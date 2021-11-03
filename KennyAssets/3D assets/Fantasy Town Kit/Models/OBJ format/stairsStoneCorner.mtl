@@ -1,0 +1,8 @@
+# Created by Kenney (www.kenney.nl)
+
+newmtl stone
+Kd 0.6039216 0.7333333 0.7882353
+
+newmtl _defaultMat
+Kd 1 1 1
+

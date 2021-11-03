@@ -1,0 +1,8 @@
+# Created by Kenney (www.kenney.nl)
+
+newmtl foliage
+Kd 0.2265931 0.7169812 0.5854273
+
+newmtl wood
+Kd 0.9098039 0.5490196 0.3490196
+

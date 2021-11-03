@@ -1,0 +1,11 @@
+# Created by Kenney (www.kenney.nl)
+
+newmtl roofRed
+Kd 0.6784314 0.2588235 0.2980392
+
+newmtl roofRedLight
+Kd 0.8470588 0.3215686 0.372549
+
+newmtl woodDark
+Kd 0.7764706 0.4666667 0.2941177
+
