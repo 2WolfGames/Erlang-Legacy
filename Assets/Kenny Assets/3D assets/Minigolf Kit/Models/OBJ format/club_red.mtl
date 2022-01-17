@@ -1,0 +1,11 @@
+# Created by Kenney (www.kenney.nl)
+
+newmtl dark
+Kd 0.227451 0.227451 0.227451
+
+newmtl border
+Kd 1 0.2039216 0.2745098
+
+newmtl metal
+Kd 0.7294118 0.8745098 0.9215686
+

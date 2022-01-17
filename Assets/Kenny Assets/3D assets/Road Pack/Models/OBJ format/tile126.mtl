@@ -1,0 +1,11 @@
+# Created by Kenney (www.kenney.nl)
+
+newmtl water
+Kd 0.6901961 0.8431373 0.9647059
+
+newmtl sand
+Kd 0.9686275 0.9176471 0.7450981
+
+newmtl grass
+Kd 0.5411765 0.7098039 0.2862745
+

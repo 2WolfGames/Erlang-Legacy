@@ -1,2 +1,2 @@
-# TFG
-Repositori que contindrà el contingüt del treball de final de grau
+# Assets 
+In this branch you can find all the assets of the game (used or not)

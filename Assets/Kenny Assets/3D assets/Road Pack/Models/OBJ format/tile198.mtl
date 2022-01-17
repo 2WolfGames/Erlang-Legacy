@@ -1,0 +1,11 @@
+# Created by Kenney (www.kenney.nl)
+
+newmtl dirt
+Kd 0.7215686 0.5647059 0.3960784
+
+newmtl grass
+Kd 0.5411765 0.7098039 0.2862745
+
+newmtl _defaultMat
+Kd 1 1 1
+

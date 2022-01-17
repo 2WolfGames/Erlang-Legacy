@@ -1,0 +1,8 @@
+# Created by Kenney (www.kenney.nl)
+
+newmtl woodDark
+Kd 0.7764706 0.4666667 0.2941177
+
+newmtl wood
+Kd 0.9098039 0.5490196 0.3490196
+

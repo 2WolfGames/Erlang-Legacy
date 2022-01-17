@@ -1,0 +1,11 @@
+# Created by Kenney (www.kenney.nl)
+
+newmtl stone
+Kd 0.6039216 0.7333333 0.7882353
+
+newmtl roofLight
+Kd 0.2862745 0.7568628 0.5921569
+
+newmtl roof
+Kd 0.2588235 0.6784314 0.5294118
+

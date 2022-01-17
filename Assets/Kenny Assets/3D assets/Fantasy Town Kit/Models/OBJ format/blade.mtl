@@ -1,0 +1,11 @@
+# Created by Kenney (www.kenney.nl)
+
+newmtl hay
+Kd 1 0.7483996 0.514151
+
+newmtl wood
+Kd 0.9098039 0.5490196 0.3490196
+
+newmtl _defaultMat
+Kd 1 1 1
+

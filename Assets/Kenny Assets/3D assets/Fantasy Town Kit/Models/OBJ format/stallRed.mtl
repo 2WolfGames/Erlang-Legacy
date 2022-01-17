@@ -1,0 +1,8 @@
+# Created by Kenney (www.kenney.nl)
+
+newmtl wood
+Kd 0.9098039 0.5490196 0.3490196
+
+newmtl roofRed
+Kd 0.6784314 0.2588235 0.2980392
+
