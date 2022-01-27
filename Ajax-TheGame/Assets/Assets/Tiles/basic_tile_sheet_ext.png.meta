@@ -178,9 +178,9 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
-    aniso: -1
-    mipBias: -100
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -372,27 +372,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: basic_tile_sheet_ext_6
-      rect:
-        serializedVersion: 2
-        x: 420
-        y: 442
-        width: 70
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f31814624946566a0800000000000000
-      internalID: -6456643903305973441
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: basic_tile_sheet_ext_7
       rect:
         serializedVersion: 2
@@ -493,48 +472,6 @@ TextureImporter:
       bones: []
       spriteID: ffe018c70054db350800000000000000
       internalID: 6034054944137481983
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: basic_tile_sheet_ext_12
-      rect:
-        serializedVersion: 2
-        x: 350
-        y: 372
-        width: 70
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 242c980d94da75f40800000000000000
-      internalID: 5717228784513040962
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: basic_tile_sheet_ext_13
-      rect:
-        serializedVersion: 2
-        x: 420
-        y: 372
-        width: 70
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8cb9ded11fa87d210800000000000000
-      internalID: 1357706580869356488
       vertices: []
       indices: 
       edges: []
@@ -645,48 +582,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: basic_tile_sheet_ext_19
-      rect:
-        serializedVersion: 2
-        x: 350
-        y: 302
-        width: 70
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4a4fab8d4d198d2e0800000000000000
-      internalID: -2100768882813111132
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: basic_tile_sheet_ext_20
-      rect:
-        serializedVersion: 2
-        x: 420
-        y: 302
-        width: 70
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ea99c0127505f5520800000000000000
-      internalID: 2692959437337696686
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: basic_tile_sheet_ext_21
       rect:
         serializedVersion: 2
@@ -787,48 +682,6 @@ TextureImporter:
       bones: []
       spriteID: a40d10c8e682669e0800000000000000
       internalID: -1628569759987412918
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: basic_tile_sheet_ext_26
-      rect:
-        serializedVersion: 2
-        x: 350
-        y: 232
-        width: 70
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7a5f2d951b6a43c50800000000000000
-      internalID: 6644118630924744103
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: basic_tile_sheet_ext_27
-      rect:
-        serializedVersion: 2
-        x: 420
-        y: 232
-        width: 70
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7c9dc5562d47202e0800000000000000
-      internalID: -2161036424191878713
       vertices: []
       indices: 
       edges: []
@@ -939,48 +792,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: basic_tile_sheet_ext_33
-      rect:
-        serializedVersion: 2
-        x: 350
-        y: 162
-        width: 70
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 692abfc1c553dce00800000000000000
-      internalID: 1066567356496192150
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: basic_tile_sheet_ext_34
-      rect:
-        serializedVersion: 2
-        x: 420
-        y: 162
-        width: 70
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1e5dbaa616fbb2d90800000000000000
-      internalID: -7121387960633928223
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: basic_tile_sheet_ext_35
       rect:
         serializedVersion: 2
@@ -1086,48 +897,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: basic_tile_sheet_ext_40
-      rect:
-        serializedVersion: 2
-        x: 350
-        y: 92
-        width: 70
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: fa544ba8b9afda2a0800000000000000
-      internalID: -6724443122640337489
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: basic_tile_sheet_ext_41
-      rect:
-        serializedVersion: 2
-        x: 420
-        y: 92
-        width: 70
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 15703778406a14220800000000000000
-      internalID: 2468436609158285137
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: basic_tile_sheet_ext_42
       rect:
         serializedVersion: 2
@@ -1228,48 +997,6 @@ TextureImporter:
       bones: []
       spriteID: 8f1b1df3b31f7f050800000000000000
       internalID: 5834397079057838584
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: basic_tile_sheet_ext_47
-      rect:
-        serializedVersion: 2
-        x: 350
-        y: 22
-        width: 70
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4d5e9532a7060ac20800000000000000
-      internalID: 3215676211637904852
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: basic_tile_sheet_ext_48
-      rect:
-        serializedVersion: 2
-        x: 420
-        y: 22
-        width: 70
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8d40b3f054dd51890800000000000000
-      internalID: -7487835516755573544
       vertices: []
       indices: 
       edges: []
