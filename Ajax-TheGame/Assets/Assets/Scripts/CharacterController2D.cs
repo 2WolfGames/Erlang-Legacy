@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class CharacterController2D : MonoBehaviour
 {
-    [Range(0, .2f)] [SerializeField] float movementSmothing = 0.05f;
-
     [SerializeField] LayerMask groundLayerMask;
 
     [SerializeField] Transform groundedDetectorCenter;
