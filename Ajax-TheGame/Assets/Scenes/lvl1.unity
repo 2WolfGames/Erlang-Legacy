@@ -302,7 +302,7 @@ MonoBehaviour:
     m_Bits: 256
   groundedDetectorCenter: {fileID: 1492081897}
   groundedDetectorDimentions: {x: 0.55, y: 0.2}
-  orientation: {x: 2, y: 19}
+  xOrientation: 1
 --- !u!4 &1459969833
 Transform:
   m_ObjectHideFlags: 0
@@ -407,8 +407,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.031938076, y: 0.11127615}
-  m_Size: {x: 0.7882166, y: 2.2030716}
+  m_Offset: {x: -0.108392715, y: 0.11127615}
+  m_Size: {x: 0.6155014, y: 2.2030716}
   m_Direction: 0
 --- !u!50 &1459969837
 Rigidbody2D:
