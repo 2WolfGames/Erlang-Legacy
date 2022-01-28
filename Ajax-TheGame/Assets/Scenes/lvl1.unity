@@ -297,12 +297,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0541624dff58f744a6e01aa7cf4873a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSmothing: 0.05
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 256
   groundedDetectorCenter: {fileID: 1492081897}
   groundedDetectorDimentions: {x: 0.55, y: 0.2}
+  orientation: {x: 2, y: 19}
 --- !u!4 &1459969833
 Transform:
   m_ObjectHideFlags: 0

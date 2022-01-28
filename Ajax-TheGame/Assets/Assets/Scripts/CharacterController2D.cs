@@ -10,9 +10,10 @@ public class CharacterController2D : MonoBehaviour
 
     [SerializeField] Vector2 groundedDetectorDimentions;
 
+    [SerializeField] int xOrientation = 1;
+
     Rigidbody2D rigidbody2d;
 
-    Vector2 horientation = Vector2.zero;
 
     bool grounded = false;
 
@@ -23,7 +24,7 @@ public class CharacterController2D : MonoBehaviour
 
     void Update()
     {
-        ListenHorientation();
+        ListenOrientationChanges();
     }
 
     void FixedUpdate()
@@ -44,12 +45,7 @@ public class CharacterController2D : MonoBehaviour
                 break;
             }
         }
-
-        if (Mathf.Abs(horientation.x) > Mathf.Epsilon)
-        {
-            ChangeHorientation(horientation.x <= Mathf.Epsilon ? -1 : 1);
-        }
-
+        UpdateOrientation(xOrientation);
     }
 
     // This method updates current velocity state
@@ -72,11 +68,11 @@ public class CharacterController2D : MonoBehaviour
     }
 
     // -1 left, 1 right 
-    void ChangeHorientation(int horientation)
+    void UpdateOrientation(int orientation)
     {
-        if (horientation != -1 && horientation != 1) return;
+        if (orientation != -1 && orientation != 1) return;
 
-        if (horientation == 1)
+        if (orientation == 1)
         {
             transform.rotation = Quaternion.Euler(0, 0, 0);
         }
@@ -86,11 +82,13 @@ public class CharacterController2D : MonoBehaviour
         }
     }
 
-    void ListenHorientation()
+    // It should only update orientation
+    // when there is a movement in horizontal axis
+    void ListenOrientationChanges()
     {
-        if (rigidbody2d.velocity != Vector2.zero)
+        if (Mathf.Abs(rigidbody2d.velocity.x) > 0.001)
         {
-            horientation = rigidbody2d.velocity.normalized;
+            xOrientation = Mathf.RoundToInt(Mathf.Clamp01(rigidbody2d.velocity.x) * 2 - 1);
         }
     }
 
