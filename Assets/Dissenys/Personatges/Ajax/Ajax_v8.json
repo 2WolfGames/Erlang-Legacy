@@ -1,0 +1,32 @@
+{"skeleton":{"images":"images"},
+"bones":[{"name":"root"}],
+"slots":[
+	{"name":"BracEsquerra","bone":"root","attachment":"BracEsquerra"},
+	{"name":"MaEsquerra","bone":"root","attachment":"MaEsquerra"},
+	{"name":"CuixaEsquerra","bone":"root","attachment":"CuixaEsquerra"},
+	{"name":"CamaEsquerra","bone":"root","attachment":"CamaEsquerra"},
+	{"name":"CamaDreta","bone":"root","attachment":"CamaDreta"},
+	{"name":"CuixaDreta","bone":"root","attachment":"CuixaDreta"},
+	{"name":"Pelvis","bone":"root","attachment":"Pelvis"},
+	{"name":"BracDret","bone":"root","attachment":"BracDret"},
+	{"name":"Cos","bone":"root","attachment":"Cos"},
+	{"name":"MaDreta","bone":"root","attachment":"MaDreta"},
+	{"name":"Cap","bone":"root","attachment":"Cap"}
+],
+"skins":{
+	"default":{
+		"Cap":{"Cap":{"x":22.63,"y":202.16,"width":159,"height":141}},
+		"MaDreta":{"MaDreta":{"x":45.74,"y":24.78,"width":172,"height":76}},
+		"Cos":{"Cos":{"x":21.22,"y":72.50,"width":151,"height":117}},
+		"BracDret":{"BracDret":{"x":90.71,"y":78.61,"width":88,"height":96}},
+		"Pelvis":{"Pelvis":{"x":19.22,"y":1.00,"width":101,"height":76}},
+		"CuixaDreta":{"CuixaDreta":{"x":53.44,"y":-46.47,"width":33,"height":114}},
+		"CamaDreta":{"CamaDreta":{"x":39.72,"y":-157.26,"width":78,"height":163}},
+		"CamaEsquerra":{"CamaEsquerra":{"x":-14.56,"y":-46.52,"width":33,"height":114}},
+		"CuixaEsquerra":{"CuixaEsquerra":{"x":-28.28,"y":-157.26,"width":78,"height":163}},
+		"MaEsquerra":{"MaEsquerra":{"x":-139.86,"y":89.72,"width":163,"height":109}},
+		"BracEsquerra":{"BracEsquerra":{"x":-47.57,"y":79.48,"width":88,"height":96}}
+	}
+},
+"animations":{"animation":{}}
+}
