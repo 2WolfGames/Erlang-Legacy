@@ -4,17 +4,16 @@ using UnityEngine;
 
 public class CharacterController2D : MonoBehaviour
 {
-    [Range(0, .2f)] [SerializeField] float movementSmothing = 0.05f;
-
     [SerializeField] LayerMask groundLayerMask;
 
-    [SerializeField] Transform bodyCenter;
+    [SerializeField] Transform groundedDetectorCenter;
 
-    [SerializeField] float bodyRadius;
+    [SerializeField] Vector2 groundedDetectorDimentions;
+
+    [SerializeField] int xOrientation = 1;
 
     Rigidbody2D rigidbody2d;
 
-    Vector2 velocity = Vector2.zero;
 
     bool grounded = false;
 
@@ -23,11 +22,20 @@ public class CharacterController2D : MonoBehaviour
         rigidbody2d = GetComponent<Rigidbody2D>();
     }
 
+    void Update()
+    {
+        ListenOrientationChanges();
+    }
+
     void FixedUpdate()
     {
         grounded = false;
 
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(bodyCenter.position, bodyRadius, groundLayerMask);
+        Collider2D[] colliders = Physics2D.OverlapBoxAll(
+            groundedDetectorCenter.position,
+            groundedDetectorDimentions,
+            0,
+            groundLayerMask);
 
         foreach (Collider2D c in colliders)
         {
@@ -37,6 +45,7 @@ public class CharacterController2D : MonoBehaviour
                 break;
             }
         }
+        UpdateOrientation(xOrientation);
     }
 
     // This method updates current velocity state
@@ -48,19 +57,44 @@ public class CharacterController2D : MonoBehaviour
 
         if (Mathf.Abs(yvel) <= Mathf.Epsilon) return;
 
-        if (!isGrounded()) return;
+        if (!IsGrounded()) return;
 
         rigidbody2d.velocity = rigidbody2d.velocity + new Vector2(0, yvel);
     }
 
-    public bool isGrounded()
+    public bool IsGrounded()
     {
         return grounded;
     }
 
+    // -1 left, 1 right 
+    void UpdateOrientation(int orientation)
+    {
+        if (orientation != -1 && orientation != 1) return;
+
+        if (orientation == 1)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+        else
+        {
+            transform.rotation = Quaternion.Euler(0, -180, 0);
+        }
+    }
+
+    // It should only update orientation
+    // when there is a movement in horizontal axis
+    void ListenOrientationChanges()
+    {
+        if (Mathf.Abs(rigidbody2d.velocity.x) > 0.001)
+        {
+            xOrientation = Mathf.RoundToInt(Mathf.Clamp01(rigidbody2d.velocity.x) * 2 - 1);
+        }
+    }
+
     void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(bodyCenter.position, bodyRadius);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(groundedDetectorCenter.position, groundedDetectorDimentions);
     }
 }
