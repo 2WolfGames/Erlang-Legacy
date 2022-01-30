@@ -3213,7 +3213,7 @@ MonoBehaviour:
     m_Bits: 256
   speed: 8
   xOrientation: 0
-  jumpForce: 20
+  jumpForce: 15
   jumpTime: 0.15
 --- !u!114 &1459969832
 MonoBehaviour:
@@ -3350,7 +3350,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 18
+  m_GravityScale: 10
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1

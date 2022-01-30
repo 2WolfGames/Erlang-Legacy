@@ -25,10 +25,6 @@ public class AjaxMovement : MonoBehaviour
 
     bool isJumping = false;
 
-    bool shouldJump = false;
-
-    bool holdingJump = false;
-
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
