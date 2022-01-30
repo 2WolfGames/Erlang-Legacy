@@ -4,40 +4,76 @@ using UnityEngine;
 
 public class AjaxMovement : MonoBehaviour
 {
-    // Start is called before the first frame update
-    [SerializeField] CharacterController2D characterController;
+    [SerializeField] Transform feetRef;
 
-    [SerializeField] float runSpeed = 100f;
+    [SerializeField] Vector2 feetDimentions;
 
-    [SerializeField] float jumpForce = 100;
+    [SerializeField] LayerMask whatIsGround;
 
-    float horizontalMovement = 0f;
+    [SerializeField] float speed;
 
-    bool wantToJump = false;
+    [SerializeField] float xOrientation = 1;
 
-    // called one per frame
+    [SerializeField] float jumpForce = 2;
+
+    [SerializeField] float jumpTime = 0.3f;
+
+    Rigidbody2D rb;
+    float jumpTimeCounter = 0.2f;
+
+    bool isGrounded = true;
+
+    bool isJumping = false;
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
+
     void Update()
     {
-        horizontalMovement = Input.GetAxisRaw("Horizontal");
+        xOrientation = Input.GetAxisRaw("Horizontal");
+        SmoothJump();
+    }
 
-        if (Input.GetButtonDown("Jump"))
+    void FixedUpdate()
+    {
+        rb.velocity = new Vector2(xOrientation * speed, rb.velocity.y);
+    }
+
+    void SmoothJump()
+    {
+        isGrounded = Physics2D.OverlapBox(feetRef.position, feetDimentions, 0, whatIsGround);
+
+        if (isGrounded && Input.GetButtonDown("Jump"))
         {
-            wantToJump = true;
+            isJumping = true;
+            jumpTimeCounter = jumpTime;
+            rb.velocity = Vector2.up * jumpForce;
+        }
+
+        if (Input.GetButton("Jump") && isJumping)
+        {
+            if (jumpTimeCounter > 0)
+            {
+                rb.velocity = Vector2.up * jumpForce;
+                jumpTimeCounter -= Time.deltaTime;
+            }
+            else
+            {
+                isJumping = false;
+            }
+        }
+
+        if (Input.GetButtonUp("Jump"))
+        {
+            isJumping = false;
         }
     }
 
-
-    // Time.fixedDeltaTime: represents how long was the last time
-    // the function was called (period time)
-
-    // Multiply by Time.fixedDeltaTime will ensure that Ajax
-    // moves same amount no matter how often this function was called
-    // It make consistences with multiple platforms
-    void FixedUpdate()
+    void OnDrawGizmosSelected()
     {
-        float xSpeed = horizontalMovement * runSpeed * Time.deltaTime;
-        float ySpeed = jumpForce * Time.deltaTime;
-        characterController.Move(xSpeed, wantToJump ? ySpeed : 0f);
-        wantToJump = false;
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(feetRef.position, feetDimentions);
     }
 }
