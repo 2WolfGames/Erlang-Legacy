@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AjaxAttack : MonoBehaviour
 {
-    [SerializeField] float timeBtwAttack;
+    [Range(0.0f, 1.0f)] [SerializeField] float timeBtwAttack;
 
     [SerializeField] Transform attackRef;
 
@@ -14,19 +14,19 @@ public class AjaxAttack : MonoBehaviour
 
     [SerializeField] LayerMask whatIsEnemy;
 
-    float _timeBtwAttack = 0;
+    float _timeBtwAttack = -1;
 
     void Update()
     {
         if (_timeBtwAttack <= 0)
         {
-            if (Input.GetButton("Fire1"))
+            if (Input.GetButtonDown("Fire1"))
             {
                 Vector2 origin = transform.position;
                 Vector2 direction = new Vector2(transform.forward.z, 0);
+                _timeBtwAttack = timeBtwAttack;
                 StartCoroutine(ComputeEnemiesInRange(origin, direction, attackDistance, (enemies) => HitEnemies(enemies)));
             }
-            _timeBtwAttack = timeBtwAttack;
         }
         else
         {
@@ -36,7 +36,6 @@ public class AjaxAttack : MonoBehaviour
 
     void HitEnemies(List<Collider2D> enemiesColliders)
     {
-        Debug.Log(enemiesColliders.Count);
         foreach (Collider2D collider in enemiesColliders)
         {
             Enemy enemy = collider.GetComponent<Enemy>();

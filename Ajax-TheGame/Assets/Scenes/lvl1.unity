@@ -3542,10 +3542,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c069eab55c8c52e48a1694f2b6db354a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBtwAttack: 0.5
+  timeBtwAttack: 0.25
   attackRef: {fileID: 2061991885}
   attackDistance: 3
-  attackComputeDelay: 0.05
+  attackComputeDelay: 0
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 512
