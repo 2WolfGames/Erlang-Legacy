@@ -8,21 +8,23 @@ public class AjaxAttack : MonoBehaviour
 
     [SerializeField] Transform attackRef;
 
-    [SerializeField] Vector2 basicAttackDimentions;
+    [SerializeField] float attackDistance;
 
-    [SerializeField] float basicAttackComputeDelay = 0.05f;
+    [SerializeField] float attackComputeDelay = 0.05f;
 
     [SerializeField] LayerMask whatIsEnemy;
 
-    float _timeBtwAttack;
+    float _timeBtwAttack = 0;
 
     void Update()
     {
         if (_timeBtwAttack <= 0)
         {
-            if (Input.GetButtonDown("Fire1"))
+            if (Input.GetButton("Fire1"))
             {
-                StartCoroutine(ComputeLayersOnRange(HitEnemies));
+                Vector2 origin = transform.position;
+                Vector2 direction = new Vector2(transform.forward.z, 0);
+                StartCoroutine(ComputeEnemiesInRange(origin, direction, attackDistance, (enemies) => HitEnemies(enemies)));
             }
             _timeBtwAttack = timeBtwAttack;
         }
@@ -32,29 +34,38 @@ public class AjaxAttack : MonoBehaviour
         }
     }
 
-    void HitEnemies(Collider2D[] colliders)
+    void HitEnemies(List<Collider2D> enemiesColliders)
     {
-        Vector3 forward = transform.forward;
-        foreach (Collider2D collider in colliders)
+        Debug.Log(enemiesColliders.Count);
+        foreach (Collider2D collider in enemiesColliders)
         {
             Enemy enemy = collider.GetComponent<Enemy>();
             if (enemy)
             {
-                enemy.Harakiri(new Vector2(forward.z, 0));
+                enemy.Harakiri(new Vector2(transform.forward.z, 0));
             }
         }
     }
 
-    IEnumerator ComputeLayersOnRange(System.Action<Collider2D[]> callback)
+    IEnumerator ComputeEnemiesInRange(Vector2 origin, Vector2 direction, float distance, System.Action<List<Collider2D>> callback)
     {
-        yield return new WaitForSeconds(basicAttackComputeDelay);
-        Collider2D[] enemies = Physics2D.OverlapBoxAll(attackRef.position, basicAttackDimentions, 0, whatIsEnemy);
+
+        yield return new WaitForSeconds(attackComputeDelay);
+        RaycastHit2D[] hits = Physics2D.RaycastAll(origin, direction, distance, whatIsEnemy);
+
+        List<Collider2D> enemies = new List<Collider2D>();
+
+        foreach (RaycastHit2D hit in hits)
+        {
+            enemies.Add(hit.collider);
+        }
+        // Collider2D[] enemies = Physics2D.OverlapBoxAll(attackRef.position, basicAttackDimentions, 0, whatIsEnemy);
         callback(enemies);
     }
 
     void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.black;
-        Gizmos.DrawWireCube(attackRef.position, basicAttackDimentions);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawRay(transform.position, new Vector2(transform.forward.z, 0) * attackDistance);
     }
 }

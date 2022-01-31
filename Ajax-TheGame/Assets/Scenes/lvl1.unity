@@ -3371,7 +3371,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1459969830}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.96, y: -0.93, z: 0}
+  m_LocalPosition: {x: 12.29, y: -0.93, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1492081897}
@@ -3544,8 +3544,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeBtwAttack: 0.5
   attackRef: {fileID: 2061991885}
-  basicAttackDimentions: {x: 2, y: 1}
-  basicAttackComputeDelay: 0.5
+  attackDistance: 3
+  attackComputeDelay: 0.05
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 512
