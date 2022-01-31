@@ -12,6 +12,8 @@ To download, right click [IllustratorToSpine.jsx](https://github.com/EsotericSof
 
 Run the `IllustratorToSpine.jsx` script file by choosing `File` > `Scripts` > `Browse` in Illustrator.
 
+![](http://n4te.com/x/4104-lCih.png)
+
 Dragging the script and dropping it on the illustrator window will also run the script.
 
 * `Output directory` The folder where the images files will be written.
