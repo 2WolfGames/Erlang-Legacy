@@ -22,26 +22,26 @@ public class AjaxAttack : MonoBehaviour
         {
             if (Input.GetButtonDown("Fire1"))
             {
-                StartCoroutine(
-                    ComputeLayersOnRange((Collider2D[] colliders) =>
-                    {
-                        Vector3 forward = transform.forward;
-                        foreach (Collider2D collider in colliders)
-                        {
-                            Enemy enemy = collider.GetComponent<Enemy>();
-                            if (enemy)
-                            {
-                                enemy.Harakiri(new Vector2(forward.z, 0));
-                            }
-                        }
-                    })
-                );
+                StartCoroutine(ComputeLayersOnRange(HitEnemies));
             }
-            _timeBtwAttack -= Time.deltaTime;
+            _timeBtwAttack = timeBtwAttack;
         }
         else
         {
-            _timeBtwAttack = timeBtwAttack;
+            _timeBtwAttack -= Time.deltaTime;
+        }
+    }
+
+    void HitEnemies(Collider2D[] colliders)
+    {
+        Vector3 forward = transform.forward;
+        foreach (Collider2D collider in colliders)
+        {
+            Enemy enemy = collider.GetComponent<Enemy>();
+            if (enemy)
+            {
+                enemy.Harakiri(new Vector2(forward.z, 0));
+            }
         }
     }
 
