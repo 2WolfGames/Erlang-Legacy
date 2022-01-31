@@ -1,10 +1,10 @@
 # This is Git's per-user configuration file.
 [core]
-	editor = \"C:\\Users\\typin\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe\" --wait
+	editor = \"C:\\Users\\{user}\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe\" --wait
 
 [user]
-	name = wilberquito
-	email = wbq.software@gmail.com
+	name = {user}
+	email = {email}
         
 [alias]
     ##
