@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class AjaxMovement : MonoBehaviour
 {
-    [SerializeField] Transform feetRef;
-
     [SerializeField] Vector2 feetDimentions;
 
     [SerializeField] LayerMask whatIsGround;
@@ -60,9 +58,7 @@ public class AjaxMovement : MonoBehaviour
 
     void SmoothJump()
     {
-        bool isGrounded = IsGrounded();
-
-        if (isGrounded && Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && IsGrounded())
         {
             isJumping = true;
             jumpTimeCounter = jumpTime;
