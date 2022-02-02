@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class AjaxMovement : MonoBehaviour
 {
-    [SerializeField] Transform feetRef;
-
     [SerializeField] Vector2 feetDimentions;
 
     [SerializeField] LayerMask whatIsGround;
@@ -23,9 +21,10 @@ public class AjaxMovement : MonoBehaviour
     [SerializeField] float jumpTime = 0.3f;
 
     Rigidbody2D rb;
-    float jumpTimeCounter = 0.2f;
 
-    bool isGrounded = true;
+    BoxCollider2D boxCollider2D;
+
+    float jumpTimeCounter = 0.2f;
 
     bool isJumping = false;
 
@@ -36,6 +35,7 @@ public class AjaxMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        boxCollider2D = GetComponent<BoxCollider2D>();
         defaultGravityScale = rb.gravityScale;
     }
 
@@ -58,9 +58,7 @@ public class AjaxMovement : MonoBehaviour
 
     void SmoothJump()
     {
-        isGrounded = Physics2D.OverlapBox(feetRef.position, feetDimentions, 0, whatIsGround);
-
-        if (isGrounded && Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && IsGrounded())
         {
             isJumping = true;
             jumpTimeCounter = jumpTime;
@@ -125,5 +123,19 @@ public class AjaxMovement : MonoBehaviour
     void Freeze()
     {
         this.rb.velocity = Vector2.zero;
+    }
+
+    bool IsGrounded()
+    {
+        float extra = 0.25f;
+        RaycastHit2D ray = Physics2D.BoxCast(boxCollider2D.bounds.center, boxCollider2D.bounds.size, 0, Vector2.down, extra, whatIsGround);
+        bool grounded = ray.collider != null;
+        Color rayColor = grounded ? Color.green : Color.red;
+
+        Debug.DrawRay(boxCollider2D.bounds.center + new Vector3(boxCollider2D.bounds.extents.x, 0), Vector2.down * (boxCollider2D.bounds.extents.y + extra), rayColor);
+        Debug.DrawRay(boxCollider2D.bounds.center - new Vector3(boxCollider2D.bounds.extents.x, 0), Vector2.down * (boxCollider2D.bounds.extents.y + extra), rayColor);
+        Debug.DrawRay(boxCollider2D.bounds.center - new Vector3(boxCollider2D.bounds.extents.x, boxCollider2D.bounds.extents.y + extra), Vector2.right * (2 * boxCollider2D.bounds.extents.x), rayColor);
+
+        return grounded;
     }
 }
