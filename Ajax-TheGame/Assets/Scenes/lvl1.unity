@@ -471,58 +471,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2356789569777508853, guid: b25ee3ee309b1754bb8083bea75471e2,
-        type: 3}
-      propertyPath: m_TileSpriteArray.Array.data[14].m_Data
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2356789569777508853, guid: b25ee3ee309b1754bb8083bea75471e2,
-        type: 3}
-      propertyPath: m_TileSpriteArray.Array.data[15].m_Data
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2356789569777508853, guid: b25ee3ee309b1754bb8083bea75471e2,
-        type: 3}
-      propertyPath: m_TileSpriteArray.Array.data[17].m_Data
-      value: 
-      objectReference: {fileID: -8949142035367472909, guid: f28fb39d6c403684491d7e73409ab5bc,
-        type: 3}
-    - target: {fileID: 2356789569777508853, guid: b25ee3ee309b1754bb8083bea75471e2,
-        type: 3}
-      propertyPath: m_TileSpriteArray.Array.data[18].m_Data
-      value: 
-      objectReference: {fileID: -5179693781910752383, guid: f28fb39d6c403684491d7e73409ab5bc,
-        type: 3}
-    - target: {fileID: 2356789569777508853, guid: b25ee3ee309b1754bb8083bea75471e2,
-        type: 3}
-      propertyPath: m_TileSpriteArray.Array.data[14].m_RefCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2356789569777508853, guid: b25ee3ee309b1754bb8083bea75471e2,
-        type: 3}
-      propertyPath: m_TileSpriteArray.Array.data[15].m_RefCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2356789569777508853, guid: b25ee3ee309b1754bb8083bea75471e2,
-        type: 3}
-      propertyPath: m_TileSpriteArray.Array.data[17].m_RefCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2356789569777508853, guid: b25ee3ee309b1754bb8083bea75471e2,
-        type: 3}
-      propertyPath: m_TileSpriteArray.Array.data[18].m_RefCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2356789569777508853, guid: b25ee3ee309b1754bb8083bea75471e2,
-        type: 3}
-      propertyPath: m_Tiles.Array.data[109].second.m_TileSpriteIndex
-      value: 18
-      objectReference: {fileID: 0}
-    - target: {fileID: 2356789569777508853, guid: b25ee3ee309b1754bb8083bea75471e2,
-        type: 3}
-      propertyPath: m_Tiles.Array.data[110].second.m_TileSpriteIndex
-      value: 17
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b25ee3ee309b1754bb8083bea75471e2, type: 3}
 --- !u!1001 &6166654859752208905
