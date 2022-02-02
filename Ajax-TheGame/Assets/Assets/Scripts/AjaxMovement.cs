@@ -64,14 +64,14 @@ public class AjaxMovement : MonoBehaviour
         {
             isJumping = true;
             jumpTimeCounter = jumpTime;
-            rb.velocity = Vector2.up * jumpForce;
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
 
         if (Input.GetButton("Jump") && isJumping)
         {
             if (jumpTimeCounter > 0)
             {
-                rb.velocity = Vector2.up * jumpForce;
+                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
                 jumpTimeCounter -= Time.deltaTime;
             }
             else
@@ -125,11 +125,5 @@ public class AjaxMovement : MonoBehaviour
     void Freeze()
     {
         this.rb.velocity = Vector2.zero;
-    }
-
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(feetRef.position, feetDimentions);
     }
 }
