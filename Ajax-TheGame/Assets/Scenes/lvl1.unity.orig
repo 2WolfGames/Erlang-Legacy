@@ -200,7 +200,6 @@ CompositeCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 53669920}
   m_Enabled: 1
-<<<<<<< HEAD
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -218,7 +217,6 @@ CompositeCollider2D:
 --- !u!50 &53669925
 Rigidbody2D:
   serializedVersion: 4
-=======
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d0541624dff58f744a6e01aa7cf4873a, type: 3}
   m_Name: 
@@ -231,7 +229,6 @@ Rigidbody2D:
   xOrientation: 1
 --- !u!4 &1459969833
 Transform:
->>>>>>> main
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -303,9 +300,6 @@ Tilemap:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 53669920}
-=======
   m_GameObject: {fileID: 1459969830}
   m_Enabled: 1
   m_Density: 1
@@ -483,7 +477,6 @@ Tilemap:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2081400319}
->>>>>>> main
   m_Enabled: 1
   m_Tiles:
   - first: {x: -11, y: -4, z: 0}
@@ -1842,11 +1835,7 @@ PlatformEffector2D:
   m_RotationalOffset: 0
   m_UseOneWay: 1
   m_UseOneWayGrouping: 1
-<<<<<<< HEAD
-  m_SurfaceArc: 180
-=======
   m_SurfaceArc: 165
->>>>>>> main
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 0
