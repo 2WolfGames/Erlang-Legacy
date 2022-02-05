@@ -18,6 +18,7 @@ public class CharacterController2D : MonoBehaviour
     {
         orientation = Input.GetAxisRaw("Horizontal");
     }
+
     void FixedUpdate()
     {
         HandleCharacterOrientation();
