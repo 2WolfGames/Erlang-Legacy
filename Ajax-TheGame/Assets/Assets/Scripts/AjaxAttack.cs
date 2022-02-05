@@ -31,9 +31,9 @@ public class AjaxAttack : MonoBehaviour
             if (Input.GetButtonDown("Fire1"))
             {
                 Vector2 origin = transform.position;
-                Vector2 direction = new Vector2(transform.forward.z, 0);
+                Vector2 direction = new Vector2(transform.localScale.x, 0);
                 _timeBtwAttack = timeBtwAttack;
-                ajaxMovementComponent.Dash(Mathf.RoundToInt(transform.forward.z), () => Debug.Log("Call after dash"));
+                ajaxMovementComponent.Dash(Mathf.RoundToInt(transform.localScale.x), () => Debug.Log("Call after dash"));
                 StartCoroutine(ComputeEnemiesInRange(origin, direction, attackDistance, (enemies) => HitEnemies(enemies)));
             }
         }
@@ -74,6 +74,6 @@ public class AjaxAttack : MonoBehaviour
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawRay(transform.position, new Vector2(transform.forward.z, 0) * attackDistance);
+        Gizmos.DrawRay(transform.position, new Vector2(transform.localScale.x, 0) * attackDistance);
     }
 }
