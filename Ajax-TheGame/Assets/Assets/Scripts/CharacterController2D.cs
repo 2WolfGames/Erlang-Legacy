@@ -12,31 +12,22 @@ using UnityEngine;
 
 public class CharacterController2D : MonoBehaviour
 {
-    Rigidbody2D rb;
-
-    [SerializeField] Vector2 orientation = Vector2.zero;
-
-    void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();
-    }
+    float orientation = 0f;
 
     void Update()
     {
-        orientation = rb.velocity.normalized;
+        orientation = Input.GetAxisRaw("Horizontal");
     }
 
     void FixedUpdate()
     {
-        HandleCharacterHorientation();
+        HandleCharacterOrientation();
     }
 
-    void HandleCharacterHorientation()
+    void HandleCharacterOrientation()
     {
-        if (Mathf.Abs(orientation.x) > 0.001)
-        {
-            UpdateCharacterOrientation(orientation.x > Mathf.Epsilon ? 1 : -1);
-        }
+        int orientation = Mathf.RoundToInt(this.orientation);
+        UpdateCharacterOrientation(orientation);
     }
 
     // -1 left, 1 right 
@@ -44,14 +35,9 @@ public class CharacterController2D : MonoBehaviour
     {
         if (orientation != -1 && orientation != 1) return;
 
-        if (orientation == 1)
-        {
-            transform.rotation = Quaternion.Euler(0, 0, 0);
-        }
-        else
-        {
-            transform.rotation = Quaternion.Euler(0, -180, 0);
-        }
+        Vector3 characterScale = transform.localScale;
+        characterScale.x = orientation;
+        transform.localScale = characterScale;
     }
 
 }
