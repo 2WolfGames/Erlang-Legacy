@@ -50,7 +50,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0541624dff58f744a6e01aa7cf4873a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  orientation: {x: 0, y: 0}
 --- !u!114 &1830561269136379726
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63,14 +62,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7dea68ed4071fc499c269ebd83c04dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  feetRef: {fileID: 0}
   feetDimentions: {x: 0.5, y: 0.15}
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
   speed: 8
   dashSpeed: 20
-  dashDuration: 0.25
+  dashDuration: 0.3
   xOrientation: 0
   jumpForce: 15
   jumpTime: 0.15
@@ -86,7 +84,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c069eab55c8c52e48a1694f2b6db354a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBtwAttack: 2.45
+  timeBtwAttack: 3
   attackRef: {fileID: 1830561269624893348}
   attackDistance: 3
   attackComputeDelay: 0

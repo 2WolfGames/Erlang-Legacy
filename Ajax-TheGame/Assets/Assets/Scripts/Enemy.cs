@@ -13,9 +13,7 @@ public class Enemy : MonoBehaviour
 
     public void Harakiri(Vector2 orientation)
     {
-        Debug.Log("Someone touched me...");
         Vector3 force = new Vector2(10 * orientation.x, 0 * orientation.y);
-        Debug.Log(force);
         rb.velocity = rb.velocity + new Vector2(force.x, force.y);
         StartCoroutine(
             OnHarakiri(() =>

@@ -30,13 +30,10 @@ public class AjaxMovement : MonoBehaviour
 
     bool dashing = false;
 
-    float defaultGravityScale = 1;
-
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         boxCollider2D = GetComponent<BoxCollider2D>();
-        defaultGravityScale = rb.gravityScale;
     }
 
     void Update()
@@ -84,40 +81,26 @@ public class AjaxMovement : MonoBehaviour
         }
     }
 
-    // Ajax can dash by now can dash left or right
-    // left: -1, right: 1
-    public void Dash(int direction, System.Action callback = null)
+    // direction only support { -1, 1 }, meaning { left, right }
+    public void Dash(int direction, System.Action onFinish = null)
     {
         if (direction != 1 && direction != -1) return;
-        Debug.Log("Dashing..." + (direction == 1 ? " right" : " left"));
-
-        StartCoroutine(IDash(direction, callback));
-
-        if (callback != null)
-        {
-            callback();
-        }
+        StartCoroutine(IDash(direction, onFinish));
     }
 
     // Method thought to be calle throw @Dash fn
-    IEnumerator IDash(int direction, System.Action callback = null)
+    IEnumerator IDash(int direction, System.Action onFinish = null)
     {
         dashing = true;
+        float gravityScale = this.rb.gravityScale;
         Freeze();
         this.rb.gravityScale = 0;
-        if (direction == -1)
-        {
-            this.rb.velocity = Vector2.left * dashSpeed;
-        }
-        else
-        {
-            this.rb.velocity = Vector2.right * dashSpeed;
-        }
+        this.rb.AddForce(new Vector2(dashSpeed * direction, 0f), ForceMode2D.Impulse);
         yield return new WaitForSeconds(dashDuration);
         Freeze();
-        this.rb.gravityScale = defaultGravityScale;
+        this.rb.gravityScale = gravityScale;
         dashing = false;
-        if (callback != null) callback();
+        if (onFinish != null) onFinish();
     }
 
     void Freeze()
