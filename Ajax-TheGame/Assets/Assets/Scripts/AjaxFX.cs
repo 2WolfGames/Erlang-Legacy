@@ -2,17 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/**
-    This class is thought to be generic,
-    any character should use this class, it takes cares of
-        - character orientation
-    
-    In future it may handle other common character eassues
-*/
-
-public class CharacterController2D : MonoBehaviour
+public class AjaxFX : MonoBehaviour
 {
     float orientation = 0f;
+    bool blockOrientationUpdate = false;
 
     void Update()
     {
@@ -21,7 +14,10 @@ public class CharacterController2D : MonoBehaviour
 
     void FixedUpdate()
     {
-        HandleCharacterOrientation();
+        if (!blockOrientationUpdate)
+        {
+            HandleCharacterOrientation();
+        }
     }
 
     void HandleCharacterOrientation()
@@ -38,6 +34,16 @@ public class CharacterController2D : MonoBehaviour
         Vector3 characterScale = transform.localScale;
         characterScale.x = orientation;
         transform.localScale = characterScale;
+    }
+
+    public void BlockOrientationUpdate()
+    {
+        blockOrientationUpdate = true;
+    }
+
+    public void UnblockOrientationUpdate()
+    {
+        blockOrientationUpdate = false;
     }
 
 }
