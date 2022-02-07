@@ -4,17 +4,61 @@ using UnityEngine;
 
 public class AjaxFX : MonoBehaviour
 {
+    enum Face
+    {
+        LEFT,
+        RIGHT
+    }
+
+    [SerializeField] GameObject dashEcho;
+
+    [SerializeField] float echoDashTimeBtwSpawn;
+
+    float _echoDashTimeBtwSpawn = 0.2f;
+
     float orientation = 0f;
-    bool blockOrientationUpdate = false;
+
+    Face facing = Face.RIGHT;
+
+    public bool spawnDashEcho
+    {
+        set; get;
+    }
+
+    public bool blockOrientationChanges
+    {
+        set; get;
+    }
+
+    void Start()
+    {
+        this._echoDashTimeBtwSpawn = echoDashTimeBtwSpawn;
+    }
 
     void Update()
     {
         orientation = Input.GetAxisRaw("Horizontal");
+
+        if (spawnDashEcho)
+        {
+            if (_echoDashTimeBtwSpawn < Mathf.Epsilon)
+            {
+                Vector3 rot = transform.rotation.eulerAngles;
+                rot = new Vector3(rot.x, rot.y + 180, rot.z);
+                var instance = Instantiate(this.dashEcho, transform.position, facing == Face.RIGHT ? Quaternion.identity : Quaternion.Euler(rot));
+                Destroy(instance, echoDashTimeBtwSpawn + 0.1f);
+                this._echoDashTimeBtwSpawn = echoDashTimeBtwSpawn;
+            }
+            else
+            {
+                this._echoDashTimeBtwSpawn -= Time.deltaTime;
+            }
+        }
     }
 
     void FixedUpdate()
     {
-        if (!blockOrientationUpdate)
+        if (!blockOrientationChanges)
         {
             HandleCharacterOrientation();
         }
@@ -31,19 +75,10 @@ public class AjaxFX : MonoBehaviour
     {
         if (orientation != -1 && orientation != 1) return;
 
+        this.facing = orientation == 1 ? Face.RIGHT : Face.LEFT;
+
         Vector3 characterScale = transform.localScale;
         characterScale.x = orientation;
         transform.localScale = characterScale;
     }
-
-    public void BlockOrientationUpdate()
-    {
-        blockOrientationUpdate = true;
-    }
-
-    public void UnblockOrientationUpdate()
-    {
-        blockOrientationUpdate = false;
-    }
-
 }

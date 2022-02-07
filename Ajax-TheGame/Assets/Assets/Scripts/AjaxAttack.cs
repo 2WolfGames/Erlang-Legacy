@@ -35,8 +35,13 @@ public class AjaxAttack : MonoBehaviour
                 Vector2 origin = transform.position;
                 Vector2 direction = new Vector2(transform.localScale.x, 0);
                 _timeBtwAttack = timeBtwAttack;
-                this.ajaxFX.BlockOrientationUpdate();
-                ajaxMovement.Dash(Mathf.RoundToInt(transform.localScale.x), () => this.ajaxFX.UnblockOrientationUpdate());
+                this.ajaxFX.blockOrientationChanges = true;
+                this.ajaxFX.spawnDashEcho = true;
+                ajaxMovement.Dash(Mathf.RoundToInt(transform.localScale.x), () =>
+                {
+                    this.ajaxFX.spawnDashEcho = false;
+                    this.ajaxFX.blockOrientationChanges = false;
+                });
                 StartCoroutine(ComputeEnemiesInRange(origin, direction, attackDistance, (enemies) => HitEnemies(enemies)));
             }
         }

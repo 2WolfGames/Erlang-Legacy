@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1830561269136379717}
   - component: {fileID: 1830561269136379714}
   - component: {fileID: 1830561269136379716}
-  - component: {fileID: 1175944230}
+  - component: {fileID: 1424717957}
   m_Layer: 9
   m_Name: Ajax
   m_TagString: Untagged
@@ -51,6 +51,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0541624dff58f744a6e01aa7cf4873a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dashEcho: {fileID: 7150596761505073631, guid: e722e24a239cf7e4d91e314d0df8688c,
+    type: 3}
+  echoDashTimeBtwSpawn: 0.05
 --- !u!114 &1830561269136379726
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -205,7 +208,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!96 &1175944230
+--- !u!96 &1424717957
 TrailRenderer:
   serializedVersion: 2
   m_ObjectHideFlags: 0
@@ -224,7 +227,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -242,42 +245,60 @@ TrailRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 2060891509
+  m_SortingLayer: -1
   m_SortingOrder: 0
-  m_Time: 0.1
+  m_Time: 0.2
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1
+    widthMultiplier: 4.0427938
     widthCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
+        value: 0.39393452
         inSlope: 0
         outSlope: 0
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.6038204
+        value: 0.19873996
+        inSlope: -0.57823735
+        outSlope: -0.57823735
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.98480433
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 1}
-      key2: {r: 0, g: 0, b: 0, a: 0}
-      key3: {r: 0, g: 0, b: 0, a: 0}
+      key0: {r: 1, g: 0.7270337, b: 0, a: 1}
+      key1: {r: 0, g: 0.22231777, b: 0.972549, a: 1}
+      key2: {r: 0, g: 0.22352941, b: 0.972549, a: 0}
+      key3: {r: 1, g: 1, b: 1, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
       key6: {r: 0, g: 0, b: 0, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
-      ctime0: 0
-      ctime1: 65535
-      ctime2: 0
-      ctime3: 0
+      ctime0: 964
+      ctime1: 45875
+      ctime2: 65535
+      ctime3: 55319
       ctime4: 0
       ctime5: 0
       ctime6: 0
@@ -291,7 +312,7 @@ TrailRenderer:
       atime6: 0
       atime7: 0
       m_Mode: 0
-      m_NumColorKeys: 2
+      m_NumColorKeys: 3
       m_NumAlphaKeys: 2
     numCornerVertices: 0
     numCapVertices: 0
