@@ -13,9 +13,9 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
+  - Ground
+  - Ajax
+  - Brush
   - 
   - 
   - 
@@ -38,6 +38,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Decorator
+    uniqueID: 1561137443
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

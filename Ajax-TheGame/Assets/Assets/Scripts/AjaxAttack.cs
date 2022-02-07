@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(AjaxMovement))]
 public class AjaxAttack : MonoBehaviour
 {
     [Range(0.5f, 3.0f)] [SerializeField] float timeBtwAttack;
@@ -17,11 +16,14 @@ public class AjaxAttack : MonoBehaviour
 
     float _timeBtwAttack = -1;
 
-    AjaxMovement ajaxMovementComponent;
+    AjaxMovement ajaxMovement;
+
+    AjaxFX ajaxFX;
 
     void Start()
     {
-        ajaxMovementComponent = GetComponent<AjaxMovement>();
+        ajaxMovement = GetComponent<AjaxMovement>();
+        ajaxFX = GetComponent<AjaxFX>();
     }
 
     void Update()
@@ -33,7 +35,8 @@ public class AjaxAttack : MonoBehaviour
                 Vector2 origin = transform.position;
                 Vector2 direction = new Vector2(transform.localScale.x, 0);
                 _timeBtwAttack = timeBtwAttack;
-                ajaxMovementComponent.Dash(Mathf.RoundToInt(transform.localScale.x), () => Debug.Log("Call after dash"));
+                this.ajaxFX.BlockOrientationUpdate();
+                ajaxMovement.Dash(Mathf.RoundToInt(transform.localScale.x), () => this.ajaxFX.UnblockOrientationUpdate());
                 StartCoroutine(ComputeEnemiesInRange(origin, direction, attackDistance, (enemies) => HitEnemies(enemies)));
             }
         }
