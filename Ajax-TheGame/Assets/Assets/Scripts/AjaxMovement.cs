@@ -30,10 +30,13 @@ public class AjaxMovement : MonoBehaviour
 
     bool dashing = false;
 
+    AjaxFX ajaxFX;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         boxCollider2D = GetComponent<BoxCollider2D>();
+        ajaxFX = GetComponent<AjaxFX>();
     }
 
     void Update()
@@ -60,6 +63,7 @@ public class AjaxMovement : MonoBehaviour
             isJumping = true;
             jumpTimeCounter = jumpTime;
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            this.ajaxFX.TriggerJumpFX();
         }
 
         if (Input.GetButton("Jump") && isJumping)
