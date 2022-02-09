@@ -38,12 +38,33 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: AjaxDash
-    uniqueID: 2060891509
-    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Decorator
-    uniqueID: 1561137443
+  - name: Deep Background
+    uniqueID: 3587494749
+    locked: 0
+  - name: Background Tilemap
+    uniqueID: 3269542587
+    locked: 0
+  - name: Background Decorators
+    uniqueID: 1303443987
+    locked: 0
+  - name: Base
+    uniqueID: 623031901
+    locked: 0
+  - name: AjaxDash
+    uniqueID: 2060891509
+    locked: 0
+  - name: Ajax
+    uniqueID: 1004425275
+    locked: 0
+  - name: Foreground Decoratros
+    uniqueID: 3069320425
+    locked: 0
+  - name: Foreground Tilemap
+    uniqueID: 798074155
+    locked: 0
+  - name: Deep Foreground
+    uniqueID: 1084225261
     locked: 0
