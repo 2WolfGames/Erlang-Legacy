@@ -14,6 +14,8 @@ public class AjaxFX : MonoBehaviour
 
     [SerializeField] float echoDashTimeBtwSpawn;
 
+    [SerializeField] ParticleSystem jumpParticles;
+
     float _echoDashTimeBtwSpawn = 0.2f;
 
     float orientation = 0f;
@@ -80,5 +82,16 @@ public class AjaxFX : MonoBehaviour
         Vector3 characterScale = transform.localScale;
         characterScale.x = orientation;
         transform.localScale = characterScale;
+    }
+
+
+    /**
+        This method should trigger
+        jump view and sound effects
+    */
+    public void TriggerJumpFX()
+    {
+        if (!this.jumpParticles) return;
+        this.jumpParticles.Play();
     }
 }
