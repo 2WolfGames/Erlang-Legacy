@@ -92,6 +92,6 @@ public class AjaxFX : MonoBehaviour
     public void TriggerJumpFX()
     {
         if (!this.jumpParticles) return;
-        this.jumpParticles.Emit(1);
+        this.jumpParticles.Play();
     }
 }
