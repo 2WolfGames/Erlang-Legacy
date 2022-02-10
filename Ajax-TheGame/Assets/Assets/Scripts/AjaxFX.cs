@@ -98,6 +98,7 @@ public class AjaxFX : MonoBehaviour
             this.jumpParticles.Play();
         }
         ajaxAnimator.SetTrigger("jump");
+        ajaxAnimator.SetBool("jumping",true);
     }
 
     /**
@@ -107,10 +108,10 @@ public class AjaxFX : MonoBehaviour
     public void TriggerLandFX()
     {
         //TODO: land particles
-        ajaxAnimator.SetTrigger("land");
+        ajaxAnimator.SetBool("jumping",false);
     }
 
-        /**
+    /**
         This method should trigger
         land view and sound effects
     */

@@ -57,7 +57,7 @@ public class AjaxMovement : MonoBehaviour
             rb.velocity = new Vector2(xOrientation * speed, rb.velocity.y);
             ajaxFX.SetRunFX(rb.velocity.x != 0);
 
-            if (rb.velocity.y == 0 && hasJumped)
+            if (IsGrounded() && hasJumped)
             {
                 ajaxFX.TriggerLandFX();
                 hasJumped = false;
@@ -85,6 +85,7 @@ public class AjaxMovement : MonoBehaviour
             else
             {
                 isJumping = false;
+                hasJumped = true;
             }
         }
 
@@ -136,7 +137,6 @@ public class AjaxMovement : MonoBehaviour
         Debug.DrawRay(boxCollider2D.bounds.center - new Vector3(boxCollider2D.bounds.extents.x, 0), Vector2.down * (boxCollider2D.bounds.extents.y + extra), rayColor);
         Debug.DrawRay(boxCollider2D.bounds.center - new Vector3(boxCollider2D.bounds.extents.x, boxCollider2D.bounds.extents.y + extra), Vector2.right * (2 * boxCollider2D.bounds.extents.x), rayColor);
 
-        Debug.Log(grounded);
         return grounded;
     }
 
