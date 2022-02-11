@@ -28,6 +28,7 @@ public class AjaxMovement : MonoBehaviour
     float jumpTimeCounter = 0.2f;
 
     bool isJumping = false;
+
     bool hasJumped = false;
 
     bool dashing = false;
@@ -57,7 +58,8 @@ public class AjaxMovement : MonoBehaviour
             rb.velocity = new Vector2(xOrientation * speed, rb.velocity.y);
             ajaxFX.SetRunFX(rb.velocity.x != 0);
 
-            if (IsGrounded() && hasJumped)
+
+            if (hasJumped && IsGrounded())
             {
                 ajaxFX.TriggerLandFX();
                 hasJumped = false;
@@ -93,7 +95,6 @@ public class AjaxMovement : MonoBehaviour
         {
             isJumping = false;
             hasJumped = true;
-
         }
 
     }

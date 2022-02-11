@@ -6,11 +6,11 @@ public class AjaxAttack : MonoBehaviour
 {
     [Range(0.5f, 3.0f)] [SerializeField] float timeBtwAttack;
 
-    [SerializeField] Transform attackRef;
+    [Range(0.0f, 1f)] [SerializeField] float dashAttackAwait = 0.01f;
 
-    [SerializeField] float attackDistance;
+    [SerializeField] DashAttack collidersDetector;
 
-    [SerializeField] float attackComputeDelay = 0.05f;
+    [SerializeField] float dashDamage = 10f;
 
     [SerializeField] LayerMask whatIsEnemy;
 
@@ -32,7 +32,6 @@ public class AjaxAttack : MonoBehaviour
         {
             if (Input.GetButtonDown("Fire1"))
             {
-                Vector2 origin = transform.position;
                 Vector2 direction = new Vector2(transform.localScale.x, 0);
                 _timeBtwAttack = timeBtwAttack;
                 this.ajaxFX.blockOrientationChanges = true;
@@ -42,7 +41,7 @@ public class AjaxAttack : MonoBehaviour
                     this.ajaxFX.spawnDashEcho = false;
                     this.ajaxFX.blockOrientationChanges = false;
                 });
-                StartCoroutine(ComputeEnemiesInRange(origin, direction, attackDistance, (enemies) => HitEnemies(enemies)));
+                ApplyDamageInDashRange(collidersDetector, dashAttackAwait);
             }
         }
         else
@@ -58,30 +57,20 @@ public class AjaxAttack : MonoBehaviour
             Enemy enemy = collider.GetComponent<Enemy>();
             if (enemy)
             {
-                enemy.Harakiri(new Vector2(transform.forward.z, 0));
             }
         }
     }
 
-    IEnumerator ComputeEnemiesInRange(Vector2 origin, Vector2 direction, float distance, System.Action<List<Collider2D>> callback)
+    void ApplyDamageInDashRange(DashAttack detector, float await)
     {
-
-        yield return new WaitForSeconds(attackComputeDelay);
-        RaycastHit2D[] hits = Physics2D.RaycastAll(origin, direction, distance, whatIsEnemy);
-
-        List<Collider2D> enemies = new List<Collider2D>();
-
-        foreach (RaycastHit2D hit in hits)
+        // compute colliders
+        detector.ComputeCollidersDuring(await, (HashSet<IEnemy> entities) =>
         {
-            enemies.Add(hit.collider);
-        }
-        // Collider2D[] enemies = Physics2D.OverlapBoxAll(attackRef.position, basicAttackDimentions, 0, whatIsEnemy);
-        callback(enemies);
+            foreach (IEnemy obj in entities)
+            {
+                obj.OnHit(100);
+            }
+        });
     }
 
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawRay(transform.position, new Vector2(transform.localScale.x, 0) * attackDistance);
-    }
 }
