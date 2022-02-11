@@ -11,10 +11,17 @@ public class AjaxFX : MonoBehaviour
     }
 
     [SerializeField] Animator ajaxAnimator;
+<<<<<<< HEAD
+=======
+
+    [SerializeField] GameObject dashEcho;
+
+    [SerializeField] float echoDashTimeBtwSpawn;
+>>>>>>> main
 
     [SerializeField] ParticleSystem jumpParticles;
 
-    [SerializeField] TrailRenderer dashTrailRenderer;
+     [SerializeField] TrailRenderer dashTrailRenderer;
 
     float orientation = 0f;
 
@@ -32,7 +39,7 @@ public class AjaxFX : MonoBehaviour
 
     void Start()
     {
-        dashTrailRenderer.widthMultiplier = 0;
+        dashTrailRenderer.widthMultiplier  = 0;
     }
 
     void Update()
@@ -66,6 +73,7 @@ public class AjaxFX : MonoBehaviour
         transform.localScale = characterScale;
     }
 
+
     /**
         This method should trigger
         jump view and sound effects
@@ -77,36 +85,53 @@ public class AjaxFX : MonoBehaviour
             this.jumpParticles.Play();
         }
         ajaxAnimator.SetTrigger("jump");
-        ajaxAnimator.SetBool("jumping", true);
-    }
-
-    /**
-            This method should trigger
-            land view and sound effects
-        */
-    public void TriggerLandFX()
-    {
-        //TODO: land particles
-        ajaxAnimator.SetBool("jumping", false);
+        ajaxAnimator.SetBool("jumping",true);
     }
 
     /**
         This method should trigger
         land view and sound effects
     */
+    public void TriggerLandFX()
+    {
+        //TODO: land particles
+        ajaxAnimator.SetBool("jumping",false);
+    }
+
+    /**
+        This method should trigger
+        land view and sound effects
+    */
+<<<<<<< HEAD
     public void TriggerDashFX(float dashDuration)
     {
         //TODO: land particles
         ajaxAnimator.SetTrigger("dash");
         StartCoroutine(IDashFX(dashDuration));
-
+        
     }
 
-    IEnumerator IDashFX(float dashDuration)
-    {
-        dashTrailRenderer.widthMultiplier = 3;
+    IEnumerator IDashFX(float dashDuration){
+        dashTrailRenderer.widthMultiplier  = 3;
         yield return new WaitForSeconds(dashDuration);
-        dashTrailRenderer.widthMultiplier = 0;
+        dashTrailRenderer.widthMultiplier  = 0;
+    }
+
+
+    /**
+        This method should trigger
+        run/idle view and sound effects
+    */
+    public void SetRunFX(bool isRunning)
+    {
+        ajaxAnimator.SetBool("running", isRunning);
+    }
+
+=======
+    public void TriggerDashFX()
+    {
+        //TODO: land particles
+        ajaxAnimator.SetTrigger("dash");
     }
 
     /**
@@ -118,4 +143,6 @@ public class AjaxFX : MonoBehaviour
         ajaxAnimator.SetBool("running", isRunning);
     }
 
+>>>>>>> main
+    
 }
