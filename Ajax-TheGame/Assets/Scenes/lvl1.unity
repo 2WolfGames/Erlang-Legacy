@@ -785,11 +785,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ajax
       objectReference: {fileID: 0}
-    - target: {fileID: 5283428248311362943, guid: 3a92e288e57aab644a0656c959990934,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a92e288e57aab644a0656c959990934, type: 3}
 --- !u!1001 &2356789569826705874
