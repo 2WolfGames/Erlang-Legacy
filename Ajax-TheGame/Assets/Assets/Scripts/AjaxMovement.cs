@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AjaxMovement : MonoBehaviour
 {
+
     [SerializeField] Vector2 feetDimentions;
 
     [SerializeField] LayerMask whatIsGround;
@@ -27,6 +28,7 @@ public class AjaxMovement : MonoBehaviour
     float jumpTimeCounter = 0.2f;
 
     bool isJumping = false;
+    bool hasJumped = false;
 
     bool dashing = false;
 
@@ -53,6 +55,13 @@ public class AjaxMovement : MonoBehaviour
         if (!dashing)
         {
             rb.velocity = new Vector2(xOrientation * speed, rb.velocity.y);
+            ajaxFX.SetRunFX(rb.velocity.x != 0);
+
+            if (IsGrounded() && hasJumped)
+            {
+                ajaxFX.TriggerLandFX();
+                hasJumped = false;
+            }
         }
     }
 
@@ -76,13 +85,17 @@ public class AjaxMovement : MonoBehaviour
             else
             {
                 isJumping = false;
+                hasJumped = true;
             }
         }
 
         if (Input.GetButtonUp("Jump"))
         {
             isJumping = false;
+            hasJumped = true;
+
         }
+
     }
 
     // direction only support { -1, 1 }, meaning { left, right }
@@ -100,6 +113,7 @@ public class AjaxMovement : MonoBehaviour
         Freeze();
         this.rb.gravityScale = 0;
         this.rb.AddForce(new Vector2(dashSpeed * direction, 0f), ForceMode2D.Impulse);
+        ajaxFX.TriggerDashFX();
         yield return new WaitForSeconds(dashDuration);
         Freeze();
         this.rb.gravityScale = gravityScale;
@@ -114,7 +128,7 @@ public class AjaxMovement : MonoBehaviour
 
     bool IsGrounded()
     {
-        float extra = 0.25f;
+        float extra = 0.1f;
         RaycastHit2D ray = Physics2D.BoxCast(boxCollider2D.bounds.center, boxCollider2D.bounds.size, 0, Vector2.down, extra, whatIsGround);
         bool grounded = ray.collider != null;
         Color rayColor = grounded ? Color.green : Color.red;
@@ -125,4 +139,5 @@ public class AjaxMovement : MonoBehaviour
 
         return grounded;
     }
+
 }
