@@ -393,12 +393,6 @@ MonoBehaviour:
   m_BoundingShape2D: {fileID: 0}
   m_ConfineScreenEdges: 1
   m_Damping: 0
---- !u!96 &1183310757 stripped
-TrailRenderer:
-  m_CorrespondingSourceObject: {fileID: 1183310757, guid: 3a92e288e57aab644a0656c959990934,
-    type: 3}
-  m_PrefabInstance: {fileID: 1830561270528675945}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1684245261 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1830561269136379712, guid: 3a92e288e57aab644a0656c959990934,
@@ -727,58 +721,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1183310755, guid: 3a92e288e57aab644a0656c959990934, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1183310757, guid: 3a92e288e57aab644a0656c959990934, type: 3}
-      propertyPath: m_Time
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1183310757, guid: 3a92e288e57aab644a0656c959990934, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1183310757, guid: 3a92e288e57aab644a0656c959990934, type: 3}
-      propertyPath: m_Parameters.textureMode
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1183310757, guid: 3a92e288e57aab644a0656c959990934, type: 3}
-      propertyPath: m_Parameters.colorGradient.atime1
-      value: 65535
-      objectReference: {fileID: 0}
-    - target: {fileID: 1183310757, guid: 3a92e288e57aab644a0656c959990934, type: 3}
-      propertyPath: m_Parameters.colorGradient.ctime0
-      value: 5243
-      objectReference: {fileID: 0}
-    - target: {fileID: 1183310757, guid: 3a92e288e57aab644a0656c959990934, type: 3}
-      propertyPath: m_Parameters.colorGradient.ctime1
-      value: 32189
-      objectReference: {fileID: 0}
-    - target: {fileID: 1183310757, guid: 3a92e288e57aab644a0656c959990934, type: 3}
-      propertyPath: m_Parameters.colorGradient.key0.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1183310757, guid: 3a92e288e57aab644a0656c959990934, type: 3}
-      propertyPath: m_Parameters.colorGradient.key0.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1183310757, guid: 3a92e288e57aab644a0656c959990934, type: 3}
-      propertyPath: m_Parameters.colorGradient.key0.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1183310757, guid: 3a92e288e57aab644a0656c959990934, type: 3}
-      propertyPath: m_Parameters.colorGradient.key1.b
-      value: 0.6156863
-      objectReference: {fileID: 0}
-    - target: {fileID: 1183310757, guid: 3a92e288e57aab644a0656c959990934, type: 3}
-      propertyPath: m_Parameters.colorGradient.key1.g
-      value: 0.6627451
-      objectReference: {fileID: 0}
-    - target: {fileID: 1183310757, guid: 3a92e288e57aab644a0656c959990934, type: 3}
-      propertyPath: m_Parameters.colorGradient.key1.r
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1636358237, guid: 3a92e288e57aab644a0656c959990934, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -838,15 +780,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1830561269136379713, guid: 3a92e288e57aab644a0656c959990934,
-        type: 3}
-      propertyPath: dashTrailRenderer
-      value: 
-      objectReference: {fileID: 1183310757}
     - target: {fileID: 1830561269136379727, guid: 3a92e288e57aab644a0656c959990934,
         type: 3}
       propertyPath: m_Name
       value: Ajax
+      objectReference: {fileID: 0}
+    - target: {fileID: 5283428248311362943, guid: 3a92e288e57aab644a0656c959990934,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a92e288e57aab644a0656c959990934, type: 3}

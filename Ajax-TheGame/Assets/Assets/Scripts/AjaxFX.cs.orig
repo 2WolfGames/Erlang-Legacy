@@ -10,11 +10,14 @@ public class AjaxFX : MonoBehaviour
         RIGHT
     }
 
- [SerializeField] Animator ajaxAnimator;
+    [SerializeField] Animator ajaxAnimator;
+<<<<<<< HEAD
+=======
 
+    [SerializeField] GameObject dashEcho;
 
-
-
+    [SerializeField] float echoDashTimeBtwSpawn;
+>>>>>>> main
 
     [SerializeField] ParticleSystem jumpParticles;
 
@@ -85,7 +88,7 @@ public class AjaxFX : MonoBehaviour
         ajaxAnimator.SetBool("jumping",true);
     }
 
-/**
+    /**
         This method should trigger
         land view and sound effects
     */
@@ -99,6 +102,7 @@ public class AjaxFX : MonoBehaviour
         This method should trigger
         land view and sound effects
     */
+<<<<<<< HEAD
     public void TriggerDashFX(float dashDuration)
     {
         //TODO: land particles
@@ -123,5 +127,22 @@ public class AjaxFX : MonoBehaviour
         ajaxAnimator.SetBool("running", isRunning);
     }
 
+=======
+    public void TriggerDashFX()
+    {
+        //TODO: land particles
+        ajaxAnimator.SetTrigger("dash");
+    }
 
+    /**
+        This method should trigger
+        run/idle view and sound effects
+    */
+    public void SetRunFX(bool isRunning)
+    {
+        ajaxAnimator.SetBool("running", isRunning);
+    }
+
+>>>>>>> main
+    
 }
