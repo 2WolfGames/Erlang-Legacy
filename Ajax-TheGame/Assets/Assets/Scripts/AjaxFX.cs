@@ -10,15 +10,11 @@ public class AjaxFX : MonoBehaviour
         RIGHT
     }
 
- [SerializeField] Animator ajaxAnimator;
-
-
-
-
+    [SerializeField] Animator ajaxAnimator;
 
     [SerializeField] ParticleSystem jumpParticles;
 
-     [SerializeField] TrailRenderer dashTrailRenderer;
+    [SerializeField] TrailRenderer dashTrailRenderer;
 
     float orientation = 0f;
 
@@ -36,7 +32,7 @@ public class AjaxFX : MonoBehaviour
 
     void Start()
     {
-        dashTrailRenderer.widthMultiplier  = 0;
+        dashTrailRenderer.widthMultiplier = 0;
     }
 
     void Update()
@@ -70,7 +66,6 @@ public class AjaxFX : MonoBehaviour
         transform.localScale = characterScale;
     }
 
-
     /**
         This method should trigger
         jump view and sound effects
@@ -82,17 +77,17 @@ public class AjaxFX : MonoBehaviour
             this.jumpParticles.Play();
         }
         ajaxAnimator.SetTrigger("jump");
-        ajaxAnimator.SetBool("jumping",true);
+        ajaxAnimator.SetBool("jumping", true);
     }
 
-/**
-        This method should trigger
-        land view and sound effects
-    */
+    /**
+            This method should trigger
+            land view and sound effects
+        */
     public void TriggerLandFX()
     {
         //TODO: land particles
-        ajaxAnimator.SetBool("jumping",false);
+        ajaxAnimator.SetBool("jumping", false);
     }
 
     /**
@@ -104,15 +99,15 @@ public class AjaxFX : MonoBehaviour
         //TODO: land particles
         ajaxAnimator.SetTrigger("dash");
         StartCoroutine(IDashFX(dashDuration));
-        
+
     }
 
-    IEnumerator IDashFX(float dashDuration){
-        dashTrailRenderer.widthMultiplier  = 3;
+    IEnumerator IDashFX(float dashDuration)
+    {
+        dashTrailRenderer.widthMultiplier = 3;
         yield return new WaitForSeconds(dashDuration);
-        dashTrailRenderer.widthMultiplier  = 0;
+        dashTrailRenderer.widthMultiplier = 0;
     }
-
 
     /**
         This method should trigger
@@ -122,6 +117,5 @@ public class AjaxFX : MonoBehaviour
     {
         ajaxAnimator.SetBool("running", isRunning);
     }
-
 
 }

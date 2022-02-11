@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class AjaxMovement : MonoBehaviour
 {
-
     [SerializeField] Vector2 feetDimentions;
 
     [SerializeField] LayerMask whatIsGround;
@@ -115,7 +114,7 @@ public class AjaxMovement : MonoBehaviour
         this.rb.AddForce(new Vector2(dashSpeed * direction, 0f), ForceMode2D.Impulse);
         ajaxFX.TriggerDashFX(dashDuration);
 
-	yield return new WaitForSeconds(dashDuration);
+        yield return new WaitForSeconds(dashDuration);
         Freeze();
         this.rb.gravityScale = gravityScale;
         dashing = false;
