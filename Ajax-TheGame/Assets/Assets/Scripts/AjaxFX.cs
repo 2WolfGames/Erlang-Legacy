@@ -12,13 +12,9 @@ public class AjaxFX : MonoBehaviour
 
     [SerializeField] Animator ajaxAnimator;
 
-    [SerializeField] GameObject dashEcho;
-
-    [SerializeField] float echoDashTimeBtwSpawn;
-
     [SerializeField] ParticleSystem jumpParticles;
 
-    float _echoDashTimeBtwSpawn = 0.2f;
+     [SerializeField] TrailRenderer dashTrailRenderer;
 
     float orientation = 0f;
 
@@ -36,28 +32,12 @@ public class AjaxFX : MonoBehaviour
 
     void Start()
     {
-        this._echoDashTimeBtwSpawn = echoDashTimeBtwSpawn;
+        dashTrailRenderer.widthMultiplier  = 0;
     }
 
     void Update()
     {
         orientation = Input.GetAxisRaw("Horizontal");
-
-        if (spawnDashEcho)
-        {
-            if (_echoDashTimeBtwSpawn < Mathf.Epsilon)
-            {
-                Vector3 rot = transform.rotation.eulerAngles;
-                rot = new Vector3(rot.x, rot.y + 180, rot.z);
-                var instance = Instantiate(this.dashEcho, transform.position, facing == Face.RIGHT ? Quaternion.identity : Quaternion.Euler(rot));
-                Destroy(instance, echoDashTimeBtwSpawn + 0.1f);
-                this._echoDashTimeBtwSpawn = echoDashTimeBtwSpawn;
-            }
-            else
-            {
-                this._echoDashTimeBtwSpawn -= Time.deltaTime;
-            }
-        }
     }
 
     void FixedUpdate()
@@ -115,11 +95,20 @@ public class AjaxFX : MonoBehaviour
         This method should trigger
         land view and sound effects
     */
-    public void TriggerDashFX()
+    public void TriggerDashFX(float dashDuration)
     {
         //TODO: land particles
         ajaxAnimator.SetTrigger("dash");
+        StartCoroutine(IDashFX(dashDuration));
+        
     }
+
+    IEnumerator IDashFX(float dashDuration){
+        dashTrailRenderer.widthMultiplier  = 3;
+        yield return new WaitForSeconds(dashDuration);
+        dashTrailRenderer.widthMultiplier  = 0;
+    }
+
 
     /**
         This method should trigger

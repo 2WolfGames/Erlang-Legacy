@@ -113,7 +113,7 @@ public class AjaxMovement : MonoBehaviour
         Freeze();
         this.rb.gravityScale = 0;
         this.rb.AddForce(new Vector2(dashSpeed * direction, 0f), ForceMode2D.Impulse);
-        ajaxFX.TriggerDashFX();
+        ajaxFX.TriggerDashFX(dashDuration);
         yield return new WaitForSeconds(dashDuration);
         Freeze();
         this.rb.gravityScale = gravityScale;
