@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class AjaxMovement : MonoBehaviour
 {
-
-    [SerializeField] Vector2 feetDimentions;
-
     [SerializeField] LayerMask whatIsGround;
 
     [SerializeField] float speed;
@@ -57,7 +54,6 @@ public class AjaxMovement : MonoBehaviour
         {
             rb.velocity = new Vector2(xOrientation * speed, rb.velocity.y);
             ajaxFX.SetRunFX(rb.velocity.x != 0);
-
 
             if (hasJumped && IsGrounded())
             {
@@ -113,8 +109,8 @@ public class AjaxMovement : MonoBehaviour
         float gravityScale = this.rb.gravityScale;
         Freeze();
         this.rb.gravityScale = 0;
+        ajaxFX.TriggerDashFX(dashDuration);
         this.rb.AddForce(new Vector2(dashSpeed * direction, 0f), ForceMode2D.Impulse);
-        ajaxFX.TriggerDashFX();
         yield return new WaitForSeconds(dashDuration);
         Freeze();
         this.rb.gravityScale = gravityScale;
