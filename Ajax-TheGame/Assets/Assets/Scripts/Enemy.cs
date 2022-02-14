@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+    basic enemy
+*/
 public class Enemy : MonoBehaviour, IEnemy
 {
     LifeController lifeController;
@@ -28,5 +31,10 @@ public class Enemy : MonoBehaviour, IEnemy
             OnDie();
         }
         return dead;
+    }
+
+    public void OnAttack()
+    {
+        throw new System.NotImplementedException();
     }
 }

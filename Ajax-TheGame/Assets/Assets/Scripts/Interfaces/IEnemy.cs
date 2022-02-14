@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-// TODO: think about a better name for this interface: name can be more generic because ajax himself can implement it
 public interface IEnemy
 {
     /**
@@ -14,4 +13,5 @@ public interface IEnemy
 
     void OnDie();
 
+    void OnAttack();
 }
