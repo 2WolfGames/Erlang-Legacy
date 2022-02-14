@@ -349,7 +349,6 @@ MonoBehaviour:
     m_Bits: 256
   speed: 8
   dashSpeed: 20
-  dashDuration: 0.3
   xOrientation: 0
   jumpForce: 15
   jumpTime: 0.15
