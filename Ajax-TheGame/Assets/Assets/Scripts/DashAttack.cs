@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class DashAttack : MonoBehaviour
 {
+    [Range(10, 1000)] [SerializeField] float damage = 100;
+
     BoxCollider2D boxCollider;
 
-    HashSet<IEnemy> colliders = new HashSet<IEnemy>();
+    HashSet<GameObject> colliders = new HashSet<GameObject>();
 
     // on aweke we disable dash triggers
     void Awake()
@@ -16,19 +18,24 @@ public class DashAttack : MonoBehaviour
         boxCollider.isTrigger = true;
     }
 
-    public void ComputeCollidersDuring(float time, System.Action<HashSet<IEnemy>> onComplete)
+    public void ApplyDamage(float time)
     {
         if (boxCollider.enabled) return;
-        StartCoroutine(Await(time, onComplete));
+        StartCoroutine(Await(time));
     }
 
-    IEnumerator Await(float time, System.Action<HashSet<IEnemy>> onComplete)
+    /**
+        this functions make sure of
+        handle the first and last state of
+        - collider detector
+        - collider set
+    */
+    IEnumerator Await(float time)
     {
-        colliders.Clear();
         boxCollider.enabled = true;
+        colliders.Clear();
         yield return new WaitForSeconds(time);
         boxCollider.enabled = false;
-        onComplete(colliders);
         colliders.Clear();
     }
 
@@ -41,9 +48,13 @@ public class DashAttack : MonoBehaviour
     {
         if (other.GetComponent(typeof(IEnemy)))
         {
-            colliders.Add(other.GetComponent<Enemy>());
+            if (!colliders.Contains(other.gameObject))
+            {
+                colliders.Add(other.gameObject);
+                IEnemy enemy = other.GetComponent<IEnemy>();
+                enemy.OnHit(damage);
+            }
         }
     }
-
 
 }

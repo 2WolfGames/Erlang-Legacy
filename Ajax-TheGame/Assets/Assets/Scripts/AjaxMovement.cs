@@ -10,8 +10,6 @@ public class AjaxMovement : MonoBehaviour
 
     [SerializeField] float dashSpeed;
 
-    [SerializeField] float dashDuration;
-
     [SerializeField] float xOrientation = 1;
 
     [SerializeField] float jumpForce = 2;
@@ -96,26 +94,26 @@ public class AjaxMovement : MonoBehaviour
     }
 
     // direction only support { -1, 1 }, meaning { left, right }
-    public void Dash(int direction, System.Action onFinish = null)
+    public void Dash(int direction, float duration, System.Action onComplete = null)
     {
         if (direction != 1 && direction != -1) return;
-        StartCoroutine(IDash(direction, onFinish));
+        StartCoroutine(IDash(direction, duration, onComplete));
     }
 
     // Method thought to be calle throw @Dash fn
-    IEnumerator IDash(int direction, System.Action onFinish = null)
+    IEnumerator IDash(int direction, float duration, System.Action onComplete = null)
     {
         dashing = true;
         float gravityScale = this.rb.gravityScale;
         Freeze();
         this.rb.gravityScale = 0;
-        ajaxFX.TriggerDashFX(dashDuration);
+        ajaxFX.TriggerDashFX(duration);
         this.rb.AddForce(new Vector2(dashSpeed * direction, 0f), ForceMode2D.Impulse);
-        yield return new WaitForSeconds(dashDuration);
+        yield return new WaitForSeconds(duration);
         Freeze();
         this.rb.gravityScale = gravityScale;
         dashing = false;
-        if (onFinish != null) onFinish();
+        if (onComplete != null) onComplete();
     }
 
     void Freeze()

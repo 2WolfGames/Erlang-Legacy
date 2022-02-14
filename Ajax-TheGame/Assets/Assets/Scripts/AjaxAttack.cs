@@ -2,15 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+    Script thought to controll
+    Ajax's attacks.
+
+    Make use of other scripts to 
+    create awesome attacks and link
+    to this one to manage them.
+*/
 public class AjaxAttack : MonoBehaviour
 {
     [Range(0.5f, 3.0f)] [SerializeField] float timeBtwAttack;
 
-    [Range(0.0f, 1f)] [SerializeField] float dashAttackAwait = 0.01f;
+    [Range(0.1f, 0.5f)] [SerializeField] float dashAttackTime;
 
-    [SerializeField] DashAttack collidersDetector;
-
-    [SerializeField] float dashDamage = 100f;
+    [SerializeField] DashAttack dashAttack;
 
     float _timeBtwAttack = -1;
 
@@ -33,29 +39,17 @@ public class AjaxAttack : MonoBehaviour
                 Vector2 direction = new Vector2(transform.localScale.x, 0);
                 _timeBtwAttack = timeBtwAttack;
                 this.ajaxFX.blockOrientationChanges = true;
-                ajaxMovement.Dash(Mathf.RoundToInt(transform.localScale.x), () =>
+                ajaxMovement.Dash(Mathf.RoundToInt(transform.localScale.x), dashAttackTime, () =>
                 {
                     this.ajaxFX.blockOrientationChanges = false;
                 });
-                ApplyDamageInDashRange(collidersDetector, dashAttackAwait);
+                dashAttack.ApplyDamage(dashAttackTime);
             }
         }
         else
         {
             _timeBtwAttack -= Time.deltaTime;
         }
-    }
-
-    void ApplyDamageInDashRange(DashAttack detector, float await)
-    {
-        // compute colliders
-        detector.ComputeCollidersDuring(await, (HashSet<IEnemy> entities) =>
-        {
-            foreach (IEnemy obj in entities)
-            {
-                obj.OnHit(dashDamage);
-            }
-        });
     }
 
 }
