@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class AjaxMovement : MonoBehaviour
 {
-
     [SerializeField] Vector2 feetDimentions;
 
     [SerializeField] LayerMask whatIsGround;
