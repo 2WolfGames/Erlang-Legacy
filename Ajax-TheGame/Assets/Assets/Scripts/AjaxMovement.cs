@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class AjaxMovement : MonoBehaviour
 {
-    [SerializeField] Vector2 feetDimentions;
-
     [SerializeField] LayerMask whatIsGround;
 
     [SerializeField] float speed;
 
     [SerializeField] float dashSpeed;
-
-    [SerializeField] float dashDuration;
 
     [SerializeField] float xOrientation = 1;
 
@@ -27,6 +23,7 @@ public class AjaxMovement : MonoBehaviour
     float jumpTimeCounter = 0.2f;
 
     bool isJumping = false;
+
     bool hasJumped = false;
 
     bool dashing = false;
@@ -56,7 +53,7 @@ public class AjaxMovement : MonoBehaviour
             rb.velocity = new Vector2(xOrientation * speed, rb.velocity.y);
             ajaxFX.SetRunFX(rb.velocity.x != 0);
 
-            if (IsGrounded() && hasJumped)
+            if (hasJumped && IsGrounded())
             {
                 ajaxFX.TriggerLandFX();
                 hasJumped = false;
@@ -92,33 +89,31 @@ public class AjaxMovement : MonoBehaviour
         {
             isJumping = false;
             hasJumped = true;
-
         }
 
     }
 
     // direction only support { -1, 1 }, meaning { left, right }
-    public void Dash(int direction, System.Action onFinish = null)
+    public void Dash(int direction, float duration, System.Action onComplete = null)
     {
         if (direction != 1 && direction != -1) return;
-        StartCoroutine(IDash(direction, onFinish));
+        StartCoroutine(IDash(direction, duration, onComplete));
     }
 
     // Method thought to be calle throw @Dash fn
-    IEnumerator IDash(int direction, System.Action onFinish = null)
+    IEnumerator IDash(int direction, float duration, System.Action onComplete = null)
     {
         dashing = true;
         float gravityScale = this.rb.gravityScale;
         Freeze();
         this.rb.gravityScale = 0;
+        ajaxFX.TriggerDashFX(duration);
         this.rb.AddForce(new Vector2(dashSpeed * direction, 0f), ForceMode2D.Impulse);
-        ajaxFX.TriggerDashFX(dashDuration);
-
-        yield return new WaitForSeconds(dashDuration);
+        yield return new WaitForSeconds(duration);
         Freeze();
         this.rb.gravityScale = gravityScale;
         dashing = false;
-        if (onFinish != null) onFinish();
+        if (onComplete != null) onComplete();
     }
 
     void Freeze()

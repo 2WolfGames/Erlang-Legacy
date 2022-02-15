@@ -2,32 +2,39 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+/**
+    basic enemy
+*/
+public class Enemy : MonoBehaviour, IEnemy
 {
-    Rigidbody2D rb;
+    LifeController lifeController;
 
-    void Start()
+    [Range(0.0f, 0.5f)] [SerializeField] float deadDelay = 0.1f;
+
+    void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
+        lifeController = GetComponent<LifeController>();
     }
 
-    public void Harakiri(Vector2 orientation)
+    public void OnDie()
     {
-        Vector3 force = new Vector2(10 * orientation.x, 0 * orientation.y);
-        rb.velocity = rb.velocity + new Vector2(force.x, force.y);
-        StartCoroutine(
-            OnHarakiri(() =>
-            {
-                Destroy(gameObject);
-            })
-        );
+        Debug.Log("OnHit@Enemy: die");
+        Destroy(gameObject, deadDelay);
     }
 
-    IEnumerator OnHarakiri(System.Action callback)
+    public bool OnHit(float damage)
     {
-        yield return new WaitForSeconds(0.5f);
-        callback();
+        Debug.Log("OnHit@Enemy: hit");
+        bool dead = lifeController.TakeLife(damage);
+        if (dead)
+        {
+            OnDie();
+        }
+        return dead;
     }
 
-
+    public void OnAttack()
+    {
+        throw new System.NotImplementedException();
+    }
 }

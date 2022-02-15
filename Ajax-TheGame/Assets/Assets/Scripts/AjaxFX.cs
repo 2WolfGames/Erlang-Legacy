@@ -20,11 +20,6 @@ public class AjaxFX : MonoBehaviour
 
     Face facing = Face.RIGHT;
 
-    public bool spawnDashEcho
-    {
-        set; get;
-    }
-
     public bool blockOrientationChanges
     {
         set; get;
@@ -97,9 +92,9 @@ public class AjaxFX : MonoBehaviour
     public void TriggerDashFX(float dashDuration)
     {
         //TODO: land particles
+        // TODO: (fix) dash animation can be longer than actual dash duration
         ajaxAnimator.SetTrigger("dash");
         StartCoroutine(IDashFX(dashDuration));
-
     }
 
     IEnumerator IDashFX(float dashDuration)
