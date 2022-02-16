@@ -51,7 +51,7 @@ public class AjaxMovement : MonoBehaviour
         if (!dashing)
         {
             rb.velocity = new Vector2(xOrientation * speed, rb.velocity.y);
-            ajaxFX.SetRunFX(rb.velocity.x != 0);
+            ajaxFX.SetRunFX(Mathf.Abs(rb.velocity.x) > Mathf.Epsilon);
 
             if (hasJumped && IsGrounded())
             {
@@ -59,6 +59,15 @@ public class AjaxMovement : MonoBehaviour
                 hasJumped = false;
             }
         }
+    }
+
+    /// <sumary>
+    /// freze normal control for a certain time applying the impulse 
+    /// <sumary>
+    public void ImpulseUp(float force)
+    {
+        Freeze();
+        rb.AddForce(Vector2.up * force, ForceMode2D.Impulse);
     }
 
     void SmoothJump()
