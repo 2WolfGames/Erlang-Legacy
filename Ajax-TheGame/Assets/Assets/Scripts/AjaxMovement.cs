@@ -28,6 +28,8 @@ public class AjaxMovement : MonoBehaviour
 
     bool dashing = false;
 
+    bool impulsed = false;
+
     AjaxFX ajaxFX;
 
     void Start()
@@ -50,7 +52,9 @@ public class AjaxMovement : MonoBehaviour
     {
         if (!dashing)
         {
-            rb.velocity = new Vector2(xOrientation * speed, rb.velocity.y);
+            // TODO: gestionar correctamente la velocidad que se le da al personage en el aire
+            float vx = impulsed ? rb.velocity.x + xOrientation * speed * 0.05f : xOrientation * speed;
+            rb.velocity = new Vector2(vx, rb.velocity.y);
             ajaxFX.SetRunFX(Mathf.Abs(rb.velocity.x) > Mathf.Epsilon);
 
             if (hasJumped && IsGrounded())
@@ -66,8 +70,16 @@ public class AjaxMovement : MonoBehaviour
     /// <sumary>
     public void ImpulseUp(float force)
     {
+        impulsed = true;
         Freeze();
         rb.AddForce(Vector2.up * force, ForceMode2D.Impulse);
+    }
+
+    public void Impulse(Vector2 impulse)
+    {
+        impulsed = true;
+        Freeze();
+        rb.AddForce(impulse, ForceMode2D.Impulse);
     }
 
     void SmoothJump()
@@ -142,6 +154,12 @@ public class AjaxMovement : MonoBehaviour
         Debug.DrawRay(boxCollider2D.bounds.center - new Vector3(boxCollider2D.bounds.extents.x, boxCollider2D.bounds.extents.y + extra), Vector2.right * (2 * boxCollider2D.bounds.extents.x), rayColor);
 
         return grounded;
+    }
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        Debug.Log("**");
+        impulsed = false;
     }
 
 }

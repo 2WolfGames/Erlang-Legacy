@@ -23,12 +23,14 @@ public class Springboard : MonoBehaviour
 
         AjaxMovement ajaxMovement = other.GetComponent<AjaxMovement>();
 
-        // var angle = phi * -1 + 90;
-        // var xForce = Mathf.Cos((angle * 180) / Mathf.PI);
-        // var yForce = Mathf.Sin((angle * 180) / Mathf.PI);
+        var worldAngle = phi * -1 + 90;
+        var rad = worldAngle * Mathf.Deg2Rad;
+        var xForce = force * Mathf.Cos(rad);
+        var yForce = force * Mathf.Sin(rad);
 
+        ajaxMovement.Impulse(new Vector2(xForce, yForce));
 
-        ajaxMovement.ImpulseUp(force);
+        // ajaxMovement.ImpulseUp(force);
 
         memory.Add(other.gameObject);
         animator.SetBool("EXPAND", true);
