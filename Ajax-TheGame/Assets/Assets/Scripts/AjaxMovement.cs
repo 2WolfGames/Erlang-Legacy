@@ -30,13 +30,18 @@ public class AjaxMovement : MonoBehaviour
 
     bool impulsed = false;
 
+    float gravityScale = 1;
+
     AjaxFX ajaxFX;
+
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         boxCollider2D = GetComponent<BoxCollider2D>();
         ajaxFX = GetComponent<AjaxFX>();
+
+        gravityScale = this.rb.gravityScale;
     }
 
     void Update()
@@ -46,13 +51,14 @@ public class AjaxMovement : MonoBehaviour
         {
             SmoothJump();
         }
+        // HandleLocalScale();
     }
 
     void FixedUpdate()
     {
         if (!dashing)
         {
-            // TODO: gestionar correctamente la velocidad que se le da al personage en el aire
+            // when Ajax is at the air, we let him take certain control of it's movement
             float vx = impulsed ? rb.velocity.x + xOrientation * speed * 0.05f : xOrientation * speed;
             rb.velocity = new Vector2(vx, rb.velocity.y);
             ajaxFX.SetRunFX(Mathf.Abs(rb.velocity.x) > Mathf.Epsilon);
@@ -66,20 +72,36 @@ public class AjaxMovement : MonoBehaviour
     }
 
     /// <sumary>
-    /// freze normal control for a certain time applying the impulse 
+    /// freze normal control for a certain time applying the impulse.
+    /// if anything had change its gravity, 
+    // the methods recover its firt local gravity scale
     /// <sumary>
     public void ImpulseUp(float force)
     {
+        this.rb.gravityScale = gravityScale;
         impulsed = true;
         Freeze();
         rb.AddForce(Vector2.up * force, ForceMode2D.Impulse);
     }
 
+    /// <sumary>
+    /// freze normal control for a certain time applying the impulse.
+    /// if anything had change its gravity, 
+    // the methods recover its firt local gravity scale
+    /// <sumary>
     public void Impulse(Vector2 impulse)
     {
+        this.rb.gravityScale = gravityScale;
         impulsed = true;
         Freeze();
         rb.AddForce(impulse, ForceMode2D.Impulse);
+    }
+
+    // direction only support { -1, 1 }, meaning { left, right }
+    public void Dash(int direction, float duration, System.Action onComplete = null)
+    {
+        if (direction != 1 && direction != -1) return;
+        StartCoroutine(IDash(direction, duration, onComplete));
     }
 
     void SmoothJump()
@@ -114,13 +136,6 @@ public class AjaxMovement : MonoBehaviour
 
     }
 
-    // direction only support { -1, 1 }, meaning { left, right }
-    public void Dash(int direction, float duration, System.Action onComplete = null)
-    {
-        if (direction != 1 && direction != -1) return;
-        StartCoroutine(IDash(direction, duration, onComplete));
-    }
-
     // Method thought to be calle throw @Dash fn
     IEnumerator IDash(int direction, float duration, System.Action onComplete = null)
     {
@@ -131,7 +146,13 @@ public class AjaxMovement : MonoBehaviour
         ajaxFX.TriggerDashFX(duration);
         this.rb.AddForce(new Vector2(dashSpeed * direction, 0f), ForceMode2D.Impulse);
         yield return new WaitForSeconds(duration);
-        Freeze();
+
+        // avoids stack when you had dash
+        // and them Ajax was trigger by impulse effect
+        if (!impulsed)
+        {
+            Freeze();
+        }
         this.rb.gravityScale = gravityScale;
         dashing = false;
         if (onComplete != null) onComplete();
@@ -158,8 +179,12 @@ public class AjaxMovement : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        Debug.Log("**");
-        impulsed = false;
+        // trigger effect ends when you had collide with something
+        if (impulsed)
+        {
+            impulsed = false;
+        }
+
     }
 
 }
