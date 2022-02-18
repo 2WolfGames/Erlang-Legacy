@@ -46,8 +46,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1a72ee374cfa7443b84aa6f9063f1f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 35
-  phi: 0
+  force: 50
+  phi: 90
+  compareTag: Player
 --- !u!95 &4973571343584022352
 Animator:
   serializedVersion: 3

@@ -34,7 +34,6 @@ public class AjaxMovement : MonoBehaviour
 
     AjaxFX ajaxFX;
 
-
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
