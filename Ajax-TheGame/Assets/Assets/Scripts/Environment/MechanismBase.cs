@@ -57,7 +57,6 @@ public class MechanismBase : MonoBehaviour
     }
 
     public void ActivateMechanism(Transform togglePoint){
-        Debug.Log(structure.transform.position + " " + togglePoint.position);
         if (structure.transform.position != togglePoint.position && !moving){
             Activate();
         }

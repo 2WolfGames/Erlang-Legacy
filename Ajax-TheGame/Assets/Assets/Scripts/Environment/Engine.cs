@@ -16,7 +16,6 @@ public class Engine : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        Debug.Log(other);
         if (other.gameObject.layer == 9){
             mechanism.ActivateMechanism(myPoint);
         }
