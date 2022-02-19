@@ -183,7 +183,6 @@ public class AjaxMovement : MonoBehaviour
         {
             impulsed = false;
         }
-
     }
 
 }
