@@ -481,7 +481,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1083160274436962766}
   - component: {fileID: 1083160274436962767}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Platform Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
