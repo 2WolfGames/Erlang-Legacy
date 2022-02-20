@@ -5,7 +5,6 @@ using UnityEngine;
 public class AjaxMovement : MonoBehaviour
 {
 
-    
     [SerializeField] LayerMask whatIsGround;
 
     [SerializeField] float speed;
@@ -30,13 +29,21 @@ public class AjaxMovement : MonoBehaviour
 
     bool dashing = false;
 
+    bool impulsed = false;
+
+    float gravityScale = 1;
+
     AjaxFX ajaxFX;
+
+    Vector2 velocityModifyer;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         boxCollider2D = GetComponent<BoxCollider2D>();
         ajaxFX = GetComponent<AjaxFX>();
+        gravityScale = this.rb.gravityScale;
+        velocityModifyer = Vector2.one;
     }
 
     void Update()
@@ -46,21 +53,62 @@ public class AjaxMovement : MonoBehaviour
         {
             SmoothJump();
         }
+        // HandleLocalScale();
     }
 
     void FixedUpdate()
     {
         if (!dashing)
         {
-            rb.velocity = new Vector2(xOrientation * speed, rb.velocity.y);
-            ajaxFX.SetRunFX(rb.velocity.x != 0);
+            // when Ajax is at the air, we let him take certain control of it's movement
+            float vx = impulsed ? 
+            rb.velocity.x + xOrientation * speed * 0.05f 
+            : xOrientation * speed * velocityModifyer.x;
+
+            rb.velocity = new Vector2(vx, rb.velocity.y);
+            ajaxFX.SetRunFX(Mathf.Abs(rb.velocity.x) > Mathf.Epsilon);
 
             if (hasJumped && IsGrounded())
             {
                 ajaxFX.TriggerLandFX();
                 hasJumped = false;
             }
+
+            velocityModifyer = Vector2.one;
         }
+    }
+
+    /// <sumary>
+    /// freze normal control for a certain time applying the impulse.
+    /// if anything had change its gravity, 
+    // the methods recover its firt local gravity scale
+    /// <sumary>
+    public void ImpulseUp(float force)
+    {
+        this.rb.gravityScale = gravityScale;
+        impulsed = true;
+        Freeze();
+        rb.AddForce(Vector2.up * force, ForceMode2D.Impulse);
+    }
+
+    /// <sumary>
+    /// freze normal control for a certain time applying the impulse.
+    /// if anything had change its gravity, 
+    // the methods recover its firt local gravity scale
+    /// <sumary>
+    public void Impulse(Vector2 impulse)
+    {
+        this.rb.gravityScale = gravityScale;
+        impulsed = true;
+        Freeze();
+        rb.AddForce(impulse, ForceMode2D.Impulse);
+    }
+
+    // direction only support { -1, 1 }, meaning { left, right }
+    public void Dash(int direction, float duration, System.Action onComplete = null)
+    {
+        if (direction != 1 && direction != -1) return;
+        StartCoroutine(IDash(direction, duration, onComplete));
     }
 
     void SmoothJump()
@@ -95,13 +143,6 @@ public class AjaxMovement : MonoBehaviour
 
     }
 
-    // direction only support { -1, 1 }, meaning { left, right }
-    public void Dash(int direction, float duration, System.Action onComplete = null)
-    {
-        if (direction != 1 && direction != -1) return;
-        StartCoroutine(IDash(direction, duration, onComplete));
-    }
-
     // Method thought to be calle throw @Dash fn
     IEnumerator IDash(int direction, float duration, System.Action onComplete = null)
     {
@@ -112,7 +153,13 @@ public class AjaxMovement : MonoBehaviour
         ajaxFX.TriggerDashFX(duration);
         this.rb.AddForce(new Vector2(dashSpeed * direction, 0f), ForceMode2D.Impulse);
         yield return new WaitForSeconds(duration);
-        Freeze();
+
+        // avoids stack when you had dash
+        // and them Ajax was trigger by impulse effect
+        if (!impulsed)
+        {
+            Freeze();
+        }
         this.rb.gravityScale = gravityScale;
         dashing = false;
         if (onComplete != null) onComplete();
@@ -135,6 +182,23 @@ public class AjaxMovement : MonoBehaviour
         Debug.DrawRay(boxCollider2D.bounds.center - new Vector3(boxCollider2D.bounds.extents.x, boxCollider2D.bounds.extents.y + extra), Vector2.right * (2 * boxCollider2D.bounds.extents.x), rayColor);
 
         return grounded;
+    }
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        // trigger effect ends when you had collide with something
+        if (impulsed)
+        {
+            impulsed = false;
+        }
+
+    }
+
+    //pre: -
+    //post: velocity modifyer is updated with the values 
+    //that are going to modify the velocity on ONE fixedUpdate
+    public void ModifyVelocity(Vector2 velocityModifyer){
+        this.velocityModifyer = velocityModifyer;
     }
 
 }

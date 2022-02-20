@@ -17,7 +17,7 @@ TagManager:
   - Ajax
   - Brush
   - Enemy
-  - Interectuable
+  - Interactuable
   - 
   - 
   - 
@@ -38,33 +38,30 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Default
-    uniqueID: 0
+  - name: back__3
+    uniqueID: 3370168481
     locked: 0
-  - name: Deep Background
-    uniqueID: 3587494749
+  - name: back__2
+    uniqueID: 4290624577
     locked: 0
-  - name: Background Tilemap
-    uniqueID: 3269542587
+  - name: back__1
+    uniqueID: 2617135505
     locked: 0
-  - name: Background Decorators
-    uniqueID: 1303443987
-    locked: 0
-  - name: Base
-    uniqueID: 623031901
-    locked: 0
-  - name: AjaxDash
-    uniqueID: 2060891509
+  - name: base__0
+    uniqueID: 282713829
     locked: 0
   - name: Ajax
-    uniqueID: 1004425275
+    uniqueID: 627137989
     locked: 0
-  - name: Foreground Decoratros
-    uniqueID: 3069320425
+  - name: front__1
+    uniqueID: 4180856727
     locked: 0
-  - name: Foreground Tilemap
-    uniqueID: 798074155
+  - name: front__2
+    uniqueID: 3417306585
     locked: 0
-  - name: Deep Foreground
-    uniqueID: 1084225261
+  - name: front__3
+    uniqueID: 4184389725
+    locked: 0
+  - name: Default
+    uniqueID: 0
     locked: 0

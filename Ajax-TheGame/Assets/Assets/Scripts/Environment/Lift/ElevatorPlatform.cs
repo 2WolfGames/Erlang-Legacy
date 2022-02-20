@@ -1,46 +1,64 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ElevatorPlatform : MonoBehaviour
 {
+    float velocityAlterator = 0.1f;
+
     private Elevator parent;
+
     private GameObject ajax;
-    private bool ajaxParented = false;
+
+    private float ajaxLastXPos;
+
+    private float platformLastXPos;
 
     void Start()
     {
-        parent = transform.parent.GetComponent<Elevator>();
+        parent = transform.parent.GetComponent<Elevator>(); 
+        platformLastXPos = transform.position.x;
     }
 
     private void FixedUpdate() {
         if (ajax){
-           if (ajaxParented && Input.GetAxisRaw("Horizontal") != 0){
-               Debug.Log("not parented");
-               ajax.transform.parent = null;
-               ajaxParented = false;
-           } 
-           
-           if (!ajaxParented && Input.GetAxisRaw("Horizontal") == 0) {
-               Debug.Log("parented");
-               ajax.transform.parent = this.transform;
-               ajaxParented = true;
-           }
+            CalculatePlayerVelocity();
+            ajaxLastXPos = ajax.transform.localPosition.x;
         }
+        platformLastXPos = transform.position.x;
     }
- 
-    private void OnTriggerEnter2D(Collider2D other) {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Ajax")){
-            parent.ActivateMechanism(other);
-            ajax= other.gameObject;
-            other.transform.parent = this.transform;
+
+    //pre: ajax != null
+    //post: looks if player and platform are moving at the same time 
+    //if do so, corrects the alterations of player movement using ModifyVelocity() from AjaxMovemnt.
+    private void CalculatePlayerVelocity(){
+        float ajaxDir = ajax.transform.localPosition.x - ajaxLastXPos;
+        float platformDir = transform.position.x - platformLastXPos;
+
+        if (ajaxDir != 0 && platformDir != 0){
+            if (ajaxDir < 0 && platformDir < 0 || ajaxDir > 0 && platformDir > 0){ //same dir
+                ajax.GetComponent<AjaxMovement>().ModifyVelocity(new Vector2(1 - velocityAlterator,1));
+            } else { // diferent dir
+                ajax.GetComponent<AjaxMovement>().ModifyVelocity(new Vector2(1 + velocityAlterator,1));
+            }
         }
     }
 
+    //pre: --
+    //post: if collider is player then its parented with platform and we Activaate parent Mechanism
+    private void OnTriggerEnter2D(Collider2D other) {
+        if (other.gameObject.tag == "Player"){
+            parent.ActivateMechanism(other); //Activation of Mecanism Base
+            ajax= other.gameObject;
+            ajax.transform.parent = this.transform; //Ajax as a Child of the platform
+            ajaxLastXPos = ajax.transform.localPosition.x;
+        }
+    }
+
+    //pre: --
+    //post: if collider is player we unparent them
     private void OnTriggerExit2D(Collider2D other) {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Ajax")){
+        if (other.gameObject.tag == "Player"){
             ajax = null;
-            other.transform.parent = null;
+            other.transform.parent = null; //Ajax no more Child of the platform
         }
     }
 }
