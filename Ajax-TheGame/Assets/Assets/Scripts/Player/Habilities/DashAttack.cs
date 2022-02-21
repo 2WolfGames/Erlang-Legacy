@@ -8,7 +8,7 @@ public class DashAttack : MonoBehaviour
 
     BoxCollider2D boxCollider;
 
-    HashSet<GameObject> colliders = new HashSet<GameObject>();
+    HashSet<GameObject> distinct = new HashSet<GameObject>();
 
     // on aweke we disable dash triggers
     void Awake()
@@ -33,10 +33,10 @@ public class DashAttack : MonoBehaviour
     IEnumerator Await(float time)
     {
         boxCollider.enabled = true;
-        colliders.Clear();
+        distinct.Clear();
         yield return new WaitForSeconds(time);
         boxCollider.enabled = false;
-        colliders.Clear();
+        distinct.Clear();
     }
 
     /**
@@ -48,9 +48,9 @@ public class DashAttack : MonoBehaviour
     {
         if (other.GetComponent(typeof(IEnemy)))
         {
-            if (!colliders.Contains(other.gameObject))
+            if (!distinct.Contains(other.gameObject))
             {
-                colliders.Add(other.gameObject);
+                distinct.Add(other.gameObject);
                 IEnemy enemy = other.GetComponent<IEnemy>();
                 enemy.OnHit(damage);
             }

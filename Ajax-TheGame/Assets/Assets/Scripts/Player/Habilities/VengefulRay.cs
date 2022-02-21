@@ -4,10 +4,44 @@ using UnityEngine;
 
 public class VengefulRay : MonoBehaviour
 {
-    [SerializeField] float time;
+    [Range(10, 1000)] [SerializeField] float damage = 100;
 
-    [SerializeField] List<LayerMask> targets;
+    [Range(10, 100)] [SerializeField] float velocity;
 
-    HashSet<GameObject> hitted = new HashSet<GameObject>();
+    [SerializeField] Rigidbody2D rb;
 
+    void Start()
+    {
+        rb.gravityScale = 0;
+    }
+
+    public Vector2 orientation
+    {
+        set; get;
+    }
+
+    HashSet<GameObject> distinct = new HashSet<GameObject>();
+
+    void Update()
+    {
+        Debug.Log(orientation);
+        rb.velocity = orientation * velocity;
+    }
+
+    void FixedUpdate()
+    {
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.GetComponent(typeof(IEnemy)))
+        {
+            if (!distinct.Contains(other.gameObject))
+            {
+                distinct.Add(other.gameObject);
+                IEnemy enemy = other.GetComponent<IEnemy>();
+                enemy.OnHit(damage);
+            }
+        }
+    }
 }

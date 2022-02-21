@@ -226,9 +226,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c069eab55c8c52e48a1694f2b6db354a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBtwAttack: 1
+  tbwDashAttack: 0
   dashAttackTime: 0.2
+  tbwRayAttack: 1.03
+  rayAttackTime: 2.28
   dashAttack: {fileID: 17862151}
+  vengefulRay: {fileID: 1600830819182689559, guid: aacd06750b278cd4f9bbe117c1e124ca,
+    type: 3}
 --- !u!70 &1830561269136379717
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
