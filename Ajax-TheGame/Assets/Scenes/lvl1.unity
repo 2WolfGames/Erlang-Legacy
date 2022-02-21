@@ -594,6 +594,11 @@ PrefabInstance:
       propertyPath: otherEngine
       value: 
       objectReference: {fileID: 1428470658}
+    - target: {fileID: 7448894941193917592, guid: 142525a82b436a24b886a7f2e473398e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 7448894941770438703, guid: 142525a82b436a24b886a7f2e473398e,
         type: 3}
       propertyPath: hasToArribe
