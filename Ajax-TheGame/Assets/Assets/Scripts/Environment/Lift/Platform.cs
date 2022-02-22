@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class ElevatorPlatform : MonoBehaviour
+public class Platform : MonoBehaviour
 {
     float velocityAlterator = 0.1f;
 
