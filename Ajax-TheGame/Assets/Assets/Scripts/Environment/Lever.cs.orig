@@ -1,0 +1,88 @@
+﻿using System;
+using UnityEngine;
+
+
+public class Lever : MonoBehaviour
+{
+    [SerializeField] Sprite defaultSprite;
+
+    [SerializeField] Sprite activatedSprite;
+
+<<<<<<< HEAD:Ajax-TheGame/Assets/Assets/Scripts/Environment/Lever.cs
+    [SerializeField] Transform myPoint;
+
+=======
+    [SerializeField] MechanismBase mechanism;
+
+    [SerializeField] Transform myPoint;
+
+    [SerializeField] Engine otherEngine;
+
+>>>>>>> 1ec65701e68f02480c7864a7e185515911060d9e:Ajax-TheGame/Assets/Assets/Scripts/Environment/Engine.cs
+    SpriteRenderer spriteRenderer;
+
+    IMechanism mechanism;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+<<<<<<< HEAD:Ajax-TheGame/Assets/Assets/Scripts/Environment/Lever.cs
+        mechanism = transform.parent.gameObject.GetComponent<IMechanism>();
+        myPoint.position = new Vector3(myPoint.position.x,myPoint.position.y,0);
+=======
+        myPoint.position = new Vector3(myPoint.position.x, myPoint.position.y, 0);
+>>>>>>> 1ec65701e68f02480c7864a7e185515911060d9e:Ajax-TheGame/Assets/Assets/Scripts/Environment/Engine.cs
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = defaultSprite;
+    }
+
+    //pre: -
+    //post: activate mechanism if collider is the player Changes sprite too
+<<<<<<< HEAD:Ajax-TheGame/Assets/Assets/Scripts/Environment/Lever.cs
+    private void OnTriggerEnter2D(Collider2D other) {
+        if (mechanism.CanActivate(this) && other.gameObject.tag == "Player"){
+            mechanism.Activate(this);
+            ChangeSprite();
+=======
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (mechanism.CanMechanismActivate(myPoint) && other.gameObject.tag == "Player")
+        {
+            mechanism.ActivateMechanism(myPoint);
+            ChangeSprite(true);
+>>>>>>> 1ec65701e68f02480c7864a7e185515911060d9e:Ajax-TheGame/Assets/Assets/Scripts/Environment/Engine.cs
+        }
+    }
+
+    //pre: - 
+    //post: changes sprite if it required and if its manager calls the same method of the other engine
+<<<<<<< HEAD:Ajax-TheGame/Assets/Assets/Scripts/Environment/Lever.cs
+    public void ChangeSprite(){        
+        if (spriteRenderer.sprite != activatedSprite){
+=======
+    public void ChangeSprite(bool manager)
+    {
+        if (spriteRenderer.sprite != activatedSprite)
+        {
+>>>>>>> 1ec65701e68f02480c7864a7e185515911060d9e:Ajax-TheGame/Assets/Assets/Scripts/Environment/Engine.cs
+            spriteRenderer.sprite = activatedSprite;
+        }
+        else
+        {
+            spriteRenderer.sprite = defaultSprite;
+        }
+    } 
+
+<<<<<<< HEAD:Ajax-TheGame/Assets/Assets/Scripts/Environment/Lever.cs
+    public Transform GetPoint(){
+        return myPoint;
+=======
+        if (manager && otherEngine)
+        {
+            otherEngine.ChangeSprite(false);
+        }
+>>>>>>> 1ec65701e68f02480c7864a7e185515911060d9e:Ajax-TheGame/Assets/Assets/Scripts/Environment/Engine.cs
+    }
+
+
+}
