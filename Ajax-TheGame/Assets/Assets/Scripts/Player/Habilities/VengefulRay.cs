@@ -13,23 +13,34 @@ public class VengefulRay : MonoBehaviour
     void Start()
     {
         rb.gravityScale = 0;
+        rb.velocity = Vector2.zero;
     }
+
+    Vector2 _orientation = Vector2.zero;
 
     public Vector2 orientation
     {
-        set; get;
+        set
+        {
+            _orientation = value;
+        }
+        get
+        {
+            return _orientation;
+        }
     }
 
     HashSet<GameObject> distinct = new HashSet<GameObject>();
 
     void Update()
     {
-        Debug.Log(orientation);
-        rb.velocity = orientation * velocity;
+        // Debug.Log(rb.velocity);
     }
 
     void FixedUpdate()
     {
+        rb.velocity = orientation * velocity;
+        // rb.velocity = new Vector2(-30, 0);
     }
 
     void OnTriggerEnter2D(Collider2D other)

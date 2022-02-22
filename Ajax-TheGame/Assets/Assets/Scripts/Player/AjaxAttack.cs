@@ -64,11 +64,13 @@ public class AjaxAttack : MonoBehaviour
 
         if (!inDashingAttack && Input.GetButtonDown("Fire2"))
         {
-            VengefulRay ray = Instantiate(vengefulRay, transform.position, Quaternion.identity);
             float x = transform.localScale.x;
-            Vector2 orientation = new Vector2(Mathf.Sign(x), 0);
+            float facing = Mathf.Sign(x);
+            ajaxFX.TriggerVengefulFX();
+            VengefulRay ray = Instantiate(vengefulRay, vengefulRay.transform.position, facing == -1f ? Quaternion.Euler(0, -180, 0) : Quaternion.identity);
+            Vector2 orientation = new Vector2(facing, 0);
             ray.orientation = orientation;
-            Debug.Log(orientation);
+            ray.gameObject.SetActive(true);
             Destroy(ray.gameObject, rayAttackTime);
         }
     }

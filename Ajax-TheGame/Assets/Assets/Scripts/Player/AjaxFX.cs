@@ -14,11 +14,19 @@ public class AjaxFX : MonoBehaviour
 
     [SerializeField] ParticleSystem jumpParticles;
 
+    [SerializeField] ParticleSystem vengefulLightParticles;
+
+    [SerializeField] ParticleSystem electricity;
+
+    [SerializeField] float electricityVfxDuration = 1f;
+
     [SerializeField] TrailRenderer dashTrailRenderer;
 
     float orientation = 0f;
 
     Face facing = Face.RIGHT;
+
+    int demonElectrivity = 0;
 
     public bool blockOrientationChanges
     {
@@ -85,6 +93,26 @@ public class AjaxFX : MonoBehaviour
         ajaxAnimator.SetBool("jumping", false);
     }
 
+    public void TriggerVengefulFX()
+    {
+        // var vfx = Instantiate(vengefulLightParticles, transform.position, Quaternion.identity);
+        StartCoroutine(ElectricityFX(this.electricityVfxDuration));
+        // Destroy(vfx, 1f);
+    }
+
+    IEnumerator ElectricityFX(float duration)
+    {
+        demonElectrivity++;
+        electricity.gameObject.SetActive(true);
+        yield return new WaitForSeconds(duration);
+        demonElectrivity--;
+
+        if (demonElectrivity <= 0)
+        {
+            electricity.gameObject.SetActive(false);
+        }
+    }
+
     /**
         This method should trigger
         land view and sound effects
@@ -94,6 +122,7 @@ public class AjaxFX : MonoBehaviour
         //TODO: land particles
         // TODO: (fix) dash animation can be longer than actual dash duration
         ajaxAnimator.SetTrigger("dash");
+        StartCoroutine(ElectricityFX(dashDuration * 2));
         StartCoroutine(IDashFX(dashDuration));
     }
 
