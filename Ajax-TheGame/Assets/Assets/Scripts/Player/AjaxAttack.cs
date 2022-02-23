@@ -12,25 +12,28 @@ using UnityEngine;
 */
 public class AjaxAttack : MonoBehaviour
 {
+    [Header("Dash configurations")]
+    [SerializeField] DashAttack dashAttack;
     [Range(0.5f, 3.0f)] [SerializeField] float tbwDashAttack;
-
     [Range(0.1f, 0.5f)] [SerializeField] float dashAttackTime;
 
-    [Range(0.5f, 3.0f)] [SerializeField] float tbwRayAttack = 0.2f;
 
+    [Header("Vengeful ray configuration")]
+    [SerializeField] VengefulRay vengefulRay;
+    [Range(0.5f, 3.0f)] [SerializeField] float tbwRayAttack = 0.2f;
     [Range(1f, 3f)] [SerializeField] float rayAttackTime = 0.1f;
 
-    [SerializeField] DashAttack dashAttack;
+    [Header("Others")]
+    AjaxFacing ajaxFacing;
 
-    [SerializeField] VengefulRay vengefulRay;
+    ////////////////////////////////////////////////////////////////////////////////////////////////
 
     float tbwDash = -1;
-
     AjaxMovement ajaxMovement;
-
     AjaxFX ajaxFX;
-
     bool inDashingAttack = false;
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
 
     void Start()
     {
@@ -41,9 +44,21 @@ public class AjaxAttack : MonoBehaviour
 
     void Update()
     {
-        if (tbwDash <= 0)
+        DashDemon();
+        VengefulRayDemon();
+    }
+
+
+    /**
+        Handles dash frequency
+        and comunicate with dash attack script
+        to make demage in area
+    */
+    void DashDemon()
+    {
+        if (tbwDash <= Mathf.Epsilon)
         {
-            if (Input.GetButtonDown("Fire1"))
+            if (!this.inDashingAttack && Input.GetButtonDown("Fire1"))
             {
                 Vector2 direction = new Vector2(transform.localScale.x, 0);
                 tbwDash = tbwDashAttack;
@@ -54,14 +69,23 @@ public class AjaxAttack : MonoBehaviour
                     this.ajaxFX.blockOrientationChanges = false;
                     this.inDashingAttack = false;
                 });
-                dashAttack.ApplyDamage(dashAttackTime);
+                dashAttack.Attack(dashAttackTime);
             }
         }
         else
         {
             tbwDash -= Time.deltaTime;
         }
+    }
 
+
+    /**
+        Handles vengeful ray frequency
+        and instanciate one venful ray
+        to make demage in area
+    */
+    void VengefulRayDemon()
+    {
         if (!inDashingAttack && Input.GetButtonDown("Fire2"))
         {
             float x = transform.localScale.x;

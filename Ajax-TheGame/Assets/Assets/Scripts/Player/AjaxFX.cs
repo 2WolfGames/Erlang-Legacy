@@ -4,29 +4,26 @@ using UnityEngine;
 
 public class AjaxFX : MonoBehaviour
 {
-    enum Face
-    {
-        LEFT,
-        RIGHT
-    }
-
-    [SerializeField] Animator ajaxAnimator;
-
+    [Header("Particles")]
     [SerializeField] ParticleSystem jumpParticles;
-
     [SerializeField] ParticleSystem vengefulLightParticles;
-
     [SerializeField] ParticleSystem electricity;
 
-    [SerializeField] float electricityVfxDuration = 1f;
 
+    [Header("Configurations")]
+    [SerializeField] float electricityVFXDuration = 1f;
+
+
+    [Header("Others")]
+    [SerializeField] AjaxFacing ajaxFacing;
+    [SerializeField] Animator ajaxAnimator;
     [SerializeField] TrailRenderer dashTrailRenderer;
 
-    float orientation = 0f;
-
-    Face facing = Face.RIGHT;
+    ////////////////////////////////////////////////////////////////////////////////////////////////
 
     int demonElectrivity = 0;
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
 
     public bool blockOrientationChanges
     {
@@ -38,31 +35,20 @@ public class AjaxFX : MonoBehaviour
         dashTrailRenderer.widthMultiplier = 0;
     }
 
-    void Update()
-    {
-        orientation = Input.GetAxisRaw("Horizontal");
-    }
-
     void FixedUpdate()
     {
         if (!blockOrientationChanges)
         {
-            HandleCharacterOrientation();
-        }
-    }
+            int orientation = ajaxFacing.LatestFacingToNumber();
 
-    void HandleCharacterOrientation()
-    {
-        int orientation = Mathf.RoundToInt(this.orientation);
-        UpdateCharacterOrientation(orientation);
+            UpdateCharacterOrientation(orientation);
+        }
     }
 
     // -1 left, 1 right 
     void UpdateCharacterOrientation(int orientation)
     {
         if (orientation != -1 && orientation != 1) return;
-
-        this.facing = orientation == 1 ? Face.RIGHT : Face.LEFT;
 
         Vector3 characterScale = transform.localScale;
         characterScale.x = orientation;
@@ -95,9 +81,7 @@ public class AjaxFX : MonoBehaviour
 
     public void TriggerVengefulFX()
     {
-        // var vfx = Instantiate(vengefulLightParticles, transform.position, Quaternion.identity);
-        StartCoroutine(ElectricityFX(this.electricityVfxDuration));
-        // Destroy(vfx, 1f);
+        StartCoroutine(ElectricityFX(this.electricityVFXDuration));
     }
 
     IEnumerator ElectricityFX(float duration)

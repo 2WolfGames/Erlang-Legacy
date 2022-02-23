@@ -4,17 +4,16 @@ using UnityEngine;
 
 public class VengefulRay : MonoBehaviour
 {
+    [Header("Configurations")]
     [Range(10, 1000)] [SerializeField] float damage = 100;
-
     [Range(10, 100)] [SerializeField] float velocity;
+    [Range(0, 0.3f)] [SerializeField] float autoDestroyDelay = 0.1f;
 
+
+    [Header("Others")]
     [SerializeField] Rigidbody2D rb;
 
-    void Start()
-    {
-        rb.gravityScale = 0;
-        rb.velocity = Vector2.zero;
-    }
+    ////////////////////////////////////////////////////////////////////////////////////////////////
 
     Vector2 _orientation = Vector2.zero;
 
@@ -32,15 +31,17 @@ public class VengefulRay : MonoBehaviour
 
     HashSet<GameObject> distinct = new HashSet<GameObject>();
 
-    void Update()
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+
+    void Start()
     {
-        // Debug.Log(rb.velocity);
+        rb.gravityScale = 0;
+        rb.velocity = Vector2.zero;
     }
 
     void FixedUpdate()
     {
         rb.velocity = orientation * velocity;
-        // rb.velocity = new Vector2(-30, 0);
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -53,6 +54,8 @@ public class VengefulRay : MonoBehaviour
                 IEnemy enemy = other.GetComponent<IEnemy>();
                 enemy.OnHit(damage);
             }
+            Destroy(gameObject, autoDestroyDelay);
         }
+
     }
 }

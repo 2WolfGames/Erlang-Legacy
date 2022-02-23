@@ -128,6 +128,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1910434359, guid: 922546fec765ee940bd2e94fba466e04, type: 3}
+      propertyPath: life
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 6166654859123775452, guid: 922546fec765ee940bd2e94fba466e04,
         type: 3}
       propertyPath: m_RootOrder
@@ -206,11 +210,6 @@ PrefabInstance:
     - target: {fileID: 1636358237, guid: 3a92e288e57aab644a0656c959990934, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1103451044180774173, guid: 3a92e288e57aab644a0656c959990934,
-        type: 3}
-      propertyPath: velocity
-      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1830561269136379712, guid: 3a92e288e57aab644a0656c959990934,
         type: 3}

@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class DashAttack : MonoBehaviour
 {
+    [Tooltip("Amount of life to take to enemies")]
     [Range(10, 1000)] [SerializeField] float damage = 100;
 
-    BoxCollider2D boxCollider;
+    ////////////////////////////////////////////////////////////////////////////////////////////////
 
+    BoxCollider2D boxCollider;
     HashSet<GameObject> distinct = new HashSet<GameObject>();
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
 
     // on aweke we disable dash triggers
     void Awake()
@@ -18,7 +22,7 @@ public class DashAttack : MonoBehaviour
         boxCollider.isTrigger = true;
     }
 
-    public void ApplyDamage(float time)
+    public void Attack(float time)
     {
         if (boxCollider.enabled) return;
         StartCoroutine(Await(time));
