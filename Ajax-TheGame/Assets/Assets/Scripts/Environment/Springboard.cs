@@ -7,15 +7,15 @@ public class Springboard : MonoBehaviour
     [Tooltip("Impulse force to add")]
     [Range(5f, 100f)] [SerializeField] float force = 10f;
 
-    [Tooltip("Util for diff between elements of same layer")]
-    [SerializeField] string compareTag = "Player";
-
     [Tooltip("Deviation angle respect normal object")]
     [SerializeField] float desviation = 90;
 
-    Animator animator;
+    ////////////////////////////////////////////////////////////////////////////////////////////////
 
+    Animator animator;
     HashSet<GameObject> memory = new HashSet<GameObject>();
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
 
     void Awake()
     {
@@ -29,9 +29,12 @@ public class Springboard : MonoBehaviour
     */
     void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log("*");
+        Debug.Log(other.name);
+
         if (memory.Contains(other.gameObject)) return;
 
-        if (compareTag != null && !other.CompareTag(compareTag)) return;
+        if (!other.CompareTag("Player")) return;
 
         AjaxMovement ajaxMovement = other.GetComponent<AjaxMovement>();
 
@@ -47,9 +50,12 @@ public class Springboard : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D other)
     {
+        Debug.Log("+");
+        Debug.Log(other.name);
+
         if (!memory.Contains(other.gameObject)) return;
 
-        if (compareTag != null && !other.CompareTag(compareTag)) return;
+        if (!other.CompareTag("Player")) return;
 
         memory.Remove(other.gameObject);
         animator.SetBool("EXPAND", false);
