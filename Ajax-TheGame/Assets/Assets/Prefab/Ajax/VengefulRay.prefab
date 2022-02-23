@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1600830819182689552}
   - component: {fileID: 1600830819182689559}
   - component: {fileID: 1600830819182689558}
-  - component: {fileID: 8188066409627561222}
+  - component: {fileID: 4585489240555811982}
   m_Layer: 0
   m_Name: VengefulRay
   m_TagString: Untagged
@@ -70,25 +70,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!95 &8188066409627561222
-Animator:
-  serializedVersion: 3
+--- !u!70 &4585489240555811982
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1600830819182689553}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 51dafce31eb06994f99476f6ac846e17, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.628819, y: -0.00000007496106}
+  m_Size: {x: 1.9059433, y: 1.0000072}
+  m_Direction: 1
 --- !u!1001 &1093865484
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -109,17 +106,17 @@ PrefabInstance:
     - target: {fileID: 4498574380749261290, guid: 4212e2469b7cbf8469df10a644b77698,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.1233034
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4498574380749261290, guid: 4212e2469b7cbf8469df10a644b77698,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.70812327
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4498574380749261290, guid: 4212e2469b7cbf8469df10a644b77698,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 10.482857
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4498574380749261290, guid: 4212e2469b7cbf8469df10a644b77698,
         type: 3}
@@ -129,7 +126,7 @@ PrefabInstance:
     - target: {fileID: 4498574380749261290, guid: 4212e2469b7cbf8469df10a644b77698,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4498574380749261290, guid: 4212e2469b7cbf8469df10a644b77698,
         type: 3}
@@ -139,7 +136,7 @@ PrefabInstance:
     - target: {fileID: 4498574380749261290, guid: 4212e2469b7cbf8469df10a644b77698,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4498574380749261290, guid: 4212e2469b7cbf8469df10a644b77698,
         type: 3}

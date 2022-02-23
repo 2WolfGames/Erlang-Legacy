@@ -207,6 +207,11 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1103451044180774173, guid: 3a92e288e57aab644a0656c959990934,
+        type: 3}
+      propertyPath: velocity
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 1830561269136379712, guid: 3a92e288e57aab644a0656c959990934,
         type: 3}
       propertyPath: m_RootOrder

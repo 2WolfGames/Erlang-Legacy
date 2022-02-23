@@ -140,6 +140,22 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1636358235}
   m_Mesh: {fileID: 0}
+--- !u!70 &857043883
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1103451044180774171}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 2, y: 1}
+  m_Direction: 1
 --- !u!1 &1830561269136379727
 GameObject:
   m_ObjectHideFlags: 0
@@ -198,7 +214,7 @@ MonoBehaviour:
   vengefulLightParticles: {fileID: 477322011718530451, guid: e92ffb6204ae4ea4188632231c6e20a2,
     type: 3}
   electricity: {fileID: 1992712691829648038}
-  electricityVfxDuration: 1.5
+  electricityVfxDuration: 1
   dashTrailRenderer: {fileID: 1196529694}
 --- !u!114 &1830561269136379726
 MonoBehaviour:
@@ -5293,23 +5309,88 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 198435890141970726, guid: 8333d50130027574ca8b4e0268fdd047,
         type: 3}
-      propertyPath: InitialModule.startSize.scalar
-      value: 0.1
+      propertyPath: SizeModule.enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 198435890141970726, guid: 8333d50130027574ca8b4e0268fdd047,
         type: 3}
-      propertyPath: InitialModule.startColor.minColor.b
+      propertyPath: InitialModule.startSize.scalar
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 198435890141970726, guid: 8333d50130027574ca8b4e0268fdd047,
         type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 198435890141970726, guid: 8333d50130027574ca8b4e0268fdd047,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0.6156863
+      objectReference: {fileID: 0}
+    - target: {fileID: 198435890141970726, guid: 8333d50130027574ca8b4e0268fdd047,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.6627451
+      objectReference: {fileID: 0}
+    - target: {fileID: 198435890141970726, guid: 8333d50130027574ca8b4e0268fdd047,
+        type: 3}
+      propertyPath: InitialModule.startColor.minColor.b
+      value: 0.6156863
+      objectReference: {fileID: 0}
+    - target: {fileID: 198435890141970726, guid: 8333d50130027574ca8b4e0268fdd047,
+        type: 3}
       propertyPath: InitialModule.startColor.minColor.g
-      value: 0.72533935
+      value: 0.6627451
       objectReference: {fileID: 0}
     - target: {fileID: 198435890141970726, guid: 8333d50130027574ca8b4e0268fdd047,
         type: 3}
       propertyPath: InitialModule.startColor.minColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198435890141970726, guid: 8333d50130027574ca8b4e0268fdd047,
+        type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[0].value
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198435890141970726, guid: 8333d50130027574ca8b4e0268fdd047,
+        type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[1].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198435890141970726, guid: 8333d50130027574ca8b4e0268fdd047,
+        type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[1].inSlope
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 198435890141970726, guid: 8333d50130027574ca8b4e0268fdd047,
+        type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[0].inWeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198435890141970726, guid: 8333d50130027574ca8b4e0268fdd047,
+        type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[0].outSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198435890141970726, guid: 8333d50130027574ca8b4e0268fdd047,
+        type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[1].inWeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198435890141970726, guid: 8333d50130027574ca8b4e0268fdd047,
+        type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[1].outSlope
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 198435890141970726, guid: 8333d50130027574ca8b4e0268fdd047,
+        type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[0].outWeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198435890141970726, guid: 8333d50130027574ca8b4e0268fdd047,
+        type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[1].outWeight
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8333d50130027574ca8b4e0268fdd047, type: 3}
@@ -5412,8 +5493,29 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4498574381836442087, guid: aacd06750b278cd4f9bbe117c1e124ca,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0.6156863
+      objectReference: {fileID: 0}
+    - target: {fileID: 4498574381836442087, guid: aacd06750b278cd4f9bbe117c1e124ca,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.6627451
+      objectReference: {fileID: 0}
+    - target: {fileID: 4498574381836442087, guid: aacd06750b278cd4f9bbe117c1e124ca,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aacd06750b278cd4f9bbe117c1e124ca, type: 3}
+--- !u!1 &1103451044180774171 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1600830819182689553, guid: aacd06750b278cd4f9bbe117c1e124ca,
+    type: 3}
+  m_PrefabInstance: {fileID: 1830561270463229962}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1103451044180774170 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1600830819182689552, guid: aacd06750b278cd4f9bbe117c1e124ca,
@@ -5426,7 +5528,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1830561270463229962}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1103451044180774171}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a552f10a9703469448bdfb0a51758dcc, type: 3}

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4498574380749261291}
   - component: {fileID: 4498574380749261284}
   m_Layer: 0
-  m_Name: Fire
+  m_Name: Ray
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
