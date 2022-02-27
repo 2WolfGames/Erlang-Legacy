@@ -25,7 +25,6 @@ public class Enemy : MonoBehaviour, IEnemy
     public bool OnHit(float damage)
     {
         bool dead = lifeController.TakeLife(damage);
-        Debug.Log(damage);
         if (dead)
         {
             OnDie();
