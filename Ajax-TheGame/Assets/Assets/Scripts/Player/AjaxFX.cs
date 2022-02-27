@@ -4,14 +4,11 @@ using UnityEngine;
 
 public class AjaxFX : MonoBehaviour
 {
-    [Header("Particles")]
+    [Header("Jump particles")]
     [SerializeField] ParticleSystem jumpParticles;
-    [SerializeField] ParticleSystem vengefulLightParticles;
-    [SerializeField] ParticleSystem electricity;
 
+    [SerializeField] Transform jumpParticlesTransform;
 
-    [Header("Configurations")]
-    [SerializeField] float electricityVFXDuration = 1f;
 
 
     [Header("Others")]
@@ -19,9 +16,6 @@ public class AjaxFX : MonoBehaviour
     [SerializeField] Animator ajaxAnimator;
     [SerializeField] TrailRenderer dashTrailRenderer;
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-
-    int demonElectrivity = 0;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -63,7 +57,8 @@ public class AjaxFX : MonoBehaviour
     {
         if (this.jumpParticles)
         {
-            this.jumpParticles.Play();
+            var particles = Instantiate(jumpParticles, jumpParticlesTransform.position, Quaternion.identity);
+            Destroy(particles.gameObject, 1f);
         }
         ajaxAnimator.SetTrigger("jump");
         ajaxAnimator.SetBool("jumping", true);
@@ -79,24 +74,6 @@ public class AjaxFX : MonoBehaviour
         ajaxAnimator.SetBool("jumping", false);
     }
 
-    public void TriggerVengefulFX()
-    {
-        StartCoroutine(ElectricityFX(this.electricityVFXDuration));
-    }
-
-    IEnumerator ElectricityFX(float duration)
-    {
-        demonElectrivity++;
-        electricity.gameObject.SetActive(true);
-        yield return new WaitForSeconds(duration);
-        demonElectrivity--;
-
-        if (demonElectrivity <= 0)
-        {
-            electricity.gameObject.SetActive(false);
-        }
-    }
-
     /**
         This method should trigger
         land view and sound effects
@@ -106,7 +83,6 @@ public class AjaxFX : MonoBehaviour
         //TODO: land particles
         // TODO: (fix) dash animation can be longer than actual dash duration
         ajaxAnimator.SetTrigger("dash");
-        StartCoroutine(ElectricityFX(dashDuration * 2));
         StartCoroutine(IDashFX(dashDuration));
     }
 

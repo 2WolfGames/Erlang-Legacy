@@ -6,14 +6,14 @@ public class VengefulRay : MonoBehaviour
 {
     [Header("Configurations")]
     [Range(10, 1000)] [SerializeField] float damage = 100;
-    [Range(10, 100)] [SerializeField] float velocity;
+    [Range(10, 100)] [SerializeField] float velocity = 10f;
 
     [Tooltip("Delay for auto destroying")]
     [Range(1, 100)] [SerializeField] float countDown = 10f;
 
     [Header("Others")]
-    [SerializeField] Rigidbody2D rb;
-    [SerializeField] CapsuleCollider2D capsule;
+    [SerializeField] Rigidbody2D ownRigidbody;
+    // [SerializeField] Collider2D c2d;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -37,8 +37,8 @@ public class VengefulRay : MonoBehaviour
 
     void Start()
     {
-        rb.gravityScale = 0;
-        rb.velocity = Vector2.zero;
+        ownRigidbody.gravityScale = 0;
+        ownRigidbody.velocity = Vector2.zero;
         StartCoroutine(Suicide(this.countDown));
     }
 
@@ -50,7 +50,7 @@ public class VengefulRay : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.velocity = orientation * velocity;
+        ownRigidbody.velocity = orientation * velocity;
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -63,17 +63,6 @@ public class VengefulRay : MonoBehaviour
                 IEnemy enemy = other.GetComponent<IEnemy>();
                 enemy.OnHit(damage);
             }
-
-            var velocityX = rb.velocity.normalized.x;
-
-            var centerX = capsule.bounds.center.x;
-            var centerY = capsule.bounds.center.y;
-            // var extentsX = capsule.bounds.extents.x;
-            // // var hit = Instantiate(hitParticle, new Vector2(centerX + (velocityX >= 0 ? 1.25f * extentsX : -1.25f * extentsX), centerY), velocityX >= 0 ? Quaternion.identity : Quaternion.Euler(0, -180, 0));
-
-            // Destroy(hit.gameObject, 1f);
-            //Destroy(gameObject);
         }
-
     }
 }

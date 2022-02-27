@@ -29,7 +29,6 @@ public class Springboard : MonoBehaviour
     */
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("*");
         Debug.Log(other.name);
 
         if (memory.Contains(other.gameObject)) return;
@@ -50,7 +49,6 @@ public class Springboard : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D other)
     {
-        Debug.Log("+");
         Debug.Log(other.name);
 
         if (!memory.Contains(other.gameObject)) return;

@@ -20,10 +20,7 @@ public class AjaxAttack : MonoBehaviour
 
     [Header("Vengeful ray configuration")]
     [SerializeField] VengefulRay vengefulRay;
-
-    [SerializeField] ParticleSystem vengefulRayHit;
     [SerializeField] Transform vengefullRayStartPosition;
-    [Range(0.5f, 3.0f)] [SerializeField] float tbwRayAttack = 0.2f;
 
     [Header("Others")]
     AjaxFacing ajaxFacing;
@@ -92,11 +89,11 @@ public class AjaxAttack : MonoBehaviour
         {
             float x = transform.localScale.x;
             float facing = Mathf.Sign(x);
-            var hit = Instantiate(vengefulRayHit, vengefullRayStartPosition.position, facing == -1f ? Quaternion.Euler(0, -180, 0) : Quaternion.identity);
-            VengefulRay ray = Instantiate(vengefulRay, vengefullRayStartPosition.position, facing == -1f ? Quaternion.Euler(0, -180, 0) : Quaternion.identity);
+            // var hit = Instantiate(vengefulRayHit, vengefullRayStartPosition.position, facing == -1f ? Quaternion.Euler(0, -180, 0) : Quaternion.identity);
+            // VengefulRay ray = Instantiate(vengefulRay, vengefullRayStartPosition.position, facing == -1f ? Quaternion.Euler(0, -180, 0) : Quaternion.identity);
             Vector2 orientation = new Vector2(facing, 0);
+            var ray = Instantiate(vengefulRay, vengefullRayStartPosition.position, facing == -1f ? Quaternion.Euler(0, -180, 0) : Quaternion.identity);
             ray.orientation = orientation;
-            Destroy(hit.gameObject, 1f);
         }
     }
 

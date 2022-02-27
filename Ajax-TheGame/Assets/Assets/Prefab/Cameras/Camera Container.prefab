@@ -42,7 +42,22 @@ PrefabInstance:
     - target: {fileID: 2097659517172927069, guid: 544c65a920f46544e906769bc04b67a9,
         type: 3}
       propertyPath: orthographic size
-      value: 6.5
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2097659517172927069, guid: 544c65a920f46544e906769bc04b67a9,
+        type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 0.12156863
+      objectReference: {fileID: 0}
+    - target: {fileID: 2097659517172927069, guid: 544c65a920f46544e906769bc04b67a9,
+        type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0.22352941
+      objectReference: {fileID: 0}
+    - target: {fileID: 2097659517172927069, guid: 544c65a920f46544e906769bc04b67a9,
+        type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 0.24705882
       objectReference: {fileID: 0}
     - target: {fileID: 2097659517172927070, guid: 544c65a920f46544e906769bc04b67a9,
         type: 3}
@@ -187,7 +202,7 @@ PrefabInstance:
     - target: {fileID: 1264250634419219719, guid: 13fcf3b952264c5449b584661754b0b9,
         type: 3}
       propertyPath: m_Lens.OrthographicSize
-      value: 6.5
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 13fcf3b952264c5449b584661754b0b9, type: 3}
