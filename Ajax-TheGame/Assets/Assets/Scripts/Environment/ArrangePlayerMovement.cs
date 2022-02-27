@@ -1,23 +1,22 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-public class Platform : MonoBehaviour
+public class ArrangePlayerMovement : MonoBehaviour
 {
-    float velocityAlterator = 0.1f;
 
-    private Elevator parent;
-
-    private GameObject ajax;
-
-    private float ajaxLastXPos;
-
-    private float platformLastXPos;
+    [SerializeField] float velocityAlterator = 0.1f;
+    GameObject ajax;
+    float ajaxLastXPos;
+    float platformLastXPos;
 
     void Start()
     {
-        parent = transform.parent.GetComponent<Elevator>();
         platformLastXPos = transform.position.x;
     }
 
+    //pre: --
+    //post: every frame evaluates CalculatePlayerVelocity() and updates ajax and platform positions
     private void FixedUpdate()
     {
         if (ajax)
@@ -36,6 +35,7 @@ public class Platform : MonoBehaviour
         float ajaxDir = ajax.transform.localPosition.x - ajaxLastXPos;
         float platformDir = transform.position.x - platformLastXPos;
 
+        //if player and platform are moving 
         if (ajaxDir != 0 && platformDir != 0)
         {
             if (ajaxDir < 0 && platformDir < 0 || ajaxDir > 0 && platformDir > 0)
@@ -55,7 +55,6 @@ public class Platform : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            parent.ActivateMechanism(other); //Activation of Mecanism Base
             ajax = other.gameObject;
             ajax.transform.parent = this.transform; //Ajax as a Child of the platform
             ajaxLastXPos = ajax.transform.localPosition.x;

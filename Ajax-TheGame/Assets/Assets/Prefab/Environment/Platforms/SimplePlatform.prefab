@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1371629590956846511}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 22.2, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 10.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1371629591695491997}
@@ -79,10 +79,9 @@ MonoBehaviour:
   pointA: {fileID: 1371629592604721775}
   pointB: {fileID: 1371629590956846510}
   structure: {fileID: 1371629592965714017}
-  speed: 1.2
-  waitTime: 0
+  speed: 3
+  waitTime: 3
   goBackwards: 1
-  position: {x: 0, y: 0, z: 0}
 --- !u!1 &1371629592604721744
 GameObject:
   m_ObjectHideFlags: 0
@@ -161,7 +160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dd09b6311b5ea44e8525ffa9faf57c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parent: {fileID: 1371629591695491998}
+  moveStructure: {fileID: 1371629591695491998}
 --- !u!50 &1371629592965714017
 Rigidbody2D:
   serializedVersion: 4
@@ -284,7 +283,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.730051, y: 0.21534228}
+  m_Size: {x: 1.5706158, y: 0.21534228}
   m_EdgeRadius: 0
 --- !u!114 &1371629592965714046
 MonoBehaviour:
@@ -298,3 +297,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f08eb63cb2b6ea54cb5a372d2a762dff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  velocityAlterator: 0.1

@@ -2,24 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovementPlatform : MonoBehaviour
+public class MoveStructure : MonoBehaviour
 {
-    [SerializeField] Transform pointA;
+    [SerializeField] Transform pointA; //initial point. 
     [SerializeField] Transform pointB;
     [SerializeField] Rigidbody2D structure;
     [SerializeField] float speed;
     [SerializeField] float waitTime;
     [SerializeField] bool goBackwards;
-    public Transform target;
+    Transform target;
 
-
-    // Start is called before the first frame update
+    //post: structure is on initial position. 
     void Start()
     {
         structure.transform.position = pointA.position;
         target = null;
     }
 
+    //pre: --
+    //If there is a target (position to go), updates platform new position
+    //if platform has to go back and has arribed, calls the corutine to go to initial point
     void FixedUpdate()
     {
         if (target){
@@ -29,24 +31,26 @@ public class MovementPlatform : MonoBehaviour
             if (structure.transform.position == pointB.position && goBackwards)
             {
                 StartCoroutine(GoBack(this.waitTime));
+                target = null; //seting target to null so this if it don't executes every frame
             }
         }
 
     }
 
+    //pre: time > 0
+    //post: it waits for time and it sets target to initial point
     public IEnumerator GoBack(float time)
     {
-        Debug.Log("About to go back");
         yield return new WaitForSeconds(time);
-        Debug.Log("Going back!! ");
-        if (structure.transform.position == pointB.position) {
-            target = pointA;
-        }
+        target = pointA;
     }
 
-    public void MoveStructure()
+    //pre: --
+    //post: sets the new targent position depending on where the structure is.
+    //      if structure is in position A, target is position B
+    //      else target is position A (initial pos)
+    public void Move()
     {
-        // estoy en el punto inicial?
         if (structure.transform.position == pointA.position)
         {
             target = pointB;
@@ -56,5 +60,14 @@ public class MovementPlatform : MonoBehaviour
             target = pointA;
         }
 
+    }
+
+    //pre: -
+    //post: it enables or disables this script.
+    public void EnableMove(bool enable){
+        this.enabled = enable;
+        if (!enable){
+            target = null;
+        }
     }
 }
