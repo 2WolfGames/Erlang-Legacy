@@ -72,7 +72,7 @@ public class VengefulRay : MonoBehaviour
             // // var hit = Instantiate(hitParticle, new Vector2(centerX + (velocityX >= 0 ? 1.25f * extentsX : -1.25f * extentsX), centerY), velocityX >= 0 ? Quaternion.identity : Quaternion.Euler(0, -180, 0));
 
             // Destroy(hit.gameObject, 1f);
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
 
     }

@@ -121,9 +121,9 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!4 &1684245261 stripped
+--- !u!4 &1457524089 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 1830561269136379712, guid: 3a92e288e57aab644a0656c959990934,
+  m_CorrespondingSourceObject: {fileID: 366199806467387019, guid: 3a92e288e57aab644a0656c959990934,
     type: 3}
   m_PrefabInstance: {fileID: 1830561270528675945}
   m_PrefabAsset: {fileID: 0}
@@ -137,6 +137,11 @@ PrefabInstance:
     - target: {fileID: 1636358237, guid: 3a92e288e57aab644a0656c959990934, type: 3}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 366199806467387019, guid: 3a92e288e57aab644a0656c959990934,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1830561269136379712, guid: 3a92e288e57aab644a0656c959990934,
         type: 3}
@@ -198,6 +203,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ajax
       objectReference: {fileID: 0}
+    - target: {fileID: 2049829484717193622, guid: 3a92e288e57aab644a0656c959990934,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a92e288e57aab644a0656c959990934, type: 3}
 --- !u!1001 &2290061595240055617
@@ -211,7 +221,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Follow
       value: 
-      objectReference: {fileID: 1684245261}
+      objectReference: {fileID: 1457524089}
     - target: {fileID: 2290061594746873646, guid: d8009698174f62c47b176554cd7abb9d,
         type: 3}
       propertyPath: m_Name
