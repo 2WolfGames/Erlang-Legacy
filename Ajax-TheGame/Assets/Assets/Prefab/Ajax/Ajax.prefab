@@ -469,10 +469,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dashAttack: {fileID: 2313847163778488167}
-  tbwDashAttack: 0
+  tbwDashAttack: 1
   dashAttackTime: 0.2
   vengefulRay: {fileID: 1712094752, guid: d69ef617df5756d42a789cc0ea7f80e2, type: 3}
   vengefullRayStartPosition: {fileID: 4141933396836268054}
+  tbwVengefulRay: 1
 --- !u!114 &2313847163239649274
 MonoBehaviour:
   m_ObjectHideFlags: 0
