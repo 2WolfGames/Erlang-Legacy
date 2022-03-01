@@ -425,7 +425,7 @@ GameObject:
   - component: {fileID: 1712094753}
   - component: {fileID: 8022072309175993673}
   m_Layer: 9
-  m_Name: Vengeful Ball
+  m_Name: Vengeful Ball Yellow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

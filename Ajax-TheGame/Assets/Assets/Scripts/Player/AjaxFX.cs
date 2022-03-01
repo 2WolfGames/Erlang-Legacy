@@ -58,6 +58,7 @@ public class AjaxFX : MonoBehaviour
         if (this.jumpParticles)
         {
             var particles = Instantiate(jumpParticles, jumpParticlesTransform.position, Quaternion.identity);
+            particles.Play();
             Destroy(particles.gameObject, 1f);
         }
         ajaxAnimator.SetTrigger("jump");

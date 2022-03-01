@@ -18,12 +18,13 @@ public class Enemy : MonoBehaviour, IEnemy
 
     public void OnDie()
     {
-        Debug.Log("OnHit@Enemy: die");
+        //Debug.Log("OnHit@Enemy: die");
         Destroy(gameObject, deadDelay);
     }
 
     public bool OnHit(float damage)
     {
+        //Debug.Log("OnHit@Enemy: hit");
         bool dead = lifeController.TakeLife(damage);
         if (dead)
         {

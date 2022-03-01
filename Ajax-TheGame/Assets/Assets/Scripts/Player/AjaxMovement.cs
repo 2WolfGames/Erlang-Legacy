@@ -27,15 +27,15 @@ public class AjaxMovement : MonoBehaviour
     float gravityScale = 1;
     AjaxFX ajaxFX;
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////
+    Vector2 velocityModifyer;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         boxCollider2D = GetComponent<BoxCollider2D>();
         ajaxFX = GetComponent<AjaxFX>();
-
         gravityScale = this.rb.gravityScale;
+        velocityModifyer = Vector2.one;
     }
 
     void Update()
@@ -52,7 +52,10 @@ public class AjaxMovement : MonoBehaviour
         {
             int orientation = ajaxFacing.FacingToNumber();
             // when Ajax is at the air, we let him take certain control of it's movement
-            float vx = impulsed ? rb.velocity.x + orientation * basicSpeed * 0.05f : orientation * basicSpeed;
+            float vx = impulsed ?
+            rb.velocity.x + orientation * basicSpeed * 0.05f
+            : orientation * basicSpeed * velocityModifyer.x;
+
             rb.velocity = new Vector2(vx, rb.velocity.y);
             ajaxFX.SetRunFX(Mathf.Abs(rb.velocity.x) > Mathf.Epsilon);
 
@@ -61,6 +64,8 @@ public class AjaxMovement : MonoBehaviour
                 ajaxFX.TriggerLandFX();
                 hasJumped = false;
             }
+
+            velocityModifyer = Vector2.one;
         }
     }
 
@@ -177,6 +182,14 @@ public class AjaxMovement : MonoBehaviour
         {
             impulsed = false;
         }
+    }
+
+    //pre: -
+    //post: velocity modifyer is updated with the values 
+    //that are going to modify the velocity on ONE fixedUpdate
+    public void ModifyVelocity(Vector2 velocityModifyer)
+    {
+        this.velocityModifyer = velocityModifyer;
     }
 
 }
