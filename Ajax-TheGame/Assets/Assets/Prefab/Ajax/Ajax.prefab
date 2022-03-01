@@ -348,36 +348,6 @@ TrailRenderer:
   m_MinVertexDistance: 1
   m_Autodestruct: 0
   m_Emitting: 1
---- !u!1 &4141933397351438878
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4141933397351438865}
-  m_Layer: 9
-  m_Name: Jump Particles Position
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4141933397351438865
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4141933397351438878}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.92, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4141933397862323744}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4141933397862323759
 GameObject:
   m_ObjectHideFlags: 0
@@ -415,7 +385,6 @@ Transform:
   - {fileID: 4141933397126362820}
   - {fileID: 2313847162159989052}
   - {fileID: 4141933396836268054}
-  - {fileID: 4141933397351438865}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -432,7 +401,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpParticles: {fileID: 1970969992, guid: 799f5cf0fcf5c59438f473624a2d2114, type: 3}
-  jumpParticlesTransform: {fileID: 4141933397351438865}
+  jumpParticlesTransform: {fileID: 0}
   ajaxFacing: {fileID: 2313847163239649274}
   ajaxAnimator: {fileID: 2313847162159989055}
   dashTrailRenderer: {fileID: 2313847162675315070}

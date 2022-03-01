@@ -7,7 +7,7 @@ public class AjaxFX : MonoBehaviour
     [Header("Jump particles")]
     [SerializeField] ParticleSystem jumpParticles;
 
-    [SerializeField] Transform jumpParticlesTransform;
+    // [SerializeField] Transform jumpParticlesTransform;
 
 
 
@@ -57,9 +57,9 @@ public class AjaxFX : MonoBehaviour
     {
         if (this.jumpParticles)
         {
-            var particles = Instantiate(jumpParticles, jumpParticlesTransform.position, Quaternion.identity);
-            particles.Play();
-            Destroy(particles.gameObject, 1f);
+            // var particles = Instantiate(jumpParticles, jumpParticlesTransform.position, Quaternion.identity);
+            jumpParticles.Play();
+            // Destroy(particles.gameObject, 1f);
         }
         ajaxAnimator.SetTrigger("jump");
         ajaxAnimator.SetBool("jumping", true);
