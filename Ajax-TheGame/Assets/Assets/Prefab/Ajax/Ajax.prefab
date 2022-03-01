@@ -440,7 +440,8 @@ MonoBehaviour:
   dashAttack: {fileID: 2313847163778488167}
   tbwDashAttack: 1
   dashAttackTime: 0.2
-  vengefulRay: {fileID: 1712094752, guid: d69ef617df5756d42a789cc0ea7f80e2, type: 3}
+  vengefulRay: {fileID: 6055551925118139890, guid: d311c9d9b5d5045458bd745eea6b2e11,
+    type: 3}
   vengefullRayStartPosition: {fileID: 4141933396836268054}
   tbwVengefulRay: 1
 --- !u!114 &2313847163239649274
