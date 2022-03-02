@@ -12,8 +12,45 @@ public class Enemy : MonoBehaviour, IEnemy
     [Range(1f, 1000f)][SerializeField] float basicDamage = 10f;
     [Range(0.0f, 0.5f)][SerializeField] float deadDelay = 0.1f;
 
+    [Header("Player")]
+    [SerializeField] LayerMask whatIsAjax;
+
     [Header("Self")]
     [SerializeField] LifeController selfLifeController;
+    [SerializeField] Collider2D selfCollider;
+
+    void FixedUpdate()
+    {
+        if (IsTouchingAjax())
+        {
+            GameObject ajax = GameObject.Find("Ajax");
+            OnCollideWithAjax(ajax);
+        }
+    }
+
+    protected bool IsTouchingAjax()
+    {
+        return selfCollider.IsTouchingLayers(whatIsAjax);
+    }
+
+    /*
+        checks if is touching Ajax
+        if it does, applies damange for collision
+    **/
+    protected void OnCollideWithAjax(GameObject ajax)
+    {
+        if (ajax.CompareTag("Player"))
+        {
+            var tangible = ajax.GetComponent<TangibleController>().Tangible;
+            if (tangible == TangibleController.TangibleEnum.TANGIBLE)
+            {
+                var lifeController = ajax.GetComponent<LifeController>();
+                var tangibleController = ajax.GetComponent<TangibleController>();
+                lifeController.TakeLife(this.basicDamage);
+                tangibleController.MakeNonTangible();
+            }
+        }
+    }
 
     public void OnDie()
     {
@@ -31,13 +68,8 @@ public class Enemy : MonoBehaviour, IEnemy
         return dead;
     }
 
-    public void OnCollisionEnter2D(Collider2D other)
-    {
-
-    }
-
     public void OnAttack(Collider2D other)
     {
-        throw new System.NotImplementedException();
+        Debug.Log("NOT IMPLEMENTED YET");
     }
 }

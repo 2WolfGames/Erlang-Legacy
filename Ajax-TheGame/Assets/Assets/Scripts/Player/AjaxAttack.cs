@@ -12,9 +12,9 @@ using UnityEngine;
 */
 public class AjaxAttack : MonoBehaviour
 {
-    [Range(0.5f, 3.0f)] [SerializeField] float timeBtwAttack;
+    [Range(0.5f, 3.0f)][SerializeField] float timeBtwAttack;
 
-    [Range(0.1f, 0.5f)] [SerializeField] float dashAttackTime;
+    [Range(0.1f, 0.5f)][SerializeField] float dashAttackTime;
 
     [SerializeField] DashAttack dashAttack;
 
@@ -23,6 +23,10 @@ public class AjaxAttack : MonoBehaviour
     AjaxMovement ajaxMovement;
 
     AjaxFX ajaxFX;
+
+    [Header("Self")]
+    [SerializeField] TangibleController selfTangibleController;
+
 
     void Start()
     {
@@ -38,11 +42,12 @@ public class AjaxAttack : MonoBehaviour
             {
                 Vector2 direction = new Vector2(transform.localScale.x, 0);
                 _timeBtwAttack = timeBtwAttack;
-                this.ajaxFX.blockOrientationChanges = true;
+                this.ajaxFX.BlockOrientationChanges = true;
                 ajaxMovement.Dash(Mathf.RoundToInt(transform.localScale.x), dashAttackTime, () =>
                 {
-                    this.ajaxFX.blockOrientationChanges = false;
+                    this.ajaxFX.BlockOrientationChanges = false;
                 });
+                selfTangibleController.MakeNonTangible(dashAttackTime);
                 dashAttack.ApplyDamage(dashAttackTime);
             }
         }

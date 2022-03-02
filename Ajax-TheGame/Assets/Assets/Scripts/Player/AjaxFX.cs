@@ -20,7 +20,7 @@ public class AjaxFX : MonoBehaviour
 
     Face facing = Face.RIGHT;
 
-    public bool blockOrientationChanges
+    public bool BlockOrientationChanges
     {
         set; get;
     }
@@ -37,7 +37,7 @@ public class AjaxFX : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!blockOrientationChanges)
+        if (!BlockOrientationChanges)
         {
             HandleCharacterOrientation();
         }

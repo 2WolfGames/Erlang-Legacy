@@ -128,6 +128,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3779401471522880912}
     m_Modifications:
+    - target: {fileID: 6166654859123775441, guid: 922546fec765ee940bd2e94fba466e04,
+        type: 3}
+      propertyPath: selfCollider
+      value: 
+      objectReference: {fileID: 1463101565}
     - target: {fileID: 6166654859123775452, guid: 922546fec765ee940bd2e94fba466e04,
         type: 3}
       propertyPath: m_RootOrder
@@ -1097,6 +1102,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3779401471522880912}
     m_Modifications:
+    - target: {fileID: 6166654859123775441, guid: 922546fec765ee940bd2e94fba466e04,
+        type: 3}
+      propertyPath: selfCollider
+      value: 
+      objectReference: {fileID: 1481666406}
+    - target: {fileID: 6166654859123775441, guid: 922546fec765ee940bd2e94fba466e04,
+        type: 3}
+      propertyPath: collideFrequency
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6166654859123775441, guid: 922546fec765ee940bd2e94fba466e04,
+        type: 3}
+      propertyPath: whatIsAjax.m_Bits
+      value: 512
+      objectReference: {fileID: 0}
     - target: {fileID: 6166654859123775452, guid: 922546fec765ee940bd2e94fba466e04,
         type: 3}
       propertyPath: m_RootOrder
@@ -1319,6 +1339,18 @@ Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 8620820812438235946, guid: 65e3adadf46c5234eaae3360f2b440a4,
     type: 3}
   m_PrefabInstance: {fileID: 6499478651286653432}
+  m_PrefabAsset: {fileID: 0}
+--- !u!58 &1463101565 stripped
+CircleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 6166654859123775454, guid: 922546fec765ee940bd2e94fba466e04,
+    type: 3}
+  m_PrefabInstance: {fileID: 16847621}
+  m_PrefabAsset: {fileID: 0}
+--- !u!58 &1481666406 stripped
+CircleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 6166654859123775454, guid: 922546fec765ee940bd2e94fba466e04,
+    type: 3}
+  m_PrefabInstance: {fileID: 1062602618}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1529758528
 GameObject:
