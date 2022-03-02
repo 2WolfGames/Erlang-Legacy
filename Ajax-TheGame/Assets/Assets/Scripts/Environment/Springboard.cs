@@ -5,7 +5,7 @@ using UnityEngine;
 public class Springboard : MonoBehaviour
 {
     [Tooltip("Impulse force to add")]
-    [Range(5f, 100f)] [SerializeField] float force = 10f;
+    [Range(5f, 100f)][SerializeField] float force = 10f;
 
     [Tooltip("Util for diff between elements of same layer")]
     [SerializeField] string compareTag = "Player";
@@ -14,8 +14,6 @@ public class Springboard : MonoBehaviour
     [SerializeField] float desviation = 90;
 
     Animator animator;
-
-    HashSet<GameObject> memory = new HashSet<GameObject>();
 
     void Awake()
     {
@@ -29,8 +27,6 @@ public class Springboard : MonoBehaviour
     */
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (memory.Contains(other.gameObject)) return;
-
         if (compareTag != null && !other.CompareTag(compareTag)) return;
 
         AjaxMovement ajaxMovement = other.GetComponent<AjaxMovement>();
@@ -41,17 +37,13 @@ public class Springboard : MonoBehaviour
 
         ajaxMovement.Impulse(new Vector2(xForce, yForce));
 
-        memory.Add(other.gameObject);
         animator.SetBool("EXPAND", true);
     }
 
     void OnTriggerExit2D(Collider2D other)
     {
-        if (!memory.Contains(other.gameObject)) return;
-
         if (compareTag != null && !other.CompareTag(compareTag)) return;
 
-        memory.Remove(other.gameObject);
         animator.SetBool("EXPAND", false);
     }
 }

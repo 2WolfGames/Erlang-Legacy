@@ -152,7 +152,6 @@ GameObject:
   - component: {fileID: 1830561269136379713}
   - component: {fileID: 1830561269136379726}
   - component: {fileID: 1830561269136379718}
-  - component: {fileID: 1830561269136379717}
   - component: {fileID: 1830561269136379714}
   - component: {fileID: 1830561269136379716}
   m_Layer: 9
@@ -229,22 +228,6 @@ MonoBehaviour:
   timeBtwAttack: 1
   dashAttackTime: 0.2
   dashAttack: {fileID: 17862151}
---- !u!70 &1830561269136379717
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1830561269136379727}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: 24bf555e7b477ff4ea304e44087cafff, type: 2}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.09398222, y: 0.08202016}
-  m_Size: {x: 0.60669804, y: 2.2615836}
-  m_Direction: 0
 --- !u!61 &1830561269136379714
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -258,7 +241,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.013885498, y: -0.90217614}
+  m_Offset: {x: -0.05891466, y: 0.099628925}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -269,7 +252,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.8235283, y: 0.31186438}
+  m_Size: {x: 0.9135866, y: 2.3154745}
   m_EdgeRadius: 0
 --- !u!50 &1830561269136379716
 Rigidbody2D:
@@ -338,7 +321,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.48573494, y: -0.28271884}
+  m_Offset: {x: 0.44388533, y: -0.28271884}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -349,7 +332,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.7547817, y: 1.2658498}
+  m_Size: {x: 1.838481, y: 1.2658498}
   m_EdgeRadius: 0
 --- !u!114 &17862151
 MonoBehaviour:

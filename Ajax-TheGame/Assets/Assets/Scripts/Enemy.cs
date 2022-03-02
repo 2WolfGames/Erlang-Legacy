@@ -7,11 +7,13 @@ using UnityEngine;
 */
 public class Enemy : MonoBehaviour, IEnemy
 {
-
-    [SerializeField] LifeController selfLifeController;
-
+    [Header("Configurations")]
+    [Tooltip("How many damage does to player")]
+    [Range(1f, 1000f)][SerializeField] float basicDamage = 10f;
     [Range(0.0f, 0.5f)][SerializeField] float deadDelay = 0.1f;
 
+    [Header("Self")]
+    [SerializeField] LifeController selfLifeController;
 
     public void OnDie()
     {
@@ -29,7 +31,12 @@ public class Enemy : MonoBehaviour, IEnemy
         return dead;
     }
 
-    public void OnAttack()
+    public void OnCollisionEnter2D(Collider2D other)
+    {
+
+    }
+
+    public void OnAttack(Collider2D other)
     {
         throw new System.NotImplementedException();
     }

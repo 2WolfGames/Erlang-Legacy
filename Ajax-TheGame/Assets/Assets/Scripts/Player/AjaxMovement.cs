@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class AjaxMovement : MonoBehaviour
 {
-
     [SerializeField] LayerMask whatIsGround;
 
     [SerializeField] float speed;
@@ -61,8 +60,8 @@ public class AjaxMovement : MonoBehaviour
         if (!dashing)
         {
             // when Ajax is at the air, we let him take certain control of it's movement
-            float vx = impulsed ? 
-            rb.velocity.x + xOrientation * speed * 0.05f 
+            float vx = impulsed ?
+            rb.velocity.x + xOrientation * speed * 0.05f
             : xOrientation * speed * velocityModifyer.x;
 
             rb.velocity = new Vector2(vx, rb.velocity.y);
@@ -197,7 +196,8 @@ public class AjaxMovement : MonoBehaviour
     //pre: -
     //post: velocity modifyer is updated with the values 
     //that are going to modify the velocity on ONE fixedUpdate
-    public void ModifyVelocity(Vector2 velocityModifyer){
+    public void ModifyVelocity(Vector2 velocityModifyer)
+    {
         this.velocityModifyer = velocityModifyer;
     }
 
