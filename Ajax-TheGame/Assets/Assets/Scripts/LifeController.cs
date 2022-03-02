@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class LifeController : MonoBehaviour
 {
-    [Range(10, 10000)] [SerializeField] float life = 100;
-
+    [Range(10, 10000)][SerializeField] float life = 100;
 
     /**
         this fn returns true when
@@ -17,6 +16,6 @@ public class LifeController : MonoBehaviour
     public bool TakeLife(float life)
     {
         this.life -= life;
-        return Mathf.Abs(this.life) <= Mathf.Epsilon;
+        return this.life <= 0;
     }
 }

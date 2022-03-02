@@ -7,25 +7,21 @@ using UnityEngine;
 */
 public class Enemy : MonoBehaviour, IEnemy
 {
-    LifeController lifeController;
 
-    [Range(0.0f, 0.5f)] [SerializeField] float deadDelay = 0.1f;
+    [SerializeField] LifeController selfLifeController;
 
-    void Awake()
-    {
-        lifeController = GetComponent<LifeController>();
-    }
+    [Range(0.0f, 0.5f)][SerializeField] float deadDelay = 0.1f;
+
 
     public void OnDie()
     {
-        //Debug.Log("OnHit@Enemy: die");
+        Debug.Log("OnHit@Enemy: die");
         Destroy(gameObject, deadDelay);
     }
 
     public bool OnHit(float damage)
     {
-        //Debug.Log("OnHit@Enemy: hit");
-        bool dead = lifeController.TakeLife(damage);
+        bool dead = selfLifeController.TakeLife(damage);
         if (dead)
         {
             OnDie();
