@@ -156,6 +156,7 @@ GameObject:
   - component: {fileID: 1915281142}
   - component: {fileID: 1830561269136379714}
   - component: {fileID: 1830561269136379716}
+  - component: {fileID: 924179529}
   m_Layer: 9
   m_Name: Ajax
   m_TagString: Player
@@ -228,9 +229,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeBtwAttack: 1
-  dashAttackTime: 0.2
-  dashAttack: {fileID: 17862151}
-  selfTangibleController: {fileID: 1915281141}
+  dashTime: 0.2
+  ajaxController: {fileID: 924179529}
 --- !u!114 &1915281141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,7 +244,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tangible: 0
-  defaultNonTangibleTime: 1.25
 --- !u!114 &1915281142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -305,6 +304,23 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &924179529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1830561269136379727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e450b5a5be415d41964c9e2bc103e4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ajaxMovement: {fileID: 1830561269136379726}
+  ajaxTangible: {fileID: 1915281141}
+  ajaxFX: {fileID: 1830561269136379713}
+  ajaxLife: {fileID: 1915281142}
+  collisionNonTangibleTime: 0.5
 --- !u!1 &1830561269624893349
 GameObject:
   m_ObjectHideFlags: 0

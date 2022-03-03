@@ -9,6 +9,8 @@ public class Enemy : MonoBehaviour, IEnemy
 {
     [Header("Configurations")]
     [Tooltip("How many damage does to player")]
+
+    [Range(1f, 1000f)][SerializeField] float collisionDamage = 10f;
     [Range(1f, 1000f)][SerializeField] float basicDamage = 10f;
     [Range(0.0f, 0.5f)][SerializeField] float deadDelay = 0.1f;
 
@@ -16,15 +18,20 @@ public class Enemy : MonoBehaviour, IEnemy
     [SerializeField] LayerMask whatIsAjax;
 
     [Header("Self")]
-    [SerializeField] LifeController selfLifeController;
+    [SerializeField] LifeController lifeController;
     [SerializeField] Collider2D selfCollider;
+
+    GameObject ajax = null;
 
     void FixedUpdate()
     {
         if (IsTouchingAjax())
         {
-            GameObject ajax = GameObject.Find("Ajax");
-            OnCollideWithAjax(ajax);
+            if (ajax == null)
+            {
+                ajax = GameObject.Find("Ajax");
+            }
+            OnCollisionWithAjax(ajax);
         }
     }
 
@@ -37,17 +44,15 @@ public class Enemy : MonoBehaviour, IEnemy
         checks if is touching Ajax
         if it does, applies damange for collision
     **/
-    protected void OnCollideWithAjax(GameObject ajax)
+    protected void OnCollisionWithAjax(GameObject ajax)
     {
         if (ajax.CompareTag("Player"))
         {
-            var tangible = ajax.GetComponent<TangibleController>().Tangible;
-            if (tangible == TangibleController.TangibleEnum.TANGIBLE)
+            AjaxController ajaxController = ajax.GetComponent<AjaxController>();
+
+            if (ajaxController.IsTangible())
             {
-                var lifeController = ajax.GetComponent<LifeController>();
-                var tangibleController = ajax.GetComponent<TangibleController>();
-                lifeController.TakeLife(this.basicDamage);
-                tangibleController.MakeNonTangible();
+                ajaxController.OnCollisionWith(collisionDamage);
             }
         }
     }
@@ -60,7 +65,7 @@ public class Enemy : MonoBehaviour, IEnemy
 
     public bool OnHit(float damage)
     {
-        bool dead = selfLifeController.TakeLife(damage);
+        bool dead = lifeController.TakeLife(damage);
         if (dead)
         {
             OnDie();

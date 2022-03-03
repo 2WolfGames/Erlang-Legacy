@@ -52,7 +52,6 @@ public class AjaxMovement : MonoBehaviour
         {
             SmoothJump();
         }
-        // HandleLocalScale();
     }
 
     void FixedUpdate()

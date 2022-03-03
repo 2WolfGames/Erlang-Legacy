@@ -12,27 +12,14 @@ using UnityEngine;
 */
 public class AjaxAttack : MonoBehaviour
 {
-    [Range(0.5f, 3.0f)][SerializeField] float timeBtwAttack;
+    [Range(0.5f, 3.0f)][SerializeField] float timeBtwAttack = 1.25f;
 
-    [Range(0.1f, 0.5f)][SerializeField] float dashAttackTime;
-
-    [SerializeField] DashAttack dashAttack;
+    [Range(0.1f, 0.5f)][SerializeField] float dashTime = 0.2f;
 
     float _timeBtwAttack = -1;
 
-    AjaxMovement ajaxMovement;
-
-    AjaxFX ajaxFX;
-
     [Header("Self")]
-    [SerializeField] TangibleController selfTangibleController;
-
-
-    void Start()
-    {
-        ajaxMovement = GetComponent<AjaxMovement>();
-        ajaxFX = GetComponent<AjaxFX>();
-    }
+    [SerializeField] AjaxController ajaxController;
 
     void Update()
     {
@@ -40,15 +27,7 @@ public class AjaxAttack : MonoBehaviour
         {
             if (Input.GetButtonDown("Fire1"))
             {
-                Vector2 direction = new Vector2(transform.localScale.x, 0);
-                _timeBtwAttack = timeBtwAttack;
-                this.ajaxFX.BlockOrientationChanges = true;
-                ajaxMovement.Dash(Mathf.RoundToInt(transform.localScale.x), dashAttackTime, () =>
-                {
-                    this.ajaxFX.BlockOrientationChanges = false;
-                });
-                selfTangibleController.MakeNonTangible(dashAttackTime);
-                dashAttack.ApplyDamage(dashAttackTime);
+                ajaxController.OnDashAttack(dashTime);
             }
         }
         else

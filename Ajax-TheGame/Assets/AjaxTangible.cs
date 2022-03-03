@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TangibleController : MonoBehaviour
+public class AjaxTangible : MonoBehaviour
 {
     [SerializeField] TangibleEnum tangible = TangibleEnum.TANGIBLE;
-
-    [SerializeField] float defaultNonTangibleTime = 0.25f;
 
     int nonTangibleEvents = 0;
 
@@ -16,17 +14,12 @@ public class TangibleController : MonoBehaviour
         private set { tangible = value; }
     }
 
-    public void MakeNonTangible()
+    public void OnTemporaryNonTangible(float time, System.Action onComplete = null)
     {
-        StartCoroutine(MakeNonTangibleEnumerator(defaultNonTangibleTime));
+        StartCoroutine(NonTangibleTimeoutEnumerator(time, onComplete));
     }
 
-    public void MakeNonTangible(float time)
-    {
-        StartCoroutine(MakeNonTangibleEnumerator(time));
-    }
-
-    IEnumerator MakeNonTangibleEnumerator(float time)
+    IEnumerator NonTangibleTimeoutEnumerator(float time, System.Action onComplete = null)
     {
         nonTangibleEvents++;
         Tangible = TangibleEnum.NON_TANGIBLE;
@@ -36,6 +29,11 @@ public class TangibleController : MonoBehaviour
         if (nonTangibleEvents == 0)
         {
             Tangible = TangibleEnum.TANGIBLE;
+        }
+
+        if (onComplete != null)
+        {
+            onComplete();
         }
     }
 
