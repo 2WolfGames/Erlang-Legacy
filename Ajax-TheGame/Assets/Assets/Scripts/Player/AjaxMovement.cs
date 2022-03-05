@@ -4,35 +4,27 @@ using UnityEngine;
 
 public class AjaxMovement : MonoBehaviour
 {
+    [Header("Configurations")]
+    [Tooltip("Displacement power on sides while running")] [SerializeField] float basicSpeed;
+    [Tooltip("Displacement power on sides while dashing")] [SerializeField] float dashSpeed;
+    [Tooltip("Displacement power on sides while jumping")] [SerializeField] float jumpForce = 2;
+    [Tooltip("How much time player can hold jump bottom")] [SerializeField] float holdJump = 0.3f;
 
+
+    [Header("Others")]
     [SerializeField] LayerMask whatIsGround;
+    [SerializeField] AjaxFacing ajaxFacing;
 
-    [SerializeField] float speed;
-
-    [SerializeField] float dashSpeed;
-
-    [SerializeField] float xOrientation = 1;
-
-    [SerializeField] float jumpForce = 2;
-
-    [SerializeField] float jumpTime = 0.3f;
+    ////////////////////////////////////////////////////////////////////////////////////////////////
 
     Rigidbody2D rb;
-
     BoxCollider2D boxCollider2D;
-
     float jumpTimeCounter = 0.2f;
-
     bool isJumping = false;
-
     bool hasJumped = false;
-
     bool dashing = false;
-
     bool impulsed = false;
-
     float gravityScale = 1;
-
     AjaxFX ajaxFX;
 
     Vector2 velocityModifyer;
@@ -48,22 +40,21 @@ public class AjaxMovement : MonoBehaviour
 
     void Update()
     {
-        xOrientation = Input.GetAxisRaw("Horizontal");
         if (!dashing)
         {
             SmoothJump();
         }
-        // HandleLocalScale();
     }
 
     void FixedUpdate()
     {
         if (!dashing)
         {
+            int orientation = ajaxFacing.FacingToNumber();
             // when Ajax is at the air, we let him take certain control of it's movement
-            float vx = impulsed ? 
-            rb.velocity.x + xOrientation * speed * 0.05f 
-            : xOrientation * speed * velocityModifyer.x;
+            float vx = impulsed ?
+            rb.velocity.x + orientation * basicSpeed * 0.05f
+            : orientation * basicSpeed * velocityModifyer.x;
 
             rb.velocity = new Vector2(vx, rb.velocity.y);
             ajaxFX.SetRunFX(Mathf.Abs(rb.velocity.x) > Mathf.Epsilon);
@@ -116,7 +107,7 @@ public class AjaxMovement : MonoBehaviour
         if (Input.GetButtonDown("Jump") && IsGrounded())
         {
             isJumping = true;
-            jumpTimeCounter = jumpTime;
+            jumpTimeCounter = holdJump;
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             this.ajaxFX.TriggerJumpFX();
         }
@@ -191,13 +182,13 @@ public class AjaxMovement : MonoBehaviour
         {
             impulsed = false;
         }
-
     }
 
     //pre: -
     //post: velocity modifyer is updated with the values 
     //that are going to modify the velocity on ONE fixedUpdate
-    public void ModifyVelocity(Vector2 velocityModifyer){
+    public void ModifyVelocity(Vector2 velocityModifyer)
+    {
         this.velocityModifyer = velocityModifyer;
     }
 
