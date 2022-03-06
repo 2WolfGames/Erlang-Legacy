@@ -241,6 +241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ae3158f1f9851a47b8d13818a7b20f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  boxCollider: {fileID: 2313847163778488168}
   damage: 100
 --- !u!96 &2313847162675315070
 TrailRenderer:
@@ -366,6 +367,7 @@ GameObject:
   - component: {fileID: 2046212546}
   - component: {fileID: 2046212547}
   - component: {fileID: 2046212548}
+  - component: {fileID: 2818751836965112833}
   m_Layer: 9
   m_Name: Ajax
   m_TagString: Player
@@ -520,6 +522,7 @@ MonoBehaviour:
   ajaxLife: {fileID: 2046212547}
   ajaxTouchable: {fileID: 2046212548}
   ajaxOrientation: {fileID: 2313847163239649274}
+  dashAttack: {fileID: 2313847163778488167}
   touchableTime: 0.5
 --- !u!114 &2046212547
 MonoBehaviour:
@@ -546,6 +549,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94c19af845919594ba312947389c2c20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2818751836965112833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4141933397862323759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ae3158f1f9851a47b8d13818a7b20f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boxCollider: {fileID: 0}
+  damage: 100
 --- !u!1001 &1830561269896832513
 PrefabInstance:
   m_ObjectHideFlags: 0

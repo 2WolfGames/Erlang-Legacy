@@ -12,6 +12,10 @@ public class AjaxController : MonoBehaviour
     [SerializeField] Orientation ajaxOrientation;
 
 
+    [Header("Linked objects")]
+    [SerializeField] DashAttack dashAttack;
+
+
     [Header("Configurations")]
     [SerializeField] float touchableTime = 0.5f;
 
@@ -38,6 +42,8 @@ public class AjaxController : MonoBehaviour
         StartCoroutine(ajaxFX.UpdateCanFlip(true, dashTime));
 
         StartCoroutine(ajaxMovement.Dash(ajaxOrientation.LatestFacing, dashTime));
+
+        StartCoroutine(dashAttack.Attack(dashTime));
     }
 
     public void TriggerVengefulRay(Vector3 origin)
