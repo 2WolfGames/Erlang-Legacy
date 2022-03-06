@@ -4,25 +4,21 @@ using UnityEngine;
 
 public class AjaxFX : MonoBehaviour
 {
-    enum Face
-    {
-        LEFT,
-        RIGHT
-    }
-
-    [SerializeField] Animator ajaxAnimator;
-
+    [Header("Jump particles")]
     [SerializeField] ParticleSystem jumpParticles;
 
+    // [SerializeField] Transform jumpParticlesTransform;
+
+    [Header("Self")]
+    [SerializeField] AjaxController ajaxController;
+    [SerializeField] Animator ajaxAnimator;
     [SerializeField] TrailRenderer dashTrailRenderer;
 
-    float orientation = 0f;
+    bool canFlip = true;
 
-    Face facing = Face.RIGHT;
-
-    public bool BlockOrientationChanges
+    public bool CanFlip
     {
-        set; get;
+        get { return canFlip; }
     }
 
     void Start()
@@ -30,35 +26,30 @@ public class AjaxFX : MonoBehaviour
         dashTrailRenderer.widthMultiplier = 0;
     }
 
-    void Update()
-    {
-        orientation = Input.GetAxisRaw("Horizontal");
-    }
-
     void FixedUpdate()
     {
-        if (!BlockOrientationChanges)
-        {
-            HandleCharacterOrientation();
-        }
+        FlipListener();
     }
 
-    void HandleCharacterOrientation()
+    void FlipListener()
     {
-        int orientation = Mathf.RoundToInt(this.orientation);
-        UpdateCharacterOrientation(orientation);
+        if (!canFlip) return;
+
+        UpdateFlip(ajaxController.FacingTo());
     }
 
     // -1 left, 1 right 
-    void UpdateCharacterOrientation(int orientation)
+    void UpdateFlip(Utils.Facing facing)
     {
-        if (orientation != -1 && orientation != 1) return;
-
-        this.facing = orientation == 1 ? Face.RIGHT : Face.LEFT;
-
         Vector3 characterScale = transform.localScale;
-        characterScale.x = orientation;
+        characterScale.x = facing == Utils.Facing.LEFT ? -1 : 1;
         transform.localScale = characterScale;
+    }
+
+    public IEnumerator UpdateCanFlip(bool flip, float time = 0)
+    {
+        yield return new WaitForSeconds(time);
+        canFlip = flip;
     }
 
     /**
@@ -69,7 +60,9 @@ public class AjaxFX : MonoBehaviour
     {
         if (this.jumpParticles)
         {
-            this.jumpParticles.Play();
+            // var particles = Instantiate(jumpParticles, jumpParticlesTransform.position, Quaternion.identity);
+            jumpParticles.Play();
+            // Destroy(particles.gameObject, 1f);
         }
         ajaxAnimator.SetTrigger("jump");
         ajaxAnimator.SetBool("jumping", true);

@@ -21,16 +21,17 @@ public class Enemy : MonoBehaviour, IEnemy
     [SerializeField] LifeController lifeController;
     [SerializeField] Collider2D selfCollider;
 
-    GameObject ajax = null;
+    GameObject ajax;
+
+    void Start()
+    {
+        ajax = GameObject.Find("Ajax");
+    }
 
     void FixedUpdate()
     {
         if (IsTouchingAjax())
         {
-            if (ajax == null)
-            {
-                ajax = GameObject.Find("Ajax");
-            }
             OnCollisionWithAjax(ajax);
         }
     }
@@ -50,7 +51,7 @@ public class Enemy : MonoBehaviour, IEnemy
         {
             AjaxController ajaxController = ajax.GetComponent<AjaxController>();
 
-            if (ajaxController.IsTangible())
+            if (ajaxController.CanBeTouch())
             {
                 ajaxController.OnCollisionWith(collisionDamage);
             }

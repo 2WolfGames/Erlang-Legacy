@@ -6,12 +6,14 @@ public class AjaxController : MonoBehaviour
 {
     [Header("Self")]
     [SerializeField] AjaxMovement ajaxMovement;
-    [SerializeField] AjaxTangible ajaxTangible;
     [SerializeField] AjaxFX ajaxFX;
     [SerializeField] LifeController ajaxLife;
+    [SerializeField] Touchable ajaxTouchable;
+    [SerializeField] Orientation ajaxOrientation;
+
 
     [Header("Configurations")]
-    [SerializeField] float collisionNonTangibleTime = 0.5f;
+    [SerializeField] float touchableTime = 0.5f;
 
 
     /**
@@ -19,29 +21,46 @@ public class AjaxController : MonoBehaviour
     */
     public void OnCollisionWith(float collisionDamage, GameObject other = null)
     {
-        if (!IsTangible()) return;
+        if (!ajaxTouchable.CanBeTouch) return;
 
-        ajaxTangible.OnTemporaryNonTangible(collisionNonTangibleTime);
+        StartCoroutine(ajaxTouchable.UpdateCanBeTouch(false, 0));
+        StartCoroutine(ajaxTouchable.UpdateCanBeTouch(true, touchableTime));
         ajaxLife.TakeLife(Mathf.Abs(collisionDamage));
     }
 
-    public bool IsTangible()
+
+    public void TriggerDash(float dashTime)
     {
-        return ajaxTangible.Tangible == AjaxTangible.TangibleEnum.TANGIBLE;
+        StartCoroutine(ajaxTouchable.UpdateCanBeTouch(false, 0));
+        StartCoroutine(ajaxTouchable.UpdateCanBeTouch(true, dashTime));
+
+        StartCoroutine(ajaxFX.UpdateCanFlip(false, 0));
+        StartCoroutine(ajaxFX.UpdateCanFlip(true, dashTime));
+
+        StartCoroutine(ajaxMovement.Dash(ajaxOrientation.LatestFacing, dashTime));
     }
 
-    public void OnDashAttack(float dashTime)
+    public void TriggerVengefulRay(Vector3 origin)
     {
-        // block ajax orientation
-        // make non tangible
-        // execute dash instruction
-        // unblock ajax orientation
 
-        ajaxTangible.OnTemporaryNonTangible(dashTime);
-        ajaxFX.BlockOrientationChanges = true;
-        // TODO: pick from Ajax facing to know the correct orientation
-        ajaxMovement.Dash(1, dashTime, () => { ajaxFX.BlockOrientationChanges = false; });
-        // TODO: use ajax dash script to make damage in area
+    }
+
+    public bool CanBeTouch()
+    {
+        return ajaxTouchable.CanBeTouch;
+    }
+
+    /**
+    retruns a number { -1, 0, 1}
+    **/
+    public int XVelocityNormalized()
+    {
+        return ajaxOrientation.InputToNumber();
+    }
+
+    public Utils.Facing FacingTo()
+    {
+        return ajaxOrientation.LatestFacing;
     }
 
 }

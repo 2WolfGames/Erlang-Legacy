@@ -236,7 +236,7 @@ Transform:
   - {fileID: 220039410}
   - {fileID: 1324557964}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &33712363
 GameObject:
@@ -965,7 +965,7 @@ PrefabInstance:
     - target: {fileID: 6166654859123775452, guid: 49f5db0805b181d45bad9e8ee42d0ff1,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6166654859123775452, guid: 49f5db0805b181d45bad9e8ee42d0ff1,
         type: 3}
@@ -1419,12 +1419,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a76c570d68763b34fadcc3ddab29c90d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &1684245261 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1830561269136379712, guid: 3a92e288e57aab644a0656c959990934,
-    type: 3}
-  m_PrefabInstance: {fileID: 1830561270528675945}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1831592338
 GameObject:
   m_ObjectHideFlags: 0
@@ -1642,7 +1636,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Follow
       value: 
-      objectReference: {fileID: 1684245261}
+      objectReference: {fileID: 0}
     - target: {fileID: 2165200137079900802, guid: 42ed3b4bdffc0da4c933f16f38c78f2d,
         type: 3}
       propertyPath: m_BoundingShape2D
@@ -1757,6 +1751,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Ajax
+      objectReference: {fileID: 0}
+    - target: {fileID: 2313847162159989053, guid: 3a92e288e57aab644a0656c959990934,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a92e288e57aab644a0656c959990934, type: 3}

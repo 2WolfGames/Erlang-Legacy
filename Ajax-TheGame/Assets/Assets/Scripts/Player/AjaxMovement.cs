@@ -4,34 +4,30 @@ using UnityEngine;
 
 public class AjaxMovement : MonoBehaviour
 {
+    [Header("Self")]
+    [SerializeField] AjaxController ajaxController;
+
+
+    [Header("Configurations")]
+    [Tooltip("Displacement power on sides while running")][SerializeField] float basicSpeed;
+    [Tooltip("Displacement power on sides while dashing")][SerializeField] float dashSpeed;
+    [Tooltip("Displacement power on sides while jumping")][SerializeField] float jumpForce = 2;
+    [Tooltip("How much time player can hold jump bottom")][SerializeField] float holdJump = 0.3f;
+
+
+    [Header("Others")]
     [SerializeField] LayerMask whatIsGround;
 
-    [SerializeField] float speed;
-
-    [SerializeField] float dashSpeed;
-
-    [SerializeField] float xOrientation = 1;
-
-    [SerializeField] float jumpForce = 2;
-
-    [SerializeField] float jumpTime = 0.3f;
+    ////////////////////////////////////////////////////////////////////////////////////////////////
 
     Rigidbody2D rb;
-
     BoxCollider2D boxCollider2D;
-
     float jumpTimeCounter = 0.2f;
-
     bool isJumping = false;
-
     bool hasJumped = false;
-
     bool dashing = false;
-
     bool impulsed = false;
-
     float gravityScale = 1;
-
     AjaxFX ajaxFX;
 
     Vector2 velocityModifyer;
@@ -47,7 +43,6 @@ public class AjaxMovement : MonoBehaviour
 
     void Update()
     {
-        xOrientation = Input.GetAxisRaw("Horizontal");
         if (!dashing)
         {
             SmoothJump();
@@ -58,10 +53,11 @@ public class AjaxMovement : MonoBehaviour
     {
         if (!dashing)
         {
+            int xNormalized = ajaxController.XVelocityNormalized();
             // when Ajax is at the air, we let him take certain control of it's movement
             float vx = impulsed ?
-            rb.velocity.x + xOrientation * speed * 0.05f
-            : xOrientation * speed * velocityModifyer.x;
+            rb.velocity.x + xNormalized * basicSpeed * 0.05f
+            : xNormalized * basicSpeed * velocityModifyer.x;
 
             rb.velocity = new Vector2(vx, rb.velocity.y);
             ajaxFX.SetRunFX(Mathf.Abs(rb.velocity.x) > Mathf.Epsilon);
@@ -102,19 +98,12 @@ public class AjaxMovement : MonoBehaviour
         rb.AddForce(impulse, ForceMode2D.Impulse);
     }
 
-    // direction only support { -1, 1 }, meaning { left, right }
-    public void Dash(int direction, float duration, System.Action onComplete = null)
-    {
-        if (direction != 1 && direction != -1) return;
-        StartCoroutine(IDash(direction, duration, onComplete));
-    }
-
     void SmoothJump()
     {
         if (Input.GetButtonDown("Jump") && IsGrounded())
         {
             isJumping = true;
-            jumpTimeCounter = jumpTime;
+            jumpTimeCounter = holdJump;
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             this.ajaxFX.TriggerJumpFX();
         }
@@ -142,13 +131,14 @@ public class AjaxMovement : MonoBehaviour
     }
 
     // Method thought to be calle throw @Dash fn
-    IEnumerator IDash(int direction, float duration, System.Action onComplete = null)
+    public IEnumerator Dash(Utils.Facing facing, float duration, System.Action onComplete = null)
     {
         dashing = true;
         float gravityScale = this.rb.gravityScale;
         Freeze();
         this.rb.gravityScale = 0;
         ajaxFX.TriggerDashFX(duration);
+        var direction = facing == Utils.Facing.LEFT ? -1 : 1;
         this.rb.AddForce(new Vector2(dashSpeed * direction, 0f), ForceMode2D.Impulse);
         yield return new WaitForSeconds(duration);
 
@@ -189,7 +179,6 @@ public class AjaxMovement : MonoBehaviour
         {
             impulsed = false;
         }
-
     }
 
     //pre: -
