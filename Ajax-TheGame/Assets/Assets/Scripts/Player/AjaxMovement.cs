@@ -53,7 +53,7 @@ public class AjaxMovement : MonoBehaviour
     {
         if (!dashing)
         {
-            int xNormalized = ajaxController.XVelocityNormalized();
+            int xNormalized = ajaxController.HorizontalInputNormalized();
             // when Ajax is at the air, we let him take certain control of it's movement
             float vx = impulsed ?
             rb.velocity.x + xNormalized * basicSpeed * 0.05f
@@ -131,7 +131,7 @@ public class AjaxMovement : MonoBehaviour
     }
 
     // Method thought to be calle throw @Dash fn
-    public IEnumerator Dash(Utils.Facing facing, float duration, System.Action onComplete = null)
+    public IEnumerator DashCoroutine(Utils.Facing facing, float duration, System.Action onComplete = null)
     {
         dashing = true;
         float gravityScale = this.rb.gravityScale;

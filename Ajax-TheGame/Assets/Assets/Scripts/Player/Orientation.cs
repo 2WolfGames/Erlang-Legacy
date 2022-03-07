@@ -20,6 +20,12 @@ public class Orientation : MonoBehaviour
 
     public Utils.Input LatestInput { get { return latestInput; } }
 
+
+    void Awake()
+    {
+        latestFacing = Utils.Facing.RIGHT;
+    }
+
     void Update()
     {
         OrientationListener();

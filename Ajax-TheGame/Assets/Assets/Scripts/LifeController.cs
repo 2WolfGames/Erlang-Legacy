@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class LifeController : MonoBehaviour
 {
-    [Range(10, 10000)] [SerializeField] float life = 100;
+    [Range(10, 10000)][SerializeField] float life = 100;
+
+    public float Life
+    {
+        get { return this.life; }
+    }
 
     /**
         this fn returns true when

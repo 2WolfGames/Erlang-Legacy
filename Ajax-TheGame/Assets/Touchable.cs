@@ -8,7 +8,7 @@ public class Touchable : MonoBehaviour
 
     public bool CanBeTouch { get { return canBeTouch; } }
 
-    public IEnumerator UpdateCanBeTouch(bool canBeTouch, float time = 0)
+    public IEnumerator CanBeTouchCoroutine(bool canBeTouch, float time = 0)
     {
         yield return new WaitForSeconds(time);
         this.canBeTouch = canBeTouch;

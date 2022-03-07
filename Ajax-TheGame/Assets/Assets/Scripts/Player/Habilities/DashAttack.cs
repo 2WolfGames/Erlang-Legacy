@@ -17,7 +17,7 @@ public class DashAttack : MonoBehaviour
     HashSet<GameObject> distinct = new HashSet<GameObject>();
 
 
-    public IEnumerator Attack(float time)
+    public IEnumerator AttackCoroutine(float time)
     {
         boxCollider.enabled = true;
         distinct.Clear();

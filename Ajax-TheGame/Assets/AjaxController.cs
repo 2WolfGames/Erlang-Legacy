@@ -12,8 +12,10 @@ public class AjaxController : MonoBehaviour
     [SerializeField] Orientation ajaxOrientation;
 
 
-    [Header("Linked objects")]
+    [Header("Linked")]
     [SerializeField] DashAttack dashAttack;
+
+    [SerializeField] VengefulRay vengefulRay;
 
 
     [Header("Configurations")]
@@ -23,32 +25,37 @@ public class AjaxController : MonoBehaviour
     /**
         collides with some element that stunes Ajax
     */
-    public void OnCollisionWith(float collisionDamage, GameObject other = null)
+    public void CollidingWith(float collisionDamage, Collider2D other = null)
     {
         if (!ajaxTouchable.CanBeTouch) return;
 
-        StartCoroutine(ajaxTouchable.UpdateCanBeTouch(false, 0));
-        StartCoroutine(ajaxTouchable.UpdateCanBeTouch(true, touchableTime));
+        StartCoroutine(ajaxTouchable.CanBeTouchCoroutine(false, 0));
+        StartCoroutine(ajaxTouchable.CanBeTouchCoroutine(true, touchableTime));
         ajaxLife.TakeLife(Mathf.Abs(collisionDamage));
+
+        Debug.Log($"Current ajax life ${ajaxLife.Life}");
     }
 
 
-    public void TriggerDash(float dashTime)
+    public void DashTrigger(float dashTime)
     {
-        StartCoroutine(ajaxTouchable.UpdateCanBeTouch(false, 0));
-        StartCoroutine(ajaxTouchable.UpdateCanBeTouch(true, dashTime));
+        StartCoroutine(ajaxTouchable.CanBeTouchCoroutine(false, 0));
+        StartCoroutine(ajaxTouchable.CanBeTouchCoroutine(true, dashTime));
 
-        StartCoroutine(ajaxFX.UpdateCanFlip(false, 0));
-        StartCoroutine(ajaxFX.UpdateCanFlip(true, dashTime));
+        StartCoroutine(ajaxFX.CanFlipCoroutine(false, 0));
+        StartCoroutine(ajaxFX.CanFlipCoroutine(true, dashTime));
 
-        StartCoroutine(ajaxMovement.Dash(ajaxOrientation.LatestFacing, dashTime));
+        StartCoroutine(ajaxMovement.DashCoroutine(FacingTo(), dashTime));
 
-        StartCoroutine(dashAttack.Attack(dashTime));
+        StartCoroutine(dashAttack.AttackCoroutine(dashTime));
     }
 
-    public void TriggerVengefulRay(Vector3 origin)
+    public void VengefulRayTrigger(Vector3 origin)
     {
-
+        bool left = FacingTo() == Utils.Facing.LEFT;
+        Vector2 orientation = new Vector2(left ? -1f : 1f, 0f);
+        VengefulRay instance = Instantiate(vengefulRay, origin, left ? Quaternion.Euler(0, -180, 0) : Quaternion.identity);
+        instance.orientation = orientation;
     }
 
     public bool CanBeTouch()
@@ -56,10 +63,8 @@ public class AjaxController : MonoBehaviour
         return ajaxTouchable.CanBeTouch;
     }
 
-    /**
-    retruns a number { -1, 0, 1}
-    **/
-    public int XVelocityNormalized()
+    // -1 | 0 | 1
+    public int HorizontalInputNormalized()
     {
         return ajaxOrientation.InputToNumber();
     }

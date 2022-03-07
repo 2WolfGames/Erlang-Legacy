@@ -7,8 +7,6 @@ public class AjaxFX : MonoBehaviour
     [Header("Jump particles")]
     [SerializeField] ParticleSystem jumpParticles;
 
-    // [SerializeField] Transform jumpParticlesTransform;
-
     [Header("Self")]
     [SerializeField] AjaxController ajaxController;
     [SerializeField] Animator ajaxAnimator;
@@ -46,7 +44,7 @@ public class AjaxFX : MonoBehaviour
         transform.localScale = characterScale;
     }
 
-    public IEnumerator UpdateCanFlip(bool flip, float time = 0)
+    public IEnumerator CanFlipCoroutine(bool flip, float time = 0)
     {
         yield return new WaitForSeconds(time);
         canFlip = flip;

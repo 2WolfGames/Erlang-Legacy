@@ -7,54 +7,46 @@ using UnityEngine;
 */
 public class Enemy : MonoBehaviour, IEnemy
 {
-    [Header("Configurations")]
-    [Tooltip("How many damage does to player")]
+    [Header("Self")]
+    [SerializeField] LifeController lifeController;
+    [SerializeField] Collider2D collider2d;
 
+    [Header("Configurations")]
+
+    [SerializeField] string playerObject = "Ajax";
     [Range(1f, 1000f)][SerializeField] float collisionDamage = 10f;
     [Range(1f, 1000f)][SerializeField] float basicDamage = 10f;
     [Range(0.0f, 0.5f)][SerializeField] float deadDelay = 0.1f;
 
-    [Header("Player")]
-    [SerializeField] LayerMask whatIsAjax;
-
-    [Header("Self")]
-    [SerializeField] LifeController lifeController;
-    [SerializeField] Collider2D selfCollider;
-
     GameObject ajax;
+    Collider2D ajaxCollider;
 
     void Start()
     {
-        ajax = GameObject.Find("Ajax");
+        ajax = GameObject.Find(playerObject);
+        ajaxCollider = ajax.GetComponent<Collider2D>();
     }
 
     void FixedUpdate()
     {
         if (IsTouchingAjax())
         {
-            OnCollisionWithAjax(ajax);
+            CollidingWithAjax(ajax);
         }
     }
 
     protected bool IsTouchingAjax()
     {
-        return selfCollider.IsTouchingLayers(whatIsAjax);
+        return collider2d.IsTouching(ajaxCollider);
     }
 
-    /*
-        checks if is touching Ajax
-        if it does, applies damange for collision
-    **/
-    protected void OnCollisionWithAjax(GameObject ajax)
+    protected void CollidingWithAjax(GameObject ajax)
     {
-        if (ajax.CompareTag("Player"))
-        {
-            AjaxController ajaxController = ajax.GetComponent<AjaxController>();
+        AjaxController ajaxController = ajax.GetComponent<AjaxController>();
 
-            if (ajaxController.CanBeTouch())
-            {
-                ajaxController.OnCollisionWith(collisionDamage);
-            }
+        if (ajaxController.CanBeTouch())
+        {
+            ajaxController.CollidingWith(collisionDamage, collider2d);
         }
     }
 

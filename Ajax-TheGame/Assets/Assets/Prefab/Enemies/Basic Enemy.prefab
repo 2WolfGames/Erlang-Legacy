@@ -47,14 +47,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e9dbff4a9c0d044bb696177586b982b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lifeController: {fileID: 1910434359}
+  collider2d: {fileID: 6166654859123775454}
+  playerObject: Ajax
   collisionDamage: 10
   basicDamage: 10
   deadDelay: 0.1
-  whatIsAjax:
-    serializedVersion: 2
-    m_Bits: 512
-  lifeController: {fileID: 1910434359}
-  selfCollider: {fileID: 6166654859123775454}
 --- !u!114 &1910434359
 MonoBehaviour:
   m_ObjectHideFlags: 0

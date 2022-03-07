@@ -16,14 +16,16 @@ public class AjaxAttack : MonoBehaviour
     [SerializeField] AjaxController ajaxController;
 
 
-    [Header("Dash configurations")]
+    [Header("Dash")]
     [Range(0.25f, 3.0f)][SerializeField] float timeBtwDash;
     [Range(0.1f, 0.5f)][SerializeField] float dashTime;
 
 
-    [Header("Vengeful ray configuration")]
-    [SerializeField] Transform vfRayTransform;
+    [Header("Vengeful ray")]
     [Range(0.25f, 3.0f)][SerializeField] float timeBtwVfRay = 0.5f;
+
+    [Header("Linked")]
+    [SerializeField] Transform vengefulRayTransform;
 
 
     float memoTimeBtwDash;
@@ -55,8 +57,8 @@ public class AjaxAttack : MonoBehaviour
         {
             ResetMemoTimeBtwDash();
             isDashing = true;
-            ajaxController.TriggerDash(dashTime);
-            StartCoroutine(UpdateIsDashing(dashTime, false));
+            ajaxController.DashTrigger(dashTime);
+            StartCoroutine(SetIsDashingCoroutine(dashTime, false));
         }
     }
 
@@ -70,7 +72,7 @@ public class AjaxAttack : MonoBehaviour
         if (memoTimeBtwVfRay <= 0 && !isDashing && Input.GetButtonDown("Fire2"))
         {
             ResetMemoTimeBtwVfRay();
-            ajaxController.TriggerVengefulRay(vfRayTransform.position);
+            ajaxController.VengefulRayTrigger(vengefulRayTransform.position);
         }
     }
 
@@ -84,7 +86,7 @@ public class AjaxAttack : MonoBehaviour
         memoTimeBtwVfRay = timeBtwVfRay;
     }
 
-    IEnumerator UpdateIsDashing(float time, bool state)
+    IEnumerator SetIsDashingCoroutine(float time, bool state)
     {
         yield return new WaitForSeconds(time);
         isDashing = false;
