@@ -14,7 +14,6 @@ public class AjaxController : MonoBehaviour
 
     [Header("Linked")]
     [SerializeField] DashAttack dashAttack;
-
     [SerializeField] VengefulRay vengefulRay;
 
 
@@ -31,6 +30,7 @@ public class AjaxController : MonoBehaviour
 
         StartCoroutine(ajaxTouchable.CanBeTouchCoroutine(false, 0));
         StartCoroutine(ajaxTouchable.CanBeTouchCoroutine(true, touchableTime));
+
         ajaxLife.TakeLife(Mathf.Abs(collisionDamage));
 
         Debug.Log($"Current ajax life ${ajaxLife.Life}");
