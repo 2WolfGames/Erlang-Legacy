@@ -1487,6 +1487,17 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2689394463106163806, guid: 3a92e288e57aab644a0656c959990934,
+        type: 3}
+      propertyPath: skeletonDataAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: f51eebf994039e14ca6a2fef3b0e11d9,
+        type: 2}
+    - target: {fileID: 2689394463106163808, guid: 3a92e288e57aab644a0656c959990934,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: fb42609249b533247ac63b32ec965efe, type: 2}
     - target: {fileID: 4338606659265295168, guid: 3a92e288e57aab644a0656c959990934,
         type: 3}
       propertyPath: m_RootOrder
