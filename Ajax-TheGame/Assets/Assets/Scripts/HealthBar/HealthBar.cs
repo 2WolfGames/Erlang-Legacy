@@ -1,18 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    [SerializeField] GameObject lifeContainerPrefab;
-    [SerializeField] List<GameObject> lifeContainers;
+    [SerializeField] GameObject lifePrefab;
+    [SerializeField] List<LifeContainer> lifeContainers;
+    [SerializeField] ParticleSystem newLifeApearingParticleEffect;
     int totalLifes;
     int currentLifes;
 
     // Start is called before the first frame update
     void Start()
     {
-        lifeContainers = new List<GameObject>();
+        lifeContainers = new List<LifeContainer>();
     }
 
     public void SetUpLifes(int lifesIn){
@@ -25,74 +28,107 @@ public class HealthBar : MonoBehaviour
         currentLifes = lifesIn;
 
         for(int i = 0; i < totalLifes; i++){
-            var current = Instantiate(lifeContainerPrefab,transform);
-            lifeContainers.Add(current);
+            var current = Instantiate(lifePrefab,transform);
+            lifeContainers.Insert(0,current.GetComponentInChildren<LifeContainer>());
         }
     }
 
     public void AddLifes(int lifesUp){
-        bool desactivateDangerEffect = currentLifes == 1;
+        if (currentLifes < totalLifes){
+            bool desactivateDangerEffect = currentLifes == 1;
 
-        for (int i = currentLifes; i < Mathf.Min(totalLifes,currentLifes+lifesUp) ; i++){
-            lifeContainers[i].GetComponentInChildren<LifeContainer>().Add();
-        }
+            for (int i = currentLifes; i < Mathf.Min(totalLifes,currentLifes+lifesUp) ; i++){
+                lifeContainers[i].Add();
+            }
 
-        currentLifes = Mathf.Min(totalLifes,currentLifes+lifesUp);
+            currentLifes = Mathf.Min(totalLifes,currentLifes+lifesUp);
 
-        if(desactivateDangerEffect){
-            ActivateDangerEffect(false);
-        } else if (currentLifes == totalLifes){
-            StartCoroutine(AllLifesEffect());
+            if(desactivateDangerEffect){
+                ActivateDangerEffect(false);
+            } else if (currentLifes == totalLifes){
+                StartCoroutine(AllLifesEffect());
+            }
         }
     }
 
     public void RemoveLife(int lifesOut){
-        for (int i = currentLifes - 1; i >= Mathf.Max(currentLifes - lifesOut,0) ; i--){
-            if (i != 0){
-                lifeContainers[i].GetComponentInChildren<LifeContainer>().Remove();
+        if(currentLifes > 0){
+            for (int i = currentLifes - 1; i >= Mathf.Max(currentLifes - lifesOut,0) ; i--){
+                lifeContainers[i].Remove();
             }
-        }
-        currentLifes = Mathf.Max(0,currentLifes-lifesOut);
+            currentLifes = Mathf.Max(0,currentLifes-lifesOut);
 
-        if(currentLifes == 1){
-            ActivateDangerEffect(true);
-        } else if (currentLifes == 0){
-            StartCoroutine(DieEffect(0));
+            if(currentLifes == 1){
+                ActivateDangerEffect(true);
+            } else if (currentLifes == 0){
+                ActivateDangerEffect(false);
+                StartCoroutine(DieEffect(0));
+            }
         }
     }
 
     public void SetUpOneMoreLife(){
         if (totalLifes < 9){
-            
-            AddLifes(totalLifes-currentLifes);
-
-            totalLifes++;
-            currentLifes = totalLifes;
-
-            var current = Instantiate(lifeContainerPrefab,transform);
-            lifeContainers.Add(current);   
+            StartCoroutine(FillAllLifesAndAddOne(0));
         }
     }
 
+    private IEnumerator FillAllLifesAndAddOne(int i) {
+        if (!lifeContainers[i].HasLife()){
+            lifeContainers[i].Add();
+            yield return new WaitForSeconds(1f);
+        } else {
+            lifeContainers[i].Reflection();
+            yield return new WaitForSeconds(0.35f);
+        }
+        if (i < totalLifes - 1){
+            StartCoroutine(FillAllLifesAndAddOne(++i));
+        } else {
+            StartCoroutine(NewLife());
+        }
+    }
+
+    private IEnumerator NewLife(){
+        totalLifes++;
+        currentLifes = totalLifes;
+
+        GameObject currentLife = Instantiate(lifePrefab,transform);
+        currentLife.GetComponentInChildren<LifeContainer>().HideAll(true);
+        currentLife.GetComponent<Image>().enabled = false;
+        currentLife.transform.SetAsFirstSibling();
+        
+        ParticleSystem particleEffect = Instantiate(newLifeApearingParticleEffect, currentLife.transform);
+        
+        particleEffect.Play();
+        yield return new WaitForSeconds(particleEffect.main.duration*2);
+
+        lifeContainers.Add(currentLife.GetComponentInChildren<LifeContainer>());  
+        currentLife.GetComponent<Image>().enabled = true;
+        lifeContainers[totalLifes - 1].HideAll(false);        
+    }
+
     private void ActivateDangerEffect(bool activate){
-        lifeContainers[0].GetComponentInChildren<LifeContainer>().SetShake(activate);
+        lifeContainers[0].GetComponentInChildren<LifeContainer>().lastLife(activate);
     }
 
     private IEnumerator DieEffect(int i){
-        lifeContainers[i].GetComponentInChildren<LifeContainer>().BrokeLife();
-        yield return new WaitForSeconds(0.5f);
-        if (i < totalLifes - 1){
-            StartCoroutine(DieEffect(++i));
+        foreach( LifeContainer life in lifeContainers ){
+            life.SetShake(true);
+        }
+        yield return new WaitForSeconds(1.25f);
+        foreach( LifeContainer life in lifeContainers ){
+            life.BrokeLife();
+            life.SetShake(false);
         }
     }
 
     private IEnumerator AllLifesEffect(){
-        foreach( GameObject life in lifeContainers ){
-            life.GetComponentInChildren<LifeContainer>().SetShake(true);
+        foreach( LifeContainer life in lifeContainers ){
+            life.SetShake(true);
         }
         yield return new WaitForSeconds(1);
-        foreach( GameObject life in lifeContainers ){
-            life.GetComponentInChildren<LifeContainer>().SetShake(false);
+        foreach( LifeContainer life in lifeContainers ){
+            life.SetShake(false);
         }
     }
 
