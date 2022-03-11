@@ -21,9 +21,9 @@ public class AjaxController : MonoBehaviour
     [SerializeField] float touchableTime = 0.5f;
 
 
-    /**
-        collides with some element that stunes Ajax
-    */
+    // pre: --
+    // post: take damage because of collision with enemy
+    //       make Ajax untouchable for `touchableTime` seconds
     public void CollidingWith(float collisionDamage, Collider2D other = null)
     {
         if (!ajaxTouchable.CanBeTouch) return;
@@ -31,6 +31,7 @@ public class AjaxController : MonoBehaviour
         StartCoroutine(ajaxTouchable.CanBeTouchCoroutine(false, 0));
         StartCoroutine(ajaxTouchable.CanBeTouchCoroutine(true, touchableTime));
 
+        ajaxFX.TriggerCollidingFX();
         ajaxLife.TakeLife(Mathf.Abs(collisionDamage));
 
         Debug.Log($"Current ajax life ${ajaxLife.Life}");

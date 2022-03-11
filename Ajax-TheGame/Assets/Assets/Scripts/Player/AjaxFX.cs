@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Spine.Unity;
 using UnityEngine;
 
 public class AjaxFX : MonoBehaviour
@@ -64,6 +65,39 @@ public class AjaxFX : MonoBehaviour
         }
         ajaxAnimator.SetTrigger("jump");
         ajaxAnimator.SetBool("jumping", true);
+    }
+
+    // pre: --
+    // post: executes `onComplete` func if ever is declared when animation is not playing
+    private IEnumerator CheckAnimationCompleted(string animationName, System.Action onComplete)
+    {
+        while (true)
+        {
+            bool playing = ajaxAnimator.GetCurrentAnimatorStateInfo(0).IsName(animationName);
+            if (!playing) break;
+        }
+        yield return null;
+        if (onComplete != null) onComplete();
+    }
+
+    public void TriggerCollidingFX()
+    {
+        int animation = Random.Range(1, 3);
+        ajaxAnimator.SetTrigger("hit" + animation);
+        Spine.Skeleton skeleton = ajaxAnimator.GetComponent<SkeletonAnimation>().skeleton;
+        StartCoroutine(RecoverFX(3f, 0.25f, true, skeleton));
+        // skeleton.A = 0.75f;
+
+    }
+
+    private IEnumerator RecoverFX(float duration, float time, bool blink, Spine.Skeleton skeleton)
+    {
+        skeleton.A = blink ? 0.75f : 1f;
+        yield return new WaitForSeconds(time);
+        if (duration >= 0)
+        {
+            StartCoroutine(RecoverFX(duration - 0.1f, time, !blink, skeleton));
+        }
     }
 
     /**

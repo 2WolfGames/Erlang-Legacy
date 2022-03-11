@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 2689394463106163804}
   - component: {fileID: 2689394463106163808}
   - component: {fileID: 2689394463106163807}
-  - component: {fileID: 2689394463106163806}
   - component: {fileID: 2689394463106163805}
+  - component: {fileID: 819139219}
+  - component: {fileID: 819139222}
   m_Layer: 0
   m_Name: AjaxSkeletonAnimation
   m_TagString: Untagged
@@ -32,7 +33,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4338606659265295168}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &2689394463106163808
 MeshRenderer:
@@ -92,7 +93,15 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &2689394463106163806
+--- !u!33 &2689394463106163805
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2689394463106163803}
+  m_Mesh: {fileID: 0}
+--- !u!114 &819139219
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -101,7 +110,30 @@ MonoBehaviour:
   m_GameObject: {fileID: 2689394463106163803}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9db98c60740638449864eb028fbe7ad, type: 3}
+  m_Script: {fileID: 11500000, guid: f21c9538588898a45a3da22bf4779ab3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rootMotionBoneName: root
+  transformPositionX: 0
+  transformPositionY: 0
+  rootMotionScaleX: 1
+  rootMotionScaleY: 1
+  rootMotionTranslateXPerY: 0
+  rootMotionTranslateYPerX: 0
+  rigidBody2D: {fileID: 0}
+  applyRigidbody2DGravity: 0
+  rigidBody: {fileID: 0}
+  animationTrackFlags: -1
+--- !u!114 &819139222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2689394463106163803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   skeletonDataAsset: {fileID: 11400000, guid: f51eebf994039e14ca6a2fef3b0e11d9, type: 2}
@@ -127,19 +159,9 @@ MonoBehaviour:
     materialsInsideMask: []
     materialsOutsideMask: []
   disableRenderingOnOverride: 1
-  translator:
-    autoReset: 1
-    useCustomMixMode: 1
-    layerMixModes: 01000000
-    layerBlendModes: 01000000
---- !u!33 &2689394463106163805
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2689394463106163803}
-  m_Mesh: {fileID: 0}
+  _animationName: run
+  loop: 1
+  timeScale: 1
 --- !u!1 &4338606659265295183
 GameObject:
   m_ObjectHideFlags: 0
@@ -176,8 +198,8 @@ Transform:
   m_LocalPosition: {x: 13.32, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4338606659711849380}
   - {fileID: 2689394463106163804}
+  - {fileID: 4338606659711849380}
   - {fileID: 4338606660018724214}
   - {fileID: 7562044211816674290}
   m_Father: {fileID: 0}
@@ -467,7 +489,7 @@ PrefabInstance:
     - target: {fileID: 4680161481662213465, guid: e48842cb521a61645a60ba718590ae0a,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4680161481662213465, guid: e48842cb521a61645a60ba718590ae0a,
         type: 3}
