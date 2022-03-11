@@ -1,5 +1,9 @@
 fileFormatVersion: 2
-guid: 9693c63b34ccfc645bcb36556e7aed11
+<<<<<<< HEAD:Ajax-TheGame/Assets/Assets/Art/UI/cracked_life_1_v2.png.meta
+guid: 182e777bc67380c4b9b23ddddc65e9a4
+=======
+guid: d08b83f947e43af438372fd6e284d176
+>>>>>>> main:Ajax-TheGame/Assets/Assets/Art/Global/Regular explosion/regularExplosion01.png.meta
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}

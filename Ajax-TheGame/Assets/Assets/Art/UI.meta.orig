@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<< HEAD:Ajax-TheGame/Assets/Assets/Art/UI.meta
+guid: 13649bc641d232646af7c37445929837
+folderAsset: yes
+DefaultImporter:
+  externalObjects: {}
+=======
+guid: 6264192ae3ad2764c81572b63b53c878
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+>>>>>>> main:Ajax-TheGame/Assets/Assets/Animations/Ajax/VFX/Fireball/ElectricFireball.anim.meta
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

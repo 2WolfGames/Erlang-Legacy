@@ -45,8 +45,6 @@ public class HealthBar : MonoBehaviour
 
             if(desactivateDangerEffect){
                 ActivateDangerEffect(false);
-            } else if (currentLifes == totalLifes){
-                StartCoroutine(AllLifesEffect());
             }
         }
     }
@@ -69,6 +67,12 @@ public class HealthBar : MonoBehaviour
 
     public void SetUpOneMoreLife(){
         if (totalLifes < 9){
+            bool desactivateDangerEffect = currentLifes == 1;
+
+            if(desactivateDangerEffect){
+                ActivateDangerEffect(false);
+            }
+            
             StartCoroutine(FillAllLifesAndAddOne(0));
         }
     }
