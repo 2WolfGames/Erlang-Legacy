@@ -26,7 +26,7 @@ public class UIPowerTimer : MonoBehaviour
     void FixedUpdate()
     {
         if(coolingDown){
-            imgContainer.fillAmount += 1.0f/waitTime * Time.deltaTime;
+            imgContainer.fillAmount += 1.0f/waitTime * Time.fixedDeltaTime;
 
             if(imgContainer.fillAmount == 1){
                 coolingDown=false;

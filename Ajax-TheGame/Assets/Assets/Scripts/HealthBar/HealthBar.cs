@@ -30,7 +30,7 @@ public class HealthBar : MonoBehaviour
 
     #region Public Methods
 
-    //pre: lifesIn > 0
+    //pre: lifesIn > 0 && lifesIn <= 9
     //post: delates current life bar and initializes health bar with the number of lifesIn 
     //      all full (of life)
     public void SetUpLifes(int lifesIn){
