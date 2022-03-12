@@ -115,6 +115,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifePrefab: {fileID: 7215511396644430785, guid: f8e3fcc301ae07b40a0d3c60f2db1c9b,
     type: 3}
+  emptyLifePrefab: {fileID: 5312285443469036919, guid: df99377ed514f2444a784323fe541500,
+    type: 3}
   lifeContainers: []
   newLifeApearingParticleEffect: {fileID: 7441233369434815428, guid: 65377e6dafd6bc84abd8f4fb0ef12b20,
     type: 3}

@@ -12,43 +12,84 @@ using UnityEngine;
 */
 public class AjaxAttack : MonoBehaviour
 {
-    [Range(0.5f, 3.0f)] [SerializeField] float timeBtwAttack;
-
+    [Header("Dash configurations")]
+    [SerializeField] DashAttack dashAttack;
+    [Range(0.25f, 3.0f)] [SerializeField] float tbwDashAttack;
     [Range(0.1f, 0.5f)] [SerializeField] float dashAttackTime;
 
-    [SerializeField] DashAttack dashAttack;
 
-    float _timeBtwAttack = -1;
+    [Header("Vengeful ray configuration")]
+    [SerializeField] VengefulRay vengefulRay;
+    [SerializeField] Transform vengefullRayStartPosition;
+    [Range(0.25f, 3.0f)] [SerializeField] float tbwVengefulRay = 0.5f;
 
+    [Header("Others")]
+    AjaxFacing ajaxFacing;
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+
+    float tbwDash = -1;
+    float tbwRay = -1;
     AjaxMovement ajaxMovement;
-
     AjaxFX ajaxFX;
+    bool inDashingAttack = false;
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
 
     void Start()
     {
         ajaxMovement = GetComponent<AjaxMovement>();
         ajaxFX = GetComponent<AjaxFX>();
+        // tbwDash = tbwDashAttack;
+        // tbwRay = tbwVengefulRay;
     }
 
     void Update()
     {
-        if (_timeBtwAttack <= 0)
+        tbwDash = Mathf.Clamp(tbwDash - Time.deltaTime, Mathf.NegativeInfinity, tbwDashAttack);
+        tbwRay = Mathf.Clamp(tbwRay - Time.deltaTime, Mathf.NegativeInfinity, tbwVengefulRay);
+        DashDemon();
+        VengefulRayDemon();
+    }
+
+    /**
+        Handles dash frequency
+        and comunicate with dash attack script
+        to make demage in area
+    */
+    void DashDemon()
+    {
+        if (tbwDash <= 0 && !this.inDashingAttack && Input.GetButtonDown("Fire1"))
         {
-            if (Input.GetButtonDown("Fire1"))
+            tbwDash = tbwDashAttack;
+            Vector2 direction = new Vector2(transform.localScale.x, 0);
+            this.inDashingAttack = true;
+            this.ajaxFX.blockOrientationChanges = true;
+            ajaxMovement.Dash(Mathf.RoundToInt(transform.localScale.x), dashAttackTime, () =>
             {
-                Vector2 direction = new Vector2(transform.localScale.x, 0);
-                _timeBtwAttack = timeBtwAttack;
-                this.ajaxFX.blockOrientationChanges = true;
-                ajaxMovement.Dash(Mathf.RoundToInt(transform.localScale.x), dashAttackTime, () =>
-                {
-                    this.ajaxFX.blockOrientationChanges = false;
-                });
-                dashAttack.ApplyDamage(dashAttackTime);
-            }
+                this.ajaxFX.blockOrientationChanges = false;
+                this.inDashingAttack = false;
+            });
+            dashAttack.Attack(dashAttackTime);
         }
-        else
+    }
+
+
+    /**
+        Handles vengeful ray frequency
+        and instanciate one venful ray
+        to make demage in area
+    */
+    void VengefulRayDemon()
+    {
+        if (tbwRay <= 0 && !inDashingAttack && Input.GetButtonDown("Fire2"))
         {
-            _timeBtwAttack -= Time.deltaTime;
+            tbwRay = tbwVengefulRay;
+            float x = transform.localScale.x;
+            float facing = Mathf.Sign(x);
+            Vector2 orientation = new Vector2(facing, 0);
+            var ray = Instantiate(vengefulRay, vengefullRayStartPosition.position, facing == -1f ? Quaternion.Euler(0, -180, 0) : Quaternion.identity);
+            ray.orientation = orientation;
         }
     }
 

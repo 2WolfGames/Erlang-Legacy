@@ -11,13 +11,18 @@ public class UIPowerTimer : MonoBehaviour
     bool coolingDown;
 	float waitTime;
 
-    // Start is called before the first frame update
+    // pre: --
+    //post: we set the powerSprite to default 
     void Start()
     {
         imgContainer.sprite = powerSprite;
     }
 
-    // Update is called once per frame
+    //pre: --
+    //post: if coolingDown is activated,
+    // evey frame fills more imageContaier
+    // when image if fully filled we change sprite to power 
+    // using the coroutine twinkle to make it notice
     void FixedUpdate()
     {
         if(coolingDown){
@@ -31,15 +36,21 @@ public class UIPowerTimer : MonoBehaviour
         }
     }
 
+    //pre: cooldownTime > 0
+    //post: if cooling down is not activated
+    //      everythink is set to activate cooldown Icon animation of imgContainer
     public void PowerUsed(float cooldownTime){
         if (!coolingDown){
-            imgContainer.sprite = loadingSprite;
-            imgContainer.fillAmount = 0;
-            waitTime = cooldownTime;
             coolingDown = true;
+            waitTime = cooldownTime;
+            imgContainer.fillAmount = 0;
+            imgContainer.sprite = loadingSprite;
         }
     }
 
+    //pre: --
+    //post: makes image tinkle a few times depending on times
+    //      waiting for each tinkle waitSeconds 
     IEnumerator Tinkle(int times = 3, float waitSeconds = 0.1f ){
         imgContainer.fillAmount = imgContainer.fillAmount == 0 ? 1 : 0;
         yield return new WaitForSeconds(waitSeconds);

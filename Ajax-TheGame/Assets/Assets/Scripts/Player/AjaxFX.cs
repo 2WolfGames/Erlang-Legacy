@@ -4,21 +4,20 @@ using UnityEngine;
 
 public class AjaxFX : MonoBehaviour
 {
-    enum Face
-    {
-        LEFT,
-        RIGHT
-    }
-
-    [SerializeField] Animator ajaxAnimator;
-
+    [Header("Jump particles")]
     [SerializeField] ParticleSystem jumpParticles;
 
+    // [SerializeField] Transform jumpParticlesTransform;
+
+
+
+    [Header("Others")]
+    [SerializeField] AjaxFacing ajaxFacing;
+    [SerializeField] Animator ajaxAnimator;
     [SerializeField] TrailRenderer dashTrailRenderer;
 
-    float orientation = 0f;
 
-    Face facing = Face.RIGHT;
+    ////////////////////////////////////////////////////////////////////////////////////////////////
 
     public bool blockOrientationChanges
     {
@@ -30,31 +29,20 @@ public class AjaxFX : MonoBehaviour
         dashTrailRenderer.widthMultiplier = 0;
     }
 
-    void Update()
-    {
-        orientation = Input.GetAxisRaw("Horizontal");
-    }
-
     void FixedUpdate()
     {
         if (!blockOrientationChanges)
         {
-            HandleCharacterOrientation();
-        }
-    }
+            int orientation = ajaxFacing.LatestFacingToNumber();
 
-    void HandleCharacterOrientation()
-    {
-        int orientation = Mathf.RoundToInt(this.orientation);
-        UpdateCharacterOrientation(orientation);
+            UpdateCharacterOrientation(orientation);
+        }
     }
 
     // -1 left, 1 right 
     void UpdateCharacterOrientation(int orientation)
     {
         if (orientation != -1 && orientation != 1) return;
-
-        this.facing = orientation == 1 ? Face.RIGHT : Face.LEFT;
 
         Vector3 characterScale = transform.localScale;
         characterScale.x = orientation;
@@ -69,7 +57,9 @@ public class AjaxFX : MonoBehaviour
     {
         if (this.jumpParticles)
         {
-            this.jumpParticles.Play();
+            // var particles = Instantiate(jumpParticles, jumpParticlesTransform.position, Quaternion.identity);
+            jumpParticles.Play();
+            // Destroy(particles.gameObject, 1f);
         }
         ajaxAnimator.SetTrigger("jump");
         ajaxAnimator.SetBool("jumping", true);
