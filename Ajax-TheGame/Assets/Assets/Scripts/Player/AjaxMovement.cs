@@ -43,33 +43,48 @@ public class AjaxMovement : MonoBehaviour
 
     void Update()
     {
-        if (!dashing)
+        if (ajaxController.Freeze)
         {
-            SmoothJump();
+            DontMove();
+            return;
         }
+
+        if (dashing) return;
+        SmoothJump();
+    }
+
+    private void DontMove()
+    {
+        ajaxFX.SetRunFX(false);
+        rb.velocity = Vector2.zero;
     }
 
     void FixedUpdate()
     {
-        if (!dashing)
+        if (ajaxController.Freeze)
         {
-            int xNormalized = ajaxController.HorizontalInputNormalized();
-            // when Ajax is at the air, we let him take certain control of it's movement
-            float vx = impulsed ?
-            rb.velocity.x + xNormalized * basicSpeed * 0.05f
-            : xNormalized * basicSpeed * velocityModifyer.x;
-
-            rb.velocity = new Vector2(vx, rb.velocity.y);
-            ajaxFX.SetRunFX(Mathf.Abs(rb.velocity.x) > Mathf.Epsilon);
-
-            if (hasJumped && IsGrounded())
-            {
-                ajaxFX.TriggerLandFX();
-                hasJumped = false;
-            }
-
-            velocityModifyer = Vector2.one;
+            DontMove();
+            return;
         }
+
+        if (dashing) return;
+
+        int xNormalized = ajaxController.HorizontalInputNormalized();
+        // when Ajax is at the air, we let him take certain control of it's movement
+        float vx = impulsed ?
+        rb.velocity.x + xNormalized * basicSpeed * 0.05f
+        : xNormalized * basicSpeed * velocityModifyer.x;
+
+        rb.velocity = new Vector2(vx, rb.velocity.y);
+        ajaxFX.SetRunFX(Mathf.Abs(rb.velocity.x) > Mathf.Epsilon);
+
+        if (hasJumped && IsGrounded())
+        {
+            ajaxFX.TriggerLandFX();
+            hasJumped = false;
+        }
+
+        velocityModifyer = Vector2.one;
     }
 
     /// <sumary>

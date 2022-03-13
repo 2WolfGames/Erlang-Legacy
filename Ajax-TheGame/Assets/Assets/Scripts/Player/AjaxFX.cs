@@ -15,6 +15,8 @@ public class AjaxFX : MonoBehaviour
 
     bool canFlip = true;
 
+    bool blinking = false;
+
     public bool CanFlip
     {
         get { return canFlip; }
@@ -33,7 +35,6 @@ public class AjaxFX : MonoBehaviour
     void FlipListener()
     {
         if (!canFlip) return;
-
         UpdateFlip(ajaxController.FacingTo());
     }
 
@@ -59,9 +60,7 @@ public class AjaxFX : MonoBehaviour
     {
         if (this.jumpParticles)
         {
-            // var particles = Instantiate(jumpParticles, jumpParticlesTransform.position, Quaternion.identity);
             jumpParticles.Play();
-            // Destroy(particles.gameObject, 1f);
         }
         ajaxAnimator.SetTrigger("jump");
         ajaxAnimator.SetBool("jumping", true);
@@ -80,24 +79,28 @@ public class AjaxFX : MonoBehaviour
         if (onComplete != null) onComplete();
     }
 
-    public void TriggerCollidingFX()
+    // pre: --
+    // post: executes randomly hit animations & blink animations for a while
+    public void TriggerCollidingFX(float blinkSeconds = 5f)
     {
         int animation = Random.Range(1, 3);
         ajaxAnimator.SetTrigger("hit" + animation);
-        Spine.Skeleton skeleton = ajaxAnimator.GetComponent<SkeletonAnimation>().skeleton;
-        StartCoroutine(RecoverFX(3f, 0.25f, true, skeleton));
-        // skeleton.A = 0.75f;
-
+        StartCoroutine(BlinkFX(blinkSeconds));
     }
 
-    private IEnumerator RecoverFX(float duration, float time, bool blink, Spine.Skeleton skeleton)
+
+    // pre: coroutine should not be called previously
+    // post: trigger blink animations for x seconds
+    //          blink animation is in 2nd layer controller
+    private IEnumerator BlinkFX(float seconds)
     {
-        skeleton.A = blink ? 0.75f : 1f;
-        yield return new WaitForSeconds(time);
-        if (duration >= 0)
-        {
-            StartCoroutine(RecoverFX(duration - 0.1f, time, !blink, skeleton));
-        }
+        if (blinking) yield return null;
+        blinking = true;
+        ajaxAnimator.SetBool("blink", true);
+        yield return new WaitForSeconds(seconds);
+        Debug.Log("Blink awake");
+        blinking = false;
+        ajaxAnimator.SetBool("blink", false);
     }
 
     /**
