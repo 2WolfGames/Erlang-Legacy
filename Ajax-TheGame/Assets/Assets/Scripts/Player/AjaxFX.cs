@@ -85,20 +85,19 @@ public class AjaxFX : MonoBehaviour
     {
         int animation = Random.Range(1, 3);
         ajaxAnimator.SetTrigger("hit" + animation);
-        StartCoroutine(BlinkFX(blinkSeconds));
+        StartCoroutine(BlinkCoroutine(blinkSeconds));
     }
 
 
     // pre: coroutine should not be called previously
     // post: trigger blink animations for x seconds
     //          blink animation is in 2nd layer controller
-    private IEnumerator BlinkFX(float seconds)
+    private IEnumerator BlinkCoroutine(float seconds)
     {
         if (blinking) yield return null;
         blinking = true;
         ajaxAnimator.SetBool("blink", true);
         yield return new WaitForSeconds(seconds);
-        Debug.Log("Blink awake");
         blinking = false;
         ajaxAnimator.SetBool("blink", false);
     }
@@ -113,29 +112,14 @@ public class AjaxFX : MonoBehaviour
         ajaxAnimator.SetBool("jumping", false);
     }
 
-    /**
-        This method should trigger
-        land view and sound effects
-    */
-    public void TriggerDashFX(float dashDuration)
+    public IEnumerator DashCoroutine(float dashDuration)
     {
-        //TODO: land particles
-        // TODO: (fix) dash animation can be longer than actual dash duration
         ajaxAnimator.SetTrigger("dash");
-        StartCoroutine(IDashFX(dashDuration));
-    }
-
-    IEnumerator IDashFX(float dashDuration)
-    {
         dashTrailRenderer.widthMultiplier = 3;
         yield return new WaitForSeconds(dashDuration);
         dashTrailRenderer.widthMultiplier = 0;
     }
 
-    /**
-        This method should trigger
-        run/idle view and sound effects
-    */
     public void SetRunFX(bool isRunning)
     {
         ajaxAnimator.SetBool("running", isRunning);

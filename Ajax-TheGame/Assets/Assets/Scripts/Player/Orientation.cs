@@ -15,7 +15,6 @@ public class Orientation : MonoBehaviour
 
     Utils.Input latestInput;
 
-
     public Utils.Facing LatestFacing { get { return latestFacing; } }
 
     public Utils.Input LatestInput { get { return latestInput; } }
@@ -28,6 +27,7 @@ public class Orientation : MonoBehaviour
 
     void Update()
     {
+        // avoid listening changes when ajax is freezeda
         OrientationListener();
     }
 

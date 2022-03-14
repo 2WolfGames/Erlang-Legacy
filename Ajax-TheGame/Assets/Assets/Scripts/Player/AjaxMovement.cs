@@ -4,18 +4,11 @@ using UnityEngine;
 
 public class AjaxMovement : MonoBehaviour
 {
-    [Header("Self")]
-    [SerializeField] AjaxController ajaxController;
-
-
     [Header("Configurations")]
     [Tooltip("Displacement power on sides while running")][SerializeField] float basicSpeed;
     [Tooltip("Displacement power on sides while dashing")][SerializeField] float dashSpeed;
     [Tooltip("Displacement power on sides while jumping")][SerializeField] float jumpForce = 2;
     [Tooltip("How much time player can hold jump bottom")][SerializeField] float holdJump = 0.3f;
-
-
-    [Header("Others")]
     [SerializeField] LayerMask whatIsGround;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -28,45 +21,26 @@ public class AjaxMovement : MonoBehaviour
     bool dashing = false;
     bool impulsed = false;
     float gravityScale = 1;
-    AjaxFX ajaxFX;
-
     Vector2 velocityModifyer;
+    AjaxController ajaxController;
 
-    void Start()
+    void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         boxCollider2D = GetComponent<BoxCollider2D>();
-        ajaxFX = GetComponent<AjaxFX>();
+        ajaxController = GetComponent<AjaxController>();
         gravityScale = this.rb.gravityScale;
         velocityModifyer = Vector2.one;
     }
 
     void Update()
     {
-        if (ajaxController.Freeze)
-        {
-            DontMove();
-            return;
-        }
-
         if (dashing) return;
         SmoothJump();
     }
 
-    private void DontMove()
-    {
-        ajaxFX.SetRunFX(false);
-        rb.velocity = Vector2.zero;
-    }
-
     void FixedUpdate()
     {
-        if (ajaxController.Freeze)
-        {
-            DontMove();
-            return;
-        }
-
         if (dashing) return;
 
         int xNormalized = ajaxController.HorizontalInputNormalized();
@@ -76,11 +50,11 @@ public class AjaxMovement : MonoBehaviour
         : xNormalized * basicSpeed * velocityModifyer.x;
 
         rb.velocity = new Vector2(vx, rb.velocity.y);
-        ajaxFX.SetRunFX(Mathf.Abs(rb.velocity.x) > Mathf.Epsilon);
+        ajaxController.Run(Mathf.Abs(rb.velocity.x) > Mathf.Epsilon);
 
         if (hasJumped && IsGrounded())
         {
-            ajaxFX.TriggerLandFX();
+            ajaxController.Land();
             hasJumped = false;
         }
 
@@ -120,7 +94,7 @@ public class AjaxMovement : MonoBehaviour
             isJumping = true;
             jumpTimeCounter = holdJump;
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-            this.ajaxFX.TriggerJumpFX();
+            ajaxController.Jump();
         }
 
         if (Input.GetButton("Jump") && isJumping)
@@ -145,14 +119,14 @@ public class AjaxMovement : MonoBehaviour
 
     }
 
-    // Method thought to be calle throw @Dash fn
+    // pre: --
+    // post: adds force impulse with facing orientation
     public IEnumerator DashCoroutine(Utils.Facing facing, float duration, System.Action onComplete = null)
     {
         dashing = true;
         float gravityScale = this.rb.gravityScale;
         Freeze();
         this.rb.gravityScale = 0;
-        ajaxFX.TriggerDashFX(duration);
         var direction = facing == Utils.Facing.LEFT ? -1 : 1;
         this.rb.AddForce(new Vector2(dashSpeed * direction, 0f), ForceMode2D.Impulse);
         yield return new WaitForSeconds(duration);
@@ -168,7 +142,7 @@ public class AjaxMovement : MonoBehaviour
         if (onComplete != null) onComplete();
     }
 
-    void Freeze()
+    public void Freeze()
     {
         this.rb.velocity = Vector2.zero;
     }

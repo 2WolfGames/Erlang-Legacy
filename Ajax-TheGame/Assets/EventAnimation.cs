@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class EventAnimation : MonoBehaviour
 {
-    [SerializeField] AjaxController ajaxController;
+    AjaxController ajaxController;
 
-    public void FreezeAjax()
+    void Start()
     {
-        ajaxController.UpdateFreeze(true);
+        ajaxController = FindObjectOfType<AjaxController>();
     }
 
+    // desc: change freeze state to true
+    public void FreezeAjax()
+    {
+        ajaxController.SetFreeze(true);
+    }
+
+    // desc: change freeze state to false
     public void UnfreezeAjax()
     {
-        ajaxController.UpdateFreeze(false);
+        ajaxController.SetFreeze(false);
     }
 }

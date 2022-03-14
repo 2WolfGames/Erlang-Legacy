@@ -153,7 +153,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e2d0de0b5f13824bb0acc0095e4d1b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ajaxController: {fileID: 382464842943519906}
 --- !u!1 &4338606659265295183
 GameObject:
   m_ObjectHideFlags: 0
@@ -209,15 +208,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e450b5a5be415d41964c9e2bc103e4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ajaxMovement: {fileID: 4338606659265295182}
-  ajaxFX: {fileID: 4338606659265295169}
-  ajaxLife: {fileID: 382464842943519907}
-  ajaxTouchable: {fileID: 382464842943519908}
-  ajaxOrientation: {fileID: 2689394462030703258}
   dashAttack: {fileID: 2689394461502353927}
   vengefulRay: {fileID: 6055551925118139890, guid: d311c9d9b5d5045458bd745eea6b2e11,
     type: 3}
-  touchableTime: 2
+  collideRecoverTime: 1.5
 --- !u!114 &4338606659265295169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -246,7 +240,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7dea68ed4071fc499c269ebd83c04dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ajaxController: {fileID: 382464842943519906}
   basicSpeed: 8
   dashSpeed: 20
   jumpForce: 15

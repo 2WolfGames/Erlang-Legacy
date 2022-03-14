@@ -2,52 +2,45 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/**
-    basic enemy
-*/
 public class Enemy : MonoBehaviour, IEnemy
 {
-    [Header("Self")]
-    [SerializeField] LifeController lifeController;
-    [SerializeField] Collider2D collider2d;
-
     [Header("Configurations")]
-
-    [SerializeField] string playerObject = "Ajax";
     [Range(1f, 1000f)][SerializeField] float collisionDamage = 10f;
     [Range(1f, 1000f)][SerializeField] float basicDamage = 10f;
     [Range(0.0f, 0.5f)][SerializeField] float deadDelay = 0.1f;
 
-    GameObject ajax;
-    Collider2D ajaxCollider;
+    AjaxController ajaxController;
+    Collider2D collider2d;
+    LifeController lifeController;
+
+    void Awake()
+    {
+        collider2d = GetComponent<Collider2D>();
+        lifeController = GetComponent<LifeController>();
+    }
 
     void Start()
     {
-        ajax = GameObject.Find(playerObject);
-        ajaxCollider = ajax.GetComponent<Collider2D>();
+        ajaxController = FindObjectOfType<AjaxController>();
     }
 
     void FixedUpdate()
     {
-        if (IsTouchingAjax())
+        if (IsTouchingAjax(ajaxController.AjaxCollider()))
         {
-            CollidingWithAjax(ajax);
+            CollidingWithAjax(ajaxController);
         }
     }
 
-    protected bool IsTouchingAjax()
+    protected bool IsTouchingAjax(Collider2D ajaxCollider)
     {
         return collider2d.IsTouching(ajaxCollider);
     }
 
-    protected void CollidingWithAjax(GameObject ajax)
+    protected void CollidingWithAjax(AjaxController ajax)
     {
-        AjaxController ajaxController = ajax.GetComponent<AjaxController>();
-
-        if (ajaxController.CanBeTouch())
-        {
-            ajaxController.CollidingWith(collisionDamage, collider2d);
-        }
+        if (ajax.CanBeTouch())
+            ajax.CollidingWith(collisionDamage, collider2d);
     }
 
     public void OnDie()

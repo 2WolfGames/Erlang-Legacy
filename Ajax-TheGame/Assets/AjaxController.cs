@@ -4,21 +4,20 @@ using UnityEngine;
 
 public class AjaxController : MonoBehaviour
 {
-    [Header("Self")]
-    [SerializeField] AjaxMovement ajaxMovement;
-    [SerializeField] AjaxFX ajaxFX;
-    [SerializeField] LifeController ajaxLife;
-    [SerializeField] Touchable ajaxTouchable;
-    [SerializeField] Orientation ajaxOrientation;
-
-
     [Header("Linked")]
     [SerializeField] DashAttack dashAttack;
     [SerializeField] VengefulRay vengefulRay;
 
-
     [Header("Configurations")]
-    [SerializeField] float touchableTime = 0.5f;
+    [SerializeField] float collideRecoverTime = 1.5f;
+
+    Collider2D ajaxCollider;
+    AjaxMovement ajaxMovement;
+    AjaxFX ajaxFX;
+    LifeController lifeController;
+    Touchable ajaxTouchable;
+    Orientation ajaxOrientation;
+    AjaxAttack ajaxAttack;
 
     // Ajax can not move & can not fire any hability
     // freeze state change when Ajax was hit by some enemy
@@ -33,59 +32,108 @@ public class AjaxController : MonoBehaviour
         }
     }
 
-    // pre: --
-    // post: change Ajax freeze state
-    // desc: while freeze is setted to true, some Ajax features should be freezed
-    //      Ajax should not be able to move, or trigger it's habilities
-    //      this, method are called at start and end of hit animations
-    public void UpdateFreeze(bool freeze)
+    void Awake()
     {
-        this.freeze = freeze;
+        ajaxMovement = GetComponent<AjaxMovement>();
+        ajaxFX = GetComponent<AjaxFX>();
+        lifeController = GetComponent<LifeController>();
+        ajaxTouchable = GetComponent<Touchable>();
+        ajaxOrientation = GetComponent<Orientation>();
+        ajaxAttack = GetComponent<AjaxAttack>();
+
+        ajaxCollider = GetComponent<Collider2D>();
     }
 
     // pre: --
-    // post: take damage because of collision with enemy
-    //       make Ajax untouchable for `touchableTime` seconds
-    // desc: 
+    // post: change Ajax freeze state
+    // desc: while freeze is setted to true, some Ajax features should be detached
+    //      Ajax should not be able to move, or trigger it's habilities
+    //      this, method are called at start and end of hit animations
+    public void SetFreeze(bool freeze)
+    {
+        this.freeze = freeze;
+
+        if (this.freeze)
+        {
+            // detach scripts
+            ajaxMovement.Freeze();
+            ajaxMovement.enabled = false;
+            ajaxOrientation.enabled = false;
+            ajaxAttack.enabled = false;
+        }
+        else
+        {
+            // attach scripts
+            ajaxMovement.enabled = true;
+            ajaxOrientation.enabled = true;
+            ajaxAttack.enabled = true;
+        }
+    }
+
+    // pre: --
+    // post: take damage from collision
     public void CollidingWith(float collisionDamage, Collider2D other = null)
     {
         if (!ajaxTouchable.CanBeTouch) return;
 
         StartCoroutine(ajaxTouchable.CanBeTouchCoroutine(false, 0));
-        StartCoroutine(ajaxTouchable.CanBeTouchCoroutine(true, touchableTime));
+        StartCoroutine(ajaxTouchable.CanBeTouchCoroutine(true, collideRecoverTime));
 
-        Debug.Log(touchableTime);
+        ajaxFX.TriggerCollidingFX(collideRecoverTime);
+        lifeController.TakeLife(Mathf.Abs(collisionDamage));
 
-        ajaxFX.TriggerCollidingFX(touchableTime);
-        ajaxLife.TakeLife(Mathf.Abs(collisionDamage));
-
-        Debug.Log($"Current ajax life ${ajaxLife.Life}");
+        Debug.Log($"Current ajax life ${lifeController.Life}");
     }
 
-
-    public void DashTrigger(float dashTime)
+    public void Dash(float dashTime)
     {
-        if (freeze) return;
-
-        StartCoroutine(ajaxTouchable.CanBeTouchCoroutine(false, 0));
+        StartCoroutine(ajaxTouchable.CanBeTouchCoroutine(false));
         StartCoroutine(ajaxTouchable.CanBeTouchCoroutine(true, dashTime));
 
-        StartCoroutine(ajaxFX.CanFlipCoroutine(false, 0));
+        StartCoroutine(ajaxFX.CanFlipCoroutine(false));
         StartCoroutine(ajaxFX.CanFlipCoroutine(true, dashTime));
+        StartCoroutine(ajaxFX.DashCoroutine(dashTime));
 
         StartCoroutine(ajaxMovement.DashCoroutine(FacingTo(), dashTime));
 
         StartCoroutine(dashAttack.AttackCoroutine(dashTime));
     }
 
-    public void VengefulRayTrigger(Vector3 origin)
+    public void Ray(Vector3 origin)
     {
-        if (freeze) return;
-
         bool left = FacingTo() == Utils.Facing.LEFT;
         Vector2 orientation = new Vector2(left ? -1f : 1f, 0f);
         VengefulRay instance = Instantiate(vengefulRay, origin, left ? Quaternion.Euler(0, -180, 0) : Quaternion.identity);
         instance.orientation = orientation;
+    }
+
+    // pre: --
+    // post: remove other animations & goes to idle animation
+    public void Idle()
+    {
+        // may to implement later?
+    }
+
+    public void Run(bool run)
+    {
+        ajaxFX.SetRunFX(run);
+    }
+
+    public void Land()
+    {
+        ajaxFX.TriggerLandFX();
+    }
+
+    public void Jump()
+    {
+        ajaxFX.TriggerJumpFX();
+    }
+
+    // pre: --
+    // returns: Ajax's collider
+    public Collider2D AjaxCollider()
+    {
+        return ajaxCollider;
     }
 
     public bool CanBeTouch()
