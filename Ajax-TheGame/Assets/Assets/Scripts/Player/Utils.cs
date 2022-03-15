@@ -23,6 +23,18 @@ namespace Utils
             }
             return Random.Range(0, 2) == 0 ? Enums.CollisionSide.BACK : Enums.CollisionSide.FRONT;
         }
+
+        // pre: --
+        // post: executes coroutines in order. 
+        //      coroutine n+1 waits until coroutine n ends
+        public static IEnumerator CoroutineChaining(params IEnumerator[] routines)
+        {
+            foreach (var item in routines)
+            {
+                while (item.MoveNext()) yield return item.Current;
+            }
+            yield break;
+        }
     }
     namespace Enums
     {
