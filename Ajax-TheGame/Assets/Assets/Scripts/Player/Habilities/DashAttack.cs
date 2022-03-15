@@ -4,37 +4,20 @@ using UnityEngine;
 
 public class DashAttack : MonoBehaviour
 {
+    [Header("Self")]
+    [SerializeField] BoxCollider2D boxCollider;
+
+
+    [Header("Configurations")]
+
     [Tooltip("Amount of life to take to enemies")]
-    [Range(10, 1000)] [SerializeField] float damage = 100;
+    [Range(10, 1000)][SerializeField] float damage = 100;
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////
 
-    BoxCollider2D boxCollider;
     HashSet<GameObject> distinct = new HashSet<GameObject>();
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////
 
-    // on aweke we disable dash triggers
-    void Awake()
-    {
-        boxCollider = GetComponent<BoxCollider2D>();
-        boxCollider.enabled = false;
-        boxCollider.isTrigger = true;
-    }
-
-    public void Attack(float time)
-    {
-        if (boxCollider.enabled) return;
-        StartCoroutine(Await(time));
-    }
-
-    /**
-        this functions make sure of
-        handle the first and last state of
-        - collider detector
-        - collider set
-    */
-    IEnumerator Await(float time)
+    public IEnumerator AttackCoroutine(float time)
     {
         boxCollider.enabled = true;
         distinct.Clear();

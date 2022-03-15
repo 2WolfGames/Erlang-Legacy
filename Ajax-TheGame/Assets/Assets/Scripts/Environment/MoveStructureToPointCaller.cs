@@ -22,8 +22,6 @@ public class MoveStructureToPointCaller : MonoBehaviour
     [SerializeField] Transform myPoint;
     bool activated;
 
-    HashSet<GameObject> memory = new HashSet<GameObject>();
-
 
     //pre: --
     //post: seting defautl sprite to gameobject
@@ -58,10 +56,6 @@ public class MoveStructureToPointCaller : MonoBehaviour
 
         if (other.gameObject.tag == "Player" && !activated)
         {
-            if (memory.Contains(other.gameObject)) return;
-
-            memory.Add(other.gameObject);
-
             if (!IsStructureOnPoint())
             {
                 ChangeSprite();
@@ -72,14 +66,6 @@ public class MoveStructureToPointCaller : MonoBehaviour
             {
                 StartCoroutine(IActivateAndDesactivateHandler());
             }
-        }
-    }
-
-    void OnTriggerExit2D(Collider2D other)
-    {
-        if (memory.Contains(other.gameObject))
-        {
-            memory.Remove(other.gameObject);
         }
     }
 
