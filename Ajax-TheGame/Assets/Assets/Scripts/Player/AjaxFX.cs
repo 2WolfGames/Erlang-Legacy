@@ -87,11 +87,11 @@ public class AjaxFX : MonoBehaviour
     {
         if (side == Enums.CollisionSide.BACK)
         {
-            ajaxAnimator.SetTrigger("hit");
+            ajaxAnimator.SetTrigger("twist");
         }
         else
         {
-            ajaxAnimator.SetTrigger("twist");
+            ajaxAnimator.SetTrigger("hit");
         }
         StartCoroutine(BlinkCoroutine(blinkTime));
     }
