@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Utils.Enums;
 
 public class AjaxController : MonoBehaviour
 {
@@ -72,14 +73,14 @@ public class AjaxController : MonoBehaviour
 
     // pre: --
     // post: take damage from collision
-    public void CollidingWith(float collisionDamage, Collider2D other = null)
+    public void CollidingWith(float collisionDamage, CollisionSide collisionSide, Collider2D other = null)
     {
         if (!ajaxTouchable.CanBeTouch) return;
 
         StartCoroutine(ajaxTouchable.CanBeTouchCoroutine(false, 0));
         StartCoroutine(ajaxTouchable.CanBeTouchCoroutine(true, collideRecoverTime));
 
-        ajaxFX.TriggerCollidingFX(collideRecoverTime);
+        ajaxFX.TriggerCollidingFX(collideRecoverTime, collisionSide);
         lifeController.TakeLife(Mathf.Abs(collisionDamage));
 
         Debug.Log($"Current ajax life ${lifeController.Life}");
@@ -101,7 +102,7 @@ public class AjaxController : MonoBehaviour
 
     public void Ray(Vector3 origin)
     {
-        bool left = FacingTo() == Utils.Facing.LEFT;
+        bool left = FacingTo() == Facing.LEFT;
         Vector2 orientation = new Vector2(left ? -1f : 1f, 0f);
         VengefulRay instance = Instantiate(vengefulRay, origin, left ? Quaternion.Euler(0, -180, 0) : Quaternion.identity);
         instance.orientation = orientation;
@@ -131,7 +132,7 @@ public class AjaxController : MonoBehaviour
 
     // pre: --
     // returns: Ajax's collider
-    public Collider2D AjaxCollider()
+    public Collider2D GetCollider()
     {
         return ajaxCollider;
     }
@@ -147,7 +148,7 @@ public class AjaxController : MonoBehaviour
         return ajaxOrientation.InputToNumber();
     }
 
-    public Utils.Facing FacingTo()
+    public Facing FacingTo()
     {
         return ajaxOrientation.LatestFacing;
     }

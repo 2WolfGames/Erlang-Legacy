@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Spine.Unity;
 using UnityEngine;
 
+using Enums = Utils.Enums;
+
 public class AjaxFX : MonoBehaviour
 {
     [Header("Jump particles")]
@@ -39,10 +41,10 @@ public class AjaxFX : MonoBehaviour
     }
 
     // -1 left, 1 right 
-    void UpdateFlip(Utils.Facing facing)
+    void UpdateFlip(Enums.Facing facing)
     {
         Vector3 characterScale = transform.localScale;
-        characterScale.x = facing == Utils.Facing.LEFT ? -1 : 1;
+        characterScale.x = facing == Enums.Facing.LEFT ? -1 : 1;
         transform.localScale = characterScale;
     }
 
@@ -81,11 +83,17 @@ public class AjaxFX : MonoBehaviour
 
     // pre: --
     // post: executes randomly hit animations & blink animations for a while
-    public void TriggerCollidingFX(float blinkSeconds = 5f)
+    public void TriggerCollidingFX(float blinkTime, Enums.CollisionSide side)
     {
-        int animation = Random.Range(1, 3);
-        ajaxAnimator.SetTrigger("hit" + animation);
-        StartCoroutine(BlinkCoroutine(blinkSeconds));
+        if (side == Enums.CollisionSide.BACK)
+        {
+            ajaxAnimator.SetTrigger("twist");
+        }
+        else
+        {
+            ajaxAnimator.SetTrigger("hit");
+        }
+        StartCoroutine(BlinkCoroutine(blinkTime));
     }
 
 

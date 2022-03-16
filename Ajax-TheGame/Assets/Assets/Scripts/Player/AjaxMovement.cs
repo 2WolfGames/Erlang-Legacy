@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using Enums = Utils.Enums;
+
 public class AjaxMovement : MonoBehaviour
 {
     [Header("Configurations")]
@@ -121,13 +123,13 @@ public class AjaxMovement : MonoBehaviour
 
     // pre: --
     // post: adds force impulse with facing orientation
-    public IEnumerator DashCoroutine(Utils.Facing facing, float duration, System.Action onComplete = null)
+    public IEnumerator DashCoroutine(Enums.Facing facing, float duration, System.Action onComplete = null)
     {
         dashing = true;
         float gravityScale = this.rb.gravityScale;
         Freeze();
         this.rb.gravityScale = 0;
-        var direction = facing == Utils.Facing.LEFT ? -1 : 1;
+        var direction = facing == Enums.Facing.LEFT ? -1 : 1;
         this.rb.AddForce(new Vector2(dashSpeed * direction, 0f), ForceMode2D.Impulse);
         yield return new WaitForSeconds(duration);
 

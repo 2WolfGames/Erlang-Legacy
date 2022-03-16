@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using Enums = Utils.Enums;
+
 public class Enemy : MonoBehaviour, IEnemy
 {
     [Header("Configurations")]
@@ -26,7 +28,7 @@ public class Enemy : MonoBehaviour, IEnemy
 
     void FixedUpdate()
     {
-        if (IsTouchingAjax(ajaxController.AjaxCollider()))
+        if (IsTouchingAjax(ajaxController.GetCollider()))
         {
             CollidingWithAjax(ajaxController);
         }
@@ -37,10 +39,16 @@ public class Enemy : MonoBehaviour, IEnemy
         return collider2d.IsTouching(ajaxCollider);
     }
 
+    // pre: --
+    // post: trigger Ajax function event
+    //      to report a collision with `this`
+    //      computes which side of Ajax `LEFT`
+    //      or `RIGHT` is colliding with `this`
     protected void CollidingWithAjax(AjaxController ajax)
     {
+        Enums.CollisionSide side = Utils.Functions.ComputeCollisionSide(ajax.transform, transform);
         if (ajax.CanBeTouch())
-            ajax.CollidingWith(collisionDamage, collider2d);
+            ajax.CollidingWith(collisionDamage, side);
     }
 
     public void OnDie()
