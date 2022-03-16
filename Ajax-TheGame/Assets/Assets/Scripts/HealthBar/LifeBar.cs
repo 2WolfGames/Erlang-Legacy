@@ -1,9 +1,10 @@
 using System.Collections;
+using Utils;
 using System.Collections.Generic;
 using UnityEngine;
 
 public enum LifeBarAction{
-    setUp, gainLife, loseLife, addNewLife
+    setUp, gainLife, loseLife, addNewLife, fillAll
 } 
 
 public class LifeBar : MonoBehaviour
@@ -26,15 +27,17 @@ public class LifeBar : MonoBehaviour
     Queue<(LifeBarAction,int)> pendentChanges; 
     bool modifying;
     
-    // Start is called before the first frame update
-    void Start()
+    //pre: --
+    //post: We initialize what we need
+    void Awake()
     {
         lifeContainers = new List<LifeContainer>();
         pendentChanges = new Queue<(LifeBarAction, int)>();
     }
 
-    // Update is called once per frame
-    void Update()
+    //pre: --
+    //post:-- If we have pendent changes, we call the queue manager
+    void FixedUpdate()
     {
         if(!modifying && pendentChanges.Count != 0){
             StartCoroutine(ManageQueue());
@@ -43,23 +46,34 @@ public class LifeBar : MonoBehaviour
 
     #region  public methods
 
+    //pre: initialLifes > 0 && < cMaxLifeContainers
+    //post: it puts to the quque the proces that initializes the lifeBar
     public void SetUpLifes(int initialLifes){
         pendentChanges.Clear(); 
+        modifying = false;
         pendentChanges.Enqueue((LifeBarAction.setUp,initialLifes));
     }
 
+    //pre: lifesUp > 0 
+    //post: it puts to the quque the proces that gains/heals the lifeBar
     public void GainLifes(int lifesUp){
         pendentChanges.Enqueue((LifeBarAction.gainLife,lifesUp));
     }
 
+    //pre: lifesOut > 0 
+    //post: it puts to the quque the proces that loses lifes 
     public void LoseLifes(int lifesOut){
         pendentChanges.Enqueue((LifeBarAction.loseLife,lifesOut));
     }
 
+    //pre: --
+    //post: it puts to the quque the proces that heals all lifes 
     public void HealAllLifes(){
         pendentChanges.Enqueue((LifeBarAction.gainLife,totalLifes-currentLifes));
     }
 
+    //pre: --
+    //post: it puts to the quque the proces puts a new life to barlife
     public void SetUpNewLife(){
         pendentChanges.Clear(); 
         pendentChanges.Enqueue((LifeBarAction.addNewLife,0));
@@ -67,11 +81,15 @@ public class LifeBar : MonoBehaviour
 
     #endregion
 
-    IEnumerator ManageQueue(){
+    #region private methods
+
+    //pre: --
+    //post: Manage Queue is the manager of the pendent changes.
+    //      its going to inicialize the diferent proces, and assure they are finished before starting others.
+    private IEnumerator ManageQueue(){
         if (modifying || pendentChanges.Count == 0)
             yield break;
         
-        Debug.Log("In Manage Queue");
         modifying = true;
 
         (LifeBarAction,int) actionType = pendentChanges.Dequeue();
@@ -86,24 +104,24 @@ public class LifeBar : MonoBehaviour
             case LifeBarAction.loseLife:
                 yield return StartCoroutine(LoseLifesProcess(actionType.Item2));
             break;
+            case LifeBarAction.fillAll:
+                yield return StartCoroutine(FillAllLifes());
+            break;
             case LifeBarAction.addNewLife:
-
+                yield return StartCoroutine(AddNewLife());
             break;
             default:
                 yield return null;
             break;
         }
 
-
-        modifying = false;
-        Debug.Log("Out Manage Queue");
+        modifying = currentLifes == 0; 
     }
     
     //pre: lifesIn > 0 && lifesIn <= 9
     //post: delates current life bar and initializes health bar with the number of lifesIn 
     //      all full (of life)
     IEnumerator SetUpLifesProcess(int initialLifes){
-        Debug.Log("In SetUpLifesProcess");
         lifeContainers.Clear();
         for(int i = transform.childCount - 1 ; i >= 0; i-- ){
             Destroy(transform.GetChild(i).gameObject);
@@ -118,11 +136,13 @@ public class LifeBar : MonoBehaviour
         }
 
         yield return null;
-        Debug.Log("Out SetUpLifesProcess");
     }
 
+
+    //pre: --
+    //post: Preces that makes gain lifes.
+    //      if lifes where 1 danger effect is desactivated
     IEnumerator GainLifesProcess(int lifesUp){
-        Debug.Log("In GainLifesProcess");
         if (currentLifes < totalLifes){
             bool desactivateDangerEffect = currentLifes == 1;
 
@@ -130,70 +150,81 @@ public class LifeBar : MonoBehaviour
 
             List<IEnumerator> coroutines = new List<IEnumerator>();    
             for (int i = currentLifes; i < lifesUpdate; i++){
-                coroutines.Add(lifeContainers[i].Addd());
+                coroutines.Add(lifeContainers[i].Gain());
             }
 
             if(desactivateDangerEffect){
                 ActivateDangerEffect(false);
             }
 
-            yield return CoroutineChaining(coroutines.ToArray());
+            yield return Utils.Functions.CoroutineChaining(coroutines.ToArray());
             currentLifes = lifesUpdate;
 
+        } else {
+            yield return null;
         }
-        Debug.Log("Out GainLifesProcess");
     }
 
-    public static IEnumerator CoroutineChaining(params IEnumerator[] routines)
-    {
-        foreach (var item in routines)
-        {
-            while (item.MoveNext()) yield return item.Current;
-        }
-        yield break;
-    }
+    //pre: --
+    //post: Process that fully heals lifebar 
+    IEnumerator FillAllLifes(){
+        bool desactivateDangerEffect = currentLifes == 1;
 
-    IEnumerator LoseLifesProcess(int lifesOut){
-        Debug.Log("In LoseLifesProcess");
-        if(currentLifes > 0){
-            for (int i = currentLifes - 1; i >= Mathf.Max(currentLifes - lifesOut,0) ; i--){
-                lifeContainers[i].Remove();
+        List<IEnumerator> coroutines = new List<IEnumerator>();    
+        for (int i = 0; i < totalLifes; i++){
+            if (lifeContainers[i].HasLife()){
+                coroutines.Add(lifeContainers[i].Reflection());
+            } else {
+                coroutines.Add(lifeContainers[i].Gain());
             }
-            currentLifes = Mathf.Max(0,currentLifes-lifesOut);
+        }
+
+        if(desactivateDangerEffect){
+            ActivateDangerEffect(false);
+        }
+
+        yield return Utils.Functions.CoroutineChaining(coroutines.ToArray());
+        currentLifes = totalLifes;
+    }
+
+    //pre: --
+    //post: Preces that makes lose lifes.
+    //      if remaining lifes == 1 triggers danger effect
+    //      if remaining lifes == 0 triggers die effect
+    IEnumerator LoseLifesProcess(int lifesOut){
+        if(currentLifes > 0){
+            int lifesUpdate = Mathf.Max(0,currentLifes-lifesOut);
+
+            Coroutine lastOne = null;
+            for (int i = currentLifes - 1; i >= lifesUpdate ; i--){
+                lastOne = StartCoroutine(lifeContainers[i].Lose());
+            }
+            currentLifes = lifesUpdate;
 
             if(currentLifes == 1){
                 ActivateDangerEffect(true);
-            } else if (currentLifes == 0){
+            } 
+            yield return lastOne;
+
+            if (currentLifes == 0){
                 ActivateDangerEffect(false); //we make sure that danger effect is not active anymore
                 StartCoroutine(DieEffect());
             }
-        }
-        yield return null;
-        Debug.Log("Out LoseLifesProcess");
-    }
-
-
-    //pre:  startLife <= 0  && startLife > totalLifes
-    //      endLifes > 0 && endLifes < totalLifes
-    //post: evaluates startLife, if its full it triggers the reflection effect.
-    //      if its empty it fills it
-    //      when startLife is not lower than endLife, if addOne == true 
-    //      the coroutine NewLife it's called to Add new life.
-    private IEnumerator FillLifes(int startLife, int endLife, bool addOne) {
-        if (!lifeContainers[startLife].HasLife()){
-            yield return StartCoroutine(lifeContainers[startLife].Addd());
         } else {
-            lifeContainers[startLife].Reflection();
-            yield return new WaitForSeconds(cCoroutineReflectLifeWait);
-        }
-        if (startLife < endLife){
-            StartCoroutine(FillLifes(++startLife,endLife,addOne));
-        } else if (addOne){
-            StartCoroutine(NewLife());
+            yield return null;
         }
     }
+    
+    //pre: --
+    //post: Fill all lifes and only afert lifes are full, calls the method to set up new life
+    IEnumerator AddNewLife(){
+        List<IEnumerator> lst = new List<IEnumerator>();
+        lst.Add(FillAllLifes());
+        lst.Add(NewLife());
+        yield return Utils.Functions.CoroutineChaining(lst.ToArray());
+    }
 
-     //pre:  totalLifes > 9, health bar fully filled
+    //pre:  totalLifes > 9, health bar fully filled
     //post: adds NewLife to LifeBar
     private IEnumerator NewLife(){
         //we add life and assume that all other lifes are fully filled 
@@ -212,13 +243,13 @@ public class LifeBar : MonoBehaviour
         currentLife.transform.SetAsFirstSibling();
         lifeContainers.Add(currentLife.GetComponentInChildren<LifeContainer>());  
         //Life fills to make nice effect
-        lifeContainers[totalLifes - 1].FillEmptyLife();        
+        StartCoroutine(lifeContainers[totalLifes - 1].Reflection());        
     }
 
-    //pre: lifeContainer[0] it's allyas the last life
+    //pre: lifeContainer[0] it's the last remaining life
     //post: Danger effect for last life is activated or desactiveted dependig on bool
     private void ActivateDangerEffect(bool activate){
-        lifeContainers[0].GetComponentInChildren<LifeContainer>().lastLife(activate);
+        StartCoroutine(lifeContainers[0].lastLife(activate));
     }
 
     //pre: --
@@ -233,5 +264,7 @@ public class LifeBar : MonoBehaviour
             life.SetShake(false);
         }
     }
+
+    #endregion
 
 }
