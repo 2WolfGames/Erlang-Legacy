@@ -12,85 +12,84 @@ using UnityEngine;
 */
 public class AjaxAttack : MonoBehaviour
 {
-    [Header("Dash configurations")]
-    [SerializeField] DashAttack dashAttack;
-    [Range(0.25f, 3.0f)] [SerializeField] float tbwDashAttack;
-    [Range(0.1f, 0.5f)] [SerializeField] float dashAttackTime;
+    [Header("Dash")]
+    [Range(0.25f, 3.0f)][SerializeField] float timeBtwDash;
+    [Range(0.1f, 0.5f)][SerializeField] float dashTime;
 
 
-    [Header("Vengeful ray configuration")]
-    [SerializeField] VengefulRay vengefulRay;
-    [SerializeField] Transform vengefullRayStartPosition;
-    [Range(0.25f, 3.0f)] [SerializeField] float tbwVengefulRay = 0.5f;
+    [Header("Vengeful ray")]
+    [Range(0.25f, 3.0f)][SerializeField] float timeBtwVfRay = 0.5f;
 
-    [Header("Others")]
-    AjaxFacing ajaxFacing;
+    [Header("Linked")]
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////
+    AjaxController ajaxController;
+    [SerializeField] Transform vengefulRayTransform;
 
-    float tbwDash = -1;
-    float tbwRay = -1;
-    AjaxMovement ajaxMovement;
-    AjaxFX ajaxFX;
-    bool inDashingAttack = false;
+    float memoTimeBtwDash;
+    float memoTimeBtwVfRay;
+    bool isDashing;
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////
 
-    void Start()
+    void Awake()
     {
-        ajaxMovement = GetComponent<AjaxMovement>();
-        ajaxFX = GetComponent<AjaxFX>();
-        // tbwDash = tbwDashAttack;
-        // tbwRay = tbwVengefulRay;
+        memoTimeBtwDash = timeBtwDash;
+        memoTimeBtwVfRay = timeBtwVfRay;
+        isDashing = false;
+        ajaxController = GetComponent<AjaxController>();
     }
 
     void Update()
     {
-        tbwDash = Mathf.Clamp(tbwDash - Time.deltaTime, Mathf.NegativeInfinity, tbwDashAttack);
-        tbwRay = Mathf.Clamp(tbwRay - Time.deltaTime, Mathf.NegativeInfinity, tbwVengefulRay);
-        DashDemon();
-        VengefulRayDemon();
+        DashListener();
+        VengefullRayListener();
     }
 
-    /**
-        Handles dash frequency
-        and comunicate with dash attack script
-        to make demage in area
-    */
-    void DashDemon()
+    void DashListener()
     {
-        if (tbwDash <= 0 && !this.inDashingAttack && Input.GetButtonDown("Fire1"))
+        if (memoTimeBtwDash >= 0)
         {
-            tbwDash = tbwDashAttack;
-            Vector2 direction = new Vector2(transform.localScale.x, 0);
-            this.inDashingAttack = true;
-            this.ajaxFX.blockOrientationChanges = true;
-            ajaxMovement.Dash(Mathf.RoundToInt(transform.localScale.x), dashAttackTime, () =>
-            {
-                this.ajaxFX.blockOrientationChanges = false;
-                this.inDashingAttack = false;
-            });
-            dashAttack.Attack(dashAttackTime);
+            memoTimeBtwDash -= Time.deltaTime;
+        }
+
+        if (memoTimeBtwDash <= 0 && !isDashing && Input.GetButtonDown("Fire1"))
+        {
+            ResetMemoTimeBtwDash();
+            ajaxController.Dash(dashTime);
+            StartCoroutine(DashingCoroutine(dashTime, false));
         }
     }
 
-
-    /**
-        Handles vengeful ray frequency
-        and instanciate one venful ray
-        to make demage in area
-    */
-    void VengefulRayDemon()
+    void VengefullRayListener()
     {
-        if (tbwRay <= 0 && !inDashingAttack && Input.GetButtonDown("Fire2"))
+        if (memoTimeBtwVfRay >= 0)
         {
-            tbwRay = tbwVengefulRay;
-            float x = transform.localScale.x;
-            float facing = Mathf.Sign(x);
-            Vector2 orientation = new Vector2(facing, 0);
-            var ray = Instantiate(vengefulRay, vengefullRayStartPosition.position, facing == -1f ? Quaternion.Euler(0, -180, 0) : Quaternion.identity);
-            ray.orientation = orientation;
+            memoTimeBtwVfRay -= Time.deltaTime;
         }
+
+        if (memoTimeBtwVfRay <= 0 && !isDashing && Input.GetButtonDown("Fire2"))
+        {
+            ResetMemoTimeBtwVfRay();
+            ajaxController.Ray(vengefulRayTransform.position);
+        }
+    }
+
+    void ResetMemoTimeBtwDash()
+    {
+        memoTimeBtwDash = timeBtwDash;
+    }
+
+    void ResetMemoTimeBtwVfRay()
+    {
+        memoTimeBtwVfRay = timeBtwVfRay;
+    }
+
+    // pre: --
+    // post: set dashing state to true waits for n seconds and then set dashing to false
+    IEnumerator DashingCoroutine(float time, bool state)
+    {
+        isDashing = true;
+        yield return new WaitForSeconds(time);
+        isDashing = false;
     }
 
 }

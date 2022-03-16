@@ -13,5 +13,5 @@ public interface IEnemy
 
     void OnDie();
 
-    void OnAttack();
+    void OnAttack(Collider2D other);
 }

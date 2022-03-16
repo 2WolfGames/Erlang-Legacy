@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class LifeController : MonoBehaviour
 {
-    [Tooltip("Units that represent how much life entity has")]
-    [Range(10, 10000)] [SerializeField] float life = 100;
+    [Range(10, 10000)][SerializeField] float life = 100;
 
+    public float Life
+    {
+        get { return this.life; }
+    }
 
     /**
         this fn returns true when
@@ -18,6 +21,6 @@ public class LifeController : MonoBehaviour
     public bool TakeLife(float life)
     {
         this.life -= life;
-        return this.life <= Mathf.Epsilon;
+        return this.life <= 0;
     }
 }

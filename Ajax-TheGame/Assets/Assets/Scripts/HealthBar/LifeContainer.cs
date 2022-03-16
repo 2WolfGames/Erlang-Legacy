@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 public class LifeContainer : MonoBehaviour
@@ -40,11 +41,12 @@ public class LifeContainer : MonoBehaviour
     bool hasLife;
     bool shake;
     bool shadowActive;
-    bool moreTransparency = true; 
+    bool moreTransparency = true;
 
     //pre: --
     //post: we set the elements of our component to their init positions
-    void Awake () {
+    void Awake()
+    {
         startPos.x = transform.localPosition.x;
         startPos.y = transform.localPosition.y;
         reflect.transform.localPosition = new Vector2(-cReflectPosX, 0);
@@ -52,7 +54,8 @@ public class LifeContainer : MonoBehaviour
 
     //pre:--
     //post: we set the values of our component to initial values
-    void Start() {
+    void Start()
+    {
         hasLife = true;
         shake = false;
         shadowActive = false;
@@ -60,42 +63,62 @@ public class LifeContainer : MonoBehaviour
         shadowImage.GetComponent<Image>().enabled = false;
     }
 
+
     //pre: --
     //post: darkShadow rotated, 
     //      if Shake, Calls method Shake for shaking life
     //      if shadowActive, shadow ligths up and fades  
-    private void FixedUpdate() {
+    private void FixedUpdate()
+    {
         RotateShadow();
 
-        if(shake){
+        if (shake)
+        {
             Shake();
         }
 
-        if(shadowActive){
+        if (shadowActive)
+        {
             Shadow();
         }
 
     }
-#region Public methods 
+    #region Public methods 
 
     //pre:--
     //post: returs true if life full, else false
-    public bool HasLife(){
+    public bool HasLife()
+    {
         return hasLife;
     }
 
     //pre: --
     //post: if life empty, this method fill it's
-    public void Add(){
-        if(!hasLife){
+    public void Add()
+    {
+        if (!hasLife)
+        {
             hasLife = true;
             StartCoroutine(IAddingLife(cStartFillValueAdd));
+        }
+    }
+    public IEnumerator Addd()
+    {
+        if (!hasLife)
+        {
+            yield return StartCoroutine(IAddingLife(cStartFillValueAdd));
+            hasLife = true;
+        }
+        else
+        {
+            yield return null;
         }
     }
 
     //pre: --
     //post: Reproduces add life effect of an already full life
-    public void FillEmptyLife(){
+    public void FillEmptyLife()
+    {
         filImage.fillAmount = 0;
         hasLife = false;
         Add();
@@ -104,14 +127,17 @@ public class LifeContainer : MonoBehaviour
     //pre: --
     //post: Calls coroitine IReflection to show the effect 
     //which makes the life bright 
-    public void Reflection(){
+    public void Reflection()
+    {
         StartCoroutine(IReflection());
     }
-    
+
     //pre: --
     //post: if life full, this method empty it's
-    public void Remove(){
-        if(hasLife){
+    public void Remove()
+    {
+        if (hasLife)
+        {
             hasLife = false;
             losingLifePS.Play();
             StartCoroutine(IRemovingLife(cStartFillValueRemove));
@@ -122,13 +148,17 @@ public class LifeContainer : MonoBehaviour
     //pre: --
     //post: shadow it's shown and life shakes if islastLife = true
     //      else shadow hiden and life stable using IDesactivateShadow Coroutine
-    public void lastLife(bool islastLife){
+    public void lastLife(bool islastLife)
+    {
         Image img = shadowImage.GetComponent<Image>();
-        if (islastLife){
+        if (islastLife)
+        {
             img.enabled = islastLife;
-            img.color =  new Color(img.color.r, img.color.g ,img.color.b , 0f);
+            img.color = new Color(img.color.r, img.color.g, img.color.b, 0f);
             moreTransparency = false; // moreOpacity = true;
-        } else {
+        }
+        else
+        {
             StartCoroutine(IDesactivateShadow());
         }
         shake = islastLife;
@@ -137,9 +167,11 @@ public class LifeContainer : MonoBehaviour
 
     //pre: --
     //post: changes sprite to one (randomly chosed) of the broken ones.
-    public void BrokeLife(){
-        if (lstSprites.Count>0){
-            filImage.sprite = lstSprites[Random.Range(0,lstSprites.Count)];
+    public void BrokeLife()
+    {
+        if (lstSprites.Count > 0)
+        {
+            filImage.sprite = lstSprites[UnityEngine.Random.Range(0, lstSprites.Count)];
             filImage.fillAmount = 1;
         }
         StartCoroutine(IShake(cShortShakeTime));
@@ -148,43 +180,65 @@ public class LifeContainer : MonoBehaviour
     //pre: --
     //post: if isShaking = true, makes life shake
     //      else puts life to it's initial position    
-    public void SetShake(bool isShaking){
+    public void SetShake(bool isShaking)
+    {
         shake = isShaking;
-        if (!isShaking){
-            transform.localPosition= new Vector2(startPos.x, startPos.y);
+        if (!isShaking)
+        {
+            transform.localPosition = new Vector2(startPos.x, startPos.y);
         }
     }
 
-#endregion
+    #endregion
 
-#region Effects
+    #region Effects
 
     //pre: filling > 0
     //post: every waitforseconds, fills more the image of life
     //      ends calling the coroutine IReflection to make life shine
-    IEnumerator IAddingLife(float filling){
+    IEnumerator IAddingLife(float filling)
+    {
+        filImage.fillAmount = filling;
+        filImage.DOFillAmount(1,1f).OnComplete(() => {
+            reflect.transform.DOLocalMoveX(cReflectPosX,1f);
+        });
+        reflect.transform.localPosition = new Vector2(-cReflectPosX, 0);
+        yield return new WaitForSeconds(2f);
+        Debug.Log("complete");
+    }
+
+    //pre: filling > 0
+    //post: every waitforseconds, fills more the image of life
+    //      ends calling the coroutine IReflection to make life shine
+    IEnumerator IAddingLife2(float filling)
+    {
         filImage.fillAmount = filling;
         yield return new WaitForSeconds(cCoroutineWaitSeconds);
-        if (filling < 1){
-            StartCoroutine(IAddingLife(filling + cFillAmount));
-        } else if (filling > 1){
+        if (filling < 1)
+        {
+            StartCoroutine(IAddingLife2(filling + cFillAmount));
+        } else {
             StartCoroutine(IReflection());
         }
+
     }
 
     //pre: filling > 0
     //post: every waitforseconds, unfills more the image of life
-    IEnumerator IRemovingLife(float unfilling){
+    IEnumerator IRemovingLife(float unfilling)
+    {
         filImage.fillAmount = 1 - unfilling;
         yield return new WaitForSeconds(cCoroutineWaitSeconds);
-        if (unfilling < 1){
+        if (unfilling < 1)
+        {
             StartCoroutine(IRemovingLife(unfilling + cFillAmount));
         }
     }
 
     //pre: seconds > 0
     //post: shakes life for the number of seconds
-    IEnumerator IShake(float seconds){
+    IEnumerator IShake(float seconds)
+    {
         SetShake(true);
         yield return new WaitForSeconds(seconds);
         SetShake(false);
@@ -192,9 +246,10 @@ public class LifeContainer : MonoBehaviour
 
     //pre: --
     //post: changes the position of image randomly
-    private void Shake(){
-        var speed = Random.Range(cShakeMinSpeed,cShakeMaxSpeed); //how fast it shakes
-        var amount = Random.Range(cShakeMinDisplacement,cShakeMaxDisplacement); //how much it shakes
+    private void Shake()
+    {
+        var speed = UnityEngine.Random.Range(cShakeMinSpeed, cShakeMaxSpeed); //how fast it shakes
+        var amount = UnityEngine.Random.Range(cShakeMinDisplacement, cShakeMaxDisplacement); //how much it shakes
         transform.localPosition = new Vector2(
             startPos.x + Mathf.Sin(Time.time * speed) * amount,
             startPos.y + (Mathf.Sin(Time.time * speed) * amount)
@@ -204,51 +259,60 @@ public class LifeContainer : MonoBehaviour
     //pre: --
     //post: reflects life
     //      How? takes the reflect gameobject and move it's to the other side fast
-    IEnumerator IReflection(){
+    IEnumerator IReflection(System.Action onComplete = null)
+    {
         reflect.transform.localPosition = new Vector2(reflect.transform.localPosition.x + cReflectVelocity, 0);
         yield return new WaitForSeconds(cCoroutineShortWaitSeconds);
-        if (reflect.transform.localPosition.x < cReflectPosX){
-            StartCoroutine(IReflection());
-        } else {
-            reflect.transform.localPosition = new Vector2(-cReflectPosX, 0);
+        if (reflect.transform.localPosition.x < cReflectPosX)
+        {
+            StartCoroutine(IReflection(onComplete));
         }
     }
 
     //pre: --
     //post: ligths up and fades out the Shadow Image tho make a nice visual efect
-    private void Shadow(){
+    private void Shadow()
+    {
         //transparency
         Image img = shadowImage.GetComponent<Image>();
         float transparency = img.color.a;
-        if (moreTransparency){
-            transparency -=  cTransparencyLittleFiller;
+        if (moreTransparency)
+        {
+            transparency -= cTransparencyLittleFiller;
             moreTransparency = transparency > cMinTransparency; //seguir donant true
-        } else {
+        }
+        else
+        {
             transparency += cTransparencyLittleFiller;
             moreTransparency = transparency > cMaxTransparency; //seguir donant false 
         }
-        img.color = new Color(img.color.r, img.color.g ,img.color.b , transparency);
+        img.color = new Color(img.color.r, img.color.g, img.color.b, transparency);
     }
 
     //pre: --
     //post: fades out the shadow nicely
-    IEnumerator IDesactivateShadow(){
+    IEnumerator IDesactivateShadow()
+    {
         Image img = shadowImage.GetComponent<Image>();
         float transparency = img.color.a - cTransparencyNormalFiller;
-        img.color =  new Color(img.color.r, img.color.g ,img.color.b , transparency);
+        img.color = new Color(img.color.r, img.color.g, img.color.b, transparency);
         yield return new WaitForSeconds(cCoroutineWaitSeconds);
-        if (transparency < 0.01f){
+        if (transparency < 0.01f)
+        {
             img.enabled = false;
-        } else {
+        }
+        else
+        {
             StartCoroutine(IDesactivateShadow());
         }
     }
 
     //pre: --
     //post: rotates shado img
-    private void RotateShadow(){
+    private void RotateShadow()
+    {
         //rotation
-        shadowImage.transform.Rotate(Vector3.forward * cRotationAmount * Time.deltaTime ); 
+        shadowImage.transform.Rotate(Vector3.forward * cRotationAmount * Time.deltaTime);
     }
 
     #endregion
