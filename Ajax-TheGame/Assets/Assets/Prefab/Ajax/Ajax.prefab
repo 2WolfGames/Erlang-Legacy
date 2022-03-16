@@ -259,7 +259,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c069eab55c8c52e48a1694f2b6db354a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ajaxController: {fileID: 382464842943519906}
   timeBtwDash: 1
   dashTime: 0.25
   timeBtwVfRay: 0.5

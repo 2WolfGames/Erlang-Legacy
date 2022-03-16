@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using Enums = Utils.Enums;
+
 /**
     thought to know Ajax facing.
 
@@ -11,18 +13,18 @@ using UnityEngine;
 
 public class Orientation : MonoBehaviour
 {
-    Utils.Facing latestFacing;
+    Enums.Facing latestFacing;
 
-    Utils.Input latestInput;
+    Enums.Input latestInput;
 
-    public Utils.Facing LatestFacing { get { return latestFacing; } }
+    public Enums.Facing LatestFacing { get { return latestFacing; } }
 
-    public Utils.Input LatestInput { get { return latestInput; } }
+    public Enums.Input LatestInput { get { return latestInput; } }
 
 
     void Awake()
     {
-        latestFacing = Utils.Facing.RIGHT;
+        latestFacing = Enums.Facing.RIGHT;
     }
 
     void Update()
@@ -41,18 +43,18 @@ public class Orientation : MonoBehaviour
 
             if (x == 1)
             {
-                latestInput = Utils.Input.RIGHT;
-                latestFacing = Utils.Facing.RIGHT;
+                latestInput = Enums.Input.RIGHT;
+                latestFacing = Enums.Facing.RIGHT;
             }
             else
             {
-                latestInput = Utils.Input.LEFT;
-                latestFacing = Utils.Facing.LEFT;
+                latestInput = Enums.Input.LEFT;
+                latestFacing = Enums.Facing.LEFT;
             }
         }
         else
         {
-            latestInput = Utils.Input.NONE;
+            latestInput = Enums.Input.NONE;
         }
     }
 
