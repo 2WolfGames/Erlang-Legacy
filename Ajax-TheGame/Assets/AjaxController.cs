@@ -41,7 +41,6 @@ public class AjaxController : MonoBehaviour
         ajaxTouchable = GetComponent<Touchable>();
         ajaxOrientation = GetComponent<Orientation>();
         ajaxAttack = GetComponent<AjaxAttack>();
-
         ajaxCollider = GetComponent<Collider2D>();
     }
 
@@ -78,7 +77,6 @@ public class AjaxController : MonoBehaviour
         if (!ajaxTouchable.CanBeTouch) return;
 
         StartCoroutine(ajaxTouchable.UntouchableForSeconds(collideRecoverTime));
-
         ajaxFX.TriggerCollidingFX(collideRecoverTime, collisionSide);
         lifeController.TakeLife(Mathf.Abs(collisionDamage));
 
@@ -87,15 +85,10 @@ public class AjaxController : MonoBehaviour
 
     public void Dash(float dashTime)
     {
-        StartCoroutine(ajaxTouchable.CanBeTouchCoroutine(false));
-        StartCoroutine(ajaxTouchable.CanBeTouchCoroutine(true, dashTime));
-
-        StartCoroutine(ajaxFX.CanFlipCoroutine(false));
-        StartCoroutine(ajaxFX.CanFlipCoroutine(true, dashTime));
+        StartCoroutine(ajaxTouchable.UntouchableForSeconds(dashTime));
+        StartCoroutine(ajaxFX.InhibitFlip(dashTime));
         StartCoroutine(ajaxFX.DashCoroutine(dashTime));
-
         StartCoroutine(ajaxMovement.DashCoroutine(FacingTo(), dashTime));
-
         StartCoroutine(dashAttack.AttackCoroutine(dashTime));
     }
 

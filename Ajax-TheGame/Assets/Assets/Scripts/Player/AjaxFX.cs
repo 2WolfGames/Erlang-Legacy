@@ -48,10 +48,13 @@ public class AjaxFX : MonoBehaviour
         transform.localScale = characterScale;
     }
 
-    public IEnumerator CanFlipCoroutine(bool flip, float time = 0)
+    // pre: not other coroutine of this fn should be running
+    // post: inhibit flip actions for a while
+    public IEnumerator InhibitFlip(float seconds = 0)
     {
-        yield return new WaitForSeconds(time);
-        canFlip = flip;
+        canFlip = false;
+        yield return new WaitForSeconds(seconds);
+        canFlip = true;
     }
 
     /**
