@@ -50,11 +50,6 @@ MonoBehaviour:
   collisionDamage: 10
   basicDamage: 10
   deadDelay: 0.1
-  whatIsAjax:
-    serializedVersion: 2
-    m_Bits: 0
-  lifeController: {fileID: 1910434359}
-  selfCollider: {fileID: 6166654859123775454}
 --- !u!114 &1910434359
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,7 +124,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -143,7 +138,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6166654859123775453}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
