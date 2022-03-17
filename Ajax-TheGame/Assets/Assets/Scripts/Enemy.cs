@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour, IEnemy
     [Range(1f, 1000f)][SerializeField] float collisionDamage = 10f;
     [Range(1f, 1000f)][SerializeField] float basicDamage = 10f;
     [Range(0.0f, 0.5f)][SerializeField] float deadDelay = 0.1f;
+    [SerializeField] LayerMask whatIsAjax;
 
     AjaxController ajaxController;
     Collider2D collider2d;
@@ -30,8 +31,14 @@ public class Enemy : MonoBehaviour, IEnemy
     {
         if (IsTouchingAjax(ajaxController.GetCollider()))
         {
+            Debug.Log("Touching...");
             CollidingWithAjax(ajaxController);
         }
+    }
+
+    bool IsTouchingAjaxByLayer()
+    {
+        return collider2d.IsTouchingLayers(whatIsAjax);
     }
 
     protected bool IsTouchingAjax(Collider2D ajaxCollider)
