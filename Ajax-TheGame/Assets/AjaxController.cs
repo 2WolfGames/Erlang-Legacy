@@ -77,8 +77,7 @@ public class AjaxController : MonoBehaviour
     {
         if (!ajaxTouchable.CanBeTouch) return;
 
-        StartCoroutine(ajaxTouchable.CanBeTouchCoroutine(false, 0));
-        StartCoroutine(ajaxTouchable.CanBeTouchCoroutine(true, collideRecoverTime));
+        StartCoroutine(ajaxTouchable.UntouchableForSeconds(collideRecoverTime));
 
         ajaxFX.TriggerCollidingFX(collideRecoverTime, collisionSide);
         lifeController.TakeLife(Mathf.Abs(collisionDamage));

@@ -13,7 +13,13 @@ public class Touchable : MonoBehaviour
             return canBeTouch;
         }
     }
-
+    public IEnumerator UntouchableForSeconds(float time = 0)
+    {
+        this.canBeTouch = false;
+        yield return new WaitForSeconds(time);
+        this.canBeTouch = true;
+    }
+    
     public IEnumerator CanBeTouchCoroutine(bool canBeTouch, float time = 0)
     {
         yield return new WaitForSeconds(time);
