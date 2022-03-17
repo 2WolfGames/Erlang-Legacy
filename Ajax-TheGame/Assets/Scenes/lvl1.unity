@@ -325,6 +325,25 @@ MonoBehaviour:
       Version: 1.6.6
   gizmoViewMode: 2
   showBehaviorDesignerGizmo: 1
+--- !u!1 &1465593884 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1465593884, guid: 922546fec765ee940bd2e94fba466e04,
+    type: 3}
+  m_PrefabInstance: {fileID: 469412938}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1465593885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1465593884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da8a59f0ca7800a428165eade88fc65f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  life: 100
 --- !u!1001 &2029360335692821769
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -396,11 +415,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Ajax
-      objectReference: {fileID: 0}
-    - target: {fileID: 4338606659711849381, guid: 3a92e288e57aab644a0656c959990934,
-        type: 3}
-      propertyPath: m_Layer
-      value: 13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a92e288e57aab644a0656c959990934, type: 3}

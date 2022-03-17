@@ -31,7 +31,6 @@ public class Enemy : MonoBehaviour, IEnemy
     {
         if (IsTouchingAjax(ajaxController.GetCollider()))
         {
-            Debug.Log("Touching...");
             CollidingWithAjax(ajaxController);
         }
     }
@@ -66,6 +65,12 @@ public class Enemy : MonoBehaviour, IEnemy
 
     public bool OnHit(float damage)
     {
+        if (lifeController == null)
+        {
+            Debug.Log("'LifeController' reference not attached");
+            return true;
+        }
+
         bool dead = lifeController.TakeLife(damage);
         if (dead)
         {

@@ -470,6 +470,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dash
       objectReference: {fileID: 0}
+    - target: {fileID: 4680161481662213464, guid: e48842cb521a61645a60ba718590ae0a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 4680161481662213465, guid: e48842cb521a61645a60ba718590ae0a,
         type: 3}
       propertyPath: m_RootOrder
