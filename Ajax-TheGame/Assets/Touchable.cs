@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Touchable : MonoBehaviour
 {
-    bool canBeTouch = true;
+    [SerializeField] bool canBeTouch = true;
 
     public bool CanBeTouch
     {
@@ -13,10 +13,10 @@ public class Touchable : MonoBehaviour
             return canBeTouch;
         }
     }
-
-    public IEnumerator CanBeTouchCoroutine(bool canBeTouch, float time = 0)
+    public IEnumerator UntouchableForSeconds(float time = 0)
     {
+        this.canBeTouch = false;
         yield return new WaitForSeconds(time);
-        this.canBeTouch = canBeTouch;
+        this.canBeTouch = true;
     }
 }
