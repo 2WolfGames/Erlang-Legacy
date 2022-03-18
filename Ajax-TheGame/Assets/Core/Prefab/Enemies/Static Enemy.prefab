@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 1465593886}
   - component: {fileID: 538651796044456064}
   - component: {fileID: 1465593887}
+  - component: {fileID: 1161697590}
   m_Layer: 11
-  m_Name: Body
+  m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -118,6 +119,19 @@ MonoBehaviour:
   whatIsAjax:
     serializedVersion: 2
     m_Bits: 512
+--- !u!114 &1161697590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1465593884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da8a59f0ca7800a428165eade88fc65f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  life: 100
 --- !u!1 &6166654859123775453
 GameObject:
   m_ObjectHideFlags: 0

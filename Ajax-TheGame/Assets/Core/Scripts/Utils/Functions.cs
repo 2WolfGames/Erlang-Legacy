@@ -5,7 +5,7 @@ using Utils.Enums;
 
 namespace Utils
 {
-    public class Functions
+    public static class Functions
     {
         // pre: --
         // post: compute if collision is made from front or backs
@@ -36,26 +36,6 @@ namespace Utils
             yield break;
         }
     }
-    namespace Enums
-    {
-        public enum Input
-        {
-            LEFT,
-            NONE,
-            RIGHT
-        }
-
-        public enum Facing
-        {
-            LEFT,
-            RIGHT
-        }
-
-        public enum CollisionSide
-        {
-            FRONT,
-            BACK
-        }
-    }
 
 }
+
