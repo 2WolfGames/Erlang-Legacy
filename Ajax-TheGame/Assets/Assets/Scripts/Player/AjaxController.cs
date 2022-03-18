@@ -19,6 +19,7 @@ public class AjaxController : MonoBehaviour
     Touchable ajaxTouchable;
     Orientation ajaxOrientation;
     AjaxAttack ajaxAttack;
+    static AjaxController instance;
 
     // Ajax can not move & can not fire any hability
     // freeze state change when Ajax was hit by some enemy
@@ -33,6 +34,18 @@ public class AjaxController : MonoBehaviour
         }
     }
 
+    public static AjaxController Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = FindObjectOfType<AjaxController>();
+            }
+            return instance;
+        }
+    }
+
     void Awake()
     {
         ajaxMovement = GetComponent<AjaxMovement>();
@@ -41,7 +54,6 @@ public class AjaxController : MonoBehaviour
         ajaxTouchable = GetComponent<Touchable>();
         ajaxOrientation = GetComponent<Orientation>();
         ajaxAttack = GetComponent<AjaxAttack>();
-
         ajaxCollider = GetComponent<Collider2D>();
     }
 
