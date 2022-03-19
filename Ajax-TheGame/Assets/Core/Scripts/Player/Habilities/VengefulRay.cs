@@ -5,11 +5,11 @@ using UnityEngine;
 public class VengefulRay : MonoBehaviour
 {
     [Header("Configurations")]
-    [Range(10, 1000)] [SerializeField] float damage = 100;
-    [Range(10, 100)] [SerializeField] float velocity = 10f;
+    [Range(10, 1000)][SerializeField] int damage = 100;
+    [Range(10, 100)][SerializeField] float velocity = 10f;
 
     [Tooltip("Delay for auto destroying")]
-    [Range(1, 100)] [SerializeField] float countDown = 10f;
+    [Range(1, 100)][SerializeField] float countDown = 10f;
 
     [Header("Others")]
     [SerializeField] Rigidbody2D ownRigidbody;

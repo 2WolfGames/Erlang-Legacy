@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class LifeController : MonoBehaviour
 {
-    [Range(10, 10000)][SerializeField] float life = 100;
+    [Range(1, 10000)][SerializeField] int life = 100;
 
-    public float Life
+    public int Life
     {
-        get { return this.life; }
+        get
+        {
+            return this.life;
+        }
     }
 
     /**
@@ -18,9 +21,14 @@ public class LifeController : MonoBehaviour
         at that moment represents who ever 
         use this class is dead
     */
-    public bool TakeLife(float life)
+    public bool TakeLife(int amount)
     {
-        this.life -= life;
+        this.life -= amount;
         return this.life <= 0;
+    }
+
+    public void AddLife(int amount)
+    {
+        this.life += amount;
     }
 }

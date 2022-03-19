@@ -13,21 +13,26 @@ public class GameController : MonoBehaviour
 
     int currentLifes;
 
-    void Start() {
-        currentLifes = (int)(ajax.Life/100);
-        lifeBar.SetUpLifes((int)(ajax.Life/100)); 
+    void Start()
+    {
+        currentLifes = ajax.Life;
+        lifeBar.SetUpLifes(currentLifes);
     }
 
-    void FixedUpdate(){
-        int updatelifes = (int)(ajax.Life/100);
-        if (updatelifes != currentLifes){
-            int x = Mathf.Abs(currentLifes-updatelifes);
-            if (currentLifes < updatelifes){
+    void FixedUpdate()
+    {
+        if (ajax.Life != currentLifes)
+        {
+            int x = Mathf.Abs(currentLifes - ajax.Life);
+            if (currentLifes < ajax.Life)
+            {
                 lifeBar.GainLifes(x);
-            } else{
+            }
+            else
+            {
                 lifeBar.LoseLifes(x);
             }
-            currentLifes = updatelifes;
+            currentLifes = ajax.Life;
         }
     }
 }

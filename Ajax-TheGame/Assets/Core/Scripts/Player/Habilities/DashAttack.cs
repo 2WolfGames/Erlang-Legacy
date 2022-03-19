@@ -11,11 +11,9 @@ public class DashAttack : MonoBehaviour
     [Header("Configurations")]
 
     [Tooltip("Amount of life to take to enemies")]
-    [Range(10, 1000)][SerializeField] float damage = 100;
-
+    [Range(10, 1000)][SerializeField] int damage = 100;
 
     HashSet<GameObject> distinct = new HashSet<GameObject>();
-
 
     public IEnumerator AttackCoroutine(float time)
     {

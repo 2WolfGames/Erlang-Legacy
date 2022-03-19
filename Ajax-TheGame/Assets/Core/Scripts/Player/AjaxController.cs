@@ -88,12 +88,19 @@ public class AjaxController : MonoBehaviour
     public void CollidingWith(float collisionDamage, CollisionSide collisionSide, Collider2D other = null)
     {
         if (!ajaxTouchable.CanBeTouch) return;
-
         StartCoroutine(ajaxTouchable.UntouchableForSeconds(collideRecoverTime));
         ajaxFX.TriggerCollidingFX(collideRecoverTime, collisionSide);
-        lifeController.TakeLife(Mathf.Abs(collisionDamage));
+    }
 
-        Debug.Log($"Current ajax life ${lifeController.Life}");
+    public void AddLife(int amount)
+    {
+        lifeController.AddLife(amount);
+    }
+
+    public void TakeLife(int amount)
+    {
+        Debug.Log($"Taking life... {amount}");
+        lifeController.TakeLife(amount);
     }
 
     public void Dash(float dashTime)

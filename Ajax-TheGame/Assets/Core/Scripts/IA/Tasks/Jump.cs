@@ -15,7 +15,6 @@ namespace IA.Task
         [SerializeField] float jumpTime = 1f;
 
         List<Tween> tweens = new List<Tween>();
-
         bool hasLanded = false;
 
         public override void OnStart()
@@ -24,7 +23,6 @@ namespace IA.Task
             tweens.Add(
                 DOVirtual.DelayedCall(delayedTime, StartJump, false)
             );
-            ajaxDetector.Hola();
         }
         public override TaskStatus OnUpdate()
         {

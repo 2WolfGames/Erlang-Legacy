@@ -9,7 +9,7 @@ public interface IEnemy
         thought to return true when ever the
         character was hit and die because of hit
     */
-    bool OnHit(float damage);
+    bool OnHit(int damage);
 
     void OnDie();
 
