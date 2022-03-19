@@ -225,8 +225,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpParticles: {fileID: 376985947717007119}
-  ajaxController: {fileID: 382464842943519906}
-  ajaxAnimator: {fileID: 2689394463106163807}
   dashTrailRenderer: {fileID: 2689394462605517854}
 --- !u!114 &4338606659265295182
 MonoBehaviour:

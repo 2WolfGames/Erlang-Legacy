@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-namespace Core.Player
+namespace Core.Character.Player
 {
     public class AbilityController : MonoBehaviour
     {
@@ -17,7 +17,7 @@ namespace Core.Player
         [Header("Linked")]
         [SerializeField] Transform vengefulRayTransform;
 
-        Controller controller;
+        BasePlayer basePlayer;
         float memoTimeBtwDash;
         float memoTimeBtwVfRay;
         bool isDashing;
@@ -27,7 +27,7 @@ namespace Core.Player
             memoTimeBtwDash = timeBtwDash;
             memoTimeBtwVfRay = timeBtwVfRay;
             isDashing = false;
-            controller = GetComponent<Controller>();
+            basePlayer = GetComponent<BasePlayer>();
         }
 
         void Update()
@@ -46,7 +46,7 @@ namespace Core.Player
             if (memoTimeBtwDash <= 0 && !isDashing && Input.GetButtonDown("Fire1"))
             {
                 ResetMemoTimeBtwDash();
-                controller.Dash(dashTime);
+                basePlayer.Dash(dashTime);
                 StartCoroutine(DashingCoroutine(dashTime, false));
             }
         }
@@ -61,7 +61,7 @@ namespace Core.Player
             if (memoTimeBtwVfRay <= 0 && !isDashing && Input.GetButtonDown("Fire2"))
             {
                 ResetMemoTimeBtwVfRay();
-                controller.Ray(vengefulRayTransform.position);
+                basePlayer.Ray(vengefulRayTransform.position);
             }
         }
 

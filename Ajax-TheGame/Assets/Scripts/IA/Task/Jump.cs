@@ -11,7 +11,7 @@ namespace Core.IA.Task
     {
         [SerializeField] float horizontalForce = 5f;
         [SerializeField] float jumpForce = 10f;
-        [SerializeField] float delayedTime = 1f;
+        [SerializeField] float delayedTime = 2f;
         [SerializeField] float jumpTime = 1f;
 
         List<Tween> tweens = new List<Tween>();
@@ -24,6 +24,7 @@ namespace Core.IA.Task
                 DOVirtual.DelayedCall(delayedTime, StartJump, false)
             );
         }
+
         public override TaskStatus OnUpdate()
         {
             return hasLanded ? TaskStatus.Success : TaskStatus.Running;
@@ -31,7 +32,9 @@ namespace Core.IA.Task
 
         private void StartJump()
         {
-            var direction = ajax.transform.position.x < transform.position.x ? -1 : 1;
+            if (body == null) return;
+
+            var direction = player.transform.position.x < transform.position.x ? -1 : 1;
             body.AddForce(new Vector2(horizontalForce * direction, jumpForce), ForceMode2D.Impulse);
             tweens.Add(
                 DOVirtual.DelayedCall(jumpTime, () => hasLanded = true, false)

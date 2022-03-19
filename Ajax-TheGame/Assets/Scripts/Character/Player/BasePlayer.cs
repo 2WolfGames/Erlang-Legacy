@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using Core.Shared;
 using Core.Shared.Enum;
-using Core.Player.Ability;
-using Core.Player.Util;
+using Core.Character.Player.Ability;
+using Core.Character.Player.Util;
 
-namespace Core.Player
+namespace Core.Character.Player
 {
-    public class Controller : MonoBehaviour
+    public class BasePlayer : BaseCharacter
     {
         [Header("Linked")]
         [SerializeField] Dash dashAttack;
@@ -20,11 +20,10 @@ namespace Core.Player
         Collider2D ajaxCollider;
         MovementController ajaxMovement;
         FXController ajaxFX;
-        LifeController lifeController;
         Touchable ajaxTouchable;
         Orientation ajaxOrientation;
         AbilityController abilityController;
-        static Controller instance;
+        static BasePlayer instance;
 
         // Ajax can not move & can not fire any hability
         // freeze state change when Ajax was hit by some enemy
@@ -39,23 +38,22 @@ namespace Core.Player
             }
         }
 
-        public static Controller Instance
+        public static BasePlayer Instance
         {
             get
             {
                 if (instance == null)
                 {
-                    instance = FindObjectOfType<Controller>();
+                    instance = FindObjectOfType<BasePlayer>();
                 }
                 return instance;
             }
         }
 
-        void Awake()
+        protected override void OnAwake()
         {
             ajaxMovement = GetComponent<MovementController>();
             ajaxFX = GetComponent<FXController>();
-            lifeController = GetComponent<LifeController>();
             ajaxTouchable = GetComponent<Touchable>();
             ajaxOrientation = GetComponent<Orientation>();
             abilityController = GetComponent<AbilityController>();
@@ -88,24 +86,16 @@ namespace Core.Player
             }
         }
 
-        // pre: --
-        // post: take damage from collision
-        public void CollidingWith(float collisionDamage, Side collisionSide, Collider2D other = null)
+        // pre: call in enemy trigger detection
+        // post: 
+        public void OnCollision(GameObject other, int damage = 1)
         {
             if (!ajaxTouchable.CanBeTouch) return;
+            Side side = Function.CollisionSide(transform, other.transform);
             StartCoroutine(ajaxTouchable.UntouchableForSeconds(collideRecoverTime));
-            ajaxFX.TriggerCollidingFX(collideRecoverTime, collisionSide);
-        }
+            ajaxFX.TriggerCollidingFX(collideRecoverTime, side);
 
-        public void AddLife(int amount)
-        {
-            lifeController.AddLife(amount);
-        }
-
-        public void TakeLife(int amount)
-        {
-            Debug.Log($"Taking life... {amount}");
-            lifeController.TakeLife(amount);
+            TakeLife(1); // takes one life
         }
 
         public void Dash(float dashTime)
@@ -170,6 +160,10 @@ namespace Core.Player
             return ajaxOrientation.LatestFacing;
         }
 
+        public override void Hit(int damage)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 
 }

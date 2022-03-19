@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-using Core.Player;
+using Core.Character.Player;
 
 public class InteractuableTrigger : MonoBehaviour
 {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 using Core.Shared.Enum;
 
-namespace Core.Player
+namespace Core.Character.Player
 {
     public class MovementController : MonoBehaviour
     {
@@ -26,13 +26,13 @@ namespace Core.Player
         bool impulsed = false;
         float gravityScale = 1;
         Vector2 velocityModifyer;
-        Controller controller;
+        BasePlayer basePlayer;
 
         void Awake()
         {
             rb = GetComponent<Rigidbody2D>();
             boxCollider2D = GetComponent<BoxCollider2D>();
-            controller = GetComponent<Controller>();
+            basePlayer = GetComponent<BasePlayer>();
             gravityScale = this.rb.gravityScale;
             velocityModifyer = Vector2.one;
         }
@@ -47,18 +47,18 @@ namespace Core.Player
         {
             if (dashing) return;
 
-            int xNormalized = controller.HorizontalInputNormalized();
+            int xNormalized = basePlayer.HorizontalInputNormalized();
             // when Ajax is at the air, we let him take certain control of it's movement
             float vx = impulsed ?
             rb.velocity.x + xNormalized * basicSpeed * 0.05f
             : xNormalized * basicSpeed * velocityModifyer.x;
 
             rb.velocity = new Vector2(vx, rb.velocity.y);
-            controller.Run(Mathf.Abs(rb.velocity.x) > Mathf.Epsilon);
+            basePlayer.Run(Mathf.Abs(rb.velocity.x) > Mathf.Epsilon);
 
             if (hasJumped && IsGrounded())
             {
-                controller.Land();
+                basePlayer.Land();
                 hasJumped = false;
             }
 
@@ -98,7 +98,7 @@ namespace Core.Player
                 isJumping = true;
                 jumpTimeCounter = holdJump;
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-                controller.Jump();
+                basePlayer.Jump();
             }
 
             if (Input.GetButton("Jump") && isJumping)

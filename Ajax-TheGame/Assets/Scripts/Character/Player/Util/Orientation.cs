@@ -4,7 +4,7 @@ using UnityEngine;
 
 using Core.Shared.Enum;
 
-namespace Core.Player.Util
+namespace Core.Character.Player.Util
 {
     public class Orientation : MonoBehaviour
     {

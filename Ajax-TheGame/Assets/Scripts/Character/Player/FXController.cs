@@ -5,7 +5,7 @@ using UnityEngine;
 
 using Core.Shared.Enum;
 
-namespace Core.Player
+namespace Core.Character.Player
 {
     public class FXController : MonoBehaviour
     {
@@ -13,7 +13,7 @@ namespace Core.Player
         [SerializeField] ParticleSystem jumpParticles;
         [SerializeField] TrailRenderer dashTrailRenderer;
 
-        Controller controller;
+        BasePlayer basePlayer;
         Animator animator;
 
         bool canFlip = true;
@@ -30,7 +30,7 @@ namespace Core.Player
 
         void Awake()
         {
-            controller = GetComponent<Controller>();
+            basePlayer = GetComponent<BasePlayer>();
             animator = gameObject.GetComponentInChildren<Animator>();
         }
 
@@ -47,7 +47,7 @@ namespace Core.Player
         void FlipListener()
         {
             if (!canFlip) return;
-            UpdateFlip(controller.FacingTo());
+            UpdateFlip(basePlayer.FacingTo());
         }
 
         // -1 left, 1 right 
@@ -112,7 +112,7 @@ namespace Core.Player
 
         // pre: coroutine should not be called previously
         // post: trigger blink animations for x seconds
-        //          blink animation is in 2nd layer controller
+        //          blink animation is in 2nd layer basePlayer
         private IEnumerator BlinkCoroutine(float seconds)
         {
             if (blinking) yield return null;

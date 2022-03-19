@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-namespace Core.Player.Util
+namespace Core.Character.Player.Util
 {
     public class Touchable : MonoBehaviour
     {

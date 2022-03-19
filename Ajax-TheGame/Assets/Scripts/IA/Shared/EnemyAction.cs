@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using BehaviorDesigner.Runtime.Tasks;
-using Core.Player;
+using Core.Character.Player;
 using UnityEngine;
 
 namespace Core.IA.Shared
@@ -10,13 +10,13 @@ namespace Core.IA.Shared
     {
         protected Rigidbody2D body;
         protected Animator animator;
-        protected Controller ajax;
+        protected BasePlayer player;
 
         public override void OnAwake()
         {
             body = GetComponent<Rigidbody2D>();
             animator = GetComponent<Animator>();
-            ajax = Controller.Instance;
+            player = BasePlayer.Instance;
         }
     }
 }
