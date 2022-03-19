@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using Core.Player;
+
 public class Springboard : MonoBehaviour
 {
     [Tooltip("Impulse force to add")]
@@ -31,7 +33,7 @@ public class Springboard : MonoBehaviour
     {
         if (compareTag != null && !other.CompareTag(compareTag)) return;
 
-        AjaxMovement ajaxMovement = other.GetComponent<AjaxMovement>();
+        MovementController ajaxMovement = other.GetComponent<MovementController>();
 
         var rad = (transform.localEulerAngles.z + desviation) * Mathf.Deg2Rad;
         var xForce = force * Mathf.Cos(rad);

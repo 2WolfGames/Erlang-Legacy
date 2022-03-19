@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using Core.Player;
+
 public class ArrangePlayerMovement : MonoBehaviour
 {
 
@@ -40,11 +42,11 @@ public class ArrangePlayerMovement : MonoBehaviour
         {
             if (ajaxDir < 0 && platformDir < 0 || ajaxDir > 0 && platformDir > 0)
             { //same dir
-                ajax.GetComponent<AjaxMovement>().ModifyVelocity(new Vector2(1 - velocityAlterator, 1));
+                ajax.GetComponent<MovementController>().ModifyVelocity(new Vector2(1 - velocityAlterator, 1));
             }
             else
             { // diferent dir
-                ajax.GetComponent<AjaxMovement>().ModifyVelocity(new Vector2(1 + velocityAlterator, 1));
+                ajax.GetComponent<MovementController>().ModifyVelocity(new Vector2(1 + velocityAlterator, 1));
             }
         }
     }

@@ -1,30 +1,32 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
+using Core.Shared;
+using Core.UI;
+using Core.UI.LifeBar;
 
 public class GameController : MonoBehaviour
 {
-    [SerializeField] LifeController ajax;
+    [SerializeField] LifeController playerLifeController;
     [SerializeField] UIPowerTimer dash;
     [SerializeField] UIPowerTimer ray;
-    [SerializeField] LifeBar lifeBar;
+    [SerializeField] LifeBarController lifeBar;
 
     int currentLifes;
 
     void Start()
     {
-        currentLifes = ajax.Life;
+        currentLifes = playerLifeController.Life;
         lifeBar.SetUpLifes(currentLifes);
     }
 
     void FixedUpdate()
     {
-        if (ajax.Life != currentLifes)
+        if (playerLifeController.Life != currentLifes)
         {
-            int x = Mathf.Abs(currentLifes - ajax.Life);
-            if (currentLifes < ajax.Life)
+            int x = Mathf.Abs(currentLifes - playerLifeController.Life);
+            if (currentLifes < playerLifeController.Life)
             {
                 lifeBar.GainLifes(x);
             }
@@ -32,7 +34,7 @@ public class GameController : MonoBehaviour
             {
                 lifeBar.LoseLifes(x);
             }
-            currentLifes = ajax.Life;
+            currentLifes = playerLifeController.Life;
         }
     }
 }

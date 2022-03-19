@@ -5710,7 +5710,6 @@ GameObject:
   - component: {fileID: 5677178874883653724}
   - component: {fileID: 5677178874883653727}
   - component: {fileID: 5677178874883653726}
-  - component: {fileID: 5677178874883653721}
   m_Layer: 5
   m_Name: HealthBar
   m_TagString: Untagged
@@ -5799,22 +5798,3 @@ MonoBehaviour:
   m_Spacing: {x: -10, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
---- !u!114 &5677178874883653721
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5677178874883653720}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba49d5242cf342e4c8293af9af9e318f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lifePrefab: {fileID: 7215511396644430785, guid: f8e3fcc301ae07b40a0d3c60f2db1c9b,
-    type: 3}
-  emptyLifePrefab: {fileID: 5312285443469036919, guid: df99377ed514f2444a784323fe541500,
-    type: 3}
-  lifeContainers: []
-  newLifeApearingParticleEffect: {fileID: 7441233369434815428, guid: 65377e6dafd6bc84abd8f4fb0ef12b20,
-    type: 3}

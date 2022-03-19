@@ -1,27 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Core.Utils.Enums;
 
-namespace Utils
+using Core.Shared.Enum;
+
+namespace Core.Shared
 {
-    public static class Functions
+    public static class Function
     {
         // pre: --
         // post: compute if collision is made from front or backs
         //      if collision is made in center, returns back and front randomly
-        public static CollisionSide ComputeCollisionSide(Transform origin, Transform other)
+        public static Side CollisionSide(Transform origin, Transform other)
         {
             Vector3 direction = origin.InverseTransformPoint(other.position);
             if (direction.x < 0)
             {
-                return CollisionSide.BACK;
+                return Side.Back;
             }
             else if (direction.x > 0)
             {
-                return CollisionSide.FRONT;
+                return Side.Front;
             }
-            return Random.Range(0, 2) == 0 ? CollisionSide.BACK : CollisionSide.FRONT;
+            return Random.Range(0, 2) == 0 ? Side.Back : Side.Front;
         }
 
         // pre: --

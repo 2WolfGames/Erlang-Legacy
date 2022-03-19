@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using Core.Player;
+
 public class InteractuableTrigger : MonoBehaviour
 {
     [SerializeField] float detectorTime = 0.2f;
@@ -32,7 +34,7 @@ public class InteractuableTrigger : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (triggerAnimation && other.GetComponent<AjaxFX>())
+        if (triggerAnimation && other.GetComponent<FXController>())
         {
             animator.SetTrigger(trigger);
             triggerAnimation = false;

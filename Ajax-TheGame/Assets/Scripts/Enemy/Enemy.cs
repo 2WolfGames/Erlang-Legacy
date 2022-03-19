@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-using Enums = Core.Utils.Enums;
+using Core.Shared.Enum;
+using Core.Shared;
 
+using Core.Player;
 namespace Enemy
 {
     public class Enemy : MonoBehaviour, IEnemy
@@ -13,8 +15,7 @@ namespace Enemy
         [Range(1, 1000)][SerializeField] int basicDamage = 10;
         [Range(0.0f, 0.5f)][SerializeField] float deadDelay = 0.1f;
         [SerializeField] LayerMask whatIsAjax;
-
-        AjaxController ajaxController;
+        Controller ajaxController;
         Collider2D collider2d;
         LifeController lifeController;
 
@@ -26,7 +27,7 @@ namespace Enemy
 
         void Start()
         {
-            ajaxController = FindObjectOfType<AjaxController>();
+            ajaxController = FindObjectOfType<Controller>();
         }
 
         void FixedUpdate()
@@ -52,9 +53,9 @@ namespace Enemy
         //      to report a collision with `this`
         //      computes which side of Ajax `LEFT`
         //      or `RIGHT` is colliding with `this`
-        protected void CollidingWithAjax(AjaxController ajax)
+        protected void CollidingWithAjax(Controller ajax)
         {
-            Enums.CollisionSide side = Utils.Functions.ComputeCollisionSide(ajax.transform, transform);
+            Side side = Function.CollisionSide(ajax.transform, transform);
             if (ajax.CanBeTouch())
                 ajax.CollidingWith(collisionDamage, side);
         }

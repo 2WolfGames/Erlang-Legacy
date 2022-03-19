@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using Core.Player;
+
 namespace Core.Effect.Health
 {
     // thought to add to elements in game
@@ -12,7 +14,7 @@ namespace Core.Effect.Health
         [SerializeField] int amount = 1;
         public override void Apply(GameObject target)
         {
-            var controller = target.GetComponent<AjaxController>();
+            var controller = target.GetComponent<Controller>();
             controller.AddLife(amount);
         }
     }

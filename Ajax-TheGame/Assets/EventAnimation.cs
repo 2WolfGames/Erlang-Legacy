@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using Core.Player;
+
 public class EventAnimation : MonoBehaviour
 {
-    AjaxController ajaxController;
+    Controller ajaxController;
 
     void Start()
     {
-        ajaxController = FindObjectOfType<AjaxController>();
+        ajaxController = FindObjectOfType<Controller>();
     }
 
     // desc: change freeze state to true
