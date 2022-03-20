@@ -6,7 +6,7 @@ namespace Core.Character.Enemy
 {
     public class BaseEnemy : BaseCharacter
     {
-        public override void Hit(int damage)
+        public override void Hit(int damage, GameObject other = null, float recoverTime = 0)
         {
             TakeLife(damage);
         }

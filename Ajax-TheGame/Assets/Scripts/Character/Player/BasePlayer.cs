@@ -91,11 +91,15 @@ namespace Core.Character.Player
         public void OnCollision(GameObject other, int damage = 1)
         {
             if (!ajaxTouchable.CanBeTouch) return;
-            Side side = Function.CollisionSide(transform, other.transform);
-            StartCoroutine(ajaxTouchable.UntouchableForSeconds(collideRecoverTime));
-            ajaxFX.TriggerCollidingFX(collideRecoverTime, side);
+            Hit(damage, other, collideRecoverTime);
+        }
 
-            TakeLife(1); // takes one life
+        public override void Hit(int damage, GameObject other = null, float recoverTime = 0)
+        {
+            Side side = Function.CollisionSide(transform, other.transform);
+            StartCoroutine(ajaxTouchable.UntouchableForSeconds(recoverTime));
+            ajaxFX.TriggerCollidingFX(recoverTime, side);
+            TakeLife(damage); // takes one life
         }
 
         public void Dash(float dashTime)
@@ -158,11 +162,6 @@ namespace Core.Character.Player
         public PlayerFacing FacingTo()
         {
             return ajaxOrientation.LatestFacing;
-        }
-
-        public override void Hit(int damage)
-        {
-            throw new System.NotImplementedException();
         }
     }
 
