@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2481893904365391552
+--- !u!1 &3343502316894440237
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,69 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2481893904365391553}
-  - component: {fileID: 2481893904365391566}
-  - component: {fileID: 2481893904365391567}
-  m_Layer: 14
-  m_Name: Collision Detector
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2481893904365391553
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2481893904365391552}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4799441900246469772}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!70 &2481893904365391566
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2481893904365391552}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.0041456223, y: -0.05531752}
-  m_Size: {x: 1.2378864, y: 1.7350328}
-  m_Direction: 0
---- !u!114 &2481893904365391567
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2481893904365391552}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb8754acbbd52814fa7d02cbb56d19df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthTakerEffect: {fileID: 11400000, guid: 861cc10b656828c4093f61d0fcca5fee, type: 2}
---- !u!1 &2481893905242718039
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2481893905242718036}
-  - component: {fileID: 2481893905242718037}
+  - component: {fileID: 3343502316894440238}
+  - component: {fileID: 3343502316894440239}
   m_Layer: 11
   m_Name: Render
   m_TagString: Untagged
@@ -78,27 +17,27 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2481893905242718036
+--- !u!4 &3343502316894440238
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2481893905242718039}
+  m_GameObject: {fileID: 3343502316894440237}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.04, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 4799441900246469772}
+  m_Father: {fileID: 5660178129668520182}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &2481893905242718037
+--- !u!212 &3343502316894440239
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2481893905242718039}
+  m_GameObject: {fileID: 3343502316894440237}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -143,7 +82,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &4799441900246469771
+--- !u!1 &3343502317074742132
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -151,43 +90,197 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4799441900246469772}
-  - component: {fileID: 4799441900246469769}
-  - component: {fileID: 403511234}
-  - component: {fileID: 403511235}
-  - component: {fileID: 337306485}
-  - component: {fileID: 2913250566319841686}
+  - component: {fileID: 3343502317074742133}
   m_Layer: 11
+  m_Name: Limit A
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3343502317074742133
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3343502317074742132}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.88, y: -1.52, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3343502317226793827}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3343502317226793826
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3343502317226793827}
+  m_Layer: 0
   m_Name: Bunny
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4799441900246469772
+--- !u!4 &3343502317226793827
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4799441900246469771}
+  m_GameObject: {fileID: 3343502317226793826}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.15, y: -0.84, z: 0}
+  m_LocalPosition: {x: 15.09, y: -0.91, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 2481893905242718036}
-  - {fileID: 2481893904365391553}
+  - {fileID: 5660178129668520182}
+  - {fileID: 3343502317074742133}
+  - {fileID: 3343502317303978965}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &4799441900246469769
+--- !u!1 &3343502317303978964
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3343502317303978965}
+  m_Layer: 11
+  m_Name: Limit B
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3343502317303978965
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3343502317303978964}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.48, y: -1.67, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3343502317226793827}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3343502318164949690
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3343502318164949691}
+  - component: {fileID: 3343502318164949684}
+  - component: {fileID: 3343502318164949685}
+  m_Layer: 14
+  m_Name: Collision Detector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3343502318164949691
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3343502318164949690}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5660178129668520182}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!70 &3343502318164949684
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3343502318164949690}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.0041456223, y: -0.05531752}
+  m_Size: {x: 1.2378864, y: 1.7350328}
+  m_Direction: 0
+--- !u!114 &3343502318164949685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3343502318164949690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb8754acbbd52814fa7d02cbb56d19df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthTakerEffect: {fileID: 11400000, guid: 861cc10b656828c4093f61d0fcca5fee, type: 2}
+--- !u!1 &5660178129668520177
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5660178129668520182}
+  - component: {fileID: 5660178129668520179}
+  - component: {fileID: 871434432866657208}
+  - component: {fileID: 871434432866657209}
+  - component: {fileID: 871434432800118543}
+  - component: {fileID: 6983534504856697774}
+  m_Layer: 11
+  m_Name: Bunny IA
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5660178129668520182
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5660178129668520177}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 3343502316894440238}
+  - {fileID: 3343502318164949691}
+  m_Father: {fileID: 3343502317226793827}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &5660178129668520179
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4799441900246469771}
+  m_GameObject: {fileID: 5660178129668520177}
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -201,38 +294,38 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &403511234
+--- !u!114 &871434432866657208
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4799441900246469771}
+  m_GameObject: {fileID: 5660178129668520177}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e9dbff4a9c0d044bb696177586b982b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &403511235
+--- !u!114 &871434432866657209
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4799441900246469771}
+  m_GameObject: {fileID: 5660178129668520177}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: da8a59f0ca7800a428165eade88fc65f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   life: 100
---- !u!61 &337306485
+--- !u!61 &871434432800118543
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4799441900246469771}
+  m_GameObject: {fileID: 5660178129668520177}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -252,13 +345,13 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.2709675, y: 1.9212918}
   m_EdgeRadius: 0
---- !u!114 &2913250566319841686
+--- !u!114 &6983534504856697774
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4799441900246469771}
+  m_GameObject: {fileID: 5660178129668520177}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8d7b55c7ecdb49a4a89fa5e6f9022861, type: 3}
@@ -281,21 +374,25 @@ MonoBehaviour:
       - BehaviorDesigner.Runtime.Tasks.Repeater
       - BehaviorDesigner.Runtime.Tasks.Sequence
       - Core.IA.Task.Guard
-      - BehaviorDesigner.Runtime.Tasks.Log
-      parentIndex: ffffffff00000000010000000200000002000000
-      startIndex: 000000000a000000200000002c0000003b000000
+      - BehaviorDesigner.Runtime.Tasks.Wait
+      - Core.IA.Task.Guard
+      - BehaviorDesigner.Runtime.Tasks.Wait
+      parentIndex: ffffffff000000000100000002000000020000000200000002000000
+      startIndex: 000000000a000000200000002c000000390000005300000060000000
       variableStartIndex: 
       JSONSerialization: 
       fieldSerializationData:
         typeName: []
-        fieldNameHash: 2944782b951203e811c37978c4a37522ae07a096e44d14616fd219c3a5f3b63149269a1caac4f9012944782b951203e811c37978c4a37522ae07a096e44d14616fd219c3a5f3b63149269a1caac4f9014beeac3844ad028f9598ff8edd02bee3fb502af7f40f804d45fb7c4de78c12330db220d106717627575c7327f9ed080d2944782b951203e811c37978c4a37522ae07a096e44d14616fd219c3a5f3b63149269a1caac4f9018690b4b290adcd7b2944782b951203e811c37978c4a37522ae07a096e44d14616fd219c3a5f3b63149269a1caac4f901d233bf27d333bf2760050e2818166666acb630352944782b951203e811c37978c4a37522ae07a096e44d14616fd219c3a5f3b63149269a1caac4f90151a40e3b4a6364919b4e61913473910fa12eb9359aed0e8cebd80b8c8d6aa171a0bc94d6997bea2cea66e72c8cf87c12
-        startIndex: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f0000001000000011000000120000001300000014000000140000001500000016000000170000001700000018000000190000001a0000001a0000001b0000001c0000001d0000001e0000001f00000020000000210000002200000023000000240000002500000026000000270000002700000028000000290000002a0000002b0000002c0000002d0000002e0000002f000000300000003100000032000000330000003400000035000000360000003700000038000000390000003a0000003b0000003c0000003d0000003e0000003f00000040000000410000004100000042000000430000004400000044000000450000004600000047000000470000004800000049000000
-        dataPosition: 0000000004000000090000000a0000000b00000013000000130000001400000015000000190000001d00000021000000290000002a0000002b00000033000000330000003400000035000000390000003d0000005f0000005f00000063000000860000008600000087000000aa000000aa000000ab000000af000000b7000000b8000000b9000000c1000000c1000000c2000000c3000000c7000000cb000000cf000000d3000000d8000000d9000000da000000e2000000e2000000e3000000e4000000e8000000ec000000f0000000f4000000f8000000fc000000000100000401000007010000080100000901000011010000110100001201000013010000170100001b0100004001000040010000470100006a0100006a0100006b0100008e0100008e010000
+        fieldNameHash: 2944782b951203e811c37978c4a37522ae07a096e44d14616fd219c3a5f3b63149269a1caac4f9012944782b951203e811c37978c4a37522ae07a096e44d14616fd219c3a5f3b63149269a1caac4f9014beeac3844ad028f9598ff8edd02bee3fb502af7f40f804d45fb7c4de78c12330db220d106717627575c7327f9ed080d2944782b951203e811c37978c4a37522ae07a096e44d14616fd219c3a5f3b63149269a1caac4f9018690b4b290adcd7b2944782b951203e811c37978c4a37522ae07a096e44d14616fd219c3a5f3b63149269a1caac4f90119772cd66eaa5bd6d78bdfd92944782b951203e811c37978c4a37522ae07a096e44d14616fd219c3a5f3b63149269a1caac4f901598f7293524ec8e9a339c5e973825867956c6dd48e2bc32adf16c02a81a8551003ac852ffc6adb854d56d8851d9f6b0315ab852f0e6adb855f55d8852f9e6b032944782b951203e811c37978c4a37522ae07a096e44d14616fd219c3a5f3b63149269a1caac4f90119772cd66eaa5bd6d78bdfd92944782b951203e811c37978c4a37522ae07a096e44d14616fd219c3a5f3b63149269a1caac4f901598f7293524ec8e9a339c5e973825867956c6dd48e2bc32adf16c02a81a8551003ac852ffc6adb854d56d8851d9f6b0315ab852f0e6adb855f55d8852f9e6b03
+        startIndex: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f0000001000000011000000120000001300000014000000140000001500000016000000170000001700000018000000190000001a0000001a0000001b0000001c0000001d0000001e0000001f00000020000000210000002200000023000000240000002500000026000000270000002700000028000000290000002a0000002b0000002c0000002d0000002e0000002f000000300000003100000032000000330000003400000035000000360000003700000038000000390000003a0000003b0000003c0000003d0000003e0000003f0000003f000000400000004100000042000000420000004300000044000000450000004500000046000000470000004800000048000000490000004a0000004b0000004c0000004d0000004e0000004f000000500000005100000052000000530000005400000055000000560000005700000058000000590000005a0000005b0000005c0000005d0000005e0000005f000000600000006100000062000000620000006300000064000000650000006500000066000000670000006800000068000000690000006a0000006b0000006b0000006c0000006d000000
+        dataPosition: 0000000004000000090000000a0000000b00000013000000130000001400000015000000190000001d00000021000000290000002a0000002b00000033000000330000003400000035000000390000003d0000005f0000005f00000063000000860000008600000087000000aa000000aa000000ab000000af000000b7000000b8000000b9000000c1000000c1000000c2000000c3000000c7000000cb000000cf000000d3000000d8000000d9000000da000000e2000000e2000000e3000000e4000000e8000000ec000000f0000000f4000000f8000000fc0000000001000001010000020100000a0100000a0100000b0100000c010000100100001401000038010000380100003c0100005f0100005f01000060010000840100008401000088010000ac010000ac010000b0010000b4010000b9010000ba010000bb010000c3010000c3010000c4010000c5010000c9010000cd010000d1010000d5010000d9010000dd010000e1010000e2010000e3010000eb010000eb010000ec010000ed010000f1010000f501000019020000190200001d0200004002000040020000410200006502000065020000690200008d0200008d020000
         unityObjects:
-        - {fileID: 0}
-        - {fileID: 0}
-        byteData: 00000000456e7472790100008098430000d6420000000000000000000001000000526570656174657201000000a0c00000ea42000000000000000000004265686176696f7244657369676e65722e52756e74696d652e536861726564496e74000000004265686176696f7244657369676e65722e52756e74696d652e536861726564426f6f6c014265686176696f7244657369676e65722e52756e74696d652e536861726564426f6f6c010200000053657175656e63650100000000c00000f84200000000000000000000000000000300000047756172640100bde880c2000004430000000000000000000000000000010000000000803f0000803f00020000040000004c6f670100c3e87642d245fd42000000000000000000004265686176696f7244657369676e65722e52756e74696d652e536861726564537472696e674f7574736964654265686176696f7244657369676e65722e52756e74696d652e536861726564426f6f6c004265686176696f7244657369676e65722e52756e74696d652e536861726564426f6f6c00
-        byteDataArray: 00000000456e7472790100008098430000d6420000000000000000000001000000526570656174657201000000a0c00000ea42000000000000000000004265686176696f7244657369676e65722e52756e74696d652e536861726564496e74000000004265686176696f7244657369676e65722e52756e74696d652e536861726564426f6f6c014265686176696f7244657369676e65722e52756e74696d652e536861726564426f6f6c010200000053657175656e63650100000000c00000f84200000000000000000000000000000300000047756172640100bde880c2000004430000000000000000000000000000010000000000803f0000803f00020000040000004c6f670100c3e87642d245fd42000000000000000000004265686176696f7244657369676e65722e52756e74696d652e536861726564537472696e674f7574736964654265686176696f7244657369676e65722e52756e74696d652e536861726564426f6f6c004265686176696f7244657369676e65722e52756e74696d652e536861726564426f6f6c00
+        - {fileID: 3343502317303978965}
+        - {fileID: 3343502317074742133}
+        - {fileID: 3343502317074742133}
+        - {fileID: 3343502317303978965}
+        byteData: 00000000456e7472790100169ada4341f911c3000000000000000000000100000052657065617465720100f45b7ec12b0d1843000000000000000000004265686176696f7244657369676e65722e52756e74696d652e536861726564496e74000000004265686176696f7244657369676e65722e52756e74696d652e536861726564426f6f6c014265686176696f7244657369676e65722e52756e74696d652e536861726564426f6f6c010200000053657175656e63650100a86832c2841ce74200000000000000000000000000000300000047756172640100934c39c3aeaa3a430000000000000000000000000000010000000000804004000000576169740100d12285c2488e3943000000000000000000004265686176696f7244657369676e65722e52756e74696d652e536861726564466c6f61740000003f4265686176696f7244657369676e65722e52756e74696d652e536861726564426f6f6c004265686176696f7244657369676e65722e52756e74696d652e536861726564466c6f61740000803f4265686176696f7244657369676e65722e52756e74696d652e536861726564466c6f61740000803f0500000047756172640100ba9f8342386b414300000000000000000000020000000300000000008040060000005761697401002c344f435c484243000000000000000000004265686176696f7244657369676e65722e52756e74696d652e536861726564466c6f61740000003f4265686176696f7244657369676e65722e52756e74696d652e536861726564426f6f6c004265686176696f7244657369676e65722e52756e74696d652e536861726564466c6f61740000803f4265686176696f7244657369676e65722e52756e74696d652e536861726564466c6f61740000803f
+        byteDataArray: 
       Version: 1.6.6
   gizmoViewMode: 2
   showBehaviorDesignerGizmo: 1

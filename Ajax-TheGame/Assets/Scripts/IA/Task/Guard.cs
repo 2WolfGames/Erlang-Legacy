@@ -9,64 +9,44 @@ namespace Core.IA.Task
 {
     public class Guard : EnemyAction
     {
-        [SerializeField] Transform limitA, limitB;
+        [SerializeField] Transform limit, other;
         [SerializeField] float period = 10f;
-        [SerializeField] float distanceDetection = 2f;
-        [SerializeField] LayerMask whatIsPlayer;
 
-        Transform target;
-        bool picked;
+        bool moving, touchesLimit = false;
 
         public override void OnStart()
         {
-            picked = false;
+            _Guard();
         }
-
         public override TaskStatus OnUpdate()
         {
-            if (CanSeePlayer()) return TaskStatus.Success;
-            Move();
-            return TaskStatus.Running;
+            return touchesLimit ? TaskStatus.Success : TaskStatus.Running;
         }
 
-        private void Move()
+        public override void OnEnd()
         {
-            if (picked) return;
+            moving = false;
+            touchesLimit = false;
+        }
 
-            picked = true;
-
-            if (target == null) PickSideRandomly();
-            else PickOtherSide();
-
+        private void _Guard()
+        {
+            if (moving) return;
+            moving = true;
             transform
-                .DOMoveX(target.position.x, period / 2)
+                .DOMoveX(limit.position.x, ComputeDoMoveXDuration())
                 .SetEase(Ease.Linear)
-                .OnComplete(() => picked = false);
+                .OnComplete(() => touchesLimit = true);
         }
 
-        private void PickSideRandomly()
+        // pre: one limit picked
+        private float ComputeDoMoveXDuration()
         {
-            int x = Random.Range(0, 2);
-            target = x == 0 ? limitA : limitB;
-        }
-
-        private void PickOtherSide()
-        {
-            if (target.position.x >= limitB.position.x)
-            {
-                target = limitA;
-            }
-            else if (target.position.x <= limitA.position.x)
-            {
-                target = limitB;
-            }
-        }
-
-        private bool CanSeePlayer()
-        {
-            Debug.DrawRay(transform.position, Vector2.right, Color.green);
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right, distanceDetection, whatIsPlayer);
-            return hit.collider;
+            // IA should move period/2
+            float distance = Mathf.Abs(limit.position.x - transform.position.x);
+            float completeDistance = Mathf.Abs(limit.position.x - other.position.x);
+            if (completeDistance == 0) return period / 2;
+            else return (distance / completeDistance) * (period / 2);
         }
     }
 }
