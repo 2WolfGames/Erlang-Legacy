@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Core.IA.Shared
 {
-    public class EnemyConditional : Conditional
+    public class EnemyConditional : BehaviorDesigner.Runtime.Tasks.Conditional
     {
         protected Rigidbody2D body;
         protected Animator animator;
