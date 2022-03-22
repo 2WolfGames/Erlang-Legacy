@@ -7,7 +7,7 @@ using DG.Tweening;
 
 namespace Core.IA.Task
 {
-    public class Guard : EnemyAction
+    public class Guard : Action
     {
         [SerializeField] Transform limit, other;
         [SerializeField] float period = 10f;
