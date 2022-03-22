@@ -16,6 +16,7 @@ namespace Core.IA.Task
 
         public override void OnStart()
         {
+            DOTween.Init(true, true, LogBehaviour.ErrorsOnly);
             _Guard();
         }
         public override TaskStatus OnUpdate()

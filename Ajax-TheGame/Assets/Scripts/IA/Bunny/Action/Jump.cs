@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using BehaviorDesigner.Runtime.Tasks;
 using UnityEngine;
 using DG.Tweening;
-using Core.IA.Shared;
+using Core.IA.Shared.Action;
 
-namespace Core.IA.Task
+namespace Core.IA.Bunny.Action
 {
     public class Jump : EnemyAction
     {

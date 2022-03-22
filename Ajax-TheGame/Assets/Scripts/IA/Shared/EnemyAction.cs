@@ -4,9 +4,9 @@ using BehaviorDesigner.Runtime.Tasks;
 using Core.Character.Player;
 using UnityEngine;
 
-namespace Core.IA.Shared
+namespace Core.IA.Shared.Action
 {
-    public class EnemyAction : Action
+    public class EnemyAction : BehaviorDesigner.Runtime.Tasks.Action
     {
         protected Rigidbody2D body;
         protected Animator animator;
