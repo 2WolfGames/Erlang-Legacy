@@ -5,9 +5,9 @@ using BehaviorDesigner.Runtime.Tasks;
 using UnityEngine;
 using DG.Tweening;
 
-namespace Core.IA.Task
+namespace Core.IA.Shared.Task
 {
-    public class Guard : Action
+    public class Guard : BehaviorDesigner.Runtime.Tasks.Action
     {
         [SerializeField] Transform limit, other;
         [SerializeField] float period = 10f;
