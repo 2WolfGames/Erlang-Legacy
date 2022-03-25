@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using BehaviorDesigner.Runtime.Tasks;
+using Core.Character.Player;
 using UnityEngine;
 
 namespace Core.IA.Shared
@@ -9,6 +10,7 @@ namespace Core.IA.Shared
     {
         protected Rigidbody2D body;
         protected Animator animator;
+        protected BasePlayer player;
 
         public override void OnAwake()
         {
