@@ -5,7 +5,7 @@ using UnityEngine;
 
 using Core.IA.Shared.Action;
 using BehaviorDesigner.Runtime.Tasks;
-using BehaviorDesigner.Runtime;
+
 
 namespace Core.IA.Worm.Action
 {
@@ -14,9 +14,12 @@ namespace Core.IA.Worm.Action
         [SerializeField] Transform target;
         [SerializeField] float delay = 0;
         [SerializeField] float speed = 0.5f;
+        bool complete;
+        Tween transitionTween;
 
         public override void OnStart()
         {
+            complete = false;
             DOVirtual.DelayedCall(delay, () =>
             {
                 _Raise();
@@ -25,13 +28,21 @@ namespace Core.IA.Worm.Action
 
         public override TaskStatus OnUpdate()
         {
-            Debug.Log("Raise");
-            return TaskStatus.Running;
+            return complete ? TaskStatus.Success : TaskStatus.Running;
         }
 
         private void _Raise()
         {
-            transform.DOMoveY(target.position.y, speed, false).SetEase(Ease.InQuad);
+            transitionTween = transform
+                .DOMoveY(target.position.y, speed, false)
+                .SetEase(Ease.InQuad)
+                .OnComplete(() => complete = true);
+        }
+
+        public override void OnEnd()
+        {
+            // kills transition at end of cicle
+            transitionTween?.Kill();
         }
     }
 }

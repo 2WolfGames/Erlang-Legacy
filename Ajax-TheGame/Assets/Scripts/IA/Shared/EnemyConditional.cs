@@ -16,6 +16,7 @@ namespace Core.IA.Shared
         {
             body = GetComponent<Rigidbody2D>();
             animator = GetComponent<Animator>();
+            player = BasePlayer.Instance;
         }
     }
 }
