@@ -1,0 +1,42 @@
+{"skeleton":{"images":"images"},
+"bones":[{"name":"root"}],
+"slots":[
+	{"name":"BracEsquerra","bone":"root","attachment":"BracEsquerra"},
+	{"name":"MaEsquerra","bone":"root","attachment":"MaEsquerra"},
+	{"name":"CuixaEsquerra","bone":"root","attachment":"CuixaEsquerra"},
+	{"name":"CamaEsquerra","bone":"root","attachment":"CamaEsquerra"},
+	{"name":"CamaDreta","bone":"root","attachment":"CamaDreta"},
+	{"name":"CuixaDreta","bone":"root","attachment":"CuixaDreta"},
+	{"name":"Pelvis","bone":"root","attachment":"Pelvis"},
+	{"name":"Cabell","bone":"root","attachment":"Cabell"},
+	{"name":"Cos","bone":"root","attachment":"Cos"},
+	{"name":"Cap","bone":"root","attachment":"Cap"},
+	{"name":"Parpelles","bone":"root","attachment":"Parpelles"},
+	{"name":"CellaDreta","bone":"root","attachment":"CellaDreta"},
+	{"name":"CellaEsquerra","bone":"root","attachment":"CellaEsquerra"},
+	{"name":"Flequillo","bone":"root","attachment":"Flequillo"},
+	{"name":"BracDret","bone":"root","attachment":"BracDret"},
+	{"name":"MaDreta","bone":"root","attachment":"MaDreta"}
+],
+"skins":{
+	"default":{
+		"MaDreta":{"MaDreta":{"x":-47.01,"y":22.78,"width":172,"height":76}},
+		"BracDret":{"BracDret":{"x":-94.98,"y":76.61,"width":88,"height":96}},
+		"Flequillo":{"Flequillo":{"x":-47.09,"y":228.74,"width":66,"height":63}},
+		"CellaEsquerra":{"CellaEsquerra":{"x":11.40,"y":210.52,"width":22,"height":12}},
+		"CellaDreta":{"CellaDreta":{"x":-26.99,"y":210.22,"width":22,"height":12}},
+		"Parpelles":{"Parpelles":{"x":-9.75,"y":220.82,"width":63,"height":27}},
+		"Cap":{"Cap":{"x":-26.40,"y":199.08,"width":150,"height":108}},
+		"Cos":{"Cos":{"x":-20.49,"y":70.50,"width":151,"height":117}},
+		"Cabell":{"Cabell":{"x":-24.30,"y":200.16,"width":141,"height":141}},
+		"Pelvis":{"Pelvis":{"x":-18.49,"y":-1.00,"width":101,"height":76}},
+		"CuixaDreta":{"CuixaDreta":{"x":-52.70,"y":-49.46,"width":40,"height":116}},
+		"CamaDreta":{"CamaDreta":{"x":-38.99,"y":-159.26,"width":78,"height":163}},
+		"CamaEsquerra":{"CamaEsquerra":{"x":15.30,"y":-49.61,"width":40,"height":116}},
+		"CuixaEsquerra":{"CuixaEsquerra":{"x":29.01,"y":-159.26,"width":78,"height":163}},
+		"MaEsquerra":{"MaEsquerra":{"x":140.60,"y":87.72,"width":163,"height":109}},
+		"BracEsquerra":{"BracEsquerra":{"x":48.30,"y":77.48,"width":88,"height":96}}
+	}
+},
+"animations":{"animation":{}}
+}

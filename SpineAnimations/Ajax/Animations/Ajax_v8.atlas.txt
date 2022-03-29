@@ -1,0 +1,118 @@
+
+Ajax_v8.png
+size: 618,269
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+BracDret
+  rotate: false
+  xy: 101, 5
+  size: 90, 96
+  orig: 90, 96
+  offset: 0, 0
+  index: -1
+BracEsquerra
+  rotate: true
+  xy: 2, 2
+  size: 89, 97
+  orig: 89, 97
+  offset: 0, 0
+  index: -1
+Cabell
+  rotate: false
+  xy: 474, 124
+  size: 142, 143
+  orig: 142, 143
+  offset: 0, 0
+  index: -1
+CamaDreta
+  rotate: false
+  xy: 80, 103
+  size: 79, 164
+  orig: 79, 164
+  offset: 0, 0
+  index: -1
+CamaEsquerra
+  rotate: false
+  xy: 516, 5
+  size: 41, 117
+  orig: 41, 117
+  offset: 0, 0
+  index: -1
+Cap
+  rotate: false
+  xy: 363, 4
+  size: 151, 109
+  orig: 151, 109
+  offset: 0, 0
+  index: -1
+CellaDreta
+  rotate: false
+  xy: 193, 9
+  size: 24, 13
+  orig: 24, 13
+  offset: 0, 0
+  index: -1
+CellaEsquerra
+  rotate: false
+  xy: 219, 9
+  size: 23, 13
+  orig: 23, 13
+  offset: 0, 0
+  index: -1
+Cos
+  rotate: true
+  xy: 354, 115
+  size: 152, 118
+  orig: 152, 118
+  offset: 0, 0
+  index: -1
+CuixaDreta
+  rotate: false
+  xy: 559, 5
+  size: 41, 117
+  orig: 41, 117
+  offset: 0, 0
+  index: -1
+CuixaEsquerra
+  rotate: false
+  xy: 161, 103
+  size: 79, 164
+  orig: 79, 164
+  offset: 0, 0
+  index: -1
+Flequillo
+  rotate: true
+  xy: 297, 36
+  size: 66, 64
+  orig: 66, 64
+  offset: 0, 0
+  index: -1
+MaDreta
+  rotate: true
+  xy: 2, 93
+  size: 174, 76
+  orig: 174, 76
+  offset: 0, 0
+  index: -1
+MaEsquerra
+  rotate: true
+  xy: 242, 104
+  size: 163, 110
+  orig: 163, 110
+  offset: 0, 0
+  index: -1
+Parpelles
+  rotate: false
+  xy: 297, 6
+  size: 64, 28
+  orig: 64, 28
+  offset: 0, 0
+  index: -1
+Pelvis
+  rotate: false
+  xy: 193, 24
+  size: 102, 77
+  orig: 102, 77
+  offset: 0, 0
+  index: -1
