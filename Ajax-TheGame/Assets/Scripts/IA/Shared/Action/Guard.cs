@@ -9,45 +9,27 @@ namespace Core.IA.Shared.Task
 {
     public class Guard : BehaviorDesigner.Runtime.Tasks.Action
     {
-        [SerializeField] Transform limit, other;
-        [SerializeField] float period = 10f;
+        [SerializeField] Transform target;
+        [SerializeField] bool horizontal = true;
+        [SerializeField] float speed;
 
-        bool moving, touchesLimit = false;
+        Vector2 limit;
 
-        public override void OnStart()
-        {
-            DOTween.Init(true, true, LogBehaviour.ErrorsOnly);
-            _Guard();
-        }
+
         public override TaskStatus OnUpdate()
         {
-            return touchesLimit ? TaskStatus.Success : TaskStatus.Running;
+            float step = speed * Time.deltaTime;
+            transform.position = Vector2.MoveTowards(transform.position, ComputeLimit(), step);
+            float distance = Vector2.Distance(transform.position, ComputeLimit());
+            return distance <= Mathf.Epsilon ? TaskStatus.Success : TaskStatus.Running;
         }
 
-        public override void OnEnd()
+        private Vector2 ComputeLimit()
         {
-            moving = false;
-            touchesLimit = false;
+            if (horizontal)
+                return new Vector2(target.position.x, transform.position.y);
+            else return target.position;
         }
 
-        private void _Guard()
-        {
-            if (moving) return;
-            moving = true;
-            transform
-                .DOMoveX(limit.position.x, ComputeDoMoveXDuration())
-                .SetEase(Ease.Linear)
-                .OnComplete(() => touchesLimit = true);
-        }
-
-        // pre: one limit picked
-        private float ComputeDoMoveXDuration()
-        {
-            // IA should move period/2
-            float distance = Mathf.Abs(limit.position.x - transform.position.x);
-            float completeDistance = Mathf.Abs(limit.position.x - other.position.x);
-            if (completeDistance == 0) return period / 2;
-            else return (distance / completeDistance) * (period / 2);
-        }
     }
 }

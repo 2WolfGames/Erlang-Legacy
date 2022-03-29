@@ -17,10 +17,7 @@ public class Jump : EnemyAction
 
     public override void OnStart()
     {
-        // Debug.Log(Mathf.Exp(Vector2.Distance(transform.position, player.transform.position) / 4));
-
         _Jump();
-
     }
 
     public override TaskStatus OnUpdate()
