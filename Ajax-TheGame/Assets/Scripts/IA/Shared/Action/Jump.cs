@@ -10,8 +10,6 @@ public class Jump : EnemyAction
     [SerializeField] float xPower, yPower;
     [SerializeField] float xMaxPower, yMaxPower;
     [SerializeField] bool randomizePower;
-    [SerializeField] LayerMask whatIsGround;
-
 
     float count = 0.05f;
 
@@ -23,13 +21,8 @@ public class Jump : EnemyAction
     public override TaskStatus OnUpdate()
     {
         if (count > 0) count -= Time.deltaTime;
-        if (count <= 0 && Grounded()) return TaskStatus.Success;
+        if (count <= 0 && IsGrounded()) return TaskStatus.Success;
         return TaskStatus.Running;
-    }
-
-    private bool Grounded()
-    {
-        return body.velocity.y == 0 && body.IsTouchingLayers(whatIsGround);
     }
 
     private void _Jump()
