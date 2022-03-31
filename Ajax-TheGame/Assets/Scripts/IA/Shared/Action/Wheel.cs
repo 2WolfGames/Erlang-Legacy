@@ -29,7 +29,6 @@ public class Wheel : EnemyAction
         ori = facePlayer ? face : (clockwise ? -1 : 1);
     }
 
-
     public override TaskStatus OnUpdate()
     {
         float gap = target.rotation.z - zAngle;
