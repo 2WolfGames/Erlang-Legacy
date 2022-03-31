@@ -10,7 +10,6 @@ namespace Core.IA.Shared.Action
     public class JumpOverPlayer : EnemyAction
     {
         [SerializeField][Range(1f, 10f)] float height = 4f;
-        [SerializeField][Range(0.01f, 0.5f)] float threshold = 0.05f;
         [SerializeField][Range(0.1f, 3f)] float soft = 1f;
 
         Vector2 start;
@@ -36,6 +35,5 @@ namespace Core.IA.Shared.Action
         {
             return t >= 0.05f && IsGrounded();
         }
-
     }
 }

@@ -8,7 +8,7 @@ using UnityEngine;
 public class Wheel : EnemyAction
 {
     [SerializeField] bool facePlayer;
-    [SerializeField] bool clockwise;
+    [SerializeField] bool rotateOverScale;
     [SerializeField] bool infinite;
     [SerializeField] float angularSpeed;
     [SerializeField] Transform target;
@@ -16,7 +16,7 @@ public class Wheel : EnemyAction
 
     float zAngle = 0f;
     float step = 0f;
-    float ori = 1f;
+    [SerializeField] float ori = 1f;
 
     public override void OnStart()
     {
@@ -25,18 +25,32 @@ public class Wheel : EnemyAction
             target = GetComponent<Transform>();
         }
         zAngle = target.rotation.z;
-        var face = transform.position.x > player.transform.position.x ? 1 : -1;
-        ori = facePlayer ? face : (clockwise ? -1 : 1);
+        ComputeRotationDirection();
     }
 
     public override TaskStatus OnUpdate()
     {
         float gap = target.rotation.z - zAngle;
         if (!infinite && gap >= phi) return TaskStatus.Success;
-        var face = transform.position.x > player.transform.position.x ? -1 : 1;
+        ComputeRotationDirection();
         step = angularSpeed * ori * Time.deltaTime;
         WheelStep(step);
         return TaskStatus.Running;
+    }
+
+    private void ComputeRotationDirection()
+    {
+        var face = transform.position.x > player.transform.position.x ? 1 : -1;
+
+        if (target.gameObject == gameObject)
+        {
+            var xScale = transform.localScale.x;
+            ori = facePlayer ? face : (rotateOverScale ? xScale : 1);
+        }
+        else
+        {
+            ori = facePlayer ? face : -1;
+        }
     }
 
     private void WheelStep(float step)

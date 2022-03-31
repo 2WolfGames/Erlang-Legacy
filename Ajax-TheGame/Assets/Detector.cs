@@ -26,7 +26,6 @@ public class Detector : MonoBehaviour
         }
     }
 
-
     void OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag(player.gameObject.tag))
