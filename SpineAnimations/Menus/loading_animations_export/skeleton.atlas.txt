@@ -1,0 +1,13 @@
+skeleton.png
+size:1348,568
+filter:Linear,Linear
+pma:true
+Menus-02
+bounds:1004,182,342,384
+Menus-03
+bounds:1004,94,157,86
+offsets:0,0,157,87
+Menus-04
+bounds:1004,49,53,43
+Menus-33
+bounds:2,2,1000,564
