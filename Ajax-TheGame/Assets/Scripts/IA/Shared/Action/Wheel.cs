@@ -13,6 +13,7 @@ public class Wheel : EnemyAction
     [SerializeField] float angularSpeed;
     [SerializeField] Transform target;
     [SerializeField] float phi;
+    [SerializeField] bool computeRotatinOverTime;
 
     float zAngle = 0f;
     float step = 0f;
@@ -32,7 +33,7 @@ public class Wheel : EnemyAction
     {
         float gap = target.rotation.z - zAngle;
         if (!infinite && gap >= phi) return TaskStatus.Success;
-        ComputeRotationDirection();
+        if (computeRotatinOverTime) ComputeRotationDirection();
         step = angularSpeed * ori * Time.deltaTime;
         WheelStep(step);
         return TaskStatus.Running;
