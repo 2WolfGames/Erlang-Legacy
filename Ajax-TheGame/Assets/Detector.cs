@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Core.Character.Player;
 using UnityEngine;
 
+// may use collide view task
 public class Detector : MonoBehaviour
 {
     BasePlayer player;

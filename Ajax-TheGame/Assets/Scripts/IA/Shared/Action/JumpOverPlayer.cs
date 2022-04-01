@@ -39,6 +39,15 @@ namespace Core.IA.Shared.Action
             return t >= 0.05f && IsGrounded();
         }
 
+        // desc: because of parabole movement
+        //      normal ground detection does not work
+        //      when ever touches ground it'is need to stop
+        //      to avoid get inside ground
+        protected override bool IsGrounded()
+        {
+            return body.IsTouchingLayers(whatIsGround);
+        }
+
         // pre: 
         // post: compute fall point betwen point A & B
         //      if B is inside A + Vector.left * maxRange and A + Vector.right * maxRange

@@ -8,7 +8,7 @@ namespace Core.IA.Shared.Action
 {
     public class EnemyAction : BehaviorDesigner.Runtime.Tasks.Action
     {
-        [SerializeField] LayerMask whatIsGround;
+        [SerializeField] protected LayerMask whatIsGround;
         protected Rigidbody2D body;
         protected Animator animator;
         protected BasePlayer player;
