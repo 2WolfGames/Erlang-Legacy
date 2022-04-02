@@ -9,7 +9,7 @@ using BehaviorDesigner.Runtime.Tasks;
 
 namespace Core.IA.Worm.Action
 {
-    public class Raise : EnemyAction
+    public class Raise : BehaviorDesigner.Runtime.Tasks.Action
     {
         [SerializeField] Transform target;
         [SerializeField] float delay = 0;
