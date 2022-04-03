@@ -13,7 +13,7 @@ namespace Core.IA.Worm.Action
     {
         [SerializeField] Transform target;
         [SerializeField] float delay = 0;
-        [SerializeField] float speed = 0.5f;
+        [SerializeField] float raiseTime = 0.5f;
         bool complete;
         Tween transitionTween;
 
@@ -34,7 +34,7 @@ namespace Core.IA.Worm.Action
         private void _Raise()
         {
             transitionTween = transform
-                .DOMoveY(target.position.y, speed, false)
+                .DOMoveY(target.position.y, raiseTime, false)
                 .SetEase(Ease.InQuad)
                 .OnComplete(() => complete = true);
         }
