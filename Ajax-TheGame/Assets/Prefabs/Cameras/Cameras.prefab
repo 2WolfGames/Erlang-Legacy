@@ -39,6 +39,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9117715257027125277}
     m_Modifications:
+    - target: {fileID: 7851640825699706208, guid: bca5fe2289708e646a9a68516fba643f,
+        type: 3}
+      propertyPath: orthographic size
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7851640825699706220, guid: bca5fe2289708e646a9a68516fba643f,
         type: 3}
       propertyPath: m_Name
@@ -52,12 +57,12 @@ PrefabInstance:
     - target: {fileID: 7851640825699706223, guid: bca5fe2289708e646a9a68516fba643f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.893407
+      value: 33.923405
       objectReference: {fileID: 0}
     - target: {fileID: 7851640825699706223, guid: bca5fe2289708e646a9a68516fba643f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.5000002
+      value: -6.3200006
       objectReference: {fileID: 0}
     - target: {fileID: 7851640825699706223, guid: bca5fe2289708e646a9a68516fba643f,
         type: 3}
@@ -122,12 +127,12 @@ PrefabInstance:
     - target: {fileID: 3946733162426378132, guid: 5c95c31281c158947a0178c58b18e41a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.893407
+      value: 33.923405
       objectReference: {fileID: 0}
     - target: {fileID: 3946733162426378132, guid: 5c95c31281c158947a0178c58b18e41a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.5000002
+      value: -6.3200006
       objectReference: {fileID: 0}
     - target: {fileID: 3946733162426378132, guid: 5c95c31281c158947a0178c58b18e41a,
         type: 3}
@@ -178,6 +183,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Follow
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3946733162426378134, guid: 5c95c31281c158947a0178c58b18e41a,
+        type: 3}
+      propertyPath: m_Lens.OrthographicSize
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c95c31281c158947a0178c58b18e41a, type: 3}
