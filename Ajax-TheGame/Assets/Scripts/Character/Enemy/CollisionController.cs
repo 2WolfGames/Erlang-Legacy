@@ -4,7 +4,7 @@ using UnityEngine;
 using Core.Effect;
 using Core.Character.Player;
 
-namespace Enemy
+namespace Core.Enemy
 {
     public class CollisionController : MonoBehaviour
     {
