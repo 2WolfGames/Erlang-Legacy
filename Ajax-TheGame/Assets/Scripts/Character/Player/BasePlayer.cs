@@ -17,6 +17,8 @@ namespace Core.Character.Player
         [Header("Configurations")]
         [SerializeField] float collideRecoverTime = 1.5f;
 
+        [SerializeField] Transform feets;
+
         Collider2D ajaxCollider;
         MovementController ajaxMovement;
         FXController ajaxFX;
@@ -35,6 +37,14 @@ namespace Core.Character.Player
             get
             {
                 return freeze;
+            }
+        }
+
+        public Transform Feets
+        {
+            get
+            {
+                return this.feets;
             }
         }
 
@@ -163,7 +173,11 @@ namespace Core.Character.Player
         {
             return ajaxOrientation.LatestFacing;
         }
-    }
 
+        public void OnDrawGizmosSelected()
+        {
+            Gizmos.DrawWireSphere(feets.position, 0.1f);
+        }
+    }
 }
 

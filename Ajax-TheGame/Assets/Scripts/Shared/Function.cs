@@ -37,13 +37,39 @@ namespace Core.Shared
             yield break;
         }
 
-        
-        //pre: --
+        // pre: density >= 1
+        // post: throw a burst of rays, if any of this rays touches layer mask returns true, otherwise false
+        public static bool LookAround(in Transform origin, in Vector2 dir, float distance, float visualAngle, float density, LayerMask mask)
+        {
+            float phi = visualAngle / density;
+            Function.Look(origin.position, dir, distance, mask);
+            int i = 1;
+            bool stop = false;
+            while (i < density && !stop)
+            {
+                var r1 = Function.Look(origin.position, Quaternion.Euler(0, 0, (visualAngle - phi * i) / 2) * dir, distance, mask);
+                var r2 = Function.Look(origin.position, Quaternion.Euler(0, 0, -(visualAngle - phi * i) / 2) * dir, distance, mask);
+                i += 2;
+                stop = r1 || r2;
+            }
+            return stop;
+        }
+
+        // pre: pairs > 0
+        public static bool Look(in Vector2 origin, in Vector2 dir, float distance, LayerMask mask)
+        {
+            var ray = Physics2D.Raycast(origin, dir, distance, mask);
+            Debug.DrawRay(origin, dir * distance, Color.red, 0.1f);
+            return ray.collider;
+        }
+
+	//pre: --
         //post: called in FixedUpdate, given a game object and its rotation makes object rotate over time.
         public static void RotateGameObject(Transform GameObjectTransform, float rotationAmount)
         {
             GameObjectTransform.Rotate(Vector3.forward * rotationAmount * Time.fixedDeltaTime);
         }
+
     }
 
 }
