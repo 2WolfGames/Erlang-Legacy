@@ -8,8 +8,6 @@ namespace Enemy
 {
     public class CollisionController : MonoBehaviour
     {
-        [SerializeField] HealthTaker healthTakerEffect;
-
         Collider2D myCollider;
         Collider2D playerCollider;
 
