@@ -10,7 +10,6 @@ public class Burst : Action
     [SerializeField] GameObject prefab;
     [SerializeField] float timeToDeleteInstances;
 
-    int nInstanciated;
     int nInstances;
     List<GameObject> instances;
     [SerializeField] bool cleanedInstances = false;
@@ -18,7 +17,6 @@ public class Burst : Action
     public override void OnStart()
     {
         instances = new List<GameObject>();
-        nInstanciated = 0;
         nInstances = burstPoints.Count;
         cleanedInstances = false;
         InstanceThemAll();
