@@ -8,27 +8,35 @@ public class LoadingMenu : MonoBehaviour
 {
     [SerializeField] SkeletonGraphic skeletonGraphic;
     [SerializeField] CanvasGroup canvasGroup;
-    AsyncOperation loadingOperation;
+    public static string sceneName = "lvl1";
+    AsyncOperation asyncOperation;
+
+    private void Awake() {
+        canvasGroup.alpha = 0;
+    }
 
     void Start()
     {
-        canvasGroup.alpha = 0;
         skeletonGraphic.AnimationState.SetAnimation(1,"animation",true);
-        StartCoroutine(FadeLoadingScreen(2));
-        StartCoroutine(nextScene("lvl1"));
+        StartCoroutine(LightLoadingScreen(2));
+        StartCoroutine(LoadNextScene());
+    }
+    private IEnumerator LoadNextScene(){
+        yield return new WaitForSeconds(3);
+        Application.backgroundLoadingPriority = ThreadPriority.Low;
+        asyncOperation = SceneManager.LoadSceneAsync(sceneName,LoadSceneMode.Single);
         
     }
 
     private void Update() {
-        if (loadingOperation != null){
-            if (loadingOperation.progress > 0.9f){
-                
+        if (asyncOperation != null){
+            if (asyncOperation.progress > 0.9f){
+                StartCoroutine(FadeLoadingScreen(2));
             }
-            Debug.Log(loadingOperation.progress);
         }
-    } 
+    }
 
-    IEnumerator FadeLoadingScreen(float duration)
+    IEnumerator LightLoadingScreen(float duration)
     {
         float startValue = canvasGroup.alpha;
         float time = 0;
@@ -41,9 +49,18 @@ public class LoadingMenu : MonoBehaviour
         canvasGroup.alpha = 1;
     }
 
-    IEnumerator nextScene(string sceneName){
-        yield return new WaitForSeconds(20);
-        loadingOperation = SceneManager.LoadSceneAsync(sceneName);
+    IEnumerator FadeLoadingScreen(float duration)
+    {
+        float startValue = canvasGroup.alpha;
+        float time = 0;
+        while (time < duration)
+        {
+            canvasGroup.alpha = Mathf.Lerp(startValue, 0, time / duration);
+            time += Time.deltaTime;
+            yield return null;
+        }
+        canvasGroup.alpha = 0;
     }
+
 
 }
