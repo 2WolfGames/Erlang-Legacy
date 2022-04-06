@@ -11,7 +11,7 @@ public class InGameMenuController : MonoBehaviour
     [SerializeField] GameObject AjaxDiaryPrefab;
     SkeletonGraphic skeletonGraphic;
     GameObject currentAjaxDiary;
-    int diaryPage;
+    //int diaryPage;
     int option;
 
 
@@ -93,7 +93,7 @@ public class InGameMenuController : MonoBehaviour
     }
 
     private void OpenMenu(){
-        diaryPage = 1;
+        //diaryPage = 1;
         option = 0;
         currentAjaxDiary = Instantiate(AjaxDiaryPrefab,pauseMenu.transform);
         skeletonGraphic = currentAjaxDiary.GetComponent<SkeletonGraphic>();
