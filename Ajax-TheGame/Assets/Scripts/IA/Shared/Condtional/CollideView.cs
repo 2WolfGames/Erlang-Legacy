@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using BehaviorDesigner.Runtime.Tasks;
-using Core.IA.Shared;
+﻿using BehaviorDesigner.Runtime.Tasks;
 using UnityEngine;
 
 // description:
@@ -15,7 +12,7 @@ namespace Core.IA.Shared.Conditional
 
         public override TaskStatus OnUpdate()
         {
-            var touching = collider.IsTouching(player.GetCollider());
+            var touching = player ? collider.IsTouching(player.GetComponent<Collider2D>()) : false;
             return touching ? TaskStatus.Success : TaskStatus.Failure;
         }
     }

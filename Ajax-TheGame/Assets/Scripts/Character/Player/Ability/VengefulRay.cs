@@ -56,7 +56,7 @@ namespace Core.Character.Player.Ability
         void OnTriggerEnter2D(Collider2D other)
         {
             var enemy = other.gameObject.GetComponentInParent<BaseEnemy>();
-            enemy?.Hit(damage);
+            enemy?.Hurt(damage);
         }
     }
 }

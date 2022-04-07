@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// todo: transform this class
 namespace Core.Character.Enemy
 {
     public class BaseEnemy : BaseCharacter
     {
-        public override void Hit(int damage, GameObject other = null, float recoverTime = 0)
+        public override void Hurt(int damage, GameObject other = null)
         {
             TakeLife(damage);
         }
