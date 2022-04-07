@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
+using Core.Shared;
 
 namespace Core.UI.LifeBar
 {
@@ -65,7 +66,7 @@ namespace Core.UI.LifeBar
         //      if shadowActive, shadow ligths up and fades  
         private void FixedUpdate()
         {
-            RotateShadow();
+            Function.RotateGameObject(shadowImage.transform,cRotationAmount);
 
             if (shake)
             {
@@ -236,14 +237,6 @@ namespace Core.UI.LifeBar
                     }
                 });
             }
-        }
-
-        //pre: --
-        //post: rotates shadow img
-        private void RotateShadow()
-        {
-            //rotation
-            shadowImage.transform.Rotate(Vector3.forward * cRotationAmount * Time.deltaTime);
         }
 
         #endregion

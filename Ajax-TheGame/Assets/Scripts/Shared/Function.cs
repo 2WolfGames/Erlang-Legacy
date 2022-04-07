@@ -62,6 +62,14 @@ namespace Core.Shared
             Debug.DrawRay(origin, dir * distance, Color.red, 0.1f);
             return ray.collider;
         }
+
+	//pre: --
+        //post: called in FixedUpdate, given a game object and its rotation makes object rotate over time.
+        public static void RotateGameObject(Transform GameObjectTransform, float rotationAmount)
+        {
+            GameObjectTransform.Rotate(Vector3.forward * rotationAmount * Time.fixedDeltaTime);
+        }
+
     }
 
 }
