@@ -56,14 +56,19 @@ namespace Core.Shared
         }
 
         // pre: pairs > 0
-        public static bool Look(in Vector2 origin, in Vector2 dir, float distance, LayerMask mask)
+        public static bool Look(in Vector2 origin, in Vector2 dir, float distance, LayerMask mask, float drawTime = 0.2f)
         {
             var ray = Physics2D.Raycast(origin, dir, distance, mask);
-            Debug.DrawRay(origin, dir * distance, Color.red, 0.1f);
+            Debug.DrawRay(origin, dir * distance, Color.red, drawTime);
             return ray.collider;
         }
 
-	//pre: --
+        public static float VerticalExtentsDimention(Collider2D collider)
+        {
+            return collider.bounds.extents.y;
+        }
+
+        //pre: --
         //post: called in FixedUpdate, given a game object and its rotation makes object rotate over time.
         public static void RotateGameObject(Transform GameObjectTransform, float rotationAmount)
         {
