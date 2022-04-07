@@ -4,60 +4,24 @@ using UnityEngine;
 
 namespace Core.Combat.IA.Action
 {
-    public class Wheel : EnemyAction
+    public class Wheel : BehaviorDesigner.Runtime.Tasks.Action
     {
-        [SerializeField] bool facePlayer;
-        [SerializeField] bool rotateOverScale;
-        [SerializeField] bool infinite;
+        // description:
+        //      thought to make rotate enemy render 
         [SerializeField] float angularSpeed;
         [SerializeField] Transform target;
-        [SerializeField] float phi;
-        [SerializeField] bool computeRotatinOverTime;
-
-        float zAngle = 0f;
-        float step = 0f;
-        [SerializeField] float ori = 1f;
-
-        public override void OnStart()
-        {
-            if (target == null)
-            {
-                target = GetComponent<Transform>();
-            }
-            zAngle = target.rotation.z;
-            ComputeRotationDirection();
-        }
 
         public override TaskStatus OnUpdate()
         {
-            float gap = target.rotation.z - zAngle;
-            if (!infinite && gap >= phi) return TaskStatus.Success;
-            if (computeRotatinOverTime) ComputeRotationDirection();
-            step = angularSpeed * ori * Time.deltaTime;
-            WheelStep(step);
+            if (target == null) return TaskStatus.Failure;
+            WheelStep(angularSpeed * Time.deltaTime);
             return TaskStatus.Running;
-        }
-
-        private void ComputeRotationDirection()
-        {
-            var face = transform.position.x > player.transform.position.x ? 1 : -1;
-
-            if (target.gameObject == gameObject)
-            {
-                var xScale = transform.localScale.x;
-                ori = facePlayer ? face : (rotateOverScale ? xScale : 1);
-            }
-            else
-            {
-                ori = facePlayer ? face : -1;
-            }
         }
 
         private void WheelStep(float step)
         {
             target.Rotate(new Vector3(0, 0, step), Space.Self);
         }
-
     }
 }
 
