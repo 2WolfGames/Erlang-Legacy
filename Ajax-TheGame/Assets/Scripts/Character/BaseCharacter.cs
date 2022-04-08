@@ -31,7 +31,7 @@ namespace Core.Character
             lifeController.AddLife(amount);
         }
 
-        public abstract void Hit(int damage, GameObject other = null, float recoverTime = 0f);
+        public abstract void Hurt(int damage, GameObject other = null);
 
         protected virtual void Die()
         {

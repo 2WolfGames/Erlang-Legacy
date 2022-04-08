@@ -37,7 +37,7 @@ namespace Core.Character.Player.Ability
             if (enemy == null) return;
             if (distinct.Contains(enemy.gameObject)) return;
             distinct.Add(enemy.gameObject);
-            enemy.Hit(damage);
+            enemy.Hurt(damage);
         }
     }
 }
