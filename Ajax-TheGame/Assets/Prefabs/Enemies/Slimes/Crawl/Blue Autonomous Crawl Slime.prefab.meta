@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Ajax-TheGame/Assets/Prefabs/Enemies/Slimes/Crawl/Blue Autonomous Crawl Slime.prefab.meta
 guid: 65d664973c5b5e44a86d8e35e60f905e
+========
+guid: c9bec1df1eb43224197a559144ec93ad
+>>>>>>>> master:Ajax-TheGame/Assets/Prefabs/Enemies/Slimes/Wheeler/Blue Slime Wheeler.prefab.meta
 PrefabImporter:
   externalObjects: {}
   userData: 
