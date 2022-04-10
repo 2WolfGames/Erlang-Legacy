@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Core.Shared;
 using Core.Shared.Enum;
 using Core.Character.Player.Ability;
@@ -111,7 +109,6 @@ namespace Core.Character.Player
 
         public override void Hurt(int damage, GameObject other)
         {
-            Debug.Log(CanBeHit);
             Side side = Function.CollisionSide(transform, other.transform);
             StartCoroutine(ajaxTouchable.UntouchableForSeconds(recoverTime));
             ajaxFX.TriggerCollidingFX(recoverTime, side);

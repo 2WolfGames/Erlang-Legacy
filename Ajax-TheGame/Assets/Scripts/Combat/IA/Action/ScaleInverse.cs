@@ -5,7 +5,7 @@
 //      scales current x object scale for it's inverse
 namespace Core.Combat.IA.Action
 {
-    public class Scale : BehaviorDesigner.Runtime.Tasks.Action
+    public class ScaleInverse : BehaviorDesigner.Runtime.Tasks.Action
     {
         public override TaskStatus OnUpdate()
         {

@@ -74,7 +74,6 @@ namespace Core.Shared
         {
             GameObjectTransform.Rotate(Vector3.forward * rotationAmount * Time.fixedDeltaTime);
         }
-
     }
 
 }
