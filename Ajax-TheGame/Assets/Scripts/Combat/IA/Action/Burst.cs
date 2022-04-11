@@ -12,18 +12,20 @@ namespace Core.Combat.IA.Action
 {
     public class Burst : BehaviorDesigner.Runtime.Tasks.Action
     {
-        [SerializeField] List<Transform> burstPoints;
+        [SerializeField] GameObject pointsContainer;
         [SerializeField] GameObject prefab;
         [SerializeField] float timeToDeleteInstances;
 
         int nInstances;
         List<GameObject> instances;
+        List<Transform> points;
         [SerializeField] bool cleanedInstances = false;
 
         public override void OnStart()
         {
             instances = new List<GameObject>();
-            nInstances = burstPoints.Count;
+            points = new List<Transform>(pointsContainer.GetComponentsInChildren<Transform>());
+            nInstances = points.Count;
             cleanedInstances = false;
             InstanceThemAll();
             StartCoroutine(CleanInstances(timeToDeleteInstances));
@@ -36,7 +38,7 @@ namespace Core.Combat.IA.Action
 
         private void InstanceThemAll()
         {
-            foreach (var point in burstPoints)
+            foreach (var point in points)
             {
                 var ins = Object.Instantiate(prefab, point.position, Quaternion.identity);
                 instances.Add(ins);
