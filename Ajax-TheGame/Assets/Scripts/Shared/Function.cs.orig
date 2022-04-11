@@ -63,17 +63,25 @@ namespace Core.Shared
             return ray.collider;
         }
 
+<<<<<<< HEAD
+	//pre: --
+=======
         public static float VerticalExtentsDimention(Collider2D collider)
         {
             return collider.bounds.extents.y;
         }
 
         //pre: --
+>>>>>>> master
         //post: called in FixedUpdate, given a game object and its rotation makes object rotate over time.
         public static void RotateGameObject(Transform GameObjectTransform, float rotationAmount)
         {
             GameObjectTransform.Rotate(Vector3.forward * rotationAmount * Time.fixedDeltaTime);
         }
+<<<<<<< HEAD
+
+=======
+>>>>>>> master
     }
 
 }

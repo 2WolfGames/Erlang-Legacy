@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Core.Shared;
 using Core.Shared.Enum;
 using Core.Character.Player.Ability;
@@ -15,7 +13,7 @@ namespace Core.Character.Player
         [SerializeField] VengefulRay vengefulRay;
 
         [Header("Configurations")]
-        [SerializeField] float collideRecoverTime = 1.5f;
+        [SerializeField] float recoverTime = 1.5f;
 
         [SerializeField] Transform feets;
 
@@ -38,6 +36,11 @@ namespace Core.Character.Player
             {
                 return freeze;
             }
+        }
+
+        public bool CanBeHit
+        {
+            get { return ajaxTouchable.CanBeTouch; }
         }
 
         public Transform Feets
@@ -101,10 +104,17 @@ namespace Core.Character.Player
         public void OnCollision(GameObject other, int damage = 1)
         {
             if (!ajaxTouchable.CanBeTouch) return;
-            Hit(damage, other, collideRecoverTime);
+            Hurt(damage, other);
         }
 
-        public override void Hit(int damage, GameObject other = null, float recoverTime = 0)
+        private void OnTriggerEnter2D(Collider2D other) {
+            if (!ajaxTouchable.CanBeTouch) return;
+            if (other.gameObject.layer == LayerMask.NameToLayer("Water")){
+                Debug.Log("yes");
+            }
+        }
+
+        public override void Hurt(int damage, GameObject other)
         {
             Side side = Function.CollisionSide(transform, other.transform);
             StartCoroutine(ajaxTouchable.UntouchableForSeconds(recoverTime));
@@ -156,11 +166,6 @@ namespace Core.Character.Player
         public Collider2D GetCollider()
         {
             return ajaxCollider;
-        }
-
-        public bool CanBeTouch()
-        {
-            return ajaxTouchable.CanBeTouch;
         }
 
         // -1 | 0 | 1

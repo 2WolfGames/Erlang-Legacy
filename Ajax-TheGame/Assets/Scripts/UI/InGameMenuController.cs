@@ -33,14 +33,22 @@ public class InGameMenuController : MonoBehaviour
 
     private void ResumeGame(){
         CloseMenu();
-        Time.timeScale = 1; 
+        Time.timeScale = 1;
         gamePaused = false;
+        StartCoroutine(EnablePlayer());
         pauseMenu.SetActive(false);
+    }
+    
+    //Is necessary to wait till the end of frame for not affect the player movment with the key events of the menu.
+    IEnumerator EnablePlayer(){ 
+        yield return new WaitForEndOfFrame();
+        FindObjectOfType<Core.Character.Player.BasePlayer>().SetFreeze(false);
     }
 
     private void PauseGame(){
         pauseMenu.SetActive(true);
         OpenMenu();
+        FindObjectOfType<Core.Character.Player.BasePlayer>().SetFreeze(true);
         Time.timeScale = 0; //we stop game 
         gamePaused = true;
     }
