@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 using Core.Shared;
 using Core.Shared.Enum;
 using Core.Character.Player.Ability;
@@ -6,15 +7,16 @@ using Core.Character.Player.Util;
 
 namespace Core.Character.Player
 {
-    public class BasePlayer : BaseCharacter
+    public class BasePlayer : BaseCharacter 
     {
+        const float cUntochableWhenHazard = 0.5f;
+
         [Header("Linked")]
         [SerializeField] Dash dashAttack;
         [SerializeField] VengefulRay vengefulRay;
 
         [Header("Configurations")]
         [SerializeField] float recoverTime = 1.5f;
-
         [SerializeField] Transform feets;
 
         Collider2D ajaxCollider;
@@ -110,8 +112,15 @@ namespace Core.Character.Player
         private void OnTriggerEnter2D(Collider2D other) {
             if (!ajaxTouchable.CanBeTouch) return;
             if (other.gameObject.layer == LayerMask.NameToLayer("Water")){
-                Debug.Log("yes");
+                StartCoroutine(ajaxTouchable.UntouchableForSeconds(cUntochableWhenHazard));
+                StartCoroutine(ResetSavePoint(other.gameObject));
             }
+        }
+
+        private IEnumerator ResetSavePoint(GameObject gameObjectWater){
+            yield return new WaitForSeconds(cUntochableWhenHazard);
+            Hurt(1, gameObjectWater);
+            FindObjectOfType<GameSessionController>().ResetCurrentPoint();
         }
 
         public override void Hurt(int damage, GameObject other)

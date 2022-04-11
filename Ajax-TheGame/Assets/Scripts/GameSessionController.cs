@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameSessionController : MonoBehaviour
 {
+    GameObject ajax;
     Transform savePoint;
     Transform currentPoint;
 
@@ -15,10 +16,21 @@ public class GameSessionController : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
     }
+    private void Start() {
+        ajax = FindObjectOfType<Core.Character.Player.BasePlayer>().gameObject;
+    }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void ResetCurrentPoint(){
+        ajax.transform.position = currentPoint.position;
+    }
+
+    public void SavePlayerCurrentPoint(Transform currentPointTransform){
+        currentPoint = currentPointTransform;
     }
 }
