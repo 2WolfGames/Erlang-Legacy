@@ -1,8 +1,9 @@
 ﻿using BehaviorDesigner.Runtime.Tasks;
 using UnityEngine;
 
-namespace Core.Combat.IA.Task
+namespace Core.Combat.IA.Action
 {
+    // description: moves current IA to point
     public class Guard : BehaviorDesigner.Runtime.Tasks.Action
     {
         [SerializeField] Transform target;

@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Core.Effect;
 using Core.Character.Player;
 
 // desc:

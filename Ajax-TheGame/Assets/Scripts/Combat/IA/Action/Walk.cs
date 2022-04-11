@@ -14,7 +14,7 @@ namespace Core.Combat.IA.Action
         public override TaskStatus OnUpdate()
         {
             body.velocity = Vector2.right * transform.localScale.x * speed;
-            return TaskStatus.Running;
+            return TaskStatus.Success;
         }
     }
 }
