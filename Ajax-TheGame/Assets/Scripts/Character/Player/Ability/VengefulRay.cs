@@ -4,6 +4,7 @@ using UnityEngine;
 
 using Core.Character.Enemy;
 
+// TODO: may this component should be replace with projectile component
 namespace Core.Character.Player.Ability
 {
     public class VengefulRay : MonoBehaviour
