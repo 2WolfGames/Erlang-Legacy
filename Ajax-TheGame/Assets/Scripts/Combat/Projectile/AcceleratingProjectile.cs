@@ -1,7 +1,6 @@
-﻿using Core.Combat.Projectile;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Core.Combat.Projectiles
+namespace Core.Combat.Projectile
 {
     public class AcceleratingProjectile : AbstractProjectile
     {

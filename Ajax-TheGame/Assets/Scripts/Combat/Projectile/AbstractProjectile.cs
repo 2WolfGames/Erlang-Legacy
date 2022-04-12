@@ -1,5 +1,4 @@
 ﻿using System;
-using Core.Character.Player;
 using Core.Util;
 using UnityEngine;
 
@@ -17,16 +16,21 @@ namespace Core.Combat.Projectile
 
         public event Action<AbstractProjectile> OnProjectileDestroyed;
 
-        public abstract void SetForce(Vector2 force);
+        public event Action<Collider2D> OnProjectileCollided;
+
+        public virtual void SetForce(Vector2 force)
+        {
+            this.force = force;
+        }
 
         protected void DestroyProjectile()
         {
             OnProjectileDestroyed?.Invoke(this);
 
             if (splatterSound != null)
-                SoundManager.Instance.PlaySoundAtLocation(splatterSound, transform.position, 0.75f);
+                SoundManager.Instance?.PlaySoundAtLocation(splatterSound, transform.position, 0.75f);
 
-            EffectManager.Instance.PlayOneShot(explosionEffect, transform.position);
+            EffectManager.Instance?.PlayOneShot(explosionEffect, transform.position);
 
             Destroy(gameObject);
         }
@@ -37,13 +41,7 @@ namespace Core.Combat.Projectile
             if (collision.gameObject == Shooter)
                 return;
 
-            // Projectile hit player
-            var player = collision.GetComponent<BasePlayer>();
-            if (player != null)
-            {
-                Vector2 force = this.force.normalized;
-                player.Hurt((int)damage, collision.gameObject);
-            }
+            OnProjectileCollided?.Invoke(collision);
 
             DestroyProjectile();
         }
