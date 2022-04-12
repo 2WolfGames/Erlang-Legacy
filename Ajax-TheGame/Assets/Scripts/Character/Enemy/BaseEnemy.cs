@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 
-// todo: transform this class
+// TODO: transform this class
 namespace Core.Character.Enemy
 {
     public class BaseEnemy : BaseCharacter
