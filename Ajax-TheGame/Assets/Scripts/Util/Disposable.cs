@@ -13,5 +13,11 @@ namespace Core.Util
         {
             Destroy(gameObject, lifetime);
         }
+
+        public static void Bind(GameObject host, float lifetime)
+        {
+            var disposable = host.AddComponent<Disposable>();
+            disposable.lifetime = lifetime;
+        }
     }
 }
