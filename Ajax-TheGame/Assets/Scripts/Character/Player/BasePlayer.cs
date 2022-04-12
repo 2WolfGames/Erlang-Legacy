@@ -3,19 +3,23 @@ using Core.Shared;
 using Core.Shared.Enum;
 using Core.Character.Player.Ability;
 using Core.Character.Player.Util;
+using Core.Combat.Projectile;
+using Core.Util;
 
 namespace Core.Character.Player
 {
     public class BasePlayer : BaseCharacter
     {
-        [Header("Linked")]
+        [Header("Dash ability")]
         [SerializeField] Dash dashAttack;
-        [SerializeField] VengefulRay vengefulRay;
+
+        [Header("Ray ability")]
+        [SerializeField] RayProjectile rayPrefab;
+        [SerializeField] float raySpeed = 10f;
+        [SerializeField] float rayLifetime = 10f;
 
         [Header("Configurations")]
         [SerializeField] float recoverTime = 1.5f;
-
-        [SerializeField] Transform feets;
 
         Collider2D ajaxCollider;
         MovementController ajaxMovement;
@@ -41,14 +45,6 @@ namespace Core.Character.Player
         public bool CanBeHit
         {
             get { return ajaxTouchable.CanBeTouch; }
-        }
-
-        public Transform Feets
-        {
-            get
-            {
-                return this.feets;
-            }
         }
 
         public static BasePlayer Instance
@@ -124,12 +120,17 @@ namespace Core.Character.Player
             StartCoroutine(dashAttack.AttackCoroutine(dashTime));
         }
 
+        // pre: --
+        // post: instanciate a ray prefab that will destroy itself in n seconds
         public void Ray(Vector3 origin)
         {
             bool left = FacingTo() == PlayerFacing.Left;
-            Vector2 orientation = new Vector2(left ? -1f : 1f, 0f);
-            VengefulRay instance = Instantiate(vengefulRay, origin, left ? Quaternion.Euler(0, -180, 0) : Quaternion.identity);
-            instance.orientation = orientation;
+            var orientation = left ? -1f : 1f;
+            Vector2 force = Vector2.right * orientation * raySpeed;
+            RayProjectile projectile = Instantiate(rayPrefab, origin, Quaternion.identity);
+            projectile.SetForce(force);
+            projectile.OnProjectileCollided += (Collider2D collider) => Debug.Log(collider);
+            Disposable.Bind(projectile.gameObject, rayLifetime);
         }
 
         // pre: --
@@ -172,10 +173,6 @@ namespace Core.Character.Player
             return ajaxOrientation.LatestFacing;
         }
 
-        public void OnDrawGizmosSelected()
-        {
-            Gizmos.DrawWireSphere(feets.position, 0.1f);
-        }
     }
 }
 
