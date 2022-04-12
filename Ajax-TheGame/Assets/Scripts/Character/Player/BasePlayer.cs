@@ -121,7 +121,7 @@ namespace Core.Character.Player
             Vector2 force = Vector2.right * orientation * raySpeed;
             RayProjectile projectile = Instantiate(rayPrefab, origin, Quaternion.identity);
             projectile.SetForce(force);
-            projectile.OnProjectileCollided += (Collider2D collider) => Debug.Log(collider);
+            projectile.OnProjectileCollided += (Collider2D collider) => Debug.Log(collider); // TODO: add correct collide function
             Disposable.Bind(projectile.gameObject, rayLifetime);
         }
 
