@@ -240,9 +240,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dashAttack: {fileID: 2689394461502353927}
-  vengefulRay: {fileID: 6055551925118139890, guid: d311c9d9b5d5045458bd745eea6b2e11,
+  rayPrefab: {fileID: 503972146821115021, guid: d69ef617df5756d42a789cc0ea7f80e2,
     type: 3}
-  collideRecoverTime: 1.5
+  raySpeed: 20
+  recoverTime: 1.5
   feets: {fileID: 1613346068}
 --- !u!114 &4338606659265295169
 MonoBehaviour:
