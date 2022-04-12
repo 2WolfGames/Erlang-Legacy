@@ -24,7 +24,7 @@ namespace Core.Character.Player
         Collider2D ajaxCollider;
         MovementController ajaxMovement;
         FXController ajaxFX;
-        Touchable ajaxTouchable;
+        Protectable playerProtection;
         Orientation ajaxOrientation;
         AbilityController abilityController;
         static BasePlayer instance;
@@ -34,27 +34,16 @@ namespace Core.Character.Player
         // trigger by hit1 & hit2 animation by now
         bool freeze = false;
 
-        public bool Freeze
-        {
-            get
-            {
-                return freeze;
-            }
-        }
+        public bool Freeze => freeze;
 
-        public bool CanBeHit
-        {
-            get { return ajaxTouchable.CanBeTouch; }
-        }
+        public bool CanBeHit => playerProtection.CanBeHit;
 
         public static BasePlayer Instance
         {
             get
             {
                 if (instance == null)
-                {
                     instance = FindObjectOfType<BasePlayer>();
-                }
                 return instance;
             }
         }
@@ -63,13 +52,13 @@ namespace Core.Character.Player
         {
             ajaxMovement = GetComponent<MovementController>();
             ajaxFX = GetComponent<FXController>();
-            ajaxTouchable = GetComponent<Touchable>();
+            playerProtection = GetComponent<Protectable>();
             ajaxOrientation = GetComponent<Orientation>();
             abilityController = GetComponent<AbilityController>();
             ajaxCollider = GetComponent<Collider2D>();
         }
 
-        // pre: --
+        // pre: triggered on hit over player animation
         // post: change Ajax freeze state
         // desc: while freeze is setted to true, some Ajax features should be detached
         //      Ajax should not be able to move, or trigger it's habilities
@@ -95,29 +84,32 @@ namespace Core.Character.Player
             }
         }
 
-        // pre: call in enemy trigger detection
-        // post: 
+        // pre: --
+        // post: applies damage to player
         public void OnCollision(GameObject other, int damage = 1)
         {
-            if (!ajaxTouchable.CanBeTouch) return;
+            if (playerProtection.IsProtected) return;
             Hurt(damage, other);
         }
 
+        // pre: --
+        // post: applies damage to player
         public override void Hurt(int damage, GameObject other)
         {
+            if (playerProtection.IsProtected) return;
+            playerProtection.ResetProtection(); // can not interact with game object for a while
             Side side = Function.CollisionSide(transform, other.transform);
-            StartCoroutine(ajaxTouchable.UntouchableForSeconds(recoverTime));
             ajaxFX.TriggerCollidingFX(recoverTime, side);
             TakeLife(damage); // takes one life
         }
 
         public void Dash(float dashTime)
         {
-            StartCoroutine(ajaxTouchable.UntouchableForSeconds(dashTime));
             StartCoroutine(ajaxFX.InhibitFlip(dashTime));
             StartCoroutine(ajaxFX.DashCoroutine(dashTime));
             StartCoroutine(ajaxMovement.DashCoroutine(FacingTo(), dashTime));
             StartCoroutine(dashAttack.AttackCoroutine(dashTime));
+            playerProtection.ResetProtection(dashTime);
         }
 
         // pre: --
