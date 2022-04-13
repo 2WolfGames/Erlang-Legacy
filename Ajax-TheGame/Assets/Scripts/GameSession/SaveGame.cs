@@ -1,0 +1,37 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.SceneManagement;
+using UnityEngine;
+
+public class SaveGame : MonoBehaviour
+{
+    GameSessionController gameSessionController;
+    bool canBeSaved = false; 
+    
+    private void Awake() {
+        gameSessionController = FindObjectOfType<GameSessionController>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (canBeSaved){
+            if (Input.GetKeyDown(KeyCode.P)){
+                Debug.Log(transform);
+                gameSessionController.SavePlayerSavePoint(transform, SceneManager.GetActiveScene().name);
+            }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Ajax")){
+            canBeSaved = true;
+        }
+    }
+    
+    private void OnTriggerExit2D(Collider2D other) {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Ajax")){
+            canBeSaved = false;
+        }
+    }
+}

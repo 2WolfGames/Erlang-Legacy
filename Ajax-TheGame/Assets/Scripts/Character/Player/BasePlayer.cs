@@ -75,6 +75,13 @@ namespace Core.Character.Player
             ajaxCollider = GetComponent<Collider2D>();
         }
 
+        private void Start() {
+            GameSessionController gsc = FindObjectOfType<GameSessionController>();
+            if(gsc.IsCurrentSavePoint()){
+                transform.position = gsc.GetSavePoint();
+            }
+        }
+
         // pre: --
         // post: change Ajax freeze state
         // desc: while freeze is setted to true, some Ajax features should be detached
@@ -120,7 +127,7 @@ namespace Core.Character.Player
         private IEnumerator ResetSavePoint(GameObject gameObjectWater){
             yield return new WaitForSeconds(cUntochableWhenHazard);
             Hurt(1, gameObjectWater);
-            FindObjectOfType<GameSessionController>().ResetCurrentPoint();
+            this.transform.position = FindObjectOfType<GameSessionController>().GetCurrentPoint();
         }
 
         public override void Hurt(int damage, GameObject other)
