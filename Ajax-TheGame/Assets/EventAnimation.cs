@@ -4,22 +4,17 @@ using Core.Character.Player;
 
 public class EventAnimation : MonoBehaviour
 {
-    BasePlayer basePlayer;
-
-    void Start()
-    {
-        basePlayer = BasePlayer.Instance;
-    }
-
-    // desc: change freeze state to true
+    // desc: start of hit animation
     public void FreezeAjax()
     {
-        basePlayer.SetFreeze(true);
+        var player = BasePlayer.Instance;
+        player.Controllable = false;
     }
 
-    // desc: change freeze state to false
+    // desc: end of hit animation
     public void UnfreezeAjax()
     {
-        basePlayer.SetFreeze(false);
+        var player = BasePlayer.Instance;
+        player.Controllable = true;
     }
 }

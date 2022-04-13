@@ -27,16 +27,15 @@ namespace Core.Character.Player
         Protectable playerProtection;
         Orientation ajaxOrientation;
         AbilityController abilityController;
-        static BasePlayer instance;
 
-        // Ajax can not move & can not fire any hability
-        // freeze state change when Ajax was hit by some enemy
-        // trigger by hit1 & hit2 animation by now
-        bool freeze = false;
-
-        public bool Freeze => freeze;
+        private bool controllable = true;
+        private bool blockingUI;
 
         public bool CanBeHit => playerProtection.CanBeHit;
+
+        public PlayerData PlayerData { get; set; } // TODO: take care of live state
+
+        private static BasePlayer instance;
 
         public static BasePlayer Instance
         {
@@ -45,6 +44,30 @@ namespace Core.Character.Player
                 if (instance == null)
                     instance = FindObjectOfType<BasePlayer>();
                 return instance;
+            }
+        }
+
+        public bool BlockingUI
+        {
+            get => blockingUI;
+            set
+            {
+                blockingUI = value;
+                if (blockingUI)
+                    OnUncontrollable();
+                else OnControllable();
+            }
+        }
+
+        public bool Controllable
+        {
+            get => controllable && !BlockingUI;
+            set
+            {
+                controllable = value;
+                if (!controllable)
+                    OnUncontrollable();
+                else OnControllable();
             }
         }
 
@@ -58,30 +81,26 @@ namespace Core.Character.Player
             ajaxCollider = GetComponent<Collider2D>();
         }
 
-        // pre: triggered on hit over player animation
-        // post: change Ajax freeze state
-        // desc: while freeze is setted to true, some Ajax features should be detached
-        //      Ajax should not be able to move, or trigger it's habilities
-        //      this, method are called at start and end of hit animations
-        public void SetFreeze(bool freeze)
+        // pre: called by some function that stunds player (called by hit animation)
+        // post: enable scripts & returns normal game constants
+        private void OnControllable()
         {
-            this.freeze = freeze;
+            ajaxMovement.enabled = true;
+            ajaxOrientation.enabled = true;
+            abilityController.enabled = true;
+            // reset global game constant to normal state if needed...
+        }
 
-            if (this.freeze)
-            {
-                // detach scripts
-                ajaxMovement.Freeze();
-                ajaxMovement.enabled = false;
-                ajaxOrientation.enabled = false;
-                abilityController.enabled = false;
-            }
-            else
-            {
-                // attach scripts
-                ajaxMovement.enabled = true;
-                ajaxOrientation.enabled = true;
-                abilityController.enabled = true;
-            }
+        // pre: (called by hit end animation)
+        // post: detach component logic scripts & freeze player
+        // PROP: instead of freezing player we can make time slow 
+        private void OnUncontrollable()
+        {
+            ajaxMovement.Freeze();
+            ajaxMovement.enabled = false;
+            ajaxOrientation.enabled = false;
+            abilityController.enabled = false;
+            // set momentanious game constants if needed...
         }
 
         // pre: --
