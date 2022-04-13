@@ -6155,6 +6155,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 382464842943519906, guid: 3a92e288e57aab644a0656c959990934,
+        type: 3}
+      propertyPath: playerData.raySpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 382464842943519906, guid: 3a92e288e57aab644a0656c959990934,
+        type: 3}
+      propertyPath: playerData.rayDuration
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 382464842943519906, guid: 3a92e288e57aab644a0656c959990934,
+        type: 3}
+      propertyPath: playerData.recoverDuration
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 382464842943519908, guid: 3a92e288e57aab644a0656c959990934,
         type: 3}
       propertyPath: hitProtectionDuration

@@ -15,12 +15,6 @@ namespace Core.Character.Player
 
         [Header("Ray ability")]
         [SerializeField] RayProjectile rayPrefab;
-        [SerializeField] float raySpeed = 10f;
-        [SerializeField] float rayLifetime = 10f;
-
-        [Header("Configurations")]
-        [SerializeField] float recoverTime = 1.5f;
-
         Collider2D ajaxCollider;
         MovementController ajaxMovement;
         FXController ajaxFX;
@@ -33,7 +27,9 @@ namespace Core.Character.Player
 
         public bool CanBeHit => playerProtection.CanBeHit;
 
-        public PlayerData PlayerData { get; set; } // TODO: take care of live state
+        public PlayerData PlayerData => playerData;
+
+        [SerializeField] PlayerData playerData;
 
         private static BasePlayer instance;
 
@@ -118,7 +114,7 @@ namespace Core.Character.Player
             if (playerProtection.IsProtected) return;
             playerProtection.ResetProtection(); // can not interact with game object for a while
             Side side = Function.CollisionSide(transform, other.transform);
-            ajaxFX.TriggerCollidingFX(recoverTime, side);
+            ajaxFX.TriggerCollidingFX(PlayerData.recoverDuration, side);
             TakeLife(damage); // takes one life
         }
 
@@ -137,11 +133,11 @@ namespace Core.Character.Player
         {
             bool left = FacingTo() == PlayerFacing.Left;
             var orientation = left ? -1f : 1f;
-            Vector2 force = Vector2.right * orientation * raySpeed;
+            Vector2 force = Vector2.right * orientation * playerData.raySpeed;
             RayProjectile projectile = Instantiate(rayPrefab, origin, Quaternion.identity);
             projectile.SetForce(force);
             projectile.OnProjectileCollided += (Collider2D collider) => Debug.Log(collider); // TODO: add correct collide function
-            Disposable.Bind(projectile.gameObject, rayLifetime);
+            Disposable.Bind(projectile.gameObject, playerData.rayDuration);
         }
 
         // pre: --
