@@ -1,9 +1,10 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 using Core.Shared.Enum;
 
+// todo: rename movement controller to player movement manager
+// todo: instead of using player manager functions use lambda function setted at awake 
 namespace Core.Character.Player
 {
     public class MovementController : MonoBehaviour
@@ -17,52 +18,75 @@ namespace Core.Character.Player
 
         ////////////////////////////////////////////////////////////////////////////////////////////////
 
-        Rigidbody2D rb;
-        BoxCollider2D boxCollider2D;
-        float jumpTimeCounter = 0.2f;
-        bool isJumping = false;
-        bool hasJumped = false;
+        float jumpHoldTimer;
+        private bool isJumping = false;
+        bool justJumped = false;
         bool dashing = false;
         bool impulsed = false;
-        float gravityScale = 1;
-        Vector2 velocityModifyer;
-        BasePlayer basePlayer;
+        private float baseGravityScale;
+        private Vector2 velocityModifyer;
+        private float JumpCooldown => BasePlayer.Instance.PlayerData.jumpCooldown;
+        private Rigidbody2D Body => BasePlayer.Instance.Body;
+        private Collider2D BodyCollider => BasePlayer.Instance.BodyCollider;
+        private bool IsDashing => BasePlayer.Instance.IsDashing;
+        private bool IsControllable => BasePlayer.Instance.Controllable;
+        private float JumpHoldDuration => BasePlayer.Instance.PlayerData.jumpHoldDuration;
+        private Animator Animator => BasePlayer.Instance.Animator;
+        private float jumpTimer;
+        public bool CanMove => IsControllable && !IsDashing;
+        public bool IsGrounded => CheckIfGrounded();
+        public bool IsJumping
+        {
+            get => isJumping;
+            private set { isJumping = value; }
+        }
+        public bool CanJump => !IsJumping && jumpTimer <= 0 && CanMove && IsGrounded;
 
         void Awake()
         {
-            rb = GetComponent<Rigidbody2D>();
-            boxCollider2D = GetComponent<BoxCollider2D>();
-            basePlayer = GetComponent<BasePlayer>();
-            gravityScale = this.rb.gravityScale;
+            baseGravityScale = Body.gravityScale;
             velocityModifyer = Vector2.one;
+        }
+
+        private void ResetJumpTimer()
+        {
+            this.jumpTimer = JumpCooldown;
         }
 
         void Update()
         {
-            if (dashing) return;
+            if (jumpTimer > 0)
+                jumpTimer -= Time.deltaTime;
+
             SmoothJump();
         }
 
         void FixedUpdate()
         {
-            if (dashing) return;
-
-            int xNormalized = basePlayer.HorizontalInputNormalized();
-            // when Ajax is at the air, we let him take certain control of it's movement
-            float vx = impulsed ?
-            rb.velocity.x + xNormalized * basicSpeed * 0.05f
-            : xNormalized * basicSpeed * velocityModifyer.x;
-
-            rb.velocity = new Vector2(vx, rb.velocity.y);
-            basePlayer.Run(Mathf.Abs(rb.velocity.x) > Mathf.Epsilon);
-
-            if (hasJumped && IsGrounded())
-            {
-                basePlayer.Land();
-                hasJumped = false;
-            }
-
+            Moving();
+            Landing();
             velocityModifyer = Vector2.one;
+        }
+
+        private void Moving()
+        {
+            if (!CanMove) return;
+            // when Ajax is at the air, we let him take certain control of it's movement
+            var facingValue = BasePlayer.Instance.FacingValue;
+            float vx = impulsed ?
+            Body.velocity.x + facingValue * basicSpeed * 0.05f
+            : facingValue * basicSpeed * velocityModifyer.x;
+            Body.velocity = new Vector2(vx, Body.velocity.y);
+            // basePlayer.Run(Mathf.Abs(Body.velocity.x) > Mathf.Epsilon);
+        }
+
+        private void Landing()
+        {
+            if (justJumped && IsGrounded)
+            {
+                // basePlayer.Land();
+                justJumped = false;
+            }
         }
 
         /// <sumary>
@@ -72,10 +96,10 @@ namespace Core.Character.Player
         /// <sumary>
         public void ImpulseUp(float force)
         {
-            this.rb.gravityScale = gravityScale;
+            this.Body.gravityScale = baseGravityScale;
             impulsed = true;
             Freeze();
-            rb.AddForce(Vector2.up * force, ForceMode2D.Impulse);
+            Body.AddForce(Vector2.up * force, ForceMode2D.Impulse);
         }
 
         /// <sumary>
@@ -85,40 +109,40 @@ namespace Core.Character.Player
         /// <sumary>
         public void Impulse(Vector2 impulse)
         {
-            this.rb.gravityScale = gravityScale;
+            this.Body.gravityScale = baseGravityScale;
             impulsed = true;
             Freeze();
-            rb.AddForce(impulse, ForceMode2D.Impulse);
+            Body.AddForce(impulse, ForceMode2D.Impulse);
         }
 
         void SmoothJump()
         {
-            if (Input.GetButtonDown("Jump") && IsGrounded())
+            if (Input.GetButtonDown("Jump") && CanJump) // button down, first key of jump
             {
-                isJumping = true;
-                jumpTimeCounter = holdJump;
-                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-                basePlayer.Jump();
+                IsJumping = true;
+                jumpHoldTimer = JumpHoldDuration;
+                Body.velocity = new Vector2(Body.velocity.x, jumpForce);
+                // Animator.SetTrigger("Jump"); // todo: trigger jump animation
             }
 
-            if (Input.GetButton("Jump") && isJumping)
+            if (Input.GetButton("Jump") && IsJumping) // while jumping
             {
-                if (jumpTimeCounter > 0)
+                if (jumpHoldTimer > 0)
                 {
-                    rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-                    jumpTimeCounter -= Time.deltaTime;
+                    Body.velocity = new Vector2(Body.velocity.x, jumpForce);
+                    jumpHoldTimer -= Time.deltaTime;
                 }
                 else
                 {
                     isJumping = false;
-                    hasJumped = true;
+                    justJumped = true;
                 }
             }
 
-            if (Input.GetButtonUp("Jump"))
+            if (Input.GetButtonUp("Jump")) // end of jump
             {
                 isJumping = false;
-                hasJumped = true;
+                justJumped = true;
             }
 
         }
@@ -128,11 +152,11 @@ namespace Core.Character.Player
         public IEnumerator DashCoroutine(PlayerFacing facing, float duration, System.Action onComplete = null)
         {
             dashing = true;
-            float gravityScale = this.rb.gravityScale;
+            float gravityScale = this.Body.gravityScale;
             Freeze();
-            this.rb.gravityScale = 0;
+            this.Body.gravityScale = 0;
             var direction = facing == PlayerFacing.Left ? -1 : 1;
-            this.rb.AddForce(new Vector2(dashSpeed * direction, 0f), ForceMode2D.Impulse);
+            this.Body.AddForce(new Vector2(dashSpeed * direction, 0f), ForceMode2D.Impulse);
             yield return new WaitForSeconds(duration);
 
             // avoids stack when you had dash
@@ -141,26 +165,26 @@ namespace Core.Character.Player
             {
                 Freeze();
             }
-            this.rb.gravityScale = gravityScale;
+            this.Body.gravityScale = gravityScale;
             dashing = false;
             if (onComplete != null) onComplete();
         }
 
         public void Freeze()
         {
-            this.rb.velocity = Vector2.zero;
+            this.Body.velocity = Vector2.zero;
         }
 
-        bool IsGrounded()
+        private bool CheckIfGrounded()
         {
             float extra = 0.1f;
-            RaycastHit2D ray = Physics2D.BoxCast(boxCollider2D.bounds.center, boxCollider2D.bounds.size, 0, Vector2.down, extra, whatIsGround);
+            RaycastHit2D ray = Physics2D.BoxCast(BodyCollider.bounds.center, BodyCollider.bounds.size, 0, Vector2.down, extra, whatIsGround);
             bool grounded = ray.collider != null;
             Color rayColor = grounded ? Color.green : Color.red;
 
-            Debug.DrawRay(boxCollider2D.bounds.center + new Vector3(boxCollider2D.bounds.extents.x, 0), Vector2.down * (boxCollider2D.bounds.extents.y + extra), rayColor);
-            Debug.DrawRay(boxCollider2D.bounds.center - new Vector3(boxCollider2D.bounds.extents.x, 0), Vector2.down * (boxCollider2D.bounds.extents.y + extra), rayColor);
-            Debug.DrawRay(boxCollider2D.bounds.center - new Vector3(boxCollider2D.bounds.extents.x, boxCollider2D.bounds.extents.y + extra), Vector2.right * (2 * boxCollider2D.bounds.extents.x), rayColor);
+            Debug.DrawRay(BodyCollider.bounds.center + new Vector3(BodyCollider.bounds.extents.x, 0), Vector2.down * (BodyCollider.bounds.extents.y + extra), rayColor);
+            Debug.DrawRay(BodyCollider.bounds.center - new Vector3(BodyCollider.bounds.extents.x, 0), Vector2.down * (BodyCollider.bounds.extents.y + extra), rayColor);
+            Debug.DrawRay(BodyCollider.bounds.center - new Vector3(BodyCollider.bounds.extents.x, BodyCollider.bounds.extents.y + extra), Vector2.right * (2 * BodyCollider.bounds.extents.x), rayColor);
 
             return grounded;
         }

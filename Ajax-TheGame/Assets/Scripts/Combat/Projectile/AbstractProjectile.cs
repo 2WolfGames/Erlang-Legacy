@@ -16,7 +16,7 @@ namespace Core.Combat.Projectile
 
         public event Action<AbstractProjectile> OnProjectileDestroyed;
 
-        public event Action<Collider2D> OnProjectileCollided;
+        public event Action<Collider2D> OnHit;
 
         public virtual void SetForce(Vector2 force)
         {
@@ -41,7 +41,7 @@ namespace Core.Combat.Projectile
             if (collision.gameObject == Shooter)
                 return;
 
-            OnProjectileCollided?.Invoke(collision);
+            OnHit?.Invoke(collision);
 
             DestroyProjectile();
         }

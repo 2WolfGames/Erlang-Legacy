@@ -6,17 +6,17 @@ namespace Core.Combat.Projectile
     //  Ajax ray attack
     public class RayProjectile : AbstractProjectile
     {
-        Rigidbody2D rb;
+        Rigidbody2D body;
 
         void Awake()
         {
-            rb = GetComponent<Rigidbody2D>();
-            rb.bodyType = RigidbodyType2D.Kinematic;
+            body = GetComponent<Rigidbody2D>();
+            body.bodyType = RigidbodyType2D.Kinematic;
         }
 
         void FixedUpdate()
         {
-            rb.velocity = force;
+            body.velocity = force;
         }
     }
 

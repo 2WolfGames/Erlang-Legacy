@@ -6,13 +6,15 @@ namespace Core.Util
     //  manage state if action can be done over game object
     public class Protectable : MonoBehaviour
     {
-        [SerializeField] float hitProtectionDuration;
-
-        float hitProtectionTimer;
-
+        [SerializeField] float protectionDuration;
+        private float hitProtectionTimer;
         public bool CanBeHit => hitProtectionTimer <= 0;
-
         public bool IsProtected => !CanBeHit;
+        public float ProtectionDuration
+        {
+            get => protectionDuration;
+            set { protectionDuration = value; }
+        }
 
         public void Update()
         {
@@ -22,7 +24,7 @@ namespace Core.Util
 
         public void ResetProtection()
         {
-            this.hitProtectionTimer = hitProtectionDuration;
+            this.hitProtectionTimer = ProtectionDuration;
         }
 
         public void ResetProtection(float duration)

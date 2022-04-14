@@ -270,6 +270,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &90487660 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2689394461502353927, guid: 3a92e288e57aab644a0656c959990934,
+    type: 3}
+  m_PrefabInstance: {fileID: 1830561270528675945}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ae3158f1f9851a47b8d13818a7b20f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &96553402 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8242193190072985616, guid: 0e821a2ba18245c408820dd339b504a5,
@@ -372,6 +384,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Pink Wheeler
+      objectReference: {fileID: 0}
+    - target: {fileID: 7004362582767644081, guid: 7fe2604c84cd8f04eb887ecdc9e05a1e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7004362582767644086, guid: 7fe2604c84cd8f04eb887ecdc9e05a1e,
         type: 3}
@@ -3958,6 +3975,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Blue Autonomous Crawl Slime
       objectReference: {fileID: 0}
+    - target: {fileID: 6603502452738742729, guid: 65d664973c5b5e44a86d8e35e60f905e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 65d664973c5b5e44a86d8e35e60f905e, type: 3}
 --- !u!4 &1010465286 stripped
@@ -5819,6 +5841,12 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!4 &1856794166 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4338606660018724214, guid: 3a92e288e57aab644a0656c959990934,
+    type: 3}
+  m_PrefabInstance: {fileID: 1830561270528675945}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1868487963
 GameObject:
   m_ObjectHideFlags: 0
@@ -6157,13 +6185,65 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 382464842943519906, guid: 3a92e288e57aab644a0656c959990934,
         type: 3}
+      propertyPath: dashHitArea
+      value: 
+      objectReference: {fileID: 90487660}
+    - target: {fileID: 382464842943519906, guid: 3a92e288e57aab644a0656c959990934,
+        type: 3}
+      propertyPath: punchHitArea
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 382464842943519906, guid: 3a92e288e57aab644a0656c959990934,
+        type: 3}
+      propertyPath: rayProjectile
+      value: 
+      objectReference: {fileID: 3112578304023649470, guid: c4740bcc5bc007640b0bb2cb7af30eac,
+        type: 3}
+    - target: {fileID: 382464842943519906, guid: 3a92e288e57aab644a0656c959990934,
+        type: 3}
       propertyPath: playerData.raySpeed
-      value: 20
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 382464842943519906, guid: 3a92e288e57aab644a0656c959990934,
+        type: 3}
+      propertyPath: rayProjectilePrefab
+      value: 
+      objectReference: {fileID: 503972146821115021, guid: d69ef617df5756d42a789cc0ea7f80e2,
+        type: 3}
+    - target: {fileID: 382464842943519906, guid: 3a92e288e57aab644a0656c959990934,
+        type: 3}
+      propertyPath: playerData.rayOrigin
+      value: 
+      objectReference: {fileID: 1856794166}
+    - target: {fileID: 382464842943519906, guid: 3a92e288e57aab644a0656c959990934,
+        type: 3}
+      propertyPath: playerData.rayCooldown
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 382464842943519906, guid: 3a92e288e57aab644a0656c959990934,
         type: 3}
       propertyPath: playerData.rayDuration
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 382464842943519906, guid: 3a92e288e57aab644a0656c959990934,
+        type: 3}
+      propertyPath: playerData.rayLifetime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 382464842943519906, guid: 3a92e288e57aab644a0656c959990934,
+        type: 3}
+      propertyPath: playerData.dashCooldown
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 382464842943519906, guid: 3a92e288e57aab644a0656c959990934,
+        type: 3}
+      propertyPath: playerData.dashDuration
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 382464842943519906, guid: 3a92e288e57aab644a0656c959990934,
+        type: 3}
+      propertyPath: playerData.recoverCooldown
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 382464842943519906, guid: 3a92e288e57aab644a0656c959990934,
         type: 3}
@@ -6239,6 +6319,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Ajax
+      objectReference: {fileID: 0}
+    - target: {fileID: 4338606659711849381, guid: 3a92e288e57aab644a0656c959990934,
+        type: 3}
+      propertyPath: m_Name
+      value: Dash Hit Area
+      objectReference: {fileID: 0}
+    - target: {fileID: 4338606660018724215, guid: 3a92e288e57aab644a0656c959990934,
+        type: 3}
+      propertyPath: m_Name
+      value: Ray Origin
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a92e288e57aab644a0656c959990934, type: 3}

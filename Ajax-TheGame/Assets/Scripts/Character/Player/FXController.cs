@@ -1,6 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using Spine.Unity;
 using UnityEngine;
 
 using Core.Shared.Enum;
@@ -16,15 +14,13 @@ namespace Core.Character.Player
         BasePlayer basePlayer;
         Animator animator;
 
-        bool canFlip = true;
-
-        bool blinking = false;
-
         public bool CanFlip
         {
             get
             {
-                return canFlip;
+                var controllable = BasePlayer.Instance.Controllable;
+                var isDashing = BasePlayer.Instance.IsDashing;
+                return controllable && !isDashing;
             }
         }
 
@@ -41,30 +37,16 @@ namespace Core.Character.Player
 
         void FixedUpdate()
         {
-            FlipListener();
-        }
-
-        void FlipListener()
-        {
-            if (!canFlip) return;
-            UpdateFlip(basePlayer.FacingTo());
+            if (CanFlip)
+                Flip(BasePlayer.Instance.Facing);
         }
 
         // -1 left, 1 right 
-        void UpdateFlip(PlayerFacing facing)
+        public void Flip(PlayerFacing facing)
         {
             Vector3 characterScale = transform.localScale;
             characterScale.x = facing == PlayerFacing.Left ? -1 : 1;
             transform.localScale = characterScale;
-        }
-
-        // pre: not other coroutine of this fn should be running
-        // post: inhibit flip actions for a while
-        public IEnumerator InhibitFlip(float seconds = 0)
-        {
-            canFlip = false;
-            yield return new WaitForSeconds(seconds);
-            canFlip = true;
         }
 
         /**
@@ -115,11 +97,8 @@ namespace Core.Character.Player
         //          blink animation is in 2nd layer basePlayer
         private IEnumerator BlinkCoroutine(float seconds)
         {
-            if (blinking) yield return null;
-            blinking = true;
             animator.SetBool("blink", true);
             yield return new WaitForSeconds(seconds);
-            blinking = false;
             animator.SetBool("blink", false);
         }
 
