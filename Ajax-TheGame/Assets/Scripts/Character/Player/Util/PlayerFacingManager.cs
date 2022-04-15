@@ -8,7 +8,7 @@ namespace Core.Character.Player
     {
         public PlayerFacing Facing { get; private set; }
 
-        public int FacingToInt { get => (int)Facing; }
+        public int FacingToInt { get => (int)Facing * 2 - 1; }
 
         void Update()
         {

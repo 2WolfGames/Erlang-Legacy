@@ -14,6 +14,7 @@ namespace Core.Character.Player
         [SerializeField] RayProjectile rayProjectile;
         [SerializeField] HitArea dashHitArea;
         [SerializeField] HitArea punchHitArea; // basic attack damage area
+        [SerializeField] LayerMask whatIsGround;
         private MovementController ajaxMovement;
         private FXController ajaxFX;
         private Protectable playerProtection;
@@ -21,6 +22,7 @@ namespace Core.Character.Player
         private PlayerAbilitiesManager playerAbilitiesManager;
         private bool controllable = true;
         private bool blockingUI;
+        public bool IsOnGround => ajaxMovement.IsOnGround;
         public bool CanBeHit => playerProtection.CanBeHit;
         public bool IsDashing => playerAbilitiesManager.IsDashing;
         public PlayerFacing Facing => playerFacingManager.Facing;
@@ -165,7 +167,6 @@ namespace Core.Character.Player
         {
             ajaxFX.TriggerJumpFX();
         }
-
     }
 }
 

@@ -13,11 +13,12 @@ public class PlayerData
     public float basicSpeed; // basic player speed movement
     public float dashSpeed; // player speed at dashing
     public float jumpPower;
-    public float jumpHoldDuration;
+    [Range(0.1f, 1f)] public float airDrag;
 
 
     [Header("Events duration stats")]
     public float dashDuration; // how it takes to dash animation  finish
+    public float holdingAfterJump; // how much time can you press jump key to continue jumping
 
 
     [Header("Damage stats")]
@@ -30,8 +31,6 @@ public class PlayerData
     public float recoverCooldown;
     public float dashCooldown; // how much it takes to trigger dash ability again
     public float rayCooldown; // how much it takes to through a ray again
-    public float jumpCooldown;
-
 
     [Header("Ray Projectile stats")]
     public Transform rayOrigin; // from which point rays are triggered

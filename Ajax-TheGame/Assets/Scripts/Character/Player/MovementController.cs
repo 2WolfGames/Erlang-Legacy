@@ -11,78 +11,117 @@ namespace Core.Character.Player
     {
         [Header("Configurations")]
         [Tooltip("Displacement power on sides while running")][SerializeField] float basicSpeed;
-        [Tooltip("Displacement power on sides while dashing")][SerializeField] float dashSpeed;
+        [Tooltip("Displacement power on sides while isDashing")][SerializeField] float dashSpeed;
         [Tooltip("Displacement power on sides while jumping")][SerializeField] float jumpForce = 2;
         [Tooltip("How much time player can hold jump bottom")][SerializeField] float holdJump = 0.3f;
         [SerializeField] LayerMask whatIsGround;
 
         ////////////////////////////////////////////////////////////////////////////////////////////////
 
-        float jumpHoldTimer;
+        [SerializeField] Vector2 currentVelocity;
+        float holdingAfterJump;
         private bool isJumping = false;
+        private float horizontal = 0;
         bool justJumped = false;
-        bool dashing = false;
+        bool isDashing = false;
         bool impulsed = false;
         private float baseGravityScale;
         private Vector2 velocityModifyer;
-        private float JumpCooldown => BasePlayer.Instance.PlayerData.jumpCooldown;
+        private float FacingValue => BasePlayer.Instance.FacingValue;
+        private float AirDrag => (1f - BasePlayer.Instance.PlayerData.airDrag);
+        private float DashCooldown => BasePlayer.Instance.PlayerData.dashCooldown;
+        private float DashDuration => BasePlayer.Instance.PlayerData.dashDuration;
         private Rigidbody2D Body => BasePlayer.Instance.Body;
         private Collider2D BodyCollider => BasePlayer.Instance.BodyCollider;
-        private bool IsDashing => BasePlayer.Instance.IsDashing;
-        private bool IsControllable => BasePlayer.Instance.Controllable;
-        private float JumpHoldDuration => BasePlayer.Instance.PlayerData.jumpHoldDuration;
+        private bool Controllable => BasePlayer.Instance.Controllable;
+        private float HoldingAfterJump => BasePlayer.Instance.PlayerData.holdingAfterJump;
+        private float DashSpeed => BasePlayer.Instance.PlayerData.dashSpeed;
         private Animator Animator => BasePlayer.Instance.Animator;
-        private float jumpTimer;
-        public bool CanMove => IsControllable && !IsDashing;
-        public bool IsGrounded => CheckIfGrounded();
-        public bool IsJumping
-        {
-            get => isJumping;
-            private set { isJumping = value; }
-        }
-        public bool CanJump => !IsJumping && jumpTimer <= 0 && CanMove && IsGrounded;
+        private float dashCooldownTimer;
+        public bool IsOnGround => IsGrounded();
+        public bool IsJumping => isJumping;
+        public bool CanJump => !isJumping && !isDashing && IsOnGround;
+        private bool CanHoldJump => isJumping && !isDashing;
+        public bool CanDash => !isDashing && dashCooldownTimer <= 0;
+        public bool CanRun => !isDashing;
 
-        void Awake()
+        public void Start()
         {
             baseGravityScale = Body.gravityScale;
             velocityModifyer = Vector2.one;
         }
 
-        private void ResetJumpTimer()
-        {
-            this.jumpTimer = JumpCooldown;
-        }
-
         void Update()
         {
-            if (jumpTimer > 0)
-                jumpTimer -= Time.deltaTime;
-
-            SmoothJump();
+            if (dashCooldownTimer > 0)
+                dashCooldownTimer -= Time.deltaTime;
+            DoJump();
+            // DoRun();
         }
 
         void FixedUpdate()
         {
-            Moving();
-            Landing();
-            velocityModifyer = Vector2.one;
+            // GatherInput();
+            Move();
+            // Landing();
+            // velocityModifyer = Vector2.one;
         }
 
-        private void Moving()
+        // pre: --
+        // post: listen player inputs
+        private void GatherInput()
         {
-            if (!CanMove) return;
-            // when Ajax is at the air, we let him take certain control of it's movement
-            var facingValue = BasePlayer.Instance.FacingValue;
-            float vx = impulsed ?
-            Body.velocity.x + facingValue * basicSpeed * 0.05f
-            : facingValue * basicSpeed * velocityModifyer.x;
-            Body.velocity = new Vector2(vx, Body.velocity.y);
+            if (!Controllable)
+                return;
+            horizontal = Input.GetAxis("Horizontal");
+            isDashing = Input.GetButton("Dash");
+        }
+
+        // pre: GatherInput execution
+        private void Move()
+        {
+            if (!Controllable)
+                return;
+            bool wannaDash = Input.GetButton("Dash");
+            if (wannaDash) DoDash();
+            else DoRun();
+            // // when Ajax is at the air, we let him take certain control of it's movement
+            // var facingValue = BasePlayer.Instance.FacingValue;
+            // Debug.Log($"facing value {facingValue}");
+            // Debug.Log($"basicSpeed value {basicSpeed}");
+            // Debug.Log($"velocityModifier value {velocityModifyer}");
+            // float vx = impulsed ?
+            // Body.velocity.x + facingValue * basicSpeed * 0.05f
+            // : facingValue * basicSpeed * velocityModifyer.x;
+            // Body.velocity = new Vector2(vx, Body.velocity.y);
             // basePlayer.Run(Mathf.Abs(Body.velocity.x) > Mathf.Epsilon);
         }
 
+        private void DoDash()
+        {
+            if (!CanDash)
+                return;
+            StartCoroutine(DashImpulse());
+        }
+
+        private void DoRun()
+        {
+            if (!CanRun)
+                return;
+
+            float horizontal = Input.GetAxis("Horizontal");
+            float velocityX = horizontal * basicSpeed; // (* aceleration => velocityModifier.x)
+
+            if (!IsOnGround) // air drag avoid moving quick in the air 
+                velocityX *= AirDrag;
+            var targetVelocity = new Vector2(velocityX, Body.velocity.y);
+            Body.velocity = Vector2.SmoothDamp(Body.velocity, targetVelocity, ref currentVelocity, 0.01f);
+        }
+
+
         private void Landing()
         {
-            if (justJumped && IsGrounded)
+            if (justJumped && IsOnGround)
             {
                 // basePlayer.Land();
                 justJumped = false;
@@ -115,22 +154,22 @@ namespace Core.Character.Player
             Body.AddForce(impulse, ForceMode2D.Impulse);
         }
 
-        void SmoothJump()
+        // pre: Controllable
+        void DoJump()
         {
             if (Input.GetButtonDown("Jump") && CanJump) // button down, first key of jump
             {
-                IsJumping = true;
-                jumpHoldTimer = JumpHoldDuration;
+                isJumping = true;
+                holdingAfterJump = HoldingAfterJump;
                 Body.velocity = new Vector2(Body.velocity.x, jumpForce);
                 // Animator.SetTrigger("Jump"); // todo: trigger jump animation
             }
-
-            if (Input.GetButton("Jump") && IsJumping) // while jumping
+            if (Input.GetButton("Jump") && CanHoldJump) // while jumping
             {
-                if (jumpHoldTimer > 0)
+                if (holdingAfterJump > 0)
                 {
                     Body.velocity = new Vector2(Body.velocity.x, jumpForce);
-                    jumpHoldTimer -= Time.deltaTime;
+                    holdingAfterJump -= Time.deltaTime;
                 }
                 else
                 {
@@ -138,20 +177,30 @@ namespace Core.Character.Player
                     justJumped = true;
                 }
             }
-
             if (Input.GetButtonUp("Jump")) // end of jump
             {
                 isJumping = false;
                 justJumped = true;
             }
-
         }
+
+        private IEnumerator DashImpulse()
+        {
+            isDashing = true;
+            Body.velocity = Vector2.zero;
+            Body.gravityScale = 0;
+            Body.AddForce(Vector2.right * FacingValue * DashSpeed, ForceMode2D.Impulse);
+            yield return new WaitForSeconds(DashDuration);
+            Body.gravityScale = baseGravityScale;
+            isDashing = false;
+        }
+
 
         // pre: --
         // post: adds force impulse with facing orientation
         public IEnumerator DashCoroutine(PlayerFacing facing, float duration, System.Action onComplete = null)
         {
-            dashing = true;
+            isDashing = true;
             float gravityScale = this.Body.gravityScale;
             Freeze();
             this.Body.gravityScale = 0;
@@ -166,7 +215,7 @@ namespace Core.Character.Player
                 Freeze();
             }
             this.Body.gravityScale = gravityScale;
-            dashing = false;
+            isDashing = false;
             if (onComplete != null) onComplete();
         }
 
@@ -175,7 +224,7 @@ namespace Core.Character.Player
             this.Body.velocity = Vector2.zero;
         }
 
-        private bool CheckIfGrounded()
+        private bool IsGrounded()
         {
             float extra = 0.1f;
             RaycastHit2D ray = Physics2D.BoxCast(BodyCollider.bounds.center, BodyCollider.bounds.size, 0, Vector2.down, extra, whatIsGround);
