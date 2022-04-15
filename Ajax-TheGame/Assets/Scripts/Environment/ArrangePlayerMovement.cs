@@ -31,7 +31,7 @@ public class ArrangePlayerMovement : MonoBehaviour
 
     //pre: ajax != null
     //post: looks if player and platform are moving at the same time 
-    //if do so, corrects the alterations of player movement using ModifyVelocity() from AjaxMovemnt.
+    //if do so, corrects the alterations of player movement using ModifyVelocity() from AjaxMovemnt. // todo: mirar velocity modifier
     private void CalculatePlayerVelocity()
     {
         float ajaxDir = ajax.transform.localPosition.x - ajaxLastXPos;
@@ -42,11 +42,11 @@ public class ArrangePlayerMovement : MonoBehaviour
         {
             if (ajaxDir < 0 && platformDir < 0 || ajaxDir > 0 && platformDir > 0)
             { //same dir
-                ajax.GetComponent<MovementController>().ModifyVelocity(new Vector2(1 - velocityAlterator, 1));
+                ajax.GetComponent<PlayerMovementManager>().ModifyVelocity(new Vector2(1 - velocityAlterator, 1));
             }
             else
             { // diferent dir
-                ajax.GetComponent<MovementController>().ModifyVelocity(new Vector2(1 + velocityAlterator, 1));
+                ajax.GetComponent<PlayerMovementManager>().ModifyVelocity(new Vector2(1 + velocityAlterator, 1));
             }
         }
     }

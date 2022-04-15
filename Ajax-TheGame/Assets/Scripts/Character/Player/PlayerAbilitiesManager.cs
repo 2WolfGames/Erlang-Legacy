@@ -13,7 +13,6 @@ namespace Core.Character.Player
         private float dashTimer;
         private float RayCooldown => BasePlayer.Instance.PlayerData.rayCooldown;
         private float DashCooldown => BasePlayer.Instance.PlayerData.dashCooldown;
-        private float DashDuration => BasePlayer.Instance.PlayerData.dashDuration;
         public bool CanTriggerDash => dashTimer <= 0 && !IsDashing;
         public bool CanTriggerRay => rayTimer <= 0 && !IsDashing;
         public bool IsDashing { get; private set; }
@@ -38,7 +37,7 @@ namespace Core.Character.Player
             IsDashing = true;
             OnTriggerDash?.Invoke();
             ResetDashTimer();
-            StartCoroutine(ResetIsDashing());
+            // StartCoroutine(ResetIsDashing());
         }
 
         private void TriggerRay()
@@ -59,12 +58,6 @@ namespace Core.Character.Player
             dashTimer = DashCooldown;
         }
 
-        private IEnumerator ResetIsDashing()
-        {
-            BasePlayer player = BasePlayer.Instance;
-            yield return new WaitForSeconds(DashDuration);
-            IsDashing = false;
-        }
     }
 
 }

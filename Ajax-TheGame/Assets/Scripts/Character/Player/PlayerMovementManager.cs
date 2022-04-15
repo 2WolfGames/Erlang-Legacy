@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using System;
 
 using Core.Shared.Enum;
 
@@ -7,7 +8,7 @@ using Core.Shared.Enum;
 // todo: instead of using player manager functions use lambda function setted at awake 
 namespace Core.Character.Player
 {
-    public class MovementController : MonoBehaviour
+    public class PlayerMovementManager : MonoBehaviour
     {
         [Header("Configurations")]
         [Tooltip("Displacement power on sides while running")][SerializeField] float basicSpeed;
@@ -19,35 +20,37 @@ namespace Core.Character.Player
         ////////////////////////////////////////////////////////////////////////////////////////////////
 
         [SerializeField] Vector2 currentVelocity;
-        float holdingAfterJump;
+        float holdingAfterJumpTimer;
         private bool isJumping = false;
-        private float horizontal = 0;
         bool justJumped = false;
         bool isDashing = false;
         bool impulsed = false;
-        private float baseGravityScale;
+        private float BaseGravityScale => Player.BaseGravityScale;
         private Vector2 velocityModifyer;
-        private float FacingValue => BasePlayer.Instance.FacingValue;
-        private float AirDrag => (1f - BasePlayer.Instance.PlayerData.airDrag);
-        private float DashCooldown => BasePlayer.Instance.PlayerData.dashCooldown;
-        private float DashDuration => BasePlayer.Instance.PlayerData.dashDuration;
-        private Rigidbody2D Body => BasePlayer.Instance.Body;
-        private Collider2D BodyCollider => BasePlayer.Instance.BodyCollider;
-        private bool Controllable => BasePlayer.Instance.Controllable;
-        private float HoldingAfterJump => BasePlayer.Instance.PlayerData.holdingAfterJump;
-        private float DashSpeed => BasePlayer.Instance.PlayerData.dashSpeed;
-        private Animator Animator => BasePlayer.Instance.Animator;
+        private BasePlayer Player => BasePlayer.Instance;
+        private float FacingValue => Player.FacingValue;
+        private float AirDrag => (1f - Player.PlayerData.airDrag);
+        private float DashCooldown => Player.PlayerData.dashCooldown;
+        private Rigidbody2D Body => Player.Body;
+        private Collider2D BodyCollider => Player.BodyCollider;
+        private bool Controllable => Player.Controllable;
+        private float HoldingAfterJump => Player.PlayerData.holdingAfterJump;
+        private float DashSpeed => Player.PlayerData.dashSpeed;
+        private Animator Animator => Player.Animator;
         private float dashCooldownTimer;
-        public bool IsOnGround => IsGrounded();
+        private bool IsOnGround => Player.IsGrounded;
+        private bool IsCornerTime => Player.IsCornerTime;
         public bool IsJumping => isJumping;
         public bool CanJump => !isJumping && !isDashing && IsOnGround;
         private bool CanHoldJump => isJumping && !isDashing;
         public bool CanDash => !isDashing && dashCooldownTimer <= 0;
         public bool CanRun => !isDashing;
 
+        public Action OnDashStart;
+        public Action OnDashEnd;
+
         public void Start()
         {
-            baseGravityScale = Body.gravityScale;
             velocityModifyer = Vector2.one;
         }
 
@@ -56,25 +59,22 @@ namespace Core.Character.Player
             if (dashCooldownTimer > 0)
                 dashCooldownTimer -= Time.deltaTime;
             DoJump();
-            // DoRun();
+            EndDashCheck();
         }
 
         void FixedUpdate()
         {
-            // GatherInput();
             Move();
             // Landing();
             // velocityModifyer = Vector2.one;
         }
 
-        // pre: --
-        // post: listen player inputs
-        private void GatherInput()
+        private void EndDashCheck()
         {
-            if (!Controllable)
+            if (!isDashing)
                 return;
-            horizontal = Input.GetAxis("Horizontal");
-            isDashing = Input.GetButton("Dash");
+            if (IsCornerTime)
+                EndDash();
         }
 
         // pre: GatherInput execution
@@ -101,21 +101,23 @@ namespace Core.Character.Player
         {
             if (!CanDash)
                 return;
-            StartCoroutine(DashImpulse());
+            StartDash();
         }
 
+        // pre: player should be controllable
         private void DoRun()
         {
             if (!CanRun)
                 return;
-
             float horizontal = Input.GetAxis("Horizontal");
             float velocityX = horizontal * basicSpeed; // (* aceleration => velocityModifier.x)
 
             if (!IsOnGround) // air drag avoid moving quick in the air 
                 velocityX *= AirDrag;
-            var targetVelocity = new Vector2(velocityX, Body.velocity.y);
-            Body.velocity = Vector2.SmoothDamp(Body.velocity, targetVelocity, ref currentVelocity, 0.01f);
+
+            var newVelocity = new Vector2(velocityX, Body.velocity.y);
+            Body.velocity = Vector2.SmoothDamp(Body.velocity, newVelocity, ref currentVelocity, 0.0001f);
+            Animator.SetBool(CharacterAnimations.Run, Mathf.Abs(Body.velocity.x) > 0.05f);
         }
 
 
@@ -135,9 +137,9 @@ namespace Core.Character.Player
         /// <sumary>
         public void ImpulseUp(float force)
         {
-            this.Body.gravityScale = baseGravityScale;
+            this.Body.gravityScale = BaseGravityScale;
             impulsed = true;
-            Freeze();
+            // Freeze();
             Body.AddForce(Vector2.up * force, ForceMode2D.Impulse);
         }
 
@@ -148,9 +150,9 @@ namespace Core.Character.Player
         /// <sumary>
         public void Impulse(Vector2 impulse)
         {
-            this.Body.gravityScale = baseGravityScale;
+            this.Body.gravityScale = BaseGravityScale;
             impulsed = true;
-            Freeze();
+            // Freeze();
             Body.AddForce(impulse, ForceMode2D.Impulse);
         }
 
@@ -160,16 +162,16 @@ namespace Core.Character.Player
             if (Input.GetButtonDown("Jump") && CanJump) // button down, first key of jump
             {
                 isJumping = true;
-                holdingAfterJump = HoldingAfterJump;
+                holdingAfterJumpTimer = HoldingAfterJump;
                 Body.velocity = new Vector2(Body.velocity.x, jumpForce);
                 // Animator.SetTrigger("Jump"); // todo: trigger jump animation
             }
             if (Input.GetButton("Jump") && CanHoldJump) // while jumping
             {
-                if (holdingAfterJump > 0)
+                if (holdingAfterJumpTimer > 0)
                 {
                     Body.velocity = new Vector2(Body.velocity.x, jumpForce);
-                    holdingAfterJump -= Time.deltaTime;
+                    holdingAfterJumpTimer -= Time.deltaTime;
                 }
                 else
                 {
@@ -184,58 +186,25 @@ namespace Core.Character.Player
             }
         }
 
-        private IEnumerator DashImpulse()
+        private void StartDash()
         {
             isDashing = true;
+            Animator.SetTrigger(CharacterAnimations.Dash);
             Body.velocity = Vector2.zero;
             Body.gravityScale = 0;
             Body.AddForce(Vector2.right * FacingValue * DashSpeed, ForceMode2D.Impulse);
-            yield return new WaitForSeconds(DashDuration);
-            Body.gravityScale = baseGravityScale;
+            OnDashEnd?.Invoke();
+        }
+
+        // pre: callable only by end of dash animation event or wall collision
+        public void EndDash()
+        {
+            if (!isDashing)
+                return;
+            Body.gravityScale = BaseGravityScale;
             isDashing = false;
-        }
-
-
-        // pre: --
-        // post: adds force impulse with facing orientation
-        public IEnumerator DashCoroutine(PlayerFacing facing, float duration, System.Action onComplete = null)
-        {
-            isDashing = true;
-            float gravityScale = this.Body.gravityScale;
-            Freeze();
-            this.Body.gravityScale = 0;
-            var direction = facing == PlayerFacing.Left ? -1 : 1;
-            this.Body.AddForce(new Vector2(dashSpeed * direction, 0f), ForceMode2D.Impulse);
-            yield return new WaitForSeconds(duration);
-
-            // avoids stack when you had dash
-            // and them Ajax was trigger by impulse effect
-            if (!impulsed)
-            {
-                Freeze();
-            }
-            this.Body.gravityScale = gravityScale;
-            isDashing = false;
-            if (onComplete != null) onComplete();
-        }
-
-        public void Freeze()
-        {
-            this.Body.velocity = Vector2.zero;
-        }
-
-        private bool IsGrounded()
-        {
-            float extra = 0.1f;
-            RaycastHit2D ray = Physics2D.BoxCast(BodyCollider.bounds.center, BodyCollider.bounds.size, 0, Vector2.down, extra, whatIsGround);
-            bool grounded = ray.collider != null;
-            Color rayColor = grounded ? Color.green : Color.red;
-
-            Debug.DrawRay(BodyCollider.bounds.center + new Vector3(BodyCollider.bounds.extents.x, 0), Vector2.down * (BodyCollider.bounds.extents.y + extra), rayColor);
-            Debug.DrawRay(BodyCollider.bounds.center - new Vector3(BodyCollider.bounds.extents.x, 0), Vector2.down * (BodyCollider.bounds.extents.y + extra), rayColor);
-            Debug.DrawRay(BodyCollider.bounds.center - new Vector3(BodyCollider.bounds.extents.x, BodyCollider.bounds.extents.y + extra), Vector2.right * (2 * BodyCollider.bounds.extents.x), rayColor);
-
-            return grounded;
+            Animator.Rebind(); // resets animator and goes to entry state animator
+            OnDashEnd?.Invoke();
         }
 
         void OnCollisionEnter2D(Collision2D other)

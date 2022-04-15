@@ -270,18 +270,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &90487660 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2689394461502353927, guid: 3a92e288e57aab644a0656c959990934,
-    type: 3}
-  m_PrefabInstance: {fileID: 1830561270528675945}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ae3158f1f9851a47b8d13818a7b20f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &96553402 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8242193190072985616, guid: 0e821a2ba18245c408820dd339b504a5,
@@ -5841,12 +5829,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!4 &1856794166 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4338606660018724214, guid: 3a92e288e57aab644a0656c959990934,
-    type: 3}
-  m_PrefabInstance: {fileID: 1830561270528675945}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1868487963
 GameObject:
   m_ObjectHideFlags: 0
@@ -6065,6 +6047,36 @@ Transform:
   m_Father: {fileID: 308097942}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2033347773
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2033347774}
+  m_Layer: 9
+  m_Name: Time Corner Checker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2033347774
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2033347773}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.48, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1813202863}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2041063051
 GameObject:
   m_ObjectHideFlags: 0
@@ -6185,85 +6197,18 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 382464842943519906, guid: 3a92e288e57aab644a0656c959990934,
         type: 3}
-      propertyPath: dashHitArea
+      propertyPath: cornerCheckerOrigin
       value: 
-      objectReference: {fileID: 90487660}
+      objectReference: {fileID: 2033347774}
     - target: {fileID: 382464842943519906, guid: 3a92e288e57aab644a0656c959990934,
         type: 3}
-      propertyPath: punchHitArea
-      value: 
+      propertyPath: cornerCheckerRadius
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 382464842943519906, guid: 3a92e288e57aab644a0656c959990934,
         type: 3}
-      propertyPath: rayProjectile
-      value: 
-      objectReference: {fileID: 3112578304023649470, guid: c4740bcc5bc007640b0bb2cb7af30eac,
-        type: 3}
-    - target: {fileID: 382464842943519906, guid: 3a92e288e57aab644a0656c959990934,
-        type: 3}
-      propertyPath: playerData.raySpeed
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 382464842943519906, guid: 3a92e288e57aab644a0656c959990934,
-        type: 3}
-      propertyPath: rayProjectilePrefab
-      value: 
-      objectReference: {fileID: 503972146821115021, guid: d69ef617df5756d42a789cc0ea7f80e2,
-        type: 3}
-    - target: {fileID: 382464842943519906, guid: 3a92e288e57aab644a0656c959990934,
-        type: 3}
-      propertyPath: playerData.dashSpeed
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 382464842943519906, guid: 3a92e288e57aab644a0656c959990934,
-        type: 3}
-      propertyPath: playerData.rayOrigin
-      value: 
-      objectReference: {fileID: 1856794166}
-    - target: {fileID: 382464842943519906, guid: 3a92e288e57aab644a0656c959990934,
-        type: 3}
-      propertyPath: playerData.rayCooldown
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 382464842943519906, guid: 3a92e288e57aab644a0656c959990934,
-        type: 3}
-      propertyPath: playerData.rayDuration
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 382464842943519906, guid: 3a92e288e57aab644a0656c959990934,
-        type: 3}
-      propertyPath: playerData.rayLifetime
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 382464842943519906, guid: 3a92e288e57aab644a0656c959990934,
-        type: 3}
-      propertyPath: playerData.dashCooldown
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 382464842943519906, guid: 3a92e288e57aab644a0656c959990934,
-        type: 3}
-      propertyPath: playerData.dashDuration
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 382464842943519906, guid: 3a92e288e57aab644a0656c959990934,
-        type: 3}
-      propertyPath: playerData.recoverCooldown
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 382464842943519906, guid: 3a92e288e57aab644a0656c959990934,
-        type: 3}
-      propertyPath: playerData.recoverDuration
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 382464842943519906, guid: 3a92e288e57aab644a0656c959990934,
-        type: 3}
-      propertyPath: playerData.holdingAfterJump
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 382464842943519908, guid: 3a92e288e57aab644a0656c959990934,
-        type: 3}
-      propertyPath: hitProtectionDuration
-      value: 1
+      propertyPath: whatIsGround.m_Bits
+      value: 256
       objectReference: {fileID: 0}
     - target: {fileID: 2689394463106163805, guid: 3a92e288e57aab644a0656c959990934,
         type: 3}
@@ -6329,16 +6274,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Ajax
-      objectReference: {fileID: 0}
-    - target: {fileID: 4338606659711849381, guid: 3a92e288e57aab644a0656c959990934,
-        type: 3}
-      propertyPath: m_Name
-      value: Dash Hit Area
-      objectReference: {fileID: 0}
-    - target: {fileID: 4338606660018724215, guid: 3a92e288e57aab644a0656c959990934,
-        type: 3}
-      propertyPath: m_Name
-      value: Ray Origin
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a92e288e57aab644a0656c959990934, type: 3}

@@ -29,11 +29,13 @@ public class Springboard : MonoBehaviour
         it's nearest parent and adds
         deviations `phi` desviation, by default it's 90 degree
     */
+
+    // todo: check impulse logic
     void OnTriggerEnter2D(Collider2D other)
     {
         if (compareTag != null && !other.CompareTag(compareTag)) return;
 
-        MovementController ajaxMovement = other.GetComponent<MovementController>();
+        PlayerMovementManager ajaxMovement = other.GetComponent<PlayerMovementManager>();
 
         var rad = (transform.localEulerAngles.z + desviation) * Mathf.Deg2Rad;
         var xForce = force * Mathf.Cos(rad);

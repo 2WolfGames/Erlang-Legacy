@@ -17,4 +17,11 @@ public class EventAnimation : MonoBehaviour
         var player = BasePlayer.Instance;
         player.Controllable = true;
     }
+
+    // pre: called at end of dash animation
+    public void OnDashEnd()
+    {
+        var player = BasePlayer.Instance;
+        player.GetComponent<PlayerMovementManager>().EndDash();
+    }
 }

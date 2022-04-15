@@ -15,19 +15,25 @@ namespace Core.Character.Player
         [SerializeField] HitArea dashHitArea;
         [SerializeField] HitArea punchHitArea; // basic attack damage area
         [SerializeField] LayerMask whatIsGround;
-        private MovementController ajaxMovement;
+        [SerializeField] Transform cornerCheckerOrigin;
+        [SerializeField] float cornerCheckerRadius;
+
+        private float baseGravityScale;
+        private PlayerMovementManager ajaxMovement;
         private FXController ajaxFX;
         private Protectable playerProtection;
         private PlayerFacingManager playerFacingManager;
         private PlayerAbilitiesManager playerAbilitiesManager;
         private bool controllable = true;
         private bool blockingUI;
-        public bool IsOnGround => ajaxMovement.IsOnGround;
+        public float BaseGravityScale => baseGravityScale;
         public bool CanBeHit => playerProtection.CanBeHit;
         public bool IsDashing => playerAbilitiesManager.IsDashing;
         public PlayerFacing Facing => playerFacingManager.Facing;
         public int FacingValue => playerFacingManager.FacingToInt;
         public PlayerData PlayerData => playerData;
+        public bool IsGrounded => CheckGrounded();
+        public bool IsCornerTime => CheckCornerTime();
         public bool BlockingUI
         {
             get => blockingUI;
@@ -52,7 +58,7 @@ namespace Core.Character.Player
         }
         public Collider2D BodyCollider => GetComponent<Collider2D>();
         public Rigidbody2D Body => GetComponent<Rigidbody2D>();
-        public Animator Animator => GetComponent<Animator>();
+        public Animator Animator => GetComponentInChildren<Animator>();
         public static BasePlayer Instance;
 
         protected override void OnAwake()
@@ -60,7 +66,7 @@ namespace Core.Character.Player
             // global game instance
             Instance = this;
 
-            ajaxMovement = GetComponent<MovementController>();
+            ajaxMovement = GetComponent<PlayerMovementManager>();
             ajaxFX = GetComponent<FXController>();
             playerFacingManager = GetComponent<PlayerFacingManager>();
 
@@ -74,6 +80,8 @@ namespace Core.Character.Player
             dashHitArea.OnHit += OnDashHit;
 
             rayProjectile.OnHit += OnRayProjectileHit;
+
+            baseGravityScale = Body.gravityScale;
         }
 
         // pre: called by some function that stunds player (called by hit animation)
@@ -91,7 +99,6 @@ namespace Core.Character.Player
         // PROP: instead of freezing player we can make time slow 
         private void OnUncontrollable()
         {
-            ajaxMovement.Freeze();
             ajaxMovement.enabled = false;
             playerFacingManager.enabled = false;
             playerAbilitiesManager.enabled = false;
@@ -120,11 +127,11 @@ namespace Core.Character.Player
         private void OnTriggerDash()
         {
             Debug.Log("Trigger dash");
-            // StartCoroutine(ajaxFX.InhibitFlip(playerData.dashDuration));
-            StartCoroutine(ajaxFX.DashCoroutine(playerData.dashDuration));
-            StartCoroutine(ajaxMovement.DashCoroutine(Facing, playerData.dashDuration));
-            StartCoroutine(dashHitArea.Hit(playerData.dashDuration));
-            playerProtection.ResetProtection(playerData.dashDuration);
+            // // StartCoroutine(ajaxFX.InhibitFlip(playerData.dashDuration));
+            // StartCoroutine(ajaxFX.DashCoroutine(playerData.dashDuration));
+            // StartCoroutine(ajaxMovement.DashCoroutine(Facing, playerData.dashDuration));
+            // StartCoroutine(dashHitArea.Hit(playerData.dashDuration));
+            // playerProtection.ResetProtection(playerData.dashDuration);
         }
 
         private void OnDashHit(Collider2D enemy)
@@ -166,6 +173,32 @@ namespace Core.Character.Player
         public void Jump()
         {
             ajaxFX.TriggerJumpFX();
+        }
+
+        // pre: --
+        // post: tells you if player is touching 
+        private bool CheckGrounded()
+        {
+            float extra = 0.1f;
+            RaycastHit2D ray = Physics2D.BoxCast(BodyCollider.bounds.center, BodyCollider.bounds.size, 0, Vector2.down, extra, whatIsGround);
+            return ray.collider != null;
+        }
+
+        private bool CheckCornerTime()
+        {
+            return Physics2D.OverlapCircle(cornerCheckerOrigin.position, cornerCheckerRadius, whatIsGround);
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(cornerCheckerOrigin.position, cornerCheckerRadius);
+
+            Color rayColor = IsGrounded ? Color.green : Color.red;
+            float extra = 0.1f;
+            Debug.DrawRay(BodyCollider.bounds.center + new Vector3(BodyCollider.bounds.extents.x, 0), Vector2.down * (BodyCollider.bounds.extents.y + extra), rayColor);
+            Debug.DrawRay(BodyCollider.bounds.center - new Vector3(BodyCollider.bounds.extents.x, 0), Vector2.down * (BodyCollider.bounds.extents.y + extra), rayColor);
+            Debug.DrawRay(BodyCollider.bounds.center - new Vector3(BodyCollider.bounds.extents.x, BodyCollider.bounds.extents.y + extra), Vector2.right * (2 * BodyCollider.bounds.extents.x), rayColor);
         }
     }
 }

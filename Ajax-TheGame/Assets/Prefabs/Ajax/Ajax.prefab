@@ -1,35 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1613346067
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1613346068}
-  m_Layer: 9
-  m_Name: Feets
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1613346068
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1613346067}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.49, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4338606659265295168}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2689394463106163803
 GameObject:
   m_ObjectHideFlags: 0
@@ -223,7 +193,6 @@ Transform:
   - {fileID: 4338606659711849380}
   - {fileID: 4338606660018724214}
   - {fileID: 7562044211816674290}
-  - {fileID: 1613346068}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -239,12 +208,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e450b5a5be415d41964c9e2bc103e4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dashAttack: {fileID: 2689394461502353927}
-  rayPrefab: {fileID: 503972146821115021, guid: d69ef617df5756d42a789cc0ea7f80e2,
+  playerData:
+    HP: 0
+    maxHP: 0
+    basicSpeed: 0
+    dashSpeed: 20
+    jumpPower: 0
+    airDrag: 0
+    dashDuration: 1
+    holdingAfterJump: 0.2
+    dashDamage: 0
+    rayDamage: 0
+    punchDamage: 0
+    recoverCooldown: 2
+    dashCooldown: 5
+    rayCooldown: 0.5
+    rayOrigin: {fileID: 4338606660018724214}
+    raySpeed: 30
+    rayLifetime: 5
+  rayProjectile: {fileID: 3112578304023649470, guid: c4740bcc5bc007640b0bb2cb7af30eac,
     type: 3}
-  raySpeed: 20
-  recoverTime: 1.5
-  feets: {fileID: 1613346068}
+  dashHitArea: {fileID: 2689394461502353927}
+  punchHitArea: {fileID: 0}
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &4338606659265295169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -278,6 +266,7 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
+  currentVelocity: {x: 0, y: 0}
 --- !u!114 &4338606659265295174
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -290,10 +279,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c069eab55c8c52e48a1694f2b6db354a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBtwDash: 1
-  dashTime: 0.25
-  timeBtwVfRay: 0.5
-  vengefulRayTransform: {fileID: 4338606660018724214}
 --- !u!114 &2689394462030703258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -331,7 +316,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94c19af845919594ba312947389c2c20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canBeTouch: 1
+  protectionDuration: 0
 --- !u!61 &4338606659265295170
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -389,7 +374,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4338606660018724214}
   m_Layer: 9
-  m_Name: VR transform
+  m_Name: Ray Origin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -500,7 +485,7 @@ PrefabInstance:
     - target: {fileID: 4680161481662213464, guid: e48842cb521a61645a60ba718590ae0a,
         type: 3}
       propertyPath: m_Name
-      value: Dash
+      value: Dash Hit Area
       objectReference: {fileID: 0}
     - target: {fileID: 4680161481662213464, guid: e48842cb521a61645a60ba718590ae0a,
         type: 3}
