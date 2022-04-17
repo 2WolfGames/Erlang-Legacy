@@ -9,8 +9,6 @@ namespace Core.Character.Player
     {
         [Header("Linked")]
         [SerializeField] ParticleSystem jumpParticles;
-        [SerializeField] TrailRenderer dashTrailRenderer;
-
         BasePlayer basePlayer;
         Animator animator;
 
@@ -28,11 +26,6 @@ namespace Core.Character.Player
         {
             basePlayer = GetComponent<BasePlayer>();
             animator = gameObject.GetComponentInChildren<Animator>();
-        }
-
-        void Start()
-        {
-            dashTrailRenderer.widthMultiplier = 0;
         }
 
         void FixedUpdate()
@@ -60,7 +53,7 @@ namespace Core.Character.Player
                 jumpParticles.Play();
             }
             animator.SetTrigger("jump");
-            animator.SetBool("jumping", true);
+            // animator.SetBool("jumping", true);
         }
 
         // pre: --
@@ -112,13 +105,13 @@ namespace Core.Character.Player
             animator.SetBool("jumping", false);
         }
 
-        public IEnumerator DashCoroutine(float dashDuration)
-        {
-            animator.SetTrigger("dash");
-            dashTrailRenderer.widthMultiplier = 3;
-            yield return new WaitForSeconds(dashDuration);
-            dashTrailRenderer.widthMultiplier = 0;
-        }
+        // public IEnumerator DashCoroutine(float dashDuration)
+        // {
+        //     animator.SetTrigger("dash");
+        //     dashTrailRenderer.widthMultiplier = 3;
+        //     yield return new WaitForSeconds(dashDuration);
+        //     dashTrailRenderer.widthMultiplier = 0;
+        // }
 
         public void SetRunFX(bool isRunning)
         {

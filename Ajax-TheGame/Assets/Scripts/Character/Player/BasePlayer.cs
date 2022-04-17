@@ -4,6 +4,7 @@ using Core.Shared.Enum;
 using Core.Combat.Projectile;
 using Core.Util;
 using Core.Combat;
+using Core.Util.Serializable;
 
 // todo: rename this file to PlayerManager & removes base character herarchy
 namespace Core.Character.Player
@@ -15,11 +16,9 @@ namespace Core.Character.Player
         [SerializeField] HitArea dashHitArea;
         [SerializeField] HitArea punchHitArea; // basic attack damage area
         [SerializeField] LayerMask whatIsGround;
-        [SerializeField] Transform cornerCheckerOrigin;
-        [SerializeField] float cornerCheckerRadius;
-
+        [SerializeField] Circle wallChecker;
         private float baseGravityScale;
-        private PlayerMovementManager ajaxMovement;
+        private PlayerMovementManager playerMovementManager;
         private FXController ajaxFX;
         private Protectable playerProtection;
         private PlayerFacingManager playerFacingManager;
@@ -66,7 +65,7 @@ namespace Core.Character.Player
             // global game instance
             Instance = this;
 
-            ajaxMovement = GetComponent<PlayerMovementManager>();
+            playerMovementManager = GetComponent<PlayerMovementManager>();
             ajaxFX = GetComponent<FXController>();
             playerFacingManager = GetComponent<PlayerFacingManager>();
 
@@ -82,13 +81,30 @@ namespace Core.Character.Player
             rayProjectile.OnHit += OnRayProjectileHit;
 
             baseGravityScale = Body.gravityScale;
+
+            playerMovementManager.OnDashStart += OnUncontrollable;
+            playerMovementManager.OnDashEnd += OnControllable;
+        }
+
+        public void Update()
+        {
+            MayEndDash();
+        }
+
+        // pre: --
+        // post: force end dash at walls collisions
+        // usufull even when player movomement manager is unactive
+        private void MayEndDash()
+        {
+            bool end = playerMovementManager.IsDashing && IsCornerTime;
+            if (end) playerMovementManager.EndDash();
         }
 
         // pre: called by some function that stunds player (called by hit animation)
         // post: enable scripts & returns normal game constants
         private void OnControllable()
         {
-            ajaxMovement.enabled = true;
+            playerMovementManager.enabled = true;
             playerFacingManager.enabled = true;
             playerAbilitiesManager.enabled = true;
             // reset global game constant to normal state if needed...
@@ -99,7 +115,7 @@ namespace Core.Character.Player
         // PROP: instead of freezing player we can make time slow 
         private void OnUncontrollable()
         {
-            ajaxMovement.enabled = false;
+            playerMovementManager.enabled = false;
             playerFacingManager.enabled = false;
             playerAbilitiesManager.enabled = false;
             // set momentanious game constants if needed...
@@ -129,7 +145,7 @@ namespace Core.Character.Player
             Debug.Log("Trigger dash");
             // // StartCoroutine(ajaxFX.InhibitFlip(playerData.dashDuration));
             // StartCoroutine(ajaxFX.DashCoroutine(playerData.dashDuration));
-            // StartCoroutine(ajaxMovement.DashCoroutine(Facing, playerData.dashDuration));
+            // StartCoroutine(playerMovementManager.DashCoroutine(Facing, playerData.dashDuration));
             // StartCoroutine(dashHitArea.Hit(playerData.dashDuration));
             // playerProtection.ResetProtection(playerData.dashDuration);
         }
@@ -170,11 +186,6 @@ namespace Core.Character.Player
             ajaxFX.TriggerLandFX();
         }
 
-        public void Jump()
-        {
-            ajaxFX.TriggerJumpFX();
-        }
-
         // pre: --
         // post: tells you if player is touching 
         private bool CheckGrounded()
@@ -184,15 +195,17 @@ namespace Core.Character.Player
             return ray.collider != null;
         }
 
+        // pre: --
+        // post: true if touching wall otrw false
         private bool CheckCornerTime()
         {
-            return Physics2D.OverlapCircle(cornerCheckerOrigin.position, cornerCheckerRadius, whatIsGround);
+            return Physics2D.OverlapCircle(wallChecker.origin.position, wallChecker.radius, whatIsGround);
         }
 
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(cornerCheckerOrigin.position, cornerCheckerRadius);
+            Gizmos.DrawWireSphere(wallChecker.origin.position, wallChecker.radius);
 
             Color rayColor = IsGrounded ? Color.green : Color.red;
             float extra = 0.1f;

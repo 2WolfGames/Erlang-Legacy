@@ -10,21 +10,7 @@ namespace Core.Character.Player
 {
     public class PlayerMovementManager : MonoBehaviour
     {
-        [Header("Configurations")]
-        [Tooltip("Displacement power on sides while running")][SerializeField] float basicSpeed;
-        [Tooltip("Displacement power on sides while isDashing")][SerializeField] float dashSpeed;
-        [Tooltip("Displacement power on sides while jumping")][SerializeField] float jumpForce = 2;
-        [Tooltip("How much time player can hold jump bottom")][SerializeField] float holdJump = 0.3f;
-        [SerializeField] LayerMask whatIsGround;
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////
-
         [SerializeField] Vector2 currentVelocity;
-        float holdingAfterJumpTimer;
-        private bool isJumping = false;
-        bool justJumped = false;
-        bool isDashing = false;
-        bool impulsed = false;
         private float BaseGravityScale => Player.BaseGravityScale;
         private Vector2 velocityModifyer;
         private BasePlayer Player => BasePlayer.Instance;
@@ -36,15 +22,25 @@ namespace Core.Character.Player
         private bool Controllable => Player.Controllable;
         private float HoldingAfterJump => Player.PlayerData.holdingAfterJump;
         private float DashSpeed => Player.PlayerData.dashSpeed;
+        private float JumpPower => Player.PlayerData.jumpPower;
+        private float MovementSpeed => Player.PlayerData.movementSpeed;
         private Animator Animator => Player.Animator;
-        private float dashCooldownTimer;
         private bool IsOnGround => Player.IsGrounded;
-        private bool IsCornerTime => Player.IsCornerTime;
+        private TrailRenderer DashTrail => Player.PlayerData.dashTrailRender;
+        private float dashCooldownTimer;
+        private float holdingAfterJumpTimer;
+        private bool isJumping = false;
+        private bool justJumped = false;
+        private bool isDashing = false;
+        private bool impulsed = false;
         public bool IsJumping => isJumping;
         public bool CanJump => !isJumping && !isDashing && IsOnGround;
         private bool CanHoldJump => isJumping && !isDashing;
         public bool CanDash => !isDashing && dashCooldownTimer <= 0;
         public bool CanRun => !isDashing;
+        public bool IsDashing => isDashing;
+        private bool CanLand => justJumped && IsOnGround;
+        private ParticleSystem JumpParticles => Player.PlayerData.jumpParticles;
 
         public Action OnDashStart;
         public Action OnDashEnd;
@@ -52,6 +48,7 @@ namespace Core.Character.Player
         public void Start()
         {
             velocityModifyer = Vector2.one;
+            DashTrail.widthMultiplier = 0;
         }
 
         void Update()
@@ -59,7 +56,7 @@ namespace Core.Character.Player
             if (dashCooldownTimer > 0)
                 dashCooldownTimer -= Time.deltaTime;
             DoJump();
-            EndDashCheck();
+            DoLand();
         }
 
         void FixedUpdate()
@@ -67,14 +64,6 @@ namespace Core.Character.Player
             Move();
             // Landing();
             // velocityModifyer = Vector2.one;
-        }
-
-        private void EndDashCheck()
-        {
-            if (!isDashing)
-                return;
-            if (IsCornerTime)
-                EndDash();
         }
 
         // pre: GatherInput execution
@@ -85,16 +74,6 @@ namespace Core.Character.Player
             bool wannaDash = Input.GetButton("Dash");
             if (wannaDash) DoDash();
             else DoRun();
-            // // when Ajax is at the air, we let him take certain control of it's movement
-            // var facingValue = BasePlayer.Instance.FacingValue;
-            // Debug.Log($"facing value {facingValue}");
-            // Debug.Log($"basicSpeed value {basicSpeed}");
-            // Debug.Log($"velocityModifier value {velocityModifyer}");
-            // float vx = impulsed ?
-            // Body.velocity.x + facingValue * basicSpeed * 0.05f
-            // : facingValue * basicSpeed * velocityModifyer.x;
-            // Body.velocity = new Vector2(vx, Body.velocity.y);
-            // basePlayer.Run(Mathf.Abs(Body.velocity.x) > Mathf.Epsilon);
         }
 
         private void DoDash()
@@ -110,7 +89,7 @@ namespace Core.Character.Player
             if (!CanRun)
                 return;
             float horizontal = Input.GetAxis("Horizontal");
-            float velocityX = horizontal * basicSpeed; // (* aceleration => velocityModifier.x)
+            float velocityX = horizontal * MovementSpeed; // (* aceleration => velocityModifier.x)
 
             if (!IsOnGround) // air drag avoid moving quick in the air 
                 velocityX *= AirDrag;
@@ -120,14 +99,12 @@ namespace Core.Character.Player
             Animator.SetBool(CharacterAnimations.Run, Mathf.Abs(Body.velocity.x) > 0.05f);
         }
 
-
-        private void Landing()
+        private void DoLand()
         {
-            if (justJumped && IsOnGround)
-            {
-                // basePlayer.Land();
-                justJumped = false;
-            }
+            if (!CanLand) return;
+            justJumped = false;
+            isJumping = false;
+            Animator.SetBool(CharacterAnimations.Jumping, isJumping);
         }
 
         /// <sumary>
@@ -163,14 +140,16 @@ namespace Core.Character.Player
             {
                 isJumping = true;
                 holdingAfterJumpTimer = HoldingAfterJump;
-                Body.velocity = new Vector2(Body.velocity.x, jumpForce);
-                // Animator.SetTrigger("Jump"); // todo: trigger jump animation
+                Body.velocity = new Vector2(Body.velocity.x, JumpPower);
+                JumpParticles.Play();
+                Animator.SetTrigger(CharacterAnimations.StartJump);
+                Animator.SetBool(CharacterAnimations.Jumping, isJumping);
             }
             if (Input.GetButton("Jump") && CanHoldJump) // while jumping
             {
                 if (holdingAfterJumpTimer > 0)
                 {
-                    Body.velocity = new Vector2(Body.velocity.x, jumpForce);
+                    Body.velocity = new Vector2(Body.velocity.x, JumpPower);
                     holdingAfterJumpTimer -= Time.deltaTime;
                 }
                 else
@@ -189,11 +168,12 @@ namespace Core.Character.Player
         private void StartDash()
         {
             isDashing = true;
+            DashTrail.widthMultiplier = 3;
             Animator.SetTrigger(CharacterAnimations.Dash);
             Body.velocity = Vector2.zero;
             Body.gravityScale = 0;
             Body.AddForce(Vector2.right * FacingValue * DashSpeed, ForceMode2D.Impulse);
-            OnDashEnd?.Invoke();
+            OnDashStart?.Invoke();
         }
 
         // pre: callable only by end of dash animation event or wall collision
@@ -204,6 +184,7 @@ namespace Core.Character.Player
             Body.gravityScale = BaseGravityScale;
             isDashing = false;
             Animator.Rebind(); // resets animator and goes to entry state animator
+            DashTrail.widthMultiplier = 0;
             OnDashEnd?.Invoke();
         }
 
