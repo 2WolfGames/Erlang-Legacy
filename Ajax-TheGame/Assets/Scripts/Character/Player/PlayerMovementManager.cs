@@ -1,49 +1,55 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using System;
+using Core.Util.Serializable;
 
-using Core.Shared.Enum;
 
-// todo: rename movement controller to player movement manager
-// todo: instead of using player manager functions use lambda function setted at awake 
+// TODO: rename movement controller to player movement manager
 namespace Core.Character.Player
 {
     public class PlayerMovementManager : MonoBehaviour
     {
-        [SerializeField] Vector2 currentVelocity;
+
+        [SerializeField] Circle wallChecker;
+        [SerializeField] Circle landChecker;
+        [SerializeField] LayerMask whatIsGround;
+
+        private Circle WallChecker { get => wallChecker; set => wallChecker = value; }
+        private Circle LandChecker { get => landChecker; set => landChecker = value; }
+        private LayerMask WhatIsGround { get => whatIsGround; set => whatIsGround = value; }
+
+
         private float BaseGravityScale => Player.BaseGravityScale;
         private Vector2 velocityModifyer;
         private BasePlayer Player => BasePlayer.Instance;
         private float FacingValue => Player.FacingValue;
-        private float AirDrag => (1f - Player.PlayerData.airDrag);
-        private float DashCooldown => Player.PlayerData.dashCooldown;
+        private float AirDrag => 1f - Player.PlayerData.Stats.AirDrag;
         private Rigidbody2D Body => Player.Body;
-        private Collider2D BodyCollider => Player.BodyCollider;
         private bool Controllable => Player.Controllable;
-        private float HoldingAfterJump => Player.PlayerData.holdingAfterJump;
-        private float DashSpeed => Player.PlayerData.dashSpeed;
-        private float JumpPower => Player.PlayerData.jumpPower;
-        private float MovementSpeed => Player.PlayerData.movementSpeed;
+        private float HoldingAfterJump => Player.PlayerData.Stats.HoldingAfterJump;
+        private float DashSpeed => Player.PlayerData.Stats.DashSpeed;
+        private float JumpPower => Player.PlayerData.Stats.JumpPower;
+        private float MovementSpeed => Player.PlayerData.Stats.MovementSpeed;
         private Animator Animator => Player.Animator;
-        private bool IsOnGround => Player.IsGrounded;
-        private TrailRenderer DashTrail => Player.PlayerData.dashTrailRender;
+        private TrailRenderer DashTrail => Player.PlayerData.DashTrailRender;
         private float dashCooldownTimer;
         private float holdingAfterJumpTimer;
         private bool isJumping = false;
         private bool justJumped = false;
         private bool isDashing = false;
-        private bool impulsed = false;
+        private Vector2 currentVelocity;
         public bool IsJumping => isJumping;
-        public bool CanJump => !isJumping && !isDashing && IsOnGround;
+        public bool IsCornerTime => CheckCornerTime();
+        public bool IsGrounded => CheckGrounded();
+        public bool CanJump => !isJumping && !isDashing && IsGrounded;
         private bool CanHoldJump => isJumping && !isDashing;
+        private bool CanLand => justJumped && CheckAboutToLand();
+        private Collider2D BodyCollider => Player.BodyCollider;
+        private ParticleSystem JumpParticles => Player.PlayerData.JumpParticles;
         public bool CanDash => !isDashing && dashCooldownTimer <= 0;
         public bool CanRun => !isDashing;
         public bool IsDashing => isDashing;
-        private bool CanLand => justJumped && IsOnGround;
-        private ParticleSystem JumpParticles => Player.PlayerData.jumpParticles;
-
-        public Action OnDashStart;
-        public Action OnDashEnd;
+        public Action OnDashStart { get; set; }
+        public Action OnDashEnd { get; set; }
 
         public void Start()
         {
@@ -51,7 +57,7 @@ namespace Core.Character.Player
             DashTrail.widthMultiplier = 0;
         }
 
-        void Update()
+        public void Update()
         {
             if (dashCooldownTimer > 0)
                 dashCooldownTimer -= Time.deltaTime;
@@ -59,39 +65,52 @@ namespace Core.Character.Player
             DoLand();
         }
 
-        void FixedUpdate()
+        public void FixedUpdate()
         {
             Move();
-            // Landing();
-            // velocityModifyer = Vector2.one;
         }
 
-        // pre: GatherInput execution
+        // pre: --
+        // post: listen walk and dash events
         private void Move()
         {
             if (!Controllable)
                 return;
+
             bool wannaDash = Input.GetButton("Dash");
             if (wannaDash) DoDash();
             else DoRun();
+
+            EndDashCheck();
         }
 
         private void DoDash()
         {
             if (!CanDash)
                 return;
+
             StartDash();
         }
 
-        // pre: player should be controllable
+        // pre: --
+        // post: end dash at wall collisions
+        private void EndDashCheck()
+        {
+            if (isDashing && IsCornerTime)
+                EndDash();
+        }
+
+        // pre: --
+        // post: handles vertical player movement
         private void DoRun()
         {
             if (!CanRun)
                 return;
+
             float horizontal = Input.GetAxis("Horizontal");
             float velocityX = horizontal * MovementSpeed; // (* aceleration => velocityModifier.x)
 
-            if (!IsOnGround) // air drag avoid moving quick in the air 
+            if (!IsGrounded) // air drag avoid moving quick in the air 
                 velocityX *= AirDrag;
 
             var newVelocity = new Vector2(velocityX, Body.velocity.y);
@@ -99,41 +118,21 @@ namespace Core.Character.Player
             Animator.SetBool(CharacterAnimations.Run, Mathf.Abs(Body.velocity.x) > 0.05f);
         }
 
+        // pre: player just jumped
+        // post: character lands triggering landing animation & resets jumping variables
         private void DoLand()
         {
-            if (!CanLand) return;
+            if (!CanLand)
+                return;
+
             justJumped = false;
             isJumping = false;
+
             Animator.SetBool(CharacterAnimations.Jumping, isJumping);
         }
 
-        /// <sumary>
-        /// freze normal control for a certain time applying the impulse.
-        /// if anything had change its gravity, 
-        // the methods recover its firt local gravity scale
-        /// <sumary>
-        public void ImpulseUp(float force)
-        {
-            this.Body.gravityScale = BaseGravityScale;
-            impulsed = true;
-            // Freeze();
-            Body.AddForce(Vector2.up * force, ForceMode2D.Impulse);
-        }
-
-        /// <sumary>
-        /// freze normal control for a certain time applying the impulse.
-        /// if anything had change its gravity, 
-        // the methods recover its firt local gravity scale
-        /// <sumary>
-        public void Impulse(Vector2 impulse)
-        {
-            this.Body.gravityScale = BaseGravityScale;
-            impulsed = true;
-            // Freeze();
-            Body.AddForce(impulse, ForceMode2D.Impulse);
-        }
-
-        // pre: Controllable
+        // pre: --
+        // post: handles land holding event
         void DoJump()
         {
             if (Input.GetButtonDown("Jump") && CanJump) // button down, first key of jump
@@ -176,11 +175,35 @@ namespace Core.Character.Player
             OnDashStart?.Invoke();
         }
 
+
+        // pre: --
+        // post: tells you if player is touching 
+        private bool CheckGrounded()
+        {
+            float extra = 0.1f;
+            RaycastHit2D ray = Physics2D.BoxCast(BodyCollider.bounds.center, BodyCollider.bounds.size, 0, Vector2.down, extra, WhatIsGround);
+            return ray.collider != null;
+        }
+
+        // pre: --
+        // post: true if touching wall otrw false
+        private bool CheckCornerTime()
+        {
+            return Physics2D.OverlapCircle(WallChecker.origin.position, WallChecker.radius, WhatIsGround);
+        }
+
+        private bool CheckAboutToLand()
+        {
+            return Body.velocity.y < 0 && Physics2D.OverlapCircle(LandChecker.origin.position, LandChecker.radius, WhatIsGround);
+        }
+
+
         // pre: callable only by end of dash animation event or wall collision
         public void EndDash()
         {
             if (!isDashing)
                 return;
+
             Body.gravityScale = BaseGravityScale;
             isDashing = false;
             Animator.Rebind(); // resets animator and goes to entry state animator
@@ -188,13 +211,15 @@ namespace Core.Character.Player
             OnDashEnd?.Invoke();
         }
 
-        void OnCollisionEnter2D(Collision2D other)
+        /// <sumary>
+        /// freze normal control for a certain time applying the impulse.
+        /// if anything had change its gravity, 
+        // the methods recover its firt local gravity scale
+        /// <sumary>
+        // TODO: may recover controll after few ms
+        public void Impulse(Vector2 power)
         {
-            // trigger effect ends when you had collide with something
-            if (impulsed)
-            {
-                impulsed = false;
-            }
+            Body.AddForce(power, ForceMode2D.Impulse);
         }
 
         //pre: -
@@ -203,6 +228,15 @@ namespace Core.Character.Player
         public void ModifyVelocity(Vector2 velocityModifyer)
         {
             this.velocityModifyer = velocityModifyer;
+        }
+
+        public void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(WallChecker.origin.position, WallChecker.radius);
+
+            Gizmos.color = Color.magenta;
+            Gizmos.DrawWireSphere(LandChecker.origin.position, LandChecker.radius);
         }
 
     }

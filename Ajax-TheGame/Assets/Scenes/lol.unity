@@ -4531,6 +4531,12 @@ SortingGroup:
   m_SortingLayerID: -110577571
   m_SortingLayer: -1
   m_SortingOrder: 0
+--- !u!4 &1356238343 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1356238343, guid: 3a92e288e57aab644a0656c959990934,
+    type: 3}
+  m_PrefabInstance: {fileID: 1830561270528675945}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1359920380
 Transform:
   m_ObjectHideFlags: 0
@@ -5856,6 +5862,12 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
+--- !u!4 &1924126420 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2033347774, guid: 3a92e288e57aab644a0656c959990934,
+    type: 3}
+  m_PrefabInstance: {fileID: 1830561270528675945}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1944782538
 GameObject:
   m_ObjectHideFlags: 0
@@ -6066,6 +6078,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1356238343, guid: 3a92e288e57aab644a0656c959990934, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.38
+      objectReference: {fileID: 0}
     - target: {fileID: 2689394463106163805, guid: 3a92e288e57aab644a0656c959990934,
         type: 3}
       propertyPath: m_Mesh
@@ -6125,6 +6141,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4338606659265295182, guid: 3a92e288e57aab644a0656c959990934,
+        type: 3}
+      propertyPath: landChecker.origin
+      value: 
+      objectReference: {fileID: 1356238343}
+    - target: {fileID: 4338606659265295182, guid: 3a92e288e57aab644a0656c959990934,
+        type: 3}
+      propertyPath: landChecker.radius
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4338606659265295182, guid: 3a92e288e57aab644a0656c959990934,
+        type: 3}
+      propertyPath: wallChecker.origin
+      value: 
+      objectReference: {fileID: 1924126420}
+    - target: {fileID: 4338606659265295182, guid: 3a92e288e57aab644a0656c959990934,
+        type: 3}
+      propertyPath: wallChecker.radius
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4338606659265295182, guid: 3a92e288e57aab644a0656c959990934,
+        type: 3}
+      propertyPath: whatIsGround.m_Bits
+      value: 256
       objectReference: {fileID: 0}
     - target: {fileID: 4338606659265295183, guid: 3a92e288e57aab644a0656c959990934,
         type: 3}

@@ -1,41 +1,29 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
+using System;
 
-[Serializable]
-public class PlayerData
+using Core.Character.Data;
+
+namespace Core.Character.Player
 {
-    [Header("Player Health")]
-    public int HP; // current life
-    public int maxHP; // max life
+    [Serializable]
+    public class PlayerData
+    {
+        
+        [Header("VFX")] 
+        [SerializeField] ParticleSystem jumpParticles;
+        [SerializeField] TrailRenderer dashTrailRender;
+        [SerializeField] HealthData health;
+        [SerializeField] StatsData stats;
+        [SerializeField] ProjectileData projectile;
+        [SerializeField] DamageAreaData damageArea;
+        
 
 
-    [Header("Movements")]
-    public float movementSpeed; // basic player speed movement
-    public float dashSpeed; // player speed at dashing
-    public float jumpPower;
-    [Range(0.1f, 1f)] public float airDrag;
-
-
-    [Header("Damage")]
-    public float dashDamage;
-    public float rayDamage; // how much damage ray does
-    public float punchDamage;
-
-
-    [Header("Cooldown or events duration")]
-    public float recoverCooldown;
-    public float dashCooldown; // how much it takes to trigger dash ability again
-    public float rayCooldown; // how much it takes to through a ray again
-    public float holdingAfterJump; // how much time can you press jump key to continue jumping
-
-
-    [Header("VFX")]
-    public ParticleSystem jumpParticles;
-    public TrailRenderer dashTrailRender;
-
-
-    [Header("Ray Projectile")]
-    public Transform rayOrigin; // from which point rays are triggered
-    public float raySpeed; // default ray ability speed
-    public float rayLifetime; // default ray abilty duration before it get's destroyed 
+        public ProjectileData Projectile { get => projectile; set => projectile = value; }
+        public HealthData Health { get => health; set => health = value; }
+        public StatsData Stats { get => stats; set => stats = value; }
+        public ParticleSystem JumpParticles { get => jumpParticles; set => jumpParticles = value; }
+        public TrailRenderer DashTrailRender { get => dashTrailRender; set => dashTrailRender = value; }
+        public DamageAreaData DamageArea { get => damageArea; set => damageArea = value; }
+    }
 }

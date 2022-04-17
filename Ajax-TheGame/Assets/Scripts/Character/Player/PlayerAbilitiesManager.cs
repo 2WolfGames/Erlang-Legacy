@@ -11,12 +11,10 @@ namespace Core.Character.Player
     {
         private float rayTimer;
         private float dashTimer;
-        private float RayCooldown => BasePlayer.Instance.PlayerData.rayCooldown;
-        private float DashCooldown => BasePlayer.Instance.PlayerData.dashCooldown;
+        private float RayCooldown => BasePlayer.Instance.PlayerData.Stats.RayCooldown;
         public bool CanTriggerDash => dashTimer <= 0 && !IsDashing;
         public bool CanTriggerRay => rayTimer <= 0 && !IsDashing;
         public bool IsDashing { get; private set; }
-        public Action OnTriggerDash;
         public Action OnTriggerRay;
 
         public void Update()
@@ -26,19 +24,10 @@ namespace Core.Character.Player
             if (dashTimer > 0)
                 dashTimer -= Time.deltaTime;
 
-            if (Input.GetButtonDown("Fire1") && CanTriggerDash)
-                TriggerDash();
             if (Input.GetButton("Fire2") && CanTriggerRay)
                 TriggerRay();
         }
 
-        private void TriggerDash()
-        {
-            IsDashing = true;
-            OnTriggerDash?.Invoke();
-            ResetDashTimer();
-            // StartCoroutine(ResetIsDashing());
-        }
 
         private void TriggerRay()
         {
@@ -50,12 +39,6 @@ namespace Core.Character.Player
         {
             BasePlayer player = BasePlayer.Instance;
             rayTimer = RayCooldown;
-        }
-
-        private void ResetDashTimer()
-        {
-            BasePlayer player = BasePlayer.Instance;
-            dashTimer = DashCooldown;
         }
 
     }

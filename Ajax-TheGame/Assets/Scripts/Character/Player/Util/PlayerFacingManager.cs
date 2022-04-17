@@ -10,7 +10,7 @@ namespace Core.Character.Player
 
         public int FacingToInt { get => (int)Facing * 2 - 1; }
 
-        void Update()
+        public void Update()
         {
             var input = Input.GetAxisRaw("Horizontal");
             if (Mathf.Abs(input) <= 0)

@@ -44,7 +44,7 @@ namespace Core.Combat
         // pre: --
         // post: search enemy controller in parent because of mechanism to 
         //        pass throught enemies without colliding
-        private void OnTriggerEnter2D(Collider2D other)
+        public void OnTriggerEnter2D(Collider2D other)
         {
             OnHit?.Invoke(other);
         }
