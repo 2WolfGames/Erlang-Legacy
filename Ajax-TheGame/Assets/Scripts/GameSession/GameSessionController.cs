@@ -1,24 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using DG.Tweening;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 public class GameSessionController : MonoBehaviour
 {
     Core.UI.LifeBar.LifeBarController lifeBarController;
-    [SerializeField] Image deathImage;
-
-    /*for test delete later*/
-    [SerializeField] bool loseLife = false;
-    int lifes = 5;
-    /*for test delete later*/
-    
     /*Save Point*/
     Vector3 savePoint;
     string sceneSavePoint;
     /*Current Point*/
     Vector3 currentPoint;
+    bool setUpLifes = false;
+
+    /*for test delete later*/
+    [SerializeField] bool loseLife = false;
+    int lifes = 5;
+    /*for test delete later*/
 
     void Awake(){
         int numGameSessionControllers = FindObjectsOfType<GameSessionController>().Length;
@@ -29,14 +26,24 @@ public class GameSessionController : MonoBehaviour
         }
     }
     private void Start() {
-        lifes = 5;
-        lifeBarController = FindObjectOfType<Core.UI.LifeBar.LifeBarController>();
-        lifeBarController.SetUpLifes(lifes); //TO DO: This has to check the scriptabble object of life
+        lifes = 5; //Delete
+        FindLifebar();
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        FindLifebar();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (setUpLifes){
+            lifeBarController?.SetUpLifes(lifes,5); //Todo
+            setUpLifes = false;
+        }
+
         if (loseLife){
             lifes--;
             lifeBarController.LoseLifes(1);
@@ -57,10 +64,9 @@ public class GameSessionController : MonoBehaviour
     }
 
     public void ResetGameToSavePoint(){
-        deathImage.DOFade(1,3).SetDelay(2).OnComplete( () =>
-        {
-            Core.Shared.Loader.Load(sceneSavePoint);
-        });
+        lifes = 5;
+        FindObjectOfType<InGameCanvas>()?.ActiveDeathImage();
+        StartCoroutine(Core.Shared.Loader.LoadWithDelay(sceneSavePoint,6));
     }
 
     public bool IsCurrentSavePoint(){
@@ -75,4 +81,8 @@ public class GameSessionController : MonoBehaviour
         return currentPoint;
     }
 
+    private void FindLifebar(){
+        lifeBarController = FindObjectOfType<Core.UI.LifeBar.LifeBarController>();
+        setUpLifes = true;
+    }
 }
