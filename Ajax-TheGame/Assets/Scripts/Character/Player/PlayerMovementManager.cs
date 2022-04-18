@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System;
 using Core.Util.Serializable;
+using System.Collections.Generic;
 
 
 // TODO: rename movement controller to player movement manager
@@ -8,18 +9,15 @@ namespace Core.Character.Player
 {
     public class PlayerMovementManager : MonoBehaviour
     {
-
         [SerializeField] Circle wallChecker;
         [SerializeField] Circle landChecker;
         [SerializeField] LayerMask whatIsGround;
+        [SerializeField] List<LayerMask> whatEndsDash;
 
         private Circle WallChecker { get => wallChecker; set => wallChecker = value; }
         private Circle LandChecker { get => landChecker; set => landChecker = value; }
         private LayerMask WhatIsGround { get => whatIsGround; set => whatIsGround = value; }
-
-
         private float BaseGravityScale => Player.BaseGravityScale;
-        private Vector2 velocityModifyer;
         private BasePlayer Player => BasePlayer.Instance;
         private float FacingValue => Player.FacingValue;
         private float AirDrag => 1f - Player.PlayerData.Stats.AirDrag;
@@ -37,12 +35,15 @@ namespace Core.Character.Player
         private bool justJumped = false;
         private bool isDashing = false;
         private Vector2 currentVelocity;
+
         public bool IsJumping => isJumping;
         public bool IsCornerTime => CheckCornerTime();
+        public bool ShouldEndDash => IsCornerTime || CheckCollisionEndDash();
         public bool IsGrounded => CheckGrounded();
+        public bool AboutToLand => CheckAboutToLand();
         public bool CanJump => !isJumping && !isDashing && IsGrounded;
         private bool CanHoldJump => isJumping && !isDashing;
-        private bool CanLand => justJumped && CheckAboutToLand();
+        private bool CanLand => justJumped && (AboutToLand || IsGrounded);
         private Collider2D BodyCollider => Player.BodyCollider;
         private ParticleSystem JumpParticles => Player.PlayerData.JumpParticles;
         public bool CanDash => !isDashing && dashCooldownTimer <= 0;
@@ -50,10 +51,11 @@ namespace Core.Character.Player
         public bool IsDashing => isDashing;
         public Action OnDashStart { get; set; }
         public Action OnDashEnd { get; set; }
+        public float Acceleration { get; set; } = 1;
+        public List<LayerMask> WhatEndsDash { get => whatEndsDash; private set => whatEndsDash = value; }
 
         public void Start()
         {
-            velocityModifyer = Vector2.one;
             DashTrail.widthMultiplier = 0;
         }
 
@@ -96,7 +98,7 @@ namespace Core.Character.Player
         // post: end dash at wall collisions
         private void EndDashCheck()
         {
-            if (isDashing && IsCornerTime)
+            if (isDashing && ShouldEndDash)
                 EndDash();
         }
 
@@ -108,13 +110,13 @@ namespace Core.Character.Player
                 return;
 
             float horizontal = Input.GetAxis("Horizontal");
-            float velocityX = horizontal * MovementSpeed; // (* aceleration => velocityModifier.x)
+            float velocityX = horizontal * MovementSpeed * Acceleration; // (* aceleration => velocityModifier.x)
 
             if (!IsGrounded) // air drag avoid moving quick in the air 
                 velocityX *= AirDrag;
 
             var newVelocity = new Vector2(velocityX, Body.velocity.y);
-            Body.velocity = Vector2.SmoothDamp(Body.velocity, newVelocity, ref currentVelocity, 0.0001f);
+            Body.velocity = Vector2.SmoothDamp(Body.velocity, newVelocity, ref currentVelocity, 0.000001f);
             Animator.SetBool(CharacterAnimations.Run, Mathf.Abs(Body.velocity.x) > 0.05f);
         }
 
@@ -192,6 +194,11 @@ namespace Core.Character.Player
             return Physics2D.OverlapCircle(WallChecker.origin.position, WallChecker.radius, WhatIsGround);
         }
 
+        private bool CheckCollisionEndDash()
+        {
+            return WhatEndsDash.FindAll(layer => Body.IsTouchingLayers(layer)).Count >= 1;
+        }
+
         private bool CheckAboutToLand()
         {
             return Body.velocity.y < 0 && Physics2D.OverlapCircle(LandChecker.origin.position, LandChecker.radius, WhatIsGround);
@@ -208,6 +215,7 @@ namespace Core.Character.Player
             isDashing = false;
             Animator.Rebind(); // resets animator and goes to entry state animator
             DashTrail.widthMultiplier = 0;
+            Debug.Log("end dash");
             OnDashEnd?.Invoke();
         }
 
@@ -219,15 +227,9 @@ namespace Core.Character.Player
         // TODO: may recover controll after few ms
         public void Impulse(Vector2 power)
         {
+            Debug.Log("impulse");
+            Body.velocity = Vector2.zero;
             Body.AddForce(power, ForceMode2D.Impulse);
-        }
-
-        //pre: -
-        //post: velocity modifyer is updated with the values 
-        //that are going to modify the velocity on ONE fixedUpdate
-        public void ModifyVelocity(Vector2 velocityModifyer)
-        {
-            this.velocityModifyer = velocityModifyer;
         }
 
         public void OnDrawGizmosSelected()

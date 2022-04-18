@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 using Core.Character.Player;
 
@@ -30,8 +28,7 @@ public class Springboard : MonoBehaviour
         deviations `phi` desviation, by default it's 90 degree
     */
 
-    // todo: check impulse logic
-    void OnTriggerEnter2D(Collider2D other)
+    public void OnTriggerEnter2D(Collider2D other)
     {
         if (compareTag != null && !other.CompareTag(compareTag)) return;
 
@@ -46,7 +43,7 @@ public class Springboard : MonoBehaviour
         animator.SetBool("EXPAND", true);
     }
 
-    void OnTriggerExit2D(Collider2D other)
+    public void OnTriggerExit2D(Collider2D other)
     {
         if (compareTag != null && !other.CompareTag(compareTag)) return;
 

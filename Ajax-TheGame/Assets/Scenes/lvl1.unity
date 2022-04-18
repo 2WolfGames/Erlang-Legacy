@@ -574,7 +574,7 @@ PrefabInstance:
     - target: {fileID: 9117715256224902646, guid: 144ba70820a80d7428eccc3270f4fca9,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.3965929
+      value: -2.5155928
       objectReference: {fileID: 0}
     - target: {fileID: 9117715256224902646, guid: 144ba70820a80d7428eccc3270f4fca9,
         type: 3}
@@ -584,7 +584,7 @@ PrefabInstance:
     - target: {fileID: 9117715256540725157, guid: 144ba70820a80d7428eccc3270f4fca9,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.3965929
+      value: -2.5155928
       objectReference: {fileID: 0}
     - target: {fileID: 9117715256540725157, guid: 144ba70820a80d7428eccc3270f4fca9,
         type: 3}
@@ -6960,6 +6960,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2033347774, guid: 3a92e288e57aab644a0656c959990934, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.312
+      objectReference: {fileID: 0}
     - target: {fileID: 382464842943519906, guid: 3a92e288e57aab644a0656c959990934,
         type: 3}
       propertyPath: rayLifetime
@@ -7063,12 +7067,17 @@ PrefabInstance:
     - target: {fileID: 4338606659265295168, guid: 3a92e288e57aab644a0656c959990934,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.03
+      value: 1.911
       objectReference: {fileID: 0}
     - target: {fileID: 4338606659265295168, guid: 3a92e288e57aab644a0656c959990934,
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 14.86
+      objectReference: {fileID: 0}
+    - target: {fileID: 4338606659265295182, guid: 3a92e288e57aab644a0656c959990934,
+        type: 3}
+      propertyPath: wallChecker.radius
+      value: 0.72
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a92e288e57aab644a0656c959990934, type: 3}

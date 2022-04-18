@@ -3,7 +3,6 @@ using Core.Shared;
 using Core.Shared.Enum;
 using Core.Combat.Projectile;
 using Core.Util;
-using Core.Util.Serializable;
 
 // todo: rename this file to PlayerManager & removes base character herarchy
 namespace Core.Character.Player
@@ -24,7 +23,7 @@ namespace Core.Character.Player
         public bool IsDashing => playerAbilitiesManager.IsDashing;
         public PlayerFacing Facing => playerFacingManager.Facing;
         public int FacingValue => playerFacingManager.FacingToInt;
-        public PlayerData PlayerData => playerData;
+        public PlayerData PlayerData { get => playerData; private set => playerData = value; }
         public bool IsGrounded => playerMovementManager.IsGrounded;
         public bool IsCornerTime => playerMovementManager.IsCornerTime;
         public bool BlockingUI
@@ -71,7 +70,6 @@ namespace Core.Character.Player
             playerFacingManager = GetComponent<PlayerFacingManager>();
             playerProtection = GetComponent<Protectable>();
             playerAbilitiesManager = GetComponent<PlayerAbilitiesManager>();
-
 
             playerAbilitiesManager.OnTriggerRay += OnTriggerRay;
             playerData.DamageArea.Dash.OnHit += OnDashHit;

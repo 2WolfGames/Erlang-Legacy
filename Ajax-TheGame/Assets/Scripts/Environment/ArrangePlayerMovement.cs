@@ -12,14 +12,14 @@ public class ArrangePlayerMovement : MonoBehaviour
     float ajaxLastXPos;
     float platformLastXPos;
 
-    void Start()
+    public void Start()
     {
         platformLastXPos = transform.position.x;
     }
 
     //pre: --
     //post: every frame evaluates CalculatePlayerVelocity() and updates ajax and platform positions
-    private void FixedUpdate()
+    public void FixedUpdate()
     {
         if (ajax)
         {
@@ -42,18 +42,22 @@ public class ArrangePlayerMovement : MonoBehaviour
         {
             if (ajaxDir < 0 && platformDir < 0 || ajaxDir > 0 && platformDir > 0)
             { //same dir
-                ajax.GetComponent<PlayerMovementManager>().ModifyVelocity(new Vector2(1 - velocityAlterator, 1));
+                // ajax.GetComponent<PlayerMovementManager>().ModifyVelocity(new Vector2(1 - velocityAlterator, 1));
+                ajax.GetComponent<PlayerMovementManager>().Acceleration = 1 - velocityAlterator;
             }
             else
             { // diferent dir
-                ajax.GetComponent<PlayerMovementManager>().ModifyVelocity(new Vector2(1 + velocityAlterator, 1));
+                // ajax.GetComponent<PlayerMovementManager>().ModifyVelocity(new Vector2(1 + velocityAlterator, 1));
+                  ajax.GetComponent<PlayerMovementManager>().Acceleration = 1 + velocityAlterator;
             }
+        } else {
+            ajax.GetComponent<PlayerMovementManager>().Acceleration = 1;
         }
     }
 
     //pre: --
     //post: if collider is player then its parented with platform and we Activaate parent Mechanism
-    private void OnTriggerEnter2D(Collider2D other)
+    public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Player")
         {
@@ -65,7 +69,7 @@ public class ArrangePlayerMovement : MonoBehaviour
 
     //pre: --
     //post: if collider is player we unparent them
-    private void OnTriggerExit2D(Collider2D other)
+    public void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.tag == "Player")
         {
