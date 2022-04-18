@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 
-namespace Core.Character.Player
+namespace Core.Player.Data
 {
     [Serializable]
     public class StatsData
@@ -20,7 +20,6 @@ namespace Core.Character.Player
 
 
         [Header("Cooldown or events duration")]
-        [SerializeField] float recoverCooldown;
         [SerializeField] float dashCooldown; // how much it takes to trigger dash ability again
         [SerializeField] float rayCooldown; // how much it takes to through a ray again
         [SerializeField] float holdingAfterJump; // how much time can you press jump key to continue jumping
@@ -32,7 +31,6 @@ namespace Core.Character.Player
         public float DashDamage { get => dashDamage; set => dashDamage = value; }
         public float RayDamage { get => rayDamage; set => rayDamage = value; }
         public float PunchDamage { get => punchDamage; set => punchDamage = value; }
-        public float RecoverCooldown { get => recoverCooldown; set => recoverCooldown = value; }
         public float RayCooldown { get => rayCooldown; set => rayCooldown = value; }
         public float DashCooldown { get => dashCooldown; set => dashCooldown = value; }
         public float HoldingAfterJump { get => holdingAfterJump; set => holdingAfterJump = value; }

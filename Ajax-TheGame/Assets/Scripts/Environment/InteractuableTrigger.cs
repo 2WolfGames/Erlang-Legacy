@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-using Core.Character.Player;
 
 public class InteractuableTrigger : MonoBehaviour
 {
@@ -10,34 +9,31 @@ public class InteractuableTrigger : MonoBehaviour
 
     [SerializeField] string trigger = "hover";
 
-    float _detectorTime = 0.2f;
+    float detectorTimeCooldown = 0.2f;
 
     Animator animator;
 
-    bool triggerAnimation = true;
+    private bool CanInteract => detectorTime < 0;
+    public float DetectorTime { get => detectorTime; set => detectorTime = value; }
+    public string Trigger { get => trigger; set => trigger = value; }
 
-    void Start()
+    public void Start()
     {
         animator = GetComponent<Animator>();
-        _detectorTime = detectorTime;
+        detectorTimeCooldown = detectorTime;
     }
 
-    void Update()
+    public void Update()
     {
-        _detectorTime -= Time.deltaTime;
-
-        if (_detectorTime < Mathf.Epsilon)
-        {
-            _detectorTime = detectorTime;
-            triggerAnimation = true;
-        }
+        if (detectorTimeCooldown >= 0)
+            detectorTimeCooldown -= Time.deltaTime;
     }
-    void OnTriggerEnter2D(Collider2D other)
+
+
+    // trigger animations when player pass throught this elements
+    public void OnTriggerEnter2D(Collider2D other)
     {
-        if (triggerAnimation && other.GetComponent<FXController>())
-        {
+        if (CanInteract && other.gameObject.CompareTag("Player"))
             animator.SetTrigger(trigger);
-            triggerAnimation = false;
-        }
     }
 }

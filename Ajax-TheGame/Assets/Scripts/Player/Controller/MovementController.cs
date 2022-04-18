@@ -3,25 +3,26 @@ using System;
 using Core.Util.Serializable;
 using System.Collections.Generic;
 
+using Core.Player.Util;
 
-// TODO: rename movement controller to player movement manager
-namespace Core.Character.Player
+
+namespace Core.Player.Controller
 {
-    public class PlayerMovementManager : MonoBehaviour
+    public class MovementController : MonoBehaviour
     {
         [SerializeField] Circle wallChecker;
         [SerializeField] Circle landChecker;
         [SerializeField] LayerMask whatIsGround;
         [SerializeField] List<LayerMask> whatEndsDash;
-
+        [SerializeField] List<LayerMask> whatTriggersLand;
+        private float baseGravityScale;
         private Circle WallChecker { get => wallChecker; set => wallChecker = value; }
         private Circle LandChecker { get => landChecker; set => landChecker = value; }
         private LayerMask WhatIsGround { get => whatIsGround; set => whatIsGround = value; }
-        private float BaseGravityScale => Player.BaseGravityScale;
-        private BasePlayer Player => BasePlayer.Instance;
+        private PlayerController Player => PlayerController.Instance;
         private float FacingValue => Player.FacingValue;
         private float AirDrag => 1f - Player.PlayerData.Stats.AirDrag;
-        private Rigidbody2D Body => Player.Body;
+        private Rigidbody2D Body => GetComponent<Rigidbody2D>();
         private bool Controllable => Player.Controllable;
         private float HoldingAfterJump => Player.PlayerData.Stats.HoldingAfterJump;
         private float DashSpeed => Player.PlayerData.Stats.DashSpeed;
@@ -35,7 +36,6 @@ namespace Core.Character.Player
         private bool justJumped = false;
         private bool isDashing = false;
         private Vector2 currentVelocity;
-
         public bool IsJumping => isJumping;
         public bool IsCornerTime => CheckCornerTime();
         public bool ShouldEndDash => IsCornerTime || CheckCollisionEndDash();
@@ -43,20 +43,25 @@ namespace Core.Character.Player
         public bool AboutToLand => CheckAboutToLand();
         public bool CanJump => !isJumping && !isDashing && IsGrounded;
         private bool CanHoldJump => isJumping && !isDashing;
-        private bool CanLand => justJumped && (AboutToLand || IsGrounded);
-        private Collider2D BodyCollider => Player.BodyCollider;
+        private bool CanLand => (justJumped || JustImpulsed) && (AboutToLand || IsGrounded);
+        private Collider2D BodyCollider => GetComponent<Collider2D>();
         private ParticleSystem JumpParticles => Player.PlayerData.JumpParticles;
         public bool CanDash => !isDashing && dashCooldownTimer <= 0;
+
         public bool CanRun => !isDashing;
         public bool IsDashing => isDashing;
         public Action OnDashStart { get; set; }
         public Action OnDashEnd { get; set; }
         public float Acceleration { get; set; } = 1;
+        public bool JustImpulsed { get; set; }
         public List<LayerMask> WhatEndsDash { get => whatEndsDash; private set => whatEndsDash = value; }
+        public List<LayerMask> WhatTriggersLand { get => whatTriggersLand; private set => whatTriggersLand = value; }
+
 
         public void Start()
         {
             DashTrail.widthMultiplier = 0;
+            baseGravityScale = Body.gravityScale;
         }
 
         public void Update()
@@ -70,6 +75,14 @@ namespace Core.Character.Player
         public void FixedUpdate()
         {
             Move();
+            Flip();
+        }
+
+        private void Flip()
+        {
+            Vector3 characterScale = transform.localScale;
+            characterScale.x = FacingValue;
+            transform.localScale = characterScale;
         }
 
         // pre: --
@@ -129,6 +142,7 @@ namespace Core.Character.Player
 
             justJumped = false;
             isJumping = false;
+            JustImpulsed = false;
 
             Animator.SetBool(CharacterAnimations.Jumping, isJumping);
         }
@@ -201,7 +215,14 @@ namespace Core.Character.Player
 
         private bool CheckAboutToLand()
         {
-            return Body.velocity.y < 0 && Physics2D.OverlapCircle(LandChecker.origin.position, LandChecker.radius, WhatIsGround);
+            bool landing = false;
+            foreach (var layer in WhatTriggersLand)
+            {
+                landing = Physics2D.OverlapCircle(LandChecker.origin.position, LandChecker.radius, layer);
+                if (landing)
+                    break;
+            }
+            return landing && Body.velocity.y < 0;
         }
 
 
@@ -211,11 +232,10 @@ namespace Core.Character.Player
             if (!isDashing)
                 return;
 
-            Body.gravityScale = BaseGravityScale;
+            Body.gravityScale = baseGravityScale;
             isDashing = false;
             Animator.Rebind(); // resets animator and goes to entry state animator
             DashTrail.widthMultiplier = 0;
-            Debug.Log("end dash");
             OnDashEnd?.Invoke();
         }
 
@@ -224,16 +244,24 @@ namespace Core.Character.Player
         /// if anything had change its gravity, 
         // the methods recover its firt local gravity scale
         /// <sumary>
-        // TODO: may recover controll after few ms
+        // TODO: may recover controll after few ms instead of inmediate contorll
         public void Impulse(Vector2 power)
         {
-            Debug.Log("impulse");
             Body.velocity = Vector2.zero;
             Body.AddForce(power, ForceMode2D.Impulse);
+            JustImpulsed = true;
+            Animator.SetTrigger(CharacterAnimations.StartJump);
+            Animator.SetBool(CharacterAnimations.Jumping, true);
         }
 
         public void OnDrawGizmosSelected()
         {
+            Color rayColor = IsGrounded ? Color.green : Color.red;
+            float extra = 0.1f;
+            Debug.DrawRay(BodyCollider.bounds.center + new Vector3(BodyCollider.bounds.extents.x, 0), Vector2.down * (BodyCollider.bounds.extents.y + extra), rayColor);
+            Debug.DrawRay(BodyCollider.bounds.center - new Vector3(BodyCollider.bounds.extents.x, 0), Vector2.down * (BodyCollider.bounds.extents.y + extra), rayColor);
+            Debug.DrawRay(BodyCollider.bounds.center - new Vector3(BodyCollider.bounds.extents.x, BodyCollider.bounds.extents.y + extra), Vector2.right * (2 * BodyCollider.bounds.extents.x), rayColor);
+
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(WallChecker.origin.position, WallChecker.radius);
 

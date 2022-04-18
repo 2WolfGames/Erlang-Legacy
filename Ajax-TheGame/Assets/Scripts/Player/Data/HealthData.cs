@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 
-namespace Core.Character.Player
+namespace Core.Player.Data
 {
     [Serializable]
     public class HealthData

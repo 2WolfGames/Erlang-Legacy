@@ -2,9 +2,9 @@
 
 using Core.Shared.Enum;
 
-namespace Core.Character.Player
+namespace Core.Player.Controller
 {
-    public class PlayerFacingManager : MonoBehaviour
+    public class FacingController : MonoBehaviour
     {
         public PlayerFacing Facing { get; private set; }
 

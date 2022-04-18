@@ -1,4 +1,4 @@
-﻿using Core.Character.Player;
+﻿using Core.Player.Controller;
 using UnityEngine;
 
 namespace Core.Combat.IA
@@ -7,13 +7,13 @@ namespace Core.Combat.IA
     {
         protected Rigidbody2D body;
         protected Animator animator;
-        protected BasePlayer player;
+        protected PlayerController player;
 
         public override void OnAwake()
         {
             body = GetComponent<Rigidbody2D>();
             animator = GetComponent<Animator>();
-            player = BasePlayer.Instance;
+            player = PlayerController.Instance;
         }
     }
 }

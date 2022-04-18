@@ -2,7 +2,7 @@ using UnityEngine;
 using System;
 using Core.Combat.Projectile;
 
-namespace Core.Character.Player
+namespace Core.Player.Data
 {
     [Serializable]
     public class ProjectileData

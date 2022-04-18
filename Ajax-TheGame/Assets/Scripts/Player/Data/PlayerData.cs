@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
 using System;
 
-using Core.Character.Data;
 
-namespace Core.Character.Player
+namespace Core.Player.Data
 {
     [Serializable]
     public class PlayerData

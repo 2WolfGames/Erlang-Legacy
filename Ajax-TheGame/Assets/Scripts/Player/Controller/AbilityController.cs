@@ -3,15 +3,15 @@ using UnityEngine;
 using System;
 
 
-namespace Core.Character.Player
+namespace Core.Player.Controller
 {
     // description:
     //   manages when abilities can be triggered
-    public class PlayerAbilitiesManager : MonoBehaviour
+    public class AbilityController : MonoBehaviour
     {
         private float rayTimer;
         private float dashTimer;
-        private float RayCooldown => BasePlayer.Instance.PlayerData.Stats.RayCooldown;
+        private float RayCooldown => PlayerController.Instance.PlayerData.Stats.RayCooldown;
         public bool CanTriggerDash => dashTimer <= 0 && !IsDashing;
         public bool CanTriggerRay => rayTimer <= 0 && !IsDashing;
         public bool IsDashing { get; private set; }
@@ -37,7 +37,7 @@ namespace Core.Character.Player
 
         private void ResetRayTimer()
         {
-            BasePlayer player = BasePlayer.Instance;
+            PlayerController player = PlayerController.Instance;
             rayTimer = RayCooldown;
         }
 

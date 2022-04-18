@@ -7,14 +7,10 @@ namespace Core.Util
     public class Protectable : MonoBehaviour
     {
         [SerializeField] float protectionDuration;
-        private float hitProtectionTimer;
         public bool CanBeHit => hitProtectionTimer <= 0;
         public bool IsProtected => !CanBeHit;
-        public float ProtectionDuration
-        {
-            get => protectionDuration;
-            set { protectionDuration = value; }
-        }
+        private float hitProtectionTimer;
+        public float ProtectionDuration { get => protectionDuration; private set => protectionDuration = value; }
 
         public void Update()
         {
@@ -24,12 +20,12 @@ namespace Core.Util
 
         public void ResetProtection()
         {
-            this.hitProtectionTimer = ProtectionDuration;
+            hitProtectionTimer = ProtectionDuration;
         }
 
         public void ResetProtection(float duration)
         {
-            this.hitProtectionTimer = duration;
+            hitProtectionTimer = duration;
         }
     }
 }
