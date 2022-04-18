@@ -63,7 +63,7 @@ namespace Core.Util
             src.minDistance = 5.0f;
             src.maxDistance = 15.0f;
             src.dopplerLevel = 0;
-            tempAudioSource.AddComponent<Disposable>().lifetime = clip.length;
+            tempAudioSource.AddComponent<Disposable>().Lifetime = clip.length;
             src.Play();
         }
 

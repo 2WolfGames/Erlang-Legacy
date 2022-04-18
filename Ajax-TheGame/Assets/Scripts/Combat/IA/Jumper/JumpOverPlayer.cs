@@ -26,6 +26,7 @@ namespace Core.Combat.IA.Action
                 jumping.Value = false;
                 return TaskStatus.Success;
             }
+
             return TaskStatus.Running;
         }
 

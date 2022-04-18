@@ -6,18 +6,18 @@ namespace Core.Util
     //  component to link to object in order to make object destroy in `lifetime`
     public class Disposable : MonoBehaviour
     {
-        public float lifetime = 1.0f;
+        public float Lifetime { get; set; } = 1;
 
         // Start is called before the first frame update
-        void Start()
+        public void Start()
         {
-            Destroy(gameObject, lifetime);
+            Destroy(gameObject, Lifetime);
         }
 
         public static void Bind(GameObject host, float lifetime)
         {
             var disposable = host.AddComponent<Disposable>();
-            disposable.lifetime = lifetime;
+            disposable.Lifetime = lifetime;
         }
     }
 }

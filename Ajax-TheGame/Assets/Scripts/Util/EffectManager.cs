@@ -9,7 +9,7 @@ namespace Core.Util
     {
         public static EffectManager Instance;
 
-        private void Awake()
+        public void Awake()
         {
             if (Instance == null)
                 Instance = this;
@@ -23,7 +23,7 @@ namespace Core.Util
             effect.Play();
 
             var duration = effect.main.duration + effect.main.startLifetime.constantMax;
-            effect.gameObject.AddComponent<Disposable>().lifetime = duration;
+            effect.gameObject.AddComponent<Disposable>().Lifetime = duration;
         }
     }
 }

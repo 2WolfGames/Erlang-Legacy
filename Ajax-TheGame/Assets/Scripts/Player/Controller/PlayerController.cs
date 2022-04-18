@@ -5,7 +5,9 @@ using Core.Combat.Projectile;
 using Core.Util;
 
 using Core.Player.Data;
-
+using System;
+using System.Collections;
+using Core.Player.Util;
 
 namespace Core.Player.Controller
 {
@@ -29,21 +31,11 @@ namespace Core.Player.Controller
             {
                 blockingUI = value;
                 if (blockingUI)
-                    OnUncontrollable();
-                else OnControllable();
+                    OnBlockUI();
+                else OnUnblockUI();
             }
         }
-        public bool Controllable
-        {
-            get => controllable && !BlockingUI;
-            set
-            {
-                controllable = value;
-                if (!controllable)
-                    OnUncontrollable();
-                else OnControllable();
-            }
-        }
+        public bool Controllable { get => controllable && !BlockingUI; set => controllable = value; }
         public Collider2D BodyCollider => GetComponent<Collider2D>();
         public Rigidbody2D Body => GetComponent<Rigidbody2D>();
         public Animator Animator => GetComponentInChildren<Animator>();
@@ -60,7 +52,7 @@ namespace Core.Player.Controller
             else Instance = this;
 
 
-            AbilityController.OnTriggerRay += OnTriggerRay;
+            AbilityController.OnRayStart += OnRayStart;
 
             PlayerData.DamageArea.Dash.OnHit += OnDashHit;
             PlayerData.DamageArea.Dash.SetEnabled(false);
@@ -91,7 +83,7 @@ namespace Core.Player.Controller
 
         // pre: called by some function that stunds player (called by hit animation)
         // post: enable scripts & returns normal game constants
-        private void OnControllable()
+        private void OnUnblockUI()
         {
             Debug.Log("freeze game play");
             // reset global game constant to normal state if needed...
@@ -100,7 +92,7 @@ namespace Core.Player.Controller
         // pre: (called by hit end animation)
         // post: detach component logic scripts & freeze player
         // PROP: instead of freezing player we can make time slow 
-        private void OnUncontrollable()
+        private void OnBlockUI()
         {
             Debug.Log("unfreeze game play");
         }
@@ -118,9 +110,41 @@ namespace Core.Player.Controller
         public void Hurt(int damage, GameObject other)
         {
             if (Protectable.IsProtected) return;
+
             Protectable.ResetProtection();
+
             Side side = Function.CollisionSide(transform, other.transform);
-            // ajaxFX.TriggerCollidingFX(PlayerData.Stats.RecoverCooldown, side);
+
+            if (side == Side.Back)
+                Animator.SetTrigger(CharacterAnimations.BackHurt);
+            else Animator.SetTrigger(CharacterAnimations.FrontHurt);
+
+            OnRecoverStart();
+            SetTimeOut(OnRecoverComplete, Protectable.ProtectionDuration); // TODO: work in recover
+
+        }
+
+        private void OnRecoverStart()
+        {
+            Animator.SetBool(CharacterAnimations.Blink, true);
+            MovementController.enabled = false;
+        }
+
+        private void OnRecoverComplete()
+        {
+            Animator.SetBool(CharacterAnimations.Blink, false);
+            MovementController.enabled = true;
+        }
+
+        public void SetTimeOut(Action function, float seconds)
+        {
+            StartCoroutine(SetTimeoutCoroutine(function, seconds));
+        }
+
+        private IEnumerator SetTimeoutCoroutine(Action function, float seconds)
+        {
+            yield return new WaitForSeconds(seconds);
+            function.Invoke();
         }
 
         private void OnDashHit(Collider2D enemy)
@@ -140,12 +164,9 @@ namespace Core.Player.Controller
 
         // pre: --
         // post: instanciate a ray prefab that will destroy itself in n seconds
-        private void OnTriggerRay()
+        private void OnRayStart()
         {
-            Vector2 force = Vector2.right * FacingValue * playerData.Projectile.Speed;
-            RayProjectile projectile = Instantiate(playerData.Projectile.Projectile, playerData.Projectile.Origin.position, Quaternion.identity);
-            projectile.SetForce(force);
-            Disposable.Bind(projectile.gameObject, playerData.Projectile.Lifetime);
+
         }
 
     }
