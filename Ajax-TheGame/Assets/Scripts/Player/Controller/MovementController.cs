@@ -75,14 +75,15 @@ namespace Core.Player.Controller
         public void FixedUpdate()
         {
             Move();
-            Flip();
+            FaceDirection();
         }
 
-        private void Flip()
+        // desc: changes local player scale in order to align to user input
+        private void FaceDirection()
         {
-            Vector3 characterScale = transform.localScale;
-            characterScale.x = FacingValue;
-            transform.localScale = characterScale;
+            Vector3 scale = transform.localScale;
+            scale.x = FacingValue;
+            transform.localScale = scale;
         }
 
         // pre: --
@@ -193,7 +194,7 @@ namespace Core.Player.Controller
 
 
         // pre: --
-        // post: tells you if player is touching 
+        // post: checks if player is touching ground
         private bool CheckGrounded()
         {
             float extra = 0.1f;
@@ -202,17 +203,23 @@ namespace Core.Player.Controller
         }
 
         // pre: --
-        // post: true if touching wall otrw false
+        // post: check if player is near and facing wall using wall checker object
         private bool CheckCornerTime()
         {
             return Physics2D.OverlapCircle(WallChecker.origin.position, WallChecker.radius, WhatIsGround);
         }
 
+        // pre: --
+        // post: check if currently touching one of those layers that ends dash
+        //      please make sure to NOT add ground layer in `WhatEndsDash`, just thouse object
+        //      that collide with player like (Springboard)
         private bool CheckCollisionEndDash()
         {
             return WhatEndsDash.FindAll(layer => Body.IsTouchingLayers(layer)).Count >= 1;
         }
 
+        // pre: --
+        // post: usufull to trigger land animation when player comes from impulsed or jumped events
         private bool CheckAboutToLand()
         {
             bool landing = false;
@@ -227,6 +234,7 @@ namespace Core.Player.Controller
 
 
         // pre: callable only by end of dash animation event or wall collision
+        // post: resets values changes from StartDash fn, resets animator to go to idle state
         public void EndDash()
         {
             if (!isDashing)

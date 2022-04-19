@@ -11,12 +11,13 @@ namespace Core.Combat.Projectile
         public AudioClip splatterSound;
 
         public GameObject Shooter { get; set; }
+        public bool DestroyOnColliding { get; set; } = false;
 
         protected Vector2 force;
 
         public event Action<AbstractProjectile> OnProjectileDestroyed;
 
-        public event Action<Collider2D> OnHit;
+        public event Action<Collider2D> OnColliding;
 
         public virtual void SetForce(Vector2 force)
         {
@@ -32,7 +33,8 @@ namespace Core.Combat.Projectile
 
             EffectManager.Instance?.PlayOneShot(explosionEffect, transform.position);
 
-            Destroy(gameObject);
+            if (DestroyOnColliding)
+                Destroy(gameObject);
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
@@ -41,7 +43,7 @@ namespace Core.Combat.Projectile
             if (collision.gameObject == Shooter)
                 return;
 
-            OnHit?.Invoke(collision);
+            OnColliding?.Invoke(collision);
 
             DestroyProjectile();
         }

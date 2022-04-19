@@ -10,13 +10,23 @@ namespace Core.Player.Controller
     //   manages when abilities can be triggered
     public class AbilityController : MonoBehaviour
     {
+        [Serializable] ProjectileData projectile;
+        [Serializable] DamageAreaData damageAreas;
+
         private float rayTimer;
         private PlayerController Player => PlayerController.Instance;
         PlayerData PlayerData => Player.PlayerData;
         private float RayCooldown => PlayerData.Stats.RayCooldown;
         private int FacingValue => Player.FacingValue;
-        public bool CanTriggerRay => rayTimer <= 0 && Player.Controllable;
+        public bool CanInvokeRay => rayTimer <= 0 && Player.Controllable;
         public Action OnRayStart { get; set; }
+
+
+        public void Awake()
+        {
+            damageAreas.Dash.SetEnabled(false);
+            damageAreas.Punch.SetEnabled(false);
+        }
 
         public void Update()
         {
@@ -24,29 +34,61 @@ namespace Core.Player.Controller
                 rayTimer -= Time.deltaTime;
 
             if (Input.GetButtonDown("Punch"))
-            {
-                Debug.Log("punching");
-            }
-
+                OnThrowPunch();
             if (Input.GetButtonUp("Punch"))
-            {
-                Debug.Log("ends punch");
-            }
+                OnPickUpPunch();
+            if (Input.GetButton("Ray") && CanInvokeRay)
+                InvokeRay();
+        }
 
-            if (Input.GetButton("Ray") && CanTriggerRay)
-                TriggerRay();
+        private void OnThrowPunch()
+        {
+            Debug.Log("punching");
+            damageAreas.Punch.SetEnabled(true);
+        }
+
+        private void OnPickUpPunch()
+        {
+            Debug.Log("pickup punch");
+            damageAreas.Punch.SetEnabled(false);
         }
 
 
-        private void TriggerRay()
+        // pre: --
+        // post: invoke an instance of ray projectile and sets its values
+        private void InvokeRay()
         {
             OnRayStart?.Invoke();
-            Vector2 force = Vector2.right * FacingValue * PlayerData.Projectile.Speed;
-            RayProjectile projectile = Instantiate(PlayerData.Projectile.Projectile, PlayerData.Projectile.Origin.position, Quaternion.identity);
+            Vector2 force = Vector2.right * FacingValue * projectile.Projectile.Speed;
+            RayProjectile projectile = Instantiate(projectile.Projectile, projectile.Origin.position, Quaternion.identity);
             projectile.SetForce(force);
+            projectile.OnColliding += OnRayColliding;
             Disposable.Bind(projectile.gameObject, PlayerData.Projectile.Lifetime);
             rayTimer = RayCooldown;
         }
+
+        private void OnRayColliding(Collider2D other)
+        {
+            // make enemy damage
+            Debug.Log("Hitting enemy at ray");
+            OnHit(other, damage);
+        }
+
+
+        public OnTriggerEnter2D(Collider2D other)
+        {
+            // trigger because of punch hit or dash hit
+        }
+
+
+        private void OnHit(Collider2D other, float damage)
+        {
+
+        }
+
+
+
+
     }
 
 }

@@ -57,7 +57,6 @@ namespace Core.Player.Controller
             PlayerData.DamageArea.Dash.OnHit += OnDashHit;
             PlayerData.DamageArea.Dash.SetEnabled(false);
             PlayerData.DamageArea.Punch.SetEnabled(false);
-            PlayerData.Projectile.Projectile.OnHit += OnRayProjectileHit;
 
             MovementController.OnDashStart += OnDashStart;
             MovementController.OnDashEnd += OnDashEnd;
@@ -152,10 +151,6 @@ namespace Core.Player.Controller
             Debug.Log("Hitting enemy at dash");
         }
 
-        private void OnRayProjectileHit(Collider2D enemy)
-        {
-            Debug.Log("Hitting enemy at ray");
-        }
 
         private void OnPunchHit(Collider2D enemy)
         {
