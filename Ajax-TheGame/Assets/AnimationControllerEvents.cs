@@ -5,25 +5,32 @@ namespace Core.Player.Util
 {
     public class AnimationControllerEvents : MonoBehaviour
     {
+
+        private PlayerController Player => PlayerController.Instance;
+
         // desc: start of hit animation
         public void FreezeAjax()
         {
-            var player = PlayerController.Instance;
-            player.Controllable = false;
+            Player.Controllable = false;
         }
 
         // desc: end of hit animation
         public void UnfreezeAjax()
         {
-            var player = PlayerController.Instance;
-            player.Controllable = true;
+            Player.Controllable = true;
         }
 
         // pre: called at end of dash animation
         public void OnDashEnd()
         {
-            var player = PlayerController.Instance;
-            player.GetComponent<MovementController>().EndDash();
+            Player.GetComponent<MovementController>().EndDash();
+        }
+
+        // pre: On recover start
+        public void OnRecoverComplete()
+        {
+            Debug.Log("hola");
+            Player.OnRecoverComplete();
         }
     }
 

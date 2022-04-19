@@ -23,7 +23,7 @@ namespace Core.Util
             hitProtectionTimer = ProtectionDuration;
         }
 
-        public void ResetProtection(float duration)
+        public void SetProtection(float duration)
         {
             hitProtectionTimer = duration;
         }

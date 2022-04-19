@@ -53,22 +53,8 @@ namespace Core.Player.Controller
 
 
             AbilityController.OnRayStart += OnRayStart;
-
-            PlayerData.DamageArea.Dash.OnHit += OnDashHit;
-            PlayerData.DamageArea.Dash.SetEnabled(false);
-            PlayerData.DamageArea.Punch.SetEnabled(false);
-
             MovementController.OnDashStart += OnDashStart;
-            MovementController.OnDashEnd += OnDashEnd;
-        }
-
-        // pre: --
-        // post: disable scripts that make damage
-        //      and activates listening from keyboard
-        private void OnDashEnd()
-        {
-            FacingController.enabled = true;
-            PlayerData.DamageArea.Dash.SetEnabled(false);
+            MovementController.OnDashEnd += OnDashComplete;
         }
 
         // pre: --
@@ -76,8 +62,16 @@ namespace Core.Player.Controller
         //      and avoid listening from keyboard
         private void OnDashStart()
         {
-            FacingController.enabled = false;
-            PlayerData.DamageArea.Dash.SetEnabled(true);
+            Protectable.SetProtection(float.PositiveInfinity);
+            controllable = false;
+        }
+        
+        // post: disable scripts that make damage
+        //      and activates listening from keyboard
+        private void OnDashComplete()
+        {
+            Protectable.SetProtection(0f);
+            controllable = true;
         }
 
         // pre: called by some function that stunds player (called by hit animation)
@@ -110,7 +104,6 @@ namespace Core.Player.Controller
         {
             if (Protectable.IsProtected) return;
 
-            Protectable.ResetProtection();
 
             Side side = Function.CollisionSide(transform, other.transform);
 
@@ -119,35 +112,27 @@ namespace Core.Player.Controller
             else Animator.SetTrigger(CharacterAnimations.FrontHurt);
 
             OnRecoverStart();
-            SetTimeOut(OnRecoverComplete, Protectable.ProtectionDuration); // TODO: work in recover
-
         }
 
         private void OnRecoverStart()
         {
+            Protectable.SetProtection(float.PositiveInfinity);
             Animator.SetBool(CharacterAnimations.Blink, true);
-            MovementController.enabled = false;
+            controllable = false;
         }
 
-        private void OnRecoverComplete()
+        // desc: to be called at end of recover animations with and event
+        public void OnRecoverComplete()
         {
+            Debug.Log("hola");
+            Protectable.SetProtection(0);
             Animator.SetBool(CharacterAnimations.Blink, false);
-            MovementController.enabled = true;
-        }
-
-        public void SetTimeOut(Action function, float seconds)
-        {
-            StartCoroutine(SetTimeoutCoroutine(function, seconds));
-        }
-
-        private IEnumerator SetTimeoutCoroutine(Action function, float seconds)
-        {
-            yield return new WaitForSeconds(seconds);
-            function.Invoke();
+            controllable = true;
         }
 
         private void OnDashHit(Collider2D enemy)
         {
+
             Debug.Log("Hitting enemy at dash");
         }
 

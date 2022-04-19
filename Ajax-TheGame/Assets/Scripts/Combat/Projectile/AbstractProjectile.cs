@@ -6,7 +6,6 @@ namespace Core.Combat.Projectile
 {
     public abstract class AbstractProjectile : MonoBehaviour
     {
-        public float damage;
         public ParticleSystem explosionEffect;
         public AudioClip splatterSound;
 

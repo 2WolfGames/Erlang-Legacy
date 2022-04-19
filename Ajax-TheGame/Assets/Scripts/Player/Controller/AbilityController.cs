@@ -10,8 +10,8 @@ namespace Core.Player.Controller
     //   manages when abilities can be triggered
     public class AbilityController : MonoBehaviour
     {
-        [Serializable] ProjectileData projectile;
-        [Serializable] DamageAreaData damageAreas;
+        [SerializeField] ProjectileData projectile;
+        [SerializeField] DamageAreaData damageAreas;
 
         private float rayTimer;
         private PlayerController Player => PlayerController.Instance;
@@ -20,7 +20,6 @@ namespace Core.Player.Controller
         private int FacingValue => Player.FacingValue;
         public bool CanInvokeRay => rayTimer <= 0 && Player.Controllable;
         public Action OnRayStart { get; set; }
-
 
         public void Awake()
         {
@@ -59,11 +58,11 @@ namespace Core.Player.Controller
         private void InvokeRay()
         {
             OnRayStart?.Invoke();
-            Vector2 force = Vector2.right * FacingValue * projectile.Projectile.Speed;
-            RayProjectile projectile = Instantiate(projectile.Projectile, projectile.Origin.position, Quaternion.identity);
-            projectile.SetForce(force);
-            projectile.OnColliding += OnRayColliding;
-            Disposable.Bind(projectile.gameObject, PlayerData.Projectile.Lifetime);
+            Vector2 force = Vector2.right * FacingValue * this.projectile.Speed;
+            RayProjectile instance = Instantiate(projectile.Projectile, projectile.Origin.position, Quaternion.identity);
+            instance.SetForce(force);
+            instance.OnColliding += OnRayColliding;
+            Disposable.Bind(instance.gameObject, projectile.Lifetime);
             rayTimer = RayCooldown;
         }
 
@@ -71,11 +70,11 @@ namespace Core.Player.Controller
         {
             // make enemy damage
             Debug.Log("Hitting enemy at ray");
-            OnHit(other, damage);
+            OnHit(other, PlayerData.Stats.RayDamage);
         }
 
 
-        public OnTriggerEnter2D(Collider2D other)
+        public void OnTriggerEnter2D(Collider2D other)
         {
             // trigger because of punch hit or dash hit
         }

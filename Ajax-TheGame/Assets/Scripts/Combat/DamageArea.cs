@@ -24,7 +24,6 @@ namespace Core.Combat
         //        pass throught enemies without colliding
         public void OnTriggerEnter2D(Collider2D other)
         {
-            Debug.Log(enabled);
             OnHit?.Invoke(other);
         }
     }

@@ -181,8 +181,10 @@ namespace Core.Player.Controller
             }
         }
 
+        // pre: can do dash
         private void StartDash()
         {
+            Debug.Log("start dash");
             isDashing = true;
             DashTrail.widthMultiplier = 3;
             Animator.SetTrigger(CharacterAnimations.Dash);
@@ -239,11 +241,12 @@ namespace Core.Player.Controller
         {
             if (!isDashing)
                 return;
-
+            Debug.Log("end dash");
             Body.gravityScale = baseGravityScale;
             isDashing = false;
             Animator.Rebind(); // resets animator and goes to entry state animator
             DashTrail.widthMultiplier = 0;
+            Body.velocity = Vector2.zero;
             OnDashEnd?.Invoke();
         }
 
