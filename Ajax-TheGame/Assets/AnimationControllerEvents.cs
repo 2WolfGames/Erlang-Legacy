@@ -1,6 +1,8 @@
 ﻿using Core.Player.Controller;
 using UnityEngine;
 
+
+// todo: change name for player bla
 namespace Core.Player.Util
 {
     public class AnimationControllerEvents : MonoBehaviour
@@ -31,6 +33,14 @@ namespace Core.Player.Util
         {
             Debug.Log("hola");
             Player.OnRecoverComplete();
+        }
+
+        
+        // pre: On recover start
+        public void OnRecoverStart()
+        {
+            Debug.Log("hola");
+            Player.OnRecoverStart();
         }
     }
 

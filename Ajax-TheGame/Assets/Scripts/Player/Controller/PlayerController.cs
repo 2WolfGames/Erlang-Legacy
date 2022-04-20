@@ -110,12 +110,12 @@ namespace Core.Player.Controller
             if (side == Side.Back)
                 Animator.SetTrigger(CharacterAnimations.BackHurt);
             else Animator.SetTrigger(CharacterAnimations.FrontHurt);
-
-            OnRecoverStart();
         }
 
-        private void OnRecoverStart()
+        // pre: called at first key frame hit (backward & forward) animations       
+        public void OnRecoverStart()
         {
+            if (Protectable.IsProtected) return;
             Protectable.SetProtection(float.PositiveInfinity);
             Animator.SetBool(CharacterAnimations.Blink, true);
             controllable = false;
@@ -124,7 +124,7 @@ namespace Core.Player.Controller
         // desc: to be called at end of recover animations with and event
         public void OnRecoverComplete()
         {
-            Debug.Log("hola");
+             // TODO: call in coroutine lately
             Protectable.SetProtection(0);
             Animator.SetBool(CharacterAnimations.Blink, false);
             controllable = true;
