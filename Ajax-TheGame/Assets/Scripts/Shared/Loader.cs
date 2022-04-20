@@ -12,6 +12,11 @@ namespace Core.Shared
             StartMenu, LoadingScene, lvl1, FirstIsland
         }
 
+        
+        public enum Entrance{
+            E1, E2, E3, E4, E5
+        }
+
         public static void Load(Scene scene){
             DOTween.KillAll(false);
             LoadingMenu.sceneName = scene.ToString();

@@ -77,9 +77,8 @@ namespace Core.Character.Player
 
         private void Start() {
             GameSessionController gsc = FindObjectOfType<GameSessionController>();
-            if(gsc.IsCurrentSavePoint()){
-                transform.position = gsc.GetSavePoint();
-            }
+            transform.position = gsc.GetCurrentPoint();
+            
         }
 
         // pre: --

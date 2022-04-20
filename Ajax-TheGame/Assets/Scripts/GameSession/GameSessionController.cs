@@ -10,7 +10,10 @@ public class GameSessionController : MonoBehaviour
     string sceneSavePoint;
     /*Current Point*/
     Vector3 currentPoint;
+    Core.Shared.Loader.Entrance entranceTag;
+    bool searchCurrentPoint = false;
     bool setUpLifes = false;
+    bool hasDied = false;
 
     /*for test delete later*/
     [SerializeField] bool loseLife = false;
@@ -34,6 +37,15 @@ public class GameSessionController : MonoBehaviour
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         FindLifebar();
+        if (searchCurrentPoint){
+            foreach (SceneEntrance se in FindObjectsOfType<SceneEntrance>()) {
+                if (se.gameObject.CompareTag(entranceTag.ToString())){
+                    currentPoint = se.GetEntrancePoint();
+                    searchCurrentPoint = false;
+                    break;
+                }
+            }
+        }
     }
 
     // Update is called once per frame
@@ -65,20 +77,23 @@ public class GameSessionController : MonoBehaviour
 
     public void ResetGameToSavePoint(){
         lifes = 5;
+        hasDied = true;
         FindObjectOfType<InGameCanvas>()?.ActiveDeathImage();
         StartCoroutine(Core.Shared.Loader.LoadWithDelay(sceneSavePoint,6));
     }
 
-    public bool IsCurrentSavePoint(){
-        return SceneManager.GetActiveScene().name == sceneSavePoint && savePoint != null;
-    }
-
-    public Vector3 GetSavePoint(){
-        return savePoint;
-    }
-
     public Vector3 GetCurrentPoint(){
-        return currentPoint;
+        if (hasDied && SceneManager.GetActiveScene().name == sceneSavePoint && savePoint != null){
+            hasDied = false;
+            return savePoint;
+        } else{
+            return currentPoint;
+        }
+    }
+
+    public void SearchCurrentPoint(Core.Shared.Loader.Entrance entranceTag){
+        searchCurrentPoint = true;
+        this.entranceTag = entranceTag;
     }
 
     private void FindLifebar(){
