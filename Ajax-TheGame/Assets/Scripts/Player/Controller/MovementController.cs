@@ -75,8 +75,8 @@ namespace Core.Player.Controller
 
         public void FixedUpdate()
         {
-            Move();
             FaceDirection();
+            Move();
         }
 
         // desc: changes local player scale in order to align to user input
@@ -101,7 +101,7 @@ namespace Core.Player.Controller
             if (wannaDash) DoDash();
             else DoRun();
 
-            EndDashCheck();
+            CheckDashComplitness();
         }
 
         private void DoDash()
@@ -114,7 +114,7 @@ namespace Core.Player.Controller
 
         // pre: --
         // post: end dash at wall collisions
-        private void EndDashCheck()
+        private void CheckDashComplitness()
         {
             if (isDashing && ShouldEndDash)
                 EndDash();
@@ -197,7 +197,6 @@ namespace Core.Player.Controller
             OnDashStart?.Invoke();
         }
 
-
         // pre: --
         // post: checks if player is touching ground
         private bool CheckGrounded()
@@ -237,7 +236,6 @@ namespace Core.Player.Controller
             return landing && Body.velocity.y < 0;
         }
 
-
         // pre: callable only by end of dash animation event or wall collision
         // post: resets values changes from StartDash fn, resets animator to go to idle state
         public void EndDash()
@@ -246,10 +244,8 @@ namespace Core.Player.Controller
                 return;
 
             dashCooldownTimer = DashCooldown;
-            Debug.Log("end dash");
             Body.gravityScale = baseGravityScale;
             isDashing = false;
-            Animator.Rebind(); // resets animator and goes to entry state animator
             DashTrail.widthMultiplier = 0;
             FreezeVelocity();
             OnDashEnd?.Invoke();
@@ -291,7 +287,6 @@ namespace Core.Player.Controller
             Gizmos.color = Color.magenta;
             Gizmos.DrawWireSphere(LandChecker.origin.position, LandChecker.radius);
         }
-
     }
 }
 

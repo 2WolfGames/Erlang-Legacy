@@ -93,7 +93,9 @@ namespace Core.Player.Controller
         // post: applies damage to player
         public void OnCollision(GameObject other, int damage = 1)
         {
-            if (Protectable.IsProtected) return;
+            if (Protectable.IsProtected) 
+                return;
+
             Hurt(damage, other);
         }
 
