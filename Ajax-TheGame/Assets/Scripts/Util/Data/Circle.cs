@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Core.Util.Serializable
+namespace Core.Util.Data
 {
     [Serializable]
     public class Circle

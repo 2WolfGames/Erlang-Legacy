@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System;
-using Core.Util.Serializable;
+using Core.Util.Data;
 using System.Collections.Generic;
 
 using Core.Player.Util;
