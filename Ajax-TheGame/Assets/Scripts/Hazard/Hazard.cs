@@ -1,5 +1,5 @@
 using UnityEngine;
-using Core.Character.Player;
+using Core.Player.Controller;
 
 // desc:
 //  this scripts is usufull to hurt player when a collision is made
@@ -9,7 +9,9 @@ namespace Core.Hazard
     {
         [SerializeField] int damage;
 
-        void Update()
+        public int Damage { get => damage; set => damage = value; }
+
+        public void Update()
         {
             CheckCollision();
         }
@@ -19,8 +21,8 @@ namespace Core.Hazard
         bool IsTouchingPlayer()
         {
             var myCollider = GetComponent<Collider2D>();
-            var playerCollider = BasePlayer.Instance?.GetComponent<Collider2D>();
-            return playerCollider ? myCollider.IsTouching(playerCollider) : false;
+            var playerCollider = PlayerController.Instance.BodyCollider;
+            return myCollider.IsTouching(playerCollider);
         }
 
         // pre: --
@@ -28,7 +30,7 @@ namespace Core.Hazard
         void CheckCollision()
         {
             if (!IsTouchingPlayer()) return;
-            var player = BasePlayer.Instance;
+            var player = PlayerController.Instance;
             if (!player.CanBeHit) return;
             player.Hurt(damage, gameObject);
         }

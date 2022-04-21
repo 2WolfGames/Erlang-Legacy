@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-using Core.Character.Player;
+using Core.Player.Controller;
+
 
 public class Springboard : MonoBehaviour
 {
@@ -10,44 +9,44 @@ public class Springboard : MonoBehaviour
     [Range(5f, 100f)][SerializeField] float force = 10f;
 
     [Tooltip("Util for diff between elements of same layer")]
-    [SerializeField] string compareTag = "Player";
 
-    [Tooltip("Deviation angle respect normal object")]
     [SerializeField] float desviation = 90;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
     Animator animator;
 
-    void Awake()
+    public void Awake()
     {
         animator = GetComponent<Animator>();
     }
 
-    /**
-        Computes local rotation from
-        it's nearest parent and adds
-        deviations `phi` desviation, by default it's 90 degree
-    */
-    void OnTriggerEnter2D(Collider2D other)
+    // desc:
+    //  Computes local rotation from
+    //  it's nearest parent and adds
+    //  deviations `phi` desviation, by default it's 90 degree
+    public void OnTriggerEnter2D(Collider2D other)
     {
-        if (compareTag != null && !other.CompareTag(compareTag)) return;
+        if (other.CompareTag("Player"))
+        {
+            MovementController ajaxMovement = other.GetComponent<MovementController>();
 
-        MovementController ajaxMovement = other.GetComponent<MovementController>();
+            var rad = (transform.localEulerAngles.z + desviation) * Mathf.Deg2Rad;
+            var xForce = force * Mathf.Cos(rad);
+            var yForce = force * Mathf.Sin(rad);
 
-        var rad = (transform.localEulerAngles.z + desviation) * Mathf.Deg2Rad;
-        var xForce = force * Mathf.Cos(rad);
-        var yForce = force * Mathf.Sin(rad);
+            ajaxMovement.Impulse(new Vector2(xForce, yForce));
 
-        ajaxMovement.Impulse(new Vector2(xForce, yForce));
+            animator.SetBool("EXPAND", true);
+        }
 
-        animator.SetBool("EXPAND", true);
     }
 
-    void OnTriggerExit2D(Collider2D other)
+    public void OnTriggerExit2D(Collider2D other)
     {
-        if (compareTag != null && !other.CompareTag(compareTag)) return;
-
-        animator.SetBool("EXPAND", false);
+        if (other.CompareTag("Player"))
+        {
+            animator.SetBool("EXPAND", false);
+        }
     }
 }

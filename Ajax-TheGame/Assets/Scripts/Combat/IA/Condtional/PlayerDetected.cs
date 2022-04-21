@@ -16,5 +16,4 @@ namespace Core.Combat.IA.Conditional
             return touching ? TaskStatus.Success : TaskStatus.Failure;
         }
     }
-
 }

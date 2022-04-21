@@ -14,12 +14,12 @@ TagManager:
   - 
   - 
   - Ground
-  - Ajax
-  - Brush
-  - Enemy
-  - Interactuable
-  - Ajax Damage
+  - Player
+  - Springboard
+  - Suggar
   - Player Detector
+  - Player Damage
+  - Hazard
   - 
   - 
   - 
