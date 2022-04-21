@@ -7,7 +7,6 @@ namespace Core.Player.Util
 {
     public class AnimationControllerEvents : MonoBehaviour
     {
-
         private PlayerController Player => PlayerController.Instance;
 
         // desc: start of hit animation
@@ -31,16 +30,7 @@ namespace Core.Player.Util
         // pre: On recover start
         public void OnRecoverComplete()
         {
-            Debug.Log("hola");
             Player.OnRecoverComplete();
-        }
-
-        
-        // pre: On recover start
-        public void OnRecoverStart()
-        {
-            Debug.Log("hola");
-            Player.OnRecoverStart();
         }
     }
 

@@ -34,10 +34,26 @@ namespace Core.Player.Controller
 
             if (Input.GetButtonDown("Punch"))
                 OnThrowPunch();
+
             if (Input.GetButtonUp("Punch"))
                 OnPickUpPunch();
+
             if (Input.GetButton("Ray") && CanInvokeRay)
                 InvokeRay();
+        }
+
+        // pre: --
+        // post: active dash damage area
+        public void ActiveDashDamageArea()
+        {
+            damageAreas.Dash.SetEnabled(true);
+        }
+
+        // pre: --
+        // post: deactive dash damage area
+        public void DeactiveDashDamageArea()
+        {
+            damageAreas.Dash.SetEnabled(false);
         }
 
         private void OnThrowPunch()

@@ -13,9 +13,6 @@ namespace Core.Player.Data
         [SerializeField] TrailRenderer dashTrailRender;
         [SerializeField] HealthData health;
         [SerializeField] StatsData stats;
-        // [SerializeField] ProjectileData projectile;
-        // [SerializeField] DamageAreaData damageArea;
-        
 
         public HealthData Health { get => health; set => health = value; }
         public StatsData Stats { get => stats; set => stats = value; }

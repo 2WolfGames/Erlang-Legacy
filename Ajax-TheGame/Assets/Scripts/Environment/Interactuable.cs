@@ -12,15 +12,14 @@ namespace Core.Environment
 
         float detectorTimeCooldown = 0.2f;
 
-        Animator animator;
+        Animator animator => GetComponent<Animator>();
 
-        private bool CanInteract => detectorTime <= 0;
+        private bool CanInteract => detectorTimeCooldown <= 0;
         public float DetectorTime { get => detectorTime; set => detectorTime = value; }
         public string Trigger { get => trigger; set => trigger = value; }
 
         public void Start()
         {
-            animator = GetComponent<Animator>();
             detectorTimeCooldown = detectorTime;
         }
 
@@ -38,5 +37,4 @@ namespace Core.Environment
                 animator.SetTrigger(trigger);
         }
     }
-
 }

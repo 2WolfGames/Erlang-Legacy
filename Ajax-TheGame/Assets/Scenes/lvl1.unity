@@ -156,7 +156,7 @@ Transform:
   - {fileID: 220039410}
   - {fileID: 1324557964}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &91667768
 GameObject:
@@ -257,12 +257,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!4 &136743413 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4338606659265295168, guid: 3a92e288e57aab644a0656c959990934,
-    type: 3}
-  m_PrefabInstance: {fileID: 1830561270528675945}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &159185143
 GameObject:
   m_ObjectHideFlags: 0
@@ -292,7 +286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52716ddaecadec145ab313a101990fa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerLifeController: {fileID: 1289069021}
+  playerLifeController: {fileID: 0}
   dash: {fileID: 1975948425}
   ray: {fileID: 1567266585}
   lifeBar: {fileID: 4839526271948773092}
@@ -308,7 +302,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &196232176 stripped
 Transform:
@@ -570,7 +564,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Follow
       value: 
-      objectReference: {fileID: 136743413}
+      objectReference: {fileID: 0}
     - target: {fileID: 9117715256224902646, guid: 144ba70820a80d7428eccc3270f4fca9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -594,7 +588,7 @@ PrefabInstance:
     - target: {fileID: 9117715257027125277, guid: 144ba70820a80d7428eccc3270f4fca9,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9117715257027125277, guid: 144ba70820a80d7428eccc3270f4fca9,
         type: 3}
@@ -5900,18 +5894,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1230843244}
   m_CullTransparentMesh: 0
---- !u!114 &1289069021 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 382464842943519907, guid: 3a92e288e57aab644a0656c959990934,
-    type: 3}
-  m_PrefabInstance: {fileID: 1830561270528675945}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da8a59f0ca7800a428165eade88fc65f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1324557963
 GameObject:
   m_ObjectHideFlags: 0
@@ -7078,6 +7060,16 @@ PrefabInstance:
         type: 3}
       propertyPath: wallChecker.radius
       value: 0.72
+      objectReference: {fileID: 0}
+    - target: {fileID: 5625281659813403158, guid: 3a92e288e57aab644a0656c959990934,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7729203758749614544, guid: 3a92e288e57aab644a0656c959990934,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a92e288e57aab644a0656c959990934, type: 3}
