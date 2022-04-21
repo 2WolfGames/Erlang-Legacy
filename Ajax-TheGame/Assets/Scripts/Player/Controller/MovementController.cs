@@ -30,6 +30,7 @@ namespace Core.Player.Controller
         private float MovementSpeed => Player.PlayerData.Stats.MovementSpeed;
         private Animator Animator => Player.Animator;
         private TrailRenderer DashTrail => Player.PlayerData.DashTrailRender;
+        private float DashCooldown => Player.PlayerData.Stats.DashCooldown;
         private float dashCooldownTimer;
         private float holdingAfterJumpTimer;
         private bool isJumping = false;
@@ -81,6 +82,9 @@ namespace Core.Player.Controller
         // desc: changes local player scale in order to align to user input
         private void FaceDirection()
         {
+            if (!Controllable)
+                return;
+                
             Vector3 scale = transform.localScale;
             scale.x = FacingValue;
             transform.localScale = scale;
@@ -241,6 +245,7 @@ namespace Core.Player.Controller
             if (!isDashing)
                 return;
 
+            dashCooldownTimer = DashCooldown;
             Debug.Log("end dash");
             Body.gravityScale = baseGravityScale;
             isDashing = false;

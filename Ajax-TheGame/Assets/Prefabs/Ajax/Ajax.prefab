@@ -105,7 +105,7 @@ MonoBehaviour:
       dashCooldown: 1
       rayCooldown: 2
       holdingAfterJump: 0.15
-      recoverTimeoutAfterHit: 2
+      recoverTimeoutAfterHit: 1.5
 --- !u!114 &5625281659813403160
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,7 +120,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wallChecker:
     origin: {fileID: 8224927624844412392}
-    radius: 0.3
+    radius: 0.25
   landChecker:
     origin: {fileID: 8224927624468817745}
     radius: 0.4
@@ -419,8 +419,8 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 627137989
+  m_SortingLayer: -4
   m_SortingOrder: 0
 --- !u!114 &7729203758749614547
 MonoBehaviour:
@@ -568,7 +568,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8224927624844412395}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.47999954, y: 0, z: 0}
+  m_LocalPosition: {x: 0.216, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8224927623522908014}
@@ -780,6 +780,16 @@ PrefabInstance:
     - target: {fileID: 4818703921557374, guid: 4c916d2207d2300418a5957aa19521d4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 199280257873770192, guid: 4c916d2207d2300418a5957aa19521d4,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 199280257873770192, guid: 4c916d2207d2300418a5957aa19521d4,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: 627137989
       objectReference: {fileID: 0}
     - target: {fileID: 199280257873770192, guid: 4c916d2207d2300418a5957aa19521d4,
         type: 3}
