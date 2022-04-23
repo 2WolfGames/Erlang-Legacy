@@ -48,7 +48,6 @@ namespace Core.Player.Controller
         private Collider2D BodyCollider => GetComponent<Collider2D>();
         private ParticleSystem JumpParticles => Player.PlayerData.JumpParticles;
         public bool CanDash => !isDashing && dashCooldownTimer <= 0;
-
         public bool CanRun => !isDashing;
         public bool IsDashing => isDashing;
         public Action OnDashStart { get; set; }
@@ -69,6 +68,10 @@ namespace Core.Player.Controller
         {
             if (dashCooldownTimer > 0)
                 dashCooldownTimer -= Time.deltaTime;
+
+            if (!Controllable) // animation that can be called from any state may not let recover event work as spected
+                return;
+            
             DoJump();
             DoLand();
         }
@@ -135,7 +138,7 @@ namespace Core.Player.Controller
 
             var newVelocity = new Vector2(velocityX, Body.velocity.y);
             Body.velocity = Vector2.SmoothDamp(Body.velocity, newVelocity, ref currentVelocity, 0.000001f);
-            Animator.SetBool(CharacterAnimations.Run, Mathf.Abs(Body.velocity.x) > 0.05f);
+            Animator.SetBool(CharacterAnimations.Running, Mathf.Abs(Body.velocity.x) > 0.05f);
         }
 
         // pre: player just jumped
