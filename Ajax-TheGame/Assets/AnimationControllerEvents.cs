@@ -24,7 +24,12 @@ namespace Core.Player.Util
         // pre: called at end of dash animation
         public void OnDashEnd()
         {
-           Player.OnDashCompletes();
+            Player.OnDashCompletes();
+        }
+
+        public void OnDashStart()
+        {
+            // Debug.Log("event dash START");
         }
 
         // pre: On recover start

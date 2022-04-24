@@ -6,17 +6,16 @@ namespace Core.Combat
 {
     public class Triggerable : MonoBehaviour
     {
-        public Action<Collider2D> OnEnter { get; set; }
 
         private bool enabledCollider = true;
+        private Collider2D BodyCollider => GetComponent<Collider2D>();
+        public Action<Collider2D> OnEnter { get; set; }
 
         public bool Enabled
         {
             get => enabledCollider; 
             set => HandleEnabled(value);
         }
-
-        private Collider2D BodyCollider => GetComponent<Collider2D>();
 
         public void Awake()
         {
