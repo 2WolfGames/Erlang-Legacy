@@ -3,12 +3,13 @@ using UnityEngine;
 
 namespace Core.Combat
 {
-    public class Destructable : Hittable
+    public class Destroyable : Hittable
     {
         [SerializeField] int health = 10;
 
-        public int CurrentHealth { get; set; }
+        public int CurrentHealth { get => health; set => health = value; }
         public bool Invincible { get; set; }
+        public bool IsDestroyed => health <= 0;
 
         public event Action OnDestroyed;
 

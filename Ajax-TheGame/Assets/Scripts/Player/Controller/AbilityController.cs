@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System;
 using Core.Player.Data;
 using Core.Combat.Projectile;
 using Core.Util;
@@ -49,13 +48,13 @@ namespace Core.Player.Controller
         // TODO: work with hittable objects too
         private void OnDashHitEnters(Collider2D other)
         {
-            var destructable = other.GetComponent<Destructable>();
+            var destroyable = other.GetComponent<Destroyable>();
 
-            if (destructable)
+            if (destroyable)
             {
-                destructable.OnDestroyed += () => Debug.Log($"enemy is dead {this.gameObject.name}");
+                destroyable.OnDestroyed += () => Debug.Log($"enemy is dead {this.gameObject.name}");
                 var direction = Player.transform.position.x > other.transform.position.x ? -1 : 1;
-                destructable.OnAttackHit(Vector2.right * direction, 1); // TODO: set default hit damage
+                destroyable.OnAttackHit(Vector2.right * direction, 1); // TODO: set default hit damage
             }
         }
 
