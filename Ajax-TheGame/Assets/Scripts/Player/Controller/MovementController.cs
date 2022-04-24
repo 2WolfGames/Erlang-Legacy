@@ -123,11 +123,7 @@ namespace Core.Player.Controller
         private void CheckDashComplitness()
         {
             if (isDashing && ShouldEndDash)
-            {
                 StopDashing();
-                // make player recover controll
-                Player.Controllable = true;
-            }
         }
 
         // pre: --
@@ -204,7 +200,8 @@ namespace Core.Player.Controller
         // pre: can do dash
         private void StartDashing()
         {
-            dashMidJump = isJumping;
+            if (isJumping)
+                dashMidJump = true;
 
             isDashing = true;
             DashTrail.widthMultiplier = 3;
