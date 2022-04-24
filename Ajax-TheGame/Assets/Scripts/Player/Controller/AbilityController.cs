@@ -27,6 +27,7 @@ namespace Core.Player.Controller
         public void Awake()
         {
             Dash.Enabled = false;
+            Dash.OnEnter += OnDashHitEnters;
             Punch.Enabled = false;
         }
 
@@ -43,6 +44,19 @@ namespace Core.Player.Controller
 
             if (Input.GetButton("Ray") && CanInvokeRay)
                 InvokeRay();
+        }
+
+        // TODO: work with hittable objects too
+        private void OnDashHitEnters(Collider2D other)
+        {
+            var destructable = other.GetComponent<Destructable>();
+
+            if (destructable)
+            {
+                destructable.OnDestroyed += () => Debug.Log($"enemy is dead {this.gameObject.name}");
+                var direction = Player.transform.position.x > other.transform.position.x ? -1 : 1;
+                destructable.OnAttackHit(Vector2.right * direction, 1); // TODO: set default hit damage
+            }
         }
 
         // pre: --
@@ -71,7 +85,6 @@ namespace Core.Player.Controller
             Punch.Enabled = false;
         }
 
-
         // pre: --
         // post: invoke an instance of ray projectile and sets its values
         private void InvokeRay()
@@ -90,13 +103,6 @@ namespace Core.Player.Controller
             Debug.Log("Hitting enemy at ray");
             OnHit(other, PlayerData.Stats.RayDamage);
         }
-
-
-        public void OnTriggerEnter2D(Collider2D other)
-        {
-            // trigger because of punch hit or dash hit
-        }
-
 
         private void OnHit(Collider2D other, float damage)
         {

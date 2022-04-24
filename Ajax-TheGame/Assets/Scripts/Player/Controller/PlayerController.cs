@@ -18,6 +18,7 @@ namespace Core.Player.Controller
         private Protectable Protectable => GetComponent<Protectable>();
         [SerializeField] private bool controllable = true;
         [SerializeField] private bool inRecoverProcess = false;
+        [SerializeField] private bool isProtected;
         private bool blockingUI;
         public bool CanBeHit => Protectable.CanBeHit;
         public int FacingValue => FacingController.FacingToInt;
@@ -34,6 +35,12 @@ namespace Core.Player.Controller
                 else OnUnblockUI();
             }
         }
+
+        public void Update()
+        {
+            isProtected = Protectable.IsProtected;
+        }
+
         public bool Controllable
         {
             get => controllable && !BlockingUI;
@@ -57,26 +64,21 @@ namespace Core.Player.Controller
         }
 
         // pre: --
-        // post: enable scripts that make damage
-        //      and avoid listening from keyboard
+        // post: enables scripts that make damage
+        //      and sets infinite protection
         private void OnDashStart()
         {
-            Debug.Log("on dash start");
             Protectable.SetProtection(float.PositiveInfinity);
             controllable = false;
             AbilityController.ActiveDashDamage();
         }
 
         // post: disable scripts that make damage
-        //      and activates listening from keyboard
+        //       and sets protection to false in case
+        //       there is no recover process running
         public void OnDashCompletes()
         {
-            Debug.Log("on dash completes");
-
-            if (!MovementController.IsDashing)
-                return;
-
-            if (!inRecoverProcess) // may there is some recover process that dash should respect
+            if (!inRecoverProcess) // respects recover process
                 Protectable.SetProtection(0f);
 
             controllable = true;
@@ -117,8 +119,6 @@ namespace Core.Player.Controller
             if (Protectable.IsProtected)
                 return;
 
-            Debug.Log("hurt");
-
             Side side = Function.CollisionSide(transform, other.transform);
 
             if (side == Side.Back)
@@ -143,21 +143,24 @@ namespace Core.Player.Controller
         }
 
         // desc: to be called at end of recover animations with and event
-        // post: recovers controll & start coroutine to set protection to false
         public void OnRecoverComplete()
         {
             controllable = true;
             StartCoroutine(AfterHurtAnimation());
         }
 
-        // pre: took player controll again
+        // pre:  after hurt animations & recover process running
         // post: trigger animations & and resets protection after few seconds
+        //       if no dashing process is running, set character unprotected
         private IEnumerator AfterHurtAnimation()
         {
             var timeout = PlayerData.Stats.RecoverTimeoutAfterHit;
             yield return new WaitForSeconds(timeout);
             inRecoverProcess = false;
-            Protectable.SetProtection(0);
+
+            if (!MovementController.IsDashing) // respects dashing protection
+                Protectable.SetProtection(0);
+
             Animator.SetBool(CharacterAnimations.Blink, false);
         }
     }
