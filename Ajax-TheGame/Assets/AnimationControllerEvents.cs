@@ -24,7 +24,7 @@ namespace Core.Player.Util
         // pre: called at end of dash animation
         public void OnDashEnd()
         {
-            Player.GetComponent<MovementController>().EndDash();
+           Player.OnDashCompletes();
         }
 
         // pre: On recover start

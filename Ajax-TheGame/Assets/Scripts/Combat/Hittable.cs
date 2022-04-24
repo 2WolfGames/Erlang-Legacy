@@ -68,7 +68,7 @@ namespace Core.Combat
             baseScale = transform.localScale;
         }
 
-        public virtual void OnAttackHit(Vector2 position, Vector2 force, int damage)
+        public virtual void OnAttackHit(Vector2 position, Vector2 force)
         {
             // Hurt/Damage
             OnHit?.Invoke(position, force);
@@ -109,10 +109,10 @@ namespace Core.Combat
             }
 
             if (customHitEffect != null)
-                EffectManager.Instance.PlayOneShot(customHitEffect, position);
+                EffectManager.Instance?.PlayOneShot(customHitEffect, position);
 
             if (customHitSound != null)
-                SoundManager.Instance.PlaySoundAtLocation(customHitSound, transform.position);
+                SoundManager.Instance?.PlaySoundAtLocation(customHitSound, transform.position);
 
             if (shakeCamera)
             {
@@ -120,6 +120,14 @@ namespace Core.Combat
                 Debug.Log("shaking camera...");
             }
 
+        }
+
+        public void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                OnAttackHit(transform.position, Vector2.right);
+            }
         }
 
     }

@@ -16,7 +16,8 @@ namespace Core.Player.Controller
         private MovementController MovementController => GetComponent<MovementController>();
         private FacingController FacingController => GetComponent<FacingController>();
         private Protectable Protectable => GetComponent<Protectable>();
-        private bool controllable = true;
+        [SerializeField] private bool controllable = true;
+        [SerializeField] private bool inRecoverProcess = false;
         private bool blockingUI;
         public bool CanBeHit => Protectable.CanBeHit;
         public int FacingValue => FacingController.FacingToInt;
@@ -33,11 +34,14 @@ namespace Core.Player.Controller
                 else OnUnblockUI();
             }
         }
-        public bool Controllable { get => controllable && !BlockingUI; set => controllable = value; }
+        public bool Controllable
+        {
+            get => controllable && !BlockingUI;
+            set => controllable = value;
+        }
         public Collider2D BodyCollider => GetComponent<Collider2D>();
         public Rigidbody2D Body => GetComponent<Rigidbody2D>();
         public Animator Animator => GetComponentInChildren<Animator>();
-
         public static PlayerController Instance { get; private set; }
 
 
@@ -49,9 +53,7 @@ namespace Core.Player.Controller
                 Destroy(gameObject);
             else Instance = this;
 
-            AbilityController.OnRayStart += OnRayStart;
             MovementController.OnDashStart += OnDashStart;
-            MovementController.OnDashEnd += OnDashComplete;
         }
 
         // pre: --
@@ -59,18 +61,27 @@ namespace Core.Player.Controller
         //      and avoid listening from keyboard
         private void OnDashStart()
         {
+            Debug.Log("on dash start");
             Protectable.SetProtection(float.PositiveInfinity);
             controllable = false;
-            AbilityController.ActiveDashDamageArea();
+            AbilityController.ActiveDashDamage();
         }
 
         // post: disable scripts that make damage
         //      and activates listening from keyboard
-        private void OnDashComplete()
+        public void OnDashCompletes()
         {
-            Protectable.SetProtection(0f);
+            Debug.Log("on dash completes");
+
+            if (!MovementController.IsDashing)
+                return;
+
+            if (!inRecoverProcess) // may there is some recover process that dash should respect
+                Protectable.SetProtection(0f);
+
             controllable = true;
-            AbilityController.DeactiveDashDamageArea();
+            AbilityController.DeactiveDashDamage();
+            MovementController.StopDashing();
         }
 
         // pre: called by some function that stunds player (called by hit animation)
@@ -93,7 +104,7 @@ namespace Core.Player.Controller
         // post: applies damage to player
         public void OnCollision(GameObject other, int damage = 1)
         {
-            if (Protectable.IsProtected) 
+            if (Protectable.IsProtected)
                 return;
 
             Hurt(damage, other);
@@ -105,6 +116,8 @@ namespace Core.Player.Controller
         {
             if (Protectable.IsProtected)
                 return;
+
+            Debug.Log("hurt");
 
             Side side = Function.CollisionSide(transform, other.transform);
 
@@ -123,6 +136,7 @@ namespace Core.Player.Controller
             if (Protectable.IsProtected)
                 return;
 
+            inRecoverProcess = true;
             Protectable.SetProtection(float.PositiveInfinity);
             Animator.SetBool(CharacterAnimations.Blink, true);
             controllable = false;
@@ -140,30 +154,12 @@ namespace Core.Player.Controller
         // post: trigger animations & and resets protection after few seconds
         private IEnumerator AfterHurtAnimation()
         {
-            yield return new WaitForSeconds(PlayerData.Stats.RecoverTimeoutAfterHit);
+            var timeout = PlayerData.Stats.RecoverTimeoutAfterHit;
+            yield return new WaitForSeconds(timeout);
+            inRecoverProcess = false;
             Protectable.SetProtection(0);
             Animator.SetBool(CharacterAnimations.Blink, false);
         }
-
-        private void OnDashHit(Collider2D enemy)
-        {
-
-            Debug.Log("Hitting enemy at dash");
-        }
-
-
-        private void OnPunchHit(Collider2D enemy)
-        {
-            Debug.Log("Hitting enemy at punch");
-        }
-
-        // pre: --
-        // post: instanciate a ray prefab that will destroy itself in n seconds
-        private void OnRayStart()
-        {
-
-        }
-
     }
 }
 
