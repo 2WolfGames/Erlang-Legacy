@@ -25,12 +25,15 @@ namespace Core.Combat
         [SerializeField] Animator animator;
         [SerializeField] SpriteRenderer sprite;
         [SerializeField] bool shakeCamera;
+        [SerializeField] bool applyRecoil;
+        [SerializeField] float recoilForce;
+        public bool ApplyRecoil { get => applyRecoil; set => applyRecoil = value; }
         protected Vector2 baseScale;
         protected Color baseColor;
         protected Material baseMaterial;
         private Color defaultColor = Color.white;
-
-        public Action<Vector2, Vector2> OnHit;
+        private Rigidbody2D body => GetComponent<Rigidbody2D>();
+        public Action OnHit;
 
         // Start is called before the first frame update
         protected virtual void Awake()
@@ -63,23 +66,33 @@ namespace Core.Combat
                 return;
             }
 
-            baseColor = sprite == null ? defaultColor : sprite.color;
-            baseMaterial = sprite?.material;
+            if (sprite)
+            {
+                baseColor = sprite.color;
+                baseMaterial = sprite.material;
+            }
+            else
+            {
+                baseColor = Color.white;
+            }
+
             baseScale = transform.localScale;
         }
 
-        public virtual void OnAttackHit(Vector2 position, Vector2 force)
+        public void OnAttackHit(Vector2 hitDirection)
         {
-            // Hurt/Damage
-            OnHit?.Invoke(position, force);
+            OnHit?.Invoke();
+
+            if (applyRecoil)
+                DoRecoil(hitDirection, true);
 
             if (hitType == HitType.Inflate)
             {
                 var sequence = DOTween.Sequence();
                 sequence
-                    .Append(transform.DOScale(baseScale * 0.1f, 0.25f))
-                    .Append(transform.DOScale(baseScale, 0.25f))
-                    .SetEase(Ease.InOutElastic);
+                    .Append(transform.DOScale(baseScale * 0.9f, 0.1f))
+                    .Append(transform.DOScale(baseScale, 0.1f))
+                    .SetEase(Ease.Linear);
             }
             else if (hitType == HitType.Push)
             {
@@ -95,8 +108,8 @@ namespace Core.Combat
                 // change color, reset color in few seconds
                 var sequence = DOTween.Sequence();
                 sequence
-                    .Append(sprite.DOColor(hitColor, 0.25f))
-                    .Append(sprite.DOColor(baseColor, 0.25f));
+                    .Append(sprite.DOColor(hitColor, 0.1f))
+                    .Append(sprite.DOColor(baseColor, 0.1f));
             }
             else if (hitType == HitType.Material)
             {
@@ -109,7 +122,7 @@ namespace Core.Combat
             }
 
             if (customHitEffect != null)
-                EffectManager.Instance?.PlayOneShot(customHitEffect, position);
+                EffectManager.Instance?.PlayOneShot(customHitEffect, transform.position);
 
             if (customHitSound != null)
                 SoundManager.Instance?.PlaySoundAtLocation(customHitSound, transform.position);
@@ -119,16 +132,20 @@ namespace Core.Combat
                 // use camera controller to shake it
                 Debug.Log("shaking camera...");
             }
-
         }
 
-        public void OnTriggerEnter2D(Collider2D other)
+        public void DoRecoil(Vector2 direction, bool resetVelocity = false)
         {
-            if (other.CompareTag("Player"))
+            if (body == null)
             {
-                OnAttackHit(transform.position, Vector2.right);
+                Debug.LogError("Recoil needs rigid body attached to game object");
+                return;
             }
-        }
 
+            if (resetVelocity)
+                body.velocity = Vector3.zero;
+
+            body.AddForce(direction * recoilForce);
+        }
     }
 }
