@@ -15,12 +15,14 @@ namespace Core.Util
                 Instance = this;
         }
 
-        public void PlayOneShot(ParticleSystem particleSystem, Vector3 position)
+        public void PlayOneShot(ParticleSystem particleSystem, Vector3 position, Transform parent = null)
         {
-            if (particleSystem == null) 
+            if (particleSystem == null)
                 return;
 
             var effect = Instantiate(particleSystem, position, Quaternion.identity);
+            if (parent)
+                effect.transform.SetParent(parent);
             effect.Play();
 
             var duration = effect.main.duration + effect.main.startLifetime.constantMax;

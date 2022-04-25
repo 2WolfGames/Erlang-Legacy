@@ -14,6 +14,7 @@ namespace Core.Player.Controller
         [SerializeField] DamageAreaData damageAreas;
 
         private Triggerable Dash => damageAreas.Dash;
+        private ParticleSystem dashPS => damageAreas.DashParticle;
         private Triggerable Punch => damageAreas.Punch;
 
         private float rayTimer;
@@ -63,6 +64,8 @@ namespace Core.Player.Controller
         public void ActiveDashDamage()
         {
             Dash.Enabled = true;
+            if (dashPS)
+                EffectManager.Instance.PlayOneShot(dashPS, dashPS.transform.position);
         }
 
         // pre: --
