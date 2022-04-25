@@ -1,15 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using Core.Shared;
 
 public class SceneTeleporter : MonoBehaviour
 {
-    [SerializeField] Core.Shared.Loader.Scene scene;
-    [SerializeField] Core.Shared.Loader.Entrance entranceTag;
-     private void OnTriggerEnter2D(Collider2D other) {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Ajax")){
-            FindObjectOfType<GameSessionController>()?.SearchCurrentPoint(entranceTag);
-            Core.Shared.Loader.Load(scene);
+    [SerializeField] SceneID scene;
+    [SerializeField] EntranceID entranceTag;
+    private void OnTriggerEnter2D(Collider2D other)
+    {   
+        if (other.gameObject.tag == "Player")
+        {
+            GameSessionController.Instance.SearchCurrentPoint(entranceTag);
+            StartCoroutine(Loader.LoadWithDelay(scene, 0));
         }
-     }
+    }
 }

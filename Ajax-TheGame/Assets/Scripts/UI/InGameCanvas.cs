@@ -9,6 +9,6 @@ public class InGameCanvas : MonoBehaviour
     [SerializeField] Image deathImage;
     
     public void ActiveDeathImage(){
-        deathImage.DOFade(1,3).SetDelay(2);
+        deathImage.DOFade(1,2).SetDelay(1.5f);
     } 
 }

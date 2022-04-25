@@ -11,7 +11,7 @@ public class SavePoint : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Ajax")){
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player")){
             gameSessionController.SavePlayerCurrentPoint(transform);
         }
     }

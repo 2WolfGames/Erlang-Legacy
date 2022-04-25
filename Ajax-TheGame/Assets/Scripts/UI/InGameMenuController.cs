@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Spine.Unity;
 using Core.Shared;
+using Core.Player.Controller;
 
 public class InGameMenuController : MonoBehaviour
 {
@@ -42,13 +43,18 @@ public class InGameMenuController : MonoBehaviour
     //Is necessary to wait till the end of frame for not affect the player movment with the key events of the menu.
     IEnumerator EnablePlayer(){ 
         yield return new WaitForEndOfFrame();
-        FindObjectOfType<Core.Character.Player.BasePlayer>().SetFreeze(false);
+
+        var player = PlayerController.Instance;
+        player.BlockingUI = false;
     }
 
     private void PauseGame(){
         pauseMenu.SetActive(true);
         OpenMenu();
-        FindObjectOfType<Core.Character.Player.BasePlayer>().SetFreeze(true);
+
+        var player = PlayerController.Instance;
+        player.BlockingUI = true;
+
         Time.timeScale = 0; //we stop game 
         gamePaused = true;
     }
@@ -95,7 +101,7 @@ public class InGameMenuController : MonoBehaviour
             } 
             else if (Input.GetKeyDown(KeyCode.Space)){
                 Time.timeScale = 1;
-                Loader.Load(Loader.Scene.StartMenu);
+                StartCoroutine(Loader.LoadWithDelay(SceneID.StartMenu,0));
             }
         }
     }

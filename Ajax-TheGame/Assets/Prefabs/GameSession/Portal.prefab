@@ -81,7 +81,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4815034752465542357}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,9 +112,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4815034753132920672}
   - component: {fileID: 4815034753132920673}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SceneEntrance
-  m_TagString: Untagged
+  m_TagString: E1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -148,6 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entrancePoint: {fileID: 4815034753683251020}
+  spawnPoint: {fileID: 0}
 --- !u!1 &4815034753683251019
 GameObject:
   m_ObjectHideFlags: 0
@@ -157,7 +158,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4815034753683251020}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: EndAnimationPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -187,7 +188,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4815034753760016233}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Portal
   m_TagString: Untagged
   m_Icon: {fileID: 0}

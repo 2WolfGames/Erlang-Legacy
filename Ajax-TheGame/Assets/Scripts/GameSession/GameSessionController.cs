@@ -1,103 +1,151 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Core.UI.LifeBar;
+using Core.Player.Controller;
+using Core.Shared;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
 public class GameSessionController : MonoBehaviour
 {
-    Core.UI.LifeBar.LifeBarController lifeBarController;
-    /*Save Point*/
-    Vector3 savePoint;
-    string sceneSavePoint;
-    /*Current Point*/
-    Vector3 currentPoint;
-    Core.Shared.Loader.Entrance entranceTag;
-    bool searchCurrentPoint = false;
-    bool setUpLifes = false;
-    bool hasDied = false;
+    private bool waiting;
+    private Vector3 currentPoint;
+    private EntranceID entranceTag;
+    private bool searchCurrentPoint = false;
+    private bool setUpLifes = false;
+    private bool hasDied = false;
 
-    /*for test delete later*/
-    [SerializeField] bool loseLife = false;
-    int lifes = 5;
-    /*for test delete later*/
+    public static GameSessionController Instance { get; private set; }
+    public static bool loadSavedData = false;
 
-    void Awake(){
+    void Awake()
+    {
         int numGameSessionControllers = FindObjectsOfType<GameSessionController>().Length;
-        if (numGameSessionControllers > 1){
+        if (numGameSessionControllers > 1)
+        {
             Destroy(gameObject);
-        } else{
-            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(Instance);
         }
     }
-    private void Start() {
-        lifes = 5; //Delete
-        FindLifebar();
+    private void Start()
+    {
+        waiting = !SceneManagementFunctions.CurrentSceneIsGameplay();
+        if (waiting)
+            return;
+
+        if (loadSavedData)
+            LoadSavedData();
+
+        setUpLifes = true;
+
+        PlacePlayer();
+
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        FindLifebar();
-        if (searchCurrentPoint){
-            foreach (SceneEntrance se in FindObjectsOfType<SceneEntrance>()) {
-                if (se.gameObject.CompareTag(entranceTag.ToString())){
-                    currentPoint = se.GetEntrancePoint();
-                    searchCurrentPoint = false;
-                    break;
-                }
-            }
-        }
+        waiting = !SceneManagementFunctions.CurrentSceneIsGameplay();
+        if (waiting)
+            return;
+
+        setUpLifes = true;
+        hasDied = false;
+
+        if (searchCurrentPoint)
+            SceneChangedSearchCurrentPoint();
+
+        PlacePlayer();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (setUpLifes){
-            lifeBarController?.SetUpLifes(lifes,5); //Todo
+        if (waiting)
+            return;
+
+        if (setUpLifes)
+        {
+            var playerHealth = PlayerController.Instance.PlayerData.Health;
+            LifeBarController.Instance.SetUpLifes(playerHealth.HP, playerHealth.MaxHP);
             setUpLifes = false;
         }
 
-        if (loseLife){
-            lifes--;
-            lifeBarController.LoseLifes(1);
-            loseLife = false;
-            if (lifes == 0){
-                ResetGameToSavePoint();
-            }
+        if (PlayerController.Instance.PlayerData.Health.HP == 0)
+        {
+            ResetGameToSavePoint();
         }
     }
 
-    public void SavePlayerCurrentPoint(Transform currentPointTransform){
+    public void SavePlayerCurrentPoint(Transform currentPointTransform)
+    {
+        if (hasDied)
+            return;
         currentPoint = currentPointTransform.position;
     }
 
-    public void SavePlayerSavePoint(Transform savePointTransform, string savePointScene){
-        savePoint = savePointTransform.position;
-        sceneSavePoint = savePointScene;
+    public void SavePlayerState(Transform savePoint)
+    {
+        PlayerState playerState = new PlayerState(((int)SceneManagementFunctions.GetCurrentSceneEnum()),
+                                                PlayerController.Instance.PlayerData.Health.HP,
+                                                PlayerController.Instance.PlayerData.Health.MaxHP,
+                                                savePoint.position);
+        SaveSystem.SavePlayerState(playerState);
     }
 
-    public void ResetGameToSavePoint(){
-        lifes = 5;
+    public void ResetGameToSavePoint()
+    {
         hasDied = true;
+        PlayerController.Instance.Controllable = false;
+
         FindObjectOfType<InGameCanvas>()?.ActiveDeathImage();
-        StartCoroutine(Core.Shared.Loader.LoadWithDelay(sceneSavePoint,6));
+        StartCoroutine(Loader.LoadWithDelay((SceneID)LoadSavedData(), 4));
     }
 
-    public Vector3 GetCurrentPoint(){
-        if (hasDied && SceneManager.GetActiveScene().name == sceneSavePoint && savePoint != null){
-            hasDied = false;
-            return savePoint;
-        } else{
-            return currentPoint;
-        }
+    public Vector3 GetCurrentPoint()
+    {
+        return currentPoint;
     }
 
-    public void SearchCurrentPoint(Core.Shared.Loader.Entrance entranceTag){
+    public void SearchCurrentPoint(EntranceID entranceTag)
+    {
         searchCurrentPoint = true;
         this.entranceTag = entranceTag;
     }
 
-    private void FindLifebar(){
-        lifeBarController = FindObjectOfType<Core.UI.LifeBar.LifeBarController>();
-        setUpLifes = true;
+    private int LoadSavedData()
+    {
+        PlayerState playerState = SaveSystem.LoadPlayerState();
+
+        var playerHealth = PlayerController.Instance.PlayerData.Health;
+        playerHealth.HP = playerState.health;
+        playerHealth.MaxHP = playerState.max_health;
+
+        currentPoint = playerState.GetPosition();
+
+        loadSavedData = false;
+
+        return playerState.scene;
+    }
+
+    private void SceneChangedSearchCurrentPoint()
+    {
+        foreach (SceneEntrance se in FindObjectsOfType<SceneEntrance>())
+        {
+            if (se.gameObject.CompareTag(entranceTag.ToString()))
+            {
+                currentPoint = se.GetEntrancePoint();
+                searchCurrentPoint = false;
+                break;
+            }
+        }
+    }
+
+    private void PlacePlayer()
+    {
+        var player = PlayerController.Instance;
+        player.transform.position = GetCurrentPoint();
     }
 }

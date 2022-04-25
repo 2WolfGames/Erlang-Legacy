@@ -8,29 +8,33 @@ public class LoadingMenu : MonoBehaviour
 {
     [SerializeField] SkeletonGraphic skeletonGraphic;
     [SerializeField] CanvasGroup canvasGroup;
-    public static string sceneName = "lvl1";
+    public static string sceneName;
     AsyncOperation asyncOperation;
 
-    private void Awake() {
+    private void Awake()
+    {
         canvasGroup.alpha = 0;
     }
 
     void Start()
     {
-        skeletonGraphic.AnimationState.SetAnimation(1,"animation",true);
+        skeletonGraphic.AnimationState.SetAnimation(1, "animation", true);
         StartCoroutine(LightLoadingScreen(2));
         StartCoroutine(LoadNextScene());
     }
-    private IEnumerator LoadNextScene(){
+    private IEnumerator LoadNextScene()
+    {
         yield return new WaitForSeconds(3);
         Application.backgroundLoadingPriority = ThreadPriority.Low;
-        asyncOperation = SceneManager.LoadSceneAsync(sceneName,LoadSceneMode.Single);
-        
+        asyncOperation = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
     }
 
-    private void Update() {
-        if (asyncOperation != null){
-            if (asyncOperation.progress > 0.9f){
+    private void Update()
+    {
+        if (asyncOperation != null)
+        {
+            if (asyncOperation.progress > 0.9f)
+            {
                 StartCoroutine(FadeLoadingScreen(2));
             }
         }

@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 using Core.Shared.Enum;
@@ -34,7 +33,6 @@ namespace Core.Shared
             {
                 while (item.MoveNext()) yield return item.Current;
             }
-            yield break;
         }
 
         // pre: density >= 1
@@ -47,8 +45,8 @@ namespace Core.Shared
             bool stop = false;
             while (i < density && !stop)
             {
-                var r1 = Function.Look(origin.position, Quaternion.Euler(0, 0, (visualAngle - phi * i) / 2) * dir, distance, mask);
-                var r2 = Function.Look(origin.position, Quaternion.Euler(0, 0, -(visualAngle - phi * i) / 2) * dir, distance, mask);
+                var r1 = Look(origin.position, Quaternion.Euler(0, 0, (visualAngle - phi * i) / 2) * dir, distance, mask);
+                var r2 = Look(origin.position, Quaternion.Euler(0, 0, -(visualAngle - phi * i) / 2) * dir, distance, mask);
                 i += 2;
                 stop = r1 || r2;
             }

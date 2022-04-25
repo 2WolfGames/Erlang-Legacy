@@ -16,21 +16,22 @@ public class SaveGame : MonoBehaviour
     void Update()
     {
         if (canBeSaved){
-            if (Input.GetKeyDown(KeyCode.P)){
+            if (Input.GetKeyDown(KeyCode.S)){
                 Debug.Log(transform);
-                gameSessionController.SavePlayerSavePoint(transform, SceneManager.GetActiveScene().name);
+                canBeSaved = false;
+                gameSessionController.SavePlayerState(transform);
             }
         }
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Ajax")){
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player")){
             canBeSaved = true;
         }
     }
     
     private void OnTriggerExit2D(Collider2D other) {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Ajax")){
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player")){
             canBeSaved = false;
         }
     }

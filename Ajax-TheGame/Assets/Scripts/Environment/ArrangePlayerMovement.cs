@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Core.Player.Controller;
 using UnityEngine;
 
-using Core.Character.Player;
 
 public class ArrangePlayerMovement : MonoBehaviour
 {
@@ -12,14 +12,14 @@ public class ArrangePlayerMovement : MonoBehaviour
     float ajaxLastXPos;
     float platformLastXPos;
 
-    void Start()
+    public void Start()
     {
         platformLastXPos = transform.position.x;
     }
 
     //pre: --
     //post: every frame evaluates CalculatePlayerVelocity() and updates ajax and platform positions
-    private void FixedUpdate()
+    public void FixedUpdate()
     {
         if (ajax)
         {
@@ -31,7 +31,7 @@ public class ArrangePlayerMovement : MonoBehaviour
 
     //pre: ajax != null
     //post: looks if player and platform are moving at the same time 
-    //if do so, corrects the alterations of player movement using ModifyVelocity() from AjaxMovemnt.
+    //if do so, corrects the alterations of player movement using ModifyVelocity() from AjaxMovemnt. // todo: mirar velocity modifier
     private void CalculatePlayerVelocity()
     {
         float ajaxDir = ajax.transform.localPosition.x - ajaxLastXPos;
@@ -42,18 +42,22 @@ public class ArrangePlayerMovement : MonoBehaviour
         {
             if (ajaxDir < 0 && platformDir < 0 || ajaxDir > 0 && platformDir > 0)
             { //same dir
-                ajax.GetComponent<MovementController>().ModifyVelocity(new Vector2(1 - velocityAlterator, 1));
+                // ajax.GetComponent<PlayerMovementManager>().ModifyVelocity(new Vector2(1 - velocityAlterator, 1));
+                ajax.GetComponent<MovementController>().Acceleration = 1 - velocityAlterator;
             }
             else
             { // diferent dir
-                ajax.GetComponent<MovementController>().ModifyVelocity(new Vector2(1 + velocityAlterator, 1));
+                // ajax.GetComponent<PlayerMovementManager>().ModifyVelocity(new Vector2(1 + velocityAlterator, 1));
+                  ajax.GetComponent<MovementController>().Acceleration = 1 + velocityAlterator;
             }
+        } else {
+            ajax.GetComponent<MovementController>().Acceleration = 1;
         }
     }
 
     //pre: --
     //post: if collider is player then its parented with platform and we Activaate parent Mechanism
-    private void OnTriggerEnter2D(Collider2D other)
+    public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Player")
         {
@@ -65,7 +69,7 @@ public class ArrangePlayerMovement : MonoBehaviour
 
     //pre: --
     //post: if collider is player we unparent them
-    private void OnTriggerExit2D(Collider2D other)
+    public void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.tag == "Player")
         {

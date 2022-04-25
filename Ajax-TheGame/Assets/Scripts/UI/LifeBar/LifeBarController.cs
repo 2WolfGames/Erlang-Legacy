@@ -21,15 +21,24 @@ namespace Core.UI.LifeBar
         [SerializeField] ParticleSystem newLifeApearingParticleEffect;
 
         ////Global variables ////
-        int totalLifes;
-        int currentLifes;
+        private int totalLifes;
+        private int currentLifes;
+        public int CurrentLifes {get => currentLifes; private set => currentLifes = value; }
         Queue<(LifeBarAction, int)> pendentChanges;
         bool modifying;
+
+        public static LifeBarController Instance { get; private set; }
 
         //pre: --
         //post: We initialize what we need
         void Awake()
         {
+            var matches = FindObjectsOfType<LifeBarController>();
+
+            if (matches.Length > 1)
+                Destroy(gameObject);
+            else Instance = this;
+
             lifeContainers = new List<LifeBarContainer>();
             pendentChanges = new Queue<(LifeBarAction, int)>();
         }
@@ -235,13 +244,15 @@ namespace Core.UI.LifeBar
                 {
                     ActivateDangerEffect(true);
                 }
-                yield return lastOne;
 
                 if (currentLifes == 0)
                 {
                     ActivateDangerEffect(false); //we make sure that danger effect is not active anymore
                     StartCoroutine(DieEffect());
                 }
+
+                yield return lastOne;
+                
             }
             else
             {
