@@ -3,7 +3,7 @@
 
 namespace Core.Combat.IA.Conditional
 {
-    public class IsDestroyed : EnemyConditional
+    public class DestroyableDone : EnemyConditional
     {
         public override TaskStatus OnUpdate()
         {

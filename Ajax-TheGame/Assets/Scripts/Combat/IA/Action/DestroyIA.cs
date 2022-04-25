@@ -6,11 +6,11 @@ using UnityEngine;
 
 namespace Core.Combat.IA.Action
 {
-    public class Destroy : EnemyAction
+    public class DestroyIA : EnemyAction
     {
+        [SerializeField] ParticleSystem exploteEffect;
         [SerializeField] ParticleSystem bleedEffect;
         [SerializeField] float bleedDuration;
-        [SerializeField] ParticleSystem exploteEffect;
 
         private bool isDestroyed;
 

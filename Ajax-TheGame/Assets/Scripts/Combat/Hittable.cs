@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using Core.Shared;
 using Core.Util;
 using DG.Tweening;
 using UnityEngine;
@@ -34,6 +36,8 @@ namespace Core.Combat
         private Color defaultColor = Color.white;
         private Rigidbody2D body => GetComponent<Rigidbody2D>();
         public Action OnHit;
+
+        List<Tween> tweens = new List<Tween>();
 
         // Start is called before the first frame update
         protected virtual void Awake()
@@ -83,13 +87,15 @@ namespace Core.Combat
         {
             OnHit?.Invoke();
 
+            Tween tween = null;
+
             if (applyRecoil)
                 DoRecoil(hitDirection, true);
 
             if (hitType == HitType.Inflate)
             {
-                var sequence = DOTween.Sequence();
-                sequence
+                tween = DOTween.Sequence();
+                (tween as Sequence)
                     .Append(transform.DOScale(baseScale * 0.9f, 0.1f))
                     .Append(transform.DOScale(baseScale, 0.1f))
                     .SetEase(Ease.Linear);
@@ -106,20 +112,24 @@ namespace Core.Combat
             else if (hitType == HitType.Color)
             {
                 // change color, reset color in few seconds
-                var sequence = DOTween.Sequence();
-                sequence
+                tween = DOTween.Sequence();
+                (tween as Sequence)
                     .Append(sprite.DOColor(hitColor, 0.1f))
                     .Append(sprite.DOColor(baseColor, 0.1f));
             }
             else if (hitType == HitType.Material)
             {
                 sprite.material = hitMaterial;
-                DOVirtual.DelayedCall(0.25f, () => sprite.material = baseMaterial);
+                tween = DOVirtual.DelayedCall(0.25f, () => sprite.material = baseMaterial);
             }
             else if (hitType == HitType.Animation)
             {
                 animator.Play(hitAnimation.name);
             }
+
+            // add new tween to list
+            if (tween != null)
+                tweens.Add(tween);
 
             if (customHitEffect != null)
                 EffectManager.Instance?.PlayOneShot(customHitEffect, transform.position);
@@ -146,6 +156,11 @@ namespace Core.Combat
                 body.velocity = Vector3.zero;
 
             body.AddForce(direction * recoilForce);
+        }
+
+        public void OnDestroy()
+        {
+            Function.KillTweensThatStillAlive(tweens);
         }
     }
 }
