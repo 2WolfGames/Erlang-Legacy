@@ -7,7 +7,7 @@ namespace Core.Hazard
 {
     public class Hazard : MonoBehaviour
     {
-        [SerializeField] int damage;
+        [SerializeField] int damage = 1;
 
         public int Damage { get => damage; set => damage = value; }
 
@@ -29,10 +29,10 @@ namespace Core.Hazard
         // post: if current object is colliding with enemy applies damamge
         void CheckCollision()
         {
-            if (!IsTouchingPlayer()) 
-                return;
             var player = PlayerController.Instance;
-            if (!player.CanBeHit) 
+            if (!player.CanBeHit)
+                return;
+            if (!IsTouchingPlayer())
                 return;
             player.Hurt(damage, gameObject);
         }

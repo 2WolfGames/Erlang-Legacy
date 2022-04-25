@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System;
-using Core.Util.Serializable;
+using Core.Util.Data;
 using System.Collections.Generic;
 
 using Core.Player.Util;
@@ -35,8 +35,10 @@ namespace Core.Player.Controller
         private float holdingAfterJumpTimer;
         private bool isJumping = false;
         private bool justJumped = false;
-        private bool isDashing = false;
+        [SerializeField] private bool isDashing = false;
+        [SerializeField] private bool canJump = false;
         private Vector2 currentVelocity;
+        private bool dashMidJump = false;
         public bool IsJumping => isJumping;
         public bool IsCornerTime => CheckCornerTime();
         public bool ShouldEndDash => IsCornerTime || CheckCollisionEndDash();
@@ -48,11 +50,9 @@ namespace Core.Player.Controller
         private Collider2D BodyCollider => GetComponent<Collider2D>();
         private ParticleSystem JumpParticles => Player.PlayerData.JumpParticles;
         public bool CanDash => !isDashing && dashCooldownTimer <= 0;
-
         public bool CanRun => !isDashing;
         public bool IsDashing => isDashing;
         public Action OnDashStart { get; set; }
-        public Action OnDashEnd { get; set; }
         public float Acceleration { get; set; } = 1;
         public bool JustImpulsed { get; set; }
         public List<LayerMask> WhatEndsDash { get => whatEndsDash; private set => whatEndsDash = value; }
@@ -74,14 +74,20 @@ namespace Core.Player.Controller
         {
             if (dashCooldownTimer > 0)
                 dashCooldownTimer -= Time.deltaTime;
+
+            canJump = CanJump;
+
+            if (!Controllable) // animation that can be called from any state may not let recover event work as spected
+                return;
+
             DoJump();
             DoLand();
         }
 
         public void FixedUpdate()
         {
-            Move();
             FaceDirection();
+            Move();
         }
 
         // desc: changes local player scale in order to align to user input
@@ -106,7 +112,7 @@ namespace Core.Player.Controller
             if (wannaDash) DoDash();
             else DoRun();
 
-            EndDashCheck();
+            CheckDashComplitness();
         }
 
         private void DoDash()
@@ -114,15 +120,15 @@ namespace Core.Player.Controller
             if (!CanDash)
                 return;
 
-            StartDash();
+            StartDashing();
         }
 
         // pre: --
         // post: end dash at wall collisions
-        private void EndDashCheck()
+        private void CheckDashComplitness()
         {
             if (isDashing && ShouldEndDash)
-                EndDash();
+                StopDashing();
         }
 
         // pre: --
@@ -140,7 +146,7 @@ namespace Core.Player.Controller
 
             var newVelocity = new Vector2(velocityX, Body.velocity.y);
             Body.velocity = Vector2.SmoothDamp(Body.velocity, newVelocity, ref currentVelocity, 0.000001f);
-            Animator.SetBool(CharacterAnimations.Run, Mathf.Abs(Body.velocity.x) > 0.05f);
+            Animator.SetBool(CharacterAnimations.Running, Mathf.Abs(Body.velocity.x) > 0.05f);
         }
 
         // pre: player just jumped
@@ -161,9 +167,12 @@ namespace Core.Player.Controller
         // post: handles land holding event
         void DoJump()
         {
-            if (!Controllable)
-                return;
-                
+            Action endJump = () =>
+            {
+                isJumping = false;
+                justJumped = true;
+            };
+
             if (Input.GetButtonDown("Jump") && CanJump) // button down, first key of jump
             {
                 isJumping = true;
@@ -175,27 +184,30 @@ namespace Core.Player.Controller
             }
             if (Input.GetButton("Jump") && CanHoldJump) // while jumping
             {
+                if (dashMidJump)
+                {
+                    endJump();
+                    dashMidJump = false;
+                    return;
+                }
+
                 if (holdingAfterJumpTimer > 0)
                 {
                     Body.velocity = new Vector2(Body.velocity.x, JumpPower);
                     holdingAfterJumpTimer -= Time.deltaTime;
                 }
-                else
-                {
-                    isJumping = false;
-                    justJumped = true;
-                }
+                else endJump();
             }
             if (Input.GetButtonUp("Jump")) // end of jump
-            {
-                isJumping = false;
-                justJumped = true;
-            }
+                endJump();
         }
 
         // pre: can do dash
-        private void StartDash()
+        private void StartDashing()
         {
+            if (isJumping)
+                dashMidJump = true;
+
             isDashing = true;
             DashTrail.widthMultiplier = 3;
             Animator.SetTrigger(CharacterAnimations.Dash);
@@ -244,10 +256,9 @@ namespace Core.Player.Controller
             return landing && Body.velocity.y < 0;
         }
 
-
         // pre: callable only by end of dash animation event or wall collision
-        // post: resets values changes from StartDash fn, resets animator to go to idle state
-        public void EndDash()
+        // post: resets values changes from StartDashing fn, resets animator to go to idle state
+        public void StopDashing()
         {
             if (!isDashing)
                 return;
@@ -255,10 +266,8 @@ namespace Core.Player.Controller
             dashCooldownTimer = DashCooldown;
             Body.gravityScale = baseGravityScale;
             isDashing = false;
-            Animator.Rebind(); // resets animator and goes to entry state animator
             DashTrail.widthMultiplier = 0;
             FreezeVelocity();
-            OnDashEnd?.Invoke();
         }
 
         /// <sumary>
@@ -297,7 +306,6 @@ namespace Core.Player.Controller
             Gizmos.color = Color.magenta;
             Gizmos.DrawWireSphere(LandChecker.origin.position, LandChecker.radius);
         }
-
     }
 }
 

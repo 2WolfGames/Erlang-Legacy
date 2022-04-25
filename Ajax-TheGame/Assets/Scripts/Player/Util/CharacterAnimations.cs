@@ -10,7 +10,7 @@ namespace Core.Player.Util
         public static readonly int Dash = Animator.StringToHash("dash");
         public static readonly int StartJump = Animator.StringToHash("jump");
         public static readonly int Jumping = Animator.StringToHash("jumping");
-        public static readonly int Run = Animator.StringToHash("running");
+        public static readonly int Running = Animator.StringToHash("running");
         public static readonly int Recover = Animator.StringToHash("blink");
         public static readonly int BackHurt = Animator.StringToHash("hit_backward");
         public static readonly int FrontHurt = Animator.StringToHash("hit_forward");
