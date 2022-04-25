@@ -106,6 +106,9 @@ MonoBehaviour:
       rayCooldown: 2
       holdingAfterJump: 0.15
       recoverTimeoutAfterHit: 1.5
+  controllable: 1
+  inRecoverProcess: 0
+  isProtected: 0
 --- !u!114 &5625281659813403160
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135,6 +138,8 @@ MonoBehaviour:
     m_Bits: 256
   - serializedVersion: 2
     m_Bits: 1024
+  isDashing: 0
+  canJump: 0
 --- !u!114 &5625281659813403152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -271,7 +276,7 @@ GameObject:
   - component: {fileID: 8815602458736620594}
   m_Layer: 13
   m_Name: Dash
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -302,7 +307,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ae3158f1f9851a47b8d13818a7b20f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 100
 --- !u!61 &8815602458736620594
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -587,7 +591,7 @@ GameObject:
   - component: {fileID: 8224927625137085709}
   m_Layer: 13
   m_Name: Punch
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -644,7 +648,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ae3158f1f9851a47b8d13818a7b20f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 100
 --- !u!1001 &6588021719670445150
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -780,6 +783,11 @@ PrefabInstance:
     - target: {fileID: 4818703921557374, guid: 4c916d2207d2300418a5957aa19521d4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198235086873131726, guid: 4c916d2207d2300418a5957aa19521d4,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.12
       objectReference: {fileID: 0}
     - target: {fileID: 199280257873770192, guid: 4c916d2207d2300418a5957aa19521d4,
         type: 3}

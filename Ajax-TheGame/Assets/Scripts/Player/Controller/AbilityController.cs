@@ -3,6 +3,7 @@ using System;
 using Core.Player.Data;
 using Core.Combat.Projectile;
 using Core.Util;
+using Core.Combat;
 
 namespace Core.Player.Controller
 {
@@ -13,18 +14,21 @@ namespace Core.Player.Controller
         [SerializeField] ProjectileData projectile;
         [SerializeField] DamageAreaData damageAreas;
 
+        private Triggerable Dash => damageAreas.Dash;
+        private Triggerable Punch => damageAreas.Punch;
+
         private float rayTimer;
         private PlayerController Player => PlayerController.Instance;
-        PlayerData PlayerData => Player.PlayerData;
+        private PlayerData PlayerData => Player.PlayerData;
         private float RayCooldown => PlayerData.Stats.RayCooldown;
         private int FacingValue => Player.FacingValue;
         public bool CanInvokeRay => rayTimer <= 0 && Player.Controllable;
-        public Action OnRayStart { get; set; }
 
         public void Awake()
         {
-            damageAreas.Dash.SetEnabled(false);
-            damageAreas.Punch.SetEnabled(false);
+            Dash.Enabled = false;
+            Dash.OnEnter += OnDashHitEnters;
+            Punch.Enabled = false;
         }
 
         public void Update()
@@ -42,38 +46,49 @@ namespace Core.Player.Controller
                 InvokeRay();
         }
 
+        // TODO: work with hittable objects too
+        private void OnDashHitEnters(Collider2D other)
+        {
+            var destructable = other.GetComponent<Destructable>();
+
+            if (destructable)
+            {
+                destructable.OnDestroyed += () => Debug.Log($"enemy is dead {this.gameObject.name}");
+                var direction = Player.transform.position.x > other.transform.position.x ? -1 : 1;
+                destructable.OnAttackHit(Vector2.right * direction, 1); // TODO: set default hit damage
+            }
+        }
+
         // pre: --
         // post: active dash damage area
-        public void ActiveDashDamageArea()
+        public void ActiveDashDamage()
         {
-            damageAreas.Dash.SetEnabled(true);
+            Dash.Enabled = true;
         }
 
         // pre: --
         // post: deactive dash damage area
-        public void DeactiveDashDamageArea()
+        public void DeactiveDashDamage()
         {
-            damageAreas.Dash.SetEnabled(false);
+            Dash.Enabled = false;
         }
 
         private void OnThrowPunch()
         {
             Debug.Log("punching");
-            damageAreas.Punch.SetEnabled(true);
+            Punch.Enabled = true;
         }
 
         private void OnPickUpPunch()
         {
             Debug.Log("pickup punch");
-            damageAreas.Punch.SetEnabled(false);
+            Punch.Enabled = false;
         }
-
 
         // pre: --
         // post: invoke an instance of ray projectile and sets its values
         private void InvokeRay()
         {
-            OnRayStart?.Invoke();
             Vector2 force = Vector2.right * FacingValue * this.projectile.Speed;
             RayProjectile instance = Instantiate(projectile.Projectile, projectile.Origin.position, Quaternion.identity);
             instance.SetForce(force);
@@ -88,13 +103,6 @@ namespace Core.Player.Controller
             Debug.Log("Hitting enemy at ray");
             OnHit(other, PlayerData.Stats.RayDamage);
         }
-
-
-        public void OnTriggerEnter2D(Collider2D other)
-        {
-            // trigger because of punch hit or dash hit
-        }
-
 
         private void OnHit(Collider2D other, float damage)
         {
