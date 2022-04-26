@@ -1,5 +1,5 @@
+﻿using Core.Player.Controller;
 using UnityEngine;
-using Core.Player.Controller;
 
 // desc:
 //  this scripts is usufull to hurt player when a collision is made

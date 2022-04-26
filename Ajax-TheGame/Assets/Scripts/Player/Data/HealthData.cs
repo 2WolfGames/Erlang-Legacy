@@ -1,5 +1,5 @@
+﻿using System;
 using UnityEngine;
-using System;
 
 namespace Core.Player.Data
 {

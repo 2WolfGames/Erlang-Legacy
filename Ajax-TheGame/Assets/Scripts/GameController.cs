@@ -1,10 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-
 using Core.Shared;
 using Core.UI;
 using Core.UI.LifeBar;
+using UnityEngine;
 
 public class GameController : MonoBehaviour
 {

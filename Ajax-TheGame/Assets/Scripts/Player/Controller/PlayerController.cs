@@ -1,11 +1,10 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using Core.Player.Data;
+using Core.Player.Util;
 using Core.Shared;
 using Core.Shared.Enum;
 using Core.Util;
-
-using Core.Player.Data;
-using System.Collections;
-using Core.Player.Util;
+using UnityEngine;
 
 namespace Core.Player.Controller
 {

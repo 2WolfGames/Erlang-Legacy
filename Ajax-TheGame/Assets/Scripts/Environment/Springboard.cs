@@ -1,12 +1,11 @@
-﻿using UnityEngine;
-
-using Core.Player.Controller;
+﻿using Core.Player.Controller;
+using UnityEngine;
 
 
 public class Springboard : MonoBehaviour
 {
     [Tooltip("Impulse force to add")]
-    [Range(5f, 100f)][SerializeField] float force = 10f;
+    [Range(5f, 100f)] [SerializeField] float force = 10f;
 
     [Tooltip("Util for diff between elements of same layer")]
 

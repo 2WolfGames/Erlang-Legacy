@@ -1,6 +1,6 @@
-using UnityEngine;
-using System;
+﻿using System;
 using Core.Combat.Projectile;
+using UnityEngine;
 
 namespace Core.Player.Data
 {
