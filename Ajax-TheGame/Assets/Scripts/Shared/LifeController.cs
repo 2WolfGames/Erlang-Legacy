@@ -34,8 +34,7 @@ namespace Core.Shared
             this.life += amount;
         }
 
-        public void Lol()
-        {
+        public void Lol() {
             Debug.Log("testing");
         }
     }
