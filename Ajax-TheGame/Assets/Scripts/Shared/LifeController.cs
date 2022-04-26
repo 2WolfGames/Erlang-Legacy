@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Core.Shared
 {
@@ -32,10 +30,6 @@ namespace Core.Shared
         public void AddLife(int amount)
         {
             this.life += amount;
-        }
-
-        public void Lol() {
-            Debug.Log("testing");
         }
     }
 }
