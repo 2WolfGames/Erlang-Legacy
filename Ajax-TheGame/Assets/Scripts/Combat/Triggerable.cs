@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using System;
+﻿using System;
+using UnityEngine;
 
 
 namespace Core.Combat
@@ -13,7 +13,7 @@ namespace Core.Combat
 
         public bool Enabled
         {
-            get => enabledCollider; 
+            get => enabledCollider;
             set => HandleEnabled(value);
         }
 

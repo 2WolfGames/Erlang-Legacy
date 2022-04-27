@@ -47,10 +47,12 @@ public class ArrangePlayerMovement : MonoBehaviour
             }
             else
             { // diferent dir
-                // ajax.GetComponent<PlayerMovementManager>().ModifyVelocity(new Vector2(1 + velocityAlterator, 1));
-                  ajax.GetComponent<MovementController>().Acceleration = 1 + velocityAlterator;
+              // ajax.GetComponent<PlayerMovementManager>().ModifyVelocity(new Vector2(1 + velocityAlterator, 1));
+                ajax.GetComponent<MovementController>().Acceleration = 1 + velocityAlterator;
             }
-        } else {
+        }
+        else
+        {
             ajax.GetComponent<MovementController>().Acceleration = 1;
         }
     }

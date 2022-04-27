@@ -5,13 +5,15 @@ using UnityEngine.SceneManagement;
 
 namespace Core.Shared
 {
-    public static class Loader 
+    public static class Loader
     {
-        public enum Scene{
+        public enum Scene
+        {
             StartMenu, LoadingScene, lvl1
         }
 
-        public static void Load(Scene scene){
+        public static void Load(Scene scene)
+        {
             LoadingMenu.sceneName = scene.ToString();
             SceneManager.LoadScene(Scene.LoadingScene.ToString());
         }

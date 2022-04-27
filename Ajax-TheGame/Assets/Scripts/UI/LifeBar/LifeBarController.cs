@@ -1,8 +1,7 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-
 using Core.Shared;
+using UnityEngine;
 
 namespace Core.UI.LifeBar
 {

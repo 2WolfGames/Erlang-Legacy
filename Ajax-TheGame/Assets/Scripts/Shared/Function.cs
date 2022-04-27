@@ -1,7 +1,6 @@
 ﻿using System.Collections;
-using UnityEngine;
-
 using Core.Shared.Enum;
+using UnityEngine;
 
 namespace Core.Shared
 {

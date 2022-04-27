@@ -1,12 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Core.Shared
 {
     public class LifeController : MonoBehaviour
     {
-        [Range(1, 10000)][SerializeField] int life = 100;
+        [Range(1, 10000)] [SerializeField] int life = 100;
 
         public int Life
         {

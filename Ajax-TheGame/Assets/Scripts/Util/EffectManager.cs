@@ -17,7 +17,7 @@ namespace Core.Util
 
         public void PlayOneShot(ParticleSystem particleSystem, Vector3 position)
         {
-            if (particleSystem == null) 
+            if (particleSystem == null)
                 return;
 
             var effect = Instantiate(particleSystem, position, Quaternion.identity);
