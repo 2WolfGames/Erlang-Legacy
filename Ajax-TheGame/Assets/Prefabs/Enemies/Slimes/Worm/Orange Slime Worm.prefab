@@ -285,7 +285,6 @@ GameObject:
   - component: {fileID: 6651695209354585355}
   - component: {fileID: 6651695209354585354}
   - component: {fileID: 6651695209354585348}
-  - component: {fileID: 6651695209354585349}
   m_Layer: 11
   m_Name: Worm AI
   m_TagString: Untagged
@@ -407,15 +406,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   life: 1000
---- !u!114 &6651695209354585349
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6651695209354585353}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e9dbff4a9c0d044bb696177586b982b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
