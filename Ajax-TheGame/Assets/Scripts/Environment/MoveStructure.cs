@@ -24,7 +24,8 @@ public class MoveStructure : MonoBehaviour
     //if platform has to go back and has arribed, calls the corutine to go to initial point
     void FixedUpdate()
     {
-        if (target){
+        if (target)
+        {
             var currentPos = structure.transform.position;
             structure.transform.position = Vector2.MoveTowards(currentPos, target.position, speed * Time.deltaTime);
 
@@ -64,9 +65,11 @@ public class MoveStructure : MonoBehaviour
 
     //pre: -
     //post: it enables or disables this script.
-    public void EnableMove(bool enable){
+    public void EnableMove(bool enable)
+    {
         this.enabled = enable;
-        if (!enable){
+        if (!enable)
+        {
             target = null;
         }
     }

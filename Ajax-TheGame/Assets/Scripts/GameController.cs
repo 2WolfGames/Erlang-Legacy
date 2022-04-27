@@ -1,10 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-using Core.Shared;
+﻿using Core.Shared;
 using Core.UI;
 using Core.UI.LifeBar;
+using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
@@ -17,12 +14,16 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
-        currentLifes = playerLifeController.Life;
+        if (playerLifeController)
+            currentLifes = playerLifeController.Life;
         lifeBar.SetUpLifes(currentLifes);
     }
 
     void FixedUpdate()
     {
+        if (!playerLifeController)
+            return;
+
         if (playerLifeController.Life != currentLifes)
         {
             int x = Mathf.Abs(currentLifes - playerLifeController.Life);

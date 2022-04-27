@@ -13,7 +13,7 @@ namespace Core.Combat
 
         public bool Enabled
         {
-            get => enabledCollider; 
+            get => enabledCollider;
             set => HandleEnabled(value);
         }
 
