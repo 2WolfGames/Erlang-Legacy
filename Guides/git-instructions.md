@@ -52,3 +52,10 @@
     => test changes
     => if you like what you see, go to Github and accept PR
     => if you don't, make needed changes and push them and accept PR or ask for revision
+
+### Revert file from previous commit
+```
+git checkout [commit ID] -- path/to/file
+```
+
+
