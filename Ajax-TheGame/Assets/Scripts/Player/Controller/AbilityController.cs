@@ -1,8 +1,8 @@
-﻿using UnityEngine;
-using Core.Player.Data;
-using Core.Combat;
+﻿using Core.Combat;
 using Core.Combat.Projectile;
+using Core.Player.Data;
 using Core.Util;
+using UnityEngine;
 namespace Core.Player.Controller
 {
     // description:

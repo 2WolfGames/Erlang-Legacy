@@ -1,8 +1,8 @@
-﻿using UnityEngine;
-using System;
-using Core.Util.Data;
+﻿using System;
 using System.Collections.Generic;
 using Core.Player.Util;
+using Core.Util.Data;
+using UnityEngine;
 
 
 namespace Core.Player.Controller

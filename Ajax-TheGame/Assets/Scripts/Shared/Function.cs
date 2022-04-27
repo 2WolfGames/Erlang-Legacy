@@ -1,9 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-
 using Core.Shared.Enum;
 using DG.Tweening;
+using UnityEngine;
 
 namespace Core.Shared
 {
