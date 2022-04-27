@@ -42,45 +42,7 @@ namespace Core.Combat
         // Start is called before the first frame update
         protected virtual void Awake()
         {
-            if (hitType == HitType.Animation)
-            {
-                if (animator == null)
-                {
-                    Debug.LogError("Hit type declared as Animation but no animator provided");
-                    return;
-                }
-
-                if (hitAnimation == null)
-                {
-                    Debug.LogError("Hit type declared as Animation but no animation provided");
-                    return;
-
-                }
-            }
-
-            if (hitType == HitType.Color && sprite == null)
-            {
-                Debug.LogError("Hit type declared as Color but no sprite renderer provided");
-                return;
-            }
-
-            if (hitType == HitType.Material && sprite == null)
-            {
-                Debug.LogError("Hit type declared as Material but no sprite renderer provided");
-                return;
-            }
-
-            if (sprite)
-            {
-                baseColor = sprite.color;
-                baseMaterial = sprite.material;
-            }
-            else
-            {
-                baseColor = Color.white;
-            }
-
-            baseScale = transform.localScale;
+            Init();
         }
 
         public void OnAttackHit(Vector2 hitDirection)
@@ -161,6 +123,57 @@ namespace Core.Combat
         public void OnDestroy()
         {
             Function.KillTweensThatStillAlive(tweens);
+        }
+
+        private void Init()
+        {
+            EvaluateConfiguration();
+            InitializeAttributes();
+        }
+
+        private void InitializeAttributes()
+        {
+            if (sprite)
+            {
+                baseColor = sprite.color;
+                baseMaterial = sprite.material;
+            }
+            else
+            {
+                baseColor = Color.white;
+            }
+            baseScale = transform.localScale;
+        }
+
+        private void EvaluateConfiguration()
+        {
+            if (hitType == HitType.Animation)
+            {
+                if (animator == null)
+                {
+                    Debug.LogError("Hit type declared as Animation but no animator provided");
+                    return;
+                }
+
+                if (hitAnimation == null)
+                {
+                    Debug.LogError("Hit type declared as Animation but no animation provided");
+                    return;
+
+                }
+            }
+
+            if (hitType == HitType.Color && sprite == null)
+            {
+                Debug.LogError("Hit type declared as Color but no sprite renderer provided");
+                return;
+            }
+
+            if (hitType == HitType.Material && sprite == null)
+            {
+                Debug.LogError("Hit type declared as Material but no sprite renderer provided");
+                return;
+            }
         }
     }
 }
