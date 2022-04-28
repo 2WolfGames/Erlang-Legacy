@@ -1,5 +1,8 @@
 ﻿
-public enum EntranceID
+namespace Core.Shared.Enum
 {
-    E1, E2, E3, E4, E5
+    public enum EntranceID
+    {
+        E1, E2, E3, E4, E5
+    }
 }

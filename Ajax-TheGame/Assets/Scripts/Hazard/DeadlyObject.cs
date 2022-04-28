@@ -1,35 +1,38 @@
 ﻿using System.Collections;
 using Core.Player.Controller;
 using UnityEngine;
+using Core.GameSession;
 
-public class DeadlyObject : MonoBehaviour
+namespace Core.Hazard
 {
-    const float cWaitTime = 0.5f;
-    bool playerIn = false;
-
-    private void OnTriggerEnter2D(Collider2D other)
+    public class DeadlyObject : MonoBehaviour
     {
-        if (!playerIn && other.gameObject.tag == "Player")
+        const float cWaitTime = 0.5f;
+        bool playerIn = false;
+
+        private void OnTriggerEnter2D(Collider2D other)
         {
-            playerIn = true;
-            StartCoroutine(ResetSavePoint());
+            if (!playerIn && other.gameObject.tag == "Player")
+            {
+                playerIn = true;
+                StartCoroutine(ResetSavePoint());
+            }
+            else if (other.gameObject.tag != "Player")
+            {
+                Destroy(other.gameObject);
+            }
         }
-        else if (other.gameObject.tag != "Player")
+
+        private IEnumerator ResetSavePoint()
         {
-            Destroy(other.gameObject);
+            yield return new WaitForSeconds(cWaitTime);
+
+            PlayerController playerController = PlayerController.Instance;
+
+            playerController.Hurt(1, gameObject);
+            if (playerController.PlayerData.Health.HP != 0)
+                playerController.transform.position = GameSessionController.Instance.GetCurrentPoint();
+            playerIn = false;
         }
     }
-
-    private IEnumerator ResetSavePoint()
-    {
-        yield return new WaitForSeconds(cWaitTime);
-
-        PlayerController playerController = PlayerController.Instance;
-
-        playerController.Hurt(1, gameObject);
-        if (playerController.PlayerData.Health.HP != 0)
-            playerController.transform.position = GameSessionController.Instance.GetCurrentPoint();
-        playerIn = false;
-    }
-
 }

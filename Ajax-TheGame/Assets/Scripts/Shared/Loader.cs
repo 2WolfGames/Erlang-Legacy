@@ -2,6 +2,8 @@
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Core.Shared.Enum;
+using Core.UI;
 
 namespace Core.Shared
 {

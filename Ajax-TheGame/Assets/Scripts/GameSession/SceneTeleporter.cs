@@ -1,16 +1,20 @@
 ﻿using Core.Shared;
 using UnityEngine;
+using Core.Shared.Enum;
 
-public class SceneTeleporter : MonoBehaviour
+namespace Core.GameSession
 {
-    [SerializeField] SceneID scene;
-    [SerializeField] EntranceID entranceTag;
-    private void OnTriggerEnter2D(Collider2D other)
+    public class SceneTeleporter : MonoBehaviour
     {
-        if (other.gameObject.tag == "Player")
+        [SerializeField] SceneID scene;
+        [SerializeField] EntranceID entranceTag;
+        private void OnTriggerEnter2D(Collider2D other)
         {
-            GameSessionController.Instance.SearchCurrentPoint(entranceTag);
-            StartCoroutine(Loader.LoadWithDelay(scene, 0));
+            if (other.gameObject.tag == "Player")
+            {
+                GameSessionController.Instance.SearchCurrentPoint(entranceTag);
+                StartCoroutine(Loader.LoadWithDelay(scene, 0));
+            }
         }
     }
 }

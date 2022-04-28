@@ -1,45 +1,45 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 
-public class SaveGame : MonoBehaviour
+namespace Core.GameSession
 {
-    GameSessionController gameSessionController;
-    bool canBeSaved = false;
-
-    private void Awake()
+    public class SaveGame : MonoBehaviour
     {
-        gameSessionController = FindObjectOfType<GameSessionController>();
-    }
+        GameSessionController gameSessionController;
+        bool canBeSaved = false;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (canBeSaved)
+        private void Awake()
         {
-            if (Input.GetKeyDown(KeyCode.S))
+            gameSessionController = FindObjectOfType<GameSessionController>();
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+            if (canBeSaved)
             {
-                Debug.Log(transform);
-                canBeSaved = false;
-                gameSessionController.SavePlayerState(transform);
+                if (Input.GetKeyDown(KeyCode.S))
+                {
+                    Debug.Log(transform);
+                    canBeSaved = false;
+                    gameSessionController.SavePlayerState(transform);
+                }
             }
         }
-    }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        private void OnTriggerEnter2D(Collider2D other)
         {
-            canBeSaved = true;
+            if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+            {
+                canBeSaved = true;
+            }
         }
-    }
 
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        private void OnTriggerExit2D(Collider2D other)
         {
-            canBeSaved = false;
+            if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+            {
+                canBeSaved = false;
+            }
         }
     }
 }

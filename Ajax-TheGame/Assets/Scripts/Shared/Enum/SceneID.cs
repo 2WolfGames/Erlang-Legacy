@@ -1,4 +1,8 @@
-﻿public enum SceneID
+﻿
+namespace Core.Shared.Enum
 {
-    StartMenu, LoadingScene, lvl1, FirstIsland
+    public enum SceneID
+    {
+        StartMenu, LoadingScene, lvl1, FirstIsland
+    }
 }

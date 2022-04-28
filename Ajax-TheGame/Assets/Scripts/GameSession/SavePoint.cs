@@ -2,22 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SavePoint : MonoBehaviour
+namespace Core.GameSession
 {
-    GameSessionController gameSessionController;
-
-    private void Awake()
+    public class SavePoint : MonoBehaviour
     {
-        gameSessionController = FindObjectOfType<GameSessionController>();
-    }
+        GameSessionController gameSessionController;
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        private void Awake()
         {
-            gameSessionController.SavePlayerCurrentPoint(transform);
+            gameSessionController = FindObjectOfType<GameSessionController>();
         }
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+            {
+                gameSessionController.SavePlayerCurrentPoint(transform);
+            }
+        }
+
     }
-
-
 }

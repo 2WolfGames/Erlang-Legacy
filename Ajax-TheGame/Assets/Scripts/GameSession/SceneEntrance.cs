@@ -1,17 +1,20 @@
 ﻿using UnityEngine;
 
-public class SceneEntrance : MonoBehaviour
+namespace Core.GameSession
 {
-    [SerializeField] Transform entrancePoint;
-    [SerializeField] Transform spawnPoint;
-
-    public Vector3 GetEntrancePoint()
+    public class SceneEntrance : MonoBehaviour
     {
-        return entrancePoint.position;
-    }
+        [SerializeField] Transform entrancePoint;
+        [SerializeField] Transform spawnPoint;
 
-    public Vector3 GetSpawnPoint()
-    {
-        return spawnPoint.position;
+        public Vector3 GetEntrancePoint()
+        {
+            return entrancePoint.position;
+        }
+
+        public Vector3 GetSpawnPoint()
+        {
+            return spawnPoint.position;
+        }
     }
 }
