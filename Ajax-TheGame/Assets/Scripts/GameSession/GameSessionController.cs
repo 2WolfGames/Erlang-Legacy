@@ -1,11 +1,11 @@
-﻿using UnityEngine;
-using UnityEngine.SceneManagement;
-using Core.Player.Controller;
+﻿using Core.Player.Controller;
 using Core.Shared;
-using Core.UI.LifeBar;
-using Core.Shared.SaveSystem;
 using Core.Shared.Enum;
+using Core.Shared.SaveSystem;
 using Core.UI;
+using Core.UI.LifeBar;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Core.GameSession
 {

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
+using Core.GameSession;
 using Core.Player.Controller;
 using UnityEngine;
-using Core.GameSession;
 
 namespace Core.Hazard
 {

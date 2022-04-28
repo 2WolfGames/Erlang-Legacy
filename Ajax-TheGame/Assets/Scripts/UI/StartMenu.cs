@@ -1,10 +1,10 @@
 ﻿using Core.GameSession;
 using Core.Shared;
+using Core.Shared.Enum;
+using Core.Shared.SaveSystem;
 using Spine.Unity;
 using UnityEngine;
 using UnityEngine.UI;
-using Core.Shared.Enum;
-using Core.Shared.SaveSystem;
 
 namespace Core.UI
 {

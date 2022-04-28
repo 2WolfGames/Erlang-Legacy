@@ -1,6 +1,6 @@
 ﻿using Core.Shared;
-using UnityEngine;
 using Core.Shared.Enum;
+using UnityEngine;
 
 namespace Core.GameSession
 {

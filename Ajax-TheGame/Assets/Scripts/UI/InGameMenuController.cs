@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using Core.Player.Controller;
 using Core.Shared;
+using Core.Shared.Enum;
 using Spine.Unity;
 using UnityEngine;
-using Core.Shared.Enum;
 
 namespace Core.UI
 {

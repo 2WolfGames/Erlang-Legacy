@@ -2,8 +2,8 @@
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Cryptography;
-using UnityEngine;
 using Core.Shared.Enum;
+using UnityEngine;
 
 namespace Core.Shared.SaveSystem
 {
