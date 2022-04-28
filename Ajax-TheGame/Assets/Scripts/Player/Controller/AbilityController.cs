@@ -15,7 +15,6 @@ namespace Core.Player.Controller
         private Triggerable Dash => damageAreas.Dash;
         private ParticleSystem dashPS => damageAreas.DashParticle;
         private Triggerable Punch => damageAreas.Punch;
-
         private float rayTimer;
         private PlayerController Player => PlayerController.Instance;
         private PlayerData PlayerData => Player.PlayerData;
@@ -48,13 +47,13 @@ namespace Core.Player.Controller
         // TODO: work with hittable objects too
         private void OnDashHitEnters(Collider2D other)
         {
-            var destructable = other.GetComponent<Destructable>();
+            var destroyable = other.GetComponent<Destroyable>();
 
-            if (destructable)
+            if (destroyable)
             {
-                destructable.OnDestroyed += () => Debug.Log($"enemy is dead {this.gameObject.name}");
+                destroyable.OnDestroyed += () => Debug.Log($"enemy is dead {this.gameObject.name}");
                 var direction = Player.transform.position.x > other.transform.position.x ? -1 : 1;
-                destructable.OnAttackHit(Vector2.right * direction, 1); // TODO: set default hit damage
+                destroyable.OnAttackHit(Vector2.right * direction, 1); // TODO: set default hit damage
             }
         }
 

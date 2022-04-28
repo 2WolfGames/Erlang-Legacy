@@ -26,10 +26,8 @@ namespace Core.Combat
         [SerializeField] Animation hitAnimation;
         [SerializeField] Animator animator;
         [SerializeField] SpriteRenderer sprite;
-        [SerializeField] bool shakeCamera;
-        [SerializeField] bool applyRecoil;
+        [SerializeField] bool hitShakeCamera;
         [SerializeField] float recoilForce;
-        public bool ApplyRecoil { get => applyRecoil; set => applyRecoil = value; }
         protected Vector2 baseScale;
         protected Color baseColor;
         protected Material baseMaterial;
@@ -50,9 +48,6 @@ namespace Core.Combat
             OnHit?.Invoke();
 
             Tween tween = null;
-
-            if (applyRecoil)
-                DoRecoil(hitDirection, true);
 
             if (hitType == HitType.Inflate)
             {
@@ -99,25 +94,11 @@ namespace Core.Combat
             if (customHitSound != null)
                 SoundManager.Instance?.PlaySoundAtLocation(customHitSound, transform.position);
 
-            if (shakeCamera)
+            if (hitShakeCamera)
             {
                 // use camera controller to shake it
                 Debug.Log("shaking camera...");
             }
-        }
-
-        public void DoRecoil(Vector2 direction, bool resetVelocity = false)
-        {
-            if (body == null)
-            {
-                Debug.LogError("Recoil needs rigid body attached to game object");
-                return;
-            }
-
-            if (resetVelocity)
-                body.velocity = Vector3.zero;
-
-            body.AddForce(direction * recoilForce);
         }
 
         public void OnDestroy()
