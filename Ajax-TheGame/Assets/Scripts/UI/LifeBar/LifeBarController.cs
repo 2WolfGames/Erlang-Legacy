@@ -22,7 +22,7 @@ namespace Core.UI.LifeBar
         ////Global variables ////
         private int totalLifes;
         private int currentLifes;
-        public int CurrentLifes {get => currentLifes; private set => currentLifes = value; }
+        public int CurrentLifes { get => currentLifes; private set => currentLifes = value; }
         Queue<(LifeBarAction, int)> pendentChanges;
         bool modifying;
 
@@ -61,7 +61,7 @@ namespace Core.UI.LifeBar
             pendentChanges.Clear();
             modifying = false;
             pendentChanges.Enqueue((LifeBarAction.Setup, totalLifes));
-            pendentChanges.Enqueue((LifeBarAction.LoseLifeNoVFX,totalLifes-currentLifes));
+            pendentChanges.Enqueue((LifeBarAction.LoseLifeNoVFX, totalLifes - currentLifes));
         }
 
         //pre: lifesUp > 0 
@@ -251,7 +251,7 @@ namespace Core.UI.LifeBar
                 }
 
                 yield return lastOne;
-                
+
             }
             else
             {

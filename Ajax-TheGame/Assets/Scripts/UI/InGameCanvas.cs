@@ -7,8 +7,9 @@ using UnityEngine.UI;
 public class InGameCanvas : MonoBehaviour
 {
     [SerializeField] Image deathImage;
-    
-    public void ActiveDeathImage(){
-        deathImage.DOFade(1,2).SetDelay(1.5f);
-    } 
+
+    public void ActiveDeathImage()
+    {
+        deathImage.DOFade(1, 2).SetDelay(1.5f);
+    }
 }

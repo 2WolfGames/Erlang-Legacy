@@ -1,11 +1,8 @@
-using UnityEngine;
-using System.Text;
-using System;
-using System.Security.Cryptography;
+﻿using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters;
+using System.Security.Cryptography;
+using UnityEngine;
 
 public static class SaveSystem
 {
@@ -16,32 +13,16 @@ public static class SaveSystem
     private const string iv = "a57T0s5UOp1wS4x9";
     private static byte[] ivInBytes = System.Text.Encoding.ASCII.GetBytes(iv);
 
-
     public static bool SaveGameExists()
     {
-        Debug.Log(dataPath);
+        //Debug.Log(dataPath);
         return File.Exists(dataPath + playerStateFileName);
     }
 
     public static void SavePlayerState(PlayerState playerData)
     {
         string path = dataPath + playerStateFileName;
-
-        Aes aes = Aes.Create();
-        aes.Key = keyInBytes;
-        aes.IV = ivInBytes;
-
-        var encryptor = aes.CreateEncryptor();
-        MemoryStream ms = new MemoryStream();
-        byte[] data = ObjectToByteArray(playerData);
-
-        using (CryptoStream cs = new CryptoStream(ms, encryptor, CryptoStreamMode.Write))
-        {
-            cs.Write(data, 0, data.Length);
-        }
-
-        System.IO.File.WriteAllBytes(path, ms.ToArray());
-
+        Encrypt(path,playerData);
     }
 
     public static PlayerState LoadPlayerState()
@@ -49,41 +30,67 @@ public static class SaveSystem
         string path = Application.persistentDataPath + "/player_stats.bin";
         if (File.Exists(path))
         {
-            try
-            {
-                
-                Aes aes = Aes.Create();
-                aes.Key = keyInBytes;
-                aes.IV = ivInBytes;
-
-                byte[] data = FileToByteArray(path);
-
-                var decryptor = aes.CreateDecryptor();
-                MemoryStream ms = new MemoryStream();
-
-                using (CryptoStream cs = new CryptoStream(ms, decryptor, CryptoStreamMode.Write))
-                {
-                    cs.Write(data, 0, data.Length);
-                }
-
-
-                return (PlayerState) ByteArrayToObject(ms.ToArray());
-
-            }
-            catch (Exception e)
-            {
-                Debug.Log(e);
-                return null;
-            }
+            return (PlayerState) Decrypt(path);
         }
         else
         {
-            Debug.LogError("Data files not found.");
             throw new System.Exception("Data files not found. Unable to load game.");
         }
     }
 
-    public static byte[] FileToByteArray(string FileName)
+    public static void InitializeGame()
+    {
+        SavePlayerState(PlayerStateDefaultValues());
+    }
+
+    private static PlayerState PlayerStateDefaultValues()
+    {
+        return new PlayerState((int)SceneID.FirstIsland,
+                                3,
+                                3,
+                                new Vector3(-23.75f, -1.57f, 0));
+    }
+
+    #region "save and encryption"
+
+    private static void Encrypt(string filePath, System.Object objectTosave){
+        
+        Aes aes = Aes.Create();
+        aes.Key = keyInBytes;
+        aes.IV = ivInBytes;
+
+        var encryptor = aes.CreateEncryptor();
+        MemoryStream ms = new MemoryStream();
+        byte[] data = ObjectToByteArray(objectTosave);
+
+        using (CryptoStream cs = new CryptoStream(ms, encryptor, CryptoStreamMode.Write))
+        {
+            cs.Write(data, 0, data.Length);
+        }
+
+        System.IO.File.WriteAllBytes(filePath, ms.ToArray());
+    }
+
+    private static System.Object Decrypt(string filePath)
+    {
+        Aes aes = Aes.Create();
+        aes.Key = keyInBytes;
+        aes.IV = ivInBytes;
+
+        byte[] data = FileToByteArray(filePath);
+
+        var decryptor = aes.CreateDecryptor();
+        MemoryStream ms = new MemoryStream();
+
+        using (CryptoStream cs = new CryptoStream(ms, decryptor, CryptoStreamMode.Write))
+        {
+            cs.Write(data, 0, data.Length);
+        }
+
+        return ByteArrayToObject(ms.ToArray());
+    }
+
+    private static byte[] FileToByteArray(string FileName)
     {
         byte[] fileBytes = null;
 
@@ -117,22 +124,11 @@ public static class SaveSystem
         BinaryFormatter binForm = new BinaryFormatter();
         memStream.Write(arrBytes, 0, arrBytes.Length);
         memStream.Seek(0, SeekOrigin.Begin);
-        System.Object obj = (System.Object) binForm.Deserialize(memStream);
+        System.Object obj = (System.Object)binForm.Deserialize(memStream);
 
         return obj;
     }
 
-    public static void InitializeGame()
-    {
-        SavePlayerState(PlayerStateDefaultValues());
-    }
-
-    private static PlayerState PlayerStateDefaultValues()
-    {
-        return new PlayerState((int)SceneID.FirstIsland,
-                                3,
-                                3,
-                                new Vector3(-23.75f, -1.57f, 0));
-    }
-
+    #endregion
+    
 }

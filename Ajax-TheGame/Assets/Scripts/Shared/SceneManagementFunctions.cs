@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+﻿using Core.Shared.Enum;
+using UnityEngine;
 using UnityEngine.SceneManagement;
-using Core.Shared.Enum;
 
 public class SceneManagementFunctions : MonoBehaviour
 {

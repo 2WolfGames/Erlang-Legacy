@@ -1,11 +1,9 @@
 ﻿using Core.Player.Controller;
 using UnityEngine;
 
-
-// todo: change name for player bla
 namespace Core.Player.Util
 {
-    public class AnimationControllerEvents : MonoBehaviour
+    public class AnimationEvents : MonoBehaviour
     {
         private PlayerController Player => PlayerController.Instance;
 

@@ -1,8 +1,8 @@
 ﻿using System.Collections;
+using Core.Player.Controller;
 using Core.Shared;
 using Spine.Unity;
 using UnityEngine;
-using Core.Player.Controller;
 
 public class InGameMenuController : MonoBehaviour
 {
@@ -45,16 +45,18 @@ public class InGameMenuController : MonoBehaviour
         StartCoroutine(EnablePlayer());
         pauseMenu.SetActive(false);
     }
-    
+
     //Is necessary to wait till the end of frame for not affect the player movment with the key events of the menu.
-    IEnumerator EnablePlayer(){ 
+    IEnumerator EnablePlayer()
+    {
         yield return new WaitForEndOfFrame();
 
         var player = PlayerController.Instance;
         player.BlockingUI = false;
     }
 
-    private void PauseGame(){
+    private void PauseGame()
+    {
         pauseMenu.SetActive(true);
         OpenMenu();
 
@@ -113,7 +115,7 @@ public class InGameMenuController : MonoBehaviour
             else if (Input.GetKeyDown(KeyCode.Space))
             {
                 Time.timeScale = 1;
-                StartCoroutine(Loader.LoadWithDelay(SceneID.StartMenu,0));
+                StartCoroutine(Loader.LoadWithDelay(SceneID.StartMenu, 0));
             }
         }
     }

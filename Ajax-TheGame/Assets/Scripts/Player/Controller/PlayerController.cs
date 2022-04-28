@@ -1,11 +1,11 @@
 ﻿using System.Collections;
-using UnityEngine;
 using Core.Player.Data;
 using Core.Player.Util;
 using Core.Shared;
 using Core.Shared.Enum;
-using Core.Util;
 using Core.UI.LifeBar;
+using Core.Util;
+using UnityEngine;
 
 namespace Core.Player.Controller
 {

@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using System;
+﻿using System;
+using UnityEngine;
 
 [Serializable]
 public class PlayerState
@@ -21,8 +21,9 @@ public class PlayerState
         this.position[2] = position.z;
     }
 
-    public Vector3 GetPosition(){
-        return new Vector3(position[0],position[1],position[2]);
+    public Vector3 GetPosition()
+    {
+        return new Vector3(position[0], position[1], position[2]);
     }
 
 }

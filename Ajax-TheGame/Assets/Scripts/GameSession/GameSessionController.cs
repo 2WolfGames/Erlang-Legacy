@@ -1,6 +1,6 @@
-﻿using Core.UI.LifeBar;
-using Core.Player.Controller;
+﻿using Core.Player.Controller;
 using Core.Shared;
+using Core.UI.LifeBar;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 

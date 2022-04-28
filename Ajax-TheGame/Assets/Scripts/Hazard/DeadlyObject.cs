@@ -1,6 +1,6 @@
 ﻿using System.Collections;
-using UnityEngine;
 using Core.Player.Controller;
+using UnityEngine;
 
 public class DeadlyObject : MonoBehaviour
 {

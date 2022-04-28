@@ -35,7 +35,7 @@ public class StartMenu : MonoBehaviour
     {
         if (option == 0)
         { //Resume
-            if (Input.GetKeyDown(KeyCode.DownArrow))
+            if (Input.GetKeyDown(KeyCode.S))
             {
                 OnStartGameHoverOut();
                 OnSettingsHoverIn();
@@ -48,13 +48,13 @@ public class StartMenu : MonoBehaviour
         }
         else if (option == 1)
         { // Settings
-            if (Input.GetKeyDown(KeyCode.DownArrow))
+            if (Input.GetKeyDown(KeyCode.S))
             {
                 OnSettingsHoverOut();
                 OnQuitHoverIn();
                 option = 2;
             }
-            else if (Input.GetKeyDown(KeyCode.UpArrow))
+            else if (Input.GetKeyDown(KeyCode.W))
             {
                 OnSettingsHoverOut();
                 OnStartGameHoverIn();
@@ -68,7 +68,7 @@ public class StartMenu : MonoBehaviour
         }
         else
         { //Quit
-            if (Input.GetKeyDown(KeyCode.UpArrow))
+            if (Input.GetKeyDown(KeyCode.W))
             {
                 OnQuitHoverOut();
                 OnSettingsHoverIn();
@@ -87,11 +87,10 @@ public class StartMenu : MonoBehaviour
         {
             //Crear inicial file
             SaveSystem.InitializeGame();
-            Debug.Log("new game created");
-        } 
+        }
         PlayerState playerState = SaveSystem.LoadPlayerState();
         GameSessionController.loadSavedData = true;
-        StartCoroutine(Loader.LoadWithDelay((SceneID)playerState.scene,0));        
+        StartCoroutine(Loader.LoadWithDelay((SceneID)playerState.scene, 0));
     }
 
     #region start menu animations
