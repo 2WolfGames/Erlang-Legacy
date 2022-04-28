@@ -1,7 +1,6 @@
 ﻿using BehaviorDesigner.Runtime.Tasks;
-using UnityEngine;
-
 using Core.Shared;
+using UnityEngine;
 
 namespace Core.Combat.IA.Conditional
 {
@@ -9,9 +8,9 @@ namespace Core.Combat.IA.Conditional
     {
         [SerializeField] Transform origin;
         [SerializeField] LayerMask playerMask;
-        [Range(0, 360)][SerializeField] float visualAngle = 160f;
+        [Range(0, 360)] [SerializeField] float visualAngle = 160f;
         [SerializeField] float visualAcuity = 3f;
-        [Range(1, 20)][SerializeField] int density = 4;
+        [Range(1, 20)] [SerializeField] int density = 4;
 
         public override TaskStatus OnUpdate()
         {

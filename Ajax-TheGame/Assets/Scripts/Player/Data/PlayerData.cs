@@ -1,13 +1,13 @@
-﻿using UnityEngine;
-using System;
+﻿using System;
+using UnityEngine;
 
 namespace Core.Player.Data
 {
     [Serializable]
     public class PlayerData
     {
-        
-        [Header("VFX")] 
+
+        [Header("VFX")]
         [SerializeField] ParticleSystem jumpParticles;
         [SerializeField] TrailRenderer dashTrailRender;
         // [SerializeField] HealthData health;

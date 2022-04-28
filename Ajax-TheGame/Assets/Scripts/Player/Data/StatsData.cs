@@ -1,5 +1,5 @@
+﻿using System;
 using UnityEngine;
-using System;
 
 namespace Core.Player.Data
 {
@@ -10,7 +10,7 @@ namespace Core.Player.Data
         [SerializeField] float movementSpeed; // basic player speed movement
         [SerializeField] float dashSpeed; // player speed at dashing
         [SerializeField] float jumpPower;
-        [SerializeField][Range(0.1f, 1f)] float airDrag;
+        [SerializeField] [Range(0.1f, 1f)] float airDrag;
 
 
         [Header("Damage")]

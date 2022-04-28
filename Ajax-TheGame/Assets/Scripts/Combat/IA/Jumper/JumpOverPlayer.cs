@@ -9,7 +9,7 @@ namespace Core.Combat.IA.Action
     //  adds force using a log equation depending on height configuration
     public class JumpOverPlayer : EnemyAction
     {
-        [SerializeField][Range(1f, 10f)] float height = 4f;
+        [SerializeField] [Range(1f, 10f)] float height = 4f;
         [SerializeField] LayerMask whatIsGround;
         [SerializeField] SharedBool jumping;
 

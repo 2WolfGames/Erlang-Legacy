@@ -7,7 +7,7 @@ namespace Core.Combat.IA.Jumper
     public class RedirectJump : EnemyAction
     {
         [SerializeField] LayerMask whatIsGround;
-        [SerializeField][Range(0.1f, 1f)] float softRedirect = 1;
+        [SerializeField] [Range(0.1f, 1f)] float softRedirect = 1;
 
         public override void OnStart()
         {

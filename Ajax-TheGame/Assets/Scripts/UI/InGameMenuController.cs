@@ -1,8 +1,7 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Spine.Unity;
 using Core.Shared;
+using Spine.Unity;
+using UnityEngine;
 using Core.Player.Controller;
 
 public class InGameMenuController : MonoBehaviour
@@ -16,23 +15,30 @@ public class InGameMenuController : MonoBehaviour
     int option;
 
 
-    private void Update() {
+    private void Update()
+    {
 
-        if (gamePaused){
+        if (gamePaused)
+        {
             ManageOptionsPage();
         }
 
-        if (Input.GetKeyDown(KeyCode.Tab)){
-            if(gamePaused){
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            if (gamePaused)
+            {
                 ResumeGame();
-            } else {
+            }
+            else
+            {
                 PauseGame();
             }
         }
-        
+
     }
 
-    private void ResumeGame(){
+    private void ResumeGame()
+    {
         CloseMenu();
         Time.timeScale = 1;
         gamePaused = false;
@@ -61,7 +67,8 @@ public class InGameMenuController : MonoBehaviour
 
     #region Menu
 
-    private void ManageOptionsPage(){
+    private void ManageOptionsPage()
+    {
         if (option == 0)
         { //Resume
             if (Input.GetKeyDown(KeyCode.DownArrow))
@@ -69,85 +76,98 @@ public class InGameMenuController : MonoBehaviour
                 OnResumeHoverOut();
                 OnSettingsHoverIn();
                 option = 1;
-            } else if (Input.GetKeyDown(KeyCode.Space))
+            }
+            else if (Input.GetKeyDown(KeyCode.Space))
             {
                 ResumeGame();
             }
-        } else if (option == 1)
+        }
+        else if (option == 1)
         { // Settings
             if (Input.GetKeyDown(KeyCode.DownArrow))
             {
                 OnSettingsHoverOut();
                 OnQuitHoverIn();
                 option = 2;
-            } 
+            }
             else if (Input.GetKeyDown(KeyCode.UpArrow))
             {
                 OnSettingsHoverOut();
                 OnResumeHoverIn();
                 option = 0;
-            } 
-            else if (Input.GetKeyDown(KeyCode.Space)){
-                //Scene Manager
-                
             }
-        } 
-        else 
+            else if (Input.GetKeyDown(KeyCode.Space))
+            {
+                //Scene Manager
+
+            }
+        }
+        else
         { //Quit
-            if (Input.GetKeyDown(KeyCode.UpArrow)){
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
                 OnQuitHoverOut();
                 OnSettingsHoverIn();
                 option = 1;
-            } 
-            else if (Input.GetKeyDown(KeyCode.Space)){
+            }
+            else if (Input.GetKeyDown(KeyCode.Space))
+            {
                 Time.timeScale = 1;
                 StartCoroutine(Loader.LoadWithDelay(SceneID.StartMenu,0));
             }
         }
     }
 
-    private void OpenMenu(){
+    private void OpenMenu()
+    {
         //diaryPage = 1;
         option = 0;
-        currentAjaxDiary = Instantiate(AjaxDiaryPrefab,pauseMenu.transform);
+        currentAjaxDiary = Instantiate(AjaxDiaryPrefab, pauseMenu.transform);
         skeletonGraphic = currentAjaxDiary.GetComponent<SkeletonGraphic>();
-        skeletonGraphic.AnimationState.SetAnimation(1,"init",false);
+        skeletonGraphic.AnimationState.SetAnimation(1, "init", false);
     }
 
-    private void CloseMenu(){
+    private void CloseMenu()
+    {
         Destroy(currentAjaxDiary);
     }
-  
+
 
     #region menu animations
 
-    public void OnResumeHoverIn(){
-        skeletonGraphic.AnimationState.AddAnimation(1,"hoverInResume",false,0);
+    public void OnResumeHoverIn()
+    {
+        skeletonGraphic.AnimationState.AddAnimation(1, "hoverInResume", false, 0);
     }
 
-    public void OnResumeHoverOut() {
-        skeletonGraphic.AnimationState.AddAnimation(1,"hoverOutResume",false,0);
+    public void OnResumeHoverOut()
+    {
+        skeletonGraphic.AnimationState.AddAnimation(1, "hoverOutResume", false, 0);
     }
 
-    public void OnSettingsHoverIn(){
-        skeletonGraphic.AnimationState.AddAnimation(1,"hoverInSettings",false,0);
+    public void OnSettingsHoverIn()
+    {
+        skeletonGraphic.AnimationState.AddAnimation(1, "hoverInSettings", false, 0);
     }
 
-    public void OnSettingsHoverOut() {
-        skeletonGraphic.AnimationState.AddAnimation(1,"hoverOutSettings",false,0);
+    public void OnSettingsHoverOut()
+    {
+        skeletonGraphic.AnimationState.AddAnimation(1, "hoverOutSettings", false, 0);
     }
 
-    public void OnQuitHoverIn(){
-        skeletonGraphic.AnimationState.AddAnimation(1,"hoverInQuit",false,0);
+    public void OnQuitHoverIn()
+    {
+        skeletonGraphic.AnimationState.AddAnimation(1, "hoverInQuit", false, 0);
     }
 
-    public void OnQuitHoverOut() {
-        skeletonGraphic.AnimationState.AddAnimation(1,"hoverOutQuit",false,0);
+    public void OnQuitHoverOut()
+    {
+        skeletonGraphic.AnimationState.AddAnimation(1, "hoverOutQuit", false, 0);
     }
 
     #endregion
 
     #endregion
 
-    
+
 }

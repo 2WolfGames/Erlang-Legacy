@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using Spine.Unity;
-using UnityEngine.UI;
 using Core.Shared;
+using Spine.Unity;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class StartMenu : MonoBehaviour
 {

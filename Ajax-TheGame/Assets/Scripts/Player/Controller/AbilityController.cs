@@ -1,9 +1,9 @@
-﻿using UnityEngine;
-using System;
-using Core.Player.Data;
-using Core.Combat.Projectile;
-using Core.Util;
+﻿using System;
 using Core.Combat;
+using Core.Combat.Projectile;
+using Core.Player.Data;
+using Core.Util;
+using UnityEngine;
 
 namespace Core.Player.Controller
 {
