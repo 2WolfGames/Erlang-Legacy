@@ -22,7 +22,7 @@ public static class SaveSystem
     public static void SavePlayerState(PlayerState playerData)
     {
         string path = dataPath + playerStateFileName;
-        Encrypt(path,playerData);
+        Encrypt(path, playerData);
     }
 
     public static PlayerState LoadPlayerState()
@@ -30,7 +30,7 @@ public static class SaveSystem
         string path = Application.persistentDataPath + "/player_stats.bin";
         if (File.Exists(path))
         {
-            return (PlayerState) Decrypt(path);
+            return (PlayerState)Decrypt(path);
         }
         else
         {
@@ -53,8 +53,9 @@ public static class SaveSystem
 
     #region "save and encryption"
 
-    private static void Encrypt(string filePath, System.Object objectTosave){
-        
+    private static void Encrypt(string filePath, System.Object objectTosave)
+    {
+
         Aes aes = Aes.Create();
         aes.Key = keyInBytes;
         aes.IV = ivInBytes;
@@ -130,5 +131,5 @@ public static class SaveSystem
     }
 
     #endregion
-    
+
 }
