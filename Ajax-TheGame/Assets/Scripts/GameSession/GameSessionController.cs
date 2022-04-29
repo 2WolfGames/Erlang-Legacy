@@ -23,8 +23,7 @@ namespace Core.GameSession
 
         void Awake()
         {
-            int numGameSessionControllers = FindObjectsOfType<GameSessionController>().Length;
-            if (numGameSessionControllers > 1)
+            if (GameSessionController.Instance != null )
             {
                 Destroy(gameObject);
             }
@@ -40,13 +39,12 @@ namespace Core.GameSession
             if (waiting)
                 return;
 
-            if (loadSavedData)
+            if (loadSavedData){
                 LoadSavedData();
+                PlacePlayer();
+            }
 
             setUpLifes = true;
-
-            PlacePlayer();
-
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
 
@@ -60,9 +58,9 @@ namespace Core.GameSession
             hasDied = false;
 
             if (searchCurrentPoint)
-                SceneChangedSearchCurrentPoint();
-
-            PlacePlayer();
+                SceneChangedEntrance();
+            else 
+                PlacePlayer();
         }
 
         // Update is called once per frame
@@ -129,18 +127,18 @@ namespace Core.GameSession
             playerHealth.MaxHP = playerState.max_health;
 
             currentPoint = playerState.GetPosition();
-
             loadSavedData = false;
 
             return playerState.scene;
         }
 
-        private void SceneChangedSearchCurrentPoint()
+        private void SceneChangedEntrance()
         {
             foreach (SceneEntrance se in FindObjectsOfType<SceneEntrance>())
             {
                 if (se.gameObject.CompareTag(entranceTag.ToString()))
                 {
+                    se.MakeEntrance();
                     currentPoint = se.GetEntrancePoint();
                     searchCurrentPoint = false;
                     break;

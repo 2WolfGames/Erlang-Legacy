@@ -90,7 +90,7 @@ namespace Core.Player.Controller
         }
 
         // desc: changes local player scale in order to align to user input
-        private void FaceDirection()
+        public void FaceDirection()
         {
             if (!Controllable)
                 return;

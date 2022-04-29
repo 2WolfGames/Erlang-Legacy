@@ -169,6 +169,11 @@ namespace Core.Player.Controller
 
             Animator.SetBool(CharacterAnimations.Blink, false);
         }
+
+        public void SetFacing(PlayerFacing playerFacing){
+            FacingController.SetFacing(playerFacing);
+            MovementController.FaceDirection();
+        }
     }
 }
 
