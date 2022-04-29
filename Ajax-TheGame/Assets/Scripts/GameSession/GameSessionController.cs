@@ -23,7 +23,7 @@ namespace Core.GameSession
 
         void Awake()
         {
-            if (GameSessionController.Instance != null )
+            if (GameSessionController.Instance != null)
             {
                 Destroy(gameObject);
             }
@@ -39,7 +39,8 @@ namespace Core.GameSession
             if (waiting)
                 return;
 
-            if (loadSavedData){
+            if (loadSavedData)
+            {
                 LoadSavedData();
                 PlacePlayer();
             }
@@ -59,7 +60,7 @@ namespace Core.GameSession
 
             if (searchCurrentPoint)
                 SceneChangedEntrance();
-            else 
+            else
                 PlacePlayer();
         }
 
