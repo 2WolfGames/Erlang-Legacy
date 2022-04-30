@@ -6,6 +6,8 @@ namespace Core.GameSession
     {
         bool canBeSaved = false;
 
+        //pre: GameSessionController.Instance != null
+        //post: saves player state when requested 
         void Update()
         {
             if (canBeSaved)
@@ -18,6 +20,8 @@ namespace Core.GameSession
             }
         }
 
+        //pre: --
+        //post: if player is in range canBesaved = true
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.gameObject.tag == "Player")
@@ -26,6 +30,8 @@ namespace Core.GameSession
             }
         }
 
+        //pre: --
+        //post: if player exits range canBesaved = false
         private void OnTriggerExit2D(Collider2D other)
         {
             if (other.gameObject.layer == LayerMask.NameToLayer("Player"))

@@ -1,4 +1,4 @@
-﻿using Core.Player.Controller;
+using Core.Player.Controller;
 using Core.Shared;
 using Core.Shared.Enum;
 using Core.Shared.SaveSystem;
@@ -19,6 +19,9 @@ namespace Core.GameSession
 
         public static GameSessionController Instance { get; private set; }
 
+        //pre: --
+        //post: if these is no gamesessioncontroller this becomes the one
+        //      else it destroys itself
         private void Awake()
         {
             if (GameSessionController.Instance != null)
@@ -32,6 +35,8 @@ namespace Core.GameSession
             }
         }
 
+        //pre: --
+        //post: seting up player lifes and charges player if it's necessary
         private void Start()
         {
             if (waiting)
@@ -47,6 +52,8 @@ namespace Core.GameSession
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
 
+        //pre: --
+        //post: seting up player lifes and search current player position if necessary
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
             if (waiting)
@@ -62,6 +69,8 @@ namespace Core.GameSession
             SetUpPlayerLifes();
         }
 
+        //pre: if not waiting, player.instance != null
+        //post: if player has died game resets to last save
         private void Update()
         {
             if (waiting)
@@ -70,10 +79,13 @@ namespace Core.GameSession
             var playerCurrentHealth = PlayerController.Instance.PlayerData.Health.HP;
             if (!hasDied & playerCurrentHealth == 0)
             {
+                hasDied = true;
                 ResetGameToSavePoint();
             }
         }
 
+        //pre: currentPointTransform != null
+        //post: currantSavePos is currentPointTransform position
         public void SavePlayerCurrentPoint(Transform currentPointTransform)
         {
             if (hasDied)
@@ -81,29 +93,42 @@ namespace Core.GameSession
             currentSavePos = currentPointTransform.position;
         }
 
+        //pre: save point != null && player.instance != null
+        //post: saves current stats of player 
+        //      and currantSavePos is savePoint position
         public void SavePlayerState(Transform savePoint)
         {
+            if (hasDied)
+                return;
+
             PlayerState playerState = new PlayerState(((int)SceneManagementFunctions.GetCurrentSceneEnum()),
                                                     PlayerController.Instance.PlayerData.Health.HP,
                                                     PlayerController.Instance.PlayerData.Health.MaxHP,
                                                     savePoint.position);
             SaveSystem.SavePlayerState(playerState);
+            currentSavePos = savePoint.position;
         }
 
+        //pre: player.instance != null
+        //post: returns player to it's status of the last save
         public void ResetGameToSavePoint()
         {
-            hasDied = true;
             PlayerController.Instance.Controllable = false;
 
             FindObjectOfType<InGameCanvas>()?.ActiveDeathImage();
             StartCoroutine(Loader.LoadWithDelay((SceneID)LoadSavedData(), 4));
         }
 
+        //pre: entranceTag != entranceID.None
+        //post: entranceTang is assigned, in next scene player is goint to apear at 
+        //        SceneEntrance.EntrancePoint of this tag
         public void NextSceneEntrance(EntranceID entranceTag)
         {
             this.entranceTag = entranceTag;
         }
 
+        //pre: there is saved data && player.instance != null
+        //post: player stats are the ones saved in data
         private int LoadSavedData()
         {
             PlayerState playerState = SaveSystem.LoadPlayerState();
@@ -118,6 +143,9 @@ namespace Core.GameSession
             return playerState.scene;
         }
 
+        //pre: entranceTag is not EntranceID.None
+        //post: searches the SceneEntrance with tag equal to entranceTag 
+        //      to start entrance proces 
         private void SearchEntrance()
         {
             SceneEntrance[] lstSceneEntrance = FindObjectsOfType<SceneEntrance>();
@@ -137,17 +165,22 @@ namespace Core.GameSession
 
             if (entranceTag != EntranceID.None)
             {
-                Debug.LogError("Entrance not found. Entrance tag: " + entranceTag.ToString());
+                Debug.LogError("GameSessionController.SearchEntrance: " +
+                                "Entrance not found. Entrance tag: " + entranceTag.ToString());
                 entranceTag = EntranceID.None;
             }
         }
 
+        //pre: player.instance != null
+        //post: player position = currentSavePosition
         private void PlacePlayer()
         {
             var player = PlayerController.Instance;
             player.transform.position = currentSavePos;
         }
 
+        //pre: player.instance != null && lifebarcontroller.instance != null
+        //post: lifebar contains current player lifes 
         private void SetUpPlayerLifes()
         {
             var playerHealth = PlayerController.Instance.PlayerData.Health;

@@ -8,6 +8,8 @@ namespace Core.UI
     {
         [SerializeField] Image deathImage;
 
+        //pre: --
+        //post: puts transparency of death image to 1 after a period of time.
         public void ActiveDeathImage()
         {
             deathImage.DOFade(1, 2).SetDelay(1.5f);

@@ -11,13 +11,17 @@ namespace Core.GameSession
         [SerializeField] Transform entrancePoint;
         [SerializeField] Transform spawnPoint;
         [SerializeField] float entranceTime = 2f;
-        [SerializeField] [Range(0.1f, 1f)] float entranceWaitTime = 0.5f;
+        [SerializeField][Range(0.1f, 1f)] float entranceWaitTime = 0.5f;
 
+        //pre: --
+        //post: returns entrancePoint position
         public Vector3 GetEntrancePoint()
         {
             return entrancePoint.position;
         }
 
+        //pre: PlayerController.Instance != null
+        //post: animates player entering the current scene
         public void MakeEntrance()
         {
             OnStartEntrance();
@@ -32,6 +36,8 @@ namespace Core.GameSession
                             );
         }
 
+        //pre: PlayerController.Instance != null
+        //post: sets player stats for entrance
         private void OnStartEntrance()
         {
             var player = PlayerController.Instance;
@@ -47,6 +53,8 @@ namespace Core.GameSession
             player.Controllable = false;
         }
 
+        //pre: PlayerController.Instance != null
+        //post: sets player stats for gameplay
         private void OnEndEntrance()
         {
             var player = PlayerController.Instance;

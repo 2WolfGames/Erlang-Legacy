@@ -168,6 +168,8 @@ namespace Core.Player.Controller
             Animator.SetBool(CharacterAnimations.Blink, false);
         }
 
+        //pre: --
+        //post: faces player = playerFacing
         public void SetFacing(PlayerFacing playerFacing)
         {
             FacingController.SetFacing(playerFacing);

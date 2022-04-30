@@ -8,6 +8,9 @@ namespace Core.GameSession
     {
         [SerializeField] SceneID scene;
         [SerializeField] EntranceID entranceTag;
+
+        //pre: GameSessionController.Instance != null
+        //post: changes current scene to sceneID
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.gameObject.tag == "Player")

@@ -9,25 +9,33 @@ namespace Core.Shared.SaveSystem
 {
     public static class SaveSystem
     {
+        //paths
         public static string dataPath = Application.persistentDataPath;
         public const string playerStateFileName = "/player_stats.bin";
+        //keys:
         private const string key = "5ai2M8OF19lfMV590dvy8iU1a23ZXa21";
         private static byte[] keyInBytes = System.Text.Encoding.ASCII.GetBytes(key);
         private const string iv = "a57T0s5UOp1wS4x9";
         private static byte[] ivInBytes = System.Text.Encoding.ASCII.GetBytes(iv);
 
+        //pre: --
+        //post: returns true if saved game exists
         public static bool SaveGameExists()
         {
             //Debug.Log(dataPath);
             return File.Exists(dataPath + playerStateFileName);
         }
 
+        //pre: --
+        //post: saves player state
         public static void SavePlayerState(PlayerState playerData)
         {
             string path = dataPath + playerStateFileName;
             Encrypt(path, playerData);
         }
 
+        //pre: files exist
+        //post: loads player state and returns PlayerState obj
         public static PlayerState LoadPlayerState()
         {
             string path = Application.persistentDataPath + "/player_stats.bin";
@@ -41,11 +49,15 @@ namespace Core.Shared.SaveSystem
             }
         }
 
+        //pre: --
+        //post: init files for new game seted and saved
         public static void InitializeGame()
         {
             SavePlayerState(PlayerStateDefaultValues());
         }
 
+        //pre: -- 
+        //post: returns a PlayerState with default values
         private static PlayerState PlayerStateDefaultValues()
         {
             //TODO: Configure an extern file (or files) for new game default values
@@ -57,6 +69,8 @@ namespace Core.Shared.SaveSystem
 
         #region "save and encryption"
 
+        //pre: filepath corrent and objectToSave != null
+        //post: encrypted file with objectToSave info saved
         private static void Encrypt(string filePath, System.Object objectTosave)
         {
 
@@ -76,6 +90,8 @@ namespace Core.Shared.SaveSystem
             System.IO.File.WriteAllBytes(filePath, ms.ToArray());
         }
 
+        //pre: filepath corrent 
+        //post: dencrypts file and returns object with file info
         private static System.Object Decrypt(string filePath)
         {
             Aes aes = Aes.Create();
@@ -95,6 +111,8 @@ namespace Core.Shared.SaveSystem
             return ByteArrayToObject(ms.ToArray());
         }
 
+        //pre: filename correct
+        //post: returns byte array of file
         private static byte[] FileToByteArray(string FileName)
         {
             byte[] fileBytes = null;
@@ -111,6 +129,8 @@ namespace Core.Shared.SaveSystem
             return fileBytes;
         }
 
+        //pre: obj != null
+        //post: returns byte array of object
         private static byte[] ObjectToByteArray(System.Object obj)
         {
             if (obj == null)
@@ -123,6 +143,8 @@ namespace Core.Shared.SaveSystem
             return ms.ToArray();
         }
 
+        //pre: arrBytes correct
+        //post: returns object of byte array 
         private static System.Object ByteArrayToObject(byte[] arrBytes)
         {
             MemoryStream memStream = new MemoryStream();

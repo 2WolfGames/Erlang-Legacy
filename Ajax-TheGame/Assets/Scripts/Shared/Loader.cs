@@ -10,12 +10,16 @@ namespace Core.Shared
     public static class Loader
     {
 
+        //pre: seconds >= 0
+        //post: Loads scene after seconds
         public static IEnumerator LoadWithDelay(SceneID scene, float seconds)
         {
             yield return new WaitForSeconds(seconds);
             Load(scene.ToString());
         }
 
+        //pre: --
+        //post: changes scene to LoadingScene and sets the new scene to charge 
         private static void Load(string sceneName)
         {
             BeforeLoadingScene();
@@ -23,6 +27,8 @@ namespace Core.Shared
             SceneManager.LoadScene(SceneID.LoadingScene.ToString());
         }
 
+        //pre: --
+        //post: ends process
         private static void BeforeLoadingScene()
         {
             DOTween.KillAll(false);

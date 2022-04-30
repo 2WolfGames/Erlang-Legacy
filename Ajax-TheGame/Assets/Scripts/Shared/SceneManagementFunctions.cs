@@ -6,6 +6,9 @@ namespace Core.Shared
 {
     public class SceneManagementFunctions : MonoBehaviour
     {
+        //TODO: find better solution?
+        //pre: --
+        //post: Returns current scene as SceneID enum
         public static SceneID GetCurrentSceneEnum()
         {
             string currentScene = SceneManager.GetActiveScene().name;
@@ -27,6 +30,9 @@ namespace Core.Shared
             }
         }
 
+        //pre: --
+        //post: returns true if current scene is playable, 
+        //      false if it's some kind of menu or loading scene
         public static bool CurrentSceneIsGameplay()
         {
             string currentScene = SceneManager.GetActiveScene().name;
