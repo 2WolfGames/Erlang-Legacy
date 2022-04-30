@@ -48,6 +48,7 @@ namespace Core.Shared.SaveSystem
 
         private static PlayerState PlayerStateDefaultValues()
         {
+            //TODO: Configure an extern file (or files) for new game default values
             return new PlayerState((int)SceneID.FirstIsland,
                                     3,
                                     3,

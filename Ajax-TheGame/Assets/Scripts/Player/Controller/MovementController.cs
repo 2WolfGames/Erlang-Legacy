@@ -64,11 +64,6 @@ namespace Core.Player.Controller
             baseGravityScale = Body.gravityScale;
         }
 
-        public void SetPosition(Vector2 position)
-        {
-            transform.position = position;
-        }
-
         public void Update()
         {
             if (dashCooldownTimer > 0)

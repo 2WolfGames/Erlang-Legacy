@@ -22,7 +22,6 @@ namespace Core.UI.LifeBar
         ////Global variables ////
         private int totalLifes;
         private int currentLifes;
-        public int CurrentLifes { get => currentLifes; private set => currentLifes = value; }
         Queue<(LifeBarAction, int)> pendentChanges;
         bool modifying;
 

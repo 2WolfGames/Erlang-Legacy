@@ -11,16 +11,11 @@ namespace Core.GameSession
         [SerializeField] Transform entrancePoint;
         [SerializeField] Transform spawnPoint;
         [SerializeField] float entranceTime = 2f;
-        [SerializeField] [Range(0.1f, 1f)] float entranceWaitTime = 0.5f;
+        [SerializeField][Range(0.1f, 1f)] float entranceWaitTime = 0.5f;
 
         public Vector3 GetEntrancePoint()
         {
             return entrancePoint.position;
-        }
-
-        public Vector3 GetSpawnPoint()
-        {
-            return spawnPoint.position;
         }
 
         public void MakeEntrance()
@@ -28,14 +23,13 @@ namespace Core.GameSession
             OnStartEntrance();
             var player = PlayerController.Instance;
             player.transform.DOMove(entrancePoint.position, entranceTime)
-            .SetDelay(entranceWaitTime)
-            .OnComplete(
-                () =>
-                {
-                    OnEndEntrance();
-                    player.Controllable = true;
-                }
-            );
+                            .SetDelay(entranceWaitTime)
+                            .OnComplete(
+                                () =>
+                                {
+                                    OnEndEntrance();
+                                }
+                            );
         }
 
         private void OnStartEntrance()
@@ -58,6 +52,8 @@ namespace Core.GameSession
             var player = PlayerController.Instance;
             //starting animation of runing
             player.Animator.SetBool(CharacterAnimations.Running, false);
+            //entrance ended, player can move
+            player.Controllable = true;
         }
     }
 }

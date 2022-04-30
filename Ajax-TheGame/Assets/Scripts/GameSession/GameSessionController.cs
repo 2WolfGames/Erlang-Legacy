@@ -11,17 +11,15 @@ namespace Core.GameSession
 {
     public class GameSessionController : MonoBehaviour
     {
-        private bool waiting;
-        private Vector3 currentPoint;
+        public static bool loadSavedData = false;
+        private bool waiting => !SceneManagementFunctions.CurrentSceneIsGameplay();
+        public Vector3 currentSavePos { get; private set; }
         private EntranceID entranceTag;
-        private bool searchCurrentPoint = false;
-        private bool setUpLifes = false;
         private bool hasDied = false;
 
         public static GameSessionController Instance { get; private set; }
-        public static bool loadSavedData = false;
 
-        void Awake()
+        private void Awake()
         {
             if (GameSessionController.Instance != null)
             {
@@ -33,9 +31,9 @@ namespace Core.GameSession
                 DontDestroyOnLoad(Instance);
             }
         }
+        
         private void Start()
         {
-            waiting = !SceneManagementFunctions.CurrentSceneIsGameplay();
             if (waiting)
                 return;
 
@@ -45,39 +43,32 @@ namespace Core.GameSession
                 PlacePlayer();
             }
 
-            setUpLifes = true;
+            SetUpPlayerLifes();
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
 
-        public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            waiting = !SceneManagementFunctions.CurrentSceneIsGameplay();
             if (waiting)
                 return;
 
-            setUpLifes = true;
             hasDied = false;
 
-            if (searchCurrentPoint)
-                SceneChangedEntrance();
+            if (entranceTag != EntranceID.None)
+                SearchEntrance();
             else
                 PlacePlayer();
+
+            SetUpPlayerLifes();
         }
 
-        // Update is called once per frame
-        void Update()
+        private void Update()
         {
             if (waiting)
                 return;
 
-            if (setUpLifes)
-            {
-                var playerHealth = PlayerController.Instance.PlayerData.Health;
-                LifeBarController.Instance.SetUpLifes(playerHealth.HP, playerHealth.MaxHP);
-                setUpLifes = false;
-            }
-
-            if (PlayerController.Instance.PlayerData.Health.HP == 0)
+            var playerCurrentHealth = PlayerController.Instance.PlayerData.Health.HP;
+            if (!hasDied & playerCurrentHealth == 0)
             {
                 ResetGameToSavePoint();
             }
@@ -87,7 +78,7 @@ namespace Core.GameSession
         {
             if (hasDied)
                 return;
-            currentPoint = currentPointTransform.position;
+            currentSavePos = currentPointTransform.position;
         }
 
         public void SavePlayerState(Transform savePoint)
@@ -108,14 +99,8 @@ namespace Core.GameSession
             StartCoroutine(Loader.LoadWithDelay((SceneID)LoadSavedData(), 4));
         }
 
-        public Vector3 GetCurrentPoint()
+        public void NextSceneEntrance(EntranceID entranceTag)
         {
-            return currentPoint;
-        }
-
-        public void SearchCurrentPoint(EntranceID entranceTag)
-        {
-            searchCurrentPoint = true;
             this.entranceTag = entranceTag;
         }
 
@@ -127,30 +112,46 @@ namespace Core.GameSession
             playerHealth.HP = playerState.health;
             playerHealth.MaxHP = playerState.max_health;
 
-            currentPoint = playerState.GetPosition();
+            currentSavePos = playerState.GetPosition();
             loadSavedData = false;
 
             return playerState.scene;
         }
 
-        private void SceneChangedEntrance()
+        private void SearchEntrance()
         {
-            foreach (SceneEntrance se in FindObjectsOfType<SceneEntrance>())
+            SceneEntrance[] lstSceneEntrance = FindObjectsOfType<SceneEntrance>();
+            int i = 0;
+
+            while (i < lstSceneEntrance.Length && entranceTag != EntranceID.None)
             {
+                SceneEntrance se = lstSceneEntrance[i];
                 if (se.gameObject.CompareTag(entranceTag.ToString()))
                 {
                     se.MakeEntrance();
-                    currentPoint = se.GetEntrancePoint();
-                    searchCurrentPoint = false;
-                    break;
+                    currentSavePos = se.GetEntrancePoint();
+                    entranceTag = EntranceID.None;
                 }
+                i++;
+            }
+
+            if (entranceTag != EntranceID.None)
+            {
+                Debug.LogError("Entrance not found. Entrance tag: " + entranceTag.ToString());
+                entranceTag = EntranceID.None;
             }
         }
 
         private void PlacePlayer()
         {
             var player = PlayerController.Instance;
-            player.transform.position = GetCurrentPoint();
+            player.transform.position = currentSavePos;
+        }
+
+        private void SetUpPlayerLifes()
+        {
+            var playerHealth = PlayerController.Instance.PlayerData.Health;
+            LifeBarController.Instance.SetUpLifes(playerHealth.HP, playerHealth.MaxHP);
         }
     }
 }

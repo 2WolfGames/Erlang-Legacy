@@ -12,7 +12,7 @@ namespace Core.GameSession
         {
             if (other.gameObject.tag == "Player")
             {
-                GameSessionController.Instance.SearchCurrentPoint(entranceTag);
+                GameSessionController.Instance.NextSceneEntrance(entranceTag);
                 StartCoroutine(Loader.LoadWithDelay(scene, 0));
             }
         }

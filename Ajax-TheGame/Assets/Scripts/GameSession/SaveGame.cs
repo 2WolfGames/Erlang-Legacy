@@ -4,31 +4,23 @@ namespace Core.GameSession
 {
     public class SaveGame : MonoBehaviour
     {
-        GameSessionController gameSessionController;
         bool canBeSaved = false;
 
-        private void Awake()
-        {
-            gameSessionController = FindObjectOfType<GameSessionController>();
-        }
-
-        // Update is called once per frame
         void Update()
         {
             if (canBeSaved)
             {
                 if (Input.GetKeyDown(KeyCode.S))
                 {
-                    Debug.Log(transform);
                     canBeSaved = false;
-                    gameSessionController.SavePlayerState(transform);
+                    GameSessionController.Instance.SavePlayerState(transform);
                 }
             }
         }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+            if (other.gameObject.tag == "Player")
             {
                 canBeSaved = true;
             }

@@ -819,6 +819,11 @@ PrefabInstance:
       propertyPath: scene
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 4815034752210865345, guid: 48e853ff129fd5046bb2e1738c428eb0,
+        type: 3}
+      propertyPath: entranceTag
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4815034752465542357, guid: 48e853ff129fd5046bb2e1738c428eb0,
         type: 3}
       propertyPath: m_LocalPosition.x

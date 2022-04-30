@@ -30,8 +30,10 @@ namespace Core.Hazard
             PlayerController playerController = PlayerController.Instance;
 
             playerController.Hurt(1, gameObject);
+
             if (playerController.PlayerData.Health.HP != 0)
-                playerController.transform.position = GameSessionController.Instance.GetCurrentPoint();
+                playerController.transform.position = GameSessionController.Instance.currentSavePos;
+
             playerIn = false;
         }
     }

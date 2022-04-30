@@ -51,8 +51,7 @@ namespace Core.Player.Controller
         public Animator Animator => GetComponentInChildren<Animator>();
         public static PlayerController Instance { get; private set; }
 
-
-        public void Awake()
+        protected void Awake()
         {
             var matches = FindObjectsOfType<PlayerController>();
 
@@ -122,10 +121,9 @@ namespace Core.Player.Controller
 
             Side side = Function.CollisionSide(transform, other.transform);
 
-            /*Changes*/
+            //TODO: player life updates maybe to other class
             LifeBarController.Instance?.LoseLifes(lifesPlayerLoses);
             playerData.Health.HP = playerData.Health.HP - lifesPlayerLoses;
-            /*Changes*/
 
             if (side == Side.Back)
                 Animator.SetTrigger(CharacterAnimations.BackHurt);
