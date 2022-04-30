@@ -31,7 +31,7 @@ namespace Core.GameSession
                 DontDestroyOnLoad(Instance);
             }
         }
-        
+
         private void Start()
         {
             if (waiting)
