@@ -14,6 +14,8 @@ namespace Core.Player.Controller
         [SerializeField] LayerMask whatIsGround;
         [SerializeField] List<LayerMask> whatEndsDash;
         [SerializeField] List<LayerMask> whatTriggersLand;
+        [SerializeField] private bool isDashing = false;
+        [SerializeField] private bool canJump = false;
         private float baseGravityScale;
         private Circle WallChecker { get => wallChecker; set => wallChecker = value; }
         private Circle LandChecker { get => landChecker; set => landChecker = value; }
@@ -34,8 +36,6 @@ namespace Core.Player.Controller
         private float holdingAfterJumpTimer;
         private bool isJumping = false;
         private bool justJumped = false;
-        [SerializeField] private bool isDashing = false;
-        [SerializeField] private bool canJump = false;
         private Vector2 currentVelocity;
         private bool dashMidJump = false;
         public bool IsJumping => isJumping;

@@ -13,7 +13,6 @@ namespace Core.Player.Controller
         [SerializeField] DamageAreaData damageAreas;
 
         private Triggerable Dash => damageAreas.Dash;
-        private ParticleSystem dashPS => damageAreas.DashParticle;
         private Triggerable Punch => damageAreas.Punch;
         private float rayTimer;
         private PlayerController Player => PlayerController.Instance;
@@ -21,6 +20,7 @@ namespace Core.Player.Controller
         private float RayCooldown => PlayerData.Stats.RayCooldown;
         private int FacingValue => Player.FacingValue;
         public bool CanInvokeRay => rayTimer <= 0 && Player.Controllable;
+        private ParticleSystem chargedPunchParticles => PlayerData.ChargedPunchParticles;
 
         public void Awake()
         {
@@ -61,9 +61,11 @@ namespace Core.Player.Controller
         // post: active dash damage area
         public void ActiveDashDamage()
         {
+            if (chargedPunchParticles)
+            {
+                chargedPunchParticles.Play();
+            }
             Dash.Enabled = true;
-            if (dashPS)
-                EffectManager.Instance.PlayOneShot(dashPS, dashPS.transform.position);
         }
 
         // pre: --
