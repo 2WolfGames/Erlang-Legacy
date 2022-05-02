@@ -20,15 +20,23 @@ namespace Core.UI.LifeBar
         [SerializeField] ParticleSystem newLifeApearingParticleEffect;
 
         ////Global variables ////
-        int totalLifes;
-        int currentLifes;
+        private int totalLifes;
+        private int currentLifes;
         Queue<(LifeBarAction, int)> pendentChanges;
         bool modifying;
+
+        public static LifeBarController Instance { get; private set; }
 
         //pre: --
         //post: We initialize what we need
         void Awake()
         {
+            var matches = FindObjectsOfType<LifeBarController>();
+
+            if (matches.Length > 1)
+                Destroy(gameObject);
+            else Instance = this;
+
             lifeContainers = new List<LifeBarContainer>();
             pendentChanges = new Queue<(LifeBarAction, int)>();
         }
@@ -47,11 +55,12 @@ namespace Core.UI.LifeBar
 
         //pre: initialLifes > 0 && < cMaxLifeContainers
         //post: it puts to the quque the proces that initializes the lifeBar
-        public void SetUpLifes(int initialLifes)
+        public void SetUpLifes(int currentLifes, int totalLifes)
         {
             pendentChanges.Clear();
             modifying = false;
-            pendentChanges.Enqueue((LifeBarAction.Setup, initialLifes));
+            pendentChanges.Enqueue((LifeBarAction.Setup, totalLifes));
+            pendentChanges.Enqueue((LifeBarAction.LoseLifeNoVFX, totalLifes - currentLifes));
         }
 
         //pre: lifesUp > 0 
@@ -109,6 +118,10 @@ namespace Core.UI.LifeBar
                     break;
                 case LifeBarAction.LoseLife:
                     yield return StartCoroutine(LoseLifesProcess(actionType.Item2));
+                    break;
+                case LifeBarAction.LoseLifeNoVFX:
+                    LoseLifesProcessNoVFX(actionType.Item2);
+                    yield return null;
                     break;
                 case LifeBarAction.FillAll:
                     yield return StartCoroutine(FillAllLifes());
@@ -229,17 +242,41 @@ namespace Core.UI.LifeBar
                 {
                     ActivateDangerEffect(true);
                 }
-                yield return lastOne;
 
                 if (currentLifes == 0)
                 {
                     ActivateDangerEffect(false); //we make sure that danger effect is not active anymore
                     StartCoroutine(DieEffect());
                 }
+
+                yield return lastOne;
+
             }
             else
             {
                 yield return null;
+            }
+        }
+
+        //pre: --
+        //post: takes lifes out without vfx
+        //      if remaining lifes == 1 triggers danger effect
+        private void LoseLifesProcessNoVFX(int lifesOut)
+        {
+            if (currentLifes > 0)
+            {
+                int lifesUpdate = Mathf.Max(0, currentLifes - lifesOut);
+
+                for (int i = currentLifes - 1; i >= lifesUpdate; i--)
+                {
+                    lifeContainers[i].LoseNoVFX();
+                }
+                currentLifes = lifesUpdate;
+
+                if (currentLifes == 1)
+                {
+                    ActivateDangerEffect(true);
+                }
             }
         }
 

@@ -9,6 +9,7 @@ namespace Core.UI.LifeBar
         Setup,
         GainLife,
         LoseLife,
+        LoseLifeNoVFX,
         AddNewLife,
         FillAll
     }

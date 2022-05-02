@@ -3,6 +3,7 @@ using Core.Player.Data;
 using Core.Player.Util;
 using Core.Shared;
 using Core.Shared.Enum;
+using Core.UI.LifeBar;
 using Core.Util;
 using UnityEngine;
 
@@ -50,14 +51,14 @@ namespace Core.Player.Controller
         public Animator Animator => GetComponentInChildren<Animator>();
         public static PlayerController Instance { get; private set; }
 
-
         protected void Awake()
         {
             var matches = FindObjectsOfType<PlayerController>();
 
             if (matches.Length > 1)
                 Destroy(gameObject);
-            else Instance = this;
+            else
+                Instance = this;
 
             MovementController.OnDashStart += OnDashStart;
         }
@@ -113,12 +114,16 @@ namespace Core.Player.Controller
 
         // pre: --
         // post: applies damage to player
-        public void Hurt(int damage, GameObject other)
+        public void Hurt(int lifesPlayerLoses, GameObject other)
         {
             if (Protectable.IsProtected)
                 return;
 
             Side side = Function.CollisionSide(transform, other.transform);
+
+            //TODO: player life updates maybe to other class
+            LifeBarController.Instance?.LoseLifes(lifesPlayerLoses);
+            playerData.Health.HP = playerData.Health.HP - lifesPlayerLoses;
 
             if (side == Side.Back)
                 Animator.SetTrigger(CharacterAnimations.BackHurt);
@@ -161,6 +166,14 @@ namespace Core.Player.Controller
                 Protectable.SetProtection(0);
 
             Animator.SetBool(CharacterAnimations.Blink, false);
+        }
+
+        //pre: --
+        //post: faces player = playerFacing
+        public void SetFacing(PlayerFacing playerFacing)
+        {
+            FacingController.SetFacing(playerFacing);
+            MovementController.FaceDirection();
         }
     }
 }

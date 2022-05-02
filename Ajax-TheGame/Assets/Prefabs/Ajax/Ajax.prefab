@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 829031480838284624}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Damage Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,9 +91,7 @@ MonoBehaviour:
   playerData:
     jumpParticles: {fileID: 8583723039670672985}
     dashTrailRender: {fileID: 7729203758757745403}
-    health:
-      hp: 0
-      maxHP: 0
+    health: {fileID: 11400000, guid: 60cef42ebb865e14e985e617c61c178f, type: 2}
     stats:
       movementSpeed: 10
       dashSpeed: 20
@@ -242,7 +240,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5625281660130636832}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Projectile Origin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -495,7 +493,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8224927623522908014}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Checkers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -527,7 +525,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8224927624468817745}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Land Checker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -557,7 +555,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8224927624844412392}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Wall Checker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -715,6 +713,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dash Trail
       objectReference: {fileID: 0}
+    - target: {fileID: 3471992770172634787, guid: 40ac531ee7e48964c8e309b4f6553e41,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40ac531ee7e48964c8e309b4f6553e41, type: 3}
 --- !u!4 &7729203758757745404 stripped
@@ -823,6 +826,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Jump Particles
+      objectReference: {fileID: 0}
+    - target: {fileID: 4744176021873924719, guid: 6d10fada01c5e2f4a8e0cf857b8c1b17,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8419615140276056211, guid: 6d10fada01c5e2f4a8e0cf857b8c1b17,
         type: 3}
