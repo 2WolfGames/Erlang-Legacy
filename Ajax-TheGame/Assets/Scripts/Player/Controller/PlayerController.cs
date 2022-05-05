@@ -126,7 +126,7 @@ namespace Core.Player.Controller
             ComputeSideHurtAnimation(other.transform);
 
             if (shakeCameraOnHurt)
-                CameraController.Instance.ShakeCamera();
+                CameraManager.Instance?.ShakeCamera();
 
             OnRecoverStart();
         }
