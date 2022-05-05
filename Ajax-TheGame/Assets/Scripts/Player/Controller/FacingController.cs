@@ -20,5 +20,12 @@ namespace Core.Player.Controller
             else Facing = PlayerFacing.Right;
         }
 
+        //pre: --
+        //post: sets playerFacing
+        public void SetFacing(PlayerFacing playerFacing)
+        {
+            Facing = playerFacing;
+        }
+
     }
 }

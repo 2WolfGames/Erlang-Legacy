@@ -1,5 +1,7 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
+using Core.Shared.Enum;
+using Core.UI;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,16 +9,31 @@ namespace Core.Shared
 {
     public static class Loader
     {
-        public enum Scene
+
+        //pre: seconds >= 0
+        //post: Loads scene after seconds
+        public static IEnumerator LoadWithDelay(SceneID scene, float seconds)
         {
-            StartMenu, LoadingScene, lvl1
+            yield return new WaitForSeconds(seconds);
+            Load(scene.ToString());
         }
 
-        public static void Load(Scene scene)
+        //pre: --
+        //post: changes scene to LoadingScene and sets the new scene to charge 
+        private static void Load(string sceneName)
         {
-            LoadingMenu.sceneName = scene.ToString();
-            SceneManager.LoadScene(Scene.LoadingScene.ToString());
+            BeforeLoadingScene();
+            LoadingMenu.sceneName = sceneName;
+            SceneManager.LoadScene(SceneID.LoadingScene.ToString());
         }
+
+        //pre: --
+        //post: ends process
+        private static void BeforeLoadingScene()
+        {
+            DOTween.KillAll(false);
+        }
+
 
     }
 }

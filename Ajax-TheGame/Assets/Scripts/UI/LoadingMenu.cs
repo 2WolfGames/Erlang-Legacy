@@ -4,68 +4,69 @@ using Spine.Unity;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LoadingMenu : MonoBehaviour
+namespace Core.UI
 {
-    [SerializeField] SkeletonGraphic skeletonGraphic;
-    [SerializeField] CanvasGroup canvasGroup;
-    public static string sceneName = "lvl1";
-    AsyncOperation asyncOperation;
-
-    private void Awake()
+    public class LoadingMenu : MonoBehaviour
     {
-        canvasGroup.alpha = 0;
-    }
+        [SerializeField] SkeletonGraphic skeletonGraphic;
+        [SerializeField] CanvasGroup canvasGroup;
+        public static string sceneName;
+        AsyncOperation asyncOperation;
 
-    void Start()
-    {
-        skeletonGraphic.AnimationState.SetAnimation(1, "animation", true);
-        StartCoroutine(LightLoadingScreen(2));
-        StartCoroutine(LoadNextScene());
-    }
-    private IEnumerator LoadNextScene()
-    {
-        yield return new WaitForSeconds(3);
-        Application.backgroundLoadingPriority = ThreadPriority.Low;
-        asyncOperation = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
-
-    }
-
-    private void Update()
-    {
-        if (asyncOperation != null)
+        private void Awake()
         {
-            if (asyncOperation.progress > 0.9f)
+            canvasGroup.alpha = 0;
+        }
+
+        void Start()
+        {
+            skeletonGraphic.AnimationState.SetAnimation(1, "animation", true);
+            StartCoroutine(LightLoadingScreen(2));
+            StartCoroutine(LoadNextScene());
+        }
+        private IEnumerator LoadNextScene()
+        {
+            yield return new WaitForSeconds(3);
+            Application.backgroundLoadingPriority = ThreadPriority.Low;
+            asyncOperation = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
+        }
+
+        private void Update()
+        {
+            if (asyncOperation != null)
             {
-                StartCoroutine(FadeLoadingScreen(2));
+                if (asyncOperation.progress > 0.9f)
+                {
+                    StartCoroutine(FadeLoadingScreen(2));
+                }
             }
         }
-    }
 
-    IEnumerator LightLoadingScreen(float duration)
-    {
-        float startValue = canvasGroup.alpha;
-        float time = 0;
-        while (time < duration)
+        IEnumerator LightLoadingScreen(float duration)
         {
-            canvasGroup.alpha = Mathf.Lerp(startValue, 1, time / duration);
-            time += Time.deltaTime;
-            yield return null;
+            float startValue = canvasGroup.alpha;
+            float time = 0;
+            while (time < duration)
+            {
+                canvasGroup.alpha = Mathf.Lerp(startValue, 1, time / duration);
+                time += Time.deltaTime;
+                yield return null;
+            }
+            canvasGroup.alpha = 1;
         }
-        canvasGroup.alpha = 1;
-    }
 
-    IEnumerator FadeLoadingScreen(float duration)
-    {
-        float startValue = canvasGroup.alpha;
-        float time = 0;
-        while (time < duration)
+        IEnumerator FadeLoadingScreen(float duration)
         {
-            canvasGroup.alpha = Mathf.Lerp(startValue, 0, time / duration);
-            time += Time.deltaTime;
-            yield return null;
+            float startValue = canvasGroup.alpha;
+            float time = 0;
+            while (time < duration)
+            {
+                canvasGroup.alpha = Mathf.Lerp(startValue, 0, time / duration);
+                time += Time.deltaTime;
+                yield return null;
+            }
+            canvasGroup.alpha = 0;
         }
-        canvasGroup.alpha = 0;
+
     }
-
-
 }

@@ -3,6 +3,7 @@ using Core.Player.Data;
 using Core.Player.Util;
 using Core.Shared;
 using Core.Shared.Enum;
+using Core.UI.LifeBar;
 using Core.Util;
 using UnityEngine;
 
@@ -53,7 +54,8 @@ namespace Core.Player.Controller
 
             if (matches.Length > 1)
                 Destroy(gameObject);
-            else Instance = this;
+            else
+                Instance = this;
 
             movementController.OnDashStart += OnDashStart;
         }
@@ -113,20 +115,27 @@ namespace Core.Player.Controller
         }
 
         // pre: --
-        // post: applies damage to player
+        // post: applies damage to player. 1 unit of damage represent 1 unit of life taken
         public void Hurt(int damage, GameObject other)
         {
             if (protectable.IsProtected)
                 return;
 
             movementController.FreezeVelocity();
-
+            TakeLifes(damage);
             ComputeSideHurtAnimation(other.transform);
 
             if (shakeCameraOnHurt)
                 CameraController.Instance.ShakeCamera();
 
             OnRecoverStart();
+        }
+
+        private void TakeLifes(int damage)
+        {
+            //TODO: player life updates maybe to other class
+            LifeBarController.Instance?.LoseLifes(damage);
+            playerData.Health.HP = playerData.Health.HP - damage;
         }
 
         private void ComputeSideHurtAnimation(Transform other)
@@ -170,6 +179,14 @@ namespace Core.Player.Controller
                 protectable.SetProtection(0);
 
             Animator.SetBool(CharacterAnimations.Blink, false);
+        }
+
+        //pre: --
+        //post: faces player = playerFacing
+        public void SetFacing(PlayerFacing playerFacing)
+        {
+            facingController.SetFacing(playerFacing);
+            movementController.FaceDirection();
         }
     }
 }

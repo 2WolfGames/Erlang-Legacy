@@ -129,6 +129,17 @@ namespace Core.UI.LifeBar
         }
 
         //pre: --
+        //post: if life full, this method empty it's w/o VFX
+        public void LoseNoVFX()
+        {
+            if (hasLife)
+            {
+                filImage.fillAmount = 0;
+                hasLife = false;
+            }
+        }
+
+        //pre: --
         //post: shadow it's shown and life shakes if islastLife = true
         //      else shadow hiden 
         public IEnumerator lastLife(bool islastLife)
