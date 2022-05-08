@@ -1,10 +1,18 @@
-# This is Git's per-user configuration file.
-[core]
-	editor = \"C:\\Users\\{user}\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe\" --wait
-
 [user]
-	name = {user}
-	email = {email}
+	email = xxx@email.com
+[merge]
+	tool = diffmerge
+
+[mergetool "unityyamlmerge"]
+trustExitCode = false
+cmd = 'C:/Program Files/Unity/2019.4.34f1/Editor/Data/Tools/UnityYamlMerge.exe' merge -p "$BASE" "$REMOTE" "$LOCAL" "$MERGED"
+[diff]
+	tool = diffmerge
+[difftool "diffmerge"]
+	cmd = C:/Program\\ Files/SourceGear/Common/DiffMerge/sgdm.exe \"$LOCAL\" \"$REMOTE\"
+[mergetool "diffmerge"]
+	trustExitCode = true
+	cmd = C:/Program\\ Files/SourceGear/Common/DiffMerge/sgdm.exe -merge -result=\"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
         
 [alias]
     ##
