@@ -1,7 +1,6 @@
 ﻿using System;
 using UnityEngine;
 
-
 namespace Core.Player.Data
 {
     [Serializable]
@@ -11,7 +10,6 @@ namespace Core.Player.Data
         [Header("VFX")]
         [SerializeField] ParticleSystem jumpParticles;
         [SerializeField] TrailRenderer dashTrailRender;
-        [SerializeField] ParticleSystem chargedPunchParticles;
         [SerializeField] HealthData health;
         [SerializeField] StatsData stats;
 
@@ -19,6 +17,5 @@ namespace Core.Player.Data
         public StatsData Stats { get => stats; set => stats = value; }
         public ParticleSystem JumpParticles { get => jumpParticles; set => jumpParticles = value; }
         public TrailRenderer DashTrailRender { get => dashTrailRender; set => dashTrailRender = value; }
-        public ParticleSystem ChargedPunchParticles { get => chargedPunchParticles; set => chargedPunchParticles = value; }
     }
 }

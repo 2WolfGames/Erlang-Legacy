@@ -11,6 +11,7 @@ namespace Core.Player.Controller
     {
         [SerializeField] ProjectileData projectile;
         [SerializeField] DamageAreaData damageAreas;
+        [SerializeField] ParticleSystem punchParticle;
 
         private Triggerable Dash => damageAreas.Dash;
         private Triggerable Punch => damageAreas.Punch;
@@ -20,12 +21,11 @@ namespace Core.Player.Controller
         private float RayCooldown => PlayerData.Stats.RayCooldown;
         private int FacingValue => Player.FacingValue;
         public bool CanInvokeRay => rayTimer <= 0 && Player.Controllable;
-        private ParticleSystem chargedPunchParticles => PlayerData.ChargedPunchParticles;
 
         public void Awake()
         {
             Dash.Enabled = false;
-            Dash.OnEnter += OnDashHitEnters;
+            Dash.OnEnter += OnHit;
             Punch.Enabled = false;
         }
 
@@ -45,7 +45,23 @@ namespace Core.Player.Controller
         }
 
         // TODO: work with hittable objects too
-        private void OnDashHitEnters(Collider2D other)
+        public void OnHit(Collider2D other)
+        {
+            var destroyable = other.GetComponent<Destroyable>();
+            var hittable = other.GetComponent<Hittable>();
+
+            if (destroyable)
+            {
+                Debug.Log("hitting for kill");
+            }
+            else if (hittable)
+            {
+                Debug.Log("hitting for interact");
+            }
+            // ApplyDamage(other, 1);
+        }
+
+        private void ApplyDamage(Collider2D other, int damage)
         {
             var destroyable = other.GetComponent<Destroyable>();
 
@@ -53,7 +69,7 @@ namespace Core.Player.Controller
             {
                 destroyable.OnDestroyed += () => Debug.Log($"enemy is dead {this.gameObject.name}");
                 var direction = Player.transform.position.x > other.transform.position.x ? -1 : 1;
-                destroyable.OnAttackHit(Vector2.right * direction, 1); // TODO: set default hit damage
+                destroyable.OnAttackHit(Vector2.right * direction, damage); // TODO: set default hit damage
             }
         }
 
@@ -61,10 +77,8 @@ namespace Core.Player.Controller
         // post: active dash damage area
         public void ActiveDashDamage()
         {
-            if (chargedPunchParticles)
-            {
-                chargedPunchParticles.Play();
-            }
+            if (punchParticle)
+                punchParticle.Play();
             Dash.Enabled = true;
         }
 

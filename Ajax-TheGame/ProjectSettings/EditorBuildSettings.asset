@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/StartMenu.unity
     guid: b1b72c92c0f64d347baed9a1d78fa097
+  - enabled: 1
+    path: Assets/Scenes/FirstIsland.unity
+    guid: 9164dcf301ee4e443b0a8e464ebb578c
   m_configObjects: {}

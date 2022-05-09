@@ -17,6 +17,22 @@ MonoBehaviour:
   m_AmplitudeGain: 0
   m_FrequencyGain: 0
   mNoiseOffsets: {x: 0, y: 0, z: 0}
+--- !u!114 &852256666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9117715256224902647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c69857ed0fa066408cdc9d64ea46f55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  followPlayerOnAwake: 1
+  intensity: 10
+  frequency: 1
+  duration: 0.5
 --- !u!114 &561858193
 MonoBehaviour:
   m_ObjectHideFlags: 0

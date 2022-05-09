@@ -3,6 +3,7 @@ using Core.Player.Data;
 using Core.Player.Util;
 using Core.Shared;
 using Core.Shared.Enum;
+using Core.UI.LifeBar;
 using Core.Util;
 using UnityEngine;
 
@@ -55,22 +56,13 @@ namespace Core.Player.Controller
                 Destroy(gameObject);
             else Instance = this;
 
-            movementController.OnDashStart += OnDashStart;
+            movementController.OnDashStarted += OnDashStarted;
+            movementController.OnDashFinished += OnDashFinished;
         }
 
         public void Update()
         {
             isProtected = protectable.IsProtected;
-        }
-
-        // pre: --
-        // post: enables scripts that make damage
-        //      and sets infinite protection
-        private void OnDashStart()
-        {
-            protectable.SetProtection(float.PositiveInfinity);
-            controllable = false;
-            abilityController.ActiveDashDamage();
         }
 
         // post: disable scripts that make damage
@@ -80,10 +72,23 @@ namespace Core.Player.Controller
         {
             if (!inRecoverProcess) // respects recover process
                 protectable.SetProtection(0f);
+            movementController.StopDashing();
+        }
 
+        // post: enables scripts that make damage
+        //      and sets infinite protection
+        private void OnDashStarted()
+        {
+            controllable = false;
+            protectable.SetProtection(float.PositiveInfinity);
+            abilityController.ActiveDashDamage();
+        }
+
+        // recovers controll && removes dash collision damage
+        private void OnDashFinished()
+        {
             controllable = true;
             abilityController.DeactiveDashDamage();
-            movementController.StopDashing();
         }
 
         // pre: called by some function that stunds player (called by hit animation)
@@ -113,20 +118,27 @@ namespace Core.Player.Controller
         }
 
         // pre: --
-        // post: applies damage to player
+        // post: applies damage to player. 1 unit of damage represent 1 unit of life taken
         public void Hurt(int damage, GameObject other)
         {
             if (protectable.IsProtected)
                 return;
 
             movementController.FreezeVelocity();
-
+            TakeLifes(damage);
             ComputeSideHurtAnimation(other.transform);
 
             if (shakeCameraOnHurt)
-                CameraController.Instance.ShakeCamera();
+                CameraManager.Instance?.ShakeCamera();
 
             OnRecoverStart();
+        }
+
+        private void TakeLifes(int damage)
+        {
+            //TODO: player life updates maybe to other class
+            LifeBarController.Instance?.LoseLifes(damage);
+            playerData.Health.HP = playerData.Health.HP - damage;
         }
 
         private void ComputeSideHurtAnimation(Transform other)
@@ -170,6 +182,14 @@ namespace Core.Player.Controller
                 protectable.SetProtection(0);
 
             Animator.SetBool(CharacterAnimations.Blink, false);
+        }
+
+        //pre: --
+        //post: faces player = playerFacing
+        public void SetFacing(PlayerFacing playerFacing)
+        {
+            facingController.SetFacing(playerFacing);
+            movementController.FaceDirection();
         }
     }
 }

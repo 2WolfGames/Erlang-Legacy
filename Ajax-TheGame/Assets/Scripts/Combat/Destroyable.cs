@@ -10,7 +10,7 @@ namespace Core.Combat
         public int CurrentHealth { get => health; set => health = value; }
         public bool Invincible { get; set; }
         public bool IsDestroyed => health <= 0;
-
+        public bool IsAlive => !IsDestroyed;
         public event Action OnDestroyed;
 
         protected override void Awake()

@@ -51,7 +51,8 @@ namespace Core.Player.Controller
         public bool CanDash => !isDashing && dashCooldownTimer <= 0;
         public bool CanRun => !isDashing;
         public bool IsDashing => isDashing;
-        public Action OnDashStart { get; set; }
+        public Action OnDashStarted { get; set; }
+        public Action OnDashFinished { get; set; }
         public float Acceleration { get; set; } = 1;
         public bool JustImpulsed { get; set; }
         public List<LayerMask> WhatEndsDash { get => whatEndsDash; private set => whatEndsDash = value; }
@@ -85,7 +86,7 @@ namespace Core.Player.Controller
         }
 
         // desc: changes local player scale in order to align to user input
-        private void FaceDirection()
+        public void FaceDirection()
         {
             if (!Controllable)
                 return;
@@ -208,7 +209,7 @@ namespace Core.Player.Controller
             Body.velocity = Vector2.zero;
             Body.gravityScale = 0;
             Body.AddForce(Vector2.right * FacingValue * DashSpeed, ForceMode2D.Impulse);
-            OnDashStart?.Invoke();
+            OnDashStarted?.Invoke();
         }
 
         // pre: --
@@ -262,10 +263,13 @@ namespace Core.Player.Controller
             isDashing = false;
             DashTrail.widthMultiplier = 0;
             FreezeVelocity();
+            OnDashFinished?.Invoke();
         }
 
         /// <sumary>
         /// freze normal control for a certain time applying the impulse.
+        /// if anything had change its gravity, 
+        /// if anything had change its gravity, 
         /// if anything had change its gravity, 
         // the methods recover its firt local gravity scale
         /// <sumary>

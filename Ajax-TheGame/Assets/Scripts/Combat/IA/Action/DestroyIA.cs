@@ -12,7 +12,7 @@ namespace Core.Combat.IA.Action
         [SerializeField] ParticleSystem bleedEffect;
         [SerializeField] float bleedDuration;
 
-        private bool isDestroyed;
+        private bool destroyTaskCompleted;
 
         public override void OnStart()
         {
@@ -23,14 +23,14 @@ namespace Core.Combat.IA.Action
             {
                 if (exploteEffect)
                     EffectManager.Instance?.PlayOneShot(exploteEffect, transform.position);
-                isDestroyed = true;
+                destroyTaskCompleted = true;
                 Object.Destroy(gameObject);
             });
         }
 
         public override TaskStatus OnUpdate()
         {
-            return isDestroyed ? TaskStatus.Success : TaskStatus.Running;
+            return destroyTaskCompleted ? TaskStatus.Success : TaskStatus.Running;
         }
 
     }
