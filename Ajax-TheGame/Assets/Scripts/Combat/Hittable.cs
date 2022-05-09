@@ -38,12 +38,12 @@ namespace Core.Combat
         List<Tween> tweens = new List<Tween>();
 
         // Start is called before the first frame update
-        protected virtual void Awake()
+        public virtual void Awake()
         {
             Init();
         }
 
-        public void OnAttackHit(Vector2 hitDirection)
+        public void OnAttackHit(Vector2 attackHitDirection)
         {
             OnHit?.Invoke();
 
@@ -96,8 +96,7 @@ namespace Core.Combat
 
             if (hitShakeCamera)
             {
-                // use camera controller to shake it
-                Debug.Log("shaking camera...");
+                CameraManager.Instance.ShakeCamera();
             }
         }
 
@@ -110,20 +109,6 @@ namespace Core.Combat
         {
             EvaluateConfiguration();
             InitializeAttributes();
-        }
-
-        private void InitializeAttributes()
-        {
-            if (sprite)
-            {
-                baseColor = sprite.color;
-                baseMaterial = sprite.material;
-            }
-            else
-            {
-                baseColor = Color.white;
-            }
-            baseScale = transform.localScale;
         }
 
         private void EvaluateConfiguration()
@@ -155,6 +140,20 @@ namespace Core.Combat
                 Debug.LogError("Hit type declared as Material but no sprite renderer provided");
                 return;
             }
+        }
+
+        private void InitializeAttributes()
+        {
+            if (sprite)
+            {
+                baseColor = sprite.color;
+                baseMaterial = sprite.material;
+            }
+            else
+            {
+                baseColor = Color.white;
+            }
+            baseScale = transform.localScale;
         }
     }
 }

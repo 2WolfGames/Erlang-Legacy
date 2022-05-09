@@ -44,37 +44,35 @@ namespace Core.Player.Controller
                 InvokeRay();
         }
 
-        // TODO: work with hittable objects too
         public void OnHit(Collider2D other)
         {
             var destroyable = other.GetComponent<Destroyable>();
             var hittable = other.GetComponent<Hittable>();
 
             if (destroyable)
-            {
-                Debug.Log("hitting for kill");
-            }
+                OnHitDestroyable(destroyable);
             else if (hittable)
-            {
-                Debug.Log("hitting for interact");
-            }
-            // ApplyDamage(other, 1);
+                OnHitHittable(hittable);
         }
 
-        private void ApplyDamage(Collider2D other, int damage)
+        private void OnHitHittable(Hittable hittable)
         {
-            var destroyable = other.GetComponent<Destroyable>();
-
-            if (destroyable)
-            {
-                destroyable.OnDestroyed += () => Debug.Log($"enemy is dead {this.gameObject.name}");
-                var direction = Player.transform.position.x > other.transform.position.x ? -1 : 1;
-                destroyable.OnAttackHit(Vector2.right * direction, damage); // TODO: set default hit damage
-            }
+            Vector3 attackHitDirection = (hittable.transform.position - transform.position).normalized;
+            hittable.OnAttackHit(attackHitDirection);
         }
 
-        // pre: --
-        // post: active dash damage area
+        private void OnHitDestroyable(Destroyable destroyable)
+        {
+            ApplyDamage(destroyable, 1);
+        }
+
+        private void ApplyDamage(Destroyable destroyable, int damage)
+        {
+            destroyable.OnDestroyed += () => Debug.Log($"enemy is dead {this.gameObject.name}");
+            var direction = Player.transform.position.x > destroyable.transform.position.x ? -1 : 1;
+            destroyable.OnAttackHit(Vector2.right * direction, damage); // TODO: set default hit damage
+        }
+
         public void ActiveDashDamage()
         {
             if (punchParticle)
@@ -82,8 +80,6 @@ namespace Core.Player.Controller
             Dash.Enabled = true;
         }
 
-        // pre: --
-        // post: deactive dash damage area
         public void DeactiveDashDamage()
         {
             Dash.Enabled = false;

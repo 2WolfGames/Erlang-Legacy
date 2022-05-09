@@ -13,7 +13,7 @@ namespace Core.Combat
         public bool IsAlive => !IsDestroyed;
         public event Action OnDestroyed;
 
-        protected override void Awake()
+        public override void Awake()
         {
             base.Awake();
             CurrentHealth = health;
