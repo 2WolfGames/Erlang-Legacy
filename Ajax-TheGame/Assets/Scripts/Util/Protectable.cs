@@ -2,8 +2,12 @@
 
 namespace Core.Util
 {
-    // description:
-    //  manage state if action can be done over game object
+    public enum ProtectionType
+    {
+        INFINITE,
+        NONE
+    }
+
     public class Protectable : MonoBehaviour
     {
         [SerializeField] float protectionDuration;
@@ -26,6 +30,14 @@ namespace Core.Util
         public void SetProtection(float duration)
         {
             hitProtectionTimer = duration;
+        }
+
+        public void SetProtection(ProtectionType protectionType)
+        {
+            if (protectionType == ProtectionType.INFINITE)
+                hitProtectionTimer = float.PositiveInfinity;
+            else
+                hitProtectionTimer = 0f;
         }
     }
 }

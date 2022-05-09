@@ -71,7 +71,7 @@ namespace Core.Player.Controller
         public void OnDashCompletes()
         {
             if (!inRecoverProcess) // respects recover process
-                protectable.SetProtection(0f);
+                protectable.SetProtection(ProtectionType.NONE);
             movementController.StopDashing();
         }
 
@@ -80,15 +80,15 @@ namespace Core.Player.Controller
         private void OnDashStarted()
         {
             controllable = false;
-            protectable.SetProtection(float.PositiveInfinity);
+            protectable.SetProtection(ProtectionType.INFINITE);
             abilityController.ActiveDashDamage();
         }
 
-        // recovers controll && removes dash collision damage
         private void OnDashFinished()
         {
             controllable = true;
             abilityController.DeactiveDashDamage();
+            protectable.SetProtection(ProtectionType.NONE);
         }
 
         // pre: called by some function that stunds player (called by hit animation)
@@ -136,7 +136,6 @@ namespace Core.Player.Controller
 
         private void TakeLifes(int damage)
         {
-            //TODO: player life updates maybe to other class
             LifeBarController.Instance?.LoseLifes(damage);
             playerData.Health.HP = playerData.Health.HP - damage;
         }
@@ -157,7 +156,7 @@ namespace Core.Player.Controller
                 return;
 
             inRecoverProcess = true;
-            protectable.SetProtection(float.PositiveInfinity);
+            protectable.SetProtection(ProtectionType.INFINITE);
             Animator.SetBool(CharacterAnimations.Blink, true);
             controllable = false;
         }
@@ -178,8 +177,10 @@ namespace Core.Player.Controller
             yield return new WaitForSeconds(timeout);
             inRecoverProcess = false;
 
-            if (!movementController.IsDashing) // respects dashing protection
-                protectable.SetProtection(0);
+            var isDashing = movementController.IsDashing;
+
+            if (!isDashing) // respects dashing protection
+                protectable.SetProtection(ProtectionType.NONE);
 
             Animator.SetBool(CharacterAnimations.Blink, false);
         }
