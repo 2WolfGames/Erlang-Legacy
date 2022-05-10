@@ -11,19 +11,20 @@ namespace Core.Player.Controller
 {
     public class PlayerController : MonoBehaviour
     {
-        [SerializeField] PlayerData playerData;
-        private AbilityController AbilityController => GetComponent<AbilityController>();
-        private MovementController MovementController => GetComponent<MovementController>();
-        private FacingController FacingController => GetComponent<FacingController>();
-        private Protectable Protectable => GetComponent<Protectable>();
+        [SerializeField] bool shakeCameraOnHurt = true;
         [SerializeField] private bool controllable = true;
         [SerializeField] private bool inRecoverProcess = false;
-        [SerializeField] private bool isProtected;
+        [SerializeField] private bool isProtected = true;
+        [SerializeField] PlayerData playerData;
+        private AbilityController abilityController => GetComponent<AbilityController>();
+        private MovementController movementController => GetComponent<MovementController>();
+        private FacingController facingController => GetComponent<FacingController>();
+        private Protectable protectable => GetComponent<Protectable>();
         private bool blockingUI;
-        public bool CanBeHit => Protectable.CanBeHit;
-        public int FacingValue => FacingController.FacingToInt;
+        public bool CanBeHit => protectable.CanBeHit;
+        public int FacingValue => facingController.FacingToInt;
         public PlayerData PlayerData { get => playerData; private set => playerData = value; }
-        public bool IsGrounded => MovementController.IsGrounded;
+        public bool IsGrounded => movementController.IsGrounded;
         public bool BlockingUI
         {
             get => blockingUI;
@@ -36,16 +37,12 @@ namespace Core.Player.Controller
             }
         }
 
-        public void Update()
-        {
-            isProtected = Protectable.IsProtected;
-        }
-
         public bool Controllable
         {
             get => controllable && !BlockingUI;
             set => controllable = value;
         }
+
         public Collider2D BodyCollider => GetComponent<Collider2D>();
         public Rigidbody2D Body => GetComponent<Rigidbody2D>();
         public Animator Animator => GetComponentInChildren<Animator>();
@@ -60,7 +57,12 @@ namespace Core.Player.Controller
             else
                 Instance = this;
 
-            MovementController.OnDashStart += OnDashStart;
+            movementController.OnDashStart += OnDashStart;
+        }
+
+        public void Update()
+        {
+            isProtected = protectable.IsProtected;
         }
 
         // pre: --
@@ -68,9 +70,9 @@ namespace Core.Player.Controller
         //      and sets infinite protection
         private void OnDashStart()
         {
-            Protectable.SetProtection(float.PositiveInfinity);
+            protectable.SetProtection(float.PositiveInfinity);
             controllable = false;
-            AbilityController.ActiveDashDamage();
+            abilityController.ActiveDashDamage();
         }
 
         // post: disable scripts that make damage
@@ -79,11 +81,11 @@ namespace Core.Player.Controller
         public void OnDashCompletes()
         {
             if (!inRecoverProcess) // respects recover process
-                Protectable.SetProtection(0f);
+                protectable.SetProtection(0f);
 
             controllable = true;
-            AbilityController.DeactiveDashDamage();
-            MovementController.StopDashing();
+            abilityController.DeactiveDashDamage();
+            movementController.StopDashing();
         }
 
         // pre: called by some function that stunds player (called by hit animation)
@@ -106,42 +108,53 @@ namespace Core.Player.Controller
         // post: applies damage to player
         public void OnCollision(GameObject other, int damage = 1)
         {
-            if (Protectable.IsProtected)
+            if (protectable.IsProtected)
                 return;
 
             Hurt(damage, other);
         }
 
         // pre: --
-        // post: applies damage to player
-        public void Hurt(int lifesPlayerLoses, GameObject other)
+        // post: applies damage to player. 1 unit of damage represent 1 unit of life taken
+        public void Hurt(int damage, GameObject other)
         {
-            if (Protectable.IsProtected)
+            if (protectable.IsProtected)
                 return;
 
-            Side side = Function.CollisionSide(transform, other.transform);
+            movementController.FreezeVelocity();
+            TakeLifes(damage);
+            ComputeSideHurtAnimation(other.transform);
 
+            if (shakeCameraOnHurt)
+                CameraManager.Instance?.ShakeCamera();
+
+            OnRecoverStart();
+        }
+
+        private void TakeLifes(int damage)
+        {
             //TODO: player life updates maybe to other class
-            LifeBarController.Instance?.LoseLifes(lifesPlayerLoses);
-            playerData.Health.HP = playerData.Health.HP - lifesPlayerLoses;
+            LifeBarController.Instance?.LoseLifes(damage);
+            playerData.Health.HP = playerData.Health.HP - damage;
+        }
+
+        private void ComputeSideHurtAnimation(Transform other)
+        {
+            Side side = Function.CollisionSide(transform, other.transform);
 
             if (side == Side.Back)
                 Animator.SetTrigger(CharacterAnimations.BackHurt);
             else Animator.SetTrigger(CharacterAnimations.FrontHurt);
-
-            MovementController.FreezeVelocity();
-
-            OnRecoverStart();
         }
 
         // pre: called at first key frame hit (backward & forward) animations       
         private void OnRecoverStart()
         {
-            if (Protectable.IsProtected)
+            if (protectable.IsProtected)
                 return;
 
             inRecoverProcess = true;
-            Protectable.SetProtection(float.PositiveInfinity);
+            protectable.SetProtection(float.PositiveInfinity);
             Animator.SetBool(CharacterAnimations.Blink, true);
             controllable = false;
         }
@@ -162,8 +175,8 @@ namespace Core.Player.Controller
             yield return new WaitForSeconds(timeout);
             inRecoverProcess = false;
 
-            if (!MovementController.IsDashing) // respects dashing protection
-                Protectable.SetProtection(0);
+            if (!movementController.IsDashing) // respects dashing protection
+                protectable.SetProtection(0);
 
             Animator.SetBool(CharacterAnimations.Blink, false);
         }
@@ -172,8 +185,8 @@ namespace Core.Player.Controller
         //post: faces player = playerFacing
         public void SetFacing(PlayerFacing playerFacing)
         {
-            FacingController.SetFacing(playerFacing);
-            MovementController.FaceDirection();
+            facingController.SetFacing(playerFacing);
+            movementController.FaceDirection();
         }
     }
 }
