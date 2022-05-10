@@ -3,7 +3,7 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -11,22 +11,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcf7219bab7fe46a1ad266029b2fee19, type: 3}
   m_Name: Readme
   m_EditorClassIdentifier: 
-  icon: {fileID: 2800000, guid: 6756ed7b80223ac4e8f026ce27541de4, type: 3}
-  title: 'Explorer: 2D Game Kit'
+  icon: {fileID: 2800000, guid: 1b854426d1f38f842a143cde84f59573, type: 3}
+  title: Unity Particle Pack 5.x
   sections:
-  - heading: What is a Gamekit?
-    text: This game kit empowers you to create your own 2D platformer game without
-      writing any code.
+  - heading: Unity Particle Pack 5.x
+    text: 'Note: this Particle Pack is compatible for Unity 5.5. Find the brand new
+      Particle Pack for Unity 2018 and above using the link below:'
+    linkText: Download the new Particle Pack HERE
+    url: http://u3d.as/1i2i
+  - heading: 
+    text: This pack of sample particle assets can be used in your games and to help
+      you understand how to achieve certain effects using the Unity Particle System
+      component and modules. You'll find Fire, Explosions, Rain and other cool effects.
     linkText: 
     url: 
-  - heading: How do I use it?
-    text: We've written a detailed manual that explores all the available prefabs
-      and components that make up the mechanics in this kit. You can find the manual
-      on our Learn site.
-    linkText: Read the manual
-    url: https://unity3d.com/learn/tutorials/s/2d-game-kit
-  - heading: Got feedback?
-    text: 'Let us know what you think or ask any questions you might have on our FORUM. '
-    linkText: Forum Thread
-    url: https://forum.unity.com/threads/2d-game-kit-official-thread.517249/
   loadedLayout: 1
