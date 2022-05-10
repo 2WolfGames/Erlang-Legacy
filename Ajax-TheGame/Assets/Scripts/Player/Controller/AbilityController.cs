@@ -13,8 +13,8 @@ namespace Core.Player.Controller
         [SerializeField] DamageAreaData damageAreas;
         [SerializeField] ParticleSystem punchParticle;
 
-        private Triggerable Dash => damageAreas.Dash;
-        private Triggerable Punch => damageAreas.Punch;
+        private InteractOnTrigger2D Dash => damageAreas.Dash;
+        private InteractOnTrigger2D Punch => damageAreas.Punch;
         private float rayTimer;
         private PlayerController Player => PlayerController.Instance;
         private PlayerData PlayerData => Player.PlayerData;
@@ -24,9 +24,8 @@ namespace Core.Player.Controller
 
         public void Awake()
         {
-            Dash.Enabled = false;
-            Dash.OnEnter += OnHit;
-            Punch.Enabled = false;
+            Dash.enabled = false;
+            Punch.enabled = false;
         }
 
         public void Update()
@@ -77,24 +76,24 @@ namespace Core.Player.Controller
         {
             if (punchParticle)
                 punchParticle.Play();
-            Dash.Enabled = true;
+            Dash.enabled = true;
         }
 
         public void DeactiveDashDamage()
         {
-            Dash.Enabled = false;
+            Dash.enabled = false;
         }
 
         private void OnThrowPunch()
         {
             Debug.Log("punching");
-            Punch.Enabled = true;
+            Punch.enabled = true;
         }
 
         private void OnPickUpPunch()
         {
             Debug.Log("pickup punch");
-            Punch.Enabled = false;
+            Punch.enabled = false;
         }
 
         // pre: --

@@ -2,15 +2,17 @@
 using Core.Util;
 using UnityEngine;
 
+// TODO: change action event to unity actions event
+
 namespace Core.Combat.Projectile
 {
     public abstract class AbstractProjectile : MonoBehaviour
     {
         public ParticleSystem explosionEffect;
         public AudioClip splatterSound;
+        public bool destroyAfterCollision = false;
 
         public GameObject Shooter { get; set; }
-        public bool DestroyOnColliding { get; set; } = false;
 
         protected Vector2 force;
 
@@ -32,7 +34,7 @@ namespace Core.Combat.Projectile
 
             EffectManager.Instance?.PlayOneShot(explosionEffect, transform.position);
 
-            if (DestroyOnColliding)
+            if (destroyAfterCollision)
                 Destroy(gameObject);
         }
 
