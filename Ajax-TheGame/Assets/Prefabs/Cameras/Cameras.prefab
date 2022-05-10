@@ -30,9 +30,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   followPlayerOnAwake: 1
-  intensity: 10
+  intensity: 5
   frequency: 1
-  duration: 0.5
+  duration: 0.25
 --- !u!114 &561858193
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,6 +126,16 @@ PrefabInstance:
     - target: {fileID: 7851640825699706223, guid: bca5fe2289708e646a9a68516fba643f,
         type: 3}
       propertyPath: m_LocalPosition.y
+      value: 14.428505
+      objectReference: {fileID: 0}
+    - target: {fileID: 7851640825699706223, guid: bca5fe2289708e646a9a68516fba643f,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 24.549408
+      objectReference: {fileID: 0}
+    - target: {fileID: 7851640825699706223, guid: bca5fe2289708e646a9a68516fba643f,
+        type: 3}
+      propertyPath: m_LocalPosition.y
       value: 15.558502
       objectReference: {fileID: 0}
     - target: {fileID: 7851640825699706223, guid: bca5fe2289708e646a9a68516fba643f,
@@ -187,6 +197,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3946733162426378132, guid: 5c95c31281c158947a0178c58b18e41a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 24.549408
+      objectReference: {fileID: 0}
+    - target: {fileID: 3946733162426378132, guid: 5c95c31281c158947a0178c58b18e41a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 14.428505
       objectReference: {fileID: 0}
     - target: {fileID: 3946733162426378132, guid: 5c95c31281c158947a0178c58b18e41a,
         type: 3}
