@@ -173,7 +173,7 @@ namespace Core.Player.Controller
         //       if no dashing process is running, set character unprotected
         private IEnumerator AfterHurtAnimation()
         {
-            var timeout = PlayerData.Stats.RecoverTimeoutAfterHit;
+            var timeout = PlayerData.Stats.recoverTimeoutAfterHit;
             yield return new WaitForSeconds(timeout);
             inRecoverProcess = false;
 

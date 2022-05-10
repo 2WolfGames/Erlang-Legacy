@@ -6,15 +6,14 @@ namespace Core.Player.Data
     [Serializable]
     public class PlayerData
     {
-
         [Header("VFX")]
         [SerializeField] ParticleSystem jumpParticles;
         [SerializeField] TrailRenderer dashTrailRender;
-        [SerializeField] PlayerHealth health;
-        [SerializeField] StatsData stats;
+        [SerializeField] Health health;
+        [SerializeField] Stats stats;
 
-        public PlayerHealth Health { get => health; set => health = value; }
-        public StatsData Stats { get => stats; set => stats = value; }
+        public Health Health { get => health; set => health = value; }
+        public Stats Stats { get => stats; set => stats = value; }
         public ParticleSystem JumpParticles { get => jumpParticles; set => jumpParticles = value; }
         public TrailRenderer DashTrailRender { get => dashTrailRender; set => dashTrailRender = value; }
     }

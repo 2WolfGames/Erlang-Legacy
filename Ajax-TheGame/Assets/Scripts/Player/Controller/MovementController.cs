@@ -22,16 +22,16 @@ namespace Core.Player.Controller
         private LayerMask WhatIsGround { get => whatIsGround; set => whatIsGround = value; }
         private PlayerController Player => PlayerController.Instance;
         private float FacingValue => Player.FacingValue;
-        private float AirDrag => 1f - Player.PlayerData.Stats.AirDrag;
+        private float AirDrag => 1f - Player.PlayerData.Stats.airDrag;
         private Rigidbody2D Body => GetComponent<Rigidbody2D>();
         private bool Controllable => Player.Controllable;
-        private float HoldingAfterJump => Player.PlayerData.Stats.HoldingAfterJump;
-        private float DashSpeed => Player.PlayerData.Stats.DashSpeed;
-        private float JumpPower => Player.PlayerData.Stats.JumpPower;
-        private float MovementSpeed => Player.PlayerData.Stats.MovementSpeed;
+        private float HoldingAfterJump => Player.PlayerData.Stats.holdingAfterJump;
+        private float DashSpeed => Player.PlayerData.Stats.dashSpeed;
+        private float JumpPower => Player.PlayerData.Stats.jumpPower;
+        private float MovementSpeed => Player.PlayerData.Stats.movementSpeed;
         private Animator Animator => Player.Animator;
         private TrailRenderer DashTrail => Player.PlayerData.DashTrailRender;
-        private float DashCooldown => Player.PlayerData.Stats.DashCooldown;
+        private float DashCooldown => Player.PlayerData.Stats.dashCooldown;
         private float dashCooldownTimer;
         private float holdingAfterJumpTimer;
         private bool isJumping = false;

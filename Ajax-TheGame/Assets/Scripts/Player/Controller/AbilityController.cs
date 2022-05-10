@@ -3,6 +3,7 @@ using Core.Combat.Projectile;
 using Core.Player.Data;
 using Core.Util;
 using UnityEngine;
+
 namespace Core.Player.Controller
 {
     // description:
@@ -18,7 +19,7 @@ namespace Core.Player.Controller
         private float rayTimer;
         private PlayerController Player => PlayerController.Instance;
         private PlayerData PlayerData => Player.PlayerData;
-        private float RayCooldown => PlayerData.Stats.RayCooldown;
+        private float RayCooldown => PlayerData.Stats.rayCooldown;
         private int FacingValue => Player.FacingValue;
         public bool CanInvokeRay => rayTimer <= 0 && Player.Controllable;
 
@@ -112,7 +113,7 @@ namespace Core.Player.Controller
         {
             // make enemy damage
             Debug.Log("Hitting enemy at ray");
-            OnHit(other, PlayerData.Stats.RayDamage);
+            OnHit(other, PlayerData.Stats.rayDamage);
         }
 
         private void OnHit(Collider2D other, float damage)
