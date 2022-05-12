@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Core.Shared;
+﻿using Core.Player.Controller;
 using UnityEngine;
 
 
@@ -12,10 +10,10 @@ namespace Core.Effect
     public class HealthTaker : Effect
     {
         [SerializeField] int amount = 1;
-        public override void Apply(GameObject target)
+        public override void Apply(GameObject self, GameObject other)
         {
-            var controller = target.GetComponent<LifeController>();
-            controller?.TakeLife(amount);
+            var player = other.GetComponent<PlayerController>();
+            player?.Hurt(amount, self);
         }
     }
 }

@@ -1,21 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Core.Player.Controller;
 using Core.Shared;
 using UnityEngine;
 
 
 namespace Core.Effect
 {
-    // thought to add to elements in game
-    // that removes life to ajax
     [CreateAssetMenu(menuName = "Effect/HealthAdder")]
     public class HealthAdderEffect : Effect
     {
         [SerializeField] int amount = 1;
-        public override void Apply(GameObject target)
+        public override void Apply(GameObject other)
         {
-            var controller = target.GetComponent<LifeController>();
-            controller?.AddLife(amount);
+            var player = other.GetComponent<PlayerController>();
+            player?.Heal(amount);
         }
     }
 }
