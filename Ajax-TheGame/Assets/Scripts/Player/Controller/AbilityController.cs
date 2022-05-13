@@ -43,7 +43,7 @@ namespace Core.Player.Controller
                 OnPickUpPunch();
 
             if (Input.GetButton("Ray") && CanInvokeRay)
-                InvokeRay();
+                OnInvokeRay();
         }
 
         // TODO: work with hittable objects too
@@ -85,16 +85,21 @@ namespace Core.Player.Controller
             Punch.Enabled = false;
         }
 
+        private void OnInvokeRay()
+        {
+            PlayerController.Instance.OnShootRay();
+            rayTimer = RayCooldown;
+        }
+
         // pre: --
         // post: invoke an instance of ray projectile and sets its values
-        private void InvokeRay()
+        public void InvokeRay()
         {
             Vector2 force = Vector2.right * FacingValue * this.projectile.Speed;
             RayProjectile instance = Instantiate(projectile.Projectile, projectile.Origin.position, Quaternion.identity);
             instance.SetForce(force);
             instance.OnColliding += OnRayColliding;
             Disposable.Bind(instance.gameObject, projectile.Lifetime);
-            rayTimer = RayCooldown;
         }
 
         private void OnRayColliding(Collider2D other)

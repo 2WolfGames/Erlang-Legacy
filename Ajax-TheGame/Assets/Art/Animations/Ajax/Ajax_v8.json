@@ -1,12 +1,12 @@
 {
 "skeleton": {
-	"hash": "Dmzx39DJVrI",
+	"hash": "98n5tvvOha0",
 	"spine": "4.0.64",
 	"x": -167.8,
 	"y": 1.04,
 	"width": 305.88,
 	"height": 512.93,
-	"images": "../../images/",
+	"images": "../images/",
 	"audio": ""
 },
 "bones": [
@@ -103,6 +103,32 @@
 		}
 	}
 ],
+"events": {
+	"OnBlinkEnd": {},
+	"OnBlinkStart": {},
+	"OnDashEnd1": {},
+	"OnDashEnd2": {},
+	"OnDashEnd3": {},
+	"OnDashStart": {},
+	"OnDeathEnd": {},
+	"OnDeathStart": {},
+	"OnHitEnd": {},
+	"OnHitStart": {},
+	"OnIdleEnd": {},
+	"OnIdleStart": {},
+	"OnJumpEnd": {},
+	"OnJumpStart": {},
+	"OnLandEnd": {},
+	"OnLandStart": {},
+	"OnPunch": {},
+	"OnPunchEnd": {},
+	"OnPunchStart": {},
+	"OnRay": {},
+	"OnRayEnd": {},
+	"OnRayStart": {},
+	"OnRunEnd": {},
+	"OnRunStart": {}
+},
 "animations": {
 	"blink": {
 		"slots": {
@@ -218,7 +244,11 @@
 					{ "time": 0.3333, "color": "c06249ff" }
 				]
 			}
-		}
+		},
+		"events": [
+			{ "name": "OnBlinkStart" },
+			{ "time": 0.3333, "name": "OnBlinkEnd" }
+		]
 	},
 	"dash": {
 		"slots": {
@@ -346,7 +376,13 @@
 					{ "time": 0.5, "x": 0.21, "y": -9.78 }
 				]
 			}
-		}
+		},
+		"events": [
+			{ "name": "OnDashStart" },
+			{ "time": 0.2333, "name": "OnDashEnd1" },
+			{ "time": 0.4, "name": "OnDashEnd2" },
+			{ "time": 0.5, "name": "OnDashEnd3" }
+		]
 	},
 	"death": {
 		"bones": {
@@ -478,7 +514,11 @@
 					{ "value": 25.96 }
 				]
 			}
-		}
+		},
+		"events": [
+			{ "name": "OnDeathEnd" },
+			{ "time": 0.9, "name": "OnDeathEnd" }
+		]
 	},
 	"hit_backward": {
 		"bones": {
@@ -675,7 +715,11 @@
 					{ "time": 0.0333, "x": -6.08, "y": -4.63 }
 				]
 			}
-		}
+		},
+		"events": [
+			{ "name": "OnHitStart" },
+			{ "time": 0.3333, "name": "OnHitEnd" }
+		]
 	},
 	"hit_forward": {
 		"bones": {
@@ -858,7 +902,11 @@
 					{ "time": 0.3333 }
 				]
 			}
-		}
+		},
+		"events": [
+			{ "name": "OnHitStart" },
+			{ "time": 0.3333, "name": "OnHitEnd" }
+		]
 	},
 	"idle": {
 		"bones": {
@@ -906,7 +954,11 @@
 					{ "time": 2.6667 }
 				]
 			}
-		}
+		},
+		"events": [
+			{ "name": "OnIdleStart" },
+			{ "time": 2.6667, "name": "OnIdleEnd" }
+		]
 	},
 	"jump": {
 		"bones": {
@@ -1017,7 +1069,11 @@
 					{ "time": 0.6, "value": -23.61 }
 				]
 			}
-		}
+		},
+		"events": [
+			{ "name": "OnJumpStart" },
+			{ "time": 0.8, "name": "OnJumpEnd" }
+		]
 	},
 	"land": {
 		"bones": {
@@ -1120,7 +1176,11 @@
 					{ "time": 0.4, "y": -4.86 }
 				]
 			}
-		}
+		},
+		"events": [
+			{ "name": "OnLandStart" },
+			{ "time": 0.4667, "name": "OnLandEnd" }
+		]
 	},
 	"punch": {
 		"slots": {
@@ -1271,7 +1331,13 @@
 					{ "time": 0.5 }
 				]
 			}
-		}
+		},
+		"events": [
+			{ "name": "OnPunchStart" },
+			{ "time": 0.1, "name": "OnPunch" },
+			{ "time": 0.3333, "name": "OnPunch" },
+			{ "time": 0.5, "name": "OnPunchEnd" }
+		]
 	},
 	"ray": {
 		"slots": {
@@ -1423,7 +1489,12 @@
 					{ "time": 0.2333 }
 				]
 			}
-		}
+		},
+		"events": [
+			{ "name": "OnRayStart" },
+			{ "time": 0.0667, "name": "OnRay" },
+			{ "time": 0.3333, "name": "OnRayEnd" }
+		]
 	},
 	"run": {
 		"bones": {
@@ -1607,7 +1678,11 @@
 					{ "time": 0.7667, "x": -0.69 }
 				]
 			}
-		}
+		},
+		"events": [
+			{ "name": "OnRunStart" },
+			{ "time": 0.7667, "name": "OnRunEnd" }
+		]
 	}
 }
 }
