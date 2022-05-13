@@ -1,7 +1,7 @@
 ﻿
 using System;
 using Core.Combat;
-using Core.Util;
+using Core.Utility;
 using UnityEngine;
 
 namespace Core.Player.Data

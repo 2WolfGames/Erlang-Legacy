@@ -1,7 +1,7 @@
 ﻿using Core.Combat;
 using Core.Combat.Projectile;
 using Core.Player.Data;
-using Core.Util;
+using Core.Utility;
 using UnityEngine;
 
 namespace Core.Player.Controller

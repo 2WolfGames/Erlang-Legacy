@@ -1,8 +1,12 @@
 ﻿using System;
 using UnityEngine;
 
+
+// TODO: use health script component instead of local health state
+
 namespace Core.Combat
 {
+    [RequireComponent(typeof(Health))]
     public class Destroyable : Hittable
     {
         [SerializeField] int health = 10;

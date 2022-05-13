@@ -1,5 +1,5 @@
 ﻿using BehaviorDesigner.Runtime.Tasks;
-using Core.Util;
+using Core.Utility;
 using DG.Tweening;
 using UnityEngine;
 

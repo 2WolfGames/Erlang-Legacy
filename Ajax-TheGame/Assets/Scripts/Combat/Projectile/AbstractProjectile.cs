@@ -1,5 +1,5 @@
 ﻿using System;
-using Core.Util;
+using Core.Utility;
 using UnityEngine;
 
 // TODO: change action event to unity actions event

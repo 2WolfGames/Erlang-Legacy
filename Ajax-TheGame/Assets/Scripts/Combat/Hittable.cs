@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Core.Shared;
-using Core.Util;
+using Core.Utility;
 using DG.Tweening;
 using UnityEngine;
 
