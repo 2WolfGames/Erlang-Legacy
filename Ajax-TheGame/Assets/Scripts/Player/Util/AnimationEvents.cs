@@ -24,11 +24,13 @@ namespace Core.Player.Util
             Player.InvokeRay();
         }
 
-        public void OnRayStart(){
+        public void OnRayStart()
+        {
             Player.OnRayStarts();
         }
 
-        public void OnRayEnd(){
+        public void OnRayEnd()
+        {
             Player.OnRayEnd();
         }
 

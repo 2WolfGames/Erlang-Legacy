@@ -189,28 +189,33 @@ namespace Core.Player.Controller
             movementController.FaceDirection();
         }
 
-        public void OnDie(){
+        public void OnDie()
+        {
             controllable = false;
             Animator.SetTrigger(CharacterAnimations.Die);
         }
 
-        public void OnShootRay(){
+        public void OnShootRay()
+        {
             Animator.SetTrigger(CharacterAnimations.Ray);
         }
 
-        public void InvokeRay(){
+        public void InvokeRay()
+        {
             abilityController.InvokeRay();
         }
 
-        public void OnRayStarts(){
+        public void OnRayStarts()
+        {
             controllable = false;
             Body.velocity = Vector3.zero;
             Body.gravityScale = 0;
         }
 
-        public void OnRayEnd(){
+        public void OnRayEnd()
+        {
             controllable = true;
-            Body.gravityScale = 10; 
+            Body.gravityScale = 10;
         }
 
     }
