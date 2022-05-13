@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 8485586381444787730}
   - component: {fileID: 8485586380787330445}
   - component: {fileID: 1524649323625511173}
-  - component: {fileID: 8778974884775190802}
   m_Layer: 11
   m_Name: Slime IA
   m_TagString: Untagged
@@ -153,19 +152,6 @@ MonoBehaviour:
       Version: 1.6.6
   gizmoViewMode: 2
   showBehaviorDesignerGizmo: 1
---- !u!114 &8778974884775190802
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4273394739405257306}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da8a59f0ca7800a428165eade88fc65f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  life: 100
 --- !u!1 &6603502452507806086
 GameObject:
   m_ObjectHideFlags: 0
@@ -295,7 +281,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb8754acbbd52814fa7d02cbb56d19df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
+  healthTaker: {fileID: 11400000, guid: 2d266f964c0d82a4ab5028c0495f708d, type: 2}
 --- !u!1 &6603502452622309855
 GameObject:
   m_ObjectHideFlags: 0
