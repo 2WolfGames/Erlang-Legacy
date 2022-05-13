@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Core.Util
+namespace Core.Utility
 {
     // description:
     //  component to link to object in order to make object destroy in `lifetime`

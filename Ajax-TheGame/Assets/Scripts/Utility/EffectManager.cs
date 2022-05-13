@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Core.Util
+namespace Core.Utility
 {
     // description:
     //  component util link to object and make instances of 

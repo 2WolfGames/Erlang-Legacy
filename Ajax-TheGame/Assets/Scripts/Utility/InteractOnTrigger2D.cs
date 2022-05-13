@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Core.Util
+namespace Core.Utility
 {
     [RequireComponent(typeof(Collider2D))]
     public class InteractOnTrigger2D : MonoBehaviour

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Core.Util
+namespace Core.Utility
 {
     public enum ProtectionType
     {
