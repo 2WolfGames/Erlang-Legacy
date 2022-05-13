@@ -7,6 +7,5 @@ namespace Core.Player
     {
         public int HP;
         public int MaxHP;
-
     }
 }
