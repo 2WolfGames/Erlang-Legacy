@@ -4,7 +4,7 @@ using Core.Player.Util;
 using Core.Shared;
 using Core.Shared.Enum;
 using Core.UI.LifeBar;
-using Core.Util;
+using Core.Utility;
 using UnityEngine;
 
 namespace Core.Player.Controller
@@ -117,6 +117,18 @@ namespace Core.Player.Controller
             Hurt(damage, other);
         }
 
+        public void Heal()
+        {
+            // TODO: trigger heal animation && vfx
+            playerData.Health.HP++;
+        }
+
+        public void Heal(int hp)
+        {
+            // TODO: trigger heal animation && vfx
+            playerData.Health.HP += hp;
+        }
+
         // pre: --
         // post: applies damage to player. 1 unit of damage represent 1 unit of life taken
         public void Hurt(int damage, GameObject other)
@@ -125,13 +137,19 @@ namespace Core.Player.Controller
                 return;
 
             movementController.FreezeVelocity();
-            TakeLifes(damage);
-            ComputeSideHurtAnimation(other.transform);
+
+            HarmFul(other.transform, damage);
 
             if (shakeCameraOnHurt)
                 CameraManager.Instance?.ShakeCamera();
 
             OnRecoverStart();
+        }
+
+        private void HarmFul(Transform other, int hp)
+        {
+            TakeLifes(hp);
+            ComputeSideHurtAnimation(other.transform);
         }
 
         private void TakeLifes(int damage)
