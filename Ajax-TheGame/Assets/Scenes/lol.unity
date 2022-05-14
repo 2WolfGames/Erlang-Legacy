@@ -3567,7 +3567,7 @@ PrefabInstance:
     - target: {fileID: 6603502452738742729, guid: 65d664973c5b5e44a86d8e35e60f905e,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 65d664973c5b5e44a86d8e35e60f905e, type: 3}
@@ -4844,11 +4844,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Pink Wheeler
-      objectReference: {fileID: 0}
-    - target: {fileID: 8360874908278554632, guid: 7fe2604c84cd8f04eb887ecdc9e05a1e,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8360874908278554639, guid: 7fe2604c84cd8f04eb887ecdc9e05a1e,
         type: 3}

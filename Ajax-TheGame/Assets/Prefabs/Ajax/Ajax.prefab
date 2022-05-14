@@ -92,7 +92,6 @@ MonoBehaviour:
   shakeCameraOnHurt: 1
   controllable: 1
   inRecoverProcess: 0
-  isProtected: 0
   playerData:
     jumpParticles: {fileID: 8583723039670672985}
     dashTrailRender: {fileID: 7729203758757745403}
