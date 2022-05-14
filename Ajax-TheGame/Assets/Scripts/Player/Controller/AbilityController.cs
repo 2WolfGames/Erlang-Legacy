@@ -10,7 +10,7 @@ namespace Core.Player.Controller
     //   manages when abilities can be triggered
     public class AbilityController : MonoBehaviour
     {
-        [SerializeField] ProjectileData projectile;
+        [SerializeField] ProjectileData projectileData;
         [SerializeField] DamageAreaData damageAreas;
         [SerializeField] ParticleSystem punchParticle;
 
@@ -19,6 +19,10 @@ namespace Core.Player.Controller
         private float rayTimer;
         private PlayerController Player => PlayerController.Instance;
         private PlayerData PlayerData => Player.PlayerData;
+        private RayProjectile projectilePrefab => projectileData.Projectile;
+        private float projectileSpeed => projectileData.Speed;
+        private float projectileTimeout => projectileData.Lifetime;
+        private Transform projectileOrigin => projectileData.Origin;
         private float RayCooldown => PlayerData.Stats.rayCooldown;
         private int FacingValue => Player.FacingValue;
         public bool CanInvokeRay => rayTimer <= 0 && Player.Controllable;
@@ -42,35 +46,6 @@ namespace Core.Player.Controller
 
             if (Input.GetButton("Ray") && CanInvokeRay)
                 InvokeRay();
-        }
-
-        public void OnHit(Collider2D other)
-        {
-            var destroyable = other.GetComponent<Destroyable>();
-            var hittable = other.GetComponent<Hittable>();
-
-            if (destroyable)
-                OnHitDestroyable(destroyable);
-            else if (hittable)
-                OnHitHittable(hittable);
-        }
-
-        private void OnHitHittable(Hittable hittable)
-        {
-            Vector3 attackHitDirection = (hittable.transform.position - transform.position).normalized;
-            hittable.OnAttackHit(attackHitDirection);
-        }
-
-        private void OnHitDestroyable(Destroyable destroyable)
-        {
-            ApplyDamage(destroyable, 1);
-        }
-
-        private void ApplyDamage(Destroyable destroyable, int damage)
-        {
-            destroyable.OnDestroyed += () => Debug.Log($"enemy is dead {this.gameObject.name}");
-            var direction = Player.transform.position.x > destroyable.transform.position.x ? -1 : 1;
-            destroyable.OnAttackHit(Vector2.right * direction, damage); // TODO: set default hit damage
         }
 
         public void ActiveDashDamage()
@@ -98,14 +73,14 @@ namespace Core.Player.Controller
         }
 
         // pre: --
-        // post: invoke an instance of ray projectile and sets its values
+        // post: invoke an instance of ray projectilePrefab and sets its values
         private void InvokeRay()
         {
-            Vector2 force = Vector2.right * FacingValue * this.projectile.Speed;
-            RayProjectile instance = Instantiate(projectile.Projectile, projectile.Origin.position, Quaternion.identity);
+            Vector2 force = Vector2.right * FacingValue * projectileSpeed;
+            RayProjectile instance = Instantiate(projectilePrefab, projectileOrigin.position, Quaternion.identity);
             instance.SetForce(force);
             instance.OnColliding += OnRayColliding;
-            Disposable.Bind(instance.gameObject, projectile.Lifetime);
+            instance.gameObject.Disposable(projectileTimeout);
             rayTimer = RayCooldown;
         }
 

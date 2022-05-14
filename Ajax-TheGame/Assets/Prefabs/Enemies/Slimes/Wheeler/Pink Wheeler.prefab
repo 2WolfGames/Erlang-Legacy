@@ -123,8 +123,9 @@ GameObject:
   - component: {fileID: 8360874906966229927}
   - component: {fileID: 8360874906966229930}
   - component: {fileID: 8360874906966229924}
-  - component: {fileID: 1527764563603198400}
   - component: {fileID: 8360874906966229931}
+  - component: {fileID: 4658110378961452691}
+  - component: {fileID: 4059621133815565235}
   m_Layer: 11
   m_Name: Wheeler AI
   m_TagString: Untagged
@@ -187,29 +188,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.85
---- !u!114 &1527764563603198400
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8360874906966229920}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14a4d368972946e4baea90377f580f05, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hitType: 3
-  customHitEffect: {fileID: 0}
-  customHitSound: {fileID: 0}
-  hitColor: {r: 0.2, g: 0, b: 0, a: 1}
-  hitMaterial: {fileID: 0}
-  hitAnimation: {fileID: 0}
-  animator: {fileID: 0}
-  sprite: {fileID: 8360874906852120356}
-  hitShakeCamera: 0
-  recoilForce: 0
-  health: 2
 --- !u!114 &8360874906966229931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -289,6 +267,47 @@ MonoBehaviour:
       Version: 1.6.6
   gizmoViewMode: 2
   showBehaviorDesignerGizmo: 1
+--- !u!114 &4658110378961452691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8360874906966229920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11ca44a82fb5acc40b5cc39da6858587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 4
+--- !u!114 &4059621133815565235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8360874906966229920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14a4d368972946e4baea90377f580f05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitType: 3
+  customHitEffect: {fileID: 0}
+  customHitSound: {fileID: 0}
+  hitColor: {r: 0.2, g: 0, b: 0, a: 1}
+  hitMaterial: {fileID: 0}
+  hitAnimation: {fileID: 0}
+  animator: {fileID: 0}
+  sprite: {fileID: 0}
+  hitShakeCamera: 0
+  recoilForce: 0
+  OnDestroyed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRevived:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &8360874907238438405
 GameObject:
   m_ObjectHideFlags: 0
@@ -399,7 +418,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8360874908278554632}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 34.651604, y: -4.0595784, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

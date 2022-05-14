@@ -26,7 +26,7 @@ namespace Core.Utility
             effect.Play();
 
             var duration = effect.main.duration + effect.main.startLifetime.constantMax;
-            effect.gameObject.AddComponent<Disposable>().Lifetime = duration;
+            effect.gameObject.Disposable(duration);
         }
     }
 }

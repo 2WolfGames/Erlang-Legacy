@@ -141,8 +141,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c069eab55c8c52e48a1694f2b6db354a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile:
-    projectile: {fileID: 3112578304023649470, guid: c4740bcc5bc007640b0bb2cb7af30eac,
+  projectileData:
+    projectile: {fileID: 503972146821115021, guid: d69ef617df5756d42a789cc0ea7f80e2,
       type: 3}
     origin: {fileID: 5625281660130636832}
     speed: 20

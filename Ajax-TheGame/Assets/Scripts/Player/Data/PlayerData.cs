@@ -6,7 +6,6 @@ namespace Core.Player.Data
     [Serializable]
     public class PlayerData
     {
-        [Header("VFX")]
         [SerializeField] ParticleSystem jumpParticles;
         [SerializeField] TrailRenderer dashTrailRender;
         [SerializeField] Health health;

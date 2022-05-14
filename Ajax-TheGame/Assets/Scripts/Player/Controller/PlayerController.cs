@@ -13,13 +13,14 @@ namespace Core.Player.Controller
     {
         [SerializeField] bool shakeCameraOnHurt = true;
         [SerializeField] private bool controllable = true;
-        [SerializeField] private bool inRecoverProcess = false;
-        [SerializeField] private bool isProtected = true;
+        [SerializeField] public bool inRecoverProcess = false;
         [SerializeField] PlayerData playerData;
         private AbilityController abilityController => GetComponent<AbilityController>();
         private MovementController movementController => GetComponent<MovementController>();
         private FacingController facingController => GetComponent<FacingController>();
         private Protectable protectable => GetComponent<Protectable>();
+        private bool isDashing => movementController.IsDashing;
+        private float recoverTimeoutAfterHit => playerData.Stats.recoverTimeoutAfterHit;
         private bool blockingUI;
         public bool CanBeHit => protectable.CanBeHit;
         public int FacingValue => facingController.FacingToInt;
@@ -58,11 +59,6 @@ namespace Core.Player.Controller
 
             movementController.OnDashStarted += OnDashStarted;
             movementController.OnDashFinished += OnDashFinished;
-        }
-
-        public void Update()
-        {
-            isProtected = protectable.IsProtected;
         }
 
         // post: disable scripts that make damage
@@ -173,6 +169,8 @@ namespace Core.Player.Controller
             if (protectable.IsProtected)
                 return;
 
+            Debug.Log("on recover start");
+
             inRecoverProcess = true;
             protectable.SetProtection(ProtectionType.INFINITE);
             Animator.SetBool(CharacterAnimations.Blink, true);
@@ -182,20 +180,18 @@ namespace Core.Player.Controller
         // desc: to be called at end of recover animations with and event
         public void OnRecoverComplete()
         {
+            Debug.Log("on recover complete");
             controllable = true;
-            StartCoroutine(AfterHurtAnimation());
+            StartCoroutine(AfterRecoverComplete());
         }
 
         // pre:  after hurt animations & recover process running
         // post: trigger animations & and resets protection after few seconds
         //       if no dashing process is running, set character unprotected
-        private IEnumerator AfterHurtAnimation()
+        private IEnumerator AfterRecoverComplete()
         {
-            var timeout = PlayerData.Stats.recoverTimeoutAfterHit;
-            yield return new WaitForSeconds(timeout);
+            yield return new WaitForSeconds(recoverTimeoutAfterHit);
             inRecoverProcess = false;
-
-            var isDashing = movementController.IsDashing;
 
             if (!isDashing) // respects dashing protection
                 protectable.SetProtection(ProtectionType.NONE);

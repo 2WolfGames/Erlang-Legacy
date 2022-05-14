@@ -25,11 +25,6 @@ namespace Core.Player.Util
             Player.OnDashCompletes();
         }
 
-        public void OnDashStart()
-        {
-            // Debug.Log("event dash START");
-        }
-
         // pre: On recover start
         public void OnRecoverComplete()
         {

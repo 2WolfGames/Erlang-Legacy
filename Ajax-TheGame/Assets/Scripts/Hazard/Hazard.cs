@@ -17,7 +17,7 @@ namespace Core.Hazard
 
         // pre: --
         // post: returns true if current colliders is touching collider's player
-        bool IsTouchingPlayer()
+        private bool IsTouchingPlayer()
         {
             var myCollider = GetComponent<Collider2D>();
             var playerCollider = PlayerController.Instance.BodyCollider;
@@ -26,7 +26,7 @@ namespace Core.Hazard
 
         // pre: --
         // post: if current object is colliding with enemy applies damamge
-        void CheckCollision()
+        private void CheckCollision()
         {
             var player = PlayerController.Instance;
 
