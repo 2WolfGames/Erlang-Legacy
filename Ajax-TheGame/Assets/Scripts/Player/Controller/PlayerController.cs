@@ -57,34 +57,35 @@ namespace Core.Player.Controller
                 Destroy(gameObject);
             else Instance = this;
 
-            movementController.OnDashStarted += OnDashStarted;
-            movementController.OnDashFinished += OnDashFinished;
+            movementController.OnDashStart += OnDashStart;
+            movementController.OnDashFinish += () => Debug.Log("Finishes dashing");
         }
 
         // post: disable scripts that make damage
         //       and sets protection to false in case
         //       there is no recover process running
-        public void OnDashCompletes()
+        public void OnDashComplete()
         {
-            if (!inRecoverProcess) // respects recover process
-                protectable.SetProtection(ProtectionType.NONE);
             movementController.StopDashing();
+            AfterDashComplete();
         }
 
         // post: enables scripts that make damage
         //      and sets infinite protection
-        private void OnDashStarted()
+        private void OnDashStart()
         {
             controllable = false;
             protectable.SetProtection(ProtectionType.INFINITE);
             abilityController.ActiveDashDamage();
         }
 
-        private void OnDashFinished()
+        private void AfterDashComplete()
         {
             controllable = true;
             abilityController.DeactiveDashDamage();
-            protectable.SetProtection(ProtectionType.NONE);
+
+            if (!inRecoverProcess)
+                protectable.SetProtection(ProtectionType.NONE);
         }
 
         // pre: called by some function that stunds player (called by hit animation)
@@ -98,19 +99,9 @@ namespace Core.Player.Controller
         // pre: (called by hit end animation)
         // post: detach component logic scripts & freeze player
         // PROP: instead of freezing player we can make time slow 
-        private void OnBlockUI()
+        public void OnBlockUI()
         {
             Debug.Log("unfreeze game play");
-        }
-
-        // pre: --
-        // post: applies damage to player
-        public void OnCollision(GameObject other, int damage = 1)
-        {
-            if (protectable.IsProtected)
-                return;
-
-            Hurt(damage, other);
         }
 
         public void Heal()
@@ -133,19 +124,13 @@ namespace Core.Player.Controller
                 return;
 
             movementController.FreezeVelocity();
-
-            HarmFul(other.transform, damage);
+            TakeLifes(damage);
+            ComputeSideHurtAnimation(other.transform);
 
             if (shakeCameraOnHurt)
                 CameraManager.Instance?.ShakeCamera();
 
             OnRecoverStart();
-        }
-
-        private void HarmFul(Transform other, int hp)
-        {
-            TakeLifes(hp);
-            ComputeSideHurtAnimation(other.transform);
         }
 
         private void TakeLifes(int damage)
@@ -169,8 +154,6 @@ namespace Core.Player.Controller
             if (protectable.IsProtected)
                 return;
 
-            Debug.Log("on recover start");
-
             inRecoverProcess = true;
             protectable.SetProtection(ProtectionType.INFINITE);
             Animator.SetBool(CharacterAnimations.Blink, true);
@@ -180,7 +163,6 @@ namespace Core.Player.Controller
         // desc: to be called at end of recover animations with and event
         public void OnRecoverComplete()
         {
-            Debug.Log("on recover complete");
             controllable = true;
             StartCoroutine(AfterRecoverComplete());
         }
@@ -191,6 +173,7 @@ namespace Core.Player.Controller
         private IEnumerator AfterRecoverComplete()
         {
             yield return new WaitForSeconds(recoverTimeoutAfterHit);
+
             inRecoverProcess = false;
 
             if (!isDashing) // respects dashing protection

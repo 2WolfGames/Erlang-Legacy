@@ -52,8 +52,8 @@ namespace Core.Player.Controller
         public bool CanDash => !isDashing && dashCooldownTimer <= 0;
         public bool CanRun => !isDashing;
         public bool IsDashing => isDashing;
-        public Action OnDashStarted { get; set; }
-        public Action OnDashFinished { get; set; }
+        public Action OnDashStart { get; set; }
+        public Action OnDashFinish { get; set; }
         public float Acceleration { get; set; } = 1;
         public bool JustImpulsed { get; set; }
         public List<LayerMask> WhatEndsDash { get => whatEndsDash; private set => whatEndsDash = value; }
@@ -210,7 +210,7 @@ namespace Core.Player.Controller
             Body.velocity = Vector2.zero;
             Body.gravityScale = 0;
             Body.AddForce(Vector2.right * FacingValue * DashSpeed, ForceMode2D.Impulse);
-            OnDashStarted?.Invoke();
+            OnDashStart?.Invoke();
         }
 
         // pre: --
@@ -264,7 +264,7 @@ namespace Core.Player.Controller
             isDashing = false;
             DashTrail.widthMultiplier = 0;
             FreezeVelocity();
-            OnDashFinished?.Invoke();
+            OnDashFinish?.Invoke();
         }
 
         /// <sumary>

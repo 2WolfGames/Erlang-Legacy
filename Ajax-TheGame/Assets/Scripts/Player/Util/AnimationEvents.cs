@@ -22,7 +22,7 @@ namespace Core.Player.Util
         // pre: called at end of dash animation
         public void OnDashEnd()
         {
-            Player.OnDashCompletes();
+            Player.OnDashComplete();
         }
 
         // pre: On recover start
