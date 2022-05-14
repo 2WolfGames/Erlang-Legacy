@@ -4,31 +4,35 @@ namespace Core.Combat
 {
     public class Health : MonoBehaviour
     {
-        [Range(1, 10000)][SerializeField] int lifes = 100;
+        [Range(1, 10000)][SerializeField] int hp = 100;
+        private int startingHp;
+        public int HP { get => hp; set => hp = value; }
 
-        public int Life { get => lifes; set => lifes = value; }
-
-        /**
-            this fn returns true when
-            the state of lifes controller is less or equal zero
-
-            at that moment represents who ever 
-            use this class is dead
-        */
-        public bool TakeLife(int amount)
+        public void Awake()
         {
-            this.lifes -= amount;
-            return this.lifes <= 0;
+            this.startingHp = hp;
         }
 
-        public void AddLife(int amount)
+        public bool TakeHP(int amount)
         {
-            this.lifes += amount;
+            this.hp -= amount;
+            return this.hp <= 0;
         }
 
-        public void SetLifes(int lifes)
+        public void AddHP(int amount)
         {
-            this.lifes = lifes;
+            this.hp += amount;
+        }
+
+        public void SetHP(int hp)
+        {
+            this.hp = hp;
+            this.startingHp = this.hp;
+        }
+
+        public void Revive()
+        {
+            this.hp = this.startingHp;
         }
     }
 }

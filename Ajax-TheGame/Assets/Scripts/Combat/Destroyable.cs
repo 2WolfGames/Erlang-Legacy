@@ -1,26 +1,22 @@
 ﻿using System;
 using UnityEngine;
-
-
-// TODO: use health script component instead of local health state
+using UnityEngine.Events;
 
 namespace Core.Combat
 {
     [RequireComponent(typeof(Health))]
     public class Destroyable : Hittable
     {
-        [SerializeField] int health = 10;
-
-        public int CurrentHealth { get => health; set => health = value; }
+        private Health health => GetComponent<Health>();
+        private int CurrentHealth => health.HP;
         public bool Invincible { get; set; }
-        public bool IsDestroyed => health <= 0;
+        public bool IsDestroyed => health.HP <= 0;
         public bool IsAlive => !IsDestroyed;
-        public event Action OnDestroyed;
+        public UnityEvent OnDestroyed, OnRevived;
 
         public override void Awake()
         {
             base.Awake();
-            CurrentHealth = health;
             Invincible = false;
         }
 
@@ -36,16 +32,15 @@ namespace Core.Combat
 
         public void DealDamage(int damage)
         {
-            CurrentHealth -= damage;
-            if (CurrentHealth <= 0)
-            {
+            var destroyed = health.TakeHP(damage);
+            if (destroyed)
                 OnDestroyed?.Invoke();
-            }
         }
 
         public void Revive()
         {
-            CurrentHealth = health;
+            health.Revive();
+            OnRevived?.Invoke();
         }
     }
 }
