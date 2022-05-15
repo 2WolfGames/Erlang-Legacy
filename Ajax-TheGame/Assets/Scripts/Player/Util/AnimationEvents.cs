@@ -8,13 +8,17 @@ namespace Core.Player.Util
         private PlayerController Player => PlayerController.Instance;
 
         // pre: called at end of dash animation
-        public void OnDashEnd()
+        public void OnDashEnd1()
+        {
+            OnDashEnd();
+        }
+
+        private void OnDashEnd()
         {
             Player.OnDashCompletes();
         }
 
-        // pre: On recover start
-        public void OnRecoverComplete()
+        public void OnHitEnd()
         {
             Player.OnRecoverComplete();
         }
