@@ -6,6 +6,7 @@ namespace Core.Player.Util
     public class CharacterAnimations
     {
         public static readonly int Die = Animator.StringToHash("die");
+        public static readonly int Ray = Animator.StringToHash("ray");
         public static readonly int Punch = Animator.StringToHash("punch");
         public static readonly int Dash = Animator.StringToHash("dash");
         public static readonly int StartJump = Animator.StringToHash("jump");

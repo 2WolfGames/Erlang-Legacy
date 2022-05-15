@@ -113,7 +113,7 @@ namespace Core.GameSession
         //post: returns player to it's status of the last save
         public void ResetGameToSavePoint()
         {
-            PlayerController.Instance.Controllable = false;
+            PlayerController.Instance.OnDie();
 
             FindObjectOfType<InGameCanvas>()?.ActiveDeathImage();
             StartCoroutine(Loader.LoadWithDelay((SceneID)LoadSavedData(), 4));
