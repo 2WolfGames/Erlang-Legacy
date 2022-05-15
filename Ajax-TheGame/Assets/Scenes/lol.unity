@@ -4153,6 +4153,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5625281659813403152, guid: 3a92e288e57aab644a0656c959990934,
+        type: 3}
+      propertyPath: projectileData.speed
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 5625281659813403152, guid: 3a92e288e57aab644a0656c959990934,
+        type: 3}
+      propertyPath: projectileData.lifetime
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5625281659813403158, guid: 3a92e288e57aab644a0656c959990934,
         type: 3}
       propertyPath: m_RootOrder

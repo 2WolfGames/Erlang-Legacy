@@ -7,29 +7,37 @@ namespace Core.Player.Util
     {
         private PlayerController Player => PlayerController.Instance;
 
-        // desc: start of hit animation
-        public void FreezeAjax()
-        {
-            Player.Controllable = false;
-        }
-
-        // desc: end of hit animation
-        public void UnfreezeAjax()
-        {
-            Player.Controllable = true;
-        }
-
         // pre: called at end of dash animation
-        public void OnDashEnd()
+        public void OnDashEnd1()
+        {
+            OnDashEnd();
+        }
+
+        private void OnDashEnd()
         {
             Player.OnDashComplete();
         }
 
-        // pre: On recover start
-        public void OnRecoverComplete()
+        public void OnHitEnd()
         {
             Player.OnRecoverComplete();
         }
+
+        public void OnRay()
+        {
+            Player.InvokeRay();
+        }
+
+        public void OnRayStart()
+        {
+            Player.OnRayStarts();
+        }
+
+        public void OnRayEnd()
+        {
+            Player.OnRayEnd();
+        }
+
     }
 
 }

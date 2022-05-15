@@ -1,6 +1,7 @@
 ﻿using Core.Combat;
 using Core.Combat.Projectile;
 using Core.Player.Data;
+using Core.Player.Util;
 using Core.Utility;
 using UnityEngine;
 
@@ -25,6 +26,7 @@ namespace Core.Player.Controller
         private Transform projectileOrigin => projectileData.Origin;
         private float RayCooldown => PlayerData.Stats.rayCooldown;
         private int FacingValue => Player.FacingValue;
+        private Animator animator => Player.Animator;
         public bool CanInvokeRay => rayTimer <= 0 && Player.Controllable;
 
         public void Awake()
@@ -45,7 +47,7 @@ namespace Core.Player.Controller
                 OnPickUpPunch();
 
             if (Input.GetButton("Ray") && CanInvokeRay)
-                InvokeRay();
+                OnRayAnimationStart();
         }
 
         public void ActiveDashDamage()
@@ -72,16 +74,21 @@ namespace Core.Player.Controller
             Punch.enabled = false;
         }
 
-        // pre: --
-        // post: invoke an instance of ray projectilePrefab and sets its values
-        private void InvokeRay()
+        private void OnRayAnimationStart()
+        {
+            animator.SetTrigger(CharacterAnimations.Ray);
+            rayTimer = RayCooldown;
+        }
+
+        // pre: called by ray player animation
+        // post: invoke an instance of ray projectile and sets its values
+        public void InvokeRay()
         {
             Vector2 force = Vector2.right * FacingValue * projectileSpeed;
             RayProjectile instance = Instantiate(projectilePrefab, projectileOrigin.position, Quaternion.identity);
             instance.SetForce(force);
             instance.OnColliding += OnRayColliding;
             instance.gameObject.Disposable(projectileTimeout);
-            rayTimer = RayCooldown;
         }
 
         private void OnRayColliding(Collider2D other)
