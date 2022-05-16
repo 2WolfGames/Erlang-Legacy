@@ -1,6 +1,8 @@
 ﻿using System;
-using Core.Util;
+using Core.Utility;
 using UnityEngine;
+
+// TODO: change action event to unity actions event
 
 namespace Core.Combat.Projectile
 {
@@ -8,9 +10,9 @@ namespace Core.Combat.Projectile
     {
         public ParticleSystem explosionEffect;
         public AudioClip splatterSound;
+        public bool destroyAfterCollision = false;
 
         public GameObject Shooter { get; set; }
-        public bool DestroyOnColliding { get; set; } = false;
 
         protected Vector2 force;
 
@@ -32,7 +34,7 @@ namespace Core.Combat.Projectile
 
             EffectManager.Instance?.PlayOneShot(explosionEffect, transform.position);
 
-            if (DestroyOnColliding)
+            if (destroyAfterCollision)
                 Destroy(gameObject);
         }
 

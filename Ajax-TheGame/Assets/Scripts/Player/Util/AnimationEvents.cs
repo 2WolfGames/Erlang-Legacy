@@ -15,7 +15,7 @@ namespace Core.Player.Util
 
         private void OnDashEnd()
         {
-            Player.OnDashCompletes();
+            Player.OnDashComplete();
         }
 
         public void OnHitEnd()

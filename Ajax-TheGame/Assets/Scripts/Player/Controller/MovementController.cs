@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Core.Player.Util;
-using Core.Util.Data;
+using Core.Utility;
+using Core.Utility.Data;
 using UnityEngine;
 
 
@@ -14,28 +15,28 @@ namespace Core.Player.Controller
         [SerializeField] LayerMask whatIsGround;
         [SerializeField] List<LayerMask> whatEndsDash;
         [SerializeField] List<LayerMask> whatTriggersLand;
+        [SerializeField] private bool isDashing = false;
+        [SerializeField] private bool canJump = false;
         private float baseGravityScale;
         private Circle WallChecker { get => wallChecker; set => wallChecker = value; }
         private Circle LandChecker { get => landChecker; set => landChecker = value; }
         private LayerMask WhatIsGround { get => whatIsGround; set => whatIsGround = value; }
         private PlayerController Player => PlayerController.Instance;
         private float FacingValue => Player.FacingValue;
-        private float AirDrag => 1f - Player.PlayerData.Stats.AirDrag;
+        private float AirDrag => 1f - Player.PlayerData.Stats.airDrag;
         private Rigidbody2D Body => GetComponent<Rigidbody2D>();
         private bool Controllable => Player.Controllable;
-        private float HoldingAfterJump => Player.PlayerData.Stats.HoldingAfterJump;
-        private float DashSpeed => Player.PlayerData.Stats.DashSpeed;
-        private float JumpPower => Player.PlayerData.Stats.JumpPower;
-        private float MovementSpeed => Player.PlayerData.Stats.MovementSpeed;
+        private float HoldingAfterJump => Player.PlayerData.Stats.holdingAfterJump;
+        private float DashSpeed => Player.PlayerData.Stats.dashSpeed;
+        private float JumpPower => Player.PlayerData.Stats.jumpPower;
+        private float MovementSpeed => Player.PlayerData.Stats.movementSpeed;
         private Animator Animator => Player.Animator;
         private TrailRenderer DashTrail => Player.PlayerData.DashTrailRender;
-        private float DashCooldown => Player.PlayerData.Stats.DashCooldown;
+        private float DashCooldown => Player.PlayerData.Stats.dashCooldown;
         private float dashCooldownTimer;
         private float holdingAfterJumpTimer;
         private bool isJumping = false;
         private bool justJumped = false;
-        [SerializeField] private bool isDashing = false;
-        [SerializeField] private bool canJump = false;
         private Vector2 currentVelocity;
         private bool dashMidJump = false;
         public bool IsJumping => isJumping;
@@ -52,6 +53,7 @@ namespace Core.Player.Controller
         public bool CanRun => !isDashing;
         public bool IsDashing => isDashing;
         public Action OnDashStart { get; set; }
+        public Action OnDashFinish { get; set; }
         public float Acceleration { get; set; } = 1;
         public bool JustImpulsed { get; set; }
         public List<LayerMask> WhatEndsDash { get => whatEndsDash; private set => whatEndsDash = value; }
@@ -262,10 +264,13 @@ namespace Core.Player.Controller
             isDashing = false;
             DashTrail.widthMultiplier = 0;
             FreezeVelocity();
+            OnDashFinish?.Invoke();
         }
 
         /// <sumary>
         /// freze normal control for a certain time applying the impulse.
+        /// if anything had change its gravity, 
+        /// if anything had change its gravity, 
         /// if anything had change its gravity, 
         // the methods recover its firt local gravity scale
         /// <sumary>

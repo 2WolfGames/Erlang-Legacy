@@ -10,11 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4273394739405257309}
   - component: {fileID: 4273394739405257304}
-  - component: {fileID: 8778974884775190803}
-  - component: {fileID: 8778974884775190802}
-  - component: {fileID: 1524649323625511173}
-  - component: {fileID: 8485586380787330445}
   - component: {fileID: 8485586381444787730}
+  - component: {fileID: 8485586380787330445}
+  - component: {fileID: 1524649323625511173}
   m_Layer: 11
   m_Name: Slime IA
   m_TagString: Untagged
@@ -60,31 +58,51 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &8778974884775190803
-MonoBehaviour:
+--- !u!61 &8485586381444787730
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4273394739405257306}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e9dbff4a9c0d044bb696177586b982b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &8778974884775190802
-MonoBehaviour:
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.010679245, y: -0.011725426}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.2886772, y: 0.81704044}
+  m_EdgeRadius: 0
+--- !u!95 &8485586380787330445
+Animator:
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4273394739405257306}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da8a59f0ca7800a428165eade88fc65f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  life: 100
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: adc0dfcc9c5b0ae44841aa2e6c787886, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &1524649323625511173
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,55 +148,10 @@ MonoBehaviour:
         - {fileID: 6603502452917344638}
         - {fileID: 6603502452622309854}
         byteData: 00000000456e74727901005de0cc4338d78040000000000000000000000100000052657065617465720100000000005a5505434775617264206c6f6f70000000000000000000004265686176696f7244657369676e65722e52756e74696d652e536861726564496e74000000004265686176696f7244657369676e65722e52756e74696d652e536861726564426f6f6c014265686176696f7244657369676e65722e52756e74696d652e536861726564426f6f6c010200000053656c6563746f720100e09fc33f31abfa4200000000000000000000000000000300000053657175656e63650100f20557c308cecb420000000000000000000002000000040000004f6e204c696d697401005ef1ecc2182ff542000000000000000000000001000000000000010000009a99993e0001050000005363616c6520496e76657273650100f82f8942964e0343000000000000000000000600000057616c6b0100b052f542d8d214430000000000000000000000008040
-        byteDataArray: 
+        byteDataArray: 00000000456e74727901005de0cc4338d78040000000000000000000000100000052657065617465720100000000005a5505434775617264206c6f6f70000000000000000000004265686176696f7244657369676e65722e52756e74696d652e536861726564496e74000000004265686176696f7244657369676e65722e52756e74696d652e536861726564426f6f6c014265686176696f7244657369676e65722e52756e74696d652e536861726564426f6f6c010200000053656c6563746f720100e09fc33f31abfa4200000000000000000000000000000300000053657175656e63650100f20557c308cecb420000000000000000000002000000040000004f6e204c696d697401005ef1ecc2182ff542000000000000000000000001000000000000010000009a99993e0001050000005363616c6520496e76657273650100f82f8942964e0343000000000000000000000600000057616c6b0100b052f542d8d214430000000000000000000000008040
       Version: 1.6.6
   gizmoViewMode: 2
   showBehaviorDesignerGizmo: 1
---- !u!95 &8485586380787330445
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4273394739405257306}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: adc0dfcc9c5b0ae44841aa2e6c787886, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!61 &8485586381444787730
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4273394739405257306}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.010679245, y: -0.011725426}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.2886772, y: 0.81704044}
-  m_EdgeRadius: 0
 --- !u!1 &6603502452507806086
 GameObject:
   m_ObjectHideFlags: 0
@@ -308,7 +281,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb8754acbbd52814fa7d02cbb56d19df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
+  healthTaker: {fileID: 11400000, guid: 2d266f964c0d82a4ab5028c0495f708d, type: 2}
 --- !u!1 &6603502452622309855
 GameObject:
   m_ObjectHideFlags: 0

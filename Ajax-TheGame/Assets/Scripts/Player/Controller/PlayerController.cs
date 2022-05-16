@@ -4,7 +4,7 @@ using Core.Player.Util;
 using Core.Shared;
 using Core.Shared.Enum;
 using Core.UI.LifeBar;
-using Core.Util;
+using Core.Utility;
 using UnityEngine;
 
 namespace Core.Player.Controller
@@ -13,13 +13,14 @@ namespace Core.Player.Controller
     {
         [SerializeField] bool shakeCameraOnHurt = true;
         [SerializeField] private bool controllable = true;
-        [SerializeField] private bool inRecoverProcess = false;
-        [SerializeField] private bool isProtected = true;
+        [SerializeField] public bool inRecoverProcess = false;
         [SerializeField] PlayerData playerData;
         private AbilityController abilityController => GetComponent<AbilityController>();
         private MovementController movementController => GetComponent<MovementController>();
         private FacingController facingController => GetComponent<FacingController>();
         private Protectable protectable => GetComponent<Protectable>();
+        private bool isDashing => movementController.IsDashing;
+        private float recoverTimeoutAfterHit => playerData.Stats.recoverTimeoutAfterHit;
         private bool blockingUI;
         public bool CanBeHit => protectable.CanBeHit;
         public int FacingValue => facingController.FacingToInt;
@@ -54,38 +55,37 @@ namespace Core.Player.Controller
 
             if (matches.Length > 1)
                 Destroy(gameObject);
-            else
-                Instance = this;
+            else Instance = this;
 
             movementController.OnDashStart += OnDashStart;
-        }
-
-        public void Update()
-        {
-            isProtected = protectable.IsProtected;
-        }
-
-        // pre: --
-        // post: enables scripts that make damage
-        //      and sets infinite protection
-        private void OnDashStart()
-        {
-            protectable.SetProtection(float.PositiveInfinity);
-            controllable = false;
-            abilityController.ActiveDashDamage();
+            movementController.OnDashFinish += () => Debug.Log("Finishes dashing");
         }
 
         // post: disable scripts that make damage
         //       and sets protection to false in case
         //       there is no recover process running
-        public void OnDashCompletes()
+        public void OnDashComplete()
         {
-            if (!inRecoverProcess) // respects recover process
-                protectable.SetProtection(0f);
+            movementController.StopDashing();
+            AfterDashComplete();
+        }
 
+        // post: enables scripts that make damage
+        //      and sets infinite protection
+        private void OnDashStart()
+        {
+            controllable = false;
+            protectable.SetProtection(ProtectionType.INFINITE);
+            abilityController.ActiveDashDamage();
+        }
+
+        private void AfterDashComplete()
+        {
             controllable = true;
             abilityController.DeactiveDashDamage();
-            movementController.StopDashing();
+
+            if (!inRecoverProcess)
+                protectable.SetProtection(ProtectionType.NONE);
         }
 
         // pre: called by some function that stunds player (called by hit animation)
@@ -99,19 +99,21 @@ namespace Core.Player.Controller
         // pre: (called by hit end animation)
         // post: detach component logic scripts & freeze player
         // PROP: instead of freezing player we can make time slow 
-        private void OnBlockUI()
+        public void OnBlockUI()
         {
             Debug.Log("unfreeze game play");
         }
 
-        // pre: --
-        // post: applies damage to player
-        public void OnCollision(GameObject other, int damage = 1)
+        public void Heal()
         {
-            if (protectable.IsProtected)
-                return;
+            // TODO: trigger heal animation && vfx
+            playerData.Health.HP++;
+        }
 
-            Hurt(damage, other);
+        public void Heal(int hp)
+        {
+            // TODO: trigger heal animation && vfx
+            playerData.Health.HP += hp;
         }
 
         // pre: --
@@ -133,7 +135,6 @@ namespace Core.Player.Controller
 
         private void TakeLifes(int damage)
         {
-            //TODO: player life updates maybe to other class
             LifeBarController.Instance?.LoseLifes(damage);
             playerData.Health.HP = playerData.Health.HP - damage;
         }
@@ -154,7 +155,7 @@ namespace Core.Player.Controller
                 return;
 
             inRecoverProcess = true;
-            protectable.SetProtection(float.PositiveInfinity);
+            protectable.SetProtection(ProtectionType.INFINITE);
             Animator.SetBool(CharacterAnimations.Blink, true);
             controllable = false;
         }
@@ -163,20 +164,20 @@ namespace Core.Player.Controller
         public void OnRecoverComplete()
         {
             controllable = true;
-            StartCoroutine(AfterHurtAnimation());
+            StartCoroutine(AfterRecoverComplete());
         }
 
         // pre:  after hurt animations & recover process running
         // post: trigger animations & and resets protection after few seconds
         //       if no dashing process is running, set character unprotected
-        private IEnumerator AfterHurtAnimation()
+        private IEnumerator AfterRecoverComplete()
         {
-            var timeout = PlayerData.Stats.RecoverTimeoutAfterHit;
-            yield return new WaitForSeconds(timeout);
+            yield return new WaitForSeconds(recoverTimeoutAfterHit);
+
             inRecoverProcess = false;
 
-            if (!movementController.IsDashing) // respects dashing protection
-                protectable.SetProtection(0);
+            if (!isDashing) // respects dashing protection
+                protectable.SetProtection(ProtectionType.NONE);
 
             Animator.SetBool(CharacterAnimations.Blink, false);
         }
@@ -193,11 +194,6 @@ namespace Core.Player.Controller
         {
             controllable = false;
             Animator.SetTrigger(CharacterAnimations.Die);
-        }
-
-        public void OnShootRay()
-        {
-            Animator.SetTrigger(CharacterAnimations.Ray);
         }
 
         public void InvokeRay()

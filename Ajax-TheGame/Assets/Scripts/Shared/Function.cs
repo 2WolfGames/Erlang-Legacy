@@ -1,5 +1,7 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using Core.Shared.Enum;
+using DG.Tweening;
 using UnityEngine;
 
 namespace Core.Shared
@@ -70,6 +72,20 @@ namespace Core.Shared
         public static void RotateGameObject(Transform GameObjectTransform, float rotationAmount)
         {
             GameObjectTransform.Rotate(Vector3.forward * rotationAmount * Time.fixedDeltaTime);
+        }
+
+        // pre --
+        // post: kill active tweens in collection
+        public static void KillTweensThatStillAlive(List<Tween> tweens)
+        {
+            if (tweens == null)
+                return;
+
+            foreach (Tween tween in tweens)
+            {
+                if (tween.IsActive())
+                    tween.Kill();
+            }
         }
     }
 
