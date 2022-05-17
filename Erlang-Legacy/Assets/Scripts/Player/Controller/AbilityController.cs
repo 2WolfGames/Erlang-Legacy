@@ -2,6 +2,7 @@
 using Core.Player.Data;
 using Core.Player.Util;
 using Core.Utility;
+using DG.Tweening;
 using UnityEngine;
 
 
@@ -27,17 +28,16 @@ namespace Core.Player.Controller
         private float rayCooldown => PlayerData.Stats.rayCooldown;
         private int FacingValue => Player.FacingValue;
         private Animator animator => Player.Animator;
-        public bool CanInvokeRay => rayTimer <= 0 && Player.Controllable;
-
+        public bool CanInvokeRay => rayTimer <= 0 && controllable;
         private bool wannaPunch = false;
         private bool punching = false;
-        private bool shouldPunch => wannaPunch && !punching;
-        private bool shouldPickUpPunch => !wannaPunch;
+        private bool controllable => Player.Controllable;
+        private bool shouldFlurryPunches => wannaPunch && !punching && controllable;
 
         public void Awake()
         {
-            dashTrigger.enabled = false;
-            punchTrigger.enabled = false;
+            dashTrigger.Interact = false;
+            punchTrigger.Interact = false;
         }
 
         public void Update()
@@ -61,44 +61,44 @@ namespace Core.Player.Controller
 
         public void FixedUpdate()
         {
-            if (shouldPunch)
-            {
-                Punch();
-            }
-
-            if (shouldPickUpPunch)
-            {
-                PickUpPunch();
-            }
+            FlurryPuches();
         }
 
         public void ActiveDashDamage()
         {
             if (punchParticle)
                 punchParticle.Play();
-            dashTrigger.enabled = true;
+            dashTrigger.Interact = true;
         }
 
         public void DeactiveDashDamage()
         {
-            dashTrigger.enabled = false;
+            dashTrigger.Interact = false;
         }
 
-        private void Punch()
+        private void FlurryPuches()
         {
-            Debug.Log("punching...");
-            punchTrigger.enabled = true;
+            if (!shouldFlurryPunches)
+                return;
+
+            punchTrigger.Interact = true;
+            punching = true;
+
+            animator.SetTrigger(CharacterAnimations.FlurryPunches);
+
+            DOVirtual.DelayedCall(1f, PickUpPunch);
         }
 
         private void PickUpPunch()
         {
-            Debug.Log("not punching...");
-            punchTrigger.enabled = false;
+            punchTrigger.Interact = false;
+            punching = false;
         }
 
         public void OnPunchLand(Collider2D other)
         {
             Debug.Log("Punch land in enemy's face");
+            Debug.Log(other.name);
         }
 
         private void OnRayAnimationStart()

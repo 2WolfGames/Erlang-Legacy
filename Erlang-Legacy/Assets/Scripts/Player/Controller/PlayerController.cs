@@ -58,7 +58,6 @@ namespace Core.Player.Controller
             else Instance = this;
 
             movementController.OnDashStart += OnDashStart;
-            movementController.OnDashFinish += () => Debug.Log("Finishes dashing");
         }
 
         // post: disable scripts that make damage
