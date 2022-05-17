@@ -104,7 +104,7 @@ namespace Core.Player.Controller
             if (!Controllable)
                 return;
 
-            bool wannaDash = Input.GetButton("Dash");
+            bool wannaDash = Input.GetButton(CharacterActions.Dash);
             if (wannaDash) DoDash();
             else DoRun();
 
@@ -134,7 +134,7 @@ namespace Core.Player.Controller
             if (!CanRun)
                 return;
 
-            float horizontal = Input.GetAxis("Horizontal");
+            float horizontal = Input.GetAxis(CharacterActions.Run);
             float velocityX = horizontal * MovementSpeed * Acceleration; // (* aceleration => velocityModifier.x)
 
             if (!IsGrounded) // air drag avoid moving quick in the air 
@@ -169,7 +169,7 @@ namespace Core.Player.Controller
                 justJumped = true;
             };
 
-            if (Input.GetButtonDown("Jump") && CanJump) // button down, first key of jump
+            if (Input.GetButtonDown(CharacterActions.Jump) && CanJump) // button down, first key of jump
             {
                 isJumping = true;
                 holdingAfterJumpTimer = HoldingAfterJump;
@@ -178,7 +178,7 @@ namespace Core.Player.Controller
                 Animator.SetTrigger(CharacterAnimations.StartJump);
                 Animator.SetBool(CharacterAnimations.Jumping, isJumping);
             }
-            if (Input.GetButton("Jump") && CanHoldJump) // while jumping
+            if (Input.GetButton(CharacterActions.Jump) && CanHoldJump) // while jumping
             {
                 if (dashMidJump)
                 {
@@ -194,7 +194,7 @@ namespace Core.Player.Controller
                 }
                 else endJump();
             }
-            if (Input.GetButtonUp("Jump")) // end of jump
+            if (Input.GetButtonUp(CharacterActions.Jump)) // end of jump
                 endJump();
         }
 
