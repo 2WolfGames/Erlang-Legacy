@@ -7,52 +7,40 @@ namespace Core.Utility
     [RequireComponent(typeof(Collider2D))]
     public class InteractOnTrigger2D : MonoBehaviour
     {
-        public LayerMask layers;
-        public UnityEvent OnEnter, OnExit;
+        public Collider2DEvent OnEnter, OnStay, OnExit;
         protected Collider2D m_Collider;
 
         public void Awake()
         {
-            layers = LayerMask.NameToLayer("Everything");
             m_Collider = GetComponent<Collider2D>();
             m_Collider.isTrigger = true;
         }
 
-        void OnTriggerEnter2D(Collider2D other)
+        public void OnTriggerStay2D(Collider2D other)
         {
-            if(!enabled)
+            if (!enabled)
                 return;
-        
-            if (layers.Contains(other.gameObject))
-            {
-                ExecuteOnEnter(other);
-            }
+
+            Debug.Log("on stay");
         }
 
-        void OnTriggerExit2D(Collider2D other)
+        public void OnTriggerEnter2D(Collider2D other)
         {
-            if(!enabled)
+            if (!enabled)
                 return;
-        
-            if (layers.Contains(other.gameObject))
-            {
-                ExecuteOnExit(other);
-            }
+
+            OnEnter?.Invoke(other);
         }
 
-        protected virtual void ExecuteOnEnter(Collider2D other)
+        public void OnTriggerExit2D(Collider2D other)
         {
-            OnEnter.Invoke();
-        }
 
-        protected virtual void ExecuteOnExit(Collider2D other)
-        {
-            OnExit.Invoke();
-        }
+            Debug.Log("adios");
 
-        void OnDrawGizmos()
-        {
-            Gizmos.DrawIcon(transform.position, "InteractionTrigger", false);
+            if (!enabled)
+                return;
+
+            OnExit?.Invoke(other);
         }
     }
 }

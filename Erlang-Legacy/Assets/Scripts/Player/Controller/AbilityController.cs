@@ -29,6 +29,11 @@ namespace Core.Player.Controller
         private Animator animator => Player.Animator;
         public bool CanInvokeRay => rayTimer <= 0 && Player.Controllable;
 
+        private bool wannaPunch = false;
+        private bool punching = false;
+        private bool shouldPunch => wannaPunch && !punching;
+        private bool shouldPickUpPunch => !wannaPunch;
+
         public void Awake()
         {
             dashTrigger.enabled = false;
@@ -41,13 +46,30 @@ namespace Core.Player.Controller
                 rayTimer -= Time.deltaTime;
 
             if (Input.GetButtonDown(CharacterActions.Punch))
-                Punch();
+            {
+                wannaPunch = true;
+            }
 
             if (Input.GetButtonUp(CharacterActions.Punch))
-                PickUpPunch();
+            {
+                wannaPunch = false;
+            }
 
             if (Input.GetButton(CharacterActions.InvokeRay) && CanInvokeRay)
                 OnRayAnimationStart();
+        }
+
+        public void FixedUpdate()
+        {
+            if (shouldPunch)
+            {
+                Punch();
+            }
+
+            if (shouldPickUpPunch)
+            {
+                PickUpPunch();
+            }
         }
 
         public void ActiveDashDamage()
@@ -64,12 +86,19 @@ namespace Core.Player.Controller
 
         private void Punch()
         {
+            Debug.Log("punching...");
             punchTrigger.enabled = true;
         }
 
         private void PickUpPunch()
         {
+            Debug.Log("not punching...");
             punchTrigger.enabled = false;
+        }
+
+        public void OnPunchLand(Collider2D other)
+        {
+            Debug.Log("Punch land in enemy's face");
         }
 
         private void OnRayAnimationStart()
