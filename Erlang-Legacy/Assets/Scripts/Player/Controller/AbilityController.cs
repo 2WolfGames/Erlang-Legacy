@@ -19,20 +19,20 @@ namespace Core.Player.Controller
         private InteractOnTrigger2D dashTrigger => damageAreas.Dash;
         private InteractOnTrigger2D punchTrigger => damageAreas.Punch;
         private float rayTimer;
-        private PlayerController Player => PlayerController.Instance;
-        private PlayerData PlayerData => Player.PlayerData;
+        private PlayerController player => PlayerController.Instance;
+        private PlayerData PlayerData => player.PlayerData;
         private RayProjectile projectilePrefab => projectileData.Projectile;
         private float projectileSpeed => projectileData.Speed;
         private float projectileTimeout => projectileData.Lifetime;
         private Transform projectileOrigin => projectileData.Origin;
         private float rayCooldown => PlayerData.Stats.rayCooldown;
-        private int FacingValue => Player.FacingValue;
-        private Animator animator => Player.Animator;
+        private int FacingValue => player.FacingValue;
+        private Animator animator => player.Animator;
         public bool CanInvokeRay => rayTimer <= 0 && controllable;
         private bool wannaPunch = false;
-        private bool punching = false;
-        private bool controllable => Player.Controllable;
-        private bool shouldFlurryPunches => wannaPunch && !punching && controllable;
+        private bool flurryPunching = false;
+        private bool controllable => player.Controllable;
+        private bool canStartFlurryPunches => wannaPunch && !flurryPunching && controllable;
 
         public void Awake()
         {
@@ -68,6 +68,7 @@ namespace Core.Player.Controller
         {
             if (punchParticle)
                 punchParticle.Play();
+                
             dashTrigger.Interact = true;
         }
 
@@ -78,21 +79,44 @@ namespace Core.Player.Controller
 
         private void FlurryPuches()
         {
-            if (!shouldFlurryPunches)
-                return;
+            if (!canStartFlurryPunches) return;
 
-            punchTrigger.Interact = true;
-            punching = true;
-
-            animator.SetTrigger(CharacterAnimations.FlurryPunches);
-
-            DOVirtual.DelayedCall(1f, PickUpPunch);
+            animator.SetTrigger(CharacterAnimations.FlurryPunching);
         }
 
-        private void PickUpPunch()
+        // should be called at very first frame of flurry punching animation
+        public void OnFlurryPunchingStart()
         {
+            if (!controllable) return;
+
+            Debug.Log("Starting blast...");
+
+            flurryPunching = true;
+            player.Controllable = false;
+
+            FreezeMovementOnFlurryPunching();
+        }
+
+        // should be called at very last frame of flurry punching animation
+        public void OnFlurryPunchingEnd()
+        {
+            if (!flurryPunching) return;
+
+            Debug.Log("Ending blast...");
+
+            flurryPunching = false;
+            player.Controllable = true;
+        }
+
+        // should be called two times in flurry punching animation
+        public void OnFlurryPunchingPunch()
+        {
+            if (!flurryPunching) return;
+
+            Debug.Log("Punch");
+
             punchTrigger.Interact = false;
-            punching = false;
+            punchTrigger.Interact = true;
         }
 
         public void OnPunchLand(Collider2D other)
@@ -127,6 +151,11 @@ namespace Core.Player.Controller
         {
             // make enemy damage
             Debug.Log("Hitting enemy at ray");
+        }
+
+        public void FreezeMovementOnFlurryPunching()
+        {
+            player.FreezeMovement();
         }
 
     }

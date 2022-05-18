@@ -213,6 +213,11 @@ namespace Core.Player.Controller
             Body.gravityScale = 10;
         }
 
+        public void FreezeMovement()
+        {
+            movementController.FreezeVelocity();
+        }
+
     }
 }
 
