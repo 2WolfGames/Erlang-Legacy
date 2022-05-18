@@ -219,7 +219,7 @@ Rigidbody2D:
   m_GravityScale: 10
   m_Material: {fileID: 0}
   m_Interpolate: 1
-  m_SleepingMode: 1
+  m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!1 &5625281660130636833
@@ -322,10 +322,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d9d8b316172c9c4ead6645234fa9cdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layers:
+  interactEnabled: 0
+  uniqueExecutionPerObject: 0
+  layer:
     serializedVersion: 2
     m_Bits: 0
   OnEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  OnStay:
     m_PersistentCalls:
       m_Calls: []
   OnExit:
@@ -621,7 +626,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.04723072, y: 0.06410813}
+  m_Offset: {x: 0.21159935, y: 0.06410813}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -632,7 +637,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.0944614, y: 1.9104309}
+  m_Size: {x: 1.4231987, y: 1.9104309}
   m_EdgeRadius: 0
 --- !u!114 &1184085065
 MonoBehaviour:
@@ -646,12 +651,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d9d8b316172c9c4ead6645234fa9cdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layers:
+  interactEnabled: 0
+  uniqueExecutionPerObject: 1
+  layer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2048
   OnEnter:
     m_PersistentCalls:
       m_Calls: []
+  OnStay:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5625281659813403152}
+        m_MethodName: OnPunchLand
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Collider2D, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnExit:
     m_PersistentCalls:
       m_Calls: []

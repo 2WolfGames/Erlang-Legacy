@@ -10,16 +10,20 @@ namespace Core.Utility
     {
         [SerializeField] bool interactEnabled = false;
         [SerializeField] bool uniqueExecutionPerObject = false;
-        
-        public Collider2DEvent OnEnter, OnStay, OnExit;
+
+        public Collider2DEvent OnEnter, OnExit;
         protected Collider2D m_Collider;
         public bool Interact
         {
             get => interactEnabled;
             set
             {
-                CleanMemory();
                 interactEnabled = value;
+
+                if (m_Collider)
+                    m_Collider.enabled = interactEnabled;
+
+                if (interactEnabled) CleanMemory();
             }
         }
         private HashSet<GameObject> memmory = new HashSet<GameObject>();
@@ -30,36 +34,26 @@ namespace Core.Utility
             m_Collider.isTrigger = true;
         }
 
-        public void OnTriggerStay2D(Collider2D other)
-        {
-            if (!interactEnabled)
-                return;
-
-            if (uniqueExecutionPerObject && memmory.Contains(other.gameObject))
-                return;
-
-            memmory.Add(other.gameObject);
-
-            OnStay?.Invoke(other);
-        }
-
         public void OnTriggerEnter2D(Collider2D other)
         {
+            Debug.Log("on trigger enter");
+
             if (!interactEnabled)
                 return;
 
-            if (uniqueExecutionPerObject && memmory.Contains(other.gameObject))
+            if (uniqueExecutionPerObject && memmory.Contains(other.gameObject)) 
                 return;
 
             memmory.Add(other.gameObject);
 
-            OnEnter?.Invoke(other);
+            OnEnter?.Invoke(other.GetComponent<Collider2D>()); // FIXME: this is not working!!
         }
 
         public void OnTriggerExit2D(Collider2D other)
         {
+            Debug.Log("on trigger exit");
 
-            if (!interactEnabled)
+            if (!interactEnabled) 
                 return;
 
             if (memmory.Contains(other.gameObject))
@@ -72,8 +66,5 @@ namespace Core.Utility
         {
             memmory.Clear();
         }
-
-
-
     }
 }

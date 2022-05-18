@@ -68,7 +68,7 @@ namespace Core.Player.Controller
         {
             if (punchParticle)
                 punchParticle.Play();
-                
+
             dashTrigger.Interact = true;
         }
 
@@ -106,6 +106,8 @@ namespace Core.Player.Controller
 
             flurryPunching = false;
             player.Controllable = true;
+
+            punchTrigger.Interact = false;
         }
 
         // should be called two times in flurry punching animation
