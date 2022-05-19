@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NPCData : MonoBehaviour
+[System.Serializable]
+public class NPCData
 {
-    [SerializeField] string npcName;
+    public string npcName;
     
+    [TextArea(3,135)]
+    public string[] phrases;
+
 }

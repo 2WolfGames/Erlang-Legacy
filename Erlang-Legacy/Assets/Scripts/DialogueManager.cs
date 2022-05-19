@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class DialogueManager : MonoBehaviour
 {
+    public NPCData npcData;
     [SerializeField] Transform TalkPoint;
-
     private bool playerIn = false;
-
+    
+    
 
     // Update is called once per frame
     void Update()
     {
         if (playerIn) {
             if (Input.GetKeyDown(KeyCode.S)){
-                Debug.Log("talk to npc");
+                TriggerDialogue();
             }
         }
     }
@@ -28,5 +29,9 @@ public class DialogueManager : MonoBehaviour
         if (other.tag == "Player"){
             playerIn = false;
         }
+    }
+
+    private void TriggerDialogue(){
+        GetComponentInChildren<Dialogue>().DisplayText(npcData.npcName);
     }
 }
