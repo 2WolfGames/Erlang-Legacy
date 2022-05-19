@@ -26,6 +26,7 @@ namespace Core.Player.Controller
         public int FacingValue => facingController.FacingToInt;
         public PlayerData PlayerData { get => playerData; private set => playerData = value; }
         public bool IsGrounded => movementController.IsGrounded;
+        public Stats Stats => playerData.Stats;
         public bool BlockingUI
         {
             get => blockingUI;

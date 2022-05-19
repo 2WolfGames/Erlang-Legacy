@@ -322,15 +322,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d9d8b316172c9c4ead6645234fa9cdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactEnabled: 0
-  uniqueExecutionPerObject: 0
-  layer:
-    serializedVersion: 2
-    m_Bits: 0
   OnEnter:
-    m_PersistentCalls:
-      m_Calls: []
-  OnStay:
     m_PersistentCalls:
       m_Calls: []
   OnExit:
@@ -651,23 +643,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d9d8b316172c9c4ead6645234fa9cdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactEnabled: 0
-  uniqueExecutionPerObject: 1
-  layer:
-    serializedVersion: 2
-    m_Bits: 2048
   OnEnter:
-    m_PersistentCalls:
-      m_Calls: []
-  OnStay:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 5625281659813403152}
         m_MethodName: OnPunchLand
-        m_Mode: 2
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Collider2D, UnityEngine
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

@@ -1,4 +1,5 @@
-﻿using Core.Combat.Projectile;
+﻿using Core.Combat;
+using Core.Combat.Projectile;
 using Core.Player.Data;
 using Core.Player.Util;
 using Core.Utility;
@@ -33,6 +34,8 @@ namespace Core.Player.Controller
         private bool flurryPunching = false;
         private bool controllable => player.Controllable;
         private bool canStartFlurryPunches => wannaPunch && !flurryPunching && controllable;
+
+        private Stats playerStats => player.Stats;
 
         public void Awake()
         {
@@ -89,8 +92,6 @@ namespace Core.Player.Controller
         {
             if (!controllable) return;
 
-            Debug.Log("Starting blast...");
-
             flurryPunching = true;
             player.Controllable = false;
 
@@ -102,29 +103,25 @@ namespace Core.Player.Controller
         {
             if (!flurryPunching) return;
 
-            Debug.Log("Ending blast...");
-
             flurryPunching = false;
             player.Controllable = true;
-
-            punchTrigger.Interact = false;
         }
 
-        // should be called two times in flurry punching animation
+        // should be called after every punch in flurry punch animation
         public void OnFlurryPunchingPunch()
         {
             if (!flurryPunching) return;
 
-            Debug.Log("Punch");
-
-            punchTrigger.Interact = false;
             punchTrigger.Interact = true;
+
+            DOVirtual.DelayedCall(0.1f, () => punchTrigger.Interact = false);
         }
 
         public void OnPunchLand(Collider2D other)
         {
-            Debug.Log("Punch land in enemy's face");
-            Debug.Log(other.name);
+            Debug.Log($"Punch land in enemy's face {other.name}");
+            Destroyable destroyable = other.GetComponent<Destroyable>();
+            destroyable?.OnAttackHit(playerStats.punchDamage);
         }
 
         private void OnRayAnimationStart()

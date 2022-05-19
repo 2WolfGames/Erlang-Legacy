@@ -3010,7 +3010,6 @@ MonoBehaviour:
   animator: {fileID: 0}
   sprite: {fileID: 1832723949}
   hitShakeCamera: 0
-  recoilForce: 0
   OnDestroyed:
     m_PersistentCalls:
       m_Calls: []
@@ -3380,11 +3379,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Green Slime Worm
       objectReference: {fileID: 0}
-    - target: {fileID: 6094601837804205828, guid: aa0c7c06cc085ea4e8eac49cc253f26d,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6094601837804205831, guid: aa0c7c06cc085ea4e8eac49cc253f26d,
         type: 3}
       propertyPath: m_RootOrder
@@ -3571,18 +3565,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 65d664973c5b5e44a86d8e35e60f905e, type: 3}
---- !u!114 &997144344 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5625281659813403152, guid: 3a92e288e57aab644a0656c959990934,
-    type: 3}
-  m_PrefabInstance: {fileID: 1608572561}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c069eab55c8c52e48a1694f2b6db354a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1010465286 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8242193190072985616, guid: 0e821a2ba18245c408820dd339b504a5,
@@ -3689,7 +3671,6 @@ MonoBehaviour:
   animator: {fileID: 0}
   sprite: {fileID: 567118286}
   hitShakeCamera: 0
-  recoilForce: 0
 --- !u!50 &1045254960
 Rigidbody2D:
   serializedVersion: 4
@@ -4165,30 +4146,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1184085065, guid: 3a92e288e57aab644a0656c959990934, type: 3}
-      propertyPath: OnEnter.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1184085065, guid: 3a92e288e57aab644a0656c959990934, type: 3}
-      propertyPath: OnEnter.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1184085065, guid: 3a92e288e57aab644a0656c959990934, type: 3}
-      propertyPath: OnEnter.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 997144344}
-    - target: {fileID: 1184085065, guid: 3a92e288e57aab644a0656c959990934, type: 3}
-      propertyPath: OnEnter.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1184085065, guid: 3a92e288e57aab644a0656c959990934, type: 3}
-      propertyPath: OnEnter.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnPunchLand
-      objectReference: {fileID: 0}
-    - target: {fileID: 1184085065, guid: 3a92e288e57aab644a0656c959990934, type: 3}
-      propertyPath: OnEnter.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Collider2D, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 5625281659813403158, guid: 3a92e288e57aab644a0656c959990934,
         type: 3}
       propertyPath: m_RootOrder
@@ -4359,38 +4316,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae9181e28c8d6f44c97c082e3e1e51b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1792395328 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6094601838065926877, guid: aa0c7c06cc085ea4e8eac49cc253f26d,
-    type: 3}
-  m_PrefabInstance: {fileID: 882305472}
-  m_PrefabAsset: {fileID: 0}
---- !u!61 &1792395332
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1792395328}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
 --- !u!1001 &1821256301
 PrefabInstance:
   m_ObjectHideFlags: 0
