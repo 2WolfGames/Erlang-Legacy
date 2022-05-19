@@ -67,17 +67,22 @@ namespace Core.Player.Controller
             FlurryPuches();
         }
 
-        public void ActiveDashDamage()
+        public void OnDashComplete()
+        {
+            dashTrigger.Interact = false;
+        }
+
+        public void OnDashStart()
+        {
+            ActiveDashDamage();
+        }
+
+        private void ActiveDashDamage()
         {
             if (punchParticle)
                 punchParticle.Play();
 
             dashTrigger.Interact = true;
-        }
-
-        public void DeactiveDashDamage()
-        {
-            dashTrigger.Interact = false;
         }
 
         private void FlurryPuches()
@@ -122,6 +127,13 @@ namespace Core.Player.Controller
             Debug.Log($"Punch land in enemy's face {other.name}");
             Destroyable destroyable = other.GetComponent<Destroyable>();
             destroyable?.OnAttackHit(playerStats.punchDamage);
+        }
+
+        public void OnSpearLand(Collider2D other)
+        {
+            Debug.Log($"Spear land in enemy's face {other.name}");
+            Destroyable destroyable = other.GetComponent<Destroyable>();
+            destroyable?.OnAttackHit(playerStats.dashDamage);
         }
 
         private void OnRayAnimationStart()
