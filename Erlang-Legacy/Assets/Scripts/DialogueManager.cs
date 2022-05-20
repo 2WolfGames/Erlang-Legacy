@@ -7,8 +7,6 @@ public class DialogueManager : MonoBehaviour
     public NPCData npcData;
     [SerializeField] Transform TalkPoint;
     private bool playerIn = false;
-    
-    
 
     // Update is called once per frame
     void Update()
@@ -32,6 +30,6 @@ public class DialogueManager : MonoBehaviour
     }
 
     private void TriggerDialogue(){
-        GetComponentInChildren<Dialogue>().DisplayText(npcData.npcName);
+        GetComponentInChildren<Dialogue>().DisplayText(npcData);
     }
 }
