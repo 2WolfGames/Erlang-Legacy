@@ -42,8 +42,8 @@ namespace Core.GameSession
         {
             var player = PlayerController.Instance;
             //facing player
-            PlayerFacing facing = spawnPoint.position.x - entrancePoint.position.x > 0
-            ? PlayerFacing.Left : PlayerFacing.Right;
+            Face facing = spawnPoint.position.x - entrancePoint.position.x > 0
+            ? Face.Left : Face.Right;
             player.SetFacing(facing);
             //positioning
             player.transform.position = spawnPoint.position;

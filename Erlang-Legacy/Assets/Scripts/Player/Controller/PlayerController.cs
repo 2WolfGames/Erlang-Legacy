@@ -177,10 +177,10 @@ namespace Core.Player.Controller
         }
 
         //pre: --
-        //post: faces player = playerFacing
-        public void SetFacing(PlayerFacing playerFacing)
+        //post: faces player = Face
+        public void SetFacing(Face Face)
         {
-            facingController.SetFacing(playerFacing);
+            facingController.SetFacing(Face);
             movementController.FaceDirection();
         }
 

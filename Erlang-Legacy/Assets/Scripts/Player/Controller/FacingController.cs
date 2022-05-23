@@ -5,7 +5,7 @@ namespace Core.Player.Controller
 {
     public class FacingController : MonoBehaviour
     {
-        public PlayerFacing Facing { get; private set; }
+        public Face Facing { get; private set; }
 
         public int FacingToInt { get => (int)Facing * 2 - 1; }
 
@@ -16,15 +16,15 @@ namespace Core.Player.Controller
                 return;
 
             if (input < 0)
-                Facing = PlayerFacing.Left;
-            else Facing = PlayerFacing.Right;
+                Facing = Face.Left;
+            else Facing = Face.Right;
         }
 
         //pre: --
-        //post: sets playerFacing
-        public void SetFacing(PlayerFacing playerFacing)
+        //post: sets Face
+        public void SetFacing(Face facing)
         {
-            Facing = playerFacing;
+            Facing = facing;
         }
 
     }
