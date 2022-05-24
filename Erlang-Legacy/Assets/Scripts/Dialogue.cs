@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using TMPro;
 using DG.Tweening;
@@ -14,8 +15,10 @@ public class Dialogue : MonoBehaviour
     [SerializeField] TextMeshProUGUI converationField;
     private Animator animator => GetComponent<Animator>();
     private Queue<string> phrases;
+    private bool settingUp = false; //?
     private bool displayingSentences = false;
     private bool phraseEnded = true;
+    private bool endPhrase = false;
 
     void Start()
     {
@@ -26,19 +29,29 @@ public class Dialogue : MonoBehaviour
 
     void Update()
     {
-        if (displayingSentences && phraseEnded)
+        if (settingUp)
+            return;
+
+        if (displayingSentences & Input.GetKeyDown(KeyCode.S))
         {
-            if (Input.GetKeyDown(KeyCode.S))
+            if (phraseEnded)
             {
                 DisplayNextSentence();
             }
+            else
+            {
+                endPhrase = true;
+            }
         }
+
     }
 
     public void DisplayText(NPCData npcData)
     {
-        if (displayingSentences)
+        if (displayingSentences || settingUp)
             return;
+        
+        settingUp = true;
 
         phrases.Clear();
         foreach (string phrase in npcData.phrases)
@@ -54,17 +67,13 @@ public class Dialogue : MonoBehaviour
         if (phrases.Count > 0)
         {
             phraseEnded = false;
+
+            nextSentenceIndicator.DOKill();
+            nextSentenceIndicator.color = ColorVisible(false, nextSentenceIndicator.color);
+
             string currentSentence = phrases.Dequeue();
-
-            nextSentenceIndicator.DOFade(0,0.01f);
-            converationField.text = currentSentence;
-
-            nextSentenceIndicator.DOFade(1, 1f).OnComplete(
-                () =>
-                {
-                    phraseEnded = true;
-                }
-            );
+            converationField.text = string.Empty;
+            StartCoroutine(DisplayPhrase(currentSentence));
         }
         else
         {
@@ -72,32 +81,80 @@ public class Dialogue : MonoBehaviour
         }
     }
 
+    private IEnumerator DisplayPhrase(string currentSentence)
+    {
+        if (endPhrase)
+        {
+            phraseEnded = true;
+            converationField.text = currentSentence;
+        }
+        else
+        {
+            yield return new WaitForSeconds(0.01f);
+            converationField.text = currentSentence.Substring(0, converationField.text.Length + 1);
+        }
+
+        if (currentSentence.Length == converationField.text.Length)
+        {
+            phraseEnded = true;
+            if (phrases.Count == 0)
+            {
+                nextSentenceIndicator.transform.rotation = Quaternion.Euler(new Vector3(0, 0, -90));
+            }
+            else
+            {
+                nextSentenceIndicator.transform.rotation = Quaternion.identity;
+            }
+            nextSentenceIndicator.DOFade(1, endPhrase ? 0f : 1f);
+        }
+        else
+        {
+            StartCoroutine(DisplayPhrase(currentSentence));
+        }
+
+        endPhrase = false;
+    }
+
     private void OpenDialogue(string name)
     {
-        displayingSentences = true;
-        phraseEnded = false;
-        SetChildrenVisibility(true);
+        nameField.color = ColorVisible(false, nameField.color);
+        nameField.text = name;
         animator.SetTrigger("open_dialogue");
     }
 
-    public void OnDialogueOpened(){
-        nameField.text = name;
+    public void OnDialogueOpened()
+    {
+        nameField.color = ColorVisible(true, nameField.color);
+        displayingSentences = true;
+        settingUp = false;
+        phraseEnded = false;
         DisplayNextSentence();
     }
 
     private void CloseDialogue()
     {
-        displayingSentences = false;
+        nextSentenceIndicator.DOKill();
+        animator.SetTrigger("close_dialogue");
+        nextSentenceIndicator.color = ColorVisible(false, nextSentenceIndicator.color);
         nameField.text = string.Empty;
         converationField.text = string.Empty;
-        animator.SetTrigger("close_dialogue");
     }
 
-    private void SetChildrenVisibility(bool isVisible){
-        nameField.enabled = isVisible;
-        converationField.enabled = isVisible;
-        bubble.enabled = isVisible;
-        bubblePointer.enabled = isVisible;
+    public void OnDialogueClosed(){
+        displayingSentences = false;
+    }
+
+    private Color ColorVisible(bool makeVisible, Color c)
+    {
+        if (makeVisible)
+        {
+            c.a = 1f;
+        }
+        else
+        {
+            c.a = 0f;
+        }
+        return c;
     }
 
 }
