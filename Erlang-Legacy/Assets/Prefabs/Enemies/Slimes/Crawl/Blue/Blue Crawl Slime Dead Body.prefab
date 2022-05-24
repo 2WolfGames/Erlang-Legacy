@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3367465785591764847}
   - component: {fileID: -1684461305348281070}
   - component: {fileID: -3465418770303530552}
+  - component: {fileID: 922993849}
   m_Layer: 15
   m_Name: Blue Crawl Slime Dead Body
   m_TagString: Untagged
@@ -130,3 +131,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.225, y: 0.85}
   m_EdgeRadius: 0
+--- !u!114 &922993849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3367465785591764833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd254ce9327dcab488fdff70821f6323, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  power: 5
+  direction: {x: 0, y: 1}

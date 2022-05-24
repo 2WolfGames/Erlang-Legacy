@@ -13,7 +13,8 @@ namespace Core.Combat.IA.Action
         [SerializeField] ParticleSystem bleedEffect;
         [SerializeField] float bleedDuration;
         [SerializeField] SpriteRenderer deadBody;
-        private bool destroyTaskCompleted;
+
+        private bool completed = false;
 
         public override void OnStart()
         {
@@ -34,25 +35,20 @@ namespace Core.Combat.IA.Action
                     SpawnDeadBody();
                 }
 
-                destroyTaskCompleted = true;
+                completed = true;
                 Object.Destroy(gameObject);
             });
         }
 
         public override TaskStatus OnUpdate()
         {
-            return destroyTaskCompleted ? TaskStatus.Success : TaskStatus.Running;
+            return completed ? TaskStatus.Success : TaskStatus.Running;
         }
 
         private void SpawnDeadBody()
         {
             var facing = transform.localScale.x < 0 ? SharedEnum.Face.Left : SharedEnum.Face.Right;
-            DeadBodiesManager.Instance?.Spawn(deadBody, transform.position, facing, Vector2.up * ComputeScaleForce());
-        }
-
-        private float ComputeScaleForce()
-        {
-            return 10f;
+            DeadBodiesManager.Instance?.Spawn(deadBody, transform.position, facing);
         }
     }
 }

@@ -1,4 +1,5 @@
 using Core.Shared.Enum;
+using DG.Tweening;
 using UnityEngine;
 
 namespace Core.Utility
@@ -24,18 +25,6 @@ namespace Core.Utility
         {
             var instance = Instantiate(sprite, position, facing == Face.Left ? Quaternion.Euler(0, -180, 0) : Quaternion.identity);
             AddToBodiesCollector(instance.gameObject);
-        }
-
-        public void Spawn(SpriteRenderer sprite, Vector2 position, Face facing, Vector2 throwForce)
-        {
-            var instance = Instantiate(sprite, position, facing == Face.Left ? Quaternion.Euler(0, -180, 0) : Quaternion.identity);
-            AddToBodiesCollector(instance.gameObject);
-            if (!instance.GetComponent<Rigidbody2D>())
-            {
-                instance.gameObject.AddComponent<Rigidbody2D>();
-            }
-            var rb = instance.GetComponent<Rigidbody2D>();
-            rb.AddForce(throwForce, ForceMode2D.Impulse);
         }
 
         private void AddToBodiesCollector(GameObject other)
