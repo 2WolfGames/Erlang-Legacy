@@ -254,6 +254,9 @@ GameObject:
   - component: {fileID: 6094601838065926876}
   - component: {fileID: 6094601838065926878}
   - component: {fileID: 6094601838065926879}
+  - component: {fileID: 1792395332}
+  - component: {fileID: 1792395333}
+  - component: {fileID: 1792395334}
   m_Layer: 11
   m_Name: Worm AI
   m_TagString: Untagged
@@ -362,6 +365,72 @@ MonoBehaviour:
       Version: 1.6.6
   gizmoViewMode: 2
   showBehaviorDesignerGizmo: 1
+--- !u!61 &1792395332
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6094601838065926877}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!114 &1792395333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6094601838065926877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14a4d368972946e4baea90377f580f05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitType: 3
+  customHitEffect: {fileID: 0}
+  customHitSound: {fileID: 0}
+  hitColor: {r: 0.2, g: 0, b: 0, a: 1}
+  hitMaterial: {fileID: 0}
+  hitAnimation: {fileID: 0}
+  animator: {fileID: 0}
+  sprite: {fileID: 6094601837469847227}
+  hitShakeCamera: 0
+  OnDestroyed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRevived:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1792395334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6094601838065926877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11ca44a82fb5acc40b5cc39da6858587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 10
 --- !u!1 &6094601838863054687
 GameObject:
   m_ObjectHideFlags: 0

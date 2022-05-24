@@ -20,14 +20,14 @@ namespace Core.Combat
             Invincible = false;
         }
 
-        public void OnAttackHit(Vector2 hitDirection, int damage)
+        public void OnAttackHit(int damage, GameObject aggressor = null)
         {
             if (CurrentHealth <= 0 || Invincible)
                 return;
 
             DealDamage(damage);
 
-            base.OnAttackHit(hitDirection); // Order of this call is important
+            base.OnAttackHit(aggressor); 
         }
 
         public void DealDamage(int damage)

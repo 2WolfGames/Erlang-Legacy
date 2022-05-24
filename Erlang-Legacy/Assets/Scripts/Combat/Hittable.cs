@@ -27,7 +27,6 @@ namespace Core.Combat
         [SerializeField] Animator animator;
         [SerializeField] SpriteRenderer sprite;
         [SerializeField] bool hitShakeCamera;
-        [SerializeField] float recoilForce;
         protected Vector2 baseScale;
         protected Color baseColor;
         protected Material baseMaterial;
@@ -43,7 +42,7 @@ namespace Core.Combat
             Init();
         }
 
-        public void OnAttackHit(Vector2 attackHitDirection)
+        public void OnAttackHit(GameObject aggressor = null)
         {
             OnHit?.Invoke();
 

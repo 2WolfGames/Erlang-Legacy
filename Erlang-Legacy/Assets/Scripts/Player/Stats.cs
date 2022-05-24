@@ -13,9 +13,9 @@ namespace Core.Player
 
 
         [Header("Damage")]
-        public float dashDamage;
-        public float rayDamage; // how much damage ray does
-        public float punchDamage;
+        public int dashDamage;
+        public int rayDamage; // how much damage ray does
+        public int punchDamage;
 
 
         [Header("Cooldown or events duration")]

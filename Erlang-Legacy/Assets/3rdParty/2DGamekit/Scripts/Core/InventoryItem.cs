@@ -50,7 +50,6 @@ namespace Gamekit2D
                 }
 
                 if (clip) AudioSource.PlayClipAtPoint(clip, transform.position);
-
             }
         }
 
