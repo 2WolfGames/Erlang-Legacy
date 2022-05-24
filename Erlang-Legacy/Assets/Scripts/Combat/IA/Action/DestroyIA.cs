@@ -12,15 +12,8 @@ namespace Core.Combat.IA.Action
         [SerializeField] ParticleSystem exploteEffect;
         [SerializeField] ParticleSystem bleedEffect;
         [SerializeField] float bleedDuration;
-        [SerializeField] bool spawnDeadBody;
+        [SerializeField] SpriteRenderer deadBody;
         private bool destroyTaskCompleted;
-        private DeadBodySpawner deadBodySpawner;
-
-        public override void OnAwake()
-        {
-            deadBodySpawner = GetComponent<DeadBodySpawner>();
-            base.OnAwake();
-        }
 
         public override void OnStart()
         {
@@ -36,10 +29,9 @@ namespace Core.Combat.IA.Action
                     EffectManager.Instance?.PlayOneShot(exploteEffect, transform.position);
                 }
 
-                if (spawnDeadBody)
+                if (deadBody)
                 {
-                    SharedEnum.Face facing = transform.localScale.x < 0 ? SharedEnum.Face.Left : SharedEnum.Face.Right;
-                    deadBodySpawner?.Spawn(transform.position, facing, Vector2.right * 10 * Vector2.up);
+                    SpawnDeadBody();
                 }
 
                 destroyTaskCompleted = true;
@@ -52,5 +44,15 @@ namespace Core.Combat.IA.Action
             return destroyTaskCompleted ? TaskStatus.Success : TaskStatus.Running;
         }
 
+        private void SpawnDeadBody()
+        {
+            var facing = transform.localScale.x < 0 ? SharedEnum.Face.Left : SharedEnum.Face.Right;
+            DeadBodiesManager.Instance?.Spawn(deadBody, transform.position, facing, Vector2.up * ComputeScaleForce());
+        }
+
+        private float ComputeScaleForce()
+        {
+            return 10f;
+        }
     }
 }
