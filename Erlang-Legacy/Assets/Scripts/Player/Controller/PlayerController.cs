@@ -26,6 +26,7 @@ namespace Core.Player.Controller
         public int FacingValue => facingController.FacingToInt;
         public PlayerData PlayerData { get => playerData; private set => playerData = value; }
         public bool IsGrounded => movementController.IsGrounded;
+        public Stats Stats => playerData.Stats;
         public bool BlockingUI
         {
             get => blockingUI;
@@ -58,16 +59,18 @@ namespace Core.Player.Controller
             else Instance = this;
 
             movementController.OnDashStart += OnDashStart;
-            movementController.OnDashFinish += () => Debug.Log("Finishes dashing");
         }
 
-        // post: disable scripts that make damage
-        //       and sets protection to false in case
-        //       there is no recover process running
+        // called when dash animation ends
         public void OnDashComplete()
         {
             movementController.StopDashing();
-            AfterDashComplete();
+            abilityController.OnDashComplete();
+
+            controllable = true;
+
+            if (!inRecoverProcess)
+                protectable.SetProtection(ProtectionType.NONE);
         }
 
         // post: enables scripts that make damage
@@ -76,16 +79,7 @@ namespace Core.Player.Controller
         {
             controllable = false;
             protectable.SetProtection(ProtectionType.INFINITE);
-            abilityController.ActiveDashDamage();
-        }
-
-        private void AfterDashComplete()
-        {
-            controllable = true;
-            abilityController.DeactiveDashDamage();
-
-            if (!inRecoverProcess)
-                protectable.SetProtection(ProtectionType.NONE);
+            abilityController.OnDashStart();
         }
 
         // pre: called by some function that stunds player (called by hit animation)
@@ -212,6 +206,11 @@ namespace Core.Player.Controller
         {
             controllable = true;
             Body.gravityScale = 10;
+        }
+
+        public void FreezeMovement()
+        {
+            movementController.FreezeVelocity();
         }
 
     }

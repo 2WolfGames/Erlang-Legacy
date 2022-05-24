@@ -1,7 +1,9 @@
-﻿using Core.Combat.Projectile;
+﻿using Core.Combat;
+using Core.Combat.Projectile;
 using Core.Player.Data;
 using Core.Player.Util;
 using Core.Utility;
+using DG.Tweening;
 using UnityEngine;
 
 
@@ -18,21 +20,27 @@ namespace Core.Player.Controller
         private InteractOnTrigger2D dashTrigger => damageAreas.Dash;
         private InteractOnTrigger2D punchTrigger => damageAreas.Punch;
         private float rayTimer;
-        private PlayerController Player => PlayerController.Instance;
-        private PlayerData PlayerData => Player.PlayerData;
+        private PlayerController player => PlayerController.Instance;
+        private PlayerData PlayerData => player.PlayerData;
         private RayProjectile projectilePrefab => projectileData.Projectile;
         private float projectileSpeed => projectileData.Speed;
         private float projectileTimeout => projectileData.Lifetime;
         private Transform projectileOrigin => projectileData.Origin;
         private float rayCooldown => PlayerData.Stats.rayCooldown;
-        private int FacingValue => Player.FacingValue;
-        private Animator animator => Player.Animator;
-        public bool CanInvokeRay => rayTimer <= 0 && Player.Controllable;
+        private int FacingValue => player.FacingValue;
+        private Animator animator => player.Animator;
+        public bool CanInvokeRay => rayTimer <= 0 && controllable;
+        private bool wannaPunch = false;
+        private bool flurryPunching = false;
+        private bool controllable => player.Controllable;
+        private bool canStartFlurryPunches => wannaPunch && !flurryPunching && controllable;
+
+        private Stats playerStats => player.Stats;
 
         public void Awake()
         {
-            dashTrigger.enabled = false;
-            punchTrigger.enabled = false;
+            dashTrigger.Interact = false;
+            punchTrigger.Interact = false;
         }
 
         public void Update()
@@ -41,35 +49,91 @@ namespace Core.Player.Controller
                 rayTimer -= Time.deltaTime;
 
             if (Input.GetButtonDown(CharacterActions.Punch))
-                Punch();
+            {
+                wannaPunch = true;
+            }
 
             if (Input.GetButtonUp(CharacterActions.Punch))
-                PickUpPunch();
+            {
+                wannaPunch = false;
+            }
 
             if (Input.GetButton(CharacterActions.InvokeRay) && CanInvokeRay)
                 OnRayAnimationStart();
         }
 
-        public void ActiveDashDamage()
+        public void FixedUpdate()
+        {
+            FlurryPuches();
+        }
+
+        public void OnDashComplete()
+        {
+            dashTrigger.Interact = false;
+        }
+
+        public void OnDashStart()
+        {
+            ActiveDashDamage();
+        }
+
+        private void ActiveDashDamage()
         {
             if (punchParticle)
                 punchParticle.Play();
-            dashTrigger.enabled = true;
+
+            dashTrigger.Interact = true;
         }
 
-        public void DeactiveDashDamage()
+        private void FlurryPuches()
         {
-            dashTrigger.enabled = false;
+            if (!canStartFlurryPunches) return;
+
+            animator.SetTrigger(CharacterAnimations.FlurryPunching);
         }
 
-        private void Punch()
+        // should be called at very first frame of flurry punching animation
+        public void OnFlurryPunchingStart()
         {
-            punchTrigger.enabled = true;
+            if (!controllable) return;
+
+            flurryPunching = true;
+            player.Controllable = false;
+
+            FreezeMovementOnFlurryPunching();
         }
 
-        private void PickUpPunch()
+        // should be called at very last frame of flurry punching animation
+        public void OnFlurryPunchingEnd()
         {
-            punchTrigger.enabled = false;
+            if (!flurryPunching) return;
+
+            flurryPunching = false;
+            player.Controllable = true;
+        }
+
+        // should be called after every punch in flurry punch animation
+        public void OnFlurryPunchingPunch()
+        {
+            if (!flurryPunching) return;
+
+            punchTrigger.Interact = true;
+
+            DOVirtual.DelayedCall(0.1f, () => punchTrigger.Interact = false);
+        }
+
+        public void OnPunchLand(Collider2D other)
+        {
+            Debug.Log($"Punch land in enemy's face {other.name}");
+            Destroyable destroyable = other.GetComponent<Destroyable>();
+            destroyable?.OnAttackHit(playerStats.punchDamage);
+        }
+
+        public void OnSpearLand(Collider2D other)
+        {
+            Debug.Log($"Spear land in enemy's face {other.name}");
+            Destroyable destroyable = other.GetComponent<Destroyable>();
+            destroyable?.OnAttackHit(playerStats.dashDamage);
         }
 
         private void OnRayAnimationStart()
@@ -98,6 +162,11 @@ namespace Core.Player.Controller
         {
             // make enemy damage
             Debug.Log("Hitting enemy at ray");
+        }
+
+        public void FreezeMovementOnFlurryPunching()
+        {
+            player.FreezeMovement();
         }
 
     }
