@@ -2,57 +2,81 @@
 using Core.Shared.Enum;
 using Core.Shared;
 using UnityEngine;
+using Core.NPC.Util;
 
-public class DialogueManager : MonoBehaviour
+namespace Core.NPC
 {
-    public NPCData npcData;
-    [SerializeField] Transform talkPoint;
-    [SerializeField] Animator npcAnimator;
-    private bool playerIn = false;
-    private bool inConversation = false;
-
-    // Update is called once per frame
-    void Update()
+    public class DialogueManager : MonoBehaviour
     {
-        if (playerIn && !inConversation) {
-            if (Input.GetKeyDown(KeyCode.S)){
-                TriggerDialogue();
+        public NPCData npcData;
+        [SerializeField] Transform talkPoint;
+        [SerializeField] Animator npcAnimator;
+        private bool playerIn = false;
+        private bool inConversation = false;
+
+        //pre: --
+        //post: if player is in range for conversation and it not already in one, 
+        //      when interacts it Runs Dialogue. 
+        void Update()
+        {
+            if (playerIn && !inConversation)
+            {
+                if (Input.GetKeyDown(KeyCode.S))
+                {
+                    TriggerDialogue();
+                }
             }
         }
-    }
 
-    private void OnTriggerEnter2D(Collider2D other) {
-        if (other.tag == "Player"){
-            playerIn = true;
+        //pre: --
+        //post: if is player playerIn = true;
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.tag == "Player")
+            {
+                playerIn = true;
+            }
         }
-    }
 
-    private void OnTriggerExit2D(Collider2D other) {
-        if (other.tag == "Player"){
-            playerIn = false;
+        //pre: --
+        //post: if is player playerIn = false;
+        private void OnTriggerExit2D(Collider2D other)
+        {
+            if (other.tag == "Player")
+            {
+                playerIn = false;
+            }
         }
-    }
 
-    private void TriggerDialogue(){
-        inConversation = true;
+        //pre: --
+        //post: positions player to tlkpoint
+        //      starts conversation with NPC
+        //      disables player controll 
+        //      return when it's conversation is over
+        private void TriggerDialogue()
+        {
+            inConversation = true;
 
-        var player = PlayerController.Instance;
-        player.Controllable = false;
-        PlayerFacing facing = talkPoint.position.x - player.gameObject.transform.position.x > 0
-        ? PlayerFacing.Right : PlayerFacing.Left;
+            var player = PlayerController.Instance;
+            player.Controllable = false;
+            PlayerFacing facing = talkPoint.position.x - player.gameObject.transform.position.x > 0
+            ? PlayerFacing.Right : PlayerFacing.Left;
 
-        MovePlayer.Trigger(talkPoint,0f,facing,0,() => {
+            MovePlayer.Trigger(talkPoint, 0f, facing, 0, () =>
+            {
 
-            facing = talkPoint.position.x - transform.position.x > 0
-            ? PlayerFacing.Left : PlayerFacing.Right;
-            player.SetFacing(facing);
+                facing = talkPoint.position.x - transform.position.x > 0
+                ? PlayerFacing.Left : PlayerFacing.Right;
+                player.SetFacing(facing);
 
-            GetComponentInChildren<Dialogue>().DisplayText(npcData,npcAnimator,() =>{
-                player.Controllable = true;
-                inConversation = false;
+                GetComponentInChildren<Dialogue>().StartConversation(npcData, npcAnimator, () =>
+                {
+                    player.Controllable = true;
+                    inConversation = false;
+                });
             });
-        });
-    }
+        }
 
+    }
 
 }

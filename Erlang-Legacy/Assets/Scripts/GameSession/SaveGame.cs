@@ -34,7 +34,7 @@ namespace Core.GameSession
         //post: if player exits range canBesaved = false
         private void OnTriggerExit2D(Collider2D other)
         {
-            if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+            if (other.gameObject.tag == "Player")
             {
                 canBeSaved = false;
             }

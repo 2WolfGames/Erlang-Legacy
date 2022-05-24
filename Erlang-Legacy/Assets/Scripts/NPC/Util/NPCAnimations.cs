@@ -14,6 +14,8 @@ namespace Core.NPC.Util
         public static readonly int TalkCalm = Animator.StringToHash("talk_calm");
         public static readonly int TalkAngry = Animator.StringToHash("talk_angry");
 
+        //pre: --
+        //post: Returns integer related to enum (and also related to animation)
         public static int ReturnHash(NPCActions npcAction)
         {
             int result;

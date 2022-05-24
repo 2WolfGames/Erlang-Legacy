@@ -1,17 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Core.NPC.Util;
+﻿using UnityEngine;
 
-
-[System.Serializable]
-public class NPCData
+namespace Core.NPC.Util
 {
-    public string npcName;
-    
-    [TextArea(3,135)]
-    public string[] phrases;
+    [System.Serializable]
+    public class NPCData
+    {
+        public string npcName;
 
-    public NPCActions[] npcActions;
+        [Tooltip("Phrases and NPCActions are connected, same lenght is requaired")]
+        [TextArea(3, 135)]
+        public string[] phrases;
+        
+        [Tooltip("Phrases and NPCActions are connected, same lenght is requaired")]
+        public NPCActions[] npcActions;
+        
+    }
 
 }

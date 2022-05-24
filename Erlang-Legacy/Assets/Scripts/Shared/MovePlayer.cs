@@ -10,7 +10,7 @@ namespace Core.Shared
     public class MovePlayer : MonoBehaviour
     {
         //pre: PlayerController.Instance != null
-        //post: animates player entering the current scene
+        //post: animates player moving to position
         public static void Trigger(Transform targetPoint, float waitTime, PlayerFacing facing, 
         float moveTime = 0f, Action OnMoveEnded = null)
         {
@@ -29,7 +29,7 @@ namespace Core.Shared
         }
 
         //pre: PlayerController.Instance != null
-        //post: sets player stats for entrance
+        //post: sets player stats for movement
         private static void OnStartMovement(PlayerFacing facing)
         {
             var player = PlayerController.Instance;
@@ -41,7 +41,7 @@ namespace Core.Shared
         }
 
         //pre: PlayerController.Instance != null
-        //post: sets player stats for gameplay
+        //post: sets player stats after movement
         private static void OnEndMovement(Action OnMoveEnded = null)
         {
             var player = PlayerController.Instance;
@@ -51,7 +51,8 @@ namespace Core.Shared
             OnMoveEnded?.Invoke();
         }
 
-
+        //pre: distance >= 0
+        //post: returns the optimum time value to move player to a distance
         private static float OptimalMovementTime(float distance){
             // A distance = 6 it's grate if the player lasts a secon on arrive to point
             // So...by this rule of 3 the optimalMovement yime will be (distance/6) * 1

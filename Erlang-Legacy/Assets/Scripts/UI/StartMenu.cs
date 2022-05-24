@@ -91,7 +91,7 @@ namespace Core.UI
                 SaveSystem.InitializeGame();
             }
             PlayerState playerState = SaveSystem.LoadPlayerState();
-            GameSessionController.loadSavedData = true;
+            GameSessionController.Instance.LoadData = true;
             StartCoroutine(Loader.LoadWithDelay((SceneID)playerState.scene, 0));
         }
 
