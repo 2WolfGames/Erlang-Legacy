@@ -89,9 +89,6 @@ namespace Core.Player.Controller
         // desc: changes local player scale in order to align to user input
         public void FaceDirection()
         {
-            if (!Controllable)
-                return;
-
             Vector3 scale = transform.localScale;
             scale.x = FacingValue;
             transform.localScale = scale;
