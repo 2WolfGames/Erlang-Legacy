@@ -3,6 +3,8 @@ using Core.GameSession;
 using Core.Player.Controller;
 using UnityEngine;
 
+
+// TODO: rename this class
 namespace Core.Hazard
 {
     public class DeadlyObject : MonoBehaviour

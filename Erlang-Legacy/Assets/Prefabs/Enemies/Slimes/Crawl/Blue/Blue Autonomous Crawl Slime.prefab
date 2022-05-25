@@ -13,6 +13,9 @@ GameObject:
   - component: {fileID: 8485586381444787730}
   - component: {fileID: 8485586380787330445}
   - component: {fileID: 1524649323625511173}
+  - component: {fileID: 1659410580}
+  - component: {fileID: 1659410581}
+  - component: {fileID: 1659410582}
   m_Layer: 11
   m_Name: Slime IA
   m_TagString: Untagged
@@ -152,6 +155,86 @@ MonoBehaviour:
       Version: 1.6.6
   gizmoViewMode: 2
   showBehaviorDesignerGizmo: 1
+--- !u!114 &1659410580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4273394739405257306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d7b55c7ecdb49a4a89fa5e6f9022861, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startWhenEnabled: 1
+  asynchronousLoad: 0
+  pauseWhenDisabled: 0
+  restartWhenComplete: 0
+  logTaskChanges: 0
+  group: 0
+  resetValuesOnRestart: 0
+  externalBehavior: {fileID: 11400000, guid: fc2dccd503d9a4e4883c665461725eed, type: 2}
+  mBehaviorSource:
+    behaviorName: Destroy
+    behaviorDescription: 
+    mTaskData:
+      types: []
+      parentIndex: 
+      startIndex: 
+      variableStartIndex: 
+      JSONSerialization: 
+      fieldSerializationData:
+        typeName: []
+        fieldNameHash: 
+        startIndex: 
+        dataPosition: 
+        unityObjects: []
+        byteData: 
+        byteDataArray: 
+      Version: 1.6.6
+  gizmoViewMode: 2
+  showBehaviorDesignerGizmo: 1
+--- !u!114 &1659410581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4273394739405257306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14a4d368972946e4baea90377f580f05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitType: 3
+  customHitEffect: {fileID: 0}
+  customHitSound: {fileID: 0}
+  hitColor: {r: 0.4811321, g: 0.004538993, b: 0.004538993, a: 1}
+  hitMaterial: {fileID: 0}
+  hitAnimation: {fileID: 0}
+  animator: {fileID: 0}
+  sprite: {fileID: 6603502452507806084}
+  hitShakeCamera: 0
+  OnDestroyed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRevived:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1659410582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4273394739405257306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11ca44a82fb5acc40b5cc39da6858587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 2
 --- !u!1 &6603502452507806086
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,9 +9,9 @@ namespace Core.Combat.IA.Action
 {
     public class DestroyIA : EnemyAction
     {
-        [SerializeField] ParticleSystem exploteEffect;
         [SerializeField] ParticleSystem bleedEffect;
         [SerializeField] float bleedDuration;
+        [SerializeField] ParticleSystem explosionEffect;
         [SerializeField] SpriteRenderer deadBody;
 
         private bool completed = false;
@@ -25,9 +25,9 @@ namespace Core.Combat.IA.Action
 
             DOVirtual.DelayedCall(bleedDuration, () =>
             {
-                if (exploteEffect)
+                if (explosionEffect)
                 {
-                    EffectManager.Instance?.PlayOneShot(exploteEffect, transform.position);
+                    EffectManager.Instance?.PlayOneShot(explosionEffect, transform.position);
                 }
 
                 if (deadBody)

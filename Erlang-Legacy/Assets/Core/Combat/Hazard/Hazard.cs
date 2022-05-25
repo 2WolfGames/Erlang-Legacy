@@ -15,6 +15,10 @@ namespace Core.Hazard
             CheckCollision();
         }
 
+
+        // TODO: use unity api to detect collision with player
+        // instead of checking directly each frame
+
         // pre: --
         // post: returns true if current colliders is touching collider's player
         private bool IsTouchingPlayer()
