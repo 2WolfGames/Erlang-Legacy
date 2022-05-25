@@ -1,4 +1,6 @@
-﻿using BehaviorDesigner.Runtime.Tasks;
+﻿using BehaviorDesigner.Runtime;
+using BehaviorDesigner.Runtime.Tasks;
+using Core.IA.Bahavior.SharedVariable;
 using Core.Utility;
 using DG.Tweening;
 using UnityEngine;
@@ -9,28 +11,28 @@ namespace Core.Combat.IA.Action
 {
     public class DestroyIA : EnemyAction
     {
-        [SerializeField] ParticleSystem bleedEffect;
-        [SerializeField] float bleedDuration;
-        [SerializeField] ParticleSystem explosionEffect;
-        [SerializeField] SpriteRenderer deadBody;
+        public SharedParticleSystem  bleedEffect;
+        public SharedFloat bleedDuration;
+        public SharedParticleSystem explosionEffect;
+        public SharedSpriteRenderer deadBody;
 
         private bool completed = false;
 
         public override void OnStart()
         {
-            if (bleedEffect)
+            if (bleedEffect.Value)
             {
-                EffectManager.Instance?.PlayOneShot(bleedEffect, transform.position);
+                EffectManager.Instance?.PlayOneShot(bleedEffect.Value, transform.position);
             }
 
-            DOVirtual.DelayedCall(bleedDuration, () =>
+            DOVirtual.DelayedCall(bleedDuration.Value, () =>
             {
-                if (explosionEffect)
+                if (explosionEffect.Value)
                 {
-                    EffectManager.Instance?.PlayOneShot(explosionEffect, transform.position);
+                    EffectManager.Instance?.PlayOneShot(explosionEffect.Value, transform.position);
                 }
 
-                if (deadBody)
+                if (deadBody.Value)
                 {
                     SpawnDeadBody();
                 }
@@ -48,7 +50,7 @@ namespace Core.Combat.IA.Action
         private void SpawnDeadBody()
         {
             var facing = transform.localScale.x < 0 ? SharedEnum.Face.Left : SharedEnum.Face.Right;
-            DeadBodiesManager.Instance?.Spawn(deadBody, transform.position, facing);
+            DeadBodiesManager.Instance?.Spawn(deadBody.Value, transform.position, facing);
         }
     }
 }
