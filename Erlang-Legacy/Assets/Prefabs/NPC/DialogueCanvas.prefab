@@ -645,7 +645,7 @@ MonoBehaviour:
   bubblePointer: {fileID: 8149932850381213306}
   nextSentenceIndicator: {fileID: 8149932850001462289}
   nameField: {fileID: 8149932849979873367}
-  conversationField: {fileID: 0}
+  conversationField: {fileID: 8149932849583156873}
 --- !u!95 &8149932850953864963
 Animator:
   serializedVersion: 3
