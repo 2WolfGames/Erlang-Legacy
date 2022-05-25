@@ -6,8 +6,6 @@ namespace Core.Utility
 {
     public class DeadBodiesManager : MonoBehaviour
     {
-        [SerializeField] bool cleanBodiesCollected = false;
-
         public static DeadBodiesManager Instance;
 
         public void Awake()
@@ -34,15 +32,12 @@ namespace Core.Utility
 
         public void OnDestroy()
         {
-            if (cleanBodiesCollected)
+            var children = GetComponentInChildren<Transform>();
+            foreach (Transform child in children)
             {
-                var children = GetComponentInChildren<Transform>();
-                foreach (Transform child in children)
+                if (child)
                 {
-                    if (child)
-                    {
-                        Destroy(child);
-                    }
+                    Destroy(child);
                 }
             }
         }
