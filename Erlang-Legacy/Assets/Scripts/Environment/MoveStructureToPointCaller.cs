@@ -23,9 +23,6 @@ public class MoveStructureToPointCaller : MonoBehaviour
     bool activated = false;
     bool playerIn = false;
 
-    int caca = 0;
-    static int cacota = 0;
-
     //pre: --
     //post: seting defautl sprite to gameobject
     void Start()
@@ -109,10 +106,6 @@ public class MoveStructureToPointCaller : MonoBehaviour
     //post: changes sprite between activated - default
     private void ChangeSprite()
     {
-        Debug.Log("caca: " + caca);
-        caca++;
-        Debug.Log("cacota: "+ cacota);
-        cacota++;
         if (spriteRenderer.sprite != activatedSprite)
         {
             spriteRenderer.sprite = activatedSprite;
