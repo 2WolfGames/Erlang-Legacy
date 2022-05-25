@@ -1,8 +1,9 @@
 ﻿using Core.Player.Controller;
+using Core.Player.Util;
 using Core.Shared.Enum;
+using Core.NPC.Util;
 using Core.Shared;
 using UnityEngine;
-using Core.NPC.Util;
 
 namespace Core.NPC
 {
@@ -21,7 +22,7 @@ namespace Core.NPC
         {
             if (playerIn && !inConversation)
             {
-                if (Input.GetKeyDown(KeyCode.S))
+                if (Input.GetButton(CharacterActions.Interact))
                 {
                     TriggerDialogue();
                 }

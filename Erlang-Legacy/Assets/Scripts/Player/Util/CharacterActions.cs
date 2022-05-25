@@ -1,5 +1,3 @@
-using UnityEngine;
-
 
 namespace Core.Player.Util
 {
@@ -10,5 +8,6 @@ namespace Core.Player.Util
         public static readonly string Punch = "Punch";
         public static readonly string InvokeRay = "Ray";
         public static readonly string Dash = "Dash";
+        public static readonly string Interact = "Interact";
     }
 }
