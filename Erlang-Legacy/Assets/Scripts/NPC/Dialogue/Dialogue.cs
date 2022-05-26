@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Collections;
-using UnityEngine;
-using TMPro;
-using DG.Tweening;
+using Core.Player.Util;
 using UnityEngine.UI;
 using Core.NPC.Util;
+using UnityEngine;
+using DG.Tweening;
 using Core.Shared;
 using System;
+using TMPro;
 
 namespace Core.NPC
 {
@@ -43,7 +44,7 @@ namespace Core.NPC
             if (settingUp)
                 return;
 
-            if (displayingSentences & Input.GetKeyDown(KeyCode.S))
+            if (displayingSentences & Input.GetButtonDown(CharacterActions.Interact))
             {
                 if (phraseEnded)
                 {
