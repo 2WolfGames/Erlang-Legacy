@@ -1,4 +1,5 @@
 ﻿using BehaviorDesigner.Runtime.Tasks;
+using UnityEngine;
 
 namespace Core.Combat.IA.Conditional
 {
@@ -6,6 +7,7 @@ namespace Core.Combat.IA.Conditional
     {
         public override TaskStatus OnUpdate()
         {
+            Debug.Log("IsDestroyable");
             bool destroyed = destroyable.IsDestroyed;
             return destroyed ? TaskStatus.Success : TaskStatus.Failure;
         }
