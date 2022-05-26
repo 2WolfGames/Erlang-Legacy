@@ -3474,12 +3474,6 @@ MonoBehaviour:
   animator: {fileID: 0}
   sprite: {fileID: 0}
   hitShakeCamera: 0
-  OnDestroyed:
-    m_PersistentCalls:
-      m_Calls: []
-  OnRevived:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!50 &1045254960
 Rigidbody2D:
   serializedVersion: 4

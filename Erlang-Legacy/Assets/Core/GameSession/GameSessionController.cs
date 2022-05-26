@@ -11,12 +11,18 @@ namespace Core.GameSession
 {
     public class GameSessionController : MonoBehaviour
     {
-        public static bool loadSavedData = false;
+        private bool loadData = false;
         private bool waiting => !SceneManagementFunctions.CurrentSceneIsGameplay();
         public Vector3 currentSavePos { get; private set; }
         private EntranceID entranceTag;
-        private bool hasDied = false;
-
+        private bool inDieProcess = false;
+        public bool LoadData {
+            get => loadData;
+            set
+            {
+                loadData = value;
+            }
+        }
         public static GameSessionController Instance { get; private set; }
 
         //pre: --
@@ -42,7 +48,7 @@ namespace Core.GameSession
             if (waiting)
                 return;
 
-            if (loadSavedData)
+            if (loadData)
             {
                 LoadSavedData();
                 PlacePlayer();
@@ -59,7 +65,7 @@ namespace Core.GameSession
             if (waiting)
                 return;
 
-            hasDied = false;
+            inDieProcess = false;
 
             if (entranceTag != EntranceID.None)
                 SearchEntrance();
@@ -77,9 +83,9 @@ namespace Core.GameSession
                 return;
 
             var playerCurrentHealth = PlayerController.Instance.PlayerData.Health.HP;
-            if (!hasDied & playerCurrentHealth == 0)
+            if (!inDieProcess & playerCurrentHealth == 0)
             {
-                hasDied = true;
+                inDieProcess = true;
                 ResetGameToSavePoint();
             }
         }
@@ -88,7 +94,7 @@ namespace Core.GameSession
         //post: currantSavePos is currentPointTransform position
         public void SavePlayerCurrentPoint(Transform currentPointTransform)
         {
-            if (hasDied)
+            if (inDieProcess)
                 return;
             currentSavePos = currentPointTransform.position;
         }
@@ -98,7 +104,7 @@ namespace Core.GameSession
         //      and currantSavePos is savePoint position
         public void SavePlayerState(Transform savePoint)
         {
-            if (hasDied)
+            if (inDieProcess)
                 return;
 
             PlayerState playerState = new PlayerState(((int)SceneManagementFunctions.GetCurrentSceneEnum()),
@@ -138,7 +144,7 @@ namespace Core.GameSession
             playerHealth.MaxHP = playerState.max_health;
 
             currentSavePos = playerState.GetPosition();
-            loadSavedData = false;
+            loadData = false;
 
             return playerState.scene;
         }

@@ -87,6 +87,22 @@ namespace Core.Shared
                     tween.Kill();
             }
         }
+
+        //pre: c != null
+        //post: returns c invisible if !makeVisible or visible if makeVisible
+        public static Color ColorVisible(bool makeVisible, Color c)
+        {
+            if (makeVisible)
+            {
+                c.a = 1f;
+            }
+            else
+            {
+                c.a = 0f;
+            }
+            return c;
+        }
+
     }
 
 }

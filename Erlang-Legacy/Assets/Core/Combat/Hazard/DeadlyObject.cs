@@ -41,7 +41,7 @@ namespace Core.Hazard
 
             playerController.Hurt(1, gameObject);
 
-            if (playerController.PlayerData.Health.HP != 0)
+            if (playerController.PlayerData.Health.HP > 0)
                 playerController.transform.position = GameSessionController.Instance.currentSavePos;
 
             playerIn = false;

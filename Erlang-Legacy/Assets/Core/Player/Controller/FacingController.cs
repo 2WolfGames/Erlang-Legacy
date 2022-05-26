@@ -11,6 +11,9 @@ namespace Core.Player.Controller
 
         public void Update()
         {
+            if (!PlayerController.Instance.Controllable)
+                return;
+                
             var input = Input.GetAxisRaw("Horizontal");
             if (Mathf.Abs(input) <= 0)
                 return;
