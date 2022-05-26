@@ -18,7 +18,7 @@ namespace Core.Shared
             var player = PlayerController.Instance;
             float distance = Mathf.Abs(player.transform.position.x - targetPoint.position.x);
 
-            player.transform.DOMove(targetPoint.position, moveTime == 0f ? OptimalMovementTime(distance) : moveTime)
+            player.transform.DOMove(targetPoint.position, moveTime <= 0f ? OptimalMovementTime(distance) : moveTime)
                 .SetDelay(waitTime)
                 .OnComplete(
                     () =>
