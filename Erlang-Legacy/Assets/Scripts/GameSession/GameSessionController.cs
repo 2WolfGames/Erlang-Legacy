@@ -86,7 +86,7 @@ namespace Core.GameSession
             if (!inDieProcess & playerCurrentHealth == 0)
             {
                 inDieProcess = true;
-                ResetGameToSavePoint();
+                ResetGameToLastSave();
             }
         }
 
@@ -117,12 +117,12 @@ namespace Core.GameSession
 
         //pre: player.instance != null
         //post: returns player to it's status of the last save
-        public void ResetGameToSavePoint()
+        public void ResetGameToLastSave()
         {
             PlayerController.Instance.OnDie();
 
             FindObjectOfType<InGameCanvas>()?.ActiveDeathImage();
-            StartCoroutine(Loader.LoadWithDelay((SceneID)LoadSavedData(), 4));
+            StartCoroutine(Loader.LoadWithDelay((SceneID)LoadSavedData(), 5f));
         }
 
         //pre: entranceTag != entranceID.None
