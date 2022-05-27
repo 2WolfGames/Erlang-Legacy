@@ -1,5 +1,5 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
+using Core.Player.Util;
 using UnityEngine;
 
 //This enum is fot the type of lever we have.
@@ -20,7 +20,8 @@ public class MoveStructureToPointCaller : MonoBehaviour
     [SerializeField] MoveStructureToPoint moveStructureToPointEngine;
     [SerializeField] Rigidbody2D structure;
     [SerializeField] Transform myPoint;
-    bool activated;
+    bool activated = false;
+    bool playerIn = false;
 
 
     //pre: --
@@ -34,9 +35,13 @@ public class MoveStructureToPointCaller : MonoBehaviour
     //post: if lever is activated, and structure is on myPoint
     //      activaed is set to false 
     //      if type is Handler it changes sprite. 
-    void FixedUpdate()
+    void Update()
     {
-        if (activated && IsStructureOnPoint())
+        if (playerIn && Input.GetButtonDown(CharacterActions.Interact))
+        {
+            MoveStructure();
+        }
+        else if (activated && IsStructureOnPoint())
         {
             if (type == LeverType.Handler)
             {
@@ -47,14 +52,31 @@ public class MoveStructureToPointCaller : MonoBehaviour
     }
 
     //pre: --
-    //post: if collider is player and is moveStructure not previously activated
+    //post: if collider is player then playerIn = true
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            playerIn = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            playerIn = false;
+        }
+    }
+
+    //pre: --
+    //post: if moveStructure not previously activated
     //      is structure is not on Point we activate moveStructure and change the sprite to activated
     //       if structure is on point and lever is type Handler, 
     //      coroutine () is activated to show the user that platform is on the "myPoint"
-    private void OnTriggerEnter2D(Collider2D other)
+    private void MoveStructure()
     {
-
-        if (other.gameObject.tag == "Player" && !activated)
+        if (!activated)
         {
             if (!IsStructureOnPoint())
             {
@@ -67,7 +89,7 @@ public class MoveStructureToPointCaller : MonoBehaviour
                 StartCoroutine(IActivateAndDesactivateHandler());
             }
         }
-    }
+}
 
     //pre: type is Handler
     //post: Active sprite is set and in waitTime time is set to default. 
