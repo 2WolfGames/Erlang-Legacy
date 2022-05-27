@@ -423,7 +423,8 @@ GameObject:
   - component: {fileID: 1349618678016665407}
   - component: {fileID: 1712094753}
   - component: {fileID: 8022072309175993673}
-  - component: {fileID: 503972146821115021}
+  - component: {fileID: 1008109272570669331}
+  - component: {fileID: -6438518260349394732}
   m_Layer: 13
   m_Name: Yellow Ray Projectile
   m_TagString: Untagged
@@ -535,7 +536,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.93
---- !u!114 &503972146821115021
+--- !u!114 &1008109272570669331
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -544,9 +545,38 @@ MonoBehaviour:
   m_GameObject: {fileID: 1349618678016665345}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: abf26195f5dff87478c4f440bf4062b9, type: 3}
+  m_Script: {fileID: 11500000, guid: e6b78bb5913abaa4eb9712f8e71e4901, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
-  explosionEffect: {fileID: 0}
-  splatterSound: {fileID: 0}
+  force: {x: 0, y: 0}
+--- !u!114 &-6438518260349394732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1349618678016665345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d9d8b316172c9c4ead6645234fa9cdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnEnter:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5625281659813403152, guid: 3a92e288e57aab644a0656c959990934,
+          type: 3}
+        m_MethodName: OnRayHit
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnExit:
+    m_PersistentCalls:
+      m_Calls: []
+  interact: 1

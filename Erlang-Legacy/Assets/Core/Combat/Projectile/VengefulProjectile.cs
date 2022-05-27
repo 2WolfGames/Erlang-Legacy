@@ -2,22 +2,19 @@
 
 namespace Core.Combat.Projectile
 {
-    // description:
-    //  Ajax ray attack
-    public class RayProjectile : AbstractProjectile
+    public class VengefulProjectile : AbstractProjectile
     {
-        Rigidbody2D body;
+        private Rigidbody2D body;
 
-        void Awake()
+        public void Awake()
         {
             body = GetComponent<Rigidbody2D>();
             body.bodyType = RigidbodyType2D.Kinematic;
         }
 
-        void FixedUpdate()
+        public void Update()
         {
             body.velocity = force;
         }
     }
-
 }

@@ -141,11 +141,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileData:
-    projectile: {fileID: 503972146821115021, guid: d69ef617df5756d42a789cc0ea7f80e2,
+    projectile: {fileID: 7387710299905422874, guid: c4740bcc5bc007640b0bb2cb7af30eac,
       type: 3}
     origin: {fileID: 5625281660130636832}
     speed: 30
-    lifetime: 1.5
+    lifetime: 2
   damageAreas:
     dash: {fileID: 731579815}
     punch: {fileID: 1184085065}
@@ -339,6 +339,7 @@ MonoBehaviour:
   OnExit:
     m_PersistentCalls:
       m_Calls: []
+  interact: 0
 --- !u!1 &7729203758749614549
 GameObject:
   m_ObjectHideFlags: 0
@@ -671,6 +672,7 @@ MonoBehaviour:
   OnExit:
     m_PersistentCalls:
       m_Calls: []
+  interact: 0
 --- !u!1001 &800985122
 PrefabInstance:
   m_ObjectHideFlags: 0
