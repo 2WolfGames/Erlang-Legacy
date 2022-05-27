@@ -119,12 +119,13 @@ namespace Core.Player.Controller
 
             movementController.FreezeVelocity();
             TakeLifes(damage);
-            ComputeSideHurtAnimation(other.transform);
 
+            ComputeSideHurtAnimation(other.transform);
+            
             if (shakeCameraOnHurt)
                 CameraManager.Instance?.ShakeCamera();
 
-            OnRecoverStart();
+            OnRecoverStart(playerData.Health.HP > 0);
         }
 
         private void TakeLifes(int damage)
@@ -143,14 +144,15 @@ namespace Core.Player.Controller
         }
 
         // pre: called at first key frame hit (backward & forward) animations       
-        private void OnRecoverStart()
+        private void OnRecoverStart(bool isAlive)
         {
             if (protectable.IsProtected)
                 return;
 
             inRecoverProcess = true;
             protectable.SetProtection(ProtectionType.INFINITE);
-            Animator.SetBool(CharacterAnimations.Blink, true);
+            if(isAlive)
+                Animator.SetBool(CharacterAnimations.Blink, true);
             controllable = false;
         }
 
