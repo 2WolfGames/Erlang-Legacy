@@ -37,7 +37,7 @@ namespace Core.Player.Controller
 
         private Stats playerStats => player.Stats;
 
-        public void Awake()
+        public void Start()
         {
             dashTrigger.Interact = false;
             punchTrigger.Interact = false;
