@@ -9,6 +9,7 @@ namespace Core.Hazard
 {
     public class DeadlyObject : MonoBehaviour
     {
+        [SerializeField] int damage = 1;
         const float cWaitTime = 0.5f;
         bool playerIn = false;
 
@@ -35,14 +36,15 @@ namespace Core.Hazard
         //      returns player to its last saved position
         private IEnumerator ResetSavePoint()
         {
+            PlayerController player = PlayerController.Instance;
+            bool playerSurvives = player.PlayerData.Health.HP - damage > 0;
+
+            player.Hurt(damage, gameObject);
+
             yield return new WaitForSeconds(cWaitTime);
 
-            PlayerController playerController = PlayerController.Instance;
-
-            playerController.Hurt(1, gameObject);
-
-            if (playerController.PlayerData.Health.HP > 0)
-                playerController.transform.position = GameSessionController.Instance.currentSavePos;
+            if (playerSurvives)
+                player.transform.position = GameSessionController.Instance.currentSavePos;
 
             playerIn = false;
         }

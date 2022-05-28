@@ -117,14 +117,17 @@ namespace Core.Player.Controller
             if (protectable.IsProtected)
                 return;
 
-            movementController.FreezeVelocity();
+            FreezeMovement();
+
             TakeLifes(damage);
+
             ComputeSideHurtAnimation(other.transform);
 
             if (shakeCameraOnHurt)
                 CameraManager.Instance?.ShakeCamera();
 
-            OnRecoverStart();
+            if (IsAlive())
+                OnRecoverStart();
         }
 
         private void TakeLifes(int damage)
@@ -145,18 +148,18 @@ namespace Core.Player.Controller
         // pre: called at first key frame hit (backward & forward) animations       
         private void OnRecoverStart()
         {
-            if (protectable.IsProtected)
-                return;
-
+            Animator.SetBool(CharacterAnimations.Blink, true);
             inRecoverProcess = true;
             protectable.SetProtection(ProtectionType.INFINITE);
-            Animator.SetBool(CharacterAnimations.Blink, true);
             controllable = false;
         }
 
         // desc: to be called at end of recover animations with and event
         public void OnRecoverComplete()
         {
+            if (!inRecoverProcess)
+                return;
+
             controllable = true;
             StartCoroutine(AfterRecoverComplete());
         }
@@ -211,6 +214,11 @@ namespace Core.Player.Controller
         public void FreezeMovement()
         {
             movementController.FreezeVelocity();
+        }
+
+        public bool IsAlive()
+        {
+            return playerData.Health.HP > 0;
         }
 
     }
