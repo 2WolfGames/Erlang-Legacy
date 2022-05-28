@@ -1,33 +1,33 @@
 
 using BehaviorDesigner.Runtime;
-using DG.Tweening;
 using UnityEngine;
 
 namespace Core.Combat
 {
-    [RequireComponent(typeof(BehaviorTree))]
     public class Recoil : MonoBehaviour
     {
-        private BehaviorTree behaviorTree;
+        public float recoilScale = 0f;
+        private BehaviorTree behaviorTree => GetComponent<BehaviorTree>();
+        private Rigidbody2D body => GetComponent<Rigidbody2D>();
 
-        public void Awake()
+        public void OnRecoil(Vector2 direction)
         {
-            behaviorTree = GetComponent<BehaviorTree>();
-            behaviorTree.RegisterEvent<object>("recoil", ReceivedEvent);
+            Vector2 norm = direction.normalized;
+            if (behaviorTree) 
+                NotifyRecoilEvent(norm);
+            else ApplyRecoil(norm);
         }
 
-        public void ReceivedEvent(object arg1)
+        private void ApplyRecoil(Vector2 direction)
         {
-            Debug.Log("Recoil received");
+            Vector2 recoilForce = direction.normalized * recoilScale;
+            body.AddForce(recoilForce, ForceMode2D.Impulse);
         }
 
-        public void Start()
+        private void NotifyRecoilEvent(Vector2 direction)
         {
-            DOVirtual.DelayedCall(3f, () =>
-            {
-                Debug.Log("Recoil");
-                behaviorTree.SendEvent<int>("recoil", 5);
-            });
+            Debug.Log("NotifyRecoilEvent");
+            behaviorTree.SendEvent("recoil"); // TODO: create static class to manage behavior events
         }
 
     }

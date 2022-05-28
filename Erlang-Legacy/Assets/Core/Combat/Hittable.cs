@@ -28,17 +28,13 @@ namespace Core.Combat
         [SerializeField] Animator animator;
         [SerializeField] SpriteRenderer sprite;
         [SerializeField] bool hitShakeCamera;
-        public float recoilScale = 0f;
-        public float recoilRecoverDuration = 0.2f;
-        public bool justRecoiled = false;
         protected Vector2 baseScale;
         protected Color baseColor;
         protected Material baseMaterial;
         private Color defaultColor = Color.white;
         private Rigidbody2D body => GetComponent<Rigidbody2D>();
-        public Action OnHit;
-
-        List<Tween> tweens = new List<Tween>();
+        private Recoil recoil => GetComponent<Recoil>();
+        private List<Tween> tweens = new List<Tween>();
 
         // Start is called before the first frame update
         public virtual void Awake()
@@ -46,33 +42,21 @@ namespace Core.Combat
             Init();
         }
 
+        public void OnAttackHit()
+        {
+            ReactHit();
+        }
+
         public void OnAttackHit(Vector2 direction)
         {
-            OnHit?.Invoke();
             ReactHit();
             Recoil(direction);
         }
 
         private void Recoil(Vector2 direction)
         {
-            if (!CanRecoil())
-                return;
-
-            Vector2 recoilForce = direction.normalized * recoilScale;
-            body.AddForce(recoilForce, ForceMode2D.Impulse);
-
-            if (recoilForce != Vector2.zero)
-                StartCoroutine(iRecoil());
+            recoil?.OnRecoil(direction);
         }
-
-        private IEnumerator iRecoil()
-        {
-            justRecoiled = true;
-            yield return new WaitForSeconds(recoilRecoverDuration);
-            justRecoiled = false;
-        }
-
-        private bool CanRecoil() => body != null;
 
         private void ReactHit()
         {
