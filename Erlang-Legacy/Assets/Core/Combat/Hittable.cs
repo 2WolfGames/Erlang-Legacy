@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Core.Shared;
 using Core.Utility;
@@ -28,6 +29,8 @@ namespace Core.Combat
         [SerializeField] SpriteRenderer sprite;
         [SerializeField] bool hitShakeCamera;
         public float recoilScale = 0f;
+        public float recoilRecoverDuration = 0.2f;
+        public bool justRecoiled = false;
         protected Vector2 baseScale;
         protected Color baseColor;
         protected Material baseMaterial;
@@ -55,9 +58,18 @@ namespace Core.Combat
             if (!CanRecoil())
                 return;
 
-            Vector2 recoilDirection = direction.normalized;
-            Debug.Log(recoilDirection * recoilScale);
-            body.AddForce(recoilDirection * recoilScale, ForceMode2D.Impulse);
+            Vector2 recoilForce = direction.normalized * recoilScale;
+            body.AddForce(recoilForce, ForceMode2D.Impulse);
+
+            if (recoilForce != Vector2.zero)
+                StartCoroutine(iRecoil());
+        }
+
+        private IEnumerator iRecoil()
+        {
+            justRecoiled = true;
+            yield return new WaitForSeconds(recoilRecoverDuration);
+            justRecoiled = false;
         }
 
         private bool CanRecoil() => body != null;
