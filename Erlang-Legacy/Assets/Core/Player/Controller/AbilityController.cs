@@ -126,14 +126,12 @@ namespace Core.Player.Controller
 
         public void OnPunchLand(Collider2D other)
         {
-            Debug.Log($"Punch land in enemy's face {other.name}");
             int damage = playerStats.punchDamage;
             OnHit(other, damage);
         }
 
         public void OnSpearLand(Collider2D other)
         {
-            Debug.Log($"Spear land in enemy's face {other.name}");
             int damage = playerStats.dashDamage;
             OnHit(other, damage);
         }

@@ -26,8 +26,8 @@ namespace Core.Combat
 
         private void NotifyRecoilEvent(Vector2 direction)
         {
-            Debug.Log("NotifyRecoilEvent");
-            behaviorTree.SendEvent("recoil"); // TODO: create static class to manage behavior events
+            behaviorTree.GetVariable("recoilDirection").SetValue(direction);
+            behaviorTree.SendEvent("recoil");
         }
 
     }
