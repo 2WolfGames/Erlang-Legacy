@@ -3143,7 +3143,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1088873642}
-  - {fileID: 1094057875}
+  - {fileID: 2072691229}
   m_Father: {fileID: 29819537}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3253,24 +3253,6 @@ Transform:
   m_Father: {fileID: 921955972}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1094057875 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8620820813915287458, guid: 65e3adadf46c5234eaae3360f2b440a4,
-    type: 3}
-  m_PrefabInstance: {fileID: 6499478651286653432}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1094057876 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8620820813915287457, guid: 65e3adadf46c5234eaae3360f2b440a4,
-    type: 3}
-  m_PrefabInstance: {fileID: 6499478651286653432}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 118a73bb6aa970c42aec23450d5cb755, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1109849001
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3278,6 +3260,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 846919903}
     m_Modifications:
+    - target: {fileID: 3000927132504428723, guid: 6a01ea45b725bc54897643f7f8381c23,
+        type: 3}
+      propertyPath: recoilScale
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3000927132504428724, guid: 6a01ea45b725bc54897643f7f8381c23,
+        type: 3}
+      propertyPath: hp
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 8496883880797586289, guid: 6a01ea45b725bc54897643f7f8381c23,
         type: 3}
       propertyPath: m_RootOrder
@@ -3338,6 +3330,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Orange Slime Worm
       objectReference: {fileID: 0}
+    - target: {fileID: 8496883880797586290, guid: 6a01ea45b725bc54897643f7f8381c23,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a01ea45b725bc54897643f7f8381c23, type: 3}
 --- !u!50 &1186964034 stripped
@@ -3345,12 +3342,6 @@ Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 7453501851678728698, guid: b6c6d48452292fe4bb6171c668d1c1e3,
     type: 3}
   m_PrefabInstance: {fileID: 7050827787156169007}
-  m_PrefabAsset: {fileID: 0}
---- !u!50 &1206108905 stripped
-Rigidbody2D:
-  m_CorrespondingSourceObject: {fileID: 8620820812438235946, guid: 65e3adadf46c5234eaae3360f2b440a4,
-    type: 3}
-  m_PrefabInstance: {fileID: 6499478651286653432}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1250438038
 PrefabInstance:
@@ -3965,6 +3956,12 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
+--- !u!4 &2072691229 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4370373776251955071, guid: 65e3adadf46c5234eaae3360f2b440a4,
+    type: 3}
+  m_PrefabInstance: {fileID: 6499478651286653432}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2107586687
 GameObject:
   m_ObjectHideFlags: 0
@@ -4094,7 +4091,12 @@ PrefabInstance:
     - target: {fileID: 2353074593296845045, guid: 65d664973c5b5e44a86d8e35e60f905e,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8864094097170090409, guid: 65d664973c5b5e44a86d8e35e60f905e,
+        type: 3}
+      propertyPath: recoilScale
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 65d664973c5b5e44a86d8e35e60f905e, type: 3}
@@ -4780,12 +4782,12 @@ PrefabInstance:
         type: 3}
       propertyPath: structure
       value: 
-      objectReference: {fileID: 1206108905}
+      objectReference: {fileID: 0}
     - target: {fileID: 8620820812481170560, guid: 65e3adadf46c5234eaae3360f2b440a4,
         type: 3}
       propertyPath: moveStructureToPointEngine
       value: 
-      objectReference: {fileID: 1094057876}
+      objectReference: {fileID: 0}
     - target: {fileID: 8620820813915287456, guid: 65e3adadf46c5234eaae3360f2b440a4,
         type: 3}
       propertyPath: m_Name

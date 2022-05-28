@@ -27,6 +27,7 @@ namespace Core.Combat
         [SerializeField] Animator animator;
         [SerializeField] SpriteRenderer sprite;
         [SerializeField] bool hitShakeCamera;
+        public float recoilScale = 0f;
         protected Vector2 baseScale;
         protected Color baseColor;
         protected Material baseMaterial;
@@ -42,10 +43,27 @@ namespace Core.Combat
             Init();
         }
 
-        public void OnAttackHit(GameObject aggressor = null)
+        public void OnAttackHit(Vector2 direction)
         {
             OnHit?.Invoke();
+            ReactHit();
+            Recoil(direction);
+        }
 
+        private void Recoil(Vector2 direction)
+        {
+            if (!CanRecoil())
+                return;
+
+            Vector2 recoilDirection = direction.normalized;
+            Debug.Log(recoilDirection * recoilScale);
+            body.AddForce(recoilDirection * recoilScale, ForceMode2D.Impulse);
+        }
+
+        private bool CanRecoil() => body != null;
+
+        private void ReactHit()
+        {
             Tween tween = null;
 
             if (hitType == HitType.Inflate)

@@ -135,7 +135,7 @@ namespace Core.Player.Controller
 
         private void ComputeSideHurtAnimation(Transform other)
         {
-            Side side = Function.CollisionSide(transform, other.transform);
+            Side side = Function.RelativeCollisionSide(transform, other.transform);
 
             if (side == Side.Back)
                 Animator.SetTrigger(CharacterAnimations.BackHurt);

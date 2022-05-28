@@ -11,7 +11,7 @@ namespace Core.Shared
         // pre: --
         // post: compute if collision is made from front or backs
         //      if collision is made in center, returns back and front randomly
-        public static Side CollisionSide(Transform origin, Transform other)
+        public static Side RelativeCollisionSide(Transform origin, Transform other)
         {
             Vector3 direction = origin.InverseTransformPoint(other.position);
             if (direction.x < 0)
@@ -23,6 +23,17 @@ namespace Core.Shared
                 return Side.Front;
             }
             return Random.Range(0, 2) == 0 ? Side.Back : Side.Front;
+        }
+
+        // def: from external point of view, compute if collision is made from front or backs
+        public static Face CollisionSide(Transform origin, Transform other)
+        {
+            bool sameX = origin.position.x == other.position.x;
+
+            if (sameX)
+                 return Random.Range(0, 2) == 0 ? Face.Left : Face.Right;
+
+            return origin.position.x < other.position.x ? Face.Left : Face.Right;
         }
 
         // pre: --
