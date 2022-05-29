@@ -1,12 +1,12 @@
 using BehaviorDesigner.Runtime;
+using BehaviorDesigner.Runtime.Tasks;
 using UnityEngine;
 
 namespace Core.Combat.IA.Behavior.Action
 {
-    // description: moves current IA to point
     public class Recoil : BehaviorDesigner.Runtime.Tasks.Action
     {
-        public float recoilScale = 0f;
+        public SharedFloat recoilScale = 0f;
         public SharedVector2 recoilDirection = Vector2.zero;
         private Rigidbody2D body => GetComponent<Rigidbody2D>();
 
@@ -15,9 +15,14 @@ namespace Core.Combat.IA.Behavior.Action
             ApplyRecoil(recoilDirection.Value);
         }
 
+        public override TaskStatus OnUpdate()
+        {
+            return TaskStatus.Success;
+        }
+
         private void ApplyRecoil(Vector2 direction)
         {
-            Vector2 recoilForce = direction.normalized * recoilScale;
+            Vector2 recoilForce = direction.normalized * recoilScale.Value;
             body.bodyType = RigidbodyType2D.Dynamic;
             body.AddForce(recoilForce, ForceMode2D.Impulse);
         }
