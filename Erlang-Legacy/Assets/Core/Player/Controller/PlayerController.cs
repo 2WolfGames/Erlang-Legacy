@@ -114,7 +114,7 @@ namespace Core.Player.Controller
         // post: applies damage to player. 1 unit of damage represent 1 unit of life taken
         public void Hurt(int damage, GameObject other)
         {
-            if (protectable.IsProtected)
+            if (protectable.IsProtected || !IsAlive())
                 return;
 
             FreezeMovement();
@@ -190,6 +190,7 @@ namespace Core.Player.Controller
         public void OnDie()
         {
             controllable = false;
+            FreezeMovement();
             Animator.SetTrigger(CharacterAnimations.Die);
         }
 
