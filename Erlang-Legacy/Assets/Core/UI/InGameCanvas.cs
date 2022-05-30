@@ -12,7 +12,7 @@ namespace Core.UI
         //post: puts transparency of death image to 1 after a period of time.
         public void ActiveDeathImage()
         {
-            deathImage.DOFade(1, 2).SetDelay(1.5f);
+            deathImage.DOFade(1, 3).SetDelay(2f);
         }
     }
 }

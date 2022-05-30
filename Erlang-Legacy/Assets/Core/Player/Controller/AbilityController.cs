@@ -24,7 +24,7 @@ namespace Core.Player.Controller
         private float rayTimer;
         private PlayerController player => PlayerController.Instance;
         private PlayerData PlayerData => player.PlayerData;
-        private RayProjectile projectilePrefab => projectileData.Projectile;
+        private VengefulProjectile projectilePrefab => projectileData.Projectile;
         private float projectileSpeed => projectileData.Speed;
         private float projectileTimeout => projectileData.Lifetime;
         private Transform projectileOrigin => projectileData.Origin;
@@ -39,7 +39,7 @@ namespace Core.Player.Controller
 
         private Stats playerStats => player.Stats;
 
-        public void Awake()
+        public void Start()
         {
             dashTrigger.Interact = false;
             punchTrigger.Interact = false;
@@ -162,16 +162,15 @@ namespace Core.Player.Controller
         public void InvokeRay()
         {
             Vector2 force = Vector2.right * FacingValue * projectileSpeed;
-            RayProjectile instance = Instantiate(projectilePrefab, projectileOrigin.position, Quaternion.identity);
+            VengefulProjectile instance = Instantiate(projectilePrefab, projectileOrigin.position, Quaternion.identity);
             instance.SetForce(force);
-            instance.OnColliding += OnRayColliding;
             instance.gameObject.Disposable(projectileTimeout);
         }
 
-        private void OnRayColliding(Collider2D other)
+        public void OnRayHit(Collider2D other)
         {
-            // make enemy damage
-            Debug.Log("Hitting enemy at ray");
+            Debug.Log("ray hit");
+            OnHit(other, playerStats.rayDamage);
         }
 
         public void FreezeMovementOnFlurryPunching()

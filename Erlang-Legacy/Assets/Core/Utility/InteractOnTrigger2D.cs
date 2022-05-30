@@ -16,7 +16,7 @@ namespace Core.Utility
         }
         public Collider2DEvent OnEnter, OnExit;
         private Collider2D m_Collider;
-        private bool interact = false;
+        public bool interact = false;
 
         public void Awake()
         {
