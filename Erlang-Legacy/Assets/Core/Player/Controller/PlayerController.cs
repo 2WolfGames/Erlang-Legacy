@@ -61,6 +61,11 @@ namespace Core.Player.Controller
             movementController.OnDashStart += OnDashStart;
         }
 
+        private void Start()
+        {
+            if (!IsAlive()) OnDie();
+        }
+
         // called when dash animation ends
         public void OnDashComplete()
         {
@@ -128,6 +133,8 @@ namespace Core.Player.Controller
 
             if (IsAlive())
                 OnRecoverStart();
+            else
+                OnDie();
         }
 
         private void TakeLifes(int damage)
@@ -138,7 +145,7 @@ namespace Core.Player.Controller
 
         private void ComputeSideHurtAnimation(Transform other)
         {
-            Side side = Function.CollisionSide(transform, other.transform);
+            Side side = Function.RelativeCollisionSide(transform, other.transform);
 
             if (side == Side.Back)
                 Animator.SetTrigger(CharacterAnimations.BackHurt);

@@ -125,8 +125,7 @@ namespace Core.GameSession
         //post: returns player to it's status of the last save
         public void ResetGameToLastSave()
         {
-            PlayerController.Instance.OnDie();
-
+            //PlayerController.Instance.OnDie();
             FindObjectOfType<InGameCanvas>()?.ActiveDeathImage();
 
             loadData = true;

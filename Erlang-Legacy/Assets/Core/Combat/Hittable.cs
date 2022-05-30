@@ -1,5 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using BehaviorDesigner.Runtime;
+using Core.IA.Behavior;
 using Core.Shared;
 using Core.Utility;
 using DG.Tweening;
@@ -27,14 +28,14 @@ namespace Core.Combat
         [SerializeField] Animator animator;
         [SerializeField] SpriteRenderer sprite;
         [SerializeField] bool hitShakeCamera;
+        public float recoilScale = 0f;
         protected Vector2 baseScale;
         protected Color baseColor;
         protected Material baseMaterial;
         private Color defaultColor = Color.white;
         private Rigidbody2D body => GetComponent<Rigidbody2D>();
-        public Action OnHit;
-
-        List<Tween> tweens = new List<Tween>();
+        protected BehaviorTree behaviorTree => GetComponent<BehaviorTree>();
+        private List<Tween> tweens = new List<Tween>();
 
         // Start is called before the first frame update
         public virtual void Awake()
@@ -42,10 +43,40 @@ namespace Core.Combat
             Init();
         }
 
-        public void OnAttackHit(GameObject aggressor = null)
+        public void OnAttackHit()
         {
-            OnHit?.Invoke();
+            ReactHit();
+        }
 
+        public void OnAttackHit(Vector2 direction)
+        {
+            ReactHit();
+            Recoil(direction);
+        }
+
+        private void Recoil(Vector2 direction)
+        {
+            Vector2 norm = direction.normalized;
+            if (behaviorTree)
+                NotifyRecoilEvent(norm);
+            else ApplyRecoil(norm);
+        }
+
+        private void ApplyRecoil(Vector2 direction)
+        {
+            Vector2 recoilForce = direction.normalized * recoilScale;
+            body.AddForce(recoilForce, ForceMode2D.Impulse);
+        }
+
+        private void NotifyRecoilEvent(Vector2 direction)
+        {
+            behaviorTree.GetVariable(Variables.RecoilDirecton)?.SetValue(direction);
+            behaviorTree.GetVariable(Variables.RecoilScale)?.SetValue(recoilScale);
+            behaviorTree.SendEvent(Events.Recoil);
+        }
+
+        private void ReactHit()
+        {
             Tween tween = null;
 
             if (hitType == HitType.Inflate)

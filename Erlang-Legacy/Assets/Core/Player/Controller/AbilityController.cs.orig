@@ -126,18 +126,26 @@ namespace Core.Player.Controller
 
         public void OnPunchLand(Collider2D other)
         {
+<<<<<<< HEAD
             int damage = playerStats.punchDamage;
             OnHit(other, damage);
+=======
+            Destroyable destroyable = other.GetComponent<Destroyable>();
+            destroyable?.OnAttackHit(playerStats.punchDamage);
+>>>>>>> @{-1}
         }
 
         public void OnSpearLand(Collider2D other)
         {
+<<<<<<< HEAD
             int damage = playerStats.dashDamage;
             OnHit(other, damage);
         }
 
         private void OnHit(Collider2D other, int damage)
         {
+=======
+>>>>>>> @{-1}
             Destroyable destroyable = other.GetComponent<Destroyable>();
 
             Face face = Function.CollisionSide(other.transform, transform);
@@ -170,7 +178,8 @@ namespace Core.Player.Controller
         public void OnRayHit(Collider2D other)
         {
             Debug.Log("ray hit");
-            OnHit(other, playerStats.rayDamage);
+            Destroyable destroyable = other.GetComponent<Destroyable>();
+            destroyable?.OnAttackHit(playerStats.rayDamage);
         }
 
         public void FreezeMovementOnFlurryPunching()
