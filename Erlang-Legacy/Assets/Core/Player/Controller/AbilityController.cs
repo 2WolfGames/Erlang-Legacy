@@ -121,6 +121,9 @@ namespace Core.Player.Controller
 
             punchTrigger.Interact = true;
 
+            if (punchParticle)
+                punchParticle.Play();
+
             DOVirtual.DelayedCall(0.1f, () => punchTrigger.Interact = false);
         }
 
