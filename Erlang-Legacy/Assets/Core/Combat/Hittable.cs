@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using BehaviorDesigner.Runtime;
+using Core.IA.Behavior;
 using Core.Shared;
 using Core.Utility;
 using DG.Tweening;
@@ -69,9 +70,9 @@ namespace Core.Combat
 
         private void NotifyRecoilEvent(Vector2 direction)
         {
-            behaviorTree.GetVariable("recoilDirection")?.SetValue(direction);
-            behaviorTree.GetVariable("recoilScale")?.SetValue(recoilScale);
-            behaviorTree.SendEvent("recoil");
+            behaviorTree.GetVariable(Variables.RecoilDirecton)?.SetValue(direction);
+            behaviorTree.GetVariable(Variables.RecoilScale)?.SetValue(recoilScale);
+            behaviorTree.SendEvent(Events.Recoil);
         }
 
         private void ReactHit()
