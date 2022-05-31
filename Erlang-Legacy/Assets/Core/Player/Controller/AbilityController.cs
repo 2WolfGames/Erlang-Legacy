@@ -18,7 +18,6 @@ namespace Core.Player.Controller
         [SerializeField] ProjectileData projectileData;
         [SerializeField] DamageAreaData damageAreas;
         [SerializeField] ParticleSystem punchParticle;
-
         private InteractOnTrigger2D dashTrigger => damageAreas.Dash;
         private InteractOnTrigger2D punchTrigger => damageAreas.Punch;
         private float rayTimer;
