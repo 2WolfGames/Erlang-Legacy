@@ -16,7 +16,8 @@ namespace Core.GameSession
         public Vector3 currentSavePos { get; private set; }
         private EntranceID entranceTag;
         private bool inDieProcess = false;
-        public bool LoadData {
+        public bool LoadData
+        {
             get => loadData;
             set
             {
@@ -67,10 +68,15 @@ namespace Core.GameSession
 
             inDieProcess = false;
 
-            if (entranceTag != EntranceID.None)
-                SearchEntrance();
-            else
+            if (loadData) //player has died 
+            {
+                LoadSavedData();
                 PlacePlayer();
+            }
+            else if (entranceTag != EntranceID.None) //player came from other scene
+            {
+                SearchEntrance();
+            }
 
             SetUpPlayerLifes();
         }
@@ -83,7 +89,7 @@ namespace Core.GameSession
                 return;
 
             var playerCurrentHealth = PlayerController.Instance.PlayerData.Health.HP;
-            if (!inDieProcess & playerCurrentHealth == 0)
+            if (!inDieProcess & playerCurrentHealth <= 0)
             {
                 inDieProcess = true;
                 ResetGameToLastSave();
@@ -119,10 +125,13 @@ namespace Core.GameSession
         //post: returns player to it's status of the last save
         public void ResetGameToLastSave()
         {
-            PlayerController.Instance.OnDie();
-
+            //PlayerController.Instance.OnDie();
             FindObjectOfType<InGameCanvas>()?.ActiveDeathImage();
-            StartCoroutine(Loader.LoadWithDelay((SceneID)LoadSavedData(), 5f));
+
+            loadData = true;
+
+            PlayerState playerState = SaveSystem.LoadPlayerState();
+            StartCoroutine(Loader.LoadWithDelay((SceneID)playerState.scene, 5f));
         }
 
         //pre: entranceTag != entranceID.None

@@ -2,6 +2,8 @@
 using Core.Combat.Projectile;
 using Core.Player.Data;
 using Core.Player.Util;
+using Core.Shared;
+using Core.Shared.Enum;
 using Core.Utility;
 using DG.Tweening;
 using UnityEngine;
@@ -119,19 +121,32 @@ namespace Core.Player.Controller
 
             punchTrigger.Interact = true;
 
+            if (punchParticle)
+                punchParticle.Play();
+
             DOVirtual.DelayedCall(0.1f, () => punchTrigger.Interact = false);
         }
 
         public void OnPunchLand(Collider2D other)
         {
-            Destroyable destroyable = other.GetComponent<Destroyable>();
-            destroyable?.OnAttackHit(playerStats.punchDamage);
+            int damage = playerStats.punchDamage;
+            OnHit(other, damage);
         }
 
         public void OnSpearLand(Collider2D other)
         {
+            int damage = playerStats.dashDamage;
+            OnHit(other, damage);
+        }
+
+        private void OnHit(Collider2D other, int damage)
+        {
             Destroyable destroyable = other.GetComponent<Destroyable>();
-            destroyable?.OnAttackHit(playerStats.dashDamage);
+
+            Face face = Function.CollisionSide(other.transform, transform);
+            Vector2 direction = face == Face.Right ? Vector2.right : Vector2.left;
+
+            destroyable?.OnAttackHit(damage, direction);
         }
 
         private void OnRayAnimationStart()
@@ -158,8 +173,7 @@ namespace Core.Player.Controller
         public void OnRayHit(Collider2D other)
         {
             Debug.Log("ray hit");
-            Destroyable destroyable = other.GetComponent<Destroyable>();
-            destroyable?.OnAttackHit(playerStats.rayDamage);
+            OnHit(other, playerStats.rayDamage);
         }
 
         public void FreezeMovementOnFlurryPunching()

@@ -37,13 +37,11 @@ namespace Core.Hazard
         private IEnumerator ResetSavePoint()
         {
             PlayerController player = PlayerController.Instance;
-            bool playerSurvives = player.PlayerData.Health.HP - damage > 0;
-
             player.Hurt(damage, gameObject);
 
             yield return new WaitForSeconds(cWaitTime);
 
-            if (playerSurvives)
+            if (player.IsAlive())
                 player.transform.position = GameSessionController.Instance.currentSavePos;
 
             playerIn = false;

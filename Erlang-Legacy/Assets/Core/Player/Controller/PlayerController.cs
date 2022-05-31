@@ -61,6 +61,11 @@ namespace Core.Player.Controller
             movementController.OnDashStart += OnDashStart;
         }
 
+        private void Start()
+        {
+            if (!IsAlive()) OnDie();
+        }
+
         // called when dash animation ends
         public void OnDashComplete()
         {
@@ -114,7 +119,7 @@ namespace Core.Player.Controller
         // post: applies damage to player. 1 unit of damage represent 1 unit of life taken
         public void Hurt(int damage, GameObject other)
         {
-            if (protectable.IsProtected)
+            if (protectable.IsProtected || !IsAlive())
                 return;
 
             FreezeMovement();
@@ -128,6 +133,8 @@ namespace Core.Player.Controller
 
             if (IsAlive())
                 OnRecoverStart();
+            else
+                OnDie();
         }
 
         private void TakeLifes(int damage)
@@ -138,7 +145,7 @@ namespace Core.Player.Controller
 
         private void ComputeSideHurtAnimation(Transform other)
         {
-            Side side = Function.CollisionSide(transform, other.transform);
+            Side side = Function.RelativeCollisionSide(transform, other.transform);
 
             if (side == Side.Back)
                 Animator.SetTrigger(CharacterAnimations.BackHurt);
@@ -190,6 +197,7 @@ namespace Core.Player.Controller
         public void OnDie()
         {
             controllable = false;
+            FreezeMovement();
             Animator.SetTrigger(CharacterAnimations.Die);
         }
 
