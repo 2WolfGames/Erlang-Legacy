@@ -1,7 +1,7 @@
 {
 "companyName": "DefaultCompany",
 "productName": "Ajax-TheGame",
-"productVersion": "0.0.163",
+"productVersion": "0.0.164",
 "dataUrl": "WebGL.data.unityweb",
 "wasmCodeUrl": "WebGL.wasm.code.unityweb",
 "wasmFrameworkUrl": "WebGL.wasm.framework.unityweb",
