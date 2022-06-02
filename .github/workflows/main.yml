@@ -1,4 +1,4 @@
-name: GameCI Template 🎮
+name: Erlang-Legacy CI 🎮
 
 on: push
 
@@ -23,13 +23,14 @@ jobs:
     name: Build for WebGL 🖥️
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout code 👁️‍🗨️
         uses: actions/checkout@v2
         with:
           lfs: true
 
       # Cache
-      - uses: actions/cache@v2
+      - name: Cache dependencies 🔄️
+        uses: actions/cache@v2
         with:
           path: ${{ env.PROJECT_PATH }}/Library
           key: Library-${{ hashFiles('${{ env.PROJECT_PATH }}/Assets/**', '${{ env.PROJECT_PATH }}/Packages/**', '${{ env.PROJECT_PATH }}/ProjectSettings/**') }}
@@ -37,7 +38,7 @@ jobs:
             Library-
 
       # Build
-      - name: Build project
+      - name: Build project 🔧
         uses: game-ci/unity-builder@v2
         env:
           UNITY_LICENSE: ${{ env.UNITY_LICENSE }}
@@ -48,9 +49,10 @@ jobs:
           targetPlatform: WebGL
 
       # Output
-      - uses: actions/upload-artifact@v2
+      - name: Upload artificat ⬆️
+        uses: actions/upload-artifact@v2
         with:
-          name: Build
+          name: build-WebGL
           path: build
 
   deployPages:
@@ -58,10 +60,11 @@ jobs:
     name: Deploy to Github Pages 🚀
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout code 👁️‍🗨️
         uses: actions/checkout@v2
 
-      - uses: actions/download-artifact@v2
+      - name: Download artificat ⬇️
+        uses: actions/download-artifact@v2
         with:
           name: build-WebGL
           path: build
