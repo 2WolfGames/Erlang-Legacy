@@ -31,7 +31,7 @@ jobs:
       # Cache
       - uses: actions/cache@v2
         with:
-          path: ${{ matrix.projectPath }}/Library
+          path: ${{ env.PROJECT_PATH }}/Library
           key: Library-${{ hashFiles('${{ env.PROJECT_PATH }}/Assets/**', '${{ env.PROJECT_PATH }}/Packages/**', '${{ env.PROJECT_PATH }}/ProjectSettings/**') }}
           restore-keys: |
             Library-
