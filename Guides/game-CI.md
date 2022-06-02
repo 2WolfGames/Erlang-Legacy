@@ -40,6 +40,10 @@ To make de CI you need to add to your deploy pipeline some build in actions
  - actions/download-artifact@v2 (builder for downloading artifacts)
  - JamesIves/github-pages-deploy-action@4.1.4 (for deploying to github pages)
 
+TO MORE INFORMATION GO TO:
+  
+    https://game.ci/docs/github/getting-started
+
 example:
 ```
 name: Erlang-Legacy CI 🎮
