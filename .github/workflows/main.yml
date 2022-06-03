@@ -1,6 +1,9 @@
 name: Erlang-Legacy CI 🎮
 
-on: push
+on: 
+  push:
+    tags:
+      - '**'
 
 env:
   UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
