@@ -19,6 +19,8 @@ namespace Core.Player.Controller
         {
             L, R
         }
+
+        [Range(0.1f, 1f)] public float punchDrag = 0.2f;
         public float punchMemoryDuration = 2f;
         [SerializeField] ProjectileData projectileData;
         [SerializeField] DamageAreaData damageAreas;
@@ -42,6 +44,7 @@ namespace Core.Player.Controller
         private bool wannaPunch = false;
         private bool controllable => player.Controllable;
         private Stats playerStats => player.Stats;
+        private MovementController movementController => GetComponent<MovementController>();
 
         public void Start()
         {
@@ -68,11 +71,12 @@ namespace Core.Player.Controller
 
         public void FixedUpdate()
         {
-            if (wannaPunch)
+            if (wannaPunch && controllable)
             {
                 Punch();
-                wannaPunch = false;
             }
+
+            if (wannaPunch) wannaPunch = false;
         }
 
         private void Punch()
@@ -86,8 +90,6 @@ namespace Core.Player.Controller
 
         private void PunchStart()
         {
-            Debug.Log("PunchStart");
-
             if (punchMemoryTimer <= 0)
             {
                 punchFist = RandomFist();
@@ -98,14 +100,17 @@ namespace Core.Player.Controller
             }
             punchTrigger.Interact = true;
             punching = true;
+            punchParticle?.Play();
+            movementController.Acceleration = punchDrag;
             StartPunchAnimation(punchFist);
         }
 
         private void PunchEnd()
         {
-            punchTrigger.Interact = false;
             punchMemoryTimer = punchMemoryDuration;
+            punchTrigger.Interact = false;
             punching = false;
+            movementController.Acceleration = 1f;
         }
 
         private void StartPunchAnimation(Fist punchFist)
