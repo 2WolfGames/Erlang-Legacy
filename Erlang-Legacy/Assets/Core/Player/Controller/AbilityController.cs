@@ -15,12 +15,20 @@ namespace Core.Player.Controller
     //   manages when abilities can be triggered
     public class AbilityController : MonoBehaviour
     {
+        private enum Fist
+        {
+            L, R
+        }
+        public float punchMemoryDuration = 2f;
         [SerializeField] ProjectileData projectileData;
         [SerializeField] DamageAreaData damageAreas;
         [SerializeField] ParticleSystem punchParticle;
         private InteractOnTrigger2D dashTrigger => damageAreas.Dash;
         private InteractOnTrigger2D punchTrigger => damageAreas.Punch;
         private float rayTimer;
+        private Fist punchFist;
+        private bool punching;
+        private float punchMemoryTimer;
         private PlayerController player => PlayerController.Instance;
         private PlayerData PlayerData => player.PlayerData;
         private VengefulProjectile projectilePrefab => projectileData.Projectile;
@@ -32,10 +40,7 @@ namespace Core.Player.Controller
         private Animator animator => player.Animator;
         public bool CanInvokeRay => rayTimer <= 0 && controllable;
         private bool wannaPunch = false;
-        private bool flurryPunching = false;
         private bool controllable => player.Controllable;
-        private bool canStartFlurryPunches => wannaPunch && !flurryPunching && controllable;
-
         private Stats playerStats => player.Stats;
 
         public void Start()
@@ -49,14 +54,12 @@ namespace Core.Player.Controller
             if (rayTimer > 0)
                 rayTimer -= Time.deltaTime;
 
+            if (punchMemoryTimer > 0)
+                punchMemoryTimer -= Time.deltaTime;
+
             if (Input.GetButtonDown(CharacterActions.Punch))
             {
                 wannaPunch = true;
-            }
-
-            if (Input.GetButtonUp(CharacterActions.Punch))
-            {
-                wannaPunch = false;
             }
 
             if (Input.GetButton(CharacterActions.InvokeRay) && CanInvokeRay)
@@ -65,7 +68,69 @@ namespace Core.Player.Controller
 
         public void FixedUpdate()
         {
-            FlurryPuches();
+            if (wannaPunch)
+            {
+                Punch();
+                wannaPunch = false;
+            }
+        }
+
+        private void Punch()
+        {
+            if (punching)
+                return;
+
+            PunchStart();
+            DOVirtual.DelayedCall(0.1f, PunchEnd);
+        }
+
+        private void PunchStart()
+        {
+            Debug.Log("PunchStart");
+
+            if (punchMemoryTimer <= 0)
+            {
+                punchFist = RandomFist();
+            }
+            else
+            {
+                punchFist = NextFist();
+            }
+            punchTrigger.Interact = true;
+            punching = true;
+            StartPunchAnimation(punchFist);
+        }
+
+        private void PunchEnd()
+        {
+            punchTrigger.Interact = false;
+            punchMemoryTimer = punchMemoryDuration;
+            punching = false;
+        }
+
+        private void StartPunchAnimation(Fist punchFist)
+        {
+            if (punchFist == Fist.L)
+            {
+                animator.SetTrigger(CharacterAnimations.LPunch);
+            }
+            else
+            {
+                animator.SetTrigger(CharacterAnimations.RPunch);
+            }
+        }
+
+        private Fist NextFist()
+        {
+            if (punchFist == Fist.L)
+                return Fist.R;
+            else
+                return Fist.L;
+        }
+
+        private Fist RandomFist()
+        {
+            return (Fist)Random.Range(0, 2);
         }
 
         public void OnDashComplete()
@@ -86,45 +151,6 @@ namespace Core.Player.Controller
             dashTrigger.Interact = true;
         }
 
-        private void FlurryPuches()
-        {
-            if (!canStartFlurryPunches) return;
-
-            animator.SetTrigger(CharacterAnimations.FlurryPunching);
-        }
-
-        // should be called at very first frame of flurry punching animation
-        public void OnFlurryPunchingStart()
-        {
-            if (!controllable) return;
-
-            flurryPunching = true;
-            player.Controllable = false;
-
-            FreezeMovementOnFlurryPunching();
-        }
-
-        // should be called at very last frame of flurry punching animation
-        public void OnFlurryPunchingEnd()
-        {
-            if (!flurryPunching) return;
-
-            flurryPunching = false;
-            player.Controllable = true;
-        }
-
-        // should be called after every punch in flurry punch animation
-        public void OnFlurryPunchingPunch()
-        {
-            if (!flurryPunching) return;
-
-            punchTrigger.Interact = true;
-
-            if (punchParticle)
-                punchParticle.Play();
-
-            DOVirtual.DelayedCall(0.1f, () => punchTrigger.Interact = false);
-        }
 
         public void OnPunchLand(Collider2D other)
         {
@@ -174,12 +200,6 @@ namespace Core.Player.Controller
             Debug.Log("ray hit");
             OnHit(other, playerStats.rayDamage);
         }
-
-        public void FreezeMovementOnFlurryPunching()
-        {
-            player.FreezeMovement();
-        }
-
     }
 
 }
