@@ -7,7 +7,8 @@ namespace Core.Player.Util
     {
         public static readonly int Die = Animator.StringToHash("die");
         public static readonly int Ray = Animator.StringToHash("ray");
-        public static readonly int FlurryPunching = Animator.StringToHash("flurry_panches");
+        public static readonly int LPunch = Animator.StringToHash("lpunch");
+        public static readonly int RPunch = Animator.StringToHash("rpunch");
         public static readonly int Dash = Animator.StringToHash("dash");
         public static readonly int StartJump = Animator.StringToHash("jump");
         public static readonly int Jumping = Animator.StringToHash("jumping");
