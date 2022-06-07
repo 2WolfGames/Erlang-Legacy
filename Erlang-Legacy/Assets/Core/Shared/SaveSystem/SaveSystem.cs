@@ -45,7 +45,7 @@ namespace Core.Shared.SaveSystem
             }
             else
             {
-                throw new System.Exception("Data files not found. Unable to load game.");
+                return PlayerStateDefaultValues();
             }
         }
 
