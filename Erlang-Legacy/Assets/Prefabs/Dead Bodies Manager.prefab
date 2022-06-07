@@ -43,4 +43,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba4dfa62a59d72f4b9c17709c222e5be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cleanBodiesCollected: 0
+  spawnType: 1
+  localSpawnPoint: {fileID: 0}

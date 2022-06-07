@@ -11,7 +11,7 @@ namespace Core.Combat.IA.Action
 {
     public class DestroyIA : EnemyAction
     {
-        public SharedParticleSystem  bleedEffect;
+        public SharedParticleSystem bleedEffect;
         public SharedFloat bleedDuration;
         public SharedParticleSystem explosionEffect;
         public SharedSpriteRenderer deadBody;
@@ -50,7 +50,7 @@ namespace Core.Combat.IA.Action
         private void SpawnDeadBody()
         {
             var facing = transform.localScale.x < 0 ? SharedEnum.Face.Left : SharedEnum.Face.Right;
-            DeadBodiesManager.Instance?.Spawn(deadBody.Value, transform.position, facing);
+            CorpsesManager.Instance?.Spawn(deadBody.Value, transform.position, facing);
         }
     }
 }
