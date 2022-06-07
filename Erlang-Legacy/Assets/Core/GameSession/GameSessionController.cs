@@ -89,7 +89,7 @@ namespace Core.GameSession
                 return;
 
             var playerCurrentHealth = PlayerController.Instance.PlayerData.Health.HP;
-            if (!inDieProcess & playerCurrentHealth <= 0)
+            if (!inDieProcess && playerCurrentHealth <= 0)
             {
                 inDieProcess = true;
                 ResetGameToLastSave();

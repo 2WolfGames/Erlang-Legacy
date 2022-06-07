@@ -41,17 +41,14 @@ namespace Core.Player.Util
 
         public void OnPunch()
         {
-            playerAbilityController?.OnFlurryPunchingPunch();
         }
 
         public void OnPunchStart()
         {
-            playerAbilityController?.OnFlurryPunchingStart();
         }
 
         public void OnPunchEnd()
         {
-            playerAbilityController?.OnFlurryPunchingEnd();
         }
 
     }

@@ -378,6 +378,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c069eab55c8c52e48a1694f2b6db354a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  punchDrag: 0.2
+  punchMemoryDuration: 2
   projectileData:
     projectile: {fileID: 7387710299905422874, guid: c4740bcc5bc007640b0bb2cb7af30eac,
       type: 3}
