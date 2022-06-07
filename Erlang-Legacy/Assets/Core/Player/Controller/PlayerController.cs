@@ -50,6 +50,8 @@ namespace Core.Player.Controller
         public Animator Animator => GetComponentInChildren<Animator>();
         public static PlayerController Instance { get; private set; }
 
+        public bool Punching => abilityController.Punching;
+
         protected void Awake()
         {
             var matches = FindObjectsOfType<PlayerController>();
