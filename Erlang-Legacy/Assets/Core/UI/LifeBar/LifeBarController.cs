@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Core.Player;
 using Core.Shared;
 using UnityEngine;
 
@@ -14,6 +15,7 @@ namespace Core.UI.LifeBar
         const float cCoroutineReflectLifeWait = 0.35f;
 
         //// Serialized variables ////
+        [SerializeField] Health playerHealth;
         [SerializeField] GameObject lifePrefab;
         [SerializeField] GameObject emptyLifePrefab;
         [SerializeField] List<LifeBarContainer> lifeContainers;
@@ -41,13 +43,34 @@ namespace Core.UI.LifeBar
             pendentChanges = new Queue<(LifeBarAction, int)>();
         }
 
+        void Start() {
+            SetUpLifes(playerHealth.HP,playerHealth.MaxHP);
+        }
+
         //pre: --
         //post:-- If we have pendent changes, we call the queue manager
         void FixedUpdate()
         {
-            if (!modifying && pendentChanges.Count != 0)
+            if (!modifying)
             {
-                StartCoroutine(ManageQueue());
+                /*Update Queue*/
+                if (pendentChanges.Count != 0){
+                    StartCoroutine(ManageQueue());
+                } else if (currentLifes > 0) {
+                /*Control changes*/
+                    if (totalLifes != playerHealth.MaxHP) {
+                        SetUpNewLife();
+                    }
+                    else if (currentLifes > playerHealth.HP) {
+                        LoseLifes(currentLifes - playerHealth.HP);
+                    }
+                    else if (currentLifes < playerHealth.HP && playerHealth.HP != playerHealth.MaxHP ) {
+                        GainLifes(currentLifes - playerHealth.HP);
+                    }
+                    if (currentLifes < playerHealth.HP && playerHealth.HP == playerHealth.MaxHP) {
+                        HealAllLifes();
+                    }
+                }
             }
         }
 

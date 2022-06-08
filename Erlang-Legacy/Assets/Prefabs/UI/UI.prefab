@@ -35,7 +35,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 116.79993, y: 0}
+  m_AnchoredPosition: {x: 116.80005, y: 0}
   m_SizeDelta: {x: 1030.4446, y: 537.9159}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1253798728
@@ -675,7 +675,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 429.34998, y: 122.89996}
+  m_AnchoredPosition: {x: 429.34998, y: 122.8999}
   m_SizeDelta: {x: 858.70233, y: 245.70038}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &8276761857583315706
@@ -6121,6 +6121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba49d5242cf342e4c8293af9af9e318f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerHealth: {fileID: 11400000, guid: 38fc894eb3e78bf41a143ce13b99757c, type: 2}
   lifePrefab: {fileID: 7215511396644430785, guid: f8e3fcc301ae07b40a0d3c60f2db1c9b,
     type: 3}
   emptyLifePrefab: {fileID: 5312285443469036919, guid: df99377ed514f2444a784323fe541500,
