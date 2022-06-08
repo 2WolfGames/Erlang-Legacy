@@ -86,7 +86,7 @@ namespace Core.Player.Controller
                 return;
 
             PunchStart();
-            DOVirtual.DelayedCall(0.1f, PunchEnd);
+            DOVirtual.DelayedCall(0.15f, PunchEnd);
         }
 
         private void PunchStart()
