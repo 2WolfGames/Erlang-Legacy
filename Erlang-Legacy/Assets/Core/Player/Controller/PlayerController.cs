@@ -141,7 +141,6 @@ namespace Core.Player.Controller
 
         private void TakeLifes(int damage)
         {
-            //LifeBarController.Instance?.LoseLifes(damage);
             playerData.Health.HP = playerData.Health.HP - damage;
         }
 
