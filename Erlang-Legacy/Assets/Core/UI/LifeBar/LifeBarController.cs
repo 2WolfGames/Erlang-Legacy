@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Core.Player;
 using Core.Shared;
 using UnityEngine;
 
@@ -14,6 +15,7 @@ namespace Core.UI.LifeBar
         const float cCoroutineReflectLifeWait = 0.35f;
 
         //// Serialized variables ////
+        [SerializeField] Health playerHealth;
         [SerializeField] GameObject lifePrefab;
         [SerializeField] GameObject emptyLifePrefab;
         [SerializeField] List<LifeBarContainer> lifeContainers;
@@ -25,8 +27,6 @@ namespace Core.UI.LifeBar
         Queue<(LifeBarAction, int)> pendentChanges;
         bool modifying;
 
-        public static LifeBarController Instance { get; private set; }
-
         //pre: --
         //post: We initialize what we need
         void Awake()
@@ -35,27 +35,47 @@ namespace Core.UI.LifeBar
 
             if (matches.Length > 1)
                 Destroy(gameObject);
-            else Instance = this;
-
+            
             lifeContainers = new List<LifeBarContainer>();
             pendentChanges = new Queue<(LifeBarAction, int)>();
+        }
+
+        void Start() {
+            SetUpLifes(playerHealth.HP,playerHealth.MaxHP);
         }
 
         //pre: --
         //post:-- If we have pendent changes, we call the queue manager
         void FixedUpdate()
         {
-            if (!modifying && pendentChanges.Count != 0)
+            if (!modifying)
             {
-                StartCoroutine(ManageQueue());
+                /*Update Queue*/
+                if (pendentChanges.Count != 0){
+                    StartCoroutine(ManageQueue());
+                } else if (currentLifes > 0) {
+                /*Control changes*/
+                    if (totalLifes != playerHealth.MaxHP) {
+                        SetUpNewLife();
+                    }
+                    else if (currentLifes > playerHealth.HP) {
+                        LoseLifes(currentLifes - playerHealth.HP);
+                    }
+                    else if (currentLifes < playerHealth.HP && playerHealth.HP != playerHealth.MaxHP ) {
+                        GainLifes(currentLifes - playerHealth.HP);
+                    }
+                    if (currentLifes < playerHealth.HP && playerHealth.HP == playerHealth.MaxHP) {
+                        HealAllLifes();
+                    }
+                }
             }
         }
 
-        #region  public methods
+        #region  queue modifyers
 
         //pre: initialLifes > 0 && < cMaxLifeContainers
         //post: it puts to the quque the proces that initializes the lifeBar
-        public void SetUpLifes(int currentLifes, int totalLifes)
+        private void SetUpLifes(int currentLifes, int totalLifes)
         {
             pendentChanges.Clear();
             modifying = false;
@@ -65,28 +85,28 @@ namespace Core.UI.LifeBar
 
         //pre: lifesUp > 0 
         //post: it puts to the quque the proces that gains/heals the lifeBar
-        public void GainLifes(int lifesUp)
+        private void GainLifes(int lifesUp)
         {
             pendentChanges.Enqueue((LifeBarAction.GainLife, lifesUp));
         }
 
         //pre: lifesOut > 0 
         //post: it puts to the quque the proces that loses lifes 
-        public void LoseLifes(int lifesOut)
+        private void LoseLifes(int lifesOut)
         {
             pendentChanges.Enqueue((LifeBarAction.LoseLife, lifesOut));
         }
 
         //pre: --
         //post: it puts to the quque the proces that heals all lifes 
-        public void HealAllLifes()
+        private void HealAllLifes()
         {
             pendentChanges.Enqueue((LifeBarAction.GainLife, totalLifes - currentLifes));
         }
 
         //pre: --
         //post: it puts to the quque the proces puts a new life to barlife
-        public void SetUpNewLife()
+        private void SetUpNewLife()
         {
             pendentChanges.Clear();
             pendentChanges.Enqueue((LifeBarAction.AddNewLife, 0));
@@ -94,7 +114,7 @@ namespace Core.UI.LifeBar
 
         #endregion
 
-        #region private methods
+        #region processes
 
         //pre: --
         //post: Manage Queue is the manager of the pendent changes.
