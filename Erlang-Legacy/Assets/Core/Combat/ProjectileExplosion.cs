@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Core.Combat
 {
+    [RequireComponent(typeof(Disposable))]
     public class ProjectileExplosion : MonoBehaviour
     {
         public HealthTaker healthTaker;
