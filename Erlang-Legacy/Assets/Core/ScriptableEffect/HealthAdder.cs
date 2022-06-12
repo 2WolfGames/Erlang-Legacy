@@ -3,7 +3,7 @@ using Core.Shared;
 using UnityEngine;
 
 
-namespace Core.Effect
+namespace Core.ScriptableEffect
 {
     [CreateAssetMenu(menuName = "Effect/HealthAdder")]
     public class HealthAdderEffect : Effect

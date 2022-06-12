@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Core.Effect
+namespace Core.ScriptableEffect
 {
     public abstract class Effect : ScriptableObject
     {

@@ -2,7 +2,7 @@
 using UnityEngine;
 
 
-namespace Core.Effect
+namespace Core.ScriptableEffect
 {
     // thought to add to elements in game
     // that removes life to ajax
@@ -12,6 +12,7 @@ namespace Core.Effect
         [SerializeField] int amount = 1;
         public override void Apply(GameObject self, GameObject other)
         {
+            Debug.Log($"{self.name} is taking {amount} damage from {other.name}");
             var player = other.GetComponent<PlayerController>();
             player?.Hurt(amount, self);
         }
