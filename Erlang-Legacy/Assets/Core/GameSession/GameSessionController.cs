@@ -55,7 +55,6 @@ namespace Core.GameSession
                 PlacePlayer();
             }
 
-            SetUpPlayerLifes();
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
 
@@ -78,7 +77,6 @@ namespace Core.GameSession
                 SearchEntrance();
             }
 
-            SetUpPlayerLifes();
         }
 
         //pre: if not waiting, player.instance != null
@@ -194,12 +192,5 @@ namespace Core.GameSession
             player.transform.position = currentSavePos;
         }
 
-        //pre: player.instance != null && lifebarcontroller.instance != null
-        //post: lifebar contains current player lifes 
-        private void SetUpPlayerLifes()
-        {
-            var playerHealth = PlayerController.Instance.PlayerData.Health;
-            LifeBarController.Instance.SetUpLifes(playerHealth.HP, playerHealth.MaxHP);
-        }
     }
 }
