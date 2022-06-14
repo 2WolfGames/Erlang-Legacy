@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 305921995f86be841bd3e45bbb205aec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifetime: 0.5
+  lifetime: 0.2
 --- !u!114 &2492043558519187857
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthTaker: {fileID: 11400000, guid: 2d266f964c0d82a4ab5028c0495f708d, type: 2}
-  explosionEffectPrefab: {fileID: 198731999422189334, guid: c5f99beb88686a342b1d3a911e99f8c1,
+  explosionEffectPrefab: {fileID: 198731999422189334, guid: c8a852e4d4b8fb644aa1593544dfbcab,
     type: 3}
 --- !u!58 &2492043558519187860
 CircleCollider2D:
