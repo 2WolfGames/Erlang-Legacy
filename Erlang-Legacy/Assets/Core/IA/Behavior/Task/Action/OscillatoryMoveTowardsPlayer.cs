@@ -1,3 +1,4 @@
+using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
 using Core.Combat.IA;
 using UnityEngine;
@@ -7,21 +8,26 @@ namespace Core.IA.Behavior.Task.Action
 {
     public class OscillatoryMoveTowardsPlayer : EnemyAction
     {
-        [SerializeField] float rotationSpeed = 5f;
-        [SerializeField] float linerSpeed = 3f;
+        // public SharedFloat rotationSpeed = 5f;
+        public SharedFloat speed = 3f;
+        public SharedFloat threshold = 0.005f;
 
         public override TaskStatus OnUpdate()
         {
             MoveTowards();
-            return TaskStatus.Success;
+            return InsideTreshold() ? TaskStatus.Success : TaskStatus.Running;
         }
 
         private void MoveTowards()
         {
             Transform playerTransform = player.transform;
-            var dir = playerTransform.position - transform.position;
-            transform.up = Vector3.MoveTowards(transform.up, dir, rotationSpeed * Time.deltaTime);
-            transform.position = Vector3.MoveTowards(transform.position, transform.position + transform.up, linerSpeed * Time.deltaTime);
+            var norm = (playerTransform.position - transform.position).normalized;
+            transform.position = Vector2.Lerp(transform.position, transform.position + norm + new Vector3(norm.x * Time.deltaTime, 0), speed.Value * Time.deltaTime);
+        }
+
+        private bool InsideTreshold()
+        {
+            return Vector2.Distance(transform.position, player.transform.position) <= threshold.Value;
         }
     }
 }
