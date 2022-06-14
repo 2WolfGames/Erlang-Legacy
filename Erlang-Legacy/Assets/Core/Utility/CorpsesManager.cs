@@ -46,7 +46,7 @@ namespace Core.Utility
                 case SpawnType.Local:
                     if (!localSpawnPoint)
                     {
-                        Debug.LogError("No local spawn point set");
+                        Debug.LogWarning("No local spawn point set, defaulting to global");
                         other.transform.SetParent(null);
                     }
                     else

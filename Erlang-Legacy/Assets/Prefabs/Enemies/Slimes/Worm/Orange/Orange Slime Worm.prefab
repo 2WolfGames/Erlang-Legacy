@@ -622,7 +622,8 @@ MonoBehaviour:
   hitMaterial: {fileID: 0}
   hitAnimation: {fileID: 0}
   animator: {fileID: 0}
-  sprite: {fileID: 8496883880999566029}
+  spriteRenderer: {fileID: 8496883880999566029}
+  hitSprite: {fileID: 0}
   hitShakeCamera: 0
   recoilScale: 0
   OnDestroyed:
