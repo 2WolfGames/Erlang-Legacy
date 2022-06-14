@@ -14,7 +14,7 @@ namespace Core.Combat
         {
             None,
             Inflate, // scale
-            Push,
+            Sprite,
             Color,
             Material,
             Animation
@@ -26,7 +26,8 @@ namespace Core.Combat
         [SerializeField] Material hitMaterial;
         [SerializeField] Animation hitAnimation;
         [SerializeField] Animator animator;
-        [SerializeField] SpriteRenderer sprite;
+        [SerializeField] SpriteRenderer spriteRenderer;
+        [SerializeField] Sprite hitSprite;
         [SerializeField] bool hitShakeCamera;
         public float recoilScale = 0f;
         protected Vector2 baseScale;
@@ -36,6 +37,7 @@ namespace Core.Combat
         private Rigidbody2D body => GetComponent<Rigidbody2D>();
         protected BehaviorTree behaviorTree => GetComponent<BehaviorTree>();
         private List<Tween> tweens = new List<Tween>();
+        private Sprite baseSprite;
 
         // Start is called before the first frame update
         public virtual void Awake()
@@ -87,27 +89,23 @@ namespace Core.Combat
                     .Append(transform.DOScale(baseScale, 0.1f))
                     .SetEase(Ease.Linear);
             }
-            else if (hitType == HitType.Push)
+            else if (hitType == HitType.Sprite)
             {
-                Debug.Log("push hit not supported yet");
-                // var sequence = DOTween.Sequence();
-                // sequence
-                //     .Append(transform.DOMoveX()
-                //     .Append(transform.DOScale(baseScale, 0.25f))
-                //     .SetEase(Ease.InOutElastic);
+                spriteRenderer.sprite = hitSprite;
+                tween = DOVirtual.DelayedCall(0.1f, () => spriteRenderer.sprite = baseSprite);
             }
             else if (hitType == HitType.Color)
             {
                 // change color, reset color in few seconds
                 tween = DOTween.Sequence();
                 (tween as Sequence)
-                    .Append(sprite.DOColor(hitColor, 0.1f))
-                    .Append(sprite.DOColor(baseColor, 0.1f));
+                    .Append(spriteRenderer.DOColor(hitColor, 0.1f))
+                    .Append(spriteRenderer.DOColor(baseColor, 0.1f));
             }
             else if (hitType == HitType.Material)
             {
-                sprite.material = hitMaterial;
-                tween = DOVirtual.DelayedCall(0.25f, () => sprite.material = baseMaterial);
+                spriteRenderer.material = hitMaterial;
+                tween = DOVirtual.DelayedCall(0.1f, () => spriteRenderer.material = baseMaterial);
             }
             else if (hitType == HitType.Animation)
             {
@@ -159,25 +157,22 @@ namespace Core.Combat
                 }
             }
 
-            if (hitType == HitType.Color && sprite == null)
-            {
-                Debug.LogError("Hit type declared as Color but no sprite renderer provided");
-                return;
-            }
+            bool needSpriteRenderer = hitType == HitType.Sprite || hitType == HitType.Color || hitType == HitType.Material;
 
-            if (hitType == HitType.Material && sprite == null)
+            if (needSpriteRenderer && spriteRenderer == null)
             {
-                Debug.LogError("Hit type declared as Material but no sprite renderer provided");
+                Debug.LogError("Hit type declared as Sprite or Color or Material but no sprite renderer provided");
                 return;
             }
         }
 
         private void InitializeAttributes()
         {
-            if (sprite)
+            if (spriteRenderer)
             {
-                baseColor = sprite.color;
-                baseMaterial = sprite.material;
+                baseColor = spriteRenderer.color;
+                baseMaterial = spriteRenderer.material;
+                baseSprite = spriteRenderer.sprite;
             }
             else
             {

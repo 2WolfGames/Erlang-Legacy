@@ -1,4 +1,4 @@
-﻿using Core.Effect;
+﻿using Core.ScriptableEffect;
 using Core.Player.Controller;
 using UnityEngine;
 

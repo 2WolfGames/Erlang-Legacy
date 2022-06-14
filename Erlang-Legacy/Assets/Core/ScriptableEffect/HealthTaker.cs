@@ -2,7 +2,7 @@
 using UnityEngine;
 
 
-namespace Core.Effect
+namespace Core.ScriptableEffect
 {
     // thought to add to elements in game
     // that removes life to ajax
