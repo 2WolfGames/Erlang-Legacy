@@ -3,9 +3,9 @@ using Core.Player.Data;
 using Core.Player.Util;
 using Core.Shared;
 using Core.Shared.Enum;
-using Core.UI.LifeBar;
 using Core.Utility;
 using UnityEngine;
+using static Core.Player.Controller.AbilityController;
 
 namespace Core.Player.Controller
 {
@@ -228,6 +228,13 @@ namespace Core.Player.Controller
         public bool IsAlive()
         {
             return playerData.Health.HP > 0;
+        }
+
+        public void ActiveSkill(Skill skill)
+        {
+            // TODO: save skill to file
+            // TODO: check if already exists, if does, warn it
+            abilityController.ActiveSkill(skill);
         }
 
     }
