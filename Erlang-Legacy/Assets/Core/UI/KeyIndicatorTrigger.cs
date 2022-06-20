@@ -19,7 +19,7 @@ namespace Core.UI
         {
             if (playerIn && Input.GetKeyDown(gameKey.ToString().ToLower()))
             {
-                if (repeat) {
+                if (!repeat) {
                     itsNeeded = false;
                     playerIn = false; //we dont care anymore
                 }
