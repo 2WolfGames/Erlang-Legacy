@@ -12,14 +12,14 @@ namespace Core.IA.Behavior.Action
         public SharedTransform positionsWrapper;
         public SharedFloat movementSpeed = 1f;
         public SharedBool loop = false;
+        public SharedInt currentIndex = 0;
         public SharedFloat threshold = 0.1f;
+        public SharedBool forgetPosition = false;
         private List<Transform> transforms;
-        private int currentIndex = 0;
 
         public override void OnStart()
         {
             transforms = GetTransforms();
-            Debug.Log(transforms.Count);
         }
 
         public override TaskStatus OnUpdate()
@@ -30,6 +30,12 @@ namespace Core.IA.Behavior.Action
             return TaskStatus.Running;
         }
 
+        public override void OnReset()
+        {
+            if (forgetPosition.Value)
+                currentIndex.Value = 0;
+        }
+
         private bool Completed()
         {
             return !loop.Value && OneCycleDone();
@@ -37,10 +43,10 @@ namespace Core.IA.Behavior.Action
 
         private void Guard()
         {
-            var currentPoint = transforms[currentIndex];
+            var currentPoint = transforms[currentIndex.Value];
             if (OnPoint(currentPoint))
-                currentIndex = Clamp(currentIndex + 1);
-            var nextPoint = transforms[currentIndex];
+                currentIndex = Clamp(currentIndex.Value + 1);
+            var nextPoint = transforms[currentIndex.Value];
             MoveForward(nextPoint);
         }
 
@@ -61,7 +67,7 @@ namespace Core.IA.Behavior.Action
 
         private bool OneCycleDone()
         {
-            return currentIndex == transforms.Count;
+            return currentIndex.Value == transforms.Count;
         }
 
         private List<Transform> GetTransforms()
