@@ -8,7 +8,8 @@ namespace Core.Combat
     {
         private Health health => GetComponent<Health>();
         private int CurrentHealth => health.HP;
-        public bool Invincible { get; set; }
+        public bool indestructible = false;
+        public bool Indestructible { get => indestructible; set => indestructible = value; }
         public bool IsDestroyed => health.HP <= 0;
         public bool IsAlive => !IsDestroyed;
         public UnityEvent OnDestroyed, OnRevived;
@@ -16,17 +17,17 @@ namespace Core.Combat
         public override void Awake()
         {
             base.Awake();
-            Invincible = false;
+            Indestructible = false;
         }
 
         public void OnAttackHit(int damage, Vector2 direction)
         {
-            if (CurrentHealth <= 0 || Invincible)
+            if (CurrentHealth <= 0 || Indestructible)
                 return;
 
             DealDamage(damage);
 
-            base.OnAttackHit(direction); 
+            base.OnAttackHit(direction);
         }
 
         public void DealDamage(int damage)

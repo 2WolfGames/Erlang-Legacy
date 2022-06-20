@@ -8,6 +8,7 @@ namespace Core.Combat.IA
         protected Rigidbody2D body;
         protected Animator animator;
         protected PlayerController player;
+        protected Destroyable destroyable => GetComponent<Destroyable>();
 
         public override void OnAwake()
         {

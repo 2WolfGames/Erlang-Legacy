@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2492043558519187856}
   - component: {fileID: 2492043558519187858}
-  - component: {fileID: 2492043558519187857}
   - component: {fileID: 2492043558519187860}
   - component: {fileID: 2492043558519187859}
+  - component: {fileID: 4903195361966810549}
   m_Layer: 12
   m_Name: Projectile Explosion
   m_TagString: Untagged
@@ -47,21 +47,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifetime: 0.2
---- !u!114 &2492043558519187857
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2492043558519187887}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9af318d5769d914e8b14854a996ba27, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthTaker: {fileID: 11400000, guid: 2d266f964c0d82a4ab5028c0495f708d, type: 2}
-  explosionEffectPrefab: {fileID: 198731999422189334, guid: c8a852e4d4b8fb644aa1593544dfbcab,
-    type: 3}
 --- !u!58 &2492043558519187860
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -99,3 +84,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &4903195361966810549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2492043558519187887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe3d9eb2b3d5bd34c8bfb9958277dbc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthTaker: {fileID: 11400000, guid: 2d266f964c0d82a4ab5028c0495f708d, type: 2}
+  explosionEffectPrefab: {fileID: 198731999422189334, guid: c8a852e4d4b8fb644aa1593544dfbcab,
+    type: 3}
