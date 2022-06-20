@@ -271,7 +271,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3300592099308083572}
   m_Layer: 0
-  m_Name: Explosion Orange Slime Worm
+  m_Name: Dangerous Orange Slime Worm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
