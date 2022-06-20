@@ -22,6 +22,5 @@ namespace Core.IA.Behavior.Task.Action
             Vector3 dir = transform.position + vector.Value.normalized;
             transform.position = Vector3.MoveTowards(transform.position, dir, linerSpeed.Value * Time.deltaTime);
         }
-
     }
 }
