@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Core.Combat
 {
     [RequireComponent(typeof(Disposable))]
-    public class ProjectileExplosion : MonoBehaviour
+    public class Explosion : MonoBehaviour
     {
         public HealthTaker healthTaker;
         public ParticleSystem explosionEffectPrefab;
@@ -16,7 +16,7 @@ namespace Core.Combat
             {
                 var explosion = Instantiate(explosionEffectPrefab, transform.position, Quaternion.identity);
                 explosion.Play();
-                explosion.gameObject.Disposable(10f);
+                explosion.gameObject.Disposable(5f);
             }
         }
 

@@ -203,7 +203,6 @@ namespace Core.Player.Controller
 
         public void OnRayHit(Collider2D other)
         {
-            Debug.Log("ray hit");
             OnHit(other, playerStats.rayDamage);
         }
     }
