@@ -1,3 +1,4 @@
+using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
 using Core.Combat.IA;
 using UnityEngine;
@@ -7,8 +8,8 @@ namespace Core.IA.Behavior.Task.Action
 {
     public class MoveTowardsPlayer : EnemyAction
     {
-        [SerializeField] float linerSpeed = 3f;
-        [Range(0.001f, 0.5f)][SerializeField] float threshold = 0.05f;
+        public SharedFloat linerSpeed = 3f;
+        public SharedFloat threshold = 0.05f;
 
         public override TaskStatus OnUpdate()
         {
@@ -19,12 +20,12 @@ namespace Core.IA.Behavior.Task.Action
         private void MoveTowards()
         {
             Transform playerTransform = player.transform;
-            transform.position = Vector3.MoveTowards(transform.position, playerTransform.position, linerSpeed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, playerTransform.position, linerSpeed.Value * Time.deltaTime);
         }
 
         private bool InsideTreshold()
         {
-            return Vector3.Distance(transform.position, player.transform.position) <= threshold;
+            return Vector3.Distance(transform.position, player.transform.position) <= threshold.Value;
         }
     }
 }
