@@ -7,7 +7,7 @@ using Core.Shared.Enum;
 using Core.Utility;
 using DG.Tweening;
 using UnityEngine;
-
+using Core.UI;
 
 namespace Core.Player.Controller
 {
@@ -189,6 +189,7 @@ namespace Core.Player.Controller
         private void ResetRayCooldown()
         {
             rayTimer = rayCooldown;
+            PowersPanelManager.Instance.GetRayTimer().PowerUsed(rayCooldown);
         }
 
         // pre: called by ray player animation

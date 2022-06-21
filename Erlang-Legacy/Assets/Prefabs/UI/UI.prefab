@@ -1518,6 +1518,7 @@ GameObject:
   - component: {fileID: 8276761857186622844}
   - component: {fileID: 8276761857186622845}
   - component: {fileID: 8276761857186622846}
+  - component: {fileID: 124652082}
   m_Layer: 5
   m_Name: PowersPanel
   m_TagString: Untagged
@@ -1607,6 +1608,20 @@ MonoBehaviour:
   m_Spacing: {x: 7, y: 7}
   m_Constraint: 0
   m_ConstraintCount: 2
+--- !u!114 &124652082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8276761857186622832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e07036c9002ec234b9e29c4b80ce9e08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dashTimer: {fileID: 8276761857818383182}
+  rayTimer: {fileID: 8276761857141264606}
 --- !u!1 &8276761857230658870
 GameObject:
   m_ObjectHideFlags: 0
