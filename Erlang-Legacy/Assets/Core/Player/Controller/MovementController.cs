@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Core.Player.Util;
-using Core.Utility;
+using Core.UI;
 using Core.Utility.Data;
 using UnityEngine;
 
@@ -259,6 +259,7 @@ namespace Core.Player.Controller
                 return;
 
             dashCooldownTimer = DashCooldown;
+            PowersPanelManager.Instance.GetDashTimer().PowerUsed(DashCooldown);
             Body.gravityScale = baseGravityScale;
             isDashing = false;
             DashTrail.widthMultiplier = 0;

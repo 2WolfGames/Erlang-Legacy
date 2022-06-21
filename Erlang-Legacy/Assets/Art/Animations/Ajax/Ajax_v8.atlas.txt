@@ -1,7 +1,6 @@
 Ajax_v8.png
 size:743,269
 filter:Linear,Linear
-pma:true
 BracDret
 bounds:101,4,90,96
 BracEsquerra

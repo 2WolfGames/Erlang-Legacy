@@ -6,6 +6,8 @@ namespace Core.UI
 {
     public class KeyIndicatorTrigger : MonoBehaviour
     {
+        [Tooltip("If enabled, key indicator will trigger again even if player has already accomplished the indication")]
+        [SerializeField] bool repeat = false;
         [SerializeField] GameKey gameKey;
         [SerializeField] string function;
         [SerializeField] float waitTimeBeforeShowingKeys;
@@ -18,8 +20,11 @@ namespace Core.UI
         {
             if (playerIn && Input.GetKeyDown(gameKey.ToString().ToLower()))
             {
-                itsNeeded = false;
-                playerIn = false; //we dont care anymore
+                if (!repeat)
+                {
+                    itsNeeded = false;
+                    playerIn = false; //we dont care anymore
+                }
                 KeyIndicatorDisposer.Instance?.HideTutorial();
             }
         }
@@ -64,6 +69,11 @@ namespace Core.UI
             {
                 KeyIndicatorDisposer.Instance?.ShowTutorial(gameKey, function);
             }
+        }
+
+        public void SetItsNeeded(bool itsNeeded)
+        {
+            this.itsNeeded = itsNeeded;
         }
     }
 }
