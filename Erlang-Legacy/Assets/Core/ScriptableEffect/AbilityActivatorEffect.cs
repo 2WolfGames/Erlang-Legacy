@@ -1,6 +1,6 @@
+using Core.Player;
 using Core.Player.Controller;
 using UnityEngine;
-using static Core.Player.Controller.AbilityController;
 
 namespace Core.ScriptableEffect
 {

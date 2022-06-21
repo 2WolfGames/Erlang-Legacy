@@ -5,7 +5,6 @@ using Core.Shared;
 using Core.Shared.Enum;
 using Core.Utility;
 using UnityEngine;
-using static Core.Player.Controller.AbilityController;
 
 namespace Core.Player.Controller
 {
@@ -240,13 +239,29 @@ namespace Core.Player.Controller
             return playerData.Health.HP > 0;
         }
 
-        public void AdquireAbility(Ability newAbility)
+        public void AdquireAbility(Ability ability)
         {
-            // TODO: save skill to file
-            // TODO: check if already exists, if does, warn it
-            // TODO: modify scriptable object
+            if (AdquiredAbility(ability))
+            {
+                Debug.LogWarning($"Ability already adquired");
+            }
+            else
+            {
+                SaveAdquiredAbility(ability);
+                abilityController.AdquireAbility(ability);
+            }
         }
 
+        private bool AdquiredAbility(Ability ability)
+        {
+            return abilityController.AdquiredAbility(ability);
+        }
+
+        private void SaveAdquiredAbility(Ability ability)
+        {
+            Debug.LogWarning($"Method not implemented yet");
+            // TODO: save ability to file
+        }
     }
 }
 

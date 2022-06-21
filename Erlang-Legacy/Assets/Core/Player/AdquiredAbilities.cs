@@ -1,5 +1,4 @@
 using UnityEngine;
-using static Core.Player.Controller.AbilityController;
 
 namespace Core.Player
 {
@@ -21,6 +20,22 @@ namespace Core.Player
                 default:
                     Debug.LogWarning($"Unsupported ability {ability}");
                     return false;
+            }
+        }
+
+        public void Adquire(Ability ability)
+        {
+            switch (ability)
+            {
+                case Ability.Dash:
+                    dash = true;
+                    break;
+                case Ability.Ray:
+                    ray = true;
+                    break;
+                default:
+                    Debug.LogWarning($"Unsupported ability {ability}");
+                    break;
             }
         }
     }

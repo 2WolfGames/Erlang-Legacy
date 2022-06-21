@@ -16,25 +16,20 @@ namespace Core.Player.Controller
     //   manages when abilities can be triggered
     public class AbilityController : MonoBehaviour
     {
-        private enum Fist
-        {
-            L, R
-        }
-        public enum Ability
-        {
-            Dash, Ray
-        }
-
-        [Range(0.1f, 1f)] public float punchDrag = 0.2f;
+        [Range(0.1f, 1f)]
+        public float punchDrag = 0.2f;
         public float punchMemoryDuration = 2f;
-        [SerializeField] ProjectileData projectileData;
-        [SerializeField] DamageAreaData damageAreas;
-        [SerializeField] ParticleSystem punchParticle;
+        public ProjectileData projectileData;
+        public DamageAreaData damageAreas;
+        public ParticleSystem punchParticle;
+        public AdquiredAbilities adquiredAbilities;
         public bool Punching => punching;
+        public bool CanInvokeRay => rayTimer <= 0 && controllable;
+        private enum Fist { L, R }
         private InteractOnTrigger2D dashTrigger => damageAreas.Dash;
         private InteractOnTrigger2D punchTrigger => damageAreas.Punch;
         private float rayTimer;
-        private Fist punchFist;
+        private Fist fist;
         private bool punching;
         private float punchMemoryTimer;
         private PlayerController player => PlayerController.Instance;
@@ -46,7 +41,6 @@ namespace Core.Player.Controller
         private float rayCooldown => PlayerData.Stats.rayCooldown;
         private int FacingValue => player.FacingValue;
         private Animator animator => player.Animator;
-        public bool CanInvokeRay => rayTimer <= 0 && controllable;
         private bool wannaPunch = false;
         private bool controllable => player.Controllable;
         private Stats playerStats => player.Stats;
@@ -79,30 +73,7 @@ namespace Core.Player.Controller
         {
             if (CanPunch())
                 PunchStart();
-
             if (wannaPunch) wannaPunch = false;
-        }
-
-        private void PunchStart()
-        {
-            if (punching)
-                return;
-            punching = true;
-            punchFist = ForgotNextFist() ? RandomFist() : NextFist();
-            punchTrigger.Interact = true;
-            punchParticle?.Play();
-            movementController.Acceleration = punchDrag;
-            StartPunchAnimation(punchFist);
-        }
-
-        private bool CanPunch()
-        {
-            return wannaPunch && controllable;
-        }
-
-        private bool ForgotNextFist()
-        {
-            return punchMemoryTimer <= 0;
         }
 
         public void PunchEnd()
@@ -115,9 +86,53 @@ namespace Core.Player.Controller
             movementController.Acceleration = 1f;
         }
 
-        private void StartPunchAnimation(Fist punchFist)
+        public bool AdquiredAbility(Ability ability)
         {
-            if (punchFist == Fist.L)
+            if (adquiredAbilities == null)
+            {
+                Debug.LogError("Please make sure to add abilities scriptable object manager");
+                return false;
+            }
+            return adquiredAbilities.Adquired(ability);
+        }
+
+        public void AdquireAbility(Ability ability)
+        {
+            if (adquiredAbilities == null)
+            {
+                Debug.LogError("Please make sure to add abilities scriptable object manager");
+            }
+            else
+            {
+                adquiredAbilities.Adquire(ability);
+            }
+        }
+
+        private void PunchStart()
+        {
+            if (punching)
+                return;
+            punching = true;
+            fist = ForgotNextFist() ? RandomFist() : NextFist();
+            punchTrigger.Interact = true;
+            punchParticle?.Play();
+            movementController.Acceleration = punchDrag;
+            AnimatePunch(fist);
+        }
+
+        private bool CanPunch()
+        {
+            return wannaPunch && controllable;
+        }
+
+        private bool ForgotNextFist()
+        {
+            return punchMemoryTimer <= 0;
+        }
+
+        private void AnimatePunch(Fist fist)
+        {
+            if (fist == Fist.L)
             {
                 animator.SetTrigger(CharacterAnimations.LPunch);
             }
@@ -129,7 +144,7 @@ namespace Core.Player.Controller
 
         private Fist NextFist()
         {
-            return punchFist == Fist.L ? Fist.R : Fist.L;
+            return fist == Fist.L ? Fist.R : Fist.L;
         }
 
         private Fist RandomFist()
@@ -151,10 +166,8 @@ namespace Core.Player.Controller
         {
             if (punchParticle)
                 punchParticle.Play();
-
             dashTrigger.Interact = true;
         }
-
 
         public void OnPunchLand(Collider2D other)
         {
@@ -171,10 +184,8 @@ namespace Core.Player.Controller
         private void OnHit(Collider2D other, int damage)
         {
             Destroyable destroyable = other.GetComponent<Destroyable>();
-
             Face face = Function.CollisionSide(other.transform, transform);
             Vector2 direction = face == Face.Right ? Vector2.right : Vector2.left;
-
             destroyable?.OnAttackHit(damage, direction);
         }
 
