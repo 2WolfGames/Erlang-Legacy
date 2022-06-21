@@ -22,7 +22,6 @@ namespace Core.Shared.SaveSystem
         //post: returns true if saved game exists
         public static bool SaveGameExists()
         {
-            //Debug.Log(dataPath);
             return File.Exists(dataPath + playerStateFileName);
         }
 

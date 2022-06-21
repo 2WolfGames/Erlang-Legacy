@@ -77,45 +77,41 @@ namespace Core.Player.Controller
 
         public void FixedUpdate()
         {
-            if (wannaPunch && controllable)
-            {
-                Punch();
-            }
+            if (CanPunch())
+                PunchStart();
 
             if (wannaPunch) wannaPunch = false;
         }
 
-        private void Punch()
+        private void PunchStart()
         {
             if (punching)
                 return;
-
-            PunchStart();
-            DOVirtual.DelayedCall(0.15f, PunchEnd);
-        }
-
-        private void PunchStart()
-        {
-            if (punchMemoryTimer <= 0)
-            {
-                punchFist = RandomFist();
-            }
-            else
-            {
-                punchFist = NextFist();
-            }
-            punchTrigger.Interact = true;
             punching = true;
+            punchFist = ForgotNextFist() ? RandomFist() : NextFist();
+            punchTrigger.Interact = true;
             punchParticle?.Play();
             movementController.Acceleration = punchDrag;
             StartPunchAnimation(punchFist);
         }
 
-        private void PunchEnd()
+        private bool CanPunch()
         {
+            return wannaPunch && controllable;
+        }
+
+        private bool ForgotNextFist()
+        {
+            return punchMemoryTimer <= 0;
+        }
+
+        public void PunchEnd()
+        {
+            if (!punching)
+                return;
+            punching = false;
             punchMemoryTimer = punchMemoryDuration;
             punchTrigger.Interact = false;
-            punching = false;
             movementController.Acceleration = 1f;
         }
 
@@ -133,10 +129,7 @@ namespace Core.Player.Controller
 
         private Fist NextFist()
         {
-            if (punchFist == Fist.L)
-                return Fist.R;
-            else
-                return Fist.L;
+            return punchFist == Fist.L ? Fist.R : Fist.L;
         }
 
         private Fist RandomFist()

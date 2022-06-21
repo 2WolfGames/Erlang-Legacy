@@ -49,7 +49,6 @@ namespace Core.Player.Controller
         private bool CanLand => (justJumped || JustImpulsed) && (AboutToLand || IsGrounded);
         private Collider2D BodyCollider => GetComponent<Collider2D>();
         private ParticleSystem JumpParticles => Player.PlayerData.JumpParticles;
-        public bool CanDash => !isDashing && dashCooldownTimer <= 0;
         public bool CanRun => !isDashing;
         public bool IsDashing => isDashing;
         public Action OnDashStart { get; set; }
@@ -112,10 +111,15 @@ namespace Core.Player.Controller
 
         private void DoDash()
         {
-            if (!CanDash)
+            if (!CanDash())
                 return;
 
             StartDashing();
+        }
+
+        private bool CanDash()
+        {
+            return !isDashing && dashCooldownTimer <= 0 && Controllable && !Player.Punching;
         }
 
         // pre: --

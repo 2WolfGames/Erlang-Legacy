@@ -67,7 +67,6 @@ namespace Core.Player.Controller
             if (!IsAlive()) OnDie();
         }
 
-        // called when dash animation ends
         public void OnDashComplete()
         {
             movementController.StopDashing();
@@ -120,22 +119,34 @@ namespace Core.Player.Controller
         // post: applies damage to player. 1 unit of damage represent 1 unit of life taken
         public void Hurt(int damage, GameObject other)
         {
-            if (protectable.IsProtected || !IsAlive())
+            if (!CanBeHit || !IsAlive())
                 return;
 
+            ShakeCamera();
             FreezeMovement();
-
+            ResetAbilities();
             TakeLifes(damage);
-
             ComputeSideHurtAnimation(other.transform);
+            AfterHurt();
+        }
 
+        private void ShakeCamera()
+        {
             if (shakeCameraOnHurt)
                 CameraManager.Instance?.ShakeCamera();
+        }
 
+        private void AfterHurt()
+        {
             if (IsAlive())
                 OnRecoverStart();
-            else
-                OnDie();
+            else OnDie();
+        }
+
+        private void ResetAbilities()
+        {
+            abilityController.PunchEnd();
+            OnDashComplete();
         }
 
         private void TakeLifes(int damage)
