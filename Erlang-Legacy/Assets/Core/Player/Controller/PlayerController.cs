@@ -49,7 +49,6 @@ namespace Core.Player.Controller
         public Rigidbody2D Body => GetComponent<Rigidbody2D>();
         public Animator Animator => GetComponentInChildren<Animator>();
         public static PlayerController Instance { get; private set; }
-
         public bool Punching => abilityController.Punching;
 
         protected void Awake()
@@ -230,11 +229,11 @@ namespace Core.Player.Controller
             return playerData.Health.HP > 0;
         }
 
-        public void ActiveSkill(Skill skill)
+        public void AdquireAbility(Ability newAbility)
         {
             // TODO: save skill to file
             // TODO: check if already exists, if does, warn it
-            abilityController.ActiveSkill(skill);
+            // TODO: modify scriptable object
         }
 
     }

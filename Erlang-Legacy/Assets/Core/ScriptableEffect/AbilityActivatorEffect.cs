@@ -4,18 +4,20 @@ using static Core.Player.Controller.AbilityController;
 
 namespace Core.ScriptableEffect
 {
-    public class AbilityActivator : Effect
+    [CreateAssetMenu(menuName = "Effect/AbilityActivator")]
+    public class AbilityActivatorEffect : Effect
     {
-        public Skill newSkill;
+        public Ability ability;
+
         public override void Apply(GameObject other)
         {
             var player = other.GetComponent<PlayerController>();
-            if (!player)
+            if (player == null)
             {
                 Debug.LogWarning("DashActivator: Player not found");
                 return;
             }
-            player.ActiveSkill(newSkill);
+            player.AdquireAbility(ability);
         }
     }
 }

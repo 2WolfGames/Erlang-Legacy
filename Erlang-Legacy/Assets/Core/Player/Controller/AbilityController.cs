@@ -20,10 +20,9 @@ namespace Core.Player.Controller
         {
             L, R
         }
-        public enum Skill
+        public enum Ability
         {
-            Dash,
-            Ray
+            Dash, Ray
         }
 
         [Range(0.1f, 1f)] public float punchDrag = 0.2f;
@@ -52,11 +51,6 @@ namespace Core.Player.Controller
         private bool controllable => player.Controllable;
         private Stats playerStats => player.Stats;
         private MovementController movementController => GetComponent<MovementController>();
-        private Dictionary<Skill, bool> adquiredSkill = new Dictionary<Skill, bool>
-        {
-            { Skill.Dash, false },
-            { Skill.Ray, false }
-        };
 
         public void Start()
         {
@@ -216,11 +210,6 @@ namespace Core.Player.Controller
         public void OnRayHit(Collider2D other)
         {
             OnHit(other, playerStats.rayDamage);
-        }
-
-        public void ActiveSkill(Skill ability)
-        {
-            adquiredSkill[ability] = true;
         }
     }
 
