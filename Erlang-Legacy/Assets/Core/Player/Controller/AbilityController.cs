@@ -22,8 +22,7 @@ namespace Core.Player.Controller
         }
         public enum Skill
         {
-            Dash,
-            Ray
+            Dash, Ray
         }
 
         [Range(0.1f, 1f)] public float punchDrag = 0.2f;
@@ -95,6 +94,7 @@ namespace Core.Player.Controller
         {
             if (punching)
                 return;
+            Debug.Log("Punching");
 
             PunchStart();
             DOVirtual.DelayedCall(0.15f, PunchEnd);
@@ -139,10 +139,7 @@ namespace Core.Player.Controller
 
         private Fist NextFist()
         {
-            if (punchFist == Fist.L)
-                return Fist.R;
-            else
-                return Fist.L;
+            return punchFist == Fist.L ? Fist.R : Fist.L;
         }
 
         private Fist RandomFist()

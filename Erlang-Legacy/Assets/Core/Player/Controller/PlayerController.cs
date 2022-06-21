@@ -133,10 +133,14 @@ namespace Core.Player.Controller
             if (shakeCameraOnHurt)
                 CameraManager.Instance?.ShakeCamera();
 
+            AfterHurt();
+        }
+
+        private void AfterHurt()
+        {
             if (IsAlive())
                 OnRecoverStart();
-            else
-                OnDie();
+            else OnDie();
         }
 
         private void TakeLifes(int damage)
@@ -156,6 +160,7 @@ namespace Core.Player.Controller
         // pre: called at first key frame hit (backward & forward) animations       
         private void OnRecoverStart()
         {
+            Debug.Log("recover start");
             Animator.SetBool(CharacterAnimations.Blink, true);
             inRecoverProcess = true;
             protectable.SetProtection(ProtectionType.INFINITE);
@@ -165,6 +170,7 @@ namespace Core.Player.Controller
         // desc: to be called at end of recover animations with and event
         public void OnRecoverComplete()
         {
+            Debug.Log("recover complete");
             if (!inRecoverProcess)
                 return;
 
