@@ -5,8 +5,7 @@ namespace Core.Player.Util
 {
     public class AnimationEvents : MonoBehaviour
     {
-        private PlayerController Player => PlayerController.Instance;
-        private AbilityController playerAbilityController => Player.GetComponent<AbilityController>();
+        private PlayerController player => PlayerController.Instance;
 
         // pre: called at end of dash animation
         public void OnDashEnd1()
@@ -16,27 +15,27 @@ namespace Core.Player.Util
 
         private void OnDashEnd()
         {
-            Player.OnDashComplete();
+            player.OnDashComplete();
         }
 
         public void OnHitEnd()
         {
-            Player.OnRecoverComplete();
+            player.OnRecoverComplete();
         }
 
         public void OnRay()
         {
-            Player.InvokeRay();
+            player.InvokeRay();
         }
 
         public void OnRayStart()
         {
-            Player.OnRayStarts();
+            player.OnRayStarts();
         }
 
         public void OnRayEnd()
         {
-            Player.OnRayEnd();
+            player.OnRayEnd();
         }
 
         public void OnPunch()
@@ -49,6 +48,8 @@ namespace Core.Player.Util
 
         public void OnPunchEnd()
         {
+            var abilityController = player.GetComponent<AbilityController>();
+            abilityController.PunchEnd();
         }
 
     }
