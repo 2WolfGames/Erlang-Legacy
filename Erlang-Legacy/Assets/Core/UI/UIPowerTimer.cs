@@ -64,7 +64,7 @@ namespace Core.UI
             {
                 imgContainer.fillAmount = imgContainer.fillAmount == 0 ? 1 : 0;
                 yield return new WaitForSeconds(waitSeconds);
-                if (!tinkeling)
+                if (tinkeling)
                 {
                     if (times > 0)
                     {
@@ -74,8 +74,6 @@ namespace Core.UI
                     {
                         imgContainer.fillAmount = 1;
                     }
-                } else {
-                    imgContainer.fillAmount = 1;
                 }
             }
             else
