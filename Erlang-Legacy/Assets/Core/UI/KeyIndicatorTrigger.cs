@@ -6,6 +6,7 @@ namespace Core.UI
 {
     public class KeyIndicatorTrigger : MonoBehaviour
     {
+        [Tooltip("If enabled, key indicator will trigger again even if player has already accomplished the indication")]
         [SerializeField] bool repeat = false;
         [SerializeField] GameKey gameKey;
         [SerializeField] string function;
@@ -19,7 +20,8 @@ namespace Core.UI
         {
             if (playerIn && Input.GetKeyDown(gameKey.ToString().ToLower()))
             {
-                if (!repeat) {
+                if (!repeat)
+                {
                     itsNeeded = false;
                     playerIn = false; //we dont care anymore
                 }
@@ -69,7 +71,8 @@ namespace Core.UI
             }
         }
 
-        public void SetItsNeeded(bool itsNeeded){
+        public void SetItsNeeded(bool itsNeeded)
+        {
             this.itsNeeded = itsNeeded;
         }
     }
