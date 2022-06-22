@@ -12,6 +12,7 @@ namespace Core.UI
         [SerializeField] Sprite powerSprite;
         [SerializeField] Sprite loadingSprite;
         bool coolingDown;
+        bool tinkeling = false;
         float waitTime;
 
         // pre: --
@@ -36,6 +37,7 @@ namespace Core.UI
                 {
                     coolingDown = false;
                     imgContainer.sprite = powerSprite;
+                    tinkeling = true;
                     StartCoroutine(Tinkle());
                 }
             }
@@ -46,13 +48,11 @@ namespace Core.UI
         //      everythink is set to activate cooldown Icon animation of imgContainer
         public void PowerUsed(float cooldownTime)
         {
-            if (!coolingDown)
-            {
-                coolingDown = true;
-                waitTime = cooldownTime;
-                imgContainer.fillAmount = 0;
-                imgContainer.sprite = loadingSprite;
-            }
+            coolingDown = true;
+            waitTime = cooldownTime;
+            imgContainer.fillAmount = 0;
+            imgContainer.sprite = loadingSprite;
+            tinkeling = false;
         }
 
         //pre: --
@@ -60,15 +60,25 @@ namespace Core.UI
         //      waiting for each tinkle waitSeconds 
         IEnumerator Tinkle(int times = 3, float waitSeconds = 0.1f)
         {
-            imgContainer.fillAmount = imgContainer.fillAmount == 0 ? 1 : 0;
-            yield return new WaitForSeconds(waitSeconds);
-            if (times > 0)
+            if (tinkeling)
             {
-                StartCoroutine(Tinkle(--times));
+                imgContainer.fillAmount = imgContainer.fillAmount == 0 ? 1 : 0;
+                yield return new WaitForSeconds(waitSeconds);
+                if (tinkeling)
+                {
+                    if (times > 0)
+                    {
+                        StartCoroutine(Tinkle(--times));
+                    }
+                    else
+                    {
+                        imgContainer.fillAmount = 1;
+                    }
+                }
             }
             else
             {
-                imgContainer.fillAmount = 1;
+                yield return null;
             }
 
         }
