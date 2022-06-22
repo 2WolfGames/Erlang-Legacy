@@ -3,9 +3,9 @@ using Core.Player.Data;
 using Core.Player.Util;
 using Core.Shared;
 using Core.Shared.Enum;
-using Core.UI.LifeBar;
 using Core.Utility;
 using UnityEngine;
+using static Core.Player.Controller.AbilityController;
 
 namespace Core.Player.Controller
 {
@@ -68,7 +68,6 @@ namespace Core.Player.Controller
             if (!IsAlive()) OnDie();
         }
 
-        // called when dash animation ends
         public void OnDashComplete()
         {
             movementController.StopDashing();
@@ -121,22 +120,34 @@ namespace Core.Player.Controller
         // post: applies damage to player. 1 unit of damage represent 1 unit of life taken
         public void Hurt(int damage, GameObject other)
         {
-            if (protectable.IsProtected || !IsAlive())
+            if (!CanBeHit || !IsAlive())
                 return;
 
+            ShakeCamera();
             FreezeMovement();
-
+            ResetAbilities();
             TakeLifes(damage);
-
             ComputeSideHurtAnimation(other.transform);
+            AfterHurt();
+        }
 
+        private void ShakeCamera()
+        {
             if (shakeCameraOnHurt)
                 CameraManager.Instance?.ShakeCamera();
+        }
 
+        private void AfterHurt()
+        {
             if (IsAlive())
                 OnRecoverStart();
-            else
-                OnDie();
+            else OnDie();
+        }
+
+        private void ResetAbilities()
+        {
+            abilityController.PunchEnd();
+            OnDashComplete();
         }
 
         private void TakeLifes(int damage)
@@ -228,6 +239,13 @@ namespace Core.Player.Controller
         public bool IsAlive()
         {
             return playerData.Health.HP > 0;
+        }
+
+        public void ActiveSkill(Skill skill)
+        {
+            // TODO: save skill to file
+            // TODO: check if already exists, if does, warn it
+            abilityController.ActiveSkill(skill);
         }
 
     }
