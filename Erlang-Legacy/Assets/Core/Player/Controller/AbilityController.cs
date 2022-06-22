@@ -20,7 +20,6 @@ namespace Core.Player.Controller
         public ParticleSystem punchParticle;
         public AdquiredAbilities adquiredAbilities;
         public bool Punching => punching;
-        public bool CanInvokeRay => rayTimer <= 0 && controllable;
         private enum Fist { L, R }
         private InteractOnTrigger2D dashTrigger => damageAreas.Dash;
         private InteractOnTrigger2D punchTrigger => damageAreas.Punch;
@@ -61,7 +60,7 @@ namespace Core.Player.Controller
                 wannaPunch = true;
             }
 
-            if (Input.GetButton(CharacterActions.InvokeRay) && CanInvokeRay)
+            if (Input.GetButton(CharacterActions.InvokeRay) && CanInvokeRayAbility())
                 InvokeRayAbility();
         }
 
@@ -223,10 +222,10 @@ namespace Core.Player.Controller
             PowersPanelManager.Instance.GetRayTimer().PowerUsed(rayCooldown);
         }
 
-
-        public void OnRayHit(Collider2D other)
+        private bool CanInvokeRayAbility()
         {
-            OnHit(other, playerStats.rayDamage);
+            return rayTimer <= 0 && controllable && AdquiredAbility(Ability.Ray);
         }
+
     }
 }
