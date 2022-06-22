@@ -10,7 +10,12 @@ namespace Core.Utility
 
         private bool activated;
         private PlayerController player => PlayerController.Instance;
+        private Animator animator => GetComponent<Animator>();
 
+        public void Disposable()
+        {
+            gameObject.Disposable(0f);
+        }
 
         public void OnTriggerEnter2D(Collider2D other)
         {
@@ -18,6 +23,7 @@ namespace Core.Utility
             {
                 effect.Apply(other.gameObject);
                 activated = true;
+                animator?.SetTrigger("Activated");
             }
         }
 
