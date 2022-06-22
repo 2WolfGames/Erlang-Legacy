@@ -192,7 +192,7 @@ namespace Core.Player.Controller
         private void ResetRayCooldown()
         {
             rayTimer = rayCooldown;
-            PowersPanelManager.Instance.GetRayTimer().PowerUsed(rayCooldown);
+            PowersPanelManager.Instance?.GetRayTimer().PowerUsed(rayCooldown);
         }
 
         // pre: called by ray player animation
