@@ -983,6 +983,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 546977339025444411, guid: 495e2ecd143ff6747b03669d278b2d8d,
         type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 546977339025444411, guid: 495e2ecd143ff6747b03669d278b2d8d,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 546977339025444411, guid: 495e2ecd143ff6747b03669d278b2d8d,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0.89771247
+      objectReference: {fileID: 0}
+    - target: {fileID: 546977339025444411, guid: 495e2ecd143ff6747b03669d278b2d8d,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 546977339025444411, guid: 495e2ecd143ff6747b03669d278b2d8d,
+        type: 3}
       propertyPath: ColorModule.gradient.maxGradient.ctime2
       value: 65535
       objectReference: {fileID: 0}

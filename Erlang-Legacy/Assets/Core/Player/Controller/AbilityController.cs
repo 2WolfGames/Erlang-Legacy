@@ -1,4 +1,5 @@
-﻿using Core.Combat;
+﻿using System.Collections.Generic;
+using Core.Combat;
 using Core.Combat.Projectile;
 using Core.Player.Data;
 using Core.Player.Util;
@@ -18,6 +19,10 @@ namespace Core.Player.Controller
         private enum Fist
         {
             L, R
+        }
+        public enum Skill
+        {
+            Dash, Ray
         }
 
         [Range(0.1f, 1f)] public float punchDrag = 0.2f;
@@ -46,6 +51,11 @@ namespace Core.Player.Controller
         private bool controllable => player.Controllable;
         private Stats playerStats => player.Stats;
         private MovementController movementController => GetComponent<MovementController>();
+        private Dictionary<Skill, bool> adquiredSkill = new Dictionary<Skill, bool>
+        {
+            { Skill.Dash, false },
+            { Skill.Ray, false }
+        };
 
         public void Start()
         {
@@ -72,45 +82,41 @@ namespace Core.Player.Controller
 
         public void FixedUpdate()
         {
-            if (wannaPunch && controllable)
-            {
-                Punch();
-            }
+            if (CanPunch())
+                PunchStart();
 
             if (wannaPunch) wannaPunch = false;
         }
 
-        private void Punch()
+        private void PunchStart()
         {
             if (punching)
                 return;
-
-            PunchStart();
-            DOVirtual.DelayedCall(0.15f, PunchEnd);
-        }
-
-        private void PunchStart()
-        {
-            if (punchMemoryTimer <= 0)
-            {
-                punchFist = RandomFist();
-            }
-            else
-            {
-                punchFist = NextFist();
-            }
-            punchTrigger.Interact = true;
             punching = true;
+            punchFist = ForgotNextFist() ? RandomFist() : NextFist();
+            punchTrigger.Interact = true;
             punchParticle?.Play();
             movementController.Acceleration = punchDrag;
             StartPunchAnimation(punchFist);
         }
 
-        private void PunchEnd()
+        private bool CanPunch()
         {
+            return wannaPunch && controllable;
+        }
+
+        private bool ForgotNextFist()
+        {
+            return punchMemoryTimer <= 0;
+        }
+
+        public void PunchEnd()
+        {
+            if (!punching)
+                return;
+            punching = false;
             punchMemoryTimer = punchMemoryDuration;
             punchTrigger.Interact = false;
-            punching = false;
             movementController.Acceleration = 1f;
         }
 
@@ -128,10 +134,7 @@ namespace Core.Player.Controller
 
         private Fist NextFist()
         {
-            if (punchFist == Fist.L)
-                return Fist.R;
-            else
-                return Fist.L;
+            return punchFist == Fist.L ? Fist.R : Fist.L;
         }
 
         private Fist RandomFist()
@@ -205,6 +208,11 @@ namespace Core.Player.Controller
         public void OnRayHit(Collider2D other)
         {
             OnHit(other, playerStats.rayDamage);
+        }
+
+        public void ActiveSkill(Skill ability)
+        {
+            adquiredSkill[ability] = true;
         }
     }
 
