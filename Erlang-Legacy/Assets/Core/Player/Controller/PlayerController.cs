@@ -10,17 +10,9 @@ namespace Core.Player.Controller
 {
     public class PlayerController : MonoBehaviour
     {
-        [SerializeField] bool shakeCameraOnHurt = true;
-        [SerializeField] private bool controllable = true;
-        [SerializeField] public bool inRecoverProcess = false;
-        [SerializeField] PlayerData playerData;
-        private AbilityController abilityController => GetComponent<AbilityController>();
-        private MovementController movementController => GetComponent<MovementController>();
-        private FacingController facingController => GetComponent<FacingController>();
-        private Protectable protectable => GetComponent<Protectable>();
-        private bool isDashing => movementController.IsDashing;
-        private float recoverTimeoutAfterHit => playerData.Stats.recoverTimeoutAfterHit;
-        private bool blockingUI;
+        public bool shakeCameraOnHurt = true;
+        public bool inRecoverProcess = false;
+        public PlayerData playerData;
         public bool CanBeHit => protectable.CanBeHit;
         public int FacingValue => facingController.FacingToInt;
         public PlayerData PlayerData { get => playerData; private set => playerData = value; }
@@ -49,6 +41,15 @@ namespace Core.Player.Controller
         public Animator Animator => GetComponentInChildren<Animator>();
         public static PlayerController Instance { get; private set; }
         public bool Punching => abilityController.Punching;
+        private bool controllable = true;
+        private AbilityController abilityController => GetComponent<AbilityController>();
+        private MovementController movementController => GetComponent<MovementController>();
+        private FacingController facingController => GetComponent<FacingController>();
+        private Protectable protectable => GetComponent<Protectable>();
+        private bool isDashing => movementController.IsDashing;
+        private float recoverTimeoutAfterHit => playerData.Stats.recoverTimeoutAfterHit;
+        private bool blockingUI;
+        private float baseGravityScale = 1f;
 
         protected void Awake()
         {
@@ -59,6 +60,7 @@ namespace Core.Player.Controller
             else Instance = this;
 
             movementController.OnDashStart += OnDashStart;
+            baseGravityScale = Body.gravityScale;
         }
 
         private void Start()
@@ -122,7 +124,7 @@ namespace Core.Player.Controller
                 return;
 
             ShakeCamera();
-            FreezeMovement();
+            Freeze();
             ResetAbilities();
             TakeLifes(damage);
             ComputeSideHurtAnimation(other.transform);
@@ -207,31 +209,23 @@ namespace Core.Player.Controller
         public void OnDie()
         {
             controllable = false;
-            FreezeMovement();
+            Freeze();
             Animator.SetTrigger(CharacterAnimations.Die);
         }
 
-        public void InvokeRay()
+        public void Freeze()
         {
-            abilityController.InvokeRay();
+            Body.velocity = Vector2.zero;
         }
 
-        public void OnRayStarts()
+        public void ZeroGravity()
         {
-            controllable = false;
-            Body.velocity = Vector3.zero;
             Body.gravityScale = 0;
         }
 
-        public void OnRayEnd()
+        public void BaseGravity()
         {
-            controllable = true;
-            Body.gravityScale = 10;
-        }
-
-        public void FreezeMovement()
-        {
-            movementController.FreezeVelocity();
+            Body.gravityScale = baseGravityScale;
         }
 
         public bool IsAlive()
@@ -252,14 +246,14 @@ namespace Core.Player.Controller
             }
         }
 
-        private bool AdquiredAbility(Ability ability)
+        public bool AdquiredAbility(Ability ability)
         {
             return abilityController.AdquiredAbility(ability);
         }
 
         private void SaveAdquiredAbility(Ability ability)
         {
-            Debug.LogWarning($"Method not implemented yet");
+            Debug.LogWarning($"PlayerController@SaveAdquiredAbility: Method not implemented yet");
             // TODO: save ability to file
         }
     }

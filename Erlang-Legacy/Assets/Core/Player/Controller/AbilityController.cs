@@ -10,8 +10,6 @@ using Core.UI;
 
 namespace Core.Player.Controller
 {
-    // description:
-    //   manages when abilities can be triggered
     public class AbilityController : MonoBehaviour
     {
         [Range(0.1f, 1f)]
@@ -64,7 +62,7 @@ namespace Core.Player.Controller
             }
 
             if (Input.GetButton(CharacterActions.InvokeRay) && CanInvokeRay)
-                OnRayAnimationStart();
+                InvokeRayAbility();
         }
 
         public void FixedUpdate()
@@ -106,6 +104,11 @@ namespace Core.Player.Controller
             }
         }
 
+        private bool CanPunch()
+        {
+            return wannaPunch && controllable;
+        }
+
         private void PunchStart()
         {
             if (punching)
@@ -113,14 +116,10 @@ namespace Core.Player.Controller
             punching = true;
             fist = ForgotNextFist() ? RandomFist() : NextFist();
             punchTrigger.Interact = true;
+            punching = true;
             punchParticle?.Play();
             movementController.Acceleration = punchDrag;
             AnimatePunch(fist);
-        }
-
-        private bool CanPunch()
-        {
-            return wannaPunch && controllable;
         }
 
         private bool ForgotNextFist()
@@ -187,10 +186,35 @@ namespace Core.Player.Controller
             destroyable?.OnAttackHit(damage, direction);
         }
 
-        private void OnRayAnimationStart()
+        private void InvokeRayAbility()
         {
             animator.SetTrigger(CharacterAnimations.Ray);
             ResetRayCooldown();
+            RayAbilityStart();
+        }
+
+        private void RayAbilityStart()
+        {
+            player.Controllable = false;
+            player.Freeze();
+            player.ZeroGravity();
+        }
+
+        // called at end of ray animation as event
+        public void RayAbilityComplete()
+        {
+            player.Controllable = true;
+        }
+
+        // called by ray player animation as event
+        public void InvokeRayBallInstance()
+        {
+            Vector2 force = Vector2.right * FacingValue * projectileSpeed;
+            VengefulProjectile instance = Instantiate(projectilePrefab, projectileOrigin.position, Quaternion.identity);
+            instance.SetForce(force);
+            instance.gameObject.Disposable(projectileTimeout);
+
+            player.BaseGravity();
         }
 
         private void ResetRayCooldown()
@@ -199,20 +223,10 @@ namespace Core.Player.Controller
             PowersPanelManager.Instance.GetRayTimer().PowerUsed(rayCooldown);
         }
 
-        // pre: called by ray player animation
-        // post: invoke an instance of ray projectile and sets its values
-        public void InvokeRay()
-        {
-            Vector2 force = Vector2.right * FacingValue * projectileSpeed;
-            VengefulProjectile instance = Instantiate(projectilePrefab, projectileOrigin.position, Quaternion.identity);
-            instance.SetForce(force);
-            instance.gameObject.Disposable(projectileTimeout);
-        }
 
         public void OnRayHit(Collider2D other)
         {
             OnHit(other, playerStats.rayDamage);
         }
     }
-
 }

@@ -1,0 +1,277 @@
+﻿using System.Collections.Generic;
+using Core.Combat;
+using Core.Combat.Projectile;
+using Core.Player.Data;
+using Core.Player.Util;
+using Core.Shared;
+using Core.Shared.Enum;
+using Core.Utility;
+using UnityEngine;
+using Core.UI;
+
+namespace Core.Player.Controller
+{
+    // description:
+    //   manages when abilities can be triggered
+    public class AbilityController : MonoBehaviour
+    {
+<<<<<<< HEAD
+        [Range(0.1f, 1f)]
+        public float punchDrag = 0.2f;
+=======
+        private enum Fist
+        {
+            L, R
+        }
+        public enum Skill
+        {
+            Dash, Ray
+        }
+
+        [Range(0.1f, 1f)] public float punchDrag = 0.2f;
+>>>>>>> @{-1}
+        public float punchMemoryDuration = 2f;
+        public ProjectileData projectileData;
+        public DamageAreaData damageAreas;
+        public ParticleSystem punchParticle;
+        public AdquiredAbilities adquiredAbilities;
+        public bool Punching => punching;
+        public bool CanInvokeRay => rayTimer <= 0 && controllable;
+        private enum Fist { L, R }
+        private InteractOnTrigger2D dashTrigger => damageAreas.Dash;
+        private InteractOnTrigger2D punchTrigger => damageAreas.Punch;
+        private float rayTimer;
+        private Fist fist;
+        private bool punching;
+        private float punchMemoryTimer;
+        private PlayerController player => PlayerController.Instance;
+        private PlayerData PlayerData => player.PlayerData;
+        private VengefulProjectile projectilePrefab => projectileData.Projectile;
+        private float projectileSpeed => projectileData.Speed;
+        private float projectileTimeout => projectileData.Lifetime;
+        private Transform projectileOrigin => projectileData.Origin;
+        private float rayCooldown => PlayerData.Stats.rayCooldown;
+        private int FacingValue => player.FacingValue;
+        private Animator animator => player.Animator;
+        private bool wannaPunch = false;
+        private bool controllable => player.Controllable;
+        private Stats playerStats => player.Stats;
+        private MovementController movementController => GetComponent<MovementController>();
+        private Dictionary<Skill, bool> adquiredSkill = new Dictionary<Skill, bool>
+        {
+            { Skill.Dash, false },
+            { Skill.Ray, false }
+        };
+
+        public void Start()
+        {
+            dashTrigger.Interact = false;
+            punchTrigger.Interact = false;
+        }
+
+        public void Update()
+        {
+            if (rayTimer > 0)
+                rayTimer -= Time.deltaTime;
+
+            if (punchMemoryTimer > 0)
+                punchMemoryTimer -= Time.deltaTime;
+
+            if (Input.GetButtonDown(CharacterActions.Punch))
+            {
+                wannaPunch = true;
+            }
+
+            if (Input.GetButton(CharacterActions.InvokeRay) && CanInvokeRay)
+                OnRayAnimationStart();
+        }
+
+        public void FixedUpdate()
+        {
+            if (CanPunch())
+                PunchStart();
+<<<<<<< HEAD
+            if (wannaPunch) wannaPunch = false;
+        }
+
+        public void PunchEnd()
+=======
+
+            if (wannaPunch) wannaPunch = false;
+        }
+
+        private void PunchStart()
+>>>>>>> @{-1}
+        {
+            if (!punching)
+                return;
+<<<<<<< HEAD
+            punching = false;
+            punchMemoryTimer = punchMemoryDuration;
+            punchTrigger.Interact = false;
+            movementController.Acceleration = 1f;
+        }
+
+        public bool AdquiredAbility(Ability ability)
+        {
+            if (adquiredAbilities == null)
+            {
+                Debug.LogError("Please make sure to add abilities scriptable object manager");
+                return false;
+            }
+            return adquiredAbilities.Adquired(ability);
+        }
+
+        public void AdquireAbility(Ability ability)
+        {
+            if (adquiredAbilities == null)
+            {
+                Debug.LogError("Please make sure to add abilities scriptable object manager");
+            }
+            else
+            {
+                adquiredAbilities.Adquire(ability);
+            }
+        }
+
+        private void PunchStart()
+        {
+            if (punching)
+                return;
+            punching = true;
+            fist = ForgotNextFist() ? RandomFist() : NextFist();
+=======
+            punching = true;
+            punchFist = ForgotNextFist() ? RandomFist() : NextFist();
+>>>>>>> @{-1}
+            punchTrigger.Interact = true;
+            punchParticle?.Play();
+            movementController.Acceleration = punchDrag;
+            AnimatePunch(fist);
+        }
+
+        private bool CanPunch()
+        {
+            return wannaPunch && controllable;
+<<<<<<< HEAD
+=======
+        }
+
+        private bool ForgotNextFist()
+        {
+            return punchMemoryTimer <= 0;
+        }
+
+        public void PunchEnd()
+        {
+            if (!punching)
+                return;
+            punching = false;
+            punchMemoryTimer = punchMemoryDuration;
+            punchTrigger.Interact = false;
+            movementController.Acceleration = 1f;
+>>>>>>> @{-1}
+        }
+
+        private bool ForgotNextFist()
+        {
+            return punchMemoryTimer <= 0;
+        }
+
+        private void AnimatePunch(Fist fist)
+        {
+            if (fist == Fist.L)
+            {
+                animator.SetTrigger(CharacterAnimations.LPunch);
+            }
+            else
+            {
+                animator.SetTrigger(CharacterAnimations.RPunch);
+            }
+        }
+
+        private Fist NextFist()
+        {
+<<<<<<< HEAD
+            return fist == Fist.L ? Fist.R : Fist.L;
+=======
+            return punchFist == Fist.L ? Fist.R : Fist.L;
+>>>>>>> @{-1}
+        }
+
+        private Fist RandomFist()
+        {
+            return (Fist)Random.Range(0, 2);
+        }
+
+        public void OnDashComplete()
+        {
+            dashTrigger.Interact = false;
+        }
+
+        public void OnDashStart()
+        {
+            ActiveDashDamage();
+        }
+
+        private void ActiveDashDamage()
+        {
+            if (punchParticle)
+                punchParticle.Play();
+            dashTrigger.Interact = true;
+        }
+
+        public void OnPunchLand(Collider2D other)
+        {
+            int damage = playerStats.punchDamage;
+            OnHit(other, damage);
+        }
+
+        public void OnSpearLand(Collider2D other)
+        {
+            int damage = playerStats.dashDamage;
+            OnHit(other, damage);
+        }
+
+        private void OnHit(Collider2D other, int damage)
+        {
+            Destroyable destroyable = other.GetComponent<Destroyable>();
+            Face face = Function.CollisionSide(other.transform, transform);
+            Vector2 direction = face == Face.Right ? Vector2.right : Vector2.left;
+            destroyable?.OnAttackHit(damage, direction);
+        }
+
+        private void OnRayAnimationStart()
+        {
+            animator.SetTrigger(CharacterAnimations.Ray);
+            ResetRayCooldown();
+        }
+
+        private void ResetRayCooldown()
+        {
+            rayTimer = rayCooldown;
+            PowersPanelManager.Instance.GetRayTimer().PowerUsed(rayCooldown);
+        }
+
+        // pre: called by ray player animation
+        // post: invoke an instance of ray projectile and sets its values
+        public void InvokeRay()
+        {
+            Vector2 force = Vector2.right * FacingValue * projectileSpeed;
+            VengefulProjectile instance = Instantiate(projectilePrefab, projectileOrigin.position, Quaternion.identity);
+            instance.SetForce(force);
+            instance.gameObject.Disposable(projectileTimeout);
+        }
+
+        public void OnRayHit(Collider2D other)
+        {
+            OnHit(other, playerStats.rayDamage);
+        }
+
+        public void ActiveSkill(Skill ability)
+        {
+            adquiredSkill[ability] = true;
+        }
+    }
+
+}
