@@ -119,7 +119,7 @@ namespace Core.Player.Controller
 
         private bool CanDash()
         {
-            return !isDashing && dashCooldownTimer <= 0 && Controllable && !Player.Punching;
+            return !isDashing && dashCooldownTimer <= 0 && Controllable && !Player.Punching && Player.AdquiredAbility(Ability.Dash);
         }
 
         // pre: --

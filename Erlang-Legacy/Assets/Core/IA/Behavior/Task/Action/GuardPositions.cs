@@ -1,5 +1,3 @@
-
-
 using System.Collections.Generic;
 using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
@@ -15,6 +13,7 @@ namespace Core.IA.Behavior.Action
         public SharedInt currentIndex = 0;
         public SharedFloat threshold = 0.1f;
         public SharedBool forgetPosition = false;
+        public SharedTransform currentTarget;
         private List<Transform> transforms;
 
         public override void OnStart()
@@ -47,6 +46,7 @@ namespace Core.IA.Behavior.Action
             if (OnPoint(currentPoint))
                 currentIndex = Clamp(currentIndex.Value + 1);
             var nextPoint = transforms[currentIndex.Value];
+            currentTarget.Value = nextPoint;
             MoveForward(nextPoint);
         }
 
