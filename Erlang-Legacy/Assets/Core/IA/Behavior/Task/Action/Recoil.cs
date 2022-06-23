@@ -23,8 +23,14 @@ namespace Core.Combat.IA.Behavior.Action
         private void ApplyRecoil(Vector2 direction)
         {
             Vector2 recoilForce = direction.normalized * recoilScale.Value;
-            body.bodyType = RigidbodyType2D.Dynamic;
-            body.AddForce(recoilForce, ForceMode2D.Impulse);
+            if (body.bodyType == RigidbodyType2D.Dynamic)
+            {
+                body.AddForce(recoilForce, ForceMode2D.Impulse);
+            }
+            else
+            {
+                body.velocity = recoilForce;
+            }
         }
     }
 }

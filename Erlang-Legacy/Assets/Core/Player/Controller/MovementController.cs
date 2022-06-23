@@ -263,7 +263,7 @@ namespace Core.Player.Controller
                 return;
 
             dashCooldownTimer = DashCooldown;
-            PowersPanelManager.Instance.GetDashTimer().PowerUsed(DashCooldown);
+            PowersPanelManager.Instance?.GetDashTimer().PowerUsed(DashCooldown);
             Body.gravityScale = baseGravityScale;
             isDashing = false;
             DashTrail.widthMultiplier = 0;
