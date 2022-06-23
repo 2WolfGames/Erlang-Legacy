@@ -1,4 +1,4 @@
-﻿using Core.Combat;
+using Core.Combat;
 using Core.Combat.Projectile;
 using Core.Player.Data;
 using Core.Player.Util;
@@ -225,6 +225,12 @@ namespace Core.Player.Controller
         private bool CanInvokeRayAbility()
         {
             return rayTimer <= 0 && controllable && AdquiredAbility(Ability.Ray);
+        }
+
+        public void OnRayHit(Collider2D other)
+        {
+            //This is a Unity Event
+            OnHit(other, playerStats.rayDamage);
         }
 
     }
