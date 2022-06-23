@@ -25,17 +25,15 @@ namespace Core.Player.Util
 
         public void OnRay()
         {
-            player.InvokeRay();
-        }
-
-        public void OnRayStart()
-        {
-            player.OnRayStarts();
+            // triggers ray power ball
+            var abilityController = player.GetComponent<AbilityController>();
+            abilityController.InvokeRayBallInstance();
         }
 
         public void OnRayEnd()
         {
-            player.OnRayEnd();
+            var abilityController = player.GetComponent<AbilityController>();
+            abilityController.RayAbilityComplete();
         }
 
         public void OnPunch()
