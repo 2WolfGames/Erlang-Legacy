@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using Spine.Unity;
 using UnityEngine;
 using UnityEngine.SceneManagement;

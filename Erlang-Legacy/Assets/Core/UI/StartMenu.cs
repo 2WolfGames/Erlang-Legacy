@@ -11,9 +11,12 @@ namespace Core.UI
     public class StartMenu : MonoBehaviour
     {
         [SerializeField] SkeletonGraphic skeletonGraphic;
+        [SerializeField] GameObject settingsMenu;
         [SerializeField] Image worldImage;
         [SerializeField] Image cloudsImage;
         int option;
+
+        bool inSettingsPage = false;
 
         private void Start()
         {
@@ -24,7 +27,10 @@ namespace Core.UI
 
         private void Update()
         {
-            ManageOptions();
+            if (!inSettingsPage)
+            {
+                ManageOptions();
+            }
         }
 
         private void FixedUpdate()
@@ -65,7 +71,7 @@ namespace Core.UI
                 else if (Input.GetKeyDown(KeyCode.Space))
                 {
                     //Scene Manager
-
+                    OpenSettingsPage();
                 }
             }
             else
@@ -93,6 +99,19 @@ namespace Core.UI
             PlayerState playerState = SaveSystem.LoadPlayerState();
             GameSessionController.Instance.LoadData = true;
             StartCoroutine(Loader.LoadWithDelay((SceneID)playerState.scene, 0));
+        }
+
+        private void OpenSettingsPage()
+        {
+            inSettingsPage = true;
+            settingsMenu.SetActive(true);
+            settingsMenu.GetComponent<SettingsMenu>()?.OnOpenMenu(false);
+        }
+
+        public void CloseSettingsPage()
+        {
+            settingsMenu.SetActive(false);
+            inSettingsPage = false;
         }
 
         #region start menu animations

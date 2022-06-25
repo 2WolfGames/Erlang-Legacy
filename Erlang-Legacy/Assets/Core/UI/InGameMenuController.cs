@@ -11,22 +11,23 @@ namespace Core.UI
     {
         public static bool gamePaused = false;
         [SerializeField] GameObject pauseMenu;
+        [SerializeField] GameObject settingsMenu;
         [SerializeField] GameObject AjaxDiaryPrefab;
         SkeletonGraphic skeletonGraphic;
         GameObject currentAjaxDiary;
-        //int diaryPage;
+        //int diaryPage; for the moment we only have one page
         int option;
-
+        bool inSettingsPage = false;
 
         private void Update()
         {
 
-            if (gamePaused)
+            if (gamePaused && !inSettingsPage)
             {
                 ManageOptionsPage();
             }
 
-            if (Input.GetKeyDown(KeyCode.Tab))
+            if (Input.GetKeyDown(KeyCode.Tab) && !inSettingsPage)
             {
                 if (gamePaused)
                 {
@@ -76,7 +77,7 @@ namespace Core.UI
         {
             if (option == 0)
             { //Resume
-                if (Input.GetKeyDown(KeyCode.DownArrow))
+                if (Input.GetKeyDown(KeyCode.S))
                 {
                     OnResumeHoverOut();
                     OnSettingsHoverIn();
@@ -89,13 +90,13 @@ namespace Core.UI
             }
             else if (option == 1)
             { // Settings
-                if (Input.GetKeyDown(KeyCode.DownArrow))
+                if (Input.GetKeyDown(KeyCode.S))
                 {
                     OnSettingsHoverOut();
                     OnQuitHoverIn();
                     option = 2;
                 }
-                else if (Input.GetKeyDown(KeyCode.UpArrow))
+                else if (Input.GetKeyDown(KeyCode.W))
                 {
                     OnSettingsHoverOut();
                     OnResumeHoverIn();
@@ -104,12 +105,12 @@ namespace Core.UI
                 else if (Input.GetKeyDown(KeyCode.Space))
                 {
                     //Scene Manager
-
+                    OpenSettingsPage();
                 }
             }
             else
             { //Quit
-                if (Input.GetKeyDown(KeyCode.UpArrow))
+                if (Input.GetKeyDown(KeyCode.W))
                 {
                     OnQuitHoverOut();
                     OnSettingsHoverIn();
@@ -135,6 +136,17 @@ namespace Core.UI
         private void CloseMenu()
         {
             Destroy(currentAjaxDiary);
+        }
+
+        private void OpenSettingsPage(){
+            inSettingsPage = true;
+            settingsMenu.SetActive(true);
+            settingsMenu.GetComponent<SettingsMenu>()?.OnOpenMenu(true);
+        }
+
+        public void CloseSettingsPage(){
+            settingsMenu.SetActive(false);
+            inSettingsPage = false;
         }
 
 
