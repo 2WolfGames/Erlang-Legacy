@@ -5,6 +5,7 @@ using Core.Shared;
 using Core.Shared.Enum;
 using Core.Utility;
 using UnityEngine;
+using Core.UI;
 
 namespace Core.Player.Controller
 {
@@ -243,6 +244,7 @@ namespace Core.Player.Controller
             {
                 SaveAdquiredAbility(ability);
                 abilityController.AdquireAbility(ability);
+                PowersPanelManager.Instance?.ManagePowersVisibility();
             }
         }
 

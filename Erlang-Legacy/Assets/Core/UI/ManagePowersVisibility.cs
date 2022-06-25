@@ -11,9 +11,9 @@ namespace Core.UI{
 
         //pre: --
         //post: hides Game Objects depending if player has the abilites or not
-        public void HideNonAcquiredPowers(){
+        public void ManageAdquiredPowersVisibility(){
             rayPower.SetActive(PlayerController.Instance.AdquiredAbility(Ability.Ray));
-            dashPower.SetActive(PlayerController.Instance.AdquiredAbility(Ability.Ray));
+            dashPower.SetActive(PlayerController.Instance.AdquiredAbility(Ability.Dash));
         }
 
         //pre: --

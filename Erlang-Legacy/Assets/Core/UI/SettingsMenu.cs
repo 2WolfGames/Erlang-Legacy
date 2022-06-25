@@ -140,7 +140,7 @@ namespace Core.UI
         private void ShowKeySheet()
         {
             if (inGame){
-                GetComponentInChildren<ManagePowersVisibility>().HideNonAcquiredPowers();
+                GetComponentInChildren<ManagePowersVisibility>().ManageAdquiredPowersVisibility();
             } else {
                 GetComponentInChildren<ManagePowersVisibility>().ShowAllPowers();
             }
