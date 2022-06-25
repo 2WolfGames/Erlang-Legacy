@@ -15,9 +15,10 @@ namespace Core.UI
         [SerializeField] Image worldImage;
         [SerializeField] Image cloudsImage;
         int option;
-
         bool inSettingsPage = false;
 
+        //pre: --
+        //post: all is set to initial state
         private void Start()
         {
             skeletonGraphic.AnimationState.SetAnimation(1, "init", false);
@@ -25,6 +26,8 @@ namespace Core.UI
             option = 0;
         }
 
+        //pre: --
+        //post: controls user interactions with menu
         private void Update()
         {
             if (!inSettingsPage)
@@ -33,12 +36,16 @@ namespace Core.UI
             }
         }
 
+        //pre:--
+        //post: animates objects in scene
         private void FixedUpdate()
         {
             Function.RotateGameObject(worldImage.transform, -20);
             Function.RotateGameObject(cloudsImage.transform, 30);
         }
 
+        //pre: --
+        //post: controls user interactions 
         private void ManageOptions()
         {
             if (option == 0)
@@ -89,6 +96,8 @@ namespace Core.UI
             }
         }
 
+        //pre: --
+        //post: laods game
         private void LoadGame()
         {
             if (!SaveSystem.SaveGameExists())
@@ -101,6 +110,8 @@ namespace Core.UI
             StartCoroutine(Loader.LoadWithDelay((SceneID)playerState.scene, 0));
         }
 
+        //pre: --
+        //post: opens settings menu 
         private void OpenSettingsPage()
         {
             inSettingsPage = true;
@@ -108,12 +119,15 @@ namespace Core.UI
             settingsMenu.GetComponent<SettingsMenu>()?.OnOpenMenu(false);
         }
 
+        //pre: --
+        //post: closes settings menu 
         public void CloseSettingsPage()
         {
             settingsMenu.SetActive(false);
             inSettingsPage = false;
         }
-
+        
+        //Animations interactions with menu 
         #region start menu animations
         public void OnStartGameHoverIn()
         {

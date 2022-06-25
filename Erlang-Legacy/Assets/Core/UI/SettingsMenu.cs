@@ -18,7 +18,8 @@ namespace Core.UI
         bool showingkeyCheatSheet = false;
         bool inGame;
 
-        // Update is called once per frame
+        //pre: --
+        //post: controls user interactions 
         void Update()
         {
             if (showingkeyCheatSheet)
@@ -105,6 +106,8 @@ namespace Core.UI
             }
         }
 
+        //pre: --
+        //post: sets menu to initial values and makes an open animation
         public void OnOpenMenu(bool inGame)
         {
             this.inGame = inGame;
@@ -113,6 +116,9 @@ namespace Core.UI
             optionsCanvasGroup.alpha = 0;
             optionsCanvasGroup.DOFade(1, 0.25f).SetUpdate(true);
         }
+
+        //pre: --
+        //post: makes an close animation
         private void OnCloseMenu()
         {
             optionsCanvasGroup.DOFade(0, 0.25f).SetUpdate(true).OnComplete(() =>
@@ -129,6 +135,8 @@ namespace Core.UI
             });
         }
 
+        //pre: --
+        //post: shows keyscheatsheet on screen
         private void ShowKeySheet()
         {
             optionsCanvasGroup.DOFade(0, 0.25f).SetUpdate(true);
@@ -140,6 +148,8 @@ namespace Core.UI
             );
         }
 
+        //pre: --
+        //post: hides keyscheatsheet on screen
         private void HideKeySheet()
         {
             keyCheatSheetCanvasGroup.DOFade(0, 0.25f).SetUpdate(true);
@@ -151,18 +161,22 @@ namespace Core.UI
             );
         }
 
-        private void ManageSlider(Slider slider, bool increaseValue)
+        //pre: --
+        //post: manages slider to increase o decrease value
+        private void ManageSlider(Slider slider, bool increase)
         {
-            if (increaseValue && slider.value < 1)
+            if (increase && slider.value < 1)
             {
                 slider.value += slidersChangeValue;
             }
-            else if (!increaseValue && slider.value > 0)
+            else if (!increase && slider.value > 0)
             {
                 slider.value -= slidersChangeValue;
             }
         }
 
+        //pre: --
+        //post: moves selector in yPos to show user where it is
         private void MoveSelector(float yPos)
         {
             selector.transform.DOMoveY(yPos, 0.2f).SetUpdate(true);
