@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d1537c0ad6752f439a59594eb293b27, type: 3}
   m_Name: Player Adquired Abilities
   m_EditorClassIdentifier: 
-  dash: 1
-  ray: 1
+  dash: 0
+  ray: 0

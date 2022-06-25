@@ -139,6 +139,11 @@ namespace Core.UI
         //post: shows keyscheatsheet on screen
         private void ShowKeySheet()
         {
+            if (inGame){
+                GetComponentInChildren<ManagePowersVisibility>().HideNonAcquiredPowers();
+            } else {
+                GetComponentInChildren<ManagePowersVisibility>().ShowAllPowers();
+            }
             optionsCanvasGroup.DOFade(0, 0.25f).SetUpdate(true);
             keyCheatSheetCanvasGroup.DOFade(1, 0.25f).SetUpdate(true).OnComplete(
                 () =>
