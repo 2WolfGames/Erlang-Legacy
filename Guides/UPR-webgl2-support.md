@@ -29,3 +29,12 @@ The thing here is that our spine projects imported in scene are not fully compat
 ```
 
 It seems that we need to re-import spine project reimporting atlas as straight alpha texture with 'premultiply alpha' unchecked.
+
+---
+
+To solve warning we:
+1. Export Ajax atlas without checking Premultiply-alpha
+2. Changed Project Setings >> Player >> Color to Gamma
+
+Now, but, webGL still does not work.
+
