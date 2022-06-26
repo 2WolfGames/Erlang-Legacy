@@ -47,6 +47,9 @@ namespace Core.GameSession
         //post: seting up player lifes and charges player if it's necessary
         private void Start()
         {
+
+            Debug.Log("GameSessionController.Start()");
+
             if (waiting)
                 return;
 
@@ -63,10 +66,14 @@ namespace Core.GameSession
         //post: seting up player lifes and search current player position if necessary
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
+            Debug.Log($"lknosfm {waiting}");
+
             if (waiting)
                 return;
 
             inDieProcess = false;
+
+            Debug.Log(loadData);
 
             if (loadData) //player has died 
             {
@@ -138,7 +145,6 @@ namespace Core.GameSession
         //post: returns player to it's status of the last save
         public void RecoverLastSaveScene()
         {
-            Debug.Log("GameSessionController.RecoverLastSaveScene()");
             FindObjectOfType<InGameCanvas>()?.ActiveDeathImage();
 
             loadData = true;
@@ -176,6 +182,8 @@ namespace Core.GameSession
 
         private void LoadAbilitiesAdcquired(PlayerState playerState)
         {
+            Debug.Log("Loading abilities");
+
             bool dashAcquired = false;
             bool rayAcquired = false;
 
