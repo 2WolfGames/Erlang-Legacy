@@ -40,6 +40,7 @@ namespace Core.Shared.SaveSystem
         public static PlayerState LoadPlayerState()
         {
             string path = Application.persistentDataPath + "/player_stats.bin";
+            Debug.Log(path);
             if (File.Exists(path))
             {
                 try

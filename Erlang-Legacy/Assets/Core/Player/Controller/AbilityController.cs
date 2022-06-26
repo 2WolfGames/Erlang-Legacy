@@ -18,7 +18,7 @@ namespace Core.Player.Controller
         public ProjectileData projectileData;
         public DamageAreaData damageAreas;
         public ParticleSystem punchParticle;
-        public AdquiredAbilities adquiredAbilities;
+        public AbilitiesAcquired abilitiesAcquired;
         public bool Punching => punching;
         private enum Fist { L, R }
         private InteractOnTrigger2D dashTrigger => damageAreas.Dash;
@@ -83,23 +83,23 @@ namespace Core.Player.Controller
 
         public bool AdquiredAbility(Ability ability)
         {
-            if (adquiredAbilities == null)
+            if (abilitiesAcquired == null)
             {
                 Debug.LogError("Please make sure to add abilities scriptable object manager");
                 return false;
             }
-            return adquiredAbilities.Adquired(ability);
+            return abilitiesAcquired.Acquired(ability);
         }
 
         public void AdquireAbility(Ability ability)
         {
-            if (adquiredAbilities == null)
+            if (abilitiesAcquired == null)
             {
                 Debug.LogError("Please make sure to add abilities scriptable object manager");
             }
             else
             {
-                adquiredAbilities.Adquire(ability);
+                abilitiesAcquired.Acquire(ability);
             }
         }
 

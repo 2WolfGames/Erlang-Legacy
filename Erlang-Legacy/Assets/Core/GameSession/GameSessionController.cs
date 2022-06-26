@@ -126,10 +126,10 @@ namespace Core.GameSession
         private Dictionary<Ability, bool> PlayerAbilitiesAdquiredSnapshot()
         {
             AbilityController abilitiesController = PlayerController.Instance?.GetComponent<AbilityController>();
-            AdquiredAbilities adquiredAbilities = abilitiesController?.adquiredAbilities;
+            AbilitiesAcquired adquiredAbilities = abilitiesController?.abilitiesAcquired;
             Dictionary<Ability, bool> abilitiesState = new Dictionary<Ability, bool>{
-                {Ability.Dash, adquiredAbilities.Adquired(Ability.Dash)},
-                {Ability.Ray, adquiredAbilities.Adquired(Ability.Ray)},
+                {Ability.Dash, adquiredAbilities.Acquired(Ability.Dash)},
+                {Ability.Ray, adquiredAbilities.Acquired(Ability.Ray)},
             };
             return abilitiesState;
         }
@@ -166,23 +166,28 @@ namespace Core.GameSession
             playerHealth.HP = playerState.health;
             playerHealth.MaxHP = playerState.max_health;
 
-            bool dashAdquired = false;
-            bool rayAdquired = false;
-
-            Dictionary<Ability, bool> mem_abilitiesAdquired = playerState.abilitiesAdquired;
-            AbilityController abilityController = PlayerController.Instance.GetComponent<AbilityController>();
-
-            mem_abilitiesAdquired.TryGetValue(Ability.Dash, out dashAdquired);
-            mem_abilitiesAdquired.TryGetValue(Ability.Ray, out rayAdquired);
-
-            AdquiredAbilities adquiredAbilities = abilityController.adquiredAbilities;
-            adquiredAbilities.DashAdquired = dashAdquired;
-            adquiredAbilities.RayAdquired = rayAdquired;
+            LoadAbilitiesAdcquired(playerState);
 
             currentSavePos = playerState.GetPosition();
             loadData = false;
 
             return playerState.scene;
+        }
+
+        private void LoadAbilitiesAdcquired(PlayerState playerState)
+        {
+            bool dashAcquired = false;
+            bool rayAcquired = false;
+
+            Dictionary<Ability, bool> mem_abilitiesAdquired = playerState.abilitiesAdquired;
+            AbilityController abilityController = PlayerController.Instance.GetComponent<AbilityController>();
+
+            mem_abilitiesAdquired.TryGetValue(Ability.Dash, out dashAcquired);
+            mem_abilitiesAdquired.TryGetValue(Ability.Ray, out rayAcquired);
+
+            AbilitiesAcquired adquiredAbilities = abilityController.abilitiesAcquired;
+            adquiredAbilities.DashAcquired = dashAcquired;
+            adquiredAbilities.RayAcquired = rayAcquired;
         }
 
         //pre: entranceTag is not EntranceID.None
