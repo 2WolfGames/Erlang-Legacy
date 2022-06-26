@@ -13,7 +13,7 @@ namespace Core.GameSession
     public class GameSessionController : MonoBehaviour
     {
         private bool loadData = false;
-        private bool waiting => !SceneManagementFunctions.CurrentSceneIsGameplay();
+        private bool nonPlayableScene => !SceneManagementFunctions.CurrentSceneIsGameplay();
         public Vector3 currentSavePos { get; private set; }
         private EntranceID entranceTag;
         private bool inDieProcess = false;
@@ -47,10 +47,9 @@ namespace Core.GameSession
         //post: seting up player lifes and charges player if it's necessary
         private void Start()
         {
+            SceneManager.sceneLoaded += OnSceneLoaded;
 
-            Debug.Log("GameSessionController.Start()");
-
-            if (waiting)
+            if (nonPlayableScene)
                 return;
 
             if (loadData)
@@ -58,22 +57,16 @@ namespace Core.GameSession
                 LoadSavedData();
                 PlacePlayer();
             }
-
-            SceneManager.sceneLoaded += OnSceneLoaded;
         }
 
         //pre: --
         //post: seting up player lifes and search current player position if necessary
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            Debug.Log($"lknosfm {waiting}");
-
-            if (waiting)
+            if (nonPlayableScene)
                 return;
 
             inDieProcess = false;
-
-            Debug.Log(loadData);
 
             if (loadData) //player has died 
             {
@@ -85,16 +78,13 @@ namespace Core.GameSession
                 SearchEntrance();
             }
 
-
-            Debug.Log("GameSessionController.OnSceneLoaded()");
-
         }
 
-        //pre: if not waiting, player.instance != null
+        //pre: if not nonPlayableScene, player.instance != null
         //post: if player has died game resets to last save
         private void Update()
         {
-            if (waiting)
+            if (nonPlayableScene)
                 return;
             bool isDead = PlayerController.Instance.IsDead();
             if (!inDieProcess && isDead)
@@ -150,6 +140,7 @@ namespace Core.GameSession
             loadData = true;
 
             PlayerState playerState = SaveSystem.LoadPlayerState();
+
             StartCoroutine(Loader.LoadWithDelay((SceneID)playerState.scene, 5f));
         }
 
