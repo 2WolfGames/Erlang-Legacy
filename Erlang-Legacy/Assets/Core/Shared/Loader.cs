@@ -22,19 +22,16 @@ namespace Core.Shared
         //post: changes scene to LoadingScene and sets the new scene to charge 
         private static void Load(string sceneName)
         {
-            BeforeLoadingScene();
+            KillActiveTweens();
             LoadingMenu.sceneName = sceneName;
             SceneManager.LoadScene(SceneID.LoadingScene.ToString());
         }
 
         //pre: --
-        //post: ends process
-        private static void BeforeLoadingScene()
+        private static void KillActiveTweens()
         {
             DOTween.KillAll(false);
         }
-
-
     }
 }
 
