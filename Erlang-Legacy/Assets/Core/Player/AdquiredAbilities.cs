@@ -9,6 +9,18 @@ namespace Core.Player
         [SerializeField] bool dash;
         [SerializeField] bool ray;
 
+        public bool DashAdquired
+        {
+            get => dash;
+            set => dash = value;
+        }
+
+        public bool RayAdquired
+        {
+            get => ray;
+            set => ray = value;
+        }
+
         public bool Adquired(Ability ability)
         {
             switch (ability)
