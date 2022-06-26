@@ -166,6 +166,19 @@ namespace Core.GameSession
             playerHealth.HP = playerState.health;
             playerHealth.MaxHP = playerState.max_health;
 
+            bool dashAdquired = false;
+            bool rayAdquired = false;
+
+            Dictionary<Ability, bool> mem_abilitiesAdquired = playerState.abilitiesAdquired;
+            AbilityController abilityController = PlayerController.Instance.GetComponent<AbilityController>();
+
+            mem_abilitiesAdquired.TryGetValue(Ability.Dash, out dashAdquired);
+            mem_abilitiesAdquired.TryGetValue(Ability.Ray, out rayAdquired);
+
+            AdquiredAbilities adquiredAbilities = abilityController.adquiredAbilities;
+            adquiredAbilities.DashAdquired = dashAdquired;
+            adquiredAbilities.RayAdquired = rayAdquired;
+
             currentSavePos = playerState.GetPosition();
             loadData = false;
 
@@ -202,7 +215,7 @@ namespace Core.GameSession
 
         //pre: player.instance != null
         //post: player position = currentSavePosition
-        private void PlacePlayer()
+        public void PlacePlayer()
         {
             var player = PlayerController.Instance;
             player.transform.position = currentSavePos;
