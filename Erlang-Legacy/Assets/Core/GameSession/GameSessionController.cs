@@ -3,7 +3,6 @@ using Core.Shared;
 using Core.Shared.Enum;
 using Core.Shared.SaveSystem;
 using Core.UI;
-using Core.UI.LifeBar;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,7 +11,7 @@ namespace Core.GameSession
     public class GameSessionController : MonoBehaviour
     {
         private bool loadData = false;
-        private bool waiting => !SceneManagementFunctions.CurrentSceneIsGameplay();
+        private bool nonPlayableScene => !SceneManagementFunctions.CurrentSceneIsGameplay();
         public Vector3 currentSavePos { get; private set; }
         private EntranceID entranceTag;
         private bool inDieProcess = false;
@@ -46,7 +45,9 @@ namespace Core.GameSession
         //post: seting up player lifes and charges player if it's necessary
         private void Start()
         {
-            if (waiting)
+            SceneManager.sceneLoaded += OnSceneLoaded;
+
+            if (nonPlayableScene)
                 return;
 
             if (loadData)
@@ -54,15 +55,13 @@ namespace Core.GameSession
                 LoadSavedData();
                 PlacePlayer();
             }
-
-            SceneManager.sceneLoaded += OnSceneLoaded;
         }
 
         //pre: --
         //post: seting up player lifes and search current player position if necessary
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            if (waiting)
+            if (nonPlayableScene)
                 return;
 
             inDieProcess = false;
@@ -79,11 +78,11 @@ namespace Core.GameSession
 
         }
 
-        //pre: if not waiting, player.instance != null
+        //pre: if not nonPlayableScene, player.instance != null
         //post: if player has died game resets to last save
         private void Update()
         {
-            if (waiting)
+            if (nonPlayableScene)
                 return;
 
             var playerCurrentHealth = PlayerController.Instance.PlayerData.Health.HP;
@@ -123,12 +122,12 @@ namespace Core.GameSession
         //post: returns player to it's status of the last save
         public void ResetGameToLastSave()
         {
-            //PlayerController.Instance.OnDie();
             FindObjectOfType<InGameCanvas>()?.ActiveDeathImage();
 
             loadData = true;
 
             PlayerState playerState = SaveSystem.LoadPlayerState();
+
             StartCoroutine(Loader.LoadWithDelay((SceneID)playerState.scene, 5f));
         }
 
