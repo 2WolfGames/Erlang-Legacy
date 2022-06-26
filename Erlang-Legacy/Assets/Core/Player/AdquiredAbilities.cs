@@ -6,8 +6,8 @@ namespace Core.Player
     [CreateAssetMenu(menuName = "Player/AdquiredAbilities")]
     public class AdquiredAbilities : ScriptableObject
     {
-        public bool dash;
-        public bool ray;
+        [SerializeField] bool dash;
+        [SerializeField] bool ray;
 
         public bool Adquired(Ability ability)
         {
