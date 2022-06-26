@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
-using Core.Player;
-using Core.Player.Controller;
+﻿using Core.Player.Controller;
 using Core.Shared;
 using Core.Shared.Enum;
 using Core.Shared.SaveSystem;
 using Core.UI;
+using Core.UI.LifeBar;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -78,9 +77,6 @@ namespace Core.GameSession
                 SearchEntrance();
             }
 
-
-            Debug.Log("GameSessionController.OnSceneLoaded()");
-
         }
 
         //pre: if not waiting, player.instance != null
@@ -89,11 +85,12 @@ namespace Core.GameSession
         {
             if (waiting)
                 return;
-            bool isDead = PlayerController.Instance.IsDead();
-            if (!inDieProcess && isDead)
+
+            var playerCurrentHealth = PlayerController.Instance.PlayerData.Health.HP;
+            if (!inDieProcess && playerCurrentHealth <= 0)
             {
                 inDieProcess = true;
-                RecoverLastSaveScene();
+                ResetGameToLastSave();
             }
         }
 
@@ -117,28 +114,16 @@ namespace Core.GameSession
             PlayerState playerState = new PlayerState(((int)SceneManagementFunctions.GetCurrentSceneEnum()),
                                                     PlayerController.Instance.PlayerData.Health.HP,
                                                     PlayerController.Instance.PlayerData.Health.MaxHP,
-                                                    savePoint.position,
-                                                    PlayerAbilitiesAdquiredSnapshot());
+                                                    savePoint.position);
             SaveSystem.SavePlayerState(playerState);
             currentSavePos = savePoint.position;
         }
 
-        private Dictionary<Ability, bool> PlayerAbilitiesAdquiredSnapshot()
-        {
-            AbilityController abilitiesController = PlayerController.Instance?.GetComponent<AbilityController>();
-            AdquiredAbilities adquiredAbilities = abilitiesController?.adquiredAbilities;
-            Dictionary<Ability, bool> abilitiesState = new Dictionary<Ability, bool>{
-                {Ability.Dash, adquiredAbilities.Adquired(Ability.Dash)},
-                {Ability.Ray, adquiredAbilities.Adquired(Ability.Ray)},
-            };
-            return abilitiesState;
-        }
-
         //pre: player.instance != null
         //post: returns player to it's status of the last save
-        public void RecoverLastSaveScene()
+        public void ResetGameToLastSave()
         {
-            Debug.Log("GameSessionController.RecoverLastSaveScene()");
+            //PlayerController.Instance.OnDie();
             FindObjectOfType<InGameCanvas>()?.ActiveDeathImage();
 
             loadData = true;
@@ -159,7 +144,6 @@ namespace Core.GameSession
         //post: player stats are the ones saved in data
         private int LoadSavedData()
         {
-            Debug.Log("Loading data");
             PlayerState playerState = SaveSystem.LoadPlayerState();
 
             var playerHealth = PlayerController.Instance.PlayerData.Health;

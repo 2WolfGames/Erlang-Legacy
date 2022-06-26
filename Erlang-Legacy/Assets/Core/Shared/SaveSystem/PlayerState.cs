@@ -1,7 +1,5 @@
 ﻿using System;
 using UnityEngine;
-using System.Collections.Generic;
-using Core.Player;
 
 namespace Core.Shared.SaveSystem
 {
@@ -12,9 +10,8 @@ namespace Core.Shared.SaveSystem
         public float[] position;
         public int health;
         public int max_health;
-        public Dictionary<Ability, bool> abilitiesAdquired;
 
-        public PlayerState(int scene, int health, int max_health, Vector3 position, Dictionary<Ability, bool> abilitiesAdquired)
+        public PlayerState(int scene, int health, int max_health, Vector3 position)
         {
             this.scene = scene;
             this.health = health;
@@ -24,8 +21,6 @@ namespace Core.Shared.SaveSystem
             this.position[0] = position.x;
             this.position[1] = position.y;
             this.position[2] = position.z;
-
-            this.abilitiesAdquired = abilitiesAdquired;
         }
 
         public Vector3 GetPosition()

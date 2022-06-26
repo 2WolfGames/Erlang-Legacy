@@ -15,11 +15,7 @@ namespace Core.GameSession
                 if (Input.GetKeyDown(KeyCode.S))
                 {
                     canBeSaved = false;
-                    GameSessionController.Instance?.SavePlayerState(transform);
-                    if (!GameSessionController.Instance)
-                    {
-                        Debug.LogWarning("Game session controller not found in scene, can handle save player state");
-                    }
+                    GameSessionController.Instance.SavePlayerState(transform);
                 }
             }
         }

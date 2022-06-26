@@ -53,7 +53,6 @@ namespace Core.Player.Controller
 
         protected void Awake()
         {
-            Debug.Log("PlayerController.Awake()");
             var matches = FindObjectsOfType<PlayerController>();
 
             if (matches.Length > 1)
@@ -234,16 +233,11 @@ namespace Core.Player.Controller
             return playerData.Health.HP > 0;
         }
 
-        public bool IsDead()
-        {
-            return !IsAlive();
-        }
-
         public void AdquireAbility(Ability ability)
         {
             if (AdquiredAbility(ability))
             {
-                Debug.LogWarning($"Ability - {ability} - already adquired");
+                Debug.LogWarning($"Ability already adquired");
             }
             else
             {
