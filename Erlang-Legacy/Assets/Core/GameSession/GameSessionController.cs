@@ -111,8 +111,6 @@ namespace Core.GameSession
             if (inDieProcess)
                 return;
 
-            Debug.Log("Saving player state");
-
             PlayerState playerState = new PlayerState(((int)SceneManagementFunctions.GetCurrentSceneEnum()),
                                                     PlayerController.Instance.PlayerData.Health.HP,
                                                     PlayerController.Instance.PlayerData.Health.MaxHP,
@@ -158,7 +156,6 @@ namespace Core.GameSession
         //post: player stats are the ones saved in data
         private int LoadSavedData()
         {
-            Debug.Log("Loading data");
             PlayerState playerState = SaveSystem.LoadPlayerState();
 
             var playerHealth = PlayerController.Instance.PlayerData.Health;
@@ -175,8 +172,6 @@ namespace Core.GameSession
 
         private void LoadAbilitiesAdcquired(PlayerState playerState)
         {
-            Debug.Log("Loading abilities");
-
             bool dashAcquired = false;
             bool rayAcquired = false;
 
