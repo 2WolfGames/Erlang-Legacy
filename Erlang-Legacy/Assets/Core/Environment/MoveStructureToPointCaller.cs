@@ -1,5 +1,5 @@
 ﻿using System.Collections;
-using Core.Player.Util;
+using Core.Player.Utility;
 using UnityEngine;
 
 //This enum is fot the type of lever we have.

@@ -1,7 +1,7 @@
 ﻿using Core.Player.Controller;
 using UnityEngine;
 
-namespace Core.Player.Util
+namespace Core.Player.Utility
 {
     public class AnimationEvents : MonoBehaviour
     {

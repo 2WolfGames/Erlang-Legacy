@@ -1,7 +1,7 @@
 using Core.Combat;
 using Core.Combat.Projectile;
 using Core.Player.Data;
-using Core.Player.Util;
+using Core.Player.Utility;
 using Core.Shared;
 using Core.Shared.Enum;
 using Core.Utility;

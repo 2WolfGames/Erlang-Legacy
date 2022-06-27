@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 
-namespace Core.Player.Util
+namespace Core.Player.Utility
 {
     public class CharacterAnimations
     {
