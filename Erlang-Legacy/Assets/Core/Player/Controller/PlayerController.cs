@@ -241,13 +241,8 @@ namespace Core.Player.Controller
 
         public void AdquireAbility(Ability ability)
         {
-            if (AdquiredAbility(ability))
+            if (!AdquiredAbility(ability))
             {
-                Debug.LogWarning($"Ability - {ability} - already adquired");
-            }
-            else
-            {
-                SaveAdquiredAbility(ability);
                 abilityController.AdquireAbility(ability);
                 PowersPanelManager.Instance?.ManagePowersVisibility();
             }
@@ -258,11 +253,6 @@ namespace Core.Player.Controller
             return abilityController.AdquiredAbility(ability);
         }
 
-        private void SaveAdquiredAbility(Ability ability)
-        {
-            Debug.LogWarning($"PlayerController@SaveAdquiredAbility: Method not implemented yet");
-            // TODO: save ability to file
-        }
     }
 }
 

@@ -56,6 +56,7 @@ namespace Core.GameSession
             {
                 LoadSavedData();
                 PlacePlayer();
+                PowersPanelManager.Instance.ManagePowersVisibility();
             }
         }
 
@@ -78,6 +79,7 @@ namespace Core.GameSession
                 SearchEntrance();
             }
 
+            PowersPanelManager.Instance.ManagePowersVisibility();
         }
 
         //pre: if not nonPlayableScene, player.instance != null
