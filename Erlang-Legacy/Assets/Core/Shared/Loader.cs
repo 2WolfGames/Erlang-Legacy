@@ -9,7 +9,6 @@ namespace Core.Shared
 {
     public static class Loader
     {
-
         //pre: seconds >= 0
         //post: Loads scene after seconds
         public static IEnumerator LoadWithDelay(SceneID scene, float seconds)
@@ -34,4 +33,3 @@ namespace Core.Shared
         }
     }
 }
-
