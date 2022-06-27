@@ -124,7 +124,7 @@ namespace Core.Combat
 
             if (hitShakeCamera)
             {
-                CameraManager.Instance.ShakeCamera();
+                CameraManager.Instance.Shake();
             }
         }
 

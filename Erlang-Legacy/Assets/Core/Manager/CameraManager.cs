@@ -34,12 +34,12 @@ namespace Core.Manager
             virtualCamera.Follow = player.transform;
         }
 
-        public void ShakeCamera()
+        public void Shake()
         {
-            ShakeCamera(intensity, frequency, duration);
+            Shake(intensity, frequency, duration);
         }
 
-        public void ShakeCamera(float intensity = 1f, float frequency = 1f, float duration = 1.0f)
+        public void Shake(float intensity = 1f, float frequency = 1f, float duration = 1.0f)
         {
             if (Shaking)
                 return;

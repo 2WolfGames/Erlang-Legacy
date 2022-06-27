@@ -150,7 +150,7 @@ namespace Core.Player.Controller
         private void ShakeCamera()
         {
             if (shakeCameraOnHurt)
-                CameraManager.Instance?.ShakeCamera();
+                CameraManager.Instance?.Shake();
         }
 
         private void ResetAbilities()
