@@ -121,7 +121,7 @@ namespace Core.Player.Controller
         // post: applies damage to player. 1 unit of damage represent 1 unit of life taken
         public void Hurt(int damage, GameObject other)
         {
-            if (!CanBeHit || !IsAlive())
+            if (!CanBeHit || IsDead())
                 return;
 
             ShakeCamera();
