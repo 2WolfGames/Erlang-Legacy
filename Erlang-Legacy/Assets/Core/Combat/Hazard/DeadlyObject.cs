@@ -42,7 +42,7 @@ namespace Core.Hazard
             yield return new WaitForSeconds(cWaitTime);
 
             if (player.IsAlive())
-                player.transform.position = GameSessionController.Instance.currentSavePos;
+                GameSessionController.Instance.PlacePlayer();
 
             playerIn = false;
         }

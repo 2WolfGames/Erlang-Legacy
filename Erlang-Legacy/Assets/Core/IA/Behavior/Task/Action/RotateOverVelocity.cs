@@ -23,5 +23,4 @@ namespace Core.Combat.IA.Action
         }
 
     }
-
 }

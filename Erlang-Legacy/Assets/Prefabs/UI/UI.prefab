@@ -1637,8 +1637,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdd7c0091870353458790d8646d5dfba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dashPower: {fileID: 0}
-  rayPower: {fileID: 0}
+  dashPower: {fileID: 8276761857818383183}
+  rayPower: {fileID: 8276761857141264592}
 --- !u!1 &8276761857230658870
 GameObject:
   m_ObjectHideFlags: 0
