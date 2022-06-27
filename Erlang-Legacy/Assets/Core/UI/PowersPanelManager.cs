@@ -6,6 +6,7 @@ namespace Core.UI
     {
         [SerializeField] UIPowerTimer dashTimer;
         [SerializeField] UIPowerTimer rayTimer;
+        private ManagePowersVisibility managePowersVisibility => GetComponent<ManagePowersVisibility>();
 
         public static PowersPanelManager Instance { get; private set; }
 
@@ -22,6 +23,14 @@ namespace Core.UI
             {
                 Instance = this;
             }
+        }
+
+        private void Start() {
+            ManagePowersVisibility();
+        }
+
+        public void ManagePowersVisibility(){
+            managePowersVisibility.ManageAdquiredPowersVisibility();
         }
 
         public UIPowerTimer GetDashTimer()

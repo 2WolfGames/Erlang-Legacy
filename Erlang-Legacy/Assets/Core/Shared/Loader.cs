@@ -9,7 +9,6 @@ namespace Core.Shared
 {
     public static class Loader
     {
-
         //pre: seconds >= 0
         //post: Loads scene after seconds
         public static IEnumerator LoadWithDelay(SceneID scene, float seconds)
@@ -22,19 +21,15 @@ namespace Core.Shared
         //post: changes scene to LoadingScene and sets the new scene to charge 
         private static void Load(string sceneName)
         {
-            BeforeLoadingScene();
+            KillActiveTweens();
             LoadingMenu.sceneName = sceneName;
             SceneManager.LoadScene(SceneID.LoadingScene.ToString());
         }
 
         //pre: --
-        //post: ends process
-        private static void BeforeLoadingScene()
+        private static void KillActiveTweens()
         {
             DOTween.KillAll(false);
         }
-
-
     }
 }
-

@@ -3,13 +3,25 @@ using UnityEngine;
 namespace Core.Player
 {
     // desacoples logic from Ajax instance in every scene
-    [CreateAssetMenu(menuName = "Player/AdquiredAbilities")]
-    public class AdquiredAbilities : ScriptableObject
+    [CreateAssetMenu(menuName = "Player/AbilitiesAcquired")]
+    public class AbilitiesAcquired : ScriptableObject
     {
-        public bool dash;
-        public bool ray;
+        [SerializeField] bool dash;
+        [SerializeField] bool ray;
 
-        public bool Adquired(Ability ability)
+        public bool DashAcquired
+        {
+            get => dash;
+            set => dash = value;
+        }
+
+        public bool RayAcquired
+        {
+            get => ray;
+            set => ray = value;
+        }
+
+        public bool Acquired(Ability ability)
         {
             switch (ability)
             {
@@ -23,7 +35,7 @@ namespace Core.Player
             }
         }
 
-        public void Adquire(Ability ability)
+        public void Acquire(Ability ability)
         {
             switch (ability)
             {

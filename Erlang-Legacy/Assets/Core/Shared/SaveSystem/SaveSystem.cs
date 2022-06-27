@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Cryptography;
+using Core.Player;
 using Core.Shared.Enum;
 using UnityEngine;
 
@@ -40,6 +42,15 @@ namespace Core.Shared.SaveSystem
             string path = Application.persistentDataPath + "/player_stats.bin";
             if (File.Exists(path))
             {
+                try
+                {
+                    PlayerState playerData = (PlayerState)Decrypt(path);
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError("Error loading player state: " + e.Message);
+                    return PlayerStateDefaultValues();
+                }
                 return (PlayerState)Decrypt(path);
             }
             else
@@ -63,7 +74,11 @@ namespace Core.Shared.SaveSystem
             return new PlayerState((int)SceneID.FirstIsland,
                                     3,
                                     3,
-                                    new Vector3(-23.75f, -1.57f, 0));
+                                    new Vector3(-23.75f, -1.57f, 0),
+                                    new Dictionary<Ability, bool>{
+                                        {Ability.Dash, false},
+                                        {Ability.Ray, false},
+                                    });
         }
 
         #region "save and encryption"

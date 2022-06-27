@@ -1,9 +1,10 @@
-﻿using Core.Player.Controller;
+﻿using System.Collections.Generic;
+using Core.Player;
+using Core.Player.Controller;
 using Core.Shared;
 using Core.Shared.Enum;
 using Core.Shared.SaveSystem;
 using Core.UI;
-using Core.UI.LifeBar;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,7 +13,7 @@ namespace Core.GameSession
     public class GameSessionController : MonoBehaviour
     {
         private bool loadData = false;
-        private bool waiting => !SceneManagementFunctions.CurrentSceneIsGameplay();
+        private bool nonPlayableScene => !SceneManagementFunctions.CurrentSceneIsGameplay();
         public Vector3 currentSavePos { get; private set; }
         private EntranceID entranceTag;
         private bool inDieProcess = false;
@@ -46,23 +47,24 @@ namespace Core.GameSession
         //post: seting up player lifes and charges player if it's necessary
         private void Start()
         {
-            if (waiting)
+            SceneManager.sceneLoaded += OnSceneLoaded;
+
+            if (nonPlayableScene)
                 return;
 
             if (loadData)
             {
                 LoadSavedData();
                 PlacePlayer();
+                PowersPanelManager.Instance.ManagePowersVisibility();
             }
-
-            SceneManager.sceneLoaded += OnSceneLoaded;
         }
 
         //pre: --
         //post: seting up player lifes and search current player position if necessary
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            if (waiting)
+            if (nonPlayableScene)
                 return;
 
             inDieProcess = false;
@@ -77,20 +79,20 @@ namespace Core.GameSession
                 SearchEntrance();
             }
 
+            PowersPanelManager.Instance.ManagePowersVisibility();
         }
 
-        //pre: if not waiting, player.instance != null
+        //pre: if not nonPlayableScene, player.instance != null
         //post: if player has died game resets to last save
         private void Update()
         {
-            if (waiting)
+            if (nonPlayableScene)
                 return;
-
-            var playerCurrentHealth = PlayerController.Instance.PlayerData.Health.HP;
-            if (!inDieProcess && playerCurrentHealth <= 0)
+            bool isDead = PlayerController.Instance.IsDead();
+            if (!inDieProcess && isDead)
             {
                 inDieProcess = true;
-                ResetGameToLastSave();
+                RecoverLastSaveScene();
             }
         }
 
@@ -114,21 +116,33 @@ namespace Core.GameSession
             PlayerState playerState = new PlayerState(((int)SceneManagementFunctions.GetCurrentSceneEnum()),
                                                     PlayerController.Instance.PlayerData.Health.HP,
                                                     PlayerController.Instance.PlayerData.Health.MaxHP,
-                                                    savePoint.position);
+                                                    savePoint.position,
+                                                    PlayerAbilitiesAdquiredSnapshot());
             SaveSystem.SavePlayerState(playerState);
             currentSavePos = savePoint.position;
         }
 
+        private Dictionary<Ability, bool> PlayerAbilitiesAdquiredSnapshot()
+        {
+            AbilityController abilitiesController = PlayerController.Instance?.GetComponent<AbilityController>();
+            AbilitiesAcquired adquiredAbilities = abilitiesController?.abilitiesAcquired;
+            Dictionary<Ability, bool> abilitiesState = new Dictionary<Ability, bool>{
+                {Ability.Dash, adquiredAbilities.Acquired(Ability.Dash)},
+                {Ability.Ray, adquiredAbilities.Acquired(Ability.Ray)},
+            };
+            return abilitiesState;
+        }
+
         //pre: player.instance != null
         //post: returns player to it's status of the last save
-        public void ResetGameToLastSave()
+        public void RecoverLastSaveScene()
         {
-            //PlayerController.Instance.OnDie();
             FindObjectOfType<InGameCanvas>()?.ActiveDeathImage();
 
             loadData = true;
 
             PlayerState playerState = SaveSystem.LoadPlayerState();
+
             StartCoroutine(Loader.LoadWithDelay((SceneID)playerState.scene, 5f));
         }
 
@@ -150,10 +164,28 @@ namespace Core.GameSession
             playerHealth.HP = playerState.health;
             playerHealth.MaxHP = playerState.max_health;
 
+            LoadAbilitiesAdcquired(playerState);
+
             currentSavePos = playerState.GetPosition();
             loadData = false;
 
             return playerState.scene;
+        }
+
+        private void LoadAbilitiesAdcquired(PlayerState playerState)
+        {
+            bool dashAcquired = false;
+            bool rayAcquired = false;
+
+            Dictionary<Ability, bool> mem_abilitiesAdquired = playerState.abilitiesAdquired;
+            AbilityController abilityController = PlayerController.Instance.GetComponent<AbilityController>();
+
+            mem_abilitiesAdquired.TryGetValue(Ability.Dash, out dashAcquired);
+            mem_abilitiesAdquired.TryGetValue(Ability.Ray, out rayAcquired);
+
+            AbilitiesAcquired adquiredAbilities = abilityController.abilitiesAcquired;
+            adquiredAbilities.DashAcquired = dashAcquired;
+            adquiredAbilities.RayAcquired = rayAcquired;
         }
 
         //pre: entranceTag is not EntranceID.None
@@ -186,7 +218,7 @@ namespace Core.GameSession
 
         //pre: player.instance != null
         //post: player position = currentSavePosition
-        private void PlacePlayer()
+        public void PlacePlayer()
         {
             var player = PlayerController.Instance;
             player.transform.position = currentSavePos;
