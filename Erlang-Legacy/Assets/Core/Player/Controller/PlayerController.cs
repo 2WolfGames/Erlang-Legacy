@@ -52,6 +52,7 @@ namespace Core.Player.Controller
         private float recoverTimeoutAfterHit => playerData.Stats.recoverTimeoutAfterHit;
         private bool blockingUI;
         private float baseGravityScale = 1f;
+        private int currentHealth => playerData.Health.HP;
 
         protected void Awake()
         {
@@ -128,13 +129,17 @@ namespace Core.Player.Controller
             ShakeCamera();
             Freeze();
             ResetAbilities();
+            GameManager.Instance?.FreezeTime(0.01f);
             TakeHurt(other.transform, damage);
         }
 
         private void TakeHurt(Transform agressor, int damage)
         {
-            TakeLifes(damage);
-            if (IsDead()) Die();
+            SetHealth(currentHealth - damage);
+            if (IsDead())
+            {
+                Die();
+            }
             else
             {
                 ComputeSideHurtAnimation(agressor);
@@ -154,9 +159,9 @@ namespace Core.Player.Controller
             OnDashComplete();
         }
 
-        private void TakeLifes(int damage)
+        private void SetHealth(int health)
         {
-            playerData.Health.HP = playerData.Health.HP - damage;
+            playerData.Health.HP = health;
         }
 
         private void ComputeSideHurtAnimation(Transform other)
