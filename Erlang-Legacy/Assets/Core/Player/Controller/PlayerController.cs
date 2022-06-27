@@ -66,7 +66,7 @@ namespace Core.Player.Controller
 
         private void Start()
         {
-            if (!IsAlive()) OnDie();
+            if (IsDead()) Die();
         }
 
         public void OnDashComplete()
@@ -127,22 +127,24 @@ namespace Core.Player.Controller
             ShakeCamera();
             Freeze();
             ResetAbilities();
+            TakeHurt(other.transform, damage);
+        }
+
+        private void TakeHurt(Transform agressor, int damage)
+        {
             TakeLifes(damage);
-            ComputeSideHurtAnimation(other.transform);
-            AfterHurt();
+            if (IsDead()) Die();
+            else
+            {
+                ComputeSideHurtAnimation(agressor);
+                OnRecoverStart();
+            }
         }
 
         private void ShakeCamera()
         {
             if (shakeCameraOnHurt)
                 CameraManager.Instance?.ShakeCamera();
-        }
-
-        private void AfterHurt()
-        {
-            if (IsAlive())
-                OnRecoverStart();
-            else OnDie();
         }
 
         private void ResetAbilities()
@@ -207,7 +209,7 @@ namespace Core.Player.Controller
             movementController.FaceDirection();
         }
 
-        public void OnDie()
+        public void Die()
         {
             controllable = false;
             Freeze();
