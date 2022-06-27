@@ -1,6 +1,8 @@
-﻿using UnityEngine;
+﻿using Core.Utility;
+using UnityEngine;
 
-namespace Core.Utility
+
+namespace Core.Manager
 {
     // description:
     //  component util link to object and make instances of 

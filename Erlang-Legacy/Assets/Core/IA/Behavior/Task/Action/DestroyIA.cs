@@ -1,7 +1,7 @@
 ﻿using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
 using Core.IA.Bahavior.SharedVariable;
-using Core.Utility;
+using Core.Manager;
 using DG.Tweening;
 using UnityEngine;
 

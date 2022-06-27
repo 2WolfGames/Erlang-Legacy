@@ -1,8 +1,7 @@
 using Core.Shared.Enum;
-using DG.Tweening;
 using UnityEngine;
 
-namespace Core.Utility
+namespace Core.Manager
 {
     public class CorpsesManager : MonoBehaviour
     {

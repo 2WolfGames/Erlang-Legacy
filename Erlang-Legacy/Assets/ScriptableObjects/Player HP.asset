@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9000edd955f53c34c9f079a34f24a6ff, type: 3}
   m_Name: Player HP
   m_EditorClassIdentifier: 
-  HP: 10
-  MaxHP: 10
+  HP: 3
+  MaxHP: 3

@@ -3,7 +3,7 @@ using Core.Player.Controller;
 using DG.Tweening;
 using UnityEngine;
 
-namespace Core.Utility
+namespace Core.Manager
 {
     public class CameraManager : MonoBehaviour
     {

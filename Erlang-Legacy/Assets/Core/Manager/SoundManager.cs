@@ -1,7 +1,8 @@
-﻿using UnityEngine;
+﻿using Core.Utility;
+using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Core.Utility
+namespace Core.Manager
 {
     // description:
     //  this component should be added to object in scene
