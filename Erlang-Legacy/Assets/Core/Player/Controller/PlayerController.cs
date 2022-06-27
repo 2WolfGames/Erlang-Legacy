@@ -54,7 +54,6 @@ namespace Core.Player.Controller
 
         protected void Awake()
         {
-            Debug.Log("PlayerController.Awake()");
             var matches = FindObjectsOfType<PlayerController>();
 
             if (matches.Length > 1)
