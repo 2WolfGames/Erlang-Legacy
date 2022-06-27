@@ -328,7 +328,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shakeCameraOnHurt: 1
-  controllable: 1
   inRecoverProcess: 0
   playerData:
     jumpParticles: {fileID: 8583723039670672985}
@@ -390,6 +389,7 @@ MonoBehaviour:
     dash: {fileID: 731579815}
     punch: {fileID: 1184085065}
   punchParticle: {fileID: 546977338950529148}
+  adquiredAbilities: {fileID: 11400000, guid: ee1f9edd9a9f16d45ab45a808b14a18c, type: 2}
 --- !u!114 &6302354587913962444
 MonoBehaviour:
   m_ObjectHideFlags: 0
