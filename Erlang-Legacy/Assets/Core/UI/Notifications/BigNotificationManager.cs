@@ -1,58 +1,72 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Core.Shared;
 using UnityEngine.UI;
 using DG.Tweening;
 using UnityEngine;
 using TMPro;
 
-public class BigNotificationManager : MonoBehaviour
+namespace Core.UI.Notifications
 {
-    [SerializeField] Image image;
-    [SerializeField] TextMeshProUGUI title;
-    [SerializeField] TextMeshProUGUI description;
-    [SerializeField] TextMeshProUGUI info;
-    CanvasGroup notificationCanvasGroup => GetComponent<CanvasGroup>();
-    bool showingNotification;
-    
-    public static BigNotificationManager Instance { get; private set; }
-
-    protected void Awake()
+    public class BigNotificationManager : MonoBehaviour
     {
-        var matches = FindObjectsOfType<BigNotificationManager>();
+        [SerializeField] Image image;
+        [SerializeField] TextMeshProUGUI title;
+        [SerializeField] TextMeshProUGUI description;
+        [SerializeField] TextMeshProUGUI info;
+        CanvasGroup notificationCanvasGroup => GetComponent<CanvasGroup>();
+        bool showingNotification;
 
-        if (matches.Length > 1)
-            Destroy(gameObject);
-        else Instance = this;
-    }
+        public static BigNotificationManager Instance { get; private set; }
 
-    public void ShowNotification(Sprite image, string title, string description){
-        Time.timeScale = 0;
-        this.image.sprite = image;
-        this.title.text = title;
-        this.description.text = description;
-        notificationCanvasGroup.DOFade(1,0.3f).SetUpdate(true).OnComplete(
-            () => {
-                info.DOFade(1,0.2f).SetUpdate(true).SetDelay(2f).OnComplete(() =>
+        void Awake()
+        {
+            var matches = FindObjectsOfType<BigNotificationManager>();
+
+            if (matches.Length > 1)
+                Destroy(gameObject);
+            else Instance = this;
+        }
+
+        private void Start()
+        {
+            info.color = Function.ColorVisible(false, info.color);
+        }
+
+        public void ShowNotification(Sprite image, string title, string description)
+        {
+            Time.timeScale = 0;
+            this.image.sprite = image;
+            this.title.text = title;
+            this.description.text = description;
+            notificationCanvasGroup.DOFade(1, 0.3f).SetUpdate(true).OnComplete(
+                () =>
                 {
-                    showingNotification = true;
-                });
-            }
-        );
-    }
+                    info.DOFade(1, 0.2f).SetUpdate(true).SetDelay(2f).OnComplete(() =>
+                    {
+                        showingNotification = true;
+                    });
+                }
+            );
+        }
 
-    private void Update() {
-        if (showingNotification){
-            if (Input.anyKey){
-                HideNotification();
+        private void Update()
+        {
+            if (showingNotification)
+            {
+                if (Input.anyKey)
+                {
+                    HideNotification();
+                }
             }
         }
-    }
 
-    private void HideNotification(){
-        showingNotification = false;
-        notificationCanvasGroup.DOFade(0,0.3f).SetUpdate(true).OnComplete( () => {
-            Time.timeScale = 1;
-            info.alpha = 0; //ready for next time 
-        });
+        private void HideNotification()
+        {
+            showingNotification = false;
+            notificationCanvasGroup.DOFade(0, 0.3f).SetUpdate(true).OnComplete(() =>
+            {
+                Time.timeScale = 1;
+                info.color = Function.ColorVisible(false, info.color);
+            });
+        }
     }
 }

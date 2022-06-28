@@ -6,12 +6,14 @@ using Core.Shared.Enum;
 using Core.Shared.SaveSystem;
 using Core.UI;
 using UnityEngine;
+using Core.UI.Notifications;
 using UnityEngine.SceneManagement;
 
 namespace Core.GameSession
 {
     public class GameSessionController : MonoBehaviour
     {
+        [SerializeField] Sprite gameSavedSprite;
         private bool loadData = false;
         private bool nonPlayableScene => !SceneManagementFunctions.CurrentSceneIsGameplay();
         public Vector3 currentSavePos { get; private set; }
@@ -120,6 +122,8 @@ namespace Core.GameSession
                                                     PlayerAbilitiesAdquiredSnapshot());
             SaveSystem.SavePlayerState(playerState);
             currentSavePos = savePoint.position;
+
+            NotificationDisposer.Instance.NewNotification("Game Saved", "Keep going little hero!", gameSavedSprite, 5f);
         }
 
         private Dictionary<Ability, bool> PlayerAbilitiesAdquiredSnapshot()
