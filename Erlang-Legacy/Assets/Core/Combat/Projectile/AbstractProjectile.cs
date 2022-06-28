@@ -1,4 +1,5 @@
 ﻿using Core.Manager;
+using Core.Utility;
 using UnityEngine;
 
 
@@ -9,8 +10,9 @@ namespace Core.Combat.Projectile
         public Vector2 force;
         public ParticleSystem explosionEffect;
         public AudioSource explosionSound;
-        public Collider2DEvent OnEnter, OnExit;
+        public Collider2DEvent OnEnter;
         public GameObject Shooter;
+        public bool destroyOnCollision = false;
 
         public virtual void SetForce(Vector2 force)
         {
@@ -27,6 +29,8 @@ namespace Core.Combat.Projectile
                 explosionSound.Play();
             if (OnEnter != null)
                 OnEnter.Invoke(other);
+            if (destroyOnCollision)
+                gameObject.Disposable(0.01f);
         }
     }
 }
