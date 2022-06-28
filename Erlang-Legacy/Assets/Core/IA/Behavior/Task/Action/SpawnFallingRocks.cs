@@ -3,7 +3,7 @@ using Core.Combat.Projectile;
 using DG.Tweening;
 using UnityEngine;
 
-namespace Core.Combat.IA.WildPig
+namespace Core.Combat.IA.Action
 {
     public class SpawnFallingRocks : EnemyAction
     {

@@ -21,7 +21,7 @@ public class Shoot : EnemyAction
             var force = new Vector2(weapon.horizontalForce * transform.localScale.x, weapon.verticalForce);
             projectile.SetForce(force);
             if (shakeCamera.Value)
-                CameraManager.Instance?.Shake();
+                CameraManager.Instance?.ShakeCamera();
         }
         return TaskStatus.Success;
     }

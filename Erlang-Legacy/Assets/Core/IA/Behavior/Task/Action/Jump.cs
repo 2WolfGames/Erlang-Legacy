@@ -38,7 +38,7 @@ public class Jump : EnemyAction
         {
             hasLanded = true;
             if (shakeCameraOnLanding.Value)
-                CameraManager.Instance?.Shake(shakeCameraIntensity.Value);
+                CameraManager.Instance?.ShakeCamera(shakeCameraIntensity.Value);
         }, false);
     }
 

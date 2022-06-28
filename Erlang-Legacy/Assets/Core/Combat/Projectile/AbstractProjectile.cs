@@ -13,6 +13,7 @@ namespace Core.Combat.Projectile
         public Collider2DEvent OnEnter;
         public GameObject Shooter;
         public bool destroyOnCollision = false;
+        protected Rigidbody2D body => GetComponent<Rigidbody2D>();
 
         public virtual void SetForce(Vector2 force)
         {
