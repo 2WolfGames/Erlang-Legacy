@@ -195,7 +195,6 @@ namespace Core.UI.LifeBar
                 List<IEnumerator> coroutines = new List<IEnumerator>();
                 for (int i = currentLifes; i < lifesUpdate; i++)
                 {
-                    Debug.Log(i);
                     coroutines.Add(lifeContainers[i].Gain());
                 }
 

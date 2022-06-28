@@ -253,6 +253,11 @@ namespace Core.Player.Controller
             return abilityController.AdquiredAbility(ability);
         }
 
+        public void IncreaseLifes(){
+            playerData.Health.MaxHP += 1;
+            playerData.Health.HP = playerData.Health.MaxHP;
+        }
+
     }
 }
 
