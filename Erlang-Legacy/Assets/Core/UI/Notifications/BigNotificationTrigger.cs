@@ -13,6 +13,9 @@ namespace Core.UI.Notifications
 
         bool activated = false;
 
+        //pre: --
+        //post: shows bug notification when player colides 
+        //      only activates once.
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.tag == "Player" && !activated)

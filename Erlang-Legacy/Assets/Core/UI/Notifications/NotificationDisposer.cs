@@ -10,6 +10,9 @@ namespace Core.UI.Notifications
 
         public static NotificationDisposer Instance;
 
+        //pre: --
+        //post: if these is no NotificationDisposer this becomes the one
+        //      else it destroys itself
         private void Awake()
         {
             var matches = FindObjectsOfType<NotificationDisposer>();
@@ -19,6 +22,8 @@ namespace Core.UI.Notifications
             else Instance = this;
         }
 
+        //pre: --
+        //post: instanciates a new notification 
         public void NewNotification(string title, string description, Sprite sprite, float seconds)
         {
             var currentNotification = Instantiate(notification, this.transform);

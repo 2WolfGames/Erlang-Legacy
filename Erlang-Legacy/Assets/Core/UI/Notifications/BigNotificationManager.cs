@@ -17,6 +17,9 @@ namespace Core.UI.Notifications
 
         public static BigNotificationManager Instance { get; private set; }
 
+        //pre: --
+        //post: if these is no BigNotificationManager this becomes the one
+        //      else it destroys itself
         void Awake()
         {
             var matches = FindObjectsOfType<BigNotificationManager>();
@@ -26,11 +29,15 @@ namespace Core.UI.Notifications
             else Instance = this;
         }
 
+        //pre: --
+        //post: inits value
         private void Start()
         {
             info.color = Function.ColorVisible(false, info.color);
         }
 
+        //pre: --
+        //post: shows a big notifications that stops the gameplay 
         public void ShowNotification(Sprite image, string title, string description)
         {
             Time.timeScale = 0;
@@ -48,6 +55,8 @@ namespace Core.UI.Notifications
             );
         }
 
+        //pre:
+        //post: if notification its displayed waits for a key input to hide it
         private void Update()
         {
             if (showingNotification)
@@ -59,6 +68,8 @@ namespace Core.UI.Notifications
             }
         }
 
+        //pre: notification is displayed
+        //post: hides notification 
         private void HideNotification()
         {
             showingNotification = false;
