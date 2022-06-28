@@ -10,6 +10,7 @@ namespace Core.Combat.Projectile
         public ParticleSystem explosionEffect;
         public AudioSource explosionSound;
         public Collider2DEvent OnEnter, OnExit;
+        public GameObject Shooter;
 
         public virtual void SetForce(Vector2 force)
         {
@@ -18,6 +19,8 @@ namespace Core.Combat.Projectile
 
         public void OnTriggerEnter2D(Collider2D other)
         {
+            if (other.gameObject == Shooter) return;
+
             if (explosionEffect != null)
                 EffectManager.Instance?.PlayOneShot(explosionEffect, transform.position);
             if (explosionSound != null)

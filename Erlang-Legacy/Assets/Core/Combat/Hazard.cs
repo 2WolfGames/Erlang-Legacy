@@ -4,7 +4,7 @@ using UnityEngine;
 
 // desc:
 //  this scripts is usufull to hurt player when a collision is made
-namespace Core.Hazard
+namespace Core.Combat
 {
     public class Hazard : MonoBehaviour
     {
