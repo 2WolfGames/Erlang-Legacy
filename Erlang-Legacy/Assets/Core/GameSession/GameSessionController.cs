@@ -161,7 +161,7 @@ namespace Core.GameSession
             PlayerState playerState = SaveSystem.LoadPlayerState();
 
             var playerHealth = PlayerController.Instance.PlayerData.Health;
-            playerHealth.HP = playerState.health;
+            playerHealth.HP = playerState.max_health;
             playerHealth.MaxHP = playerState.max_health;
 
             LoadAbilitiesAdcquired(playerState);

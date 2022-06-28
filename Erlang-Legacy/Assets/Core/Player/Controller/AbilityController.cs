@@ -18,6 +18,7 @@ namespace Core.Player.Controller
         public ProjectileData projectileData;
         public DamageAreaData damageAreas;
         public ParticleSystem punchParticle;
+        public ParticleSystem dashParticle;
         public AbilitiesAcquired abilitiesAcquired;
         public bool Punching => punching;
         private enum Fist { L, R }
@@ -116,9 +117,9 @@ namespace Core.Player.Controller
             fist = ForgotNextFist() ? RandomFist() : NextFist();
             punchTrigger.Interact = true;
             punching = true;
-            punchParticle?.Play();
             movementController.Acceleration = punchDrag;
             AnimatePunch(fist);
+            punchParticle?.Play();
         }
 
         private bool ForgotNextFist()
@@ -160,8 +161,8 @@ namespace Core.Player.Controller
 
         private void ActiveDashDamage()
         {
-            if (punchParticle)
-                punchParticle.Play();
+            if (dashParticle)
+                dashParticle.Play();
             dashTrigger.Interact = true;
         }
 
