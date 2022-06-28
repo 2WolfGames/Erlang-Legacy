@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 198000010585806678}
   - component: {fileID: 199000012270651464}
   m_Layer: 0
-  m_Name: PlasmaExplosionEffect
+  m_Name: PlasmaExplosionEffect 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
