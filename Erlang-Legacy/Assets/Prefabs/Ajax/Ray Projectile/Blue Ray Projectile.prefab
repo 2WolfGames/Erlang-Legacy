@@ -566,6 +566,5 @@ MonoBehaviour:
           m_StringArgument: OnRayHit
           m_BoolArgument: 0
         m_CallState: 2
-  OnExit:
-    m_PersistentCalls:
-      m_Calls: []
+  Shooter: {fileID: 0}
+  destroyOnCollision: 0

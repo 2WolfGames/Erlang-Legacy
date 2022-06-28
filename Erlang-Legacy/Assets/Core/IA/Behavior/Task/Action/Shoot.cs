@@ -11,6 +11,7 @@ public class Shoot : EnemyAction
 {
     public SharedGenericList<Weapon> weapons;
     public SharedBool shakeCamera;
+    public SharedFloat shakeIntensity = 1;
 
     public override TaskStatus OnUpdate()
     {
@@ -21,7 +22,7 @@ public class Shoot : EnemyAction
             var force = new Vector2(weapon.horizontalForce * transform.localScale.x, weapon.verticalForce);
             projectile.SetForce(force);
             if (shakeCamera.Value)
-                CameraManager.Instance?.ShakeCamera();
+                CameraManager.Instance?.ShakeCamera(shakeIntensity.Value);
         }
         return TaskStatus.Success;
     }

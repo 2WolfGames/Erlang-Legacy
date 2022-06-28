@@ -8,9 +8,9 @@ namespace Core.Manager
     public class CameraManager : MonoBehaviour
     {
         [SerializeField] bool followPlayerOnAwake = true;
-        [SerializeField] float intensity;
-        [SerializeField] float frequency;
-        [SerializeField] float duration;
+        [SerializeField] float intensity = 1;
+        [SerializeField] float frequency = 1;
+        [SerializeField] float duration = 1;
 
         public static CameraManager Instance;
         public bool Shaking { get; private set; }
