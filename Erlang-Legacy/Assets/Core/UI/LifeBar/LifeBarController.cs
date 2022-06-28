@@ -62,7 +62,7 @@ namespace Core.UI.LifeBar
                         LoseLifes(currentLifes - playerHealth.HP);
                     }
                     else if (currentLifes < playerHealth.HP && playerHealth.HP != playerHealth.MaxHP ) {
-                        GainLifes(currentLifes - playerHealth.HP);
+                        GainLifes(playerHealth.HP - currentLifes);
                     }
                     if (currentLifes < playerHealth.HP && playerHealth.HP == playerHealth.MaxHP) {
                         HealAllLifes();
@@ -195,6 +195,7 @@ namespace Core.UI.LifeBar
                 List<IEnumerator> coroutines = new List<IEnumerator>();
                 for (int i = currentLifes; i < lifesUpdate; i++)
                 {
+                    Debug.Log(i);
                     coroutines.Add(lifeContainers[i].Gain());
                 }
 
