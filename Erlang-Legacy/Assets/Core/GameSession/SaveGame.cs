@@ -4,6 +4,7 @@ namespace Core.GameSession
 {
     public class SaveGame : MonoBehaviour
     {
+        [SerializeField] Animator animator;
         bool canBeSaved = false;
 
         //pre: GameSessionController.Instance != null
@@ -20,6 +21,7 @@ namespace Core.GameSession
                     {
                         Debug.LogWarning("Game session controller not found in scene, can handle save player state");
                     }
+                    animator.SetBool("saved",true);
                 }
             }
         }
@@ -41,6 +43,7 @@ namespace Core.GameSession
             if (other.gameObject.tag == "Player")
             {
                 canBeSaved = false;
+                animator.SetBool("saved",false);
             }
         }
     }

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using Core.Player.Data;
 using Core.Player.Utility;
 using Core.Shared;
@@ -7,18 +7,21 @@ using Core.Utility;
 using Core.Manager;
 using UnityEngine;
 using Core.UI;
+using Core.UI.Notifications;
 
 namespace Core.Player.Controller
 {
     public class PlayerController : MonoBehaviour
     {
         public bool shakeCameraOnHurt = true;
+        public Sprite newLifeSprite;
         public bool inRecoverProcess = false;
         public PlayerData playerData;
         public bool CanBeHit => protectable.CanBeHit;
         public int FacingValue => facingController.FacingToInt;
         public PlayerData PlayerData { get => playerData; private set => playerData = value; }
         public bool IsGrounded => movementController.IsGrounded;
+        public ParticleSystem healEffectParticle;
         public Stats Stats => playerData.Stats;
         public bool BlockingUI
         {
@@ -109,14 +112,20 @@ namespace Core.Player.Controller
 
         public void Heal()
         {
-            // TODO: trigger heal animation && vfx
-            playerData.Health.HP++;
+            if (playerData.Health.HP < playerData.Health.MaxHP)
+            {
+                playerData.Health.HP += 1;
+            }
+            healEffectParticle?.Play();
         }
 
         public void Heal(int hp)
         {
-            // TODO: trigger heal animation && vfx
-            playerData.Health.HP += hp;
+            if (playerData.Health.HP < playerData.Health.MaxHP)
+            {
+                playerData.Health.HP += hp;
+            }
+            healEffectParticle?.Play();
         }
 
         // pre: --
@@ -261,6 +270,14 @@ namespace Core.Player.Controller
             return abilityController.AdquiredAbility(ability);
         }
 
+        //pre: --
+        //post: Player max lifes increase
+        public void IncreaseMaxLifes()
+        {
+            playerData.Health.MaxHP += 1;
+            playerData.Health.HP = playerData.Health.MaxHP;
+            NotificationDisposer.Instance?.PostNotification("New Life", "Your lifes increased", newLifeSprite);
+        }
     }
 }
 
