@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 0.25
   m_LightVolumeOpacity: 0
-  m_ApplyToSortingLayers: a1b0e0c841bcbdff9151fe9be5ded910c55d612597cf32f9d9f5afcb5db868f900000000
+  m_ApplyToSortingLayers: a1b0e0c841bcbdffe5ded910c55d612597cf32f9d9f5afcb5db868f900000000
   m_LightCookieSprite: {fileID: 0}
   m_UseNormalMap: 0
   m_LightOrder: 0
@@ -83,6 +83,7 @@ GameObject:
   - component: {fileID: 963182352250167339}
   - component: {fileID: 963182352250167338}
   - component: {fileID: 963182352250167341}
+  - component: {fileID: 1072290993}
   m_Layer: 12
   m_Name: CaptainJava
   m_TagString: Untagged
@@ -156,6 +157,22 @@ MonoBehaviour:
     npcActions: 020000000100000001000000
   talkPoint: {fileID: 963182352426319684}
   npcAnimator: {fileID: 963182352749126410}
+--- !u!114 &1072290993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963182352250167336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af03f1a60496aa74b8c21c717a860d95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  repeat: 1
+  gameKey: 1
+  function: Talk
+  waitTimeBeforeShowingKeys: 2
 --- !u!1 &963182352426319685
 GameObject:
   m_ObjectHideFlags: 0
