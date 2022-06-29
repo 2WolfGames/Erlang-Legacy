@@ -1,5 +1,4 @@
 using Core.Shared.Enum;
-using DG.Tweening;
 using UnityEngine;
 
 namespace Core.Utility

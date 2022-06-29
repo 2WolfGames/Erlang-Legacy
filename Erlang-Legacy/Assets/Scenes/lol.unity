@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -2873,7 +2873,7 @@ Transform:
   - {fileID: 1728642718}
   - {fileID: 1035153507}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &619460112
 PrefabInstance:
@@ -3134,7 +3134,7 @@ Transform:
   m_LocalPosition: {x: 32.1, y: -2.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 7004362582871797511}
+  - {fileID: 3949600353902636176}
   - {fileID: 3136578534978508371}
   - {fileID: 809441264}
   m_Father: {fileID: 2107586688}
@@ -4144,17 +4144,17 @@ PrefabInstance:
     - target: {fileID: 108914099864973180, guid: 1d5da815a4dd209408f3601eb948dee0,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 37.2
+      value: 34.65
       objectReference: {fileID: 0}
     - target: {fileID: 108914099864973180, guid: 1d5da815a4dd209408f3601eb948dee0,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.78
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 108914099864973180, guid: 1d5da815a4dd209408f3601eb948dee0,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -15.878272
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 108914099864973180, guid: 1d5da815a4dd209408f3601eb948dee0,
         type: 3}
@@ -4528,6 +4528,12 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7fe2604c84cd8f04eb887ecdc9e05a1e, type: 3}
+--- !u!4 &3949600353902636176 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 424937043743599186, guid: 7fe2604c84cd8f04eb887ecdc9e05a1e,
+    type: 3}
+  m_PrefabInstance: {fileID: 3949600353902636175}
+  m_PrefabAsset: {fileID: 0}
 --- !u!156049354 &4286029480370856450
 Grid:
   m_ObjectHideFlags: 0
@@ -5187,12 +5193,6 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 260e0d8b67830ed46bf825fa448fdcd6, type: 3}
---- !u!4 &7004362582871797511 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6339856820169065352, guid: 7fe2604c84cd8f04eb887ecdc9e05a1e,
-    type: 3}
-  m_PrefabInstance: {fileID: 3949600353902636175}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7050827787156169007
 PrefabInstance:
   m_ObjectHideFlags: 0
