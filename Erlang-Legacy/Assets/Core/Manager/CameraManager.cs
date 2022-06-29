@@ -17,6 +17,7 @@ namespace Core.Manager
         private PlayerController player => PlayerController.Instance;
         private CinemachineVirtualCamera virtualCamera => GetComponent<CinemachineVirtualCamera>();
         private CinemachineBasicMultiChannelPerlin virtualCameraNoise => virtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+        private Tween shakeTween;
 
         public void Awake()
         {
@@ -36,11 +37,13 @@ namespace Core.Manager
 
         public void ShakeCamera()
         {
-            ShakeCamera(intensity, frequency, duration);
+            ShakeCamera(intensity, frequency, duration, false);
         }
 
-        public void ShakeCamera(float intensity = 1f, float frequency = 1f, float duration = 1.0f)
+        public void ShakeCamera(float intensity = 1f, float frequency = 1f, float duration = 1.0f, bool reset = false)
         {
+            if (reset) Reset();
+
             if (Shaking)
                 return;
 
@@ -48,12 +51,15 @@ namespace Core.Manager
             virtualCameraNoise.m_AmplitudeGain = intensity;
             virtualCameraNoise.m_FrequencyGain = frequency;
 
-            DOVirtual.DelayedCall(duration, () =>
-            {
-                virtualCameraNoise.m_AmplitudeGain = 0;
-                virtualCameraNoise.m_FrequencyGain = 0;
-                Shaking = false;
-            });
+            shakeTween = DOVirtual.DelayedCall(duration, Reset);
+        }
+
+        private void Reset()
+        {
+            shakeTween?.Kill();
+            virtualCameraNoise.m_AmplitudeGain = 0;
+            virtualCameraNoise.m_FrequencyGain = 0;
+            Shaking = false;
         }
     }
 }
