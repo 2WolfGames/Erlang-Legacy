@@ -281,7 +281,7 @@ MonoBehaviour:
       m_Calls: []
   Shooter: {fileID: 0}
   destroyOnCollision: 0
-  accelaration: 40
+  accelaration: 30
 --- !u!114 &5000219442461960500
 MonoBehaviour:
   m_ObjectHideFlags: 0
