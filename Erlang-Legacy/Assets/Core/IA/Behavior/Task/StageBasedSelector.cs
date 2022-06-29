@@ -6,11 +6,11 @@ using UnityEngine;
 
 namespace Core.AI
 {
-    public class StageBasedSelector : RandomSelector
+    public class StageBasedSelector : Composite
     {
         public SharedInt CurrentStage;
         public List<string> IncludedTasksPerStage;
-        
+
         // A list of indexes of every child task. This list is used by the Fischer-Yates shuffle algorithm.
         private List<int> childIndexList = new List<int>();
         // The random child index execution order.
@@ -22,10 +22,15 @@ namespace Core.AI
         {
             // Select considered child indicies based on the current stage
             childIndexList.Clear();
-            childIndexList = IncludedTasksPerStage[CurrentStage.Value].Split(',').Select(int.Parse).ToList();
-            
+            childIndexList = IncludedTasksPerStage[Clamp(CurrentStage.Value)].Split(',').Select(int.Parse).ToList();
+
             // Randomize the indecies
             ShuffleChilden();
+        }
+
+        private int Clamp(int currentStage)
+        {
+            return Mathf.Clamp(currentStage, 0, IncludedTasksPerStage.Count - 1);
         }
 
         public override int CurrentChildIndex()
@@ -43,7 +48,8 @@ namespace Core.AI
         public override void OnChildExecuted(TaskStatus childStatus)
         {
             // Pop the top index from the stack and set the execution status.
-            if (childrenExecutionOrder.Count > 0) {
+            if (childrenExecutionOrder.Count > 0)
+            {
                 childrenExecutionOrder.Pop();
             }
             executionStatus = childStatus;
@@ -73,7 +79,8 @@ namespace Core.AI
         private void ShuffleChilden()
         {
             // Use Fischer-Yates shuffle to randomize the child index order.
-            for (int i = childIndexList.Count; i > 0; --i) {
+            for (int i = childIndexList.Count; i > 0; --i)
+            {
                 int j = Random.Range(0, i);
                 int index = childIndexList[j];
                 childrenExecutionOrder.Push(index);
