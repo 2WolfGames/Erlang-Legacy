@@ -45,10 +45,14 @@ namespace Core.UI.Notifications
             }
         }
 
+        //pre: --
+        //post: it's shows a new notification
         public void PostNotification(string title, string description, Sprite sprite){
             NewNotification(title, description, sprite);
         }
 
+        //pre: --
+        //post: it's shows a new notification after delay 
         public void PostNotificationWithDelay(string title, string description, Sprite sprite, float delay){
             StartCoroutine(WaitAndPostNotification(title, description, sprite,delay));
         }

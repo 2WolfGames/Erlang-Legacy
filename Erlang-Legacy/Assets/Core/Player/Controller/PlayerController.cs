@@ -256,12 +256,16 @@ namespace Core.Player.Controller
             return abilityController.AdquiredAbility(ability);
         }
 
+        //pre: --
+        //post: Player max lifes increase
         public void IncreaseLifes(){
             playerData.Health.MaxHP += 1;
             playerData.Health.HP = playerData.Health.MaxHP;
             NotificationDisposer.Instance?.PostNotification("New Life", "Your lifes increased", newLifeSprite);
         }
 
+        //pre: --
+        //post: Player heals one life
         public void GainLife(){
             if (playerData.Health.HP < playerData.Health.MaxHP){
                 playerData.Health.HP += 1;
