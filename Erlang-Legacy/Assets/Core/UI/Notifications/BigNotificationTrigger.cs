@@ -21,6 +21,10 @@ namespace Core.UI.Notifications
             if (other.tag == "Player" && !activated)
             {
                 activated = true;
+                if (BigNotificationManager.Instance == null)
+                {
+                    Debug.LogWarning("BigNotificationManager is null");
+                }
                 BigNotificationManager.Instance?.ShowNotification(sprite, title, description);
             }
         }
