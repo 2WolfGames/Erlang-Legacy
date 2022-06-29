@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 220483832713330178}
-  - component: {fileID: 220483832713330181}
   - component: {fileID: 220483832713330177}
   - component: {fileID: 220483832713330182}
   m_Layer: 0
@@ -33,22 +32,6 @@ Transform:
   m_Father: {fileID: 220483832859137519}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!70 &220483832713330181
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 220483832713330180}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1.31, y: 1.31}
-  m_Direction: 0
 --- !u!212 &220483832713330177
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -181,8 +164,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.009342194, y: 0}
-  m_Size: {x: 1.1913757, y: 1.1913757}
+  m_Offset: {x: 0.007587433, y: -0.0031266212}
+  m_Size: {x: 1.0063782, y: 1.1163402}
   m_Direction: 0
 --- !u!114 &220483832859137512
 MonoBehaviour:
