@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Core.Player.Util;
 using Core.Player.Controller;
+using Core.ScriptableEffect;
 
 namespace Core.Environment
 {
@@ -12,6 +13,7 @@ namespace Core.Environment
         private bool playerIn = false;
         private bool processHasStarted = false;
         [SerializeField] GameObject onDestroyParticleEffect;
+        [SerializeField] HealthAdderEffect healthAdder;
 
         //pre: --
         //post: if player is in range and clicks, eat fruit to gain life process starts.
@@ -47,7 +49,7 @@ namespace Core.Environment
         private void EatFruitOfLifeProcess()
         {
             processHasStarted = true;
-            PlayerController.Instance?.GainLife();
+            healthAdder.Apply(PlayerController.Instance.gameObject);
             var inst = Instantiate(onDestroyParticleEffect, transform.position, transform.rotation);
             Destroy(this.gameObject);
         }

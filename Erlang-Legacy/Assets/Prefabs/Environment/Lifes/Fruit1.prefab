@@ -196,3 +196,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onDestroyParticleEffect: {fileID: 8900769453879468815, guid: 84ff9c30ac7bbf943aa76a049a14556a,
     type: 3}
+  healthAdder: {fileID: 11400000, guid: 3abc19a2206861647b8924328f6202b7, type: 2}

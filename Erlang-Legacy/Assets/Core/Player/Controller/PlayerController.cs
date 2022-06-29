@@ -110,14 +110,20 @@ namespace Core.Player.Controller
 
         public void Heal()
         {
-            // TODO: trigger heal animation && vfx
-            playerData.Health.HP++;
+            if (playerData.Health.HP < playerData.Health.MaxHP)
+            {
+                playerData.Health.HP += 1;
+            }
+            healEffectParticle?.Play();
         }
 
         public void Heal(int hp)
         {
-            // TODO: trigger heal animation && vfx
-            playerData.Health.HP += hp;
+            if (playerData.Health.HP < playerData.Health.MaxHP)
+            {
+                playerData.Health.HP += hp;
+            }
+            healEffectParticle?.Play();
         }
 
         // pre: --
@@ -258,21 +264,12 @@ namespace Core.Player.Controller
 
         //pre: --
         //post: Player max lifes increase
-        public void IncreaseLifes(){
+        public void IncreaseMaxLifes()
+        {
             playerData.Health.MaxHP += 1;
             playerData.Health.HP = playerData.Health.MaxHP;
             NotificationDisposer.Instance?.PostNotification("New Life", "Your lifes increased", newLifeSprite);
         }
-
-        //pre: --
-        //post: Player heals one life
-        public void GainLife(){
-            if (playerData.Health.HP < playerData.Health.MaxHP){
-                playerData.Health.HP += 1;
-            }
-            healEffectParticle?.Play();
-        }
-
     }
 }
 

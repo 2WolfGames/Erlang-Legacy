@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using Core.Player.Util;
 using UnityEngine.Events;
+
 namespace Core.Environment
 {
     public class OpenTreasureTrigger : MonoBehaviour
@@ -57,8 +58,11 @@ namespace Core.Environment
             spriteRenderer.sprite = treasureOpen;
             //event
             OnOpen?.Invoke();
+            if (OnOpen == null)
+            {
+                Debug.LogWarning("OnOpen is null");
+            }
             Instantiate(onOpenParticleEffect, transform.position, transform.rotation);
-
         }
     }
 }
