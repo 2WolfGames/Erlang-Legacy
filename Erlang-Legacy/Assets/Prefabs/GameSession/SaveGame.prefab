@@ -383,6 +383,7 @@ GameObject:
   - component: {fileID: 3365599519273020471}
   - component: {fileID: 3365599519273020468}
   - component: {fileID: 3365599519273020457}
+  - component: {fileID: 80303293}
   m_Layer: 12
   m_Name: SaveGame
   m_TagString: Untagged
@@ -397,7 +398,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3365599519273020466}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 65.45558, y: 0.5626824, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -477,6 +478,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 3365599517981827983}
+--- !u!114 &80303293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3365599519273020466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af03f1a60496aa74b8c21c717a860d95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  repeat: 1
+  gameKey: 1
+  function: Save progress
+  waitTimeBeforeShowingKeys: 5
 --- !u!1 &3365599519583862668
 GameObject:
   m_ObjectHideFlags: 0

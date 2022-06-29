@@ -44,9 +44,7 @@ public class GainLifeTrigger : MonoBehaviour
     private void GainLifeProcess()
     {
         processHasStarted = true;
-        var playerData = PlayerController.Instance.PlayerData;
-        if (playerData.Health.HP < playerData.Health.MaxHP)
-            playerData.Health.HP = playerData.Health.HP + 1; 
+        PlayerController.Instance?.GainLife();
         var inst = Instantiate(onDestroyParticleEffect, transform.position,transform.rotation);
         Destroy(this.gameObject);
     }
