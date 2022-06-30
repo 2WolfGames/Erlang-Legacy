@@ -393,6 +393,7 @@ MonoBehaviour:
   punchParticle: {fileID: 546977338950529148}
   dashParticle: {fileID: 1597337908403413970}
   abilitiesAcquired: {fileID: 11400000, guid: 82610f626fac78549bc9820c99388842, type: 2}
+  adquiredAbilities: {fileID: 11400000, guid: ee1f9edd9a9f16d45ab45a808b14a18c, type: 2}
 --- !u!114 &6302354587913962444
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,6 +1,6 @@
 ﻿using Core.Player.Controller;
 using Core.Shared.Enum;
-using Core.Player.Util;
+using Core.Player.Utility;
 using Core.Shared;
 using UnityEngine;
 using Core.NPC.Util;

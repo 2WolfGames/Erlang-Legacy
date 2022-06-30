@@ -7,7 +7,7 @@ namespace Core.Combat
     public class Destroyable : Hittable
     {
         private Health health => GetComponent<Health>();
-        private int CurrentHealth => health.HP;
+        public int CurrentHealth { get => health.HP; set => health.HP = value; }
         public bool indestructible = false;
         public bool Indestructible { get => indestructible; set => indestructible = value; }
         public bool IsDestroyed => health.HP <= 0;
