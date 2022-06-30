@@ -2673,7 +2673,7 @@ Transform:
   - {fileID: 1728642718}
   - {fileID: 1035153507}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &619460112
 PrefabInstance:
@@ -3008,7 +3008,6 @@ Transform:
   m_LocalPosition: {x: 32.1, y: -2.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 3949600353902636176}
   - {fileID: 3136578534978508371}
   - {fileID: 809441264}
   m_Father: {fileID: 2107586688}
@@ -4268,7 +4267,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 38.08, y: -2.23, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: [{fileID: 1188413852}]
+  m_Children:
+  - {fileID: 1188413852}
   m_Father: {fileID: 200078075}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4318,12 +4318,6 @@ PolygonCollider2D:
       - {x: 1.4254537, y: -7.283552}
       - {x: 41.140182, y: -6.9957952}
       - {x: 41.503456, y: 14.98463}
---- !u!4 &3949600353902636176 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 424937043743599186, guid: 7fe2604c84cd8f04eb887ecdc9e05a1e,
-    type: 3}
-  m_PrefabInstance: {fileID: 3949600353902636175}
-  m_PrefabAsset: {fileID: 0}
 --- !u!156049354 &4286029480370856450
 Grid:
   m_ObjectHideFlags: 0
