@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Core.AI
 {
-    public class StageBasedSelector : Composite
+    public class StageSelector : Composite
     {
         public SharedInt CurrentStage;
         public List<string> IncludedTasksPerStage;
