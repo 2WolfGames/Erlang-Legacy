@@ -112,7 +112,7 @@ GameObject:
   m_Component:
   - component: {fileID: 439475849062506104}
   m_Layer: 0
-  m_Name: Blue Autonomous Crawl Slime
+  m_Name: Pink Autonomous Crawl Slime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -127,7 +127,7 @@ Transform:
   m_GameObject: {fileID: 439475849062506105}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.58, y: -1.53, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 7418320657380277741}
   m_Father: {fileID: 0}
@@ -235,7 +235,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f51f6f54d79ff8746948899e9548e8d0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a92544e0340f6de4bb492171a788732f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -367,7 +367,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.010679245, y: -0.011725426}
+  m_Offset: {x: -0.010679245, y: -0.014486074}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -378,7 +378,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.2886772, y: 0.81704044}
+  m_Size: {x: 1.2886772, y: 0.82256174}
   m_EdgeRadius: 0
 --- !u!95 &2918285625011120701
 Animator:
@@ -390,7 +390,7 @@ Animator:
   m_GameObject: {fileID: 7418320657380277738}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: adc0dfcc9c5b0ae44841aa2e6c787886, type: 2}
+  m_Controller: {fileID: 9100000, guid: 453abe57945e9e34e81f09958038ab19, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -446,7 +446,7 @@ MonoBehaviour:
         dataPosition: 0000000004000000090000000a0000000b00000013000000130000001400000015000000190000001d00000021000000290000002a0000002b000000330000003d0000003e0000003f000000430000004700000069000000690000006d000000900000009000000091000000b4000000b4000000b5000000b9000000c1000000c2000000c3000000cb000000cb000000cc000000cd000000d1000000d5000000d9000000dd000000e5000000e6000000e7000000ef000000ef000000f0000000f1000000f5000000f9000000fd0000000101000018010000190100001a01000022010000220100002301000024010000280100002c01000030010000340100003801000064010000640100006c01000080010000b4010000b4010000b8010000b9010000bd010000c5010000c6010000c7010000cf010000cf010000d0010000d1010000d5010000d9010000dd010000e1010000f8010000f9010000fa01000002020000020200000302000004020000080200000c020000100200001402000018020000190200001d0200002502000026020000270200002f0200002f020000300200003102000035020000390200003d02000041020000490200004a0200004b02000053020000530200005402000055020000590200005d0200006102000065020000690200006d0200006e0200006f020000730200008002000081020000820200008a0200008a0200008b0200008c0200009002000094020000980200009c0200009d0200009e020000a6020000a6020000a7020000a8020000ac020000b0020000
         unityObjects:
         - {fileID: 11400000, guid: fc2dccd503d9a4e4883c665461725eed, type: 2}
-        - {fileID: 3367465785591764847, guid: 4057761f4a597454d9d087bd70f0f562, type: 3}
+        - {fileID: 3367465785591764847, guid: 26975f066883bd746abc86a66109b8bb, type: 3}
         - {fileID: 11400000, guid: a75c7c3da5a2ab24696c06191a99f388, type: 2}
         - {fileID: 439475848913690318}
         - {fileID: 439475849212411502}
@@ -478,6 +478,7 @@ MonoBehaviour:
   hitSprite: {fileID: 0}
   hitShakeCamera: 0
   recoilScale: 1
+  indestructible: 0
   OnDestroyed:
     m_PersistentCalls:
       m_Calls: []
@@ -496,4 +497,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11ca44a82fb5acc40b5cc39da6858587, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 6
+  hp: 12
