@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Core.UI.Notifications
@@ -11,6 +10,9 @@ namespace Core.UI.Notifications
         public static NotificationDisposer Instance;
 
         const float notificationLifeTime = 5f;
+
+        // TODO: add NotificationBehavior as required component
+        // TODO: corret the notification behavior name => BEHABIOR
 
         //pre: --
         //post: if these is no NotificationDisposer this becomes the one
