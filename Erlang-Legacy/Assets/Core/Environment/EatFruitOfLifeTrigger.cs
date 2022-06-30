@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Core.Player.Util;
+using Core.Player.Utility;
 using Core.Player.Controller;
 using Core.ScriptableEffect;
 

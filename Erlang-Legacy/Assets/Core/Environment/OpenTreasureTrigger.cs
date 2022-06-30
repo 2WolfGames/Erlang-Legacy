@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
-using Core.Player.Util;
 using UnityEngine.Events;
+using Core.Player.Utility;
 
 namespace Core.Environment
 {

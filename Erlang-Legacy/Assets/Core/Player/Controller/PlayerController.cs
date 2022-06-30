@@ -1,9 +1,10 @@
 using System.Collections;
 using Core.Player.Data;
-using Core.Player.Util;
+using Core.Player.Utility;
 using Core.Shared;
 using Core.Shared.Enum;
 using Core.Utility;
+using Core.Manager;
 using UnityEngine;
 using Core.UI;
 using Core.UI.Notifications;
@@ -54,6 +55,7 @@ namespace Core.Player.Controller
         private float recoverTimeoutAfterHit => playerData.Stats.recoverTimeoutAfterHit;
         private bool blockingUI;
         private float baseGravityScale = 1f;
+        private int currentHealth => playerData.Health.HP;
 
         protected void Awake()
         {
@@ -69,7 +71,7 @@ namespace Core.Player.Controller
 
         private void Start()
         {
-            if (!IsAlive()) OnDie();
+            if (IsDead()) Die();
         }
 
         public void OnDashComplete()
@@ -130,15 +132,28 @@ namespace Core.Player.Controller
         // post: applies damage to player. 1 unit of damage represent 1 unit of life taken
         public void Hurt(int damage, GameObject other)
         {
-            if (!CanBeHit || !IsAlive())
+            if (!CanBeHit || IsDead())
                 return;
 
             ShakeCamera();
             Freeze();
             ResetAbilities();
-            TakeLifes(damage);
-            ComputeSideHurtAnimation(other.transform);
-            AfterHurt();
+            GameManager.Instance?.FreezeTime(0.01f);
+            TakeHurt(other.transform, damage);
+        }
+
+        private void TakeHurt(Transform agressor, int damage)
+        {
+            SetHealth(currentHealth - damage);
+            if (IsDead())
+            {
+                Die();
+            }
+            else
+            {
+                ComputeSideHurtAnimation(agressor);
+                OnRecoverStart();
+            }
         }
 
         private void ShakeCamera()
@@ -147,22 +162,15 @@ namespace Core.Player.Controller
                 CameraManager.Instance?.ShakeCamera();
         }
 
-        private void AfterHurt()
-        {
-            if (IsAlive())
-                OnRecoverStart();
-            else OnDie();
-        }
-
         private void ResetAbilities()
         {
             abilityController.PunchEnd();
             OnDashComplete();
         }
 
-        private void TakeLifes(int damage)
+        private void SetHealth(int health)
         {
-            playerData.Health.HP = playerData.Health.HP - damage;
+            playerData.Health.HP = health;
         }
 
         private void ComputeSideHurtAnimation(Transform other)
@@ -216,7 +224,7 @@ namespace Core.Player.Controller
             movementController.FaceDirection();
         }
 
-        public void OnDie()
+        public void Die()
         {
             controllable = false;
             Freeze();

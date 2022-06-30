@@ -424,7 +424,6 @@ GameObject:
   - component: {fileID: 7745045027625967912}
   - component: {fileID: 301685278751300160}
   - component: {fileID: 7387710299905422874}
-  - component: {fileID: 5610962506014228445}
   m_Layer: 13
   m_Name: Blue Ray Projectile
   m_TagString: Untagged
@@ -549,18 +548,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: {x: 0, y: 0}
---- !u!114 &5610962506014228445
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8773331361758656520}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d9d8b316172c9c4ead6645234fa9cdc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  explosionEffect: {fileID: 198000010585806678, guid: 96730f8640590934eacb6f860058e7f9,
+    type: 3}
+  explosionSound: {fileID: 0}
   OnEnter:
     m_PersistentCalls:
       m_Calls:
@@ -573,10 +563,8 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: OnRayHit
           m_BoolArgument: 0
         m_CallState: 2
-  OnExit:
-    m_PersistentCalls:
-      m_Calls: []
-  interact: 1
+  Shooter: {fileID: 0}
+  destroyOnCollision: 0

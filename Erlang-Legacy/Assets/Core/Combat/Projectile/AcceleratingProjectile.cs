@@ -4,9 +4,9 @@ namespace Core.Combat.Projectile
 {
     public class AcceleratingProjectile : AbstractProjectile
     {
-        public float speed = 5.0f;
-        private Vector3 direction;
-        private Vector3 velocity;
+        public float accelaration = 5.0f;
+        private Vector3 direction = new Vector3(1, 0, 0);
+        private float velocity = 0f;
 
         public override void SetForce(Vector2 force)
         {
@@ -14,10 +14,10 @@ namespace Core.Combat.Projectile
             direction = force.normalized;
         }
 
-        void Update()
+        public void Update()
         {
-            velocity += direction * speed * Time.deltaTime;
-            transform.position += velocity * Time.deltaTime;
+            velocity += accelaration * Time.deltaTime;
+            body.velocity = direction * velocity;
         }
     }
 }

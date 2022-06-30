@@ -1,5 +1,4 @@
 using BehaviorDesigner.Runtime;
-using UnityEngine;
 
 namespace Core.IA.Bahavior.SharedVariable
 {

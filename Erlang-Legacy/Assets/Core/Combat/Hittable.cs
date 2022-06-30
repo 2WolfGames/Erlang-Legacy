@@ -2,7 +2,7 @@
 using BehaviorDesigner.Runtime;
 using Core.IA.Behavior;
 using Core.Shared;
-using Core.Utility;
+using Core.Manager;
 using DG.Tweening;
 using UnityEngine;
 

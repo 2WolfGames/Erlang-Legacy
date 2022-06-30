@@ -1,7 +1,7 @@
 using Core.Combat;
 using Core.Combat.Projectile;
 using Core.Player.Data;
-using Core.Player.Util;
+using Core.Player.Utility;
 using Core.Shared;
 using Core.Shared.Enum;
 using Core.Utility;
@@ -220,7 +220,7 @@ namespace Core.Player.Controller
         private void ResetRayCooldown()
         {
             rayTimer = rayCooldown;
-            PowersPanelManager.Instance.GetRayTimer().PowerUsed(rayCooldown);
+            PowersPanelManager.Instance?.GetRayTimer().PowerUsed(rayCooldown);
         }
 
         private bool CanInvokeRayAbility()

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections;
-using Core.Player.Util;
+using Core.Player.Utility;
 using UnityEngine.UI;
 using Core.NPC.Util;
 using UnityEngine;

@@ -1,5 +1,5 @@
 ﻿using Core.Player.Controller;
-using Core.Player.Util;
+using Core.Player.Utility;
 using Core.Shared.Enum;
 using DG.Tweening;
 using UnityEngine;

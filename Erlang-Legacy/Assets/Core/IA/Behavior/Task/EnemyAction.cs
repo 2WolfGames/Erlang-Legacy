@@ -13,7 +13,7 @@ namespace Core.Combat.IA
         public override void OnAwake()
         {
             body = GetComponent<Rigidbody2D>();
-            animator = GetComponent<Animator>();
+            animator = gameObject.GetComponentInChildren<Animator>();
             player = PlayerController.Instance;
         }
     }
