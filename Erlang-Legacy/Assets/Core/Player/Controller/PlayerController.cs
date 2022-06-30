@@ -276,7 +276,7 @@ namespace Core.Player.Controller
         {
             playerData.Health.MaxHP += 1;
             playerData.Health.HP = playerData.Health.MaxHP;
-            NotificationDisposer.Instance?.PostNotification("New Life", "Your lifes increased", newLifeSprite);
+            NotificationManager.Instance?.PostNotification("New Life", "Your lifes increased", newLifeSprite);
         }
     }
 }
