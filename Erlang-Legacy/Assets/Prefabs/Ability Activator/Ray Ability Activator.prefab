@@ -207,6 +207,7 @@ GameObject:
   - component: {fileID: 545369387721495324}
   - component: {fileID: 545369387721495326}
   - component: {fileID: -8935609952182530940}
+  - component: {fileID: 1917343341}
   m_Layer: 12
   m_Name: Ray Ability Activator
   m_TagString: Untagged
@@ -298,3 +299,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1917343341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 545369387721495297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: decf7f5310e3c9343992ee208d50cdea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 21300000, guid: d85457ff0239a5d4f95f7d1ff876a1fe, type: 3}
+  title: Vengeful Ray
+  description: Invoke a ray that will fly forward and apply damage to enemies in
+    its path
+  delay: 0.1
