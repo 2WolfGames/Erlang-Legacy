@@ -207,6 +207,7 @@ GameObject:
   - component: {fileID: 1751085933552144305}
   - component: {fileID: 1751085933552144307}
   - component: {fileID: 1769745923117177102}
+  - component: {fileID: 1252290899}
   m_Layer: 12
   m_Name: Dash Ability Activator
   m_TagString: Untagged
@@ -298,3 +299,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1252290899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1751085933552144300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: decf7f5310e3c9343992ee208d50cdea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 21300000, guid: 5afd0f9fdceb5dc418c6294149c613f9, type: 3}
+  title: Dash
+  description: Grants you the ability to dash horizontal in the direction Ajax is
+    facing. Useful to getting out of range of anemies and reach new areas
+  delay: 0.1

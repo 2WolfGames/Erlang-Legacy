@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using DG.Tweening;
 using UnityEngine;
 
 namespace Core.UI.Notifications
@@ -10,8 +9,10 @@ namespace Core.UI.Notifications
         [SerializeField] Sprite sprite;
         [SerializeField] string title;
         [SerializeField] string description;
+        [SerializeField] float delay = 0f;
 
-        bool activated = false;
+        private bool activated = false;
+        private Tween delayedCall;
 
         //pre: --
         //post: shows bug notification when player colides 
@@ -24,8 +25,12 @@ namespace Core.UI.Notifications
                 if (BigNotificationManager.Instance == null)
                 {
                     Debug.LogWarning("BigNotificationManager is null");
+                    return;
                 }
-                BigNotificationManager.Instance?.ShowNotification(sprite, title, description);
+                delayedCall = DOVirtual.DelayedCall(delay, () =>
+                {
+                    BigNotificationManager.Instance.ShowNotification(sprite, title, description);
+                });
             }
         }
     }

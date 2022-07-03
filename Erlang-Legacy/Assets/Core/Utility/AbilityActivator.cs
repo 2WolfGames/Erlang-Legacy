@@ -1,3 +1,4 @@
+using System.Collections;
 using Core.Player.Controller;
 using Core.ScriptableEffect;
 using UnityEngine;
@@ -24,7 +25,20 @@ namespace Core.Utility
                 effect.Apply(other.gameObject);
                 activated = true;
                 animator?.SetTrigger("Activated");
+                // StartCoroutine(AfterAdquiredAbility());
             }
+        }
+
+        private IEnumerator AfterAdquiredAbility()
+        {
+            // BigNotificationManager.Instance.ShowNotification(
+            //     effect.ability.image,
+            //     effect.ability.title,
+            //     effect.ability.description
+            // );
+            Time.timeScale = 0.1f;
+            yield return new WaitForSeconds(0.1f);
+            Time.timeScale = 1f;
         }
 
         private bool CanApplyEffect(Collider2D other)
