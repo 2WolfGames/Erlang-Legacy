@@ -314,5 +314,5 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 5afd0f9fdceb5dc418c6294149c613f9, type: 3}
   title: Dash
   description: Grants you the ability to dash horizontal in the direction Ajax is
-    facing. Useful to getting out of range of anemies and reach new areas
+    facing. Useful to getting out of range of enemies and reach new areas
   delay: 0.1
