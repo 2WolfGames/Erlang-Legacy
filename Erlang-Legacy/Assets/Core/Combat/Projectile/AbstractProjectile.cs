@@ -1,4 +1,6 @@
-﻿using Core.Manager;
+﻿using System.Collections.Generic;
+using Core.Manager;
+using Core.Player.Controller;
 using Core.Utility;
 using UnityEngine;
 
@@ -31,7 +33,16 @@ namespace Core.Combat.Projectile
             if (OnEnter != null)
                 OnEnter.Invoke(other);
             if (destroyOnCollision)
+            {
+                // if some enemy uses this class, don't destroy if collide with player when he is protected
+                if (other.CompareTag("Player"))
+                {
+                    var player = other.gameObject.GetComponent<PlayerController>();
+                    if (player.IsProtected) return;
+                }
                 gameObject.Disposable(0.01f);
+            }
         }
+
     }
 }

@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Core.IA.Task.Action
 {
-    public class DisplayNotification : BehaviorDesigner.Runtime.Tasks.Action
+    public class PostNotification : BehaviorDesigner.Runtime.Tasks.Action
     {
         public SharedString title = "This a notification";
         public SharedString description = "You can see this notification";

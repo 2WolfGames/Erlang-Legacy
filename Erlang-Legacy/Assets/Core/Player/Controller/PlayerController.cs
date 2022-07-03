@@ -18,6 +18,7 @@ namespace Core.Player.Controller
         public bool inRecoverProcess = false;
         public PlayerData playerData;
         public bool CanBeHit => protectable.CanBeHit;
+        public bool IsProtected => !CanBeHit;
         public int FacingValue => facingController.FacingToInt;
         public PlayerData PlayerData { get => playerData; private set => playerData = value; }
         public bool IsGrounded => movementController.IsGrounded;
