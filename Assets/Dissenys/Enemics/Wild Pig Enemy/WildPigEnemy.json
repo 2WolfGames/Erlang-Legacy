@@ -1,0 +1,44 @@
+{"skeleton":{"images":"images"},
+"bones":[{"name":"root"}],
+"slots":[
+	{"name":"Cua","bone":"root","attachment":"Cua"},
+	{"name":"OrellaDreta","bone":"root","attachment":"OrellaDreta"},
+	{"name":"DavantPeuDret","bone":"root","attachment":"DavantPeuDret"},
+	{"name":"DavantCuixaDreta","bone":"root","attachment":"DavantCuixaDreta"},
+	{"name":"DarreraPeuDret","bone":"root","attachment":"DarreraPeuDret"},
+	{"name":"DarreraCuixaDreta","bone":"root","attachment":"DarreraCuixaDreta"},
+	{"name":"Cul","bone":"root","attachment":"Cul"},
+	{"name":"Torc","bone":"root","attachment":"Torc"},
+	{"name":"DarreraPeuEsquerra","bone":"root","attachment":"DarreraPeuEsquerra"},
+	{"name":"DarreraCuixaEsquerra","bone":"root","attachment":"DarreraCuixaEsquerra"},
+	{"name":"DavantPeuEsquerra","bone":"root","attachment":"DavantPeuEsquerra"},
+	{"name":"DavantCuixaEsquerra","bone":"root","attachment":"DavantCuixaEsquerra"},
+	{"name":"Pelatge","bone":"root","attachment":"Pelatge"},
+	{"name":"Ralles","bone":"root","attachment":"Ralles"},
+	{"name":"Cap","bone":"root","attachment":"Cap"},
+	{"name":"Ull","bone":"root","attachment":"Ull"},
+	{"name":"OrellaEsquerra","bone":"root","attachment":"OrellaEsquerra"}
+],
+"skins":{
+	"default":{
+		"OrellaEsquerra":{"OrellaEsquerra":{"x":258.51,"y":-55.04,"width":35,"height":30}},
+		"Ull":{"Ull":{"x":213.90,"y":-92.66,"width":55,"height":27}},
+		"Cap":{"Cap":{"x":199.38,"y":-114.35,"width":162,"height":108}},
+		"Ralles":{"Ralles":{"x":409.28,"y":-116.23,"width":110,"height":50}},
+		"Pelatge":{"Pelatge":{"x":290.60,"y":-105.52,"width":173,"height":114}},
+		"DavantCuixaEsquerra":{"DavantCuixaEsquerra":{"x":326.81,"y":-169.78,"width":86,"height":83}},
+		"DavantPeuEsquerra":{"DavantPeuEsquerra":{"x":303.79,"y":-226.34,"width":34,"height":71}},
+		"DarreraCuixaEsquerra":{"DarreraCuixaEsquerra":{"x":446.81,"y":-173.78,"width":86,"height":83}},
+		"DarreraPeuEsquerra":{"DarreraPeuEsquerra":{"x":423.79,"y":-230.34,"width":34,"height":71}},
+		"Torc":{"Torc":{"x":351.68,"y":-120.40,"width":172,"height":119}},
+		"Cul":{"Cul":{"x":427.04,"y":-128.45,"width":122,"height":107}},
+		"DarreraCuixaDreta":{"DarreraCuixaDreta":{"x":421.81,"y":-173.78,"width":86,"height":83}},
+		"DarreraPeuDret":{"DarreraPeuDret":{"x":398.79,"y":-230.34,"width":34,"height":71}},
+		"DavantCuixaDreta":{"DavantCuixaDreta":{"x":293.05,"y":-168.78,"width":86,"height":83}},
+		"DavantPeuDret":{"DavantPeuDret":{"x":270.03,"y":-225.34,"width":34,"height":71}},
+		"OrellaDreta":{"OrellaDreta":{"x":236.51,"y":-55.04,"width":35,"height":30}},
+		"Cua":{"Cua":{"x":484.62,"y":-70.45,"width":22,"height":83}}
+	}
+},
+"animations":{"animation":{}}
+}
