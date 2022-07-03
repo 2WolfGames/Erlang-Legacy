@@ -12,8 +12,6 @@ namespace Core.UI.Notifications
         [SerializeField] TextMeshProUGUI title;
         [SerializeField] TextMeshProUGUI description;
 
-        //pre: --
-        //post: It displays a notification for few seconds and then destroy it. 
         public IEnumerator DisplayNotification(string title, string description, Sprite sprite, float seconds)
         {
             CanvasGroup cg = GetComponent<CanvasGroup>();

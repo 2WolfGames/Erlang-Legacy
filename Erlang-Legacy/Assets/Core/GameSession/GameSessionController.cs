@@ -123,7 +123,7 @@ namespace Core.GameSession
             SaveSystem.SavePlayerState(playerState);
             currentSavePos = savePoint.position;
 
-            NotificationDisposer.Instance.PostNotificationWithDelay("Game Saved", "Keep going little hero!", gameSavedSprite, 2f);
+            NotificationManager.Instance.PostNotificationWithDelay("Game Saved", "Keep going little hero!", gameSavedSprite, 2f);
         }
 
         private Dictionary<Ability, bool> PlayerAbilitiesAdquiredSnapshot()
