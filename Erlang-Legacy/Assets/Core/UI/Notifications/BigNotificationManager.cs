@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using DG.Tweening;
 using UnityEngine;
 using TMPro;
-
+using Core.Player.Controller;
 namespace Core.UI.Notifications
 {
     public class BigNotificationManager : MonoBehaviour
@@ -41,6 +41,7 @@ namespace Core.UI.Notifications
         public void ShowNotification(Sprite image, string title, string description)
         {
             Time.timeScale = 0;
+            PlayerController.Instance.Controllable = false;
             this.image.sprite = image;
             this.title.text = title;
             this.description.text = description;
@@ -75,8 +76,9 @@ namespace Core.UI.Notifications
             showingNotification = false;
             notificationCanvasGroup.DOFade(0, 0.3f).SetUpdate(true).OnComplete(() =>
             {
-                Time.timeScale = 1;
+                PlayerController.Instance.Controllable = true;
                 info.color = Function.ColorVisible(false, info.color);
+                Time.timeScale = 1;
             });
         }
     }
