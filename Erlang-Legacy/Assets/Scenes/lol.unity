@@ -206,6 +206,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1250438038}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &140671292 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8716551065903435298, guid: dc09e76e871fe0148ab656a999ea4713,
+    type: 3}
+  m_PrefabInstance: {fileID: 8716551066583901418}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &145811626 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8180181448557295714, guid: 260e0d8b67830ed46bf825fa448fdcd6,
@@ -3018,6 +3024,67 @@ Transform:
   m_Father: {fileID: 344171373}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &697827176
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 697827177}
+  - component: {fileID: 697827178}
+  - component: {fileID: 697827179}
+  m_Layer: 14
+  m_Name: Apache Pig Hazard
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &697827177
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 697827176}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 2.76, y: -3.56, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 765113703}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!114 &697827178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 697827176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb8754acbbd52814fa7d02cbb56d19df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthTaker: {fileID: 11400000, guid: 2d266f964c0d82a4ab5028c0495f708d, type: 2}
+--- !u!70 &697827179
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 697827176}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.095614776, y: -0.048382275}
+  m_Size: {x: 1.5648618, y: 2.8281162}
+  m_Direction: 0
 --- !u!1 &757034640
 GameObject:
   m_ObjectHideFlags: 0
@@ -3048,6 +3115,84 @@ Transform:
   m_Father: {fileID: 220039410}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &765113702
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 765113703}
+  - component: {fileID: 765113705}
+  - component: {fileID: 765113704}
+  m_Layer: 0
+  m_Name: Apache Pig AI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &765113703
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 765113702}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 25.433838, y: -0.4605419, z: -9.270257}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 140671292}
+  - {fileID: 697827177}
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &765113704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 765113702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14a4d368972946e4baea90377f580f05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitType: 5
+  customHitEffect: {fileID: 0}
+  customHitSound: {fileID: 0}
+  hitColor: {r: 0.2, g: 0, b: 0, a: 1}
+  hitMaterial: {fileID: 0}
+  hitAnimation: {fileID: 0}
+  animator: {fileID: 0}
+  animatorLayer: -1
+  spriteRenderer: {fileID: 0}
+  hitSprite: {fileID: 0}
+  hitShakeCamera: 0
+  recoilScale: 0
+  indestructible: 0
+  OnDestroyed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRevived:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &765113705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 765113702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11ca44a82fb5acc40b5cc39da6858587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 10
 --- !u!4 &809441264 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8496883880797586289, guid: 6a01ea45b725bc54897643f7f8381c23,
@@ -4923,7 +5068,7 @@ PrefabInstance:
     - target: {fileID: 4761120382021744197, guid: 53997f36318c65d43a5be69c3a244848,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 53997f36318c65d43a5be69c3a244848, type: 3}
@@ -5249,47 +5394,47 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 765113703}
     m_Modifications:
     - target: {fileID: 8716551065903435298, guid: dc09e76e871fe0148ab656a999ea4713,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8716551065903435298, guid: dc09e76e871fe0148ab656a999ea4713,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 28.01
+      value: 2.5761623
       objectReference: {fileID: 0}
     - target: {fileID: 8716551065903435298, guid: dc09e76e871fe0148ab656a999ea4713,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5
+      value: -4.5694585
       objectReference: {fileID: 0}
     - target: {fileID: 8716551065903435298, guid: dc09e76e871fe0148ab656a999ea4713,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -7.5935984
+      value: 1.6766586
       objectReference: {fileID: 0}
     - target: {fileID: 8716551065903435298, guid: dc09e76e871fe0148ab656a999ea4713,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.9999738
       objectReference: {fileID: 0}
     - target: {fileID: 8716551065903435298, guid: dc09e76e871fe0148ab656a999ea4713,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8716551065903435298, guid: dc09e76e871fe0148ab656a999ea4713,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8716551065903435298, guid: dc09e76e871fe0148ab656a999ea4713,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0.00724309
       objectReference: {fileID: 0}
     - target: {fileID: 8716551065903435298, guid: dc09e76e871fe0148ab656a999ea4713,
         type: 3}
@@ -5304,7 +5449,7 @@ PrefabInstance:
     - target: {fileID: 8716551065903435298, guid: dc09e76e871fe0148ab656a999ea4713,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: -0.83
       objectReference: {fileID: 0}
     - target: {fileID: 8716551065903435299, guid: dc09e76e871fe0148ab656a999ea4713,
         type: 3}

@@ -26,6 +26,7 @@ namespace Core.Combat
         [SerializeField] Material hitMaterial;
         [SerializeField] Animation hitAnimation;
         [SerializeField] Animator animator;
+        [SerializeField] int animatorLayer = -1;
         [SerializeField] SpriteRenderer spriteRenderer;
         [SerializeField] Sprite hitSprite;
         [SerializeField] bool hitShakeCamera;
@@ -109,7 +110,7 @@ namespace Core.Combat
             }
             else if (hitType == HitType.Animation)
             {
-                animator.Play(hitAnimation.name);
+                animator.Play(hitAnimation.name, animatorLayer);
             }
 
             // add new tween to list
