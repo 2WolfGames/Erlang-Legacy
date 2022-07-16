@@ -1,12 +1,12 @@
 {
 "skeleton": {
-	"hash": "gsJpYmDvxH8",
+	"hash": "kR6pRgPigyE",
 	"spine": "4.0.64",
 	"x": -232.78,
 	"y": 1.96,
 	"width": 407.74,
 	"height": 238.99,
-	"images": "../../Assets/Dissenys/Enemics/Wild Pig Enemy/images/",
+	"images": "./images/",
 	"audio": "C:/Unity/Erlang-Legacy/Assets/Dissenys/Enemics/Wild Pig Enemy"
 },
 "bones": [
@@ -103,6 +103,9 @@
 		}
 	}
 ],
+"events": {
+	"coz": {}
+},
 "animations": {
 	"coz": {
 		"bones": {
@@ -183,6 +186,119 @@
 				"rotate": [
 					{ "time": 0.1, "value": 16.04 },
 					{ "time": 0.4333 }
+				]
+			}
+		},
+		"events": [
+			{ "time": 0.1, "name": "coz" }
+		]
+	},
+	"die": {
+		"bones": {
+			"DarreraCuixaEsquerra": {
+				"rotate": [
+					{},
+					{ "time": 0.1, "value": 50.15 },
+					{ "time": 0.3, "value": 50.35 },
+					{ "time": 0.6667, "value": 62.52 }
+				]
+			},
+			"DarreraPeuDret": {
+				"rotate": [
+					{},
+					{ "time": 0.6667, "value": 1.59 }
+				]
+			},
+			"DarreraCuixaDreta": {
+				"rotate": [
+					{},
+					{ "time": 0.1, "value": 49.82 },
+					{ "time": 0.3, "value": 52.05 },
+					{ "time": 0.6667, "value": 69.38 }
+				]
+			},
+			"DavantPeuDret": {
+				"rotate": [
+					{},
+					{ "time": 0.0333, "value": 38.06 },
+					{ "time": 0.1, "value": 26 },
+					{ "time": 0.6667, "value": 5.77 }
+				]
+			},
+			"DavantCuixaDreta": {
+				"rotate": [
+					{},
+					{ "time": 0.1, "value": 49.31 },
+					{ "time": 0.3667, "value": 75.04 },
+					{ "time": 0.6667, "value": 83.91 }
+				]
+			},
+			"DavantPeuEsquerra": {
+				"rotate": [
+					{},
+					{ "time": 0.0333, "value": -13.55 },
+					{ "time": 0.1, "value": 26.54 },
+					{ "time": 0.6667, "value": 1.44 }
+				]
+			},
+			"DavantCuixaEsquerra": {
+				"rotate": [
+					{},
+					{ "time": 0.1, "value": 29.96 },
+					{ "time": 0.3667, "value": 61.02 },
+					{ "time": 0.6667, "value": 63.17 }
+				]
+			},
+			"Cua": {
+				"rotate": [
+					{},
+					{ "time": 0.1, "value": -46.54 },
+					{ "time": 0.2, "value": -69.27 },
+					{ "time": 0.6667, "value": -120.47 }
+				]
+			},
+			"OrellaDreta": {
+				"rotate": [
+					{},
+					{ "time": 0.1, "value": -4.92 },
+					{ "time": 0.3, "value": -21.99 },
+					{ "time": 0.6667, "value": -12.96 }
+				]
+			},
+			"OrellaEsquerra": {
+				"rotate": [
+					{},
+					{ "time": 0.1, "value": -44.98 }
+				]
+			},
+			"Ull": {
+				"rotate": [
+					{},
+					{ "time": 0.1, "value": -30.98 },
+					{ "time": 0.3, "value": -36.87 },
+					{ "time": 0.6667, "value": -68.45 }
+				]
+			},
+			"Pelatge": {
+				"rotate": [
+					{},
+					{ "time": 0.1, "value": 12.53 },
+					{ "time": 0.3667, "value": -2.45 },
+					{ "time": 0.6667, "value": -0.43 }
+				]
+			},
+			"Torc": {
+				"rotate": [
+					{},
+					{ "time": 0.1, "value": 8.13 },
+					{ "time": 0.2, "value": 8.8 },
+					{ "time": 0.5667, "value": 3.96 }
+				],
+				"translate": [
+					{},
+					{ "time": 0.1, "y": -33.6 },
+					{ "time": 0.2, "y": -55.68 },
+					{ "time": 0.5667, "y": -82.48 }
 				]
 			}
 		}
