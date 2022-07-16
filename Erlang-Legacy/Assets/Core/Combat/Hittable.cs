@@ -24,8 +24,8 @@ namespace Core.Combat
         [SerializeField] AudioClip customHitSound;
         [SerializeField] Color hitColor = new Color(0.2f, 0.0f, 0.0f);
         [SerializeField] Material hitMaterial;
-        [SerializeField] Animation hitAnimation;
         [SerializeField] Animator animator;
+        [SerializeField] string animationName = "hit";
         [SerializeField] int animatorLayer = -1;
         [SerializeField] SpriteRenderer spriteRenderer;
         [SerializeField] Sprite hitSprite;
@@ -80,6 +80,8 @@ namespace Core.Combat
 
         private void ReactHit()
         {
+            Debug.Log("Reacting to hit");
+
             Tween tween = null;
 
             if (hitType == HitType.Inflate)
@@ -110,7 +112,7 @@ namespace Core.Combat
             }
             else if (hitType == HitType.Animation)
             {
-                animator.Play(hitAnimation.name, animatorLayer);
+                animator.Play(animationName, animatorLayer);
             }
 
             // add new tween to list
@@ -150,7 +152,7 @@ namespace Core.Combat
                     return;
                 }
 
-                if (hitAnimation == null)
+                if (animationName == null)
                 {
                     Debug.LogError("Hit type declared as Animation but no animation provided");
                     return;
