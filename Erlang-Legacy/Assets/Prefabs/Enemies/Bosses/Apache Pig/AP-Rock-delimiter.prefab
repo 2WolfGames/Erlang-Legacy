@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7566019250990856919}
   - component: {fileID: 7566019250990856936}
+  - component: {fileID: 1003829882377802508}
   m_Layer: 8
   m_Name: Delimiter
   m_TagString: Untagged
@@ -57,6 +58,38 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 11.551751}
   m_EdgeRadius: 0
+--- !u!60 &1003829882377802508
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7566019250990856918}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: a33ed0f52d9a26f4fa618d976d5ead8c, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 1.2514992, y: 0.8739121}
+      - {x: 0.007911682, y: 1.6091589}
+      - {x: -1.4583511, y: 0.84781075}
+      - {x: -1.6472349, y: -0.30014202}
+      - {x: -0.59569305, y: -0.8723062}
+      - {x: 0.6827179, y: -0.8406613}
+      - {x: 1.5681295, y: -0.26058608}
 --- !u!1 &8175479786085598577
 GameObject:
   m_ObjectHideFlags: 0
@@ -160,7 +193,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8175479786283855519}
   - component: {fileID: 8175479786283855516}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FK-fireball Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
