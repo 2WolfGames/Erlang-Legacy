@@ -32,7 +32,7 @@ public class PositionedJump : EnemyAction
 
     private void StartJump()
     {
-        var direction = transform.position.x < transform.position.x ? -1 : 1;
+        var direction = IsFacingRight() ? -1 : 1;
         body.AddForce(new Vector2(horizontalForce.Value * direction, jumpForce.Value), ForceMode2D.Impulse);
         jumpTween = DOVirtual.DelayedCall(jumpTime.Value, () =>
         {
@@ -47,5 +47,10 @@ public class PositionedJump : EnemyAction
         hasLanded = false;
         builupTween?.Kill();
         jumpTween?.Kill();
+    }
+
+    private bool IsFacingRight()
+    {
+        return transform.localScale.x >= 0;
     }
 }
