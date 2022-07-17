@@ -80,8 +80,6 @@ namespace Core.Combat
 
         private void ReactHit()
         {
-            Debug.Log("Reacting to hit");
-
             Tween tween = null;
 
             if (hitType == HitType.Inflate)
