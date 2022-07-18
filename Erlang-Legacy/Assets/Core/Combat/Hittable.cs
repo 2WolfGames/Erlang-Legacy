@@ -118,7 +118,7 @@ namespace Core.Combat
                 tweens.Add(tween);
 
             if (customHitEffect != null)
-                EffectManager.Instance?.PlayOneShot(customHitEffect, transform.position);
+                EffectManager.Instance?.PlayOneShot(customHitEffect, transform);
 
             if (customHitSound != null)
                 SoundManager.Instance?.PlaySoundAtLocation(customHitSound, transform.position);

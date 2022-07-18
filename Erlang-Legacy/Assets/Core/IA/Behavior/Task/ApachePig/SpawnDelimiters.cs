@@ -5,6 +5,7 @@ using Core.Combat.Projectile;
 using DG.Tweening;
 using UnityEngine;
 
+// TODO: use external manager to handle this logic (reusable delimiter logic)
 namespace Core.IA.Behavior.ApachePig
 {
     public class SpawnDelimiters : EnemyAction

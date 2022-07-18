@@ -22,14 +22,14 @@ namespace Core.Combat.IA.Action
         {
             if (bleedEffect.Value)
             {
-                EffectManager.Instance?.PlayOneShot(bleedEffect.Value, transform.position);
+                EffectManager.Instance?.PlayOneShot(bleedEffect.Value, transform);
             }
 
             DOVirtual.DelayedCall(bleedDuration.Value, () =>
             {
                 if (explosionEffect.Value)
                 {
-                    EffectManager.Instance?.PlayOneShot(explosionEffect.Value, transform.position);
+                    EffectManager.Instance?.PlayOneShot(explosionEffect.Value, transform);
                 }
 
                 if (deadBody.Value)
