@@ -1,6 +1,6 @@
 {
 "skeleton": {
-	"hash": "IOuTPc8bmL4",
+	"hash": "Dj4Oyvq5/X8",
 	"spine": "4.0.64",
 	"x": -233.03,
 	"y": 1.98,
@@ -104,7 +104,8 @@
 	}
 ],
 "events": {
-	"coz": {}
+	"OnAttackEnd": {},
+	"OnAttackStart": {}
 },
 "animations": {
 	"coz": {
@@ -208,7 +209,8 @@
 			}
 		},
 		"events": [
-			{ "time": 0.1, "name": "coz" }
+			{ "time": 0.0667, "name": "OnAttackStart" },
+			{ "time": 0.5, "name": "OnAttackEnd" }
 		]
 	},
 	"die": {
