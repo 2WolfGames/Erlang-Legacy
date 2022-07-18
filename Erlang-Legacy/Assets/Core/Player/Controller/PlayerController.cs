@@ -230,6 +230,13 @@ namespace Core.Player.Controller
             controllable = false;
             Freeze();
             Animator.SetTrigger(CharacterAnimations.Die);
+            StartCoroutine(BlockMovement(1f));
+        }
+
+        private IEnumerator BlockMovement(float afterTimeout)
+        {
+            yield return new WaitForSeconds(afterTimeout);
+            Body.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
         }
 
         public void Freeze()
