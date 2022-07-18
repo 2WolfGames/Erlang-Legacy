@@ -3,12 +3,12 @@ using Core.Combat.IA;
 using Core.Utility;
 using UnityEngine;
 
-namespace Core.IA.Behavior.ApachePig
+namespace Core.IA.Behavior.Task.Action
 {
-    public class SpawnStoneThorn : EnemyAction
+    public class InstantiateOverArea : EnemyAction
     {
         [SerializeField] Collider2D spawnArea;
-        [SerializeField] GameObject stoneThornPrefab;
+        [SerializeField] GameObject prefab;
         [SerializeField] float offset = 0f;
         [SerializeField] float disposableTimeout = 3f;
 
@@ -16,7 +16,7 @@ namespace Core.IA.Behavior.ApachePig
         {
             float xPosition = player.transform.position.x;
             float yPosition = spawnArea.bounds.max.y;
-            var stoneThorn = Object.Instantiate(stoneThornPrefab, new Vector2(xPosition, yPosition + offset), Quaternion.identity);
+            var stoneThorn = Object.Instantiate(prefab, new Vector2(xPosition, yPosition + offset), Quaternion.identity);
             stoneThorn.gameObject.Disposable(disposableTimeout);
             return TaskStatus.Success;
         }
