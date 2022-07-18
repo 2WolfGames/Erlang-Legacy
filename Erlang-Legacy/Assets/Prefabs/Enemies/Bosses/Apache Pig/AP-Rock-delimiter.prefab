@@ -144,7 +144,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 5
 --- !u!114 &8175479786085598581
 MonoBehaviour:
@@ -166,7 +166,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   Shooter: {fileID: 0}
-  destroyOnCollision: 1
+  destroyOnCollision: 0
 --- !u!58 &8175479786085598580
 CircleCollider2D:
   m_ObjectHideFlags: 0
