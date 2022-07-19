@@ -103,8 +103,8 @@ GameObject:
   - component: {fileID: 8175479786085598581}
   - component: {fileID: 8175479786085598580}
   m_Layer: 16
-  m_Name: AP-Rock-delimiter
-  m_TagString: Untagged
+  m_Name: AP-action-delimiter
+  m_TagString: Delimiter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

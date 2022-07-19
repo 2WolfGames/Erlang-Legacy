@@ -5,7 +5,6 @@ using Core.Combat.Projectile;
 using DG.Tweening;
 using UnityEngine;
 
-// TODO: use external manager to handle this logic (reusable delimiter logic)
 namespace Core.IA.Behavior.ApachePig
 {
     public class SpawnDelimiters : EnemyAction
@@ -16,6 +15,16 @@ namespace Core.IA.Behavior.ApachePig
         [SerializeField] bool reverse = false;
         private Stack<float> delimitersX = new Stack<float>();
         private int nDelimiters = 2;
+
+        private static string delimiterTagName = "Delimiter";
+
+        public override void OnAwake()
+        {
+            if (!delimiterPrefab.CompareTag(delimiterTagName))
+            {
+                Debug.LogError($"Delimiter prefab must have tag {delimiterTagName}");
+            }
+        }
 
         public override void OnStart()
         {
