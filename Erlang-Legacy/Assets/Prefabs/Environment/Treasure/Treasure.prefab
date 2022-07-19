@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8769734217025865460}
   - component: {fileID: 8769734217025865461}
   - component: {fileID: 8769734217025865458}
+  - component: {fileID: 2947072386622076045}
   m_Layer: 12
   m_Name: Treasure
   m_TagString: Untagged
@@ -139,3 +140,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.1051407, y: 1.4}
   m_EdgeRadius: 0
+--- !u!114 &2947072386622076045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8769734217025865462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af03f1a60496aa74b8c21c717a860d95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  repeat: 0
+  gameKey: 1
+  function: Open Treasure
+  waitTimeBeforeShowingKeys: 2

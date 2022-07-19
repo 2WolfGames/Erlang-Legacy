@@ -17,4 +17,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LoadingScene.unity
     guid: 527db62d792ef9343865f596b8cd50b0
+  - enabled: 1
+    path: Assets/Scenes/Omed Island/OmedIsland_Zone1.unity
+    guid: fd0175d2059275d4b85ea7ecc31ccecd
+  - enabled: 1
+    path: Assets/Scenes/Omed Island/OmedIsland_Zone2.unity
+    guid: 029121050b118b44991ce86d84e3090e
   m_configObjects: {}
