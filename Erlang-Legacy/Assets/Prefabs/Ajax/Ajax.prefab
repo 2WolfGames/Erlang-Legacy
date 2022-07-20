@@ -330,12 +330,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shakeCameraOnHurt: 1
+  newLifeSprite: {fileID: 0}
   inRecoverProcess: 0
   playerData:
     jumpParticles: {fileID: 8583723039670672985}
     dashTrailRender: {fileID: 7729203758757745403}
     health: {fileID: 11400000, guid: 38fc894eb3e78bf41a143ce13b99757c, type: 2}
     stats: {fileID: 11400000, guid: 93decfccab4b0ec4ea3f47954ba4b217, type: 2}
+  healEffectParticle: {fileID: 0}
 --- !u!114 &5625281659813403160
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -393,7 +395,6 @@ MonoBehaviour:
   punchParticle: {fileID: 546977338950529148}
   dashParticle: {fileID: 1597337908403413970}
   abilitiesAcquired: {fileID: 11400000, guid: 82610f626fac78549bc9820c99388842, type: 2}
-  adquiredAbilities: {fileID: 11400000, guid: ee1f9edd9a9f16d45ab45a808b14a18c, type: 2}
 --- !u!114 &6302354587913962444
 MonoBehaviour:
   m_ObjectHideFlags: 0

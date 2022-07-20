@@ -139,23 +139,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3758270310337249618
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6687549234671097686}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8903bb8dd78d4d14abf2f313628ddcb5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackCollider: {fileID: 3758270310698077515}
-  impactEffect: {fileID: 867246214757349016, guid: 8fbed873f1be056428a5bb5a3089cb63,
-    type: 3}
-  impactTransform: {fileID: 3758270308941240325}
-  cameraShakeIntensity: 0.2
 --- !u!1 &3758270310698077513
 GameObject:
   m_ObjectHideFlags: 0
@@ -490,6 +473,23 @@ MonoBehaviour:
       Version: 1.6.6
   gizmoViewMode: 2
   showBehaviorDesignerGizmo: 1
+--- !u!114 &3758270310337249618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6687549234671097686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8903bb8dd78d4d14abf2f313628ddcb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackCollider: {fileID: 3758270310698077515}
+  impactEffect: {fileID: 867246214757349016, guid: 8fbed873f1be056428a5bb5a3089cb63,
+    type: 3}
+  impactTransform: {fileID: 3758270308941240325}
+  cameraShakeIntensity: 0.2
 --- !u!1001 &3758270309710786707
 PrefabInstance:
   m_ObjectHideFlags: 0
