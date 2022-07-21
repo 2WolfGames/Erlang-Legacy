@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 223160247328460884}
   - component: {fileID: 223160247328460885}
   - component: {fileID: 223160247328460887}
-  - component: {fileID: 223160247328460886}
   m_Layer: 14
   m_Name: Tooth (4)
   m_TagString: Untagged
@@ -109,19 +108,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.08, y: 2.39}
   m_EdgeRadius: 0
---- !u!114 &223160247328460886
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 223160247328460882}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb8754acbbd52814fa7d02cbb56d19df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthTaker: {fileID: 11400000, guid: 2d266f964c0d82a4ab5028c0495f708d, type: 2}
 --- !u!1 &223160247480845488
 GameObject:
   m_ObjectHideFlags: 0
@@ -133,7 +119,6 @@ GameObject:
   - component: {fileID: 223160247480845494}
   - component: {fileID: 223160247480845495}
   - component: {fileID: 223160247480845493}
-  - component: {fileID: 223160247480845492}
   m_Layer: 14
   m_Name: Tooth (2)
   m_TagString: Untagged
@@ -231,19 +216,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.08, y: 2.39}
   m_EdgeRadius: 0
---- !u!114 &223160247480845492
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 223160247480845488}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb8754acbbd52814fa7d02cbb56d19df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthTaker: {fileID: 11400000, guid: 2d266f964c0d82a4ab5028c0495f708d, type: 2}
 --- !u!1 &223160247670305909
 GameObject:
   m_ObjectHideFlags: 0
@@ -255,7 +227,6 @@ GameObject:
   - component: {fileID: 223160247670305907}
   - component: {fileID: 223160247670305906}
   - component: {fileID: 223160247670305904}
-  - component: {fileID: 223160247670305905}
   m_Layer: 14
   m_Name: Tooth (3)
   m_TagString: Untagged
@@ -353,19 +324,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.08, y: 2.39}
   m_EdgeRadius: 0
---- !u!114 &223160247670305905
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 223160247670305909}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb8754acbbd52814fa7d02cbb56d19df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthTaker: {fileID: 11400000, guid: 2d266f964c0d82a4ab5028c0495f708d, type: 2}
 --- !u!1 &223160247815950075
 GameObject:
   m_ObjectHideFlags: 0
@@ -377,7 +335,6 @@ GameObject:
   - component: {fileID: 223160247815950077}
   - component: {fileID: 223160247815950076}
   - component: {fileID: 223160247815950078}
-  - component: {fileID: 223160247815950079}
   m_Layer: 14
   m_Name: Tooth (1)
   m_TagString: Untagged
@@ -475,19 +432,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.08, y: 2.39}
   m_EdgeRadius: 0
---- !u!114 &223160247815950079
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 223160247815950075}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb8754acbbd52814fa7d02cbb56d19df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthTaker: {fileID: 11400000, guid: 2d266f964c0d82a4ab5028c0495f708d, type: 2}
 --- !u!1 &223160247979130240
 GameObject:
   m_ObjectHideFlags: 0
@@ -499,7 +443,6 @@ GameObject:
   - component: {fileID: 223160247979130246}
   - component: {fileID: 223160247979130247}
   - component: {fileID: 223160247979130245}
-  - component: {fileID: 223160247979130244}
   m_Layer: 14
   m_Name: Tooth
   m_TagString: Untagged
@@ -597,19 +540,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.08, y: 2.39}
   m_EdgeRadius: 0
---- !u!114 &223160247979130244
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 223160247979130240}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb8754acbbd52814fa7d02cbb56d19df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthTaker: {fileID: 11400000, guid: 2d266f964c0d82a4ab5028c0495f708d, type: 2}
 --- !u!1 &223160248065819995
 GameObject:
   m_ObjectHideFlags: 0
@@ -621,7 +551,6 @@ GameObject:
   - component: {fileID: 223160248065819997}
   - component: {fileID: 223160248065819996}
   - component: {fileID: 223160248065819998}
-  - component: {fileID: 223160248065819999}
   m_Layer: 14
   m_Name: Tooth (1)
   m_TagString: Untagged
@@ -719,19 +648,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.08, y: 2.39}
   m_EdgeRadius: 0
---- !u!114 &223160248065819999
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 223160248065819995}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb8754acbbd52814fa7d02cbb56d19df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthTaker: {fileID: 11400000, guid: 2d266f964c0d82a4ab5028c0495f708d, type: 2}
 --- !u!1 &223160248324320156
 GameObject:
   m_ObjectHideFlags: 0
@@ -743,7 +659,6 @@ GameObject:
   - component: {fileID: 223160248324320154}
   - component: {fileID: 223160248324320155}
   - component: {fileID: 223160248324320153}
-  - component: {fileID: 223160248324320152}
   m_Layer: 14
   m_Name: Tooth (3)
   m_TagString: Untagged
@@ -841,19 +756,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.08, y: 2.39}
   m_EdgeRadius: 0
---- !u!114 &223160248324320152
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 223160248324320156}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb8754acbbd52814fa7d02cbb56d19df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthTaker: {fileID: 11400000, guid: 2d266f964c0d82a4ab5028c0495f708d, type: 2}
 --- !u!1 &223160248342697679
 GameObject:
   m_ObjectHideFlags: 0
@@ -865,7 +767,6 @@ GameObject:
   - component: {fileID: 223160248342697673}
   - component: {fileID: 223160248342697672}
   - component: {fileID: 223160248342697674}
-  - component: {fileID: 223160248342697675}
   m_Layer: 14
   m_Name: Tooth (5)
   m_TagString: Untagged
@@ -963,19 +864,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.08, y: 2.39}
   m_EdgeRadius: 0
---- !u!114 &223160248342697675
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 223160248342697679}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb8754acbbd52814fa7d02cbb56d19df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthTaker: {fileID: 11400000, guid: 2d266f964c0d82a4ab5028c0495f708d, type: 2}
 --- !u!1 &223160248346880270
 GameObject:
   m_ObjectHideFlags: 0
@@ -987,7 +875,6 @@ GameObject:
   - component: {fileID: 223160248346880264}
   - component: {fileID: 223160248346880265}
   - component: {fileID: 223160248346880267}
-  - component: {fileID: 223160248346880266}
   m_Layer: 14
   m_Name: Tooth (5)
   m_TagString: Untagged
@@ -1085,19 +972,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.08, y: 2.39}
   m_EdgeRadius: 0
---- !u!114 &223160248346880266
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 223160248346880270}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb8754acbbd52814fa7d02cbb56d19df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthTaker: {fileID: 11400000, guid: 2d266f964c0d82a4ab5028c0495f708d, type: 2}
 --- !u!1 &223160248369208787
 GameObject:
   m_ObjectHideFlags: 0
@@ -1109,7 +983,6 @@ GameObject:
   - component: {fileID: 223160248369208789}
   - component: {fileID: 223160248369208788}
   - component: {fileID: 223160248369208790}
-  - component: {fileID: 223160248369208791}
   m_Layer: 14
   m_Name: Tooth (6)
   m_TagString: Untagged
@@ -1207,19 +1080,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.08, y: 2.39}
   m_EdgeRadius: 0
---- !u!114 &223160248369208791
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 223160248369208787}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb8754acbbd52814fa7d02cbb56d19df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthTaker: {fileID: 11400000, guid: 2d266f964c0d82a4ab5028c0495f708d, type: 2}
 --- !u!1 &223160248679881717
 GameObject:
   m_ObjectHideFlags: 0
@@ -1231,7 +1091,6 @@ GameObject:
   - component: {fileID: 223160248679881715}
   - component: {fileID: 223160248679881714}
   - component: {fileID: 223160248679881712}
-  - component: {fileID: 223160248679881713}
   m_Layer: 14
   m_Name: Tooth (7)
   m_TagString: Untagged
@@ -1329,19 +1188,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.08, y: 2.39}
   m_EdgeRadius: 0
---- !u!114 &223160248679881713
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 223160248679881717}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb8754acbbd52814fa7d02cbb56d19df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthTaker: {fileID: 11400000, guid: 2d266f964c0d82a4ab5028c0495f708d, type: 2}
 --- !u!1 &223160248863048479
 GameObject:
   m_ObjectHideFlags: 0
@@ -1353,7 +1199,6 @@ GameObject:
   - component: {fileID: 223160248863048473}
   - component: {fileID: 223160248863048472}
   - component: {fileID: 223160248863048474}
-  - component: {fileID: 223160248863048475}
   m_Layer: 14
   m_Name: Tooth (4)
   m_TagString: Untagged
@@ -1451,19 +1296,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.08, y: 2.39}
   m_EdgeRadius: 0
---- !u!114 &223160248863048475
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 223160248863048479}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb8754acbbd52814fa7d02cbb56d19df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthTaker: {fileID: 11400000, guid: 2d266f964c0d82a4ab5028c0495f708d, type: 2}
 --- !u!1 &223160249070831832
 GameObject:
   m_ObjectHideFlags: 0
@@ -1475,7 +1307,6 @@ GameObject:
   - component: {fileID: 223160249070831838}
   - component: {fileID: 223160249070831839}
   - component: {fileID: 223160249070831837}
-  - component: {fileID: 223160249070831836}
   m_Layer: 14
   m_Name: Tooth (6)
   m_TagString: Untagged
@@ -1573,19 +1404,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.08, y: 2.39}
   m_EdgeRadius: 0
---- !u!114 &223160249070831836
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 223160249070831832}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb8754acbbd52814fa7d02cbb56d19df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthTaker: {fileID: 11400000, guid: 2d266f964c0d82a4ab5028c0495f708d, type: 2}
 --- !u!1 &223160249176627332
 GameObject:
   m_ObjectHideFlags: 0
@@ -1597,7 +1415,6 @@ GameObject:
   - component: {fileID: 223160249176627330}
   - component: {fileID: 223160249176627331}
   - component: {fileID: 223160249176627329}
-  - component: {fileID: 223160249176627328}
   m_Layer: 14
   m_Name: Tooth (2)
   m_TagString: Untagged
@@ -1695,19 +1512,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.08, y: 2.39}
   m_EdgeRadius: 0
---- !u!114 &223160249176627328
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 223160249176627332}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb8754acbbd52814fa7d02cbb56d19df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthTaker: {fileID: 11400000, guid: 2d266f964c0d82a4ab5028c0495f708d, type: 2}
 --- !u!1 &223160249333687350
 GameObject:
   m_ObjectHideFlags: 0
@@ -1719,7 +1523,6 @@ GameObject:
   - component: {fileID: 223160249333687344}
   - component: {fileID: 223160249333687345}
   - component: {fileID: 223160249333687347}
-  - component: {fileID: 223160249333687346}
   m_Layer: 14
   m_Name: Tooth (7)
   m_TagString: Untagged
@@ -1817,19 +1620,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.08, y: 2.39}
   m_EdgeRadius: 0
---- !u!114 &223160249333687346
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 223160249333687350}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb8754acbbd52814fa7d02cbb56d19df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthTaker: {fileID: 11400000, guid: 2d266f964c0d82a4ab5028c0495f708d, type: 2}
 --- !u!1 &721872720525320416
 GameObject:
   m_ObjectHideFlags: 0
@@ -1953,7 +1743,6 @@ GameObject:
   - component: {fileID: 721872720649758336}
   - component: {fileID: 721872720649758337}
   - component: {fileID: 721872720649758339}
-  - component: {fileID: 721872720649758338}
   m_Layer: 14
   m_Name: Tooth
   m_TagString: Untagged
@@ -2051,19 +1840,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.08, y: 2.39}
   m_EdgeRadius: 0
---- !u!114 &721872720649758338
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 721872720649758342}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb8754acbbd52814fa7d02cbb56d19df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthTaker: {fileID: 11400000, guid: 2d266f964c0d82a4ab5028c0495f708d, type: 2}
 --- !u!1 &721872721261503261
 GameObject:
   m_ObjectHideFlags: 0
@@ -2113,7 +1889,6 @@ GameObject:
   - component: {fileID: 1429122046832444167}
   - component: {fileID: 1429122046832444166}
   - component: {fileID: 1429122046832444164}
-  - component: {fileID: 1429122046832444165}
   m_Layer: 14
   m_Name: Tooth
   m_TagString: Untagged
@@ -2211,19 +1986,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.08, y: 2.39}
   m_EdgeRadius: 0
---- !u!114 &1429122046832444165
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1429122046832444161}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb8754acbbd52814fa7d02cbb56d19df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthTaker: {fileID: 11400000, guid: 2d266f964c0d82a4ab5028c0495f708d, type: 2}
 --- !u!1 &1429122046895779962
 GameObject:
   m_ObjectHideFlags: 0
@@ -2235,7 +1997,6 @@ GameObject:
   - component: {fileID: 1429122046895779964}
   - component: {fileID: 1429122046895779965}
   - component: {fileID: 1429122046895779967}
-  - component: {fileID: 1429122046895779966}
   m_Layer: 14
   m_Name: Tooth (1)
   m_TagString: Untagged
@@ -2333,19 +2094,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.08, y: 2.39}
   m_EdgeRadius: 0
---- !u!114 &1429122046895779966
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1429122046895779962}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb8754acbbd52814fa7d02cbb56d19df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthTaker: {fileID: 11400000, guid: 2d266f964c0d82a4ab5028c0495f708d, type: 2}
 --- !u!1 &1429122047184452570
 GameObject:
   m_ObjectHideFlags: 0
@@ -2357,7 +2105,6 @@ GameObject:
   - component: {fileID: 1429122047184452572}
   - component: {fileID: 1429122047184452573}
   - component: {fileID: 1429122047184452575}
-  - component: {fileID: 1429122047184452574}
   m_Layer: 14
   m_Name: Tooth (1)
   m_TagString: Untagged
@@ -2455,19 +2202,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.08, y: 2.39}
   m_EdgeRadius: 0
---- !u!114 &1429122047184452574
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1429122047184452570}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb8754acbbd52814fa7d02cbb56d19df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthTaker: {fileID: 11400000, guid: 2d266f964c0d82a4ab5028c0495f708d, type: 2}
 --- !u!1 &1429122047367035441
 GameObject:
   m_ObjectHideFlags: 0
@@ -2479,7 +2213,6 @@ GameObject:
   - component: {fileID: 1429122047367035447}
   - component: {fileID: 1429122047367035446}
   - component: {fileID: 1429122047367035444}
-  - component: {fileID: 1429122047367035445}
   m_Layer: 14
   m_Name: Tooth (2)
   m_TagString: Untagged
@@ -2577,19 +2310,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.08, y: 2.39}
   m_EdgeRadius: 0
---- !u!114 &1429122047367035445
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1429122047367035441}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb8754acbbd52814fa7d02cbb56d19df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthTaker: {fileID: 11400000, guid: 2d266f964c0d82a4ab5028c0495f708d, type: 2}
 --- !u!1 &1429122047483080403
 GameObject:
   m_ObjectHideFlags: 0
@@ -2601,7 +2321,6 @@ GameObject:
   - component: {fileID: 1429122047483080405}
   - component: {fileID: 1429122047483080404}
   - component: {fileID: 1429122047483080406}
-  - component: {fileID: 1429122047483080407}
   m_Layer: 14
   m_Name: Tooth (4)
   m_TagString: Untagged
@@ -2699,19 +2418,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.08, y: 2.39}
   m_EdgeRadius: 0
---- !u!114 &1429122047483080407
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1429122047483080403}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb8754acbbd52814fa7d02cbb56d19df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthTaker: {fileID: 11400000, guid: 2d266f964c0d82a4ab5028c0495f708d, type: 2}
 --- !u!1 &1429122047543888628
 GameObject:
   m_ObjectHideFlags: 0
@@ -2723,7 +2429,6 @@ GameObject:
   - component: {fileID: 1429122047543888626}
   - component: {fileID: 1429122047543888627}
   - component: {fileID: 1429122047543888625}
-  - component: {fileID: 1429122047543888624}
   m_Layer: 14
   m_Name: Tooth (3)
   m_TagString: Untagged
@@ -2821,19 +2526,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.08, y: 2.39}
   m_EdgeRadius: 0
---- !u!114 &1429122047543888624
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1429122047543888628}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb8754acbbd52814fa7d02cbb56d19df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthTaker: {fileID: 11400000, guid: 2d266f964c0d82a4ab5028c0495f708d, type: 2}
 --- !u!1 &1429122047924172377
 GameObject:
   m_ObjectHideFlags: 0
@@ -2845,7 +2537,6 @@ GameObject:
   - component: {fileID: 1429122047924172383}
   - component: {fileID: 1429122047924172382}
   - component: {fileID: 1429122047924172380}
-  - component: {fileID: 1429122047924172381}
   m_Layer: 14
   m_Name: Tooth (6)
   m_TagString: Untagged
@@ -2943,19 +2634,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.08, y: 2.39}
   m_EdgeRadius: 0
---- !u!114 &1429122047924172381
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1429122047924172377}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb8754acbbd52814fa7d02cbb56d19df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthTaker: {fileID: 11400000, guid: 2d266f964c0d82a4ab5028c0495f708d, type: 2}
 --- !u!1 &1429122047997410718
 GameObject:
   m_ObjectHideFlags: 0
@@ -2967,7 +2645,6 @@ GameObject:
   - component: {fileID: 1429122047997410712}
   - component: {fileID: 1429122047997410713}
   - component: {fileID: 1429122047997410715}
-  - component: {fileID: 1429122047997410714}
   m_Layer: 14
   m_Name: Tooth (4)
   m_TagString: Untagged
@@ -3065,19 +2742,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.08, y: 2.39}
   m_EdgeRadius: 0
---- !u!114 &1429122047997410714
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1429122047997410718}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb8754acbbd52814fa7d02cbb56d19df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthTaker: {fileID: 11400000, guid: 2d266f964c0d82a4ab5028c0495f708d, type: 2}
 --- !u!1 &1429122048196450999
 GameObject:
   m_ObjectHideFlags: 0
@@ -3089,7 +2753,6 @@ GameObject:
   - component: {fileID: 1429122048196450993}
   - component: {fileID: 1429122048196450992}
   - component: {fileID: 1429122048196450994}
-  - component: {fileID: 1429122048196450995}
   m_Layer: 14
   m_Name: Tooth (7)
   m_TagString: Untagged
@@ -3187,19 +2850,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.08, y: 2.39}
   m_EdgeRadius: 0
---- !u!114 &1429122048196450995
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1429122048196450999}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb8754acbbd52814fa7d02cbb56d19df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthTaker: {fileID: 11400000, guid: 2d266f964c0d82a4ab5028c0495f708d, type: 2}
 --- !u!1 &1429122048319366661
 GameObject:
   m_ObjectHideFlags: 0
@@ -3211,7 +2861,6 @@ GameObject:
   - component: {fileID: 1429122048319366659}
   - component: {fileID: 1429122048319366658}
   - component: {fileID: 1429122048319366656}
-  - component: {fileID: 1429122048319366657}
   m_Layer: 14
   m_Name: Tooth (2)
   m_TagString: Untagged
@@ -3309,19 +2958,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.08, y: 2.39}
   m_EdgeRadius: 0
---- !u!114 &1429122048319366657
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1429122048319366661}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb8754acbbd52814fa7d02cbb56d19df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthTaker: {fileID: 11400000, guid: 2d266f964c0d82a4ab5028c0495f708d, type: 2}
 --- !u!1 &1429122048480515983
 GameObject:
   m_ObjectHideFlags: 0
@@ -3333,7 +2969,6 @@ GameObject:
   - component: {fileID: 1429122048480515977}
   - component: {fileID: 1429122048480515976}
   - component: {fileID: 1429122048480515978}
-  - component: {fileID: 1429122048480515979}
   m_Layer: 14
   m_Name: Tooth (5)
   m_TagString: Untagged
@@ -3431,19 +3066,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.08, y: 2.39}
   m_EdgeRadius: 0
---- !u!114 &1429122048480515979
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1429122048480515983}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb8754acbbd52814fa7d02cbb56d19df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthTaker: {fileID: 11400000, guid: 2d266f964c0d82a4ab5028c0495f708d, type: 2}
 --- !u!1 &1429122048484730958
 GameObject:
   m_ObjectHideFlags: 0
@@ -3455,7 +3077,6 @@ GameObject:
   - component: {fileID: 1429122048484730952}
   - component: {fileID: 1429122048484730953}
   - component: {fileID: 1429122048484730955}
-  - component: {fileID: 1429122048484730954}
   m_Layer: 14
   m_Name: Tooth (5)
   m_TagString: Untagged
@@ -3553,19 +3174,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.08, y: 2.39}
   m_EdgeRadius: 0
---- !u!114 &1429122048484730954
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1429122048484730958}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb8754acbbd52814fa7d02cbb56d19df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthTaker: {fileID: 11400000, guid: 2d266f964c0d82a4ab5028c0495f708d, type: 2}
 --- !u!1 &1429122048536597789
 GameObject:
   m_ObjectHideFlags: 0
@@ -3577,7 +3185,6 @@ GameObject:
   - component: {fileID: 1429122048536597787}
   - component: {fileID: 1429122048536597786}
   - component: {fileID: 1429122048536597784}
-  - component: {fileID: 1429122048536597785}
   m_Layer: 14
   m_Name: Tooth (3)
   m_TagString: Untagged
@@ -3675,19 +3282,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.08, y: 2.39}
   m_EdgeRadius: 0
---- !u!114 &1429122048536597785
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1429122048536597789}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb8754acbbd52814fa7d02cbb56d19df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthTaker: {fileID: 11400000, guid: 2d266f964c0d82a4ab5028c0495f708d, type: 2}
 --- !u!1 &1429122048589882194
 GameObject:
   m_ObjectHideFlags: 0
@@ -3699,7 +3293,6 @@ GameObject:
   - component: {fileID: 1429122048589882196}
   - component: {fileID: 1429122048589882197}
   - component: {fileID: 1429122048589882199}
-  - component: {fileID: 1429122048589882198}
   m_Layer: 14
   m_Name: Tooth (6)
   m_TagString: Untagged
@@ -3797,19 +3390,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.08, y: 2.39}
   m_EdgeRadius: 0
---- !u!114 &1429122048589882198
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1429122048589882194}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb8754acbbd52814fa7d02cbb56d19df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthTaker: {fileID: 11400000, guid: 2d266f964c0d82a4ab5028c0495f708d, type: 2}
 --- !u!1 &1429122048816670068
 GameObject:
   m_ObjectHideFlags: 0
@@ -3821,7 +3401,6 @@ GameObject:
   - component: {fileID: 1429122048816670066}
   - component: {fileID: 1429122048816670067}
   - component: {fileID: 1429122048816670065}
-  - component: {fileID: 1429122048816670064}
   m_Layer: 14
   m_Name: Tooth (7)
   m_TagString: Untagged
@@ -3919,19 +3498,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.08, y: 2.39}
   m_EdgeRadius: 0
---- !u!114 &1429122048816670064
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1429122048816670068}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb8754acbbd52814fa7d02cbb56d19df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthTaker: {fileID: 11400000, guid: 2d266f964c0d82a4ab5028c0495f708d, type: 2}
 --- !u!1 &1930085546172323847
 GameObject:
   m_ObjectHideFlags: 0
@@ -3943,7 +3509,6 @@ GameObject:
   - component: {fileID: 1930085546172323841}
   - component: {fileID: 1930085546172323840}
   - component: {fileID: 1930085546172323842}
-  - component: {fileID: 1930085546172323843}
   m_Layer: 14
   m_Name: Tooth
   m_TagString: Untagged
@@ -4041,19 +3606,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.08, y: 2.39}
   m_EdgeRadius: 0
---- !u!114 &1930085546172323843
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1930085546172323847}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb8754acbbd52814fa7d02cbb56d19df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthTaker: {fileID: 11400000, guid: 2d266f964c0d82a4ab5028c0495f708d, type: 2}
 --- !u!1 &1930085546188220390
 GameObject:
   m_ObjectHideFlags: 0
@@ -4223,7 +3775,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1930085547591963709}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.57000065, y: -4.72, z: 44.52282}
+  m_LocalPosition: {x: 0.4, y: -4.72, z: 44.52282}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1930085547868364722}
@@ -4280,7 +3832,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1930085547815654175}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.57000065, y: -4.72, z: 44.52282}
+  m_LocalPosition: {x: 0.3, y: -4.72, z: 44.52282}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1930085547415927443}
