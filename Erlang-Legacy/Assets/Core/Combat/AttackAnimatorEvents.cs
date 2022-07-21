@@ -13,7 +13,7 @@ namespace Core.Combat
         private void OnAttackStart()
         {
             attackCollider.enabled = true;
-            EffectManager.Instance?.PlayOneShot(impactEffect, impactTransform.position);
+            EffectManager.Instance?.PlayOneShot(impactEffect, impactTransform);
             CameraManager.Instance?.ShakeCamera(cameraShakeIntensity);
         }
 
