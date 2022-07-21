@@ -1,0 +1,1275 @@
+{
+"skeleton": {
+	"hash": "Dj4Oyvq5/X8",
+	"spine": "4.0.64",
+	"x": -233.03,
+	"y": 1.98,
+	"width": 404.99,
+	"height": 241.7,
+	"images": "./images/",
+	"audio": "C:/Unity/Erlang-Legacy/Assets/Dissenys/Enemics/Wild Pig Enemy"
+},
+"bones": [
+	{ "name": "root" },
+	{ "name": "Torc", "parent": "root", "length": 91.9, "rotation": 6.07, "x": -6.97, "y": 155.1 },
+	{ "name": "Pelatge", "parent": "Torc", "length": 116.8, "rotation": -160.66, "x": -52.97, "y": 8.74 },
+	{ "name": "Ull", "parent": "Pelatge", "length": 31.14, "rotation": -158.57, "x": 88.56, "y": -19.69 },
+	{ "name": "OrellaEsquerra", "parent": "Pelatge", "length": 25.81, "rotation": -143.3, "x": 25.09, "y": -39.89 },
+	{ "name": "OrellaDreta", "parent": "Pelatge", "length": 18.68, "rotation": -147.78, "x": 43.98, "y": -49.76 },
+	{ "name": "Cua", "parent": "Torc", "length": 64.62, "rotation": 57.4, "x": 138.76, "y": -8.1 },
+	{ "name": "DavantCuixaEsquerra", "parent": "Torc", "length": 54.66, "rotation": -110.24, "x": -12.13, "y": -28.11 },
+	{ "name": "DavantPeuEsquerra", "parent": "DavantCuixaEsquerra", "length": 54.78, "rotation": 10.5, "x": 57.19, "y": 1.85 },
+	{ "name": "DavantCuixaDreta", "parent": "Torc", "length": 55.8, "rotation": -118.25, "x": -47.01, "y": -31.81 },
+	{ "name": "DavantPeuDret", "parent": "DavantCuixaDreta", "length": 53.34, "rotation": 9.76, "x": 55.73, "y": 2.66 },
+	{ "name": "DarreraCuixaDreta", "parent": "Torc", "length": 49.32, "rotation": -108.73, "x": 60.82, "y": -40.66 },
+	{ "name": "DarreraPeuDret", "parent": "DarreraCuixaDreta", "length": 55.86, "rotation": 16.48, "x": 48.6, "y": -0.39 },
+	{ "name": "DarreraCuixaEsquerra", "parent": "Torc", "length": 54.79, "rotation": -107.66, "x": 91.06, "y": -39.64 },
+	{ "name": "DarreraPeuEsquerra", "parent": "DarreraCuixaEsquerra", "length": 58.79, "rotation": 20.16, "x": 53.73, "y": -0.66 }
+],
+"slots": [
+	{ "name": "Cua", "bone": "Cua", "attachment": "Cua" },
+	{ "name": "OrellaDreta", "bone": "OrellaDreta", "attachment": "OrellaDreta" },
+	{ "name": "DavantPeuDret", "bone": "DavantPeuDret", "attachment": "DavantPeuDret" },
+	{ "name": "DavantCuixaDreta", "bone": "DavantCuixaDreta", "attachment": "DavantCuixaDreta" },
+	{ "name": "DarreraPeuDret", "bone": "DarreraPeuDret", "attachment": "DarreraPeuDret" },
+	{ "name": "DarreraCuixaDreta", "bone": "DarreraCuixaDreta", "attachment": "DarreraCuixaDreta" },
+	{ "name": "Cul", "bone": "Torc", "attachment": "Cul" },
+	{ "name": "Torc", "bone": "Torc", "attachment": "Torc" },
+	{ "name": "DarreraPeuEsquerra", "bone": "DarreraPeuEsquerra", "attachment": "DarreraPeuEsquerra" },
+	{ "name": "DarreraCuixaEsquerra", "bone": "DarreraCuixaEsquerra", "attachment": "DarreraCuixaEsquerra" },
+	{ "name": "DavantPeuEsquerra", "bone": "DavantPeuEsquerra", "attachment": "DavantPeuEsquerra" },
+	{ "name": "DavantCuixaEsquerra", "bone": "DavantCuixaEsquerra", "attachment": "DavantCuixaEsquerra" },
+	{ "name": "Pelatge", "bone": "Pelatge", "attachment": "Pelatge" },
+	{ "name": "Ralles", "bone": "Torc", "attachment": "Ralles" },
+	{ "name": "Cap", "bone": "Pelatge", "attachment": "Cap" },
+	{ "name": "Ull", "bone": "Ull", "attachment": "Ull" },
+	{ "name": "OrellaEsquerra", "bone": "OrellaEsquerra", "attachment": "OrellaEsquerra" }
+],
+"skins": [
+	{
+		"name": "default",
+		"attachments": {
+			"Cap": {
+				"Cap": { "x": 87.78, "y": -2.96, "rotation": 167.99, "width": 163, "height": 109 }
+			},
+			"Cua": {
+				"Cua": { "x": 39.89, "y": 0.99, "rotation": -77.32, "width": 26, "height": 88 }
+			},
+			"Cul": {
+				"Cul": { "x": 87.86, "y": -24.05, "rotation": -2.76, "width": 122, "height": 107 }
+			},
+			"DarreraCuixaDreta": {
+				"DarreraCuixaDreta": { "x": 23.85, "y": 21.12, "rotation": 90.59, "width": 87, "height": 84 }
+			},
+			"DarreraCuixaEsquerra": {
+				"DarreraCuixaEsquerra": { "x": 25.05, "y": 17.85, "rotation": 95.74, "width": 87, "height": 84 }
+			},
+			"DarreraPeuDret": {
+				"DarreraPeuDret": { "x": 32.34, "y": 1.82, "rotation": 96.81, "width": 35, "height": 72 }
+			},
+			"DarreraPeuEsquerra": {
+				"DarreraPeuEsquerra": { "x": 31.94, "y": 2.47, "rotation": 99.17, "width": 35, "height": 72 }
+			},
+			"DavantCuixaDreta": {
+				"DavantCuixaDreta": { "x": 21.07, "y": 15.31, "rotation": 106.15, "width": 87, "height": 84 }
+			},
+			"DavantCuixaEsquerra": {
+				"DavantCuixaEsquerra": { "x": 22.86, "y": 14.67, "rotation": 109.4, "width": 87, "height": 84 }
+			},
+			"DavantPeuDret": {
+				"DavantPeuDret": { "x": 26.66, "y": 2.98, "rotation": 98.41, "width": 35, "height": 72 }
+			},
+			"DavantPeuEsquerra": {
+				"DavantPeuEsquerra": { "x": 28.91, "y": 3.22, "rotation": 95.08, "width": 35, "height": 72 }
+			},
+			"OrellaDreta": {
+				"OrellaDreta": { "x": 5.94, "y": 0.73, "rotation": -40.54, "width": 37, "height": 30 }
+			},
+			"OrellaEsquerra": {
+				"OrellaEsquerra": { "x": 11.24, "y": 2.63, "rotation": -48.34, "width": 37, "height": 30 }
+			},
+			"Pelatge": {
+				"Pelatge": { "x": -3.28, "y": 7.39, "rotation": 167.99, "width": 174, "height": 115 }
+			},
+			"Ralles": {
+				"Ralles": { "x": 70.71, "y": -10.99, "rotation": -2.76, "width": 112, "height": 57 }
+			},
+			"Torc": {
+				"Torc": { "x": 12.97, "y": -12.39, "rotation": -2.76, "width": 173, "height": 121 }
+			},
+			"Ull": {
+				"Ull": { "x": 18.93, "y": -4.37, "rotation": -29.38, "width": 56, "height": 27 }
+			}
+		}
+	}
+],
+"events": {
+	"OnAttackEnd": {},
+	"OnAttackStart": {}
+},
+"animations": {
+	"coz": {
+		"bones": {
+			"Torc": {
+				"rotate": [
+					{},
+					{ "time": 0.1, "value": 9.96 },
+					{ "time": 0.6667 }
+				],
+				"translate": [
+					{ "time": 0.1, "x": -2.06, "y": 4.53 },
+					{ "time": 0.6667 }
+				]
+			},
+			"DavantPeuEsquerra": {
+				"rotate": [
+					{},
+					{ "time": 0.1333, "value": -10.73 },
+					{ "time": 0.6667 }
+				]
+			},
+			"DavantCuixaDreta": {
+				"rotate": [
+					{},
+					{ "time": 0.0333, "value": -1.14 },
+					{ "time": 0.1, "value": -4.02 },
+					{ "time": 0.6667 }
+				]
+			},
+			"DavantPeuDret": {
+				"rotate": [
+					{ "time": 0.0667, "value": -4.95 },
+					{ "time": 0.1, "value": -6.69 },
+					{ "time": 0.6, "value": -3.54 },
+					{ "time": 0.6667 }
+				]
+			},
+			"DarreraPeuEsquerra": {
+				"translate": [
+					{}
+				]
+			},
+			"DarreraCuixaEsquerra": {
+				"rotate": [
+					{},
+					{ "time": 0.1, "value": 86.63, "curve": "stepped" },
+					{ "time": 0.3667, "value": 86.63 },
+					{ "time": 0.6667 }
+				]
+			},
+			"DarreraCuixaDreta": {
+				"rotate": [
+					{},
+					{ "time": 0.0333, "value": 28.02 },
+					{ "time": 0.1, "value": 79.96, "curve": "stepped" },
+					{ "time": 0.3667, "value": 79.96 },
+					{ "time": 0.6667 }
+				]
+			},
+			"Cua": {
+				"rotate": [
+					{},
+					{ "time": 0.1, "value": 17.39 },
+					{ "time": 0.6667 }
+				]
+			},
+			"OrellaDreta": {
+				"rotate": [
+					{ "time": 0.1 },
+					{ "time": 0.1667, "value": 6.97 },
+					{ "time": 0.6667 }
+				],
+				"translate": [
+					{}
+				]
+			},
+			"OrellaEsquerra": {
+				"rotate": [
+					{ "time": 0.1 },
+					{ "time": 0.1667, "value": 7.07 },
+					{ "time": 0.6667 }
+				],
+				"translate": [
+					{}
+				]
+			},
+			"Ull": {
+				"rotate": [
+					{ "time": 0.1, "value": 16.04 },
+					{ "time": 0.4333 }
+				],
+				"translate": [
+					{}
+				]
+			},
+			"Pelatge": {
+				"translate": [
+					{}
+				]
+			}
+		},
+		"events": [
+			{ "time": 0.0667, "name": "OnAttackStart" },
+			{ "time": 0.5, "name": "OnAttackEnd" }
+		]
+	},
+	"die": {
+		"bones": {
+			"DarreraCuixaEsquerra": {
+				"rotate": [
+					{},
+					{ "time": 0.1, "value": 50.15 },
+					{ "time": 0.3, "value": 50.35 },
+					{ "time": 0.6667, "value": 62.52 }
+				]
+			},
+			"DarreraPeuDret": {
+				"rotate": [
+					{},
+					{ "time": 0.6667, "value": 1.59 }
+				]
+			},
+			"DarreraCuixaDreta": {
+				"rotate": [
+					{},
+					{ "time": 0.1, "value": 49.82 },
+					{ "time": 0.3, "value": 52.05 },
+					{ "time": 0.6667, "value": 69.38 }
+				]
+			},
+			"DavantPeuDret": {
+				"rotate": [
+					{},
+					{ "time": 0.0333, "value": 38.06 },
+					{ "time": 0.1, "value": 26 },
+					{ "time": 0.6667, "value": 5.77 }
+				]
+			},
+			"DavantCuixaDreta": {
+				"rotate": [
+					{},
+					{ "time": 0.1, "value": 49.31 },
+					{ "time": 0.3667, "value": 75.04 },
+					{ "time": 0.6667, "value": 83.91 }
+				]
+			},
+			"DavantPeuEsquerra": {
+				"rotate": [
+					{},
+					{ "time": 0.0333, "value": -13.55 },
+					{ "time": 0.1, "value": 26.54 },
+					{ "time": 0.6667, "value": 1.44 }
+				]
+			},
+			"DavantCuixaEsquerra": {
+				"rotate": [
+					{},
+					{ "time": 0.1, "value": 29.96 },
+					{ "time": 0.3667, "value": 61.02 },
+					{ "time": 0.6667, "value": 63.17 }
+				]
+			},
+			"Cua": {
+				"rotate": [
+					{},
+					{ "time": 0.1, "value": -46.54 },
+					{ "time": 0.2, "value": -69.27 },
+					{ "time": 0.6667, "value": -120.47 }
+				]
+			},
+			"OrellaDreta": {
+				"rotate": [
+					{},
+					{ "time": 0.1, "value": -4.92 },
+					{ "time": 0.3, "value": -21.99 },
+					{ "time": 0.6667, "value": -12.96 }
+				]
+			},
+			"OrellaEsquerra": {
+				"rotate": [
+					{},
+					{ "time": 0.1, "value": -44.98 }
+				]
+			},
+			"Ull": {
+				"rotate": [
+					{},
+					{ "time": 0.1, "value": -30.98 },
+					{ "time": 0.3, "value": -36.87 },
+					{ "time": 0.6667, "value": -68.45 }
+				]
+			},
+			"Pelatge": {
+				"rotate": [
+					{},
+					{ "time": 0.1, "value": 12.53 },
+					{ "time": 0.3667, "value": -2.45 },
+					{ "time": 0.6667, "value": -0.43 }
+				]
+			},
+			"Torc": {
+				"rotate": [
+					{},
+					{ "time": 0.1, "value": 8.13 },
+					{ "time": 0.2, "value": 8.8 },
+					{ "time": 0.5667, "value": 3.96 }
+				],
+				"translate": [
+					{},
+					{ "time": 0.1, "y": -33.6 },
+					{ "time": 0.2, "y": -55.68 },
+					{ "time": 0.5667, "y": -82.48 }
+				]
+			}
+		}
+	},
+	"hurt": {
+		"slots": {
+			"Cap": {
+				"rgba": [
+					{ "color": "330000ff" }
+				]
+			},
+			"Cua": {
+				"rgba": [
+					{ "color": "330000ff" }
+				]
+			},
+			"Cul": {
+				"rgba": [
+					{ "color": "330000ff" }
+				]
+			},
+			"DarreraCuixaDreta": {
+				"rgba": [
+					{ "color": "330000ff" }
+				]
+			},
+			"DarreraCuixaEsquerra": {
+				"rgba": [
+					{ "color": "330000ff" }
+				]
+			},
+			"DarreraPeuDret": {
+				"rgba": [
+					{ "color": "330000ff" }
+				]
+			},
+			"DarreraPeuEsquerra": {
+				"rgba": [
+					{ "color": "330000ff" }
+				]
+			},
+			"DavantCuixaDreta": {
+				"rgba": [
+					{ "color": "330000ff" }
+				]
+			},
+			"DavantCuixaEsquerra": {
+				"rgba": [
+					{ "color": "330000ff" }
+				]
+			},
+			"DavantPeuDret": {
+				"rgba": [
+					{ "color": "330000ff" }
+				]
+			},
+			"DavantPeuEsquerra": {
+				"rgba": [
+					{ "color": "330000ff" }
+				]
+			},
+			"OrellaDreta": {
+				"rgba": [
+					{ "color": "330000ff" }
+				]
+			},
+			"OrellaEsquerra": {
+				"rgba": [
+					{ "color": "330000ff", "curve": "stepped" },
+					{ "time": 0.0667, "color": "330000ff" }
+				]
+			},
+			"Pelatge": {
+				"rgba": [
+					{ "color": "330000ff" }
+				]
+			},
+			"Ralles": {
+				"rgba": [
+					{ "color": "330000ff" }
+				]
+			},
+			"Torc": {
+				"rgba": [
+					{ "color": "330000ff" }
+				]
+			},
+			"Ull": {
+				"rgba": [
+					{ "color": "330000ff" }
+				]
+			}
+		}
+	},
+	"idle": {
+		"bones": {
+			"DavantPeuDret": {
+				"rotate": [
+					{},
+					{ "time": 0.3333, "value": -22.42 },
+					{ "time": 1 }
+				]
+			},
+			"DavantCuixaDreta": {
+				"rotate": [
+					{},
+					{ "time": 0.3333, "value": 15.45 },
+					{ "time": 1 }
+				],
+				"translate": [
+					{ "x": 0.36, "y": 5.28 }
+				]
+			},
+			"DavantPeuEsquerra": {
+				"rotate": [
+					{ "value": -3.73 },
+					{ "time": 0.3333, "value": -21.4 },
+					{ "time": 1, "value": -3.73 }
+				],
+				"translate": [
+					{ "x": -3.24, "y": -5.46 }
+				]
+			},
+			"DavantCuixaEsquerra": {
+				"rotate": [
+					{ "value": 1.55 },
+					{ "time": 0.3333, "value": 13.98 },
+					{ "time": 1, "value": 1.55 }
+				]
+			},
+			"Cua": {
+				"rotate": [
+					{},
+					{ "time": 0.3333, "value": -32.62 },
+					{ "time": 1 }
+				]
+			},
+			"Ull": {
+				"rotate": [
+					{},
+					{ "time": 0.3333, "value": 11.02 },
+					{ "time": 1 }
+				]
+			},
+			"Pelatge": {
+				"rotate": [
+					{},
+					{ "time": 0.3333, "value": -4.76 },
+					{ "time": 1 }
+				]
+			},
+			"Torc": {
+				"rotate": [
+					{ "value": 2.18 }
+				],
+				"translate": [
+					{ "y": -3.17 }
+				]
+			}
+		}
+	},
+	"jump": {
+		"bones": {
+			"DarreraCuixaEsquerra": {
+				"rotate": [
+					{},
+					{ "time": 0.0333, "value": -5.99 },
+					{ "time": 0.0667, "value": 75.73, "curve": "stepped" },
+					{ "time": 0.2, "value": 75.73 },
+					{ "time": 0.2333, "value": -3 },
+					{ "time": 0.9333, "value": -38.65 },
+					{ "time": 1 }
+				],
+				"translate": [
+					{},
+					{ "time": 0.2333, "x": 0.33, "y": 2.13, "curve": "stepped" },
+					{ "time": 0.9333, "x": 0.33, "y": 2.13 },
+					{ "time": 1 }
+				]
+			},
+			"DarreraPeuDret": {
+				"rotate": [
+					{},
+					{ "time": 0.0333, "value": 2.6 },
+					{ "time": 0.2333, "value": 0.65, "curve": "stepped" },
+					{ "time": 0.9333, "value": 0.65 },
+					{ "time": 1 }
+				]
+			},
+			"DarreraCuixaDreta": {
+				"rotate": [
+					{},
+					{ "time": 0.0333, "value": -11.18 },
+					{ "time": 0.0667, "value": 53.91, "curve": "stepped" },
+					{ "time": 0.2, "value": 53.91 },
+					{ "time": 0.2333, "value": -5.59 },
+					{ "time": 0.9333, "value": -34.24 },
+					{ "time": 1 }
+				],
+				"translate": [
+					{},
+					{ "time": 0.2333, "x": 0.15, "y": 0.94, "curve": "stepped" },
+					{ "time": 0.9333, "x": 0.15, "y": 0.94 },
+					{ "time": 1 }
+				]
+			},
+			"DavantPeuDret": {
+				"rotate": [
+					{},
+					{ "time": 0.0333, "value": -13.83 },
+					{ "time": 0.2333, "value": 22.52 },
+					{ "time": 0.8333, "value": 17.77, "curve": "stepped" },
+					{ "time": 0.9333, "value": 17.77 },
+					{ "time": 1 }
+				]
+			},
+			"DavantCuixaDreta": {
+				"rotate": [
+					{},
+					{ "time": 0.0333, "value": 10.75 },
+					{ "time": 0.0667, "value": 66.31, "curve": "stepped" },
+					{ "time": 0.2, "value": 66.31 },
+					{ "time": 0.2333, "value": 25.63 },
+					{ "time": 0.8333, "value": 32.76, "curve": "stepped" },
+					{ "time": 0.9333, "value": 32.76 },
+					{ "time": 1 }
+				],
+				"translate": [
+					{},
+					{ "time": 0.0333, "x": 2.68, "y": 17.22 },
+					{ "time": 0.2333, "x": 0.85, "y": 5.49, "curve": "stepped" },
+					{ "time": 0.9333, "x": 0.85, "y": 5.49 },
+					{ "time": 1 }
+				]
+			},
+			"DavantPeuEsquerra": {
+				"rotate": [
+					{},
+					{ "time": 0.0333, "value": -44.46 },
+					{ "time": 0.2333, "value": 41.98 },
+					{ "time": 0.8333, "value": 7.37, "curve": "stepped" },
+					{ "time": 0.9333, "value": 7.37 },
+					{ "time": 1 }
+				]
+			},
+			"DavantCuixaEsquerra": {
+				"rotate": [
+					{},
+					{ "time": 0.0333, "value": 14.72 },
+					{ "time": 0.0667, "value": 40.56, "curve": "stepped" },
+					{ "time": 0.2, "value": 40.56 },
+					{ "time": 0.2333, "value": -10.39, "curve": "stepped" },
+					{ "time": 0.9333, "value": -10.39 },
+					{ "time": 1 }
+				],
+				"translate": [
+					{},
+					{ "time": 0.0333, "x": 1.05, "y": 6.79 },
+					{ "time": 0.2333, "x": 0.34, "y": 2.17, "curve": "stepped" },
+					{ "time": 0.9333, "x": 0.34, "y": 2.17 },
+					{ "time": 1 }
+				]
+			},
+			"Cua": {
+				"rotate": [
+					{},
+					{ "time": 0.0333, "value": -14.05 },
+					{ "time": 0.0667, "value": 27.52, "curve": "stepped" },
+					{ "time": 0.2, "value": 27.52 },
+					{ "time": 0.2333, "value": -17.27 },
+					{ "time": 0.8333, "value": -83.72, "curve": "stepped" },
+					{ "time": 0.9333, "value": -83.72 },
+					{ "time": 1 }
+				]
+			},
+			"OrellaDreta": {
+				"rotate": [
+					{ "time": 0.8333 },
+					{ "time": 0.9333, "value": -13.42 },
+					{ "time": 1 }
+				]
+			},
+			"OrellaEsquerra": {
+				"rotate": [
+					{ "time": 0.8333 },
+					{ "time": 0.9333, "value": -19.18 },
+					{ "time": 1 }
+				]
+			},
+			"Ull": {
+				"rotate": [
+					{},
+					{ "time": 0.0667, "value": 3.06 },
+					{ "time": 0.2, "value": -3.07 },
+					{ "time": 0.2333 }
+				]
+			},
+			"Pelatge": {
+				"rotate": [
+					{},
+					{ "time": 0.0333, "value": -1.28 },
+					{ "time": 0.0667, "value": 16.9, "curve": "stepped" },
+					{ "time": 0.2, "value": 16.9 },
+					{ "time": 0.2333, "value": 33.52, "curve": "stepped" },
+					{ "time": 0.9333, "value": 33.52 },
+					{ "time": 1 }
+				]
+			},
+			"Torc": {
+				"rotate": [
+					{},
+					{ "time": 0.0333, "value": 4.94 },
+					{ "time": 0.0667, "value": -22.41, "curve": "stepped" },
+					{ "time": 0.2, "value": -22.41 },
+					{ "time": 0.2333, "value": -22.8, "curve": "stepped" },
+					{ "time": 0.9333, "value": -22.8 },
+					{ "time": 1 }
+				],
+				"translate": [
+					{},
+					{ "time": 0.0333, "y": -16.32 },
+					{ "time": 0.2333, "y": -4.8, "curve": "stepped" },
+					{ "time": 0.9333, "y": -4.8 },
+					{ "time": 1 }
+				]
+			}
+		}
+	},
+	"land": {
+		"bones": {
+			"DarreraCuixaEsquerra": {
+				"rotate": [
+					{ "value": 2.13 },
+					{ "time": 0.2333, "value": 59.51 },
+					{ "time": 0.3, "value": 11.78 },
+					{ "time": 0.3667, "value": -5.99, "curve": "stepped" },
+					{ "time": 0.4667, "value": -5.99 },
+					{ "time": 0.6667 }
+				]
+			},
+			"DarreraPeuDret": {
+				"rotate": [
+					{ "time": 0.3 },
+					{ "time": 0.3667, "value": 2.6, "curve": "stepped" },
+					{ "time": 0.4667, "value": 2.6 },
+					{ "time": 0.6667 }
+				]
+			},
+			"DarreraCuixaDreta": {
+				"rotate": [
+					{ "value": 2.48 },
+					{ "time": 0.2333, "value": 45.06 },
+					{ "time": 0.3, "value": 7.66 },
+					{ "time": 0.3667, "value": -11.18, "curve": "stepped" },
+					{ "time": 0.4667, "value": -11.18 },
+					{ "time": 0.6667 }
+				]
+			},
+			"DavantPeuDret": {
+				"rotate": [
+					{ "time": 0.3 },
+					{ "time": 0.3667, "value": -20.44 },
+					{ "time": 0.4667, "value": -13.83 },
+					{ "time": 0.6667 }
+				]
+			},
+			"DavantCuixaDreta": {
+				"rotate": [
+					{ "value": 0.79 },
+					{ "time": 0.3, "value": -24.73 },
+					{ "time": 0.3667, "value": 15.72 },
+					{ "time": 0.4667, "value": 10.75 },
+					{ "time": 0.6667 }
+				],
+				"translate": [
+					{ "x": 0.44, "y": 6.42 },
+					{ "time": 0.3 },
+					{ "time": 0.3667, "x": 2.68, "y": 17.22, "curve": "stepped" },
+					{ "time": 0.4667, "x": 2.68, "y": 17.22 },
+					{ "time": 0.6667 }
+				]
+			},
+			"DavantPeuEsquerra": {
+				"rotate": [
+					{ "time": 0.3 },
+					{ "time": 0.3667, "value": -58.79 },
+					{ "time": 0.4667, "value": -44.46 },
+					{ "time": 0.6667 }
+				]
+			},
+			"DavantCuixaEsquerra": {
+				"rotate": [
+					{ "value": 1.35 },
+					{ "time": 0.3, "value": -27.49 },
+					{ "time": 0.3667, "value": 27.05 },
+					{ "time": 0.4667, "value": 14.72 },
+					{ "time": 0.6667 }
+				],
+				"translate": [
+					{ "time": 0.3 },
+					{ "time": 0.3667, "x": 1.05, "y": 6.79, "curve": "stepped" },
+					{ "time": 0.4667, "x": 1.05, "y": 6.79 },
+					{ "time": 0.6667 }
+				]
+			},
+			"Cua": {
+				"rotate": [
+					{ "value": -6.66 },
+					{ "time": 0.3 },
+					{ "time": 0.3667, "value": -14.05 },
+					{ "time": 0.6667 }
+				]
+			},
+			"OrellaDreta": {
+				"rotate": [
+					{ "value": -7.68 },
+					{ "time": 0.3 }
+				]
+			},
+			"OrellaEsquerra": {
+				"rotate": [
+					{ "value": -13.05 },
+					{ "time": 0.3 }
+				]
+			},
+			"Pelatge": {
+				"rotate": [
+					{ "time": 0.6333 },
+					{ "time": 0.7, "value": 5.61 },
+					{ "time": 0.7333, "value": -1.28 }
+				]
+			},
+			"Torc": {
+				"rotate": [
+					{},
+					{ "time": 0.3, "value": 15.99 },
+					{ "time": 0.3667, "value": 8.31 },
+					{ "time": 0.4667, "value": 4.94 },
+					{ "time": 0.6667 }
+				],
+				"translate": [
+					{},
+					{ "time": 0.3, "x": 7.29 },
+					{ "time": 0.3667, "y": -16.32, "curve": "stepped" },
+					{ "time": 0.4667, "y": -16.32 },
+					{ "time": 0.6667 }
+				]
+			}
+		}
+	},
+	"pre-attack": {
+		"bones": {
+			"DarreraCuixaEsquerra": {
+				"rotate": [
+					{},
+					{ "time": 0.2, "value": 22.89 },
+					{ "time": 0.4, "value": 32.63, "curve": "stepped" },
+					{ "time": 0.4667, "value": 32.63 },
+					{ "time": 0.5667, "value": 22.89, "curve": "stepped" },
+					{ "time": 0.6, "value": 22.89 },
+					{ "time": 0.7 }
+				]
+			},
+			"DavantPeuDret": {
+				"rotate": [
+					{},
+					{ "time": 0.1667, "value": 25.43 },
+					{ "time": 0.3667, "value": 12.12 },
+					{ "time": 0.7 }
+				]
+			},
+			"DavantCuixaDreta": {
+				"rotate": [
+					{},
+					{ "time": 0.1667, "value": -21.13 },
+					{ "time": 0.2, "value": -17.74 },
+					{ "time": 0.3, "value": -21.68 },
+					{ "time": 0.3667, "value": -40.65, "curve": "stepped" },
+					{ "time": 0.4667, "value": -40.65 },
+					{ "time": 0.5667, "value": -17.74, "curve": "stepped" },
+					{ "time": 0.6, "value": -17.74 },
+					{ "time": 0.7 }
+				]
+			},
+			"DavantPeuEsquerra": {
+				"rotate": [
+					{},
+					{ "time": 0.2, "value": 9.46 },
+					{ "time": 0.3667, "value": -1.21, "curve": "stepped" },
+					{ "time": 0.4667, "value": -1.21 },
+					{ "time": 0.8333 }
+				]
+			},
+			"DavantCuixaEsquerra": {
+				"rotate": [
+					{},
+					{ "time": 0.2, "value": -12.86 },
+					{ "time": 0.3667, "value": -31.14, "curve": "stepped" },
+					{ "time": 0.4667, "value": -31.14 },
+					{ "time": 0.5667, "value": -12.86, "curve": "stepped" },
+					{ "time": 0.6, "value": -12.86 },
+					{ "time": 0.7333 }
+				]
+			},
+			"Cua": {
+				"rotate": [
+					{},
+					{ "time": 0.2, "value": -31.68 },
+					{ "time": 0.4, "value": -47.63, "curve": "stepped" },
+					{ "time": 0.4667, "value": -47.63 },
+					{ "time": 0.5667, "value": -31.68, "curve": "stepped" },
+					{ "time": 0.6, "value": -31.68 },
+					{ "time": 0.7 }
+				]
+			},
+			"Ull": {
+				"rotate": [
+					{},
+					{ "time": 0.2, "value": -6.55, "curve": "stepped" },
+					{ "time": 0.6, "value": -6.55 },
+					{ "time": 0.7, "value": 5.27, "curve": "stepped" },
+					{ "time": 0.7333, "value": 5.27 },
+					{ "time": 0.8333 }
+				]
+			},
+			"Pelatge": {
+				"rotate": [
+					{},
+					{ "time": 0.1667, "value": -21.82 },
+					{ "time": 0.5667, "value": -57.02, "curve": "stepped" },
+					{ "time": 0.6, "value": -57.02 },
+					{ "time": 0.7, "value": 11.48 },
+					{ "time": 0.7333 }
+				]
+			},
+			"Torc": {
+				"rotate": [
+					{},
+					{ "time": 0.2, "value": -27.24 },
+					{ "time": 0.4, "value": -35.99, "curve": "stepped" },
+					{ "time": 0.4667, "value": -35.99 },
+					{ "time": 0.5667, "value": -16.85, "curve": "stepped" },
+					{ "time": 0.6, "value": -16.85 },
+					{ "time": 0.7 }
+				],
+				"translate": [
+					{},
+					{ "time": 0.2, "x": 33.14, "y": 37.72 },
+					{ "time": 0.4, "x": 39.14, "y": 47.91, "curve": "stepped" },
+					{ "time": 0.4667, "x": 39.14, "y": 47.91 },
+					{ "time": 0.5667, "y": 21.81, "curve": "stepped" },
+					{ "time": 0.6, "y": 21.81 },
+					{ "time": 0.7 }
+				]
+			},
+			"DarreraCuixaDreta": {
+				"rotate": [
+					{},
+					{ "time": 0.1667, "value": 20.79 },
+					{ "time": 0.3333, "value": 29.77 },
+					{ "time": 0.4, "value": 31.66 },
+					{ "time": 0.4667, "value": 33.09 },
+					{ "time": 0.5, "value": 30.07 },
+					{ "time": 0.5667, "value": 21.41 },
+					{ "time": 0.6, "value": 20.16 },
+					{ "time": 0.6667, "value": 5.6 },
+					{ "time": 0.7, "value": 0.04 },
+					{ "time": 0.8333 }
+				]
+			}
+		}
+	},
+	"roll": {
+		"bones": {
+			"DarreraPeuEsquerra": {
+				"rotate": [
+					{},
+					{ "time": 0.0333, "value": 55.41 },
+					{ "time": 0.4, "value": 18.2 }
+				]
+			},
+			"DarreraCuixaEsquerra": {
+				"rotate": [
+					{},
+					{ "time": 0.0333, "value": -37.26 },
+					{ "time": 0.3, "value": 75.73 },
+					{ "time": 0.4, "value": 84.61 }
+				]
+			},
+			"DarreraPeuDret": {
+				"rotate": [
+					{},
+					{ "time": 0.0333, "value": 60.85 },
+					{ "time": 0.4, "value": 23.29 }
+				]
+			},
+			"DarreraCuixaDreta": {
+				"rotate": [
+					{},
+					{ "time": 0.0333, "value": 3.45 },
+					{ "time": 0.3, "value": 53.91 },
+					{ "time": 0.4, "value": 66.84 }
+				]
+			},
+			"DavantCuixaDreta": {
+				"rotate": [
+					{},
+					{ "time": 0.0333, "value": 66.31 },
+					{ "time": 0.3, "value": 77.22 }
+				]
+			},
+			"DavantCuixaEsquerra": {
+				"rotate": [
+					{},
+					{ "time": 0.0333, "value": 40.56 },
+					{ "time": 0.2333, "value": 30.01 },
+					{ "time": 0.4, "value": 59.64 }
+				]
+			},
+			"Cua": {
+				"rotate": [
+					{},
+					{ "time": 0.0333, "value": 27.52 },
+					{ "time": 0.4, "value": -48.56 }
+				]
+			},
+			"OrellaDreta": {
+				"rotate": [
+					{},
+					{ "time": 0.3, "value": 30.27 }
+				]
+			},
+			"OrellaEsquerra": {
+				"rotate": [
+					{},
+					{ "time": 0.3, "value": 26.96 }
+				]
+			},
+			"Ull": {
+				"rotate": [
+					{},
+					{ "time": 0.0333, "value": -36.31 }
+				]
+			},
+			"Pelatge": {
+				"rotate": [
+					{},
+					{ "time": 0.0333, "value": 16.9, "curve": "stepped" },
+					{ "time": 0.3, "value": 16.9 },
+					{ "time": 0.4, "value": -57.61 }
+				]
+			},
+			"Torc": {
+				"rotate": [
+					{},
+					{ "time": 0.2333, "value": -136.02 },
+					{ "time": 0.4, "value": -172.27 },
+					{ "time": 0.5, "value": -165.54 }
+				],
+				"translate": [
+					{},
+					{ "time": 0.2333, "y": -2.01 },
+					{ "time": 0.5, "y": -98.83 }
+				]
+			}
+		}
+	},
+	"run": {
+		"bones": {
+			"DarreraPeuEsquerra": {
+				"rotate": [
+					{},
+					{ "time": 0.4667, "value": -9.47, "curve": "stepped" },
+					{ "time": 0.5333, "value": -9.47 },
+					{ "time": 0.6 }
+				],
+				"translate": [
+					{},
+					{ "time": 0.4667, "curve": "stepped" },
+					{ "time": 0.5333 },
+					{ "time": 0.6 }
+				]
+			},
+			"DarreraCuixaEsquerra": {
+				"rotate": [
+					{},
+					{ "time": 0.0333, "value": 40.06 },
+					{ "time": 0.2667, "value": 60.68, "curve": "stepped" },
+					{ "time": 0.3333, "value": 60.68 },
+					{ "time": 0.4, "value": 40.06 },
+					{ "time": 0.4667, "value": -19.86 },
+					{ "time": 0.5333, "value": -18.79 },
+					{ "time": 0.6 }
+				]
+			},
+			"DarreraPeuDret": {
+				"rotate": [
+					{},
+					{ "time": 0.4667, "value": -7.47, "curve": "stepped" },
+					{ "time": 0.5333, "value": -7.47 },
+					{ "time": 0.6 }
+				]
+			},
+			"DarreraCuixaDreta": {
+				"rotate": [
+					{},
+					{ "time": 0.0333, "value": 24.24 },
+					{ "time": 0.2667, "value": 46.04, "curve": "stepped" },
+					{ "time": 0.3333, "value": 46.04 },
+					{ "time": 0.4, "value": 24.24 },
+					{ "time": 0.4667, "value": -13.16, "curve": "stepped" },
+					{ "time": 0.5333, "value": -13.16 },
+					{ "time": 0.6 }
+				]
+			},
+			"DavantCuixaDreta": {
+				"rotate": [
+					{},
+					{ "time": 0.0333, "value": -24.36 },
+					{ "time": 0.2667, "value": -45.12, "curve": "stepped" },
+					{ "time": 0.3333, "value": -45.12 },
+					{ "time": 0.4, "value": -24.36 },
+					{ "time": 0.4667, "value": 30.21, "curve": "stepped" },
+					{ "time": 0.5333, "value": 30.21 },
+					{ "time": 0.6 }
+				]
+			},
+			"DavantPeuEsquerra": {
+				"rotate": [
+					{},
+					{ "time": 0.2667, "value": -19.08 },
+					{ "time": 0.3333, "value": -23.15 },
+					{ "time": 0.4667, "value": -1.27, "curve": "stepped" },
+					{ "time": 0.5333, "value": -1.27 },
+					{ "time": 0.6 }
+				]
+			},
+			"DavantCuixaEsquerra": {
+				"rotate": [
+					{},
+					{ "time": 0.0333, "value": -16.11 },
+					{ "time": 0.2667, "value": -35, "curve": "stepped" },
+					{ "time": 0.3333, "value": -35 },
+					{ "time": 0.4, "value": -16.11 },
+					{ "time": 0.4667, "value": 12.72, "curve": "stepped" },
+					{ "time": 0.5333, "value": 12.72 },
+					{ "time": 0.6 }
+				]
+			},
+			"Cua": {
+				"rotate": [
+					{},
+					{ "time": 0.2667, "value": -43.8, "curve": "stepped" },
+					{ "time": 0.3333, "value": -43.8 },
+					{ "time": 0.4667, "value": -2.92, "curve": "stepped" },
+					{ "time": 0.5333, "value": -2.92 },
+					{ "time": 0.6 }
+				]
+			},
+			"OrellaDreta": {
+				"rotate": [
+					{},
+					{ "time": 0.0333, "value": -10.5 },
+					{ "time": 0.4, "value": -17.12 },
+					{ "time": 0.4667, "value": -2.63, "curve": "stepped" },
+					{ "time": 0.5333, "value": -2.63 },
+					{ "time": 0.6 }
+				],
+				"translate": [
+					{},
+					{ "time": 0.4667, "curve": "stepped" },
+					{ "time": 0.5333 },
+					{ "time": 0.6 }
+				]
+			},
+			"OrellaEsquerra": {
+				"rotate": [
+					{},
+					{ "time": 0.0333, "value": -17.12, "curve": "stepped" },
+					{ "time": 0.4, "value": -17.12 },
+					{ "time": 0.4667, "value": -4.28, "curve": "stepped" },
+					{ "time": 0.5333, "value": -4.28 },
+					{ "time": 0.6 }
+				],
+				"translate": [
+					{},
+					{ "time": 0.4667, "curve": "stepped" },
+					{ "time": 0.5333 },
+					{ "time": 0.6 }
+				]
+			},
+			"Ull": {
+				"rotate": [
+					{},
+					{ "time": 0.1333, "value": 5.68 },
+					{ "time": 0.4667, "value": -8.38, "curve": "stepped" },
+					{ "time": 0.5333, "value": -8.38 },
+					{ "time": 0.6 }
+				],
+				"translate": [
+					{},
+					{ "time": 0.4667, "curve": "stepped" },
+					{ "time": 0.5333 },
+					{ "time": 0.6 }
+				]
+			},
+			"Pelatge": {
+				"rotate": [
+					{},
+					{ "time": 0.2667, "value": 1.29, "curve": "stepped" },
+					{ "time": 0.3333, "value": 1.29 },
+					{ "time": 0.4667, "value": 0.09, "curve": "stepped" },
+					{ "time": 0.5333, "value": 0.09 },
+					{ "time": 0.6 }
+				],
+				"translate": [
+					{},
+					{ "time": 0.4667, "curve": "stepped" },
+					{ "time": 0.5333 },
+					{ "time": 0.6 }
+				]
+			},
+			"Torc": {
+				"rotate": [
+					{},
+					{ "time": 0.2667, "value": 8.93 },
+					{ "time": 0.3333, "value": 7.41 },
+					{ "time": 0.4, "value": 2.09 },
+					{ "time": 0.4667, "value": -5.79 },
+					{ "time": 0.5333, "value": -0.23 },
+					{ "time": 0.6 }
+				]
+			}
+		}
+	},
+	"scream": {
+		"bones": {
+			"DarreraCuixaEsquerra": {
+				"rotate": [
+					{},
+					{ "time": 0.0667, "value": 22.89 },
+					{ "time": 0.2, "value": 32.63, "curve": "stepped" },
+					{ "time": 0.8333, "value": 32.63 },
+					{ "time": 0.8667, "value": 22.89 },
+					{ "time": 0.9333 }
+				]
+			},
+			"DavantPeuDret": {
+				"rotate": [
+					{},
+					{ "time": 0.0333, "value": 25.43 },
+					{ "time": 0.1667, "value": 12.12 },
+					{ "time": 0.2333, "value": 8.48, "curve": "stepped" },
+					{ "time": 0.8333, "value": 8.48 },
+					{ "time": 0.9333 }
+				]
+			},
+			"DavantCuixaDreta": {
+				"rotate": [
+					{},
+					{ "time": 0.0333, "value": -21.13 },
+					{ "time": 0.0667, "value": -17.74 },
+					{ "time": 0.1, "value": -21.68 },
+					{ "time": 0.1667, "value": -40.65, "curve": "stepped" },
+					{ "time": 0.8333, "value": -40.65 },
+					{ "time": 0.8667, "value": -17.74 },
+					{ "time": 0.9333 }
+				]
+			},
+			"DavantPeuEsquerra": {
+				"rotate": [
+					{},
+					{ "time": 0.0667, "value": 9.46 },
+					{ "time": 0.1667, "value": -1.21, "curve": "stepped" },
+					{ "time": 0.8333, "value": -1.21 },
+					{ "time": 1 }
+				]
+			},
+			"DavantCuixaEsquerra": {
+				"rotate": [
+					{},
+					{ "time": 0.0667, "value": -12.86 },
+					{ "time": 0.1667, "value": -31.14, "curve": "stepped" },
+					{ "time": 0.8333, "value": -31.14 },
+					{ "time": 0.8667, "value": -12.86 },
+					{ "time": 0.9667 }
+				]
+			},
+			"Cua": {
+				"rotate": [
+					{},
+					{ "time": 0.0667, "value": -31.68 },
+					{ "time": 0.2, "value": -47.63, "curve": "stepped" },
+					{ "time": 0.8333, "value": -47.63 },
+					{ "time": 0.8667, "value": -31.68 },
+					{ "time": 0.9333 }
+				]
+			},
+			"Ull": {
+				"rotate": [
+					{},
+					{ "time": 0.0667, "value": -6.55, "curve": "stepped" },
+					{ "time": 0.8667, "value": -6.55 },
+					{ "time": 0.9333, "value": 5.27, "curve": "stepped" },
+					{ "time": 0.9667, "value": 5.27 },
+					{ "time": 1 }
+				]
+			},
+			"Pelatge": {
+				"rotate": [
+					{},
+					{ "time": 0.0333, "value": -21.82 },
+					{ "time": 0.2333, "value": -60.73 },
+					{ "time": 0.8667, "value": -57.02 },
+					{ "time": 0.9333, "value": 11.48 },
+					{ "time": 0.9667 }
+				]
+			},
+			"Torc": {
+				"rotate": [
+					{},
+					{ "time": 0.0667, "value": -27.24 },
+					{ "time": 0.2, "value": -35.99, "curve": "stepped" },
+					{ "time": 0.8333, "value": -35.99 },
+					{ "time": 0.8667, "value": -16.85 },
+					{ "time": 0.9333 }
+				],
+				"translate": [
+					{},
+					{ "time": 0.0667, "x": 33.14, "y": 37.72 },
+					{ "time": 0.2, "x": 39.14, "y": 47.91, "curve": "stepped" },
+					{ "time": 0.8333, "x": 39.14, "y": 47.91 },
+					{ "time": 0.8667, "y": 21.81 },
+					{ "time": 0.9333 }
+				]
+			},
+			"DarreraCuixaDreta": {
+				"rotate": [
+					{},
+					{ "time": 0.0333, "value": 20.79 },
+					{ "time": 0.1333, "value": 29.77 },
+					{ "time": 0.2, "value": 31.66 },
+					{ "time": 0.2333, "value": 33.09, "curve": "stepped" },
+					{ "time": 0.8333, "value": 33.09 },
+					{ "time": 0.8667, "value": 20.16 },
+					{ "time": 0.9, "value": 5.6 },
+					{ "time": 0.9333, "value": 0.04 },
+					{ "time": 1 }
+				]
+			}
+		}
+	}
+}
+}

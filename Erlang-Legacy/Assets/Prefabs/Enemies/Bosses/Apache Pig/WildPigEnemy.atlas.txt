@@ -1,0 +1,47 @@
+WildPigEnemy.png
+	size: 1023, 125
+	filter: Linear, Linear
+	pma: true
+Cap
+	bounds: 353, 14, 163, 109
+Cua
+	bounds: 909, 38, 26, 88
+	rotate: 90
+Cul
+	bounds: 518, 16, 122, 107
+DarreraCuixaDreta
+	bounds: 642, 40, 87, 83
+	offsets: 0, 1, 87, 84
+DarreraCuixaEsquerra
+	bounds: 731, 40, 87, 83
+	offsets: 0, 1, 87, 84
+DavantCuixaEsquerra
+	bounds: 731, 40, 87, 83
+	offsets: 0, 1, 87, 84
+DarreraPeuDret
+	bounds: 642, 3, 35, 72
+	rotate: 90
+DarreraPeuEsquerra
+	bounds: 642, 3, 35, 72
+	rotate: 90
+DavantCuixaDreta
+	bounds: 820, 40, 87, 83
+	offsets: 0, 1, 87, 84
+DavantPeuDret
+	bounds: 716, 3, 35, 72
+	rotate: 90
+DavantPeuEsquerra
+	bounds: 790, 3, 35, 72
+	rotate: 90
+OrellaDreta
+	bounds: 864, 8, 37, 30
+OrellaEsquerra
+	bounds: 961, 6, 37, 30
+Pelatge
+	bounds: 177, 8, 174, 115
+Ralles
+	bounds: 909, 66, 112, 57
+Torc
+	bounds: 2, 2, 173, 121
+Ull
+	bounds: 903, 9, 56, 27

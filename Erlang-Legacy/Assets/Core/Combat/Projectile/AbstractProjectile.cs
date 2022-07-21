@@ -27,7 +27,7 @@ namespace Core.Combat.Projectile
             if (other.gameObject == Shooter) return;
 
             if (explosionEffect != null)
-                EffectManager.Instance?.PlayOneShot(explosionEffect, transform.position);
+                EffectManager.Instance?.PlayOneShot(explosionEffect, transform);
             if (explosionSound != null)
                 explosionSound.Play();
             if (OnEnter != null)

@@ -17,12 +17,12 @@ namespace Core.Manager
                 Instance = this;
         }
 
-        public void PlayOneShot(ParticleSystem particleSystem, Vector3 position, Transform parent = null)
+        public void PlayOneShot(ParticleSystem particleSystem, Transform position = null, Transform parent = null)
         {
-            if (particleSystem == null)
+            if (particleSystem == null || transform == null)
                 return;
 
-            var effect = Instantiate(particleSystem, position, Quaternion.identity);
+            var effect = Instantiate(particleSystem, position.position, Quaternion.identity);
             if (parent)
                 effect.transform.SetParent(parent);
             effect.Play();

@@ -15,6 +15,7 @@ namespace Core.Combat.IA.Action
         public SharedFloat bleedDuration;
         public SharedParticleSystem explosionEffect;
         public SharedSpriteRenderer deadBody;
+        [SerializeField] bool destroyGameObject = true;
 
         private bool completed = false;
 
@@ -22,24 +23,9 @@ namespace Core.Combat.IA.Action
         {
             if (bleedEffect.Value)
             {
-                EffectManager.Instance?.PlayOneShot(bleedEffect.Value, transform.position);
+                EffectManager.Instance?.PlayOneShot(bleedEffect.Value, transform);
             }
-
-            DOVirtual.DelayedCall(bleedDuration.Value, () =>
-            {
-                if (explosionEffect.Value)
-                {
-                    EffectManager.Instance?.PlayOneShot(explosionEffect.Value, transform.position);
-                }
-
-                if (deadBody.Value)
-                {
-                    SpawnDeadBody();
-                }
-
-                completed = true;
-                Object.Destroy(gameObject);
-            });
+            DOVirtual.DelayedCall(bleedDuration.Value, KillEnemy);
         }
 
         public override TaskStatus OnUpdate()
@@ -51,6 +37,21 @@ namespace Core.Combat.IA.Action
         {
             var facing = transform.localScale.x < 0 ? SharedEnum.Face.Left : SharedEnum.Face.Right;
             CorpsesManager.Instance?.Spawn(deadBody.Value, transform.position, facing);
+        }
+
+        private void KillEnemy()
+        {
+            if (explosionEffect.Value)
+            {
+                EffectManager.Instance?.PlayOneShot(explosionEffect.Value, transform);
+            }
+
+            if (deadBody.Value)
+            {
+                SpawnDeadBody();
+            }
+            completed = true;
+            if (destroyGameObject) Object.Destroy(gameObject);
         }
     }
 }

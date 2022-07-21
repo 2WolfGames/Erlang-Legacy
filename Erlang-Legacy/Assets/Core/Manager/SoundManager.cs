@@ -4,9 +4,6 @@ using Random = UnityEngine.Random;
 
 namespace Core.Manager
 {
-    // description:
-    //  this component should be added to object in scene
-    //  and we can manage audio source throght this component
     public class SoundManager : MonoBehaviour
     {
         public static SoundManager Instance;
