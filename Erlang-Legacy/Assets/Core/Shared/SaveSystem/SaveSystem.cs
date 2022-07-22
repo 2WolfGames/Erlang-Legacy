@@ -71,10 +71,10 @@ namespace Core.Shared.SaveSystem
         private static PlayerState PlayerStateDefaultValues()
         {
             //TODO: Configure an extern file (or files) for new game default values
-            return new PlayerState((int)SceneID.FirstIsland,
+            return new PlayerState((int)SceneID.OmedIsland_Zone1,
                                     3,
                                     3,
-                                    new Vector3(-23.75f, -1.57f, 0),
+                                    new Vector3(109f, -3.6f, 0),
                                     new Dictionary<Ability, bool>{
                                         {Ability.Dash, false},
                                         {Ability.Ray, false},
