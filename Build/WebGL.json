@@ -1,7 +1,7 @@
 {
 "companyName": "2WolfGames",
 "productName": "Erlang Legacy",
-"productVersion": "0.0.211",
+"productVersion": "0.0.215",
 "dataUrl": "WebGL.data.unityweb",
 "wasmCodeUrl": "WebGL.wasm.code.unityweb",
 "wasmFrameworkUrl": "WebGL.wasm.framework.unityweb",
