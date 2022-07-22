@@ -53870,12 +53870,12 @@ PrefabInstance:
     - target: {fileID: 5625281659813403158, guid: 3a92e288e57aab644a0656c959990934,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 96.3
+      value: 126.2
       objectReference: {fileID: 0}
     - target: {fileID: 5625281659813403158, guid: 3a92e288e57aab644a0656c959990934,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.4
+      value: 22.4
       objectReference: {fileID: 0}
     - target: {fileID: 5625281659813403158, guid: 3a92e288e57aab644a0656c959990934,
         type: 3}
@@ -53945,6 +53945,18 @@ PrefabInstance:
       objectReference: {fileID: 25119910}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a92e288e57aab644a0656c959990934, type: 3}
+--- !u!114 &659156216 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8604718243391550964, guid: 3a92e288e57aab644a0656c959990934,
+    type: 3}
+  m_PrefabInstance: {fileID: 659156215}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e450b5a5be415d41964c9e2bc103e4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &693625511 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1981316816467642050, guid: 95d8ed21d425ccc428fc228ed9eec7c9,
@@ -56297,6 +56309,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8769734217025865461, guid: db132cbf1a3cb3a46a386a81fc91b6dc,
+        type: 3}
+      propertyPath: OnOpen.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 659156216}
+    - target: {fileID: 8769734217025865461, guid: db132cbf1a3cb3a46a386a81fc91b6dc,
+        type: 3}
+      propertyPath: OnOpen.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: IncreaseMaxLifes
       objectReference: {fileID: 0}
     - target: {fileID: 8769734217025865462, guid: db132cbf1a3cb3a46a386a81fc91b6dc,
         type: 3}
