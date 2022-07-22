@@ -211,6 +211,16 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+  - first: {x: -12, y: -2, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 35
+      m_TileSpriteIndex: 35
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
   - first: {x: -9, y: -1, z: 0}
     second:
       serializedVersion: 2
@@ -463,6 +473,8 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 6d62b586b3a0e344aac1610ee80fdf2b, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 2431b4637d494ed419864452eac99af6, type: 2}
+  - m_RefCount: 1
+    m_Data: {fileID: 11400000, guid: 86cd062b669f61249a171336bc3bb00d, type: 2}
   m_TileSpriteArray:
   - m_RefCount: 1
     m_Data: {fileID: -7866973530775819605, guid: c005be69e2292c941982cc8e2790f4be,
@@ -567,8 +579,10 @@ Tilemap:
   - m_RefCount: 1
     m_Data: {fileID: 5500342803797795574, guid: c005be69e2292c941982cc8e2790f4be,
       type: 3}
+  - m_RefCount: 1
+    m_Data: {fileID: 973756408265946169, guid: c005be69e2292c941982cc8e2790f4be, type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 35
+  - m_RefCount: 36
     m_Data:
       e00: 1
       e01: 0
@@ -586,14 +600,32 @@ Tilemap:
       e31: 0
       e32: 0
       e33: 1
+  - m_RefCount: 0
+    m_Data:
+      e00: 221979.12
+      e01: NaN
+      e02: 0
+      e03: 221978.88
+      e10: 3.27e-43
+      e11: NaN
+      e12: 7.34684e-40
+      e13: 3.27e-43
+      e20: 0
+      e21: NaN
+      e22: 87954690
+      e23: 0
+      e30: 0
+      e31: NaN
+      e32: 4.5904e-41
+      e33: 0
   m_TileColorArray:
-  - m_RefCount: 35
+  - m_RefCount: 36
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Origin: {x: -9, y: -4, z: 0}
-  m_Size: {x: 20, y: 5, z: 1}
+  m_Origin: {x: -12, y: -4, z: 0}
+  m_Size: {x: 23, y: 5, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
@@ -631,7 +663,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

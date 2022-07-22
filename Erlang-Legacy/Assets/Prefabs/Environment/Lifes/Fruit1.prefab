@@ -84,6 +84,7 @@ GameObject:
   - component: {fileID: 7471603776143406836}
   - component: {fileID: 7471603776143406839}
   - component: {fileID: 7471603776143406838}
+  - component: {fileID: 863280042052982406}
   m_Layer: 12
   m_Name: Fruit1
   m_TagString: Untagged
@@ -197,3 +198,19 @@ MonoBehaviour:
   onDestroyParticleEffect: {fileID: 8900769453879468815, guid: 84ff9c30ac7bbf943aa76a049a14556a,
     type: 3}
   healthAdder: {fileID: 11400000, guid: 3abc19a2206861647b8924328f6202b7, type: 2}
+--- !u!114 &863280042052982406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7471603776143406832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af03f1a60496aa74b8c21c717a860d95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  repeat: 0
+  gameKey: 1
+  function: Eat Fruit
+  waitTimeBeforeShowingKeys: 0

@@ -24,6 +24,30 @@ namespace Core.Shared
             {
                 return SceneID.LoadingScene;
             }
+            else if (currentScene == SceneID.OmedIsland_Zone1.ToString())
+            {
+                return SceneID.OmedIsland_Zone1;
+            }
+            else if (currentScene == SceneID.OmedIsland_Zone2.ToString())
+            {
+                return SceneID.OmedIsland_Zone2;
+            }
+            else if (currentScene == SceneID.OmedIsland_Zone3.ToString())
+            {
+                return SceneID.OmedIsland_Zone3;
+            }
+            else if (currentScene == SceneID.OmedIsland_Zone4.ToString())
+            {
+                return SceneID.OmedIsland_Zone4;
+            }
+            else if (currentScene == SceneID.OmedIsland_Zone5.ToString())
+            {
+                return SceneID.OmedIsland_Zone5;
+            }
+            else if (currentScene == SceneID.OmedIsland_Zone6.ToString())
+            {
+                return SceneID.OmedIsland_Zone6;
+            }
             else
             { //lvl1
                 return SceneID.lvl1;
