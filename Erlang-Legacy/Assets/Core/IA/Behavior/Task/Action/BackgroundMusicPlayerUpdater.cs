@@ -8,7 +8,7 @@ namespace Core.IA.Behavior.Task.Action
 {
     public class BackgroundMusicPlayerUpdater : BehaviorDesigner.Runtime.Tasks.Action
     {
-        [SerializeField] AudioClip musicAudioClip;
+        [SerializeField] SharedAudioClip musicAudioClip;
         [SerializeField] float musicAudioTimeout = 0f;
         [SerializeField] AudioClip ambientAudioClip;
         [SerializeField] float ambientAudioTimeout = 0f;
@@ -40,7 +40,7 @@ namespace Core.IA.Behavior.Task.Action
                 Debug.LogError("BackgroundMusicPlayer is not found");
                 return;
             }
-            BackgroundMusicPlayer.Instance.ChangeMusic(musicAudioClip);
+            BackgroundMusicPlayer.Instance.ChangeMusic(musicAudioClip.Value);
             BackgroundMusicPlayer.Instance.PlayJustMusic();
         }
 

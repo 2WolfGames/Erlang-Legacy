@@ -24,6 +24,7 @@ namespace Core.Player.Controller
         public bool IsGrounded => movementController.IsGrounded;
         public ParticleSystem healEffectParticle;
         public Stats Stats => playerData.Stats;
+        [SerializeField] SFX playerSoundFx;
         public bool BlockingUI
         {
             get => blockingUI;
@@ -41,7 +42,7 @@ namespace Core.Player.Controller
             get => controllable && !BlockingUI;
             set => controllable = value;
         }
-
+        public AudioSource audioSource;
         public Collider2D BodyCollider => GetComponent<Collider2D>();
         public Rigidbody2D Body => GetComponent<Rigidbody2D>();
         public Animator Animator => GetComponentInChildren<Animator>();
@@ -57,7 +58,6 @@ namespace Core.Player.Controller
         private bool blockingUI;
         private float baseGravityScale = 1f;
         private int currentHealth => playerData.Health.HP;
-        private SoundManager soundManager => SoundManager.Instance;
 
         protected void Awake()
         {
@@ -67,8 +67,35 @@ namespace Core.Player.Controller
                 Destroy(gameObject);
             else Instance = this;
 
-            movementController.OnDashStart += OnDashStart;
+            audioSource = GetComponentInChildren<AudioSource>();
+
             baseGravityScale = Body.gravityScale;
+            InitControllers();
+        }
+
+        private void InitControllers()
+        {
+            InitAbilityController();
+            InitMovementController();
+        }
+
+        private void InitAbilityController()
+        {
+            abilityController.OnPunchStart += () =>
+            {
+                SoundManager soundManager = SoundManager.Instance;
+                if (soundManager == null)
+                {
+                    Debug.LogError("SoundManager is null");
+                    return;
+                }
+                soundManager?.PlayRandomSound(playerSoundFx.punchSounds, 1f, audioSource);
+            };
+        }
+
+        private void InitMovementController()
+        {
+            movementController.OnDashStart += OnDashStart;
         }
 
         private void Start()

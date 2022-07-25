@@ -7,6 +7,7 @@ using Core.Shared.Enum;
 using Core.Utility;
 using UnityEngine;
 using Core.UI;
+using System;
 
 namespace Core.Player.Controller
 {
@@ -41,6 +42,7 @@ namespace Core.Player.Controller
         private bool controllable => player.Controllable;
         private Stats playerStats => player.Stats;
         private MovementController movementController => GetComponent<MovementController>();
+        public Action OnPunchStart;
 
         public void Start()
         {
@@ -119,6 +121,7 @@ namespace Core.Player.Controller
             punching = true;
             movementController.Acceleration = punchDrag;
             AnimatePunch(fist);
+            OnPunchStart?.Invoke();
             punchParticle?.Play();
         }
 
@@ -146,7 +149,7 @@ namespace Core.Player.Controller
 
         private Fist RandomFist()
         {
-            return (Fist)Random.Range(0, 2);
+            return (Fist)UnityEngine.Random.Range(0, 2);
         }
 
         public void OnDashComplete()
