@@ -57,6 +57,7 @@ namespace Core.Player.Controller
         private bool blockingUI;
         private float baseGravityScale = 1f;
         private int currentHealth => playerData.Health.HP;
+        private SoundManager soundManager => SoundManager.Instance;
 
         protected void Awake()
         {

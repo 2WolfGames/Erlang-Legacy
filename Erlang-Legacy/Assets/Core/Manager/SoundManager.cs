@@ -18,8 +18,6 @@ namespace Core.Manager
         private float musicBaseVolume = 0.3f;
         private AudioSource audioSource;
 
-        private Coroutine musicCoroutine;
-
         private void Awake()
         {
             if (Instance == null)
