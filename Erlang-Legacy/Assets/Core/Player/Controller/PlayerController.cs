@@ -296,10 +296,10 @@ namespace Core.Player.Controller
             Body.gravityScale = baseGravityScale;
         }
 
-        public bool IsAlive()
-        {
-            return playerData.Health.HP > 0;
-        }
+       public bool IsAlive()
+       {
+           return playerData.Health.HP > 0;
+       }
 
         public bool IsDead()
         {
