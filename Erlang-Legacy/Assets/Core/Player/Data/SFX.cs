@@ -9,11 +9,19 @@ namespace Core.Player.Data
     [Serializable]
     public class SFX
     {
-        public AudioClip abilityAdquired;
-        public AudioClip[] punchSounds;
-        public AudioClip[] dashSounds;
-        public AudioClip healthSound;
-        public AudioClip[] deathSounds;
-        public AudioClip[] hurtSounds;
+        [Serializable]
+        public class SFXsDefinition
+        {
+            public AudioClip[] clips;
+            [Range(0f, 1f)] public float volume = 0.5f;
+        }
+
+        public SFXsDefinition abilityAdquired;
+        public SFXsDefinition punch;
+        public SFXsDefinition dash;
+        public SFXsDefinition health;
+        public SFXsDefinition death;
+        public SFXsDefinition hurt;
+        public SFXsDefinition jump;
     }
 }

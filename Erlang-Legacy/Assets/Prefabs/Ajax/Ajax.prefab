@@ -466,13 +466,44 @@ MonoBehaviour:
     health: {fileID: 11400000, guid: 38fc894eb3e78bf41a143ce13b99757c, type: 2}
     stats: {fileID: 11400000, guid: 93decfccab4b0ec4ea3f47954ba4b217, type: 2}
   healEffectParticle: {fileID: 3589104469226228773}
-  playerSoundFx:
-    abilityAdquired: {fileID: 0}
-    punchSounds:
-    - {fileID: 8300000, guid: fe0b1f9aeb45b41b089175aeeabd5d95, type: 3}
-    - {fileID: 8300000, guid: d46323e22e74e46baa241cbf48c85671, type: 3}
-    healthSound: {fileID: 0}
-  audioSource: {fileID: 0}
+  soundEffects:
+    abilityAdquired:
+      clips: []
+      volume: 0.5
+    punch:
+      clips:
+      - {fileID: 8300000, guid: fe0b1f9aeb45b41b089175aeeabd5d95, type: 3}
+      volume: 0.2
+    dash:
+      clips:
+      - {fileID: 8300000, guid: d46323e22e74e46baa241cbf48c85671, type: 3}
+      volume: 0.2
+    health:
+      clips:
+      - {fileID: 8300000, guid: c38179a52651ffc47b9f669c4ccd2bf1, type: 3}
+      - {fileID: 8300000, guid: d8fdb0f783a6cb94db4bd4718756d393, type: 3}
+      volume: 0.5
+    death:
+      clips:
+      - {fileID: 8300000, guid: a929f4d588dca024e96a721f9c16e80d, type: 3}
+      - {fileID: 8300000, guid: 61bab6454ab0d474a90610c63a6817d6, type: 3}
+      - {fileID: 8300000, guid: 1dab569d05018ad45a35e0207a18502e, type: 3}
+      - {fileID: 8300000, guid: f0de914598c8ea74e88b9e226cecb4a2, type: 3}
+      volume: 0.5
+    hurt:
+      clips:
+      - {fileID: 8300000, guid: 4f484006c2dad3541abd25f11dc0437a, type: 3}
+      - {fileID: 8300000, guid: 4f8638a732addc14b918e16fb017827c, type: 3}
+      - {fileID: 8300000, guid: e0266999e4596e94196396d88c1b0d51, type: 3}
+      - {fileID: 8300000, guid: b08a34e31450a234581db967f5ee0297, type: 3}
+      - {fileID: 8300000, guid: 9ccc9e769d09ee24bbe4d0cc7278cba3, type: 3}
+      - {fileID: 8300000, guid: 0d666bd0e6f62044c853883e1f07764b, type: 3}
+      volume: 0.5
+    jump:
+      clips:
+      - {fileID: 8300000, guid: 4c4fc92d5416d854fa3c8912af4f346d, type: 3}
+      - {fileID: 8300000, guid: d8fdb0f783a6cb94db4bd4718756d393, type: 3}
+      volume: 0.2
 --- !u!114 &5625281659813403160
 MonoBehaviour:
   m_ObjectHideFlags: 0
