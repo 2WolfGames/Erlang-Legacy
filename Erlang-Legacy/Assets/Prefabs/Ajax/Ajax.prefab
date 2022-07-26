@@ -478,10 +478,10 @@ MonoBehaviour:
       clips:
       - {fileID: 8300000, guid: d46323e22e74e46baa241cbf48c85671, type: 3}
       volume: 0.2
-    health:
+    heal:
       clips:
-      - {fileID: 8300000, guid: c38179a52651ffc47b9f669c4ccd2bf1, type: 3}
-      - {fileID: 8300000, guid: d8fdb0f783a6cb94db4bd4718756d393, type: 3}
+      - {fileID: 8300000, guid: 64860418ae031cc4f9868afa1d9d3b65, type: 3}
+      - {fileID: 8300000, guid: 751a72d6b5d7e524388cd4c3146868a2, type: 3}
       volume: 0.5
     death:
       clips:

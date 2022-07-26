@@ -19,7 +19,7 @@ namespace Core.Player.Data
         public SFXsDefinition abilityAdquired;
         public SFXsDefinition punch;
         public SFXsDefinition dash;
-        public SFXsDefinition health;
+        public SFXsDefinition heal;
         public SFXsDefinition death;
         public SFXsDefinition hurt;
         public SFXsDefinition jump;

@@ -136,6 +136,7 @@ namespace Core.Player.Controller
 
         public void Heal()
         {
+            PlayRandomSound(soundEffects.heal.clips, soundEffects.heal.volume);
             if (playerData.Health.HP < playerData.Health.MaxHP)
             {
                 playerData.Health.HP += 1;
@@ -145,6 +146,7 @@ namespace Core.Player.Controller
 
         public void Heal(int hp)
         {
+            PlayRandomSound(soundEffects.heal.clips, soundEffects.heal.volume);
             if (playerData.Health.HP < playerData.Health.MaxHP)
             {
                 playerData.Health.HP += hp;
