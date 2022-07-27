@@ -8,6 +8,7 @@ using Core.Manager;
 using UnityEngine;
 using Core.UI;
 using Core.UI.Notifications;
+using Core.ScriptableEffect;
 
 namespace Core.Player.Controller
 {
@@ -25,6 +26,7 @@ namespace Core.Player.Controller
         public ParticleSystem healEffectParticle;
         public Stats Stats => playerData.Stats;
         [SerializeField] SFX soundEffects;
+        [SerializeField] VolumeSettings volumeSettings;
         public bool BlockingUI
         {
             get => blockingUI;
@@ -189,10 +191,12 @@ namespace Core.Player.Controller
             SoundManager soundManager = SoundManager.Instance;
             if (soundManager == null)
             {
-                Debug.LogError("SoundManager is null");
+                Debug.LogError("SoundManager is not present in scene");
                 return;
             }
-            soundManager.PlayRandomSound(sounds, intensity, playerAudioSource);
+            float volume = (volumeSettings ? volumeSettings.SoundVolume : 1)
+                            * intensity;
+            soundManager.PlayRandomSound(sounds, volume, playerAudioSource);
         }
 
         private void ShakeCamera()
