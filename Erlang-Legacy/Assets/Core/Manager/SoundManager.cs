@@ -6,9 +6,18 @@ namespace Core.Manager
 {
     public class SoundManager : MonoBehaviour
     {
-        public static SoundManager Instance;
+        public static SoundManager Instance
+        {
+            get
+            {
+                if (s_Instance != null)
+                    return s_Instance;
 
-        public AudioSource sfxAudioSource;
+                s_Instance = FindObjectOfType<SoundManager>();
+
+                return s_Instance;
+            }
+        }
 
         // Random pitch adjustment range.
         public float lowPitchRange = 0.95f;
@@ -17,12 +26,12 @@ namespace Core.Manager
         public float Volume { get; set; } = 1.0f;
         private float musicBaseVolume = 0.3f;
         private AudioSource audioSource;
+        private static SoundManager s_Instance;
 
         private void Awake()
         {
-            if (Instance == null)
-                Instance = this;
-
+            s_Instance = this;
+            DontDestroyOnLoad(gameObject);
             audioSource = GetComponent<AudioSource>();
         }
 
@@ -37,7 +46,7 @@ namespace Core.Manager
             if (clips.Length == 0)
                 return;
 
-            AudioSource source = src ?? sfxAudioSource;
+            AudioSource source = src ?? audioSource;
 
             int randomIndex = Random.Range(0, clips.Length);
 
@@ -71,7 +80,7 @@ namespace Core.Manager
             en caso contrario, evalúa el operando derecho y devuelve su resultado. 
             El operador ?? no evalúa su operando derecho 
             si el operando izquierdo se evalúa como no NULL.*/
-            AudioSource source = src ?? sfxAudioSource;
+            AudioSource source = src ?? audioSource;
             source.pitch = pitch;
             source.PlayOneShot(clip, volume);
         }

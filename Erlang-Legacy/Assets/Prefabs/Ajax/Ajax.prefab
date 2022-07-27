@@ -504,6 +504,7 @@ MonoBehaviour:
       - {fileID: 8300000, guid: 4c4fc92d5416d854fa3c8912af4f346d, type: 3}
       - {fileID: 8300000, guid: d8fdb0f783a6cb94db4bd4718756d393, type: 3}
       volume: 0.2
+  volumeSettings: {fileID: 11400000, guid: 833ff6d7c89626f4099305b28a97d81f, type: 2}
 --- !u!114 &5625281659813403160
 MonoBehaviour:
   m_ObjectHideFlags: 0
