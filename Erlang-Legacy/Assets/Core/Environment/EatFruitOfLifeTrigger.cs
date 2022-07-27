@@ -49,7 +49,8 @@ namespace Core.Environment
         private void EatFruitOfLifeProcess()
         {
             processHasStarted = true;
-            healthAdder.Apply(PlayerController.Instance.gameObject);
+            var player = PlayerController.Instance;
+            healthAdder.Apply(player.gameObject);
             var inst = Instantiate(onDestroyParticleEffect, transform.position, transform.rotation);
             Destroy(this.gameObject);
         }

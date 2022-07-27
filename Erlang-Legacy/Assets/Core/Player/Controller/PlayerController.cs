@@ -24,6 +24,7 @@ namespace Core.Player.Controller
         public bool IsGrounded => movementController.IsGrounded;
         public ParticleSystem healEffectParticle;
         public Stats Stats => playerData.Stats;
+        [SerializeField] SFX soundEffects;
         public bool BlockingUI
         {
             get => blockingUI;
@@ -41,7 +42,7 @@ namespace Core.Player.Controller
             get => controllable && !BlockingUI;
             set => controllable = value;
         }
-
+        private AudioSource playerAudioSource;
         public Collider2D BodyCollider => GetComponent<Collider2D>();
         public Rigidbody2D Body => GetComponent<Rigidbody2D>();
         public Animator Animator => GetComponentInChildren<Animator>();
@@ -66,13 +67,34 @@ namespace Core.Player.Controller
                 Destroy(gameObject);
             else Instance = this;
 
-            movementController.OnDashStart += OnDashStart;
+            playerAudioSource = GetComponentInChildren<AudioSource>();
+
             baseGravityScale = Body.gravityScale;
+            InitControllers();
+        }
+
+        private void InitControllers()
+        {
+            InitAbilityController();
+            InitMovementController();
+        }
+
+        private void InitAbilityController()
+        {
+            abilityController.OnPunchStart += () =>
+                PlayRandomSound(soundEffects.punch.clips, soundEffects.punch.volume);
+        }
+
+        private void InitMovementController()
+        {
+            movementController.OnDashStart += OnDashStart;
+            movementController.OnJumpStart += () =>
+                PlayRandomSound(soundEffects.jump.clips, soundEffects.jump.volume);
         }
 
         private void Start()
         {
-            if (IsDead()) Die();
+            if (HasNoLifes()) Die();
         }
 
         public void OnDashComplete()
@@ -93,6 +115,7 @@ namespace Core.Player.Controller
             controllable = false;
             protectable.SetProtection(ProtectionType.INFINITE);
             abilityController.OnDashStart();
+            PlayRandomSound(soundEffects.dash.clips, soundEffects.dash.volume);
         }
 
         // pre: called by some function that stunds player (called by hit animation)
@@ -113,6 +136,7 @@ namespace Core.Player.Controller
 
         public void Heal()
         {
+            PlayRandomSound(soundEffects.heal.clips, soundEffects.heal.volume);
             if (playerData.Health.HP < playerData.Health.MaxHP)
             {
                 playerData.Health.HP += 1;
@@ -122,6 +146,7 @@ namespace Core.Player.Controller
 
         public void Heal(int hp)
         {
+            PlayRandomSound(soundEffects.heal.clips, soundEffects.heal.volume);
             if (playerData.Health.HP < playerData.Health.MaxHP)
             {
                 playerData.Health.HP += hp;
@@ -140,21 +165,34 @@ namespace Core.Player.Controller
             Freeze();
             ResetAbilities();
             GameManager.Instance?.FreezeTime(0.01f);
-            TakeHurt(other.transform, damage);
+            TakeDamage(other.transform, damage);
         }
 
-        private void TakeHurt(Transform agressor, int damage)
+        private void TakeDamage(Transform agressor, int damage)
         {
             SetHealth(currentHealth - damage);
-            if (IsDead())
-            {
+            if (HasNoLifes())
                 Die();
-            }
             else
+                RecoverFromTakingDamage(agressor);
+        }
+
+        private void RecoverFromTakingDamage(Transform agressor)
+        {
+            PlayRandomSound(soundEffects.hurt.clips, soundEffects.hurt.volume);
+            ComputeSideHurtAnimation(agressor);
+            OnRecoverStart();
+        }
+
+        private void PlayRandomSound(AudioClip[] sounds, float intensity)
+        {
+            SoundManager soundManager = SoundManager.Instance;
+            if (soundManager == null)
             {
-                ComputeSideHurtAnimation(agressor);
-                OnRecoverStart();
+                Debug.LogError("SoundManager is null");
+                return;
             }
+            soundManager.PlayRandomSound(sounds, intensity, playerAudioSource);
         }
 
         private void ShakeCamera()
@@ -227,6 +265,7 @@ namespace Core.Player.Controller
 
         public void Die()
         {
+            PlayRandomSound(soundEffects.death.clips, soundEffects.death.volume);
             controllable = false;
             Freeze();
             Animator.SetTrigger(CharacterAnimations.Die);
@@ -262,6 +301,11 @@ namespace Core.Player.Controller
         public bool IsDead()
         {
             return !IsAlive();
+        }
+
+        public bool HasNoLifes()
+        {
+            return IsDead();
         }
 
         public void AdquireAbility(Ability ability)
