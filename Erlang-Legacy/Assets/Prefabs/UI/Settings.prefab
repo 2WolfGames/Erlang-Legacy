@@ -414,8 +414,8 @@ MonoBehaviour:
   navigationSound: {fileID: 8300000, guid: 3abe320a8d30d5e45b1512c96b3e1f50, type: 3}
   selectSound: {fileID: 8300000, guid: 42727f10f046fc8449d78ab3527c3b9d, type: 3}
   settingSound: {fileID: 8300000, guid: 156ad7cea395be942aa36d7008f7ad2a, type: 3}
-  openSettingsSound: {fileID: 0}
-  closeSettingsSound: {fileID: 0}
+  playerVolumeSettings: {fileID: 11400000, guid: 833ff6d7c89626f4099305b28a97d81f,
+    type: 2}
 --- !u!114 &693625512
 MonoBehaviour:
   m_ObjectHideFlags: 0

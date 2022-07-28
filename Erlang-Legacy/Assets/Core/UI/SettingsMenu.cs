@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using Core.Manager;
+using Core.ScriptableEffect;
 
 namespace Core.UI
 {
@@ -19,6 +21,8 @@ namespace Core.UI
         [SerializeField] AudioClip navigationSound;
         [SerializeField] AudioClip selectSound;
         [SerializeField] AudioClip settingSound;
+        [SerializeField] VolumeSettings playerVolumeSettings;
+
 
         private int option = 0;
         private bool showingkeyCheatSheet = false;
@@ -201,41 +205,35 @@ namespace Core.UI
         //post: moves selector in yPos to show user where it is
         private void MoveSelector(float yPos)
         {
-            PlayMoveSound();
+            PlayNavigationSound();
             selector.transform.DOMoveY(yPos, 0.2f).SetUpdate(true);
         }
 
         private void PlaySettingSound()
         {
-            if (audioSource == null)
-            {
-                Debug.LogWarning("AudioSource not found");
-                return;
-            }
-            audioSource.clip = settingSound;
-            audioSource.Play();
-        }
+            SoundManager soundManager = SoundManager.Instance;
+            float volume = playerVolumeSettings ? playerVolumeSettings.SoundVolume : 1;
+            soundManager?.PlaySound(settingSound, volume, audioSource);
 
-        private void PlayMoveSound()
-        {
-            if (audioSource == null)
-            {
-                Debug.LogWarning("AudioSource not found");
-                return;
-            }
-            audioSource.clip = navigationSound;
-            audioSource.Play();
+            if (soundManager == null) Debug.LogWarning("SoundManager is null");
         }
 
         private void PlaySelectSound()
         {
-            if (audioSource == null)
-            {
-                Debug.LogWarning("AudioSource not found");
-                return;
-            }
-            audioSource.clip = selectSound;
-            audioSource.Play();
+            SoundManager soundManager = SoundManager.Instance;
+            float volume = playerVolumeSettings ? playerVolumeSettings.SoundVolume : 1;
+            soundManager?.PlaySound(selectSound, volume, audioSource);
+
+            if (soundManager == null) Debug.LogWarning("SoundManager is null");
+        }
+
+        private void PlayNavigationSound()
+        {
+            SoundManager soundManager = SoundManager.Instance;
+            float volume = playerVolumeSettings ? playerVolumeSettings.SoundVolume : 1;
+            soundManager?.PlaySound(navigationSound, volume, audioSource);
+
+            if (soundManager == null) Debug.LogWarning("SoundManager is null");
         }
     }
 }

@@ -39,8 +39,6 @@ namespace Core.Manager
 
             AudioSource source = src ?? audioSource;
 
-            if (source.isPlaying) return;
-
             int randomIndex = Random.Range(0, clips.Length);
 
             source.pitch = Random.Range(lowPitchRange, highPitchRange);
