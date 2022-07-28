@@ -14,13 +14,25 @@ namespace Core.UI
         [SerializeField] GameObject keysCheatSheetGO;
         [SerializeField] GameObject quitGO;
         [SerializeField] GameObject selector;
-        int option = 0;
-        bool showingkeyCheatSheet = false;
-        bool inGame;
+
+        [Header("Sound clips")]
+        [SerializeField] AudioClip navigationSound;
+        [SerializeField] AudioClip selectSound;
+        [SerializeField] AudioClip settingSound;
+
+        private int option = 0;
+        private bool showingkeyCheatSheet = false;
+        private bool inGame;
+        private AudioSource audioSource;
+
+        private void Awake()
+        {
+            audioSource = GetComponentInChildren<AudioSource>();
+        }
 
         //pre: --
         //post: controls user interactions 
-        void Update()
+        private void Update()
         {
             if (showingkeyCheatSheet)
             {
@@ -121,6 +133,7 @@ namespace Core.UI
         //post: makes an close animation
         private void OnCloseMenu()
         {
+            PlaySelectSound();
             optionsCanvasGroup.DOFade(0, 0.25f).SetUpdate(true).OnComplete(() =>
             {
                 if (inGame)
@@ -139,9 +152,13 @@ namespace Core.UI
         //post: shows keyscheatsheet on screen
         private void ShowKeySheet()
         {
-            if (inGame){
+            PlaySelectSound();
+            if (inGame)
+            {
                 GetComponentInChildren<ManagePowersVisibility>().ManageAdquiredPowersVisibility();
-            } else {
+            }
+            else
+            {
                 GetComponentInChildren<ManagePowersVisibility>().ShowAllPowers();
             }
             optionsCanvasGroup.DOFade(0, 0.25f).SetUpdate(true);
@@ -157,19 +174,19 @@ namespace Core.UI
         //post: hides keyscheatsheet on screen
         private void HideKeySheet()
         {
+            PlaySelectSound();
             keyCheatSheetCanvasGroup.DOFade(0, 0.25f).SetUpdate(true);
-            optionsCanvasGroup.DOFade(1, 0.25f).SetUpdate(true).OnComplete(
-                () =>
-                {
-                    showingkeyCheatSheet = false;
-                }
-            );
+            optionsCanvasGroup
+                .DOFade(1, 0.25f)
+                .SetUpdate(true)
+                .OnComplete(() => showingkeyCheatSheet = false);
         }
 
         //pre: --
         //post: manages slider to increase o decrease value
         private void ManageSlider(Slider slider, bool increase)
         {
+            PlaySettingSound();
             if (increase && slider.value < 1)
             {
                 slider.value += slidersChangeValue;
@@ -184,7 +201,41 @@ namespace Core.UI
         //post: moves selector in yPos to show user where it is
         private void MoveSelector(float yPos)
         {
+            PlayMoveSound();
             selector.transform.DOMoveY(yPos, 0.2f).SetUpdate(true);
+        }
+
+        private void PlaySettingSound()
+        {
+            if (audioSource == null)
+            {
+                Debug.LogWarning("AudioSource not found");
+                return;
+            }
+            audioSource.clip = settingSound;
+            audioSource.Play();
+        }
+
+        private void PlayMoveSound()
+        {
+            if (audioSource == null)
+            {
+                Debug.LogWarning("AudioSource not found");
+                return;
+            }
+            audioSource.clip = navigationSound;
+            audioSource.Play();
+        }
+
+        private void PlaySelectSound()
+        {
+            if (audioSource == null)
+            {
+                Debug.LogWarning("AudioSource not found");
+                return;
+            }
+            audioSource.clip = selectSound;
+            audioSource.Play();
         }
     }
 }
