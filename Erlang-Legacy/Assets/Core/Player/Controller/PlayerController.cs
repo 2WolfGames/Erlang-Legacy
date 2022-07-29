@@ -85,6 +85,8 @@ namespace Core.Player.Controller
         {
             abilityController.OnPunchStart += () =>
                 PlayRandomSound(soundEffects.punch.clips, soundEffects.punch.volume);
+            abilityController.OnRayStart += () =>
+                PlayRandomSound(soundEffects.ray.clips, soundEffects.ray.volume);
         }
 
         private void InitMovementController()

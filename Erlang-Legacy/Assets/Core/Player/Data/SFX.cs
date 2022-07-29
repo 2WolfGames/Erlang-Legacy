@@ -23,5 +23,6 @@ namespace Core.Player.Data
         public SFXsDefinition death;
         public SFXsDefinition hurt;
         public SFXsDefinition jump;
+        public SFXsDefinition ray;
     }
 }
