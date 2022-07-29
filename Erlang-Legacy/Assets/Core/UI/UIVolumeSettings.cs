@@ -10,6 +10,12 @@ namespace Core.UI
         [SerializeField] Slider soundSlider;
         [SerializeField] VolumeSettings volumeSettings;
 
+        private void Awake()
+        {
+            musicSlider.value = volumeSettings.MusicVolume;
+            soundSlider.value = volumeSettings.SoundVolume;
+        }
+
         private void Update()
         {
             UpdateVolumeSettings();

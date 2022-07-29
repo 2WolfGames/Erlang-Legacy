@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Player Abilities Acquired
   m_EditorClassIdentifier: 
   dash: 1
-  ray: 0
+  ray: 1

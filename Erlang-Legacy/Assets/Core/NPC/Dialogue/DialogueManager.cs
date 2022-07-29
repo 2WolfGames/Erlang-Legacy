@@ -18,7 +18,7 @@ namespace Core.NPC
         //pre: --
         //post: if player is in range for conversation and it not already in one, 
         //      when interacts it Runs Dialogue. 
-        void Update()
+        private void Update()
         {
             if (playerIn && !inConversation)
             {

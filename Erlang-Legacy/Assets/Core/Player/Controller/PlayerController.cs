@@ -85,6 +85,8 @@ namespace Core.Player.Controller
         {
             abilityController.OnPunchStart += () =>
                 PlayRandomSound(soundEffects.punch.clips, soundEffects.punch.volume);
+            abilityController.OnRayStart += () =>
+                PlayRandomSound(soundEffects.ray.clips, soundEffects.ray.volume);
         }
 
         private void InitMovementController()
@@ -191,7 +193,7 @@ namespace Core.Player.Controller
             SoundManager soundManager = SoundManager.Instance;
             if (soundManager == null)
             {
-                Debug.LogError("SoundManager is not present in scene");
+                Debug.LogWarning("SoundManager is not present in scene");
                 return;
             }
             float volume = (volumeSettings ? volumeSettings.SoundVolume : 1)
