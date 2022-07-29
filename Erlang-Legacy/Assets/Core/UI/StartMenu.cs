@@ -1,4 +1,6 @@
 ﻿using Core.GameSession;
+using Core.Manager;
+using Core.ScriptableEffect;
 using Core.Shared;
 using Core.Shared.Enum;
 using Core.Shared.SaveSystem;
@@ -14,8 +16,20 @@ namespace Core.UI
         [SerializeField] GameObject settingsMenu;
         [SerializeField] Image worldImage;
         [SerializeField] Image cloudsImage;
-        int option;
-        bool inSettingsPage = false;
+
+        [Header("Sound clips")]
+        [SerializeField] AudioClip navigationSound;
+        [SerializeField] AudioClip selectSound;
+        [SerializeField] VolumeSettings playerVolumeSettings;
+
+        private int option;
+        private bool inSettingsPage = false;
+        private AudioSource audioSource;
+
+        private void Awake()
+        {
+            audioSource = GetComponentInChildren<AudioSource>();
+        }
 
         //pre: --
         //post: all is set to initial state
@@ -30,10 +44,10 @@ namespace Core.UI
         //post: controls user interactions with menu
         private void Update()
         {
-            if (!inSettingsPage)
-            {
-                ManageOptions();
-            }
+            if (inSettingsPage)
+                return;
+
+            ManageOptions();
         }
 
         //pre:--
@@ -52,12 +66,14 @@ namespace Core.UI
             { //Resume
                 if (Input.GetKeyDown(KeyCode.S))
                 {
+                    PlayNavigationSound();
                     OnStartGameHoverOut();
                     OnSettingsHoverIn();
                     option = 1;
                 }
                 else if (Input.GetKeyDown(KeyCode.Space))
                 {
+                    PlaySelectSound();
                     LoadGame();
                 }
             }
@@ -65,12 +81,14 @@ namespace Core.UI
             { // Settings
                 if (Input.GetKeyDown(KeyCode.S))
                 {
+                    PlayNavigationSound();
                     OnSettingsHoverOut();
                     OnQuitHoverIn();
                     option = 2;
                 }
                 else if (Input.GetKeyDown(KeyCode.W))
                 {
+                    PlayNavigationSound();
                     OnSettingsHoverOut();
                     OnStartGameHoverIn();
                     option = 0;
@@ -78,6 +96,7 @@ namespace Core.UI
                 else if (Input.GetKeyDown(KeyCode.Space))
                 {
                     //Scene Manager
+                    PlaySelectSound();
                     OpenSettingsPage();
                 }
             }
@@ -85,16 +104,37 @@ namespace Core.UI
             { //Quit
                 if (Input.GetKeyDown(KeyCode.W))
                 {
+                    PlayNavigationSound();
                     OnQuitHoverOut();
                     OnSettingsHoverIn();
                     option = 1;
                 }
                 else if (Input.GetKeyDown(KeyCode.Space))
                 {
+                    PlaySelectSound();
                     Application.Quit();
                 }
             }
         }
+
+        private void PlaySelectSound()
+        {
+            SoundManager soundManager = SoundManager.Instance;
+            float volume = playerVolumeSettings ? playerVolumeSettings.SoundVolume : 1;
+            soundManager?.PlaySound(selectSound, volume, audioSource);
+
+            if (soundManager == null) Debug.LogWarning("SoundManager is null");
+        }
+
+        private void PlayNavigationSound()
+        {
+            SoundManager soundManager = SoundManager.Instance;
+            float volume = playerVolumeSettings ? playerVolumeSettings.SoundVolume : 1;
+            soundManager?.PlaySound(navigationSound, volume, audioSource);
+
+            if (soundManager == null) Debug.LogWarning("SoundManager is null");
+        }
+
 
         //pre: --
         //post: laods game
@@ -126,7 +166,7 @@ namespace Core.UI
             settingsMenu.SetActive(false);
             inSettingsPage = false;
         }
-        
+
         //Animations interactions with menu 
         #region start menu animations
         public void OnStartGameHoverIn()

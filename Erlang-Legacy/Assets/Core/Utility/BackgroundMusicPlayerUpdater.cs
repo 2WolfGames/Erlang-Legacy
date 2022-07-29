@@ -10,6 +10,11 @@ namespace Core.Utility
 
         private void Start()
         {
+            Play();
+        }
+
+        public void Play()
+        {
             UpdateMusicClip();
             UpdateAmbientClip();
         }

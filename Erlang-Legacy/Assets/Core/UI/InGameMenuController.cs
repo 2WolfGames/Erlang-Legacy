@@ -1,5 +1,7 @@
 ﻿using System.Collections;
+using Core.Manager;
 using Core.Player.Controller;
+using Core.ScriptableEffect;
 using Core.Shared;
 using Core.Shared.Enum;
 using Spine.Unity;
@@ -12,18 +14,29 @@ namespace Core.UI
         public static bool gamePaused = false;
         [SerializeField] GameObject pauseMenu;
         [SerializeField] GameObject settingsMenu;
-        [SerializeField] GameObject AjaxDiaryPrefab;
+        [SerializeField] GameObject ajaxDiaryPrefab;
         SkeletonGraphic skeletonGraphic;
         GameObject currentAjaxDiary;
-        //int diaryPage; for the moment we only have one page
-        int option;
-        bool inSettingsPage = false;
+
+        [Header("Sound clips")]
+        [SerializeField] AudioClip navigationSound;
+        [SerializeField] AudioClip selectSound;
+        [SerializeField] VolumeSettings playerVolumeSettings;
+
+        private AudioSource audioSource;
+        private int option;
+        private bool inSettingsPage = false;
+
+        private void Awake()
+        {
+            audioSource = GetComponentInChildren<AudioSource>();
+        }
+
 
         //pre: --
         //post: controls user interactions 
         private void Update()
         {
-
             if (gamePaused && !inSettingsPage)
             {
                 ManageOptionsPage();
@@ -90,12 +103,14 @@ namespace Core.UI
             { //Resume
                 if (Input.GetKeyDown(KeyCode.S))
                 {
+                    PlayNavigationSound();
                     OnResumeHoverOut();
                     OnSettingsHoverIn();
                     option = 1;
                 }
                 else if (Input.GetKeyDown(KeyCode.Space))
                 {
+                    PlaySelectSound();
                     ResumeGame();
                 }
             }
@@ -103,18 +118,21 @@ namespace Core.UI
             { // Settings
                 if (Input.GetKeyDown(KeyCode.S))
                 {
+                    PlayNavigationSound();
                     OnSettingsHoverOut();
                     OnQuitHoverIn();
                     option = 2;
                 }
                 else if (Input.GetKeyDown(KeyCode.W))
                 {
+                    PlayNavigationSound();
                     OnSettingsHoverOut();
                     OnResumeHoverIn();
                     option = 0;
                 }
                 else if (Input.GetKeyDown(KeyCode.Space))
                 {
+                    PlaySelectSound();
                     //Scene Manager
                     OpenSettingsPage();
                 }
@@ -123,12 +141,14 @@ namespace Core.UI
             { //Quit
                 if (Input.GetKeyDown(KeyCode.W))
                 {
+                    PlayNavigationSound();
                     OnQuitHoverOut();
                     OnSettingsHoverIn();
                     option = 1;
                 }
                 else if (Input.GetKeyDown(KeyCode.Space))
                 {
+                    PlaySelectSound();
                     Time.timeScale = 1;
                     StartCoroutine(Loader.LoadWithDelay(SceneID.StartMenu, 0));
                 }
@@ -141,7 +161,7 @@ namespace Core.UI
         {
             //diaryPage = 1;
             option = 0;
-            currentAjaxDiary = Instantiate(AjaxDiaryPrefab, pauseMenu.transform);
+            currentAjaxDiary = Instantiate(ajaxDiaryPrefab, pauseMenu.transform);
             skeletonGraphic = currentAjaxDiary.GetComponent<SkeletonGraphic>();
             skeletonGraphic.AnimationState.SetAnimation(1, "init", false);
         }
@@ -155,7 +175,8 @@ namespace Core.UI
 
         //pre:--
         //post: opens settings menu
-        private void OpenSettingsPage(){
+        private void OpenSettingsPage()
+        {
             inSettingsPage = true;
             settingsMenu.SetActive(true);
             settingsMenu.GetComponent<SettingsMenu>()?.OnOpenMenu(true);
@@ -163,7 +184,8 @@ namespace Core.UI
 
         //pre:--
         //post: closes settings menu
-        public void CloseSettingsPage(){
+        public void CloseSettingsPage()
+        {
             settingsMenu.SetActive(false);
             inSettingsPage = false;
         }
@@ -204,6 +226,24 @@ namespace Core.UI
         #endregion
 
         #endregion
+
+        private void PlaySelectSound()
+        {
+            SoundManager soundManager = SoundManager.Instance;
+            float volume = playerVolumeSettings ? playerVolumeSettings.SoundVolume : 1;
+            soundManager?.PlaySound(selectSound, volume, audioSource);
+
+            if (soundManager == null) Debug.LogWarning("SoundManager is null");
+        }
+
+        private void PlayNavigationSound()
+        {
+            SoundManager soundManager = SoundManager.Instance;
+            float volume = playerVolumeSettings ? playerVolumeSettings.SoundVolume : 1;
+            soundManager?.PlaySound(navigationSound, volume, audioSource);
+
+            if (soundManager == null) Debug.LogWarning("SoundManager is null");
+        }
 
     }
 }

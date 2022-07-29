@@ -191,7 +191,7 @@ namespace Core.Player.Controller
             SoundManager soundManager = SoundManager.Instance;
             if (soundManager == null)
             {
-                Debug.LogError("SoundManager is not present in scene");
+                Debug.LogWarning("SoundManager is not present in scene");
                 return;
             }
             float volume = (volumeSettings ? volumeSettings.SoundVolume : 1)
