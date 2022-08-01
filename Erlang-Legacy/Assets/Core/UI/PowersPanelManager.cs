@@ -25,11 +25,13 @@ namespace Core.UI
             }
         }
 
-        private void Start() {
+        private void Start()
+        {
             ManagePowersVisibility();
         }
 
-        public void ManagePowersVisibility(){
+        public void ManagePowersVisibility()
+        {
             managePowersVisibility.ManageAdquiredPowersVisibility();
         }
 

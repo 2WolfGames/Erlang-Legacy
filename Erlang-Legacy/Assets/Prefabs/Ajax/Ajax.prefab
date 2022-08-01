@@ -473,11 +473,11 @@ MonoBehaviour:
     punch:
       clips:
       - {fileID: 8300000, guid: fe0b1f9aeb45b41b089175aeeabd5d95, type: 3}
-      volume: 0.2
+      volume: 0.5
     dash:
       clips:
       - {fileID: 8300000, guid: d46323e22e74e46baa241cbf48c85671, type: 3}
-      volume: 0.2
+      volume: 0.5
     heal:
       clips:
       - {fileID: 8300000, guid: 64860418ae031cc4f9868afa1d9d3b65, type: 3}
@@ -489,7 +489,7 @@ MonoBehaviour:
       - {fileID: 8300000, guid: 61bab6454ab0d474a90610c63a6817d6, type: 3}
       - {fileID: 8300000, guid: 1dab569d05018ad45a35e0207a18502e, type: 3}
       - {fileID: 8300000, guid: f0de914598c8ea74e88b9e226cecb4a2, type: 3}
-      volume: 0.5
+      volume: 1
     hurt:
       clips:
       - {fileID: 8300000, guid: 4f484006c2dad3541abd25f11dc0437a, type: 3}
@@ -498,12 +498,17 @@ MonoBehaviour:
       - {fileID: 8300000, guid: b08a34e31450a234581db967f5ee0297, type: 3}
       - {fileID: 8300000, guid: 9ccc9e769d09ee24bbe4d0cc7278cba3, type: 3}
       - {fileID: 8300000, guid: 0d666bd0e6f62044c853883e1f07764b, type: 3}
-      volume: 0.5
+      volume: 0.75
     jump:
       clips:
       - {fileID: 8300000, guid: 4c4fc92d5416d854fa3c8912af4f346d, type: 3}
       - {fileID: 8300000, guid: d8fdb0f783a6cb94db4bd4718756d393, type: 3}
-      volume: 0.2
+      volume: 0.5
+    ray:
+      clips:
+      - {fileID: 8300000, guid: 071c516f761e8824496d37853670226f, type: 3}
+      - {fileID: 8300000, guid: 800045f6f79212049824947982228381, type: 3}
+      volume: 0.5
   volumeSettings: {fileID: 11400000, guid: 833ff6d7c89626f4099305b28a97d81f, type: 2}
 --- !u!114 &5625281659813403160
 MonoBehaviour:

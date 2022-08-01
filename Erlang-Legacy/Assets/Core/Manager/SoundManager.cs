@@ -6,18 +6,7 @@ namespace Core.Manager
 {
     public class SoundManager : MonoBehaviour
     {
-        public static SoundManager Instance
-        {
-            get
-            {
-                if (s_Instance != null)
-                    return s_Instance;
-
-                s_Instance = FindObjectOfType<SoundManager>();
-
-                return s_Instance;
-            }
-        }
+        public static SoundManager Instance;
 
         // Random pitch adjustment range.
         public float lowPitchRange = 0.95f;
@@ -26,11 +15,13 @@ namespace Core.Manager
         public float Volume { get; set; } = 1.0f;
         private float musicBaseVolume = 0.3f;
         private AudioSource audioSource;
-        private static SoundManager s_Instance;
 
         private void Awake()
         {
-            s_Instance = this;
+            var matches = FindObjectsOfType<SoundManager>();
+            if (matches.Length > 1)
+                Destroy(gameObject);
+            else Instance = this;
             DontDestroyOnLoad(gameObject);
             audioSource = GetComponent<AudioSource>();
         }

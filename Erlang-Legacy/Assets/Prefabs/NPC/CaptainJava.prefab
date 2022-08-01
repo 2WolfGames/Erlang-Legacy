@@ -350,6 +350,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 963182352250167339}
     m_Modifications:
+    - target: {fileID: 8149932850953864964, guid: d524d4f031cc6614b93211a6d98cdc18,
+        type: 3}
+      propertyPath: conversationClips.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8149932850953864964, guid: d524d4f031cc6614b93211a6d98cdc18,
+        type: 3}
+      propertyPath: conversationClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: c34a9580daa4cad48b95b51de9faddf6, type: 3}
+    - target: {fileID: 8149932850953864964, guid: d524d4f031cc6614b93211a6d98cdc18,
+        type: 3}
+      propertyPath: conversationClips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 35245e65eb1d6c44382e34929953c4c1, type: 3}
+    - target: {fileID: 8149932850953864964, guid: d524d4f031cc6614b93211a6d98cdc18,
+        type: 3}
+      propertyPath: conversationClips.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 35245e65eb1d6c44382e34929953c4c1, type: 3}
     - target: {fileID: 8149932850953864968, guid: d524d4f031cc6614b93211a6d98cdc18,
         type: 3}
       propertyPath: m_Pivot.x
