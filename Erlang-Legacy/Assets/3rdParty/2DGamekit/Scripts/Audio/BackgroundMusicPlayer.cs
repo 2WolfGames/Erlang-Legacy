@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics.SymbolStore;
+using Core.ScriptableEffect;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -15,7 +15,7 @@ namespace Gamekit2D
                 if (s_Instance != null)
                     return s_Instance;
 
-                s_Instance = FindObjectOfType<BackgroundMusicPlayer> ();
+                s_Instance = FindObjectOfType<BackgroundMusicPlayer>();
 
                 return s_Instance;
             }
@@ -36,6 +36,8 @@ namespace Gamekit2D
         [Range(0f, 1f)]
         public float ambientVolume = 1f;
 
+        public VolumeSettings playerVolumeSettings;
+
         protected AudioSource m_MusicAudioSource;
         protected AudioSource m_AmbientAudioSource;
 
@@ -46,13 +48,13 @@ namespace Gamekit2D
         //once that stack is empty, it revert to the musicAudioClip
         protected Stack<AudioClip> m_MusicStack = new Stack<AudioClip>();
 
-        void Awake ()
+        void Awake()
         {
             // If there's already a player...
             if (Instance != null && Instance != this)
             {
                 //...if it use the same music clip, we set the audio source to be at the same position, so music don't restart
-                if(Instance.musicAudioClip == musicAudioClip)
+                if (Instance.musicAudioClip == musicAudioClip)
                 {
                     m_TransferMusicTime = true;
                 }
@@ -66,12 +68,12 @@ namespace Gamekit2D
                 // ... destroy the pre-existing player.
                 m_OldInstanceToDestroy = Instance;
             }
-        
+
             s_Instance = this;
 
-            DontDestroyOnLoad (gameObject);
+            DontDestroyOnLoad(gameObject);
 
-            m_MusicAudioSource = gameObject.AddComponent<AudioSource> ();
+            m_MusicAudioSource = gameObject.AddComponent<AudioSource>();
             m_MusicAudioSource.clip = musicAudioClip;
             m_MusicAudioSource.outputAudioMixerGroup = musicOutput;
             m_MusicAudioSource.loop = true;
@@ -96,6 +98,16 @@ namespace Gamekit2D
             }
         }
 
+        private float ComputeMusicVolume()
+        {
+            return playerVolumeSettings ? playerVolumeSettings.MusicVolume * musicVolume : musicVolume;
+        }
+
+        private float ComputeAmbientVolume()
+        {
+            return playerVolumeSettings ? playerVolumeSettings.SoundVolume * ambientVolume : ambientVolume;
+        }
+
         private void Start()
         {
             //if delete & trasnfer time only in Start so we avoid the small gap that doing everything at the same time in Awake would create 
@@ -110,13 +122,13 @@ namespace Gamekit2D
 
         private void Update()
         {
-            if(m_MusicStack.Count > 0)
+            if (m_MusicStack.Count > 0)
             {
                 //isPlaying will be false once the current clip end up playing
-                if(!m_MusicAudioSource.isPlaying)
+                if (!m_MusicAudioSource.isPlaying)
                 {
                     m_MusicStack.Pop();
-                    if(m_MusicStack.Count > 0)
+                    if (m_MusicStack.Count > 0)
                     {
                         m_MusicAudioSource.clip = m_MusicStack.Peek();
                         m_MusicAudioSource.Play();
@@ -129,6 +141,9 @@ namespace Gamekit2D
                     }
                 }
             }
+
+            m_MusicAudioSource.volume = ComputeMusicVolume();
+            m_AmbientAudioSource.volume = ComputeAmbientVolume();
         }
 
         public void PushClip(AudioClip clip)
@@ -154,104 +169,104 @@ namespace Gamekit2D
         }
 
 
-        public void Play ()
+        public void Play()
         {
-            PlayJustAmbient ();
-            PlayJustMusic ();
+            PlayJustAmbient();
+            PlayJustMusic();
         }
 
-        public void PlayJustMusic ()
+        public void PlayJustMusic()
         {
             m_MusicAudioSource.time = 0f;
             m_MusicAudioSource.Play();
         }
 
-        public void PlayJustAmbient ()
+        public void PlayJustAmbient()
         {
             m_AmbientAudioSource.Play();
         }
 
-        public void Stop ()
+        public void Stop()
         {
-            StopJustAmbient ();
-            StopJustMusic ();
+            StopJustAmbient();
+            StopJustMusic();
         }
 
-        public void StopJustMusic ()
+        public void StopJustMusic()
         {
-            m_MusicAudioSource.Stop ();
+            m_MusicAudioSource.Stop();
         }
 
-        public void StopJustAmbient ()
+        public void StopJustAmbient()
         {
-            m_AmbientAudioSource.Stop ();
+            m_AmbientAudioSource.Stop();
         }
 
-        public void Mute ()
+        public void Mute()
         {
-            MuteJustAmbient ();
-            MuteJustMusic ();
+            MuteJustAmbient();
+            MuteJustMusic();
         }
 
-        public void MuteJustMusic ()
+        public void MuteJustMusic()
         {
             m_MusicAudioSource.volume = 0f;
         }
 
-        public void MuteJustAmbient ()
+        public void MuteJustAmbient()
         {
             m_AmbientAudioSource.volume = 0f;
         }
 
-        public void Unmute ()
+        public void Unmute()
         {
-            UnmuteJustAmbient ();
-            UnmuteJustMustic ();
+            UnmuteJustAmbient();
+            UnmuteJustMustic();
         }
 
-        public void UnmuteJustMustic ()
+        public void UnmuteJustMustic()
         {
             m_MusicAudioSource.volume = musicVolume;
         }
 
-        public void UnmuteJustAmbient ()
+        public void UnmuteJustAmbient()
         {
             m_AmbientAudioSource.volume = ambientVolume;
         }
 
-        public void Mute (float fadeTime)
+        public void Mute(float fadeTime)
         {
             MuteJustAmbient(fadeTime);
             MuteJustMusic(fadeTime);
         }
 
-        public void MuteJustMusic (float fadeTime)
+        public void MuteJustMusic(float fadeTime)
         {
             StartCoroutine(VolumeFade(m_MusicAudioSource, 0f, fadeTime));
         }
 
-        public void MuteJustAmbient (float fadeTime)
+        public void MuteJustAmbient(float fadeTime)
         {
             StartCoroutine(VolumeFade(m_AmbientAudioSource, 0f, fadeTime));
         }
 
-        public void Unmute (float fadeTime)
+        public void Unmute(float fadeTime)
         {
             UnmuteJustAmbient(fadeTime);
             UnmuteJustMusic(fadeTime);
         }
 
-        public void UnmuteJustMusic (float fadeTime)
+        public void UnmuteJustMusic(float fadeTime)
         {
             StartCoroutine(VolumeFade(m_MusicAudioSource, musicVolume, fadeTime));
         }
 
-        public void UnmuteJustAmbient (float fadeTime)
+        public void UnmuteJustAmbient(float fadeTime)
         {
             StartCoroutine(VolumeFade(m_AmbientAudioSource, ambientVolume, fadeTime));
         }
 
-        protected IEnumerator VolumeFade (AudioSource source, float finalVolume, float fadeTime)
+        protected IEnumerator VolumeFade(AudioSource source, float finalVolume, float fadeTime)
         {
             float volumeDifference = Mathf.Abs(source.volume - finalVolume);
             float inverseFadeTime = 1f / fadeTime;

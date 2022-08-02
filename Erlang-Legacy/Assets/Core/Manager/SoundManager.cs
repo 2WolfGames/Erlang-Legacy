@@ -8,8 +8,6 @@ namespace Core.Manager
     {
         public static SoundManager Instance;
 
-        public AudioSource sfxAudioSource;
-
         // Random pitch adjustment range.
         public float lowPitchRange = 0.95f;
         public float highPitchRange = 1.05f;
@@ -18,13 +16,13 @@ namespace Core.Manager
         private float musicBaseVolume = 0.3f;
         private AudioSource audioSource;
 
-        private Coroutine musicCoroutine;
-
         private void Awake()
         {
-            if (Instance == null)
-                Instance = this;
-
+            var matches = FindObjectsOfType<SoundManager>();
+            if (matches.Length > 1)
+                Destroy(gameObject);
+            else Instance = this;
+            DontDestroyOnLoad(gameObject);
             audioSource = GetComponent<AudioSource>();
         }
 
@@ -39,7 +37,7 @@ namespace Core.Manager
             if (clips.Length == 0)
                 return;
 
-            AudioSource source = src ?? sfxAudioSource;
+            AudioSource source = src ?? audioSource;
 
             int randomIndex = Random.Range(0, clips.Length);
 
@@ -73,7 +71,7 @@ namespace Core.Manager
             en caso contrario, evalúa el operando derecho y devuelve su resultado. 
             El operador ?? no evalúa su operando derecho 
             si el operando izquierdo se evalúa como no NULL.*/
-            AudioSource source = src ?? sfxAudioSource;
+            AudioSource source = src ?? audioSource;
             source.pitch = pitch;
             source.PlayOneShot(clip, volume);
         }

@@ -58,6 +58,7 @@ namespace Core.Player.Controller
         public List<LayerMask> WhatEndsDash { get => whatEndsDash; private set => whatEndsDash = value; }
         public List<LayerMask> WhatTriggersLand { get => whatTriggersLand; private set => whatTriggersLand = value; }
 
+        public Action OnJumpStart;
 
         public void Start()
         {
@@ -180,6 +181,7 @@ namespace Core.Player.Controller
                 JumpParticles.Play();
                 Animator.SetTrigger(CharacterAnimations.StartJump);
                 Animator.SetBool(CharacterAnimations.Jumping, isJumping);
+                OnJumpStart?.Invoke();
             }
             if (Input.GetButton(CharacterActions.Jump) && CanHoldJump) // while jumping
             {

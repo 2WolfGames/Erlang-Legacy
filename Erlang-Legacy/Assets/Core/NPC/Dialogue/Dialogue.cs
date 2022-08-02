@@ -8,6 +8,9 @@ using DG.Tweening;
 using Core.Shared;
 using System;
 using TMPro;
+using Core.Manager;
+using Core.UI;
+using Core.ScriptableEffect;
 
 namespace Core.NPC
 {
@@ -20,6 +23,9 @@ namespace Core.NPC
         [SerializeField] Image nextSentenceIndicator;
         [SerializeField] TextMeshProUGUI nameField;
         [SerializeField] TextMeshProUGUI conversationField;
+        [SerializeField] AudioClip[] conversationClips;
+        [SerializeField] VolumeSettings volumeSettings;
+
         private Animator animator => GetComponent<Animator>();
         private Animator npcAnimator;
         private Queue<(string, int)> phrases;
@@ -28,8 +34,14 @@ namespace Core.NPC
         private bool phraseEnded = true;
         private bool endPhrase = false;
         private Action onEndConversation = null;
+        private AudioSource audioSource;
 
-        void Start()
+        private void Awake()
+        {
+            audioSource = GetComponent<AudioSource>();
+        }
+
+        private void Start()
         {
             phrases = new Queue<(string, int)>();
             nameField.text = string.Empty;
@@ -39,7 +51,7 @@ namespace Core.NPC
         //pre: --
         //post: When conversation is taking place, displays next sentece 
         //      or shows all the phase without the talk effect 
-        void Update()
+        private void Update()
         {
             if (settingUp)
                 return;
@@ -88,6 +100,7 @@ namespace Core.NPC
         {
             if (phrases.Count > 0)
             {
+                PlayConversationClip();
                 phraseEnded = false;
 
                 nextSentenceIndicator.DOKill(); //needed if it's in de middle of DoFade
@@ -104,6 +117,18 @@ namespace Core.NPC
             {
                 CloseDialogue();
             }
+        }
+
+        private void PlayConversationClip()
+        {
+            SoundManager soundManager = SoundManager.Instance;
+            if (soundManager == null)
+            {
+                Debug.LogWarning("SoundManager not found");
+                return;
+            }
+            float volume = volumeSettings == null ? 1 : volumeSettings.SoundVolume;
+            soundManager.PlayRandomSound(conversationClips, volume, audioSource);
         }
 
         //pre: --

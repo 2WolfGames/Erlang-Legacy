@@ -10,7 +10,7 @@ namespace Core.GameSession
         [SerializeField] Transform entrancePoint;
         [SerializeField] Transform spawnPoint;
         [SerializeField] float entranceTime = 2f;
-        [SerializeField] [Range(0.1f, 1f)] float entranceWaitTime = 0.5f;
+        [SerializeField][Range(0.1f, 1f)] float entranceWaitTime = 0.5f;
 
         //pre: --
         //post: returns entrancePoint position
@@ -32,11 +32,10 @@ namespace Core.GameSession
             //player not controllable 
             player.Controllable = false;
 
-            MovePlayer.Trigger(entrancePoint,entranceWaitTime,facing,entranceTime,() =>{
+            MovePlayer.Trigger(entrancePoint, entranceWaitTime, facing, entranceTime, () =>
+            {
                 player.Controllable = true;
             });
-
         }
-
     }
 }

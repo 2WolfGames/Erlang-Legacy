@@ -7,6 +7,8 @@ using Core.Shared.Enum;
 using Core.Utility;
 using UnityEngine;
 using Core.UI;
+using System;
+using DG.Tweening;
 
 namespace Core.Player.Controller
 {
@@ -41,6 +43,8 @@ namespace Core.Player.Controller
         private bool controllable => player.Controllable;
         private Stats playerStats => player.Stats;
         private MovementController movementController => GetComponent<MovementController>();
+        public Action OnPunchStart;
+        public Action OnRayStart;
 
         public void Start()
         {
@@ -119,6 +123,7 @@ namespace Core.Player.Controller
             punching = true;
             movementController.Acceleration = punchDrag;
             AnimatePunch(fist);
+            OnPunchStart?.Invoke();
             punchParticle?.Play();
         }
 
@@ -146,7 +151,7 @@ namespace Core.Player.Controller
 
         private Fist RandomFist()
         {
-            return (Fist)Random.Range(0, 2);
+            return (Fist)UnityEngine.Random.Range(0, 2);
         }
 
         public void OnDashComplete()
@@ -191,6 +196,7 @@ namespace Core.Player.Controller
             animator.SetTrigger(CharacterAnimations.Ray);
             ResetRayCooldown();
             RayAbilityStart();
+            OnRayStart?.Invoke();
         }
 
         private void RayAbilityStart()
@@ -208,13 +214,12 @@ namespace Core.Player.Controller
 
         // called by ray player animation as event
         public void InvokeRayBallInstance()
-        {
+        {   
             Vector2 force = Vector2.right * FacingValue * projectileSpeed;
             VengefulProjectile instance = Instantiate(projectilePrefab, projectileOrigin.position, Quaternion.identity);
             instance.SetForce(force);
             instance.gameObject.Disposable(projectileTimeout);
-
-            player.BaseGravity();
+            DOVirtual.DelayedCall(0.1f, () => player.BaseGravity());
         }
 
         private void ResetRayCooldown()

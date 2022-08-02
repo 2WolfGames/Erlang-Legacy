@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 5ff69c4781182334583e1541115ebeba, type: 3}
   m_Name: Health Adder 1
-  m_EditorClassIdentifier: Assembly-CSharp:Core.ScriptableEffect:HealthAdderEffect
+  m_EditorClassIdentifier: 
   amount: 1
