@@ -1,3 +1,4 @@
+using System.Collections;
 using Core.Utility;
 using UnityEngine;
 
@@ -5,36 +6,44 @@ namespace Core.IA.Behavior.FalseKnight
 {
     public class Door : MonoBehaviour, IOpenable, ICloseable
     {
-        [SerializeField] bool isOpen = false;
-
-        private Animator animator;
+        [SerializeField] private float speed = 1.0f;
+        [SerializeField] private Transform openPosition;
+        [SerializeField] private Transform closedPosition;
+        [SerializeField] private bool isOpen = false;
 
         private void Awake()
         {
-            animator = GetComponent<Animator>();
-        }
-
-        private void Start()
-        {
             if (isOpen)
             {
-                Open();
+                transform.position = openPosition.position;
             }
             else
             {
-                Close();
+                transform.position = closedPosition.position;
             }
         }
 
         public void Open()
         {
+            if (isOpen) return;
             isOpen = true;
-            animator.SetBool("isOpen", true);
+            StartCoroutine(Move(openPosition.position));
         }
+
         public void Close()
         {
+            if (!isOpen) return;
             isOpen = false;
-            animator.SetBool("isOpen", false);
+            StartCoroutine(Move(closedPosition.position));
+        }
+
+        private IEnumerator Move(Vector3 target)
+        {
+            while (Vector2.Distance(transform.position, target) > 0.1f)
+            {
+                transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
+                yield return null;
+            }
         }
     }
 }
