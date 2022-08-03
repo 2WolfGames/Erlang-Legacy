@@ -233,7 +233,7 @@ namespace Core.UI
             float volume = playerVolumeSettings ? playerVolumeSettings.SoundVolume : 1;
             soundManager?.PlaySound(selectSound, volume, audioSource);
 
-            if (soundManager == null) Debug.LogWarning("SoundManager is null");
+            if (soundManager == null) Debug.LogWarning("SoundManager is not present in scene");
         }
 
         private void PlayNavigationSound()
@@ -242,7 +242,7 @@ namespace Core.UI
             float volume = playerVolumeSettings ? playerVolumeSettings.SoundVolume : 1;
             soundManager?.PlaySound(navigationSound, volume, audioSource);
 
-            if (soundManager == null) Debug.LogWarning("SoundManager is null");
+            if (soundManager == null) Debug.LogWarning("SoundManager is not present in scene");
         }
 
     }
