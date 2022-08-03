@@ -16,10 +16,6 @@ namespace Core.Shared
             {
                 return SceneID.StartMenu;
             }
-            else if (currentScene == SceneID.FirstIsland.ToString())
-            {
-                return SceneID.FirstIsland;
-            }
             else if (currentScene == SceneID.LoadingScene.ToString())
             {
                 return SceneID.LoadingScene;
@@ -48,9 +44,49 @@ namespace Core.Shared
             {
                 return SceneID.OmedIsland_Zone6;
             }
+            else if (currentScene == SceneID.MenIsland_Zone1.ToString())
+            {
+                return SceneID.MenIsland_Zone1;
+            }
+            else if (currentScene == SceneID.MenIsland_Zone2.ToString())
+            {
+                return SceneID.MenIsland_Zone2;
+            }
+            else if (currentScene == SceneID.MenIsland_Zone3.ToString())
+            {
+                return SceneID.MenIsland_Zone3;
+            }
+            else if (currentScene == SceneID.MenIsland_Zone4.ToString())
+            {
+                return SceneID.MenIsland_Zone4;
+            }
+            else if (currentScene == SceneID.MenIsland_Zone5.ToString())
+            {
+                return SceneID.MenIsland_Zone5;
+            }
+            else if (currentScene == SceneID.MenIsland_Zone6.ToString())
+            {
+                return SceneID.MenIsland_Zone6;
+            }
+            else if (currentScene == SceneID.MenIsland_Zone7.ToString())
+            {
+                return SceneID.MenIsland_Zone7;
+            }
+            else if (currentScene == SceneID.MenIsland_Zone8.ToString())
+            {
+                return SceneID.MenIsland_Zone8;
+            }
+            else if (currentScene == SceneID.MenIsland_Zone9.ToString())
+            {
+                return SceneID.MenIsland_Zone9;
+            }
+            else if (currentScene == SceneID.MenIsland_Zone10.ToString())
+            {
+                return SceneID.MenIsland_Zone10;
+            }
             else
             { //lvl1
-                return SceneID.lvl1;
+                throw new System.Exception("Scene ID not found.");
             }
         }
 
