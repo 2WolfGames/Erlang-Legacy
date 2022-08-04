@@ -1,25 +1,41 @@
 using System.Collections;
+using Core.Manager;
 using Core.Utility;
 using UnityEngine;
 
-namespace Core.IA.Behavior.FalseKnight
+namespace Core.Environment
 {
     public class Door : MonoBehaviour, IOpenable, ICloseable
     {
+        [SerializeField] private GameObject objectDoor;
         [SerializeField] private float speed = 1.0f;
         [SerializeField] private Transform openPosition;
         [SerializeField] private Transform closedPosition;
         [SerializeField] private bool isOpen = false;
+        [SerializeField] private AudioClip doorMovingClip;
+
+        public float Speed { get => speed; set => speed = value; }
+
+        private Transform tranformDoor;
+        private AudioSource audioSource;
 
         private void Awake()
         {
+            if (objectDoor == null)
+            {
+                objectDoor = gameObject;
+            }
+
+            tranformDoor = objectDoor.transform;
+            audioSource = GetComponent<AudioSource>();
+
             if (isOpen)
             {
-                transform.position = openPosition.position;
+                tranformDoor.position = openPosition.position;
             }
             else
             {
-                transform.position = closedPosition.position;
+                tranformDoor.position = closedPosition.position;
             }
         }
 
@@ -39,9 +55,10 @@ namespace Core.IA.Behavior.FalseKnight
 
         private IEnumerator Move(Vector3 target)
         {
-            while (Vector2.Distance(transform.position, target) > 0.1f)
+            SoundManager.Instance?.PlaySound(doorMovingClip, 0.2f);
+            while (Vector2.Distance(tranformDoor.position, target) > 0.1f)
             {
-                transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
+                tranformDoor.position = Vector2.MoveTowards(tranformDoor.position, target, speed * Time.deltaTime);
                 yield return null;
             }
         }
