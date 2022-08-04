@@ -17,7 +17,7 @@ MonoBehaviour:
   jumpPower: 20
   airDrag: 0.15
   dashDamage: 1
-  rayDamage: 1
+  rayDamage: 2
   punchDamage: 1
   dashCooldown: 1
   rayCooldown: 2
