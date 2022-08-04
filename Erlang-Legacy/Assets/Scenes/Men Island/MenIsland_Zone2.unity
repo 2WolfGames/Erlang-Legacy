@@ -16380,7 +16380,7 @@ PrefabInstance:
         type: 3}
       propertyPath: musicAudioClip
       value: 
-      objectReference: {fileID: 8300000, guid: fefe2df5b21548f46af879dad9d381cd, type: 3}
+      objectReference: {fileID: 8300000, guid: f51f19a8d01eb0d4b8ad41775e3110d7, type: 3}
     - target: {fileID: 114738439059648026, guid: 9c48d4101c920ef47a787da13f097d90,
         type: 3}
       propertyPath: ambientAudioClip
@@ -16454,12 +16454,12 @@ PrefabInstance:
     - target: {fileID: 9117715256540725157, guid: 144ba70820a80d7428eccc3270f4fca9,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 81.93244
+      value: 81.931725
       objectReference: {fileID: 0}
     - target: {fileID: 9117715256540725157, guid: 144ba70820a80d7428eccc3270f4fca9,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.6273978
+      value: 1.6274226
       objectReference: {fileID: 0}
     - target: {fileID: 9117715257027125277, guid: 144ba70820a80d7428eccc3270f4fca9,
         type: 3}
