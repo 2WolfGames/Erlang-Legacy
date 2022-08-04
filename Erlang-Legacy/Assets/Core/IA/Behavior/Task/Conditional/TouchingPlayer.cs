@@ -16,7 +16,8 @@ namespace Core.IA.Behavior.Conditional
 
         private bool IsTouchingPlayer()
         {
-            return detector.Value.IsTouching(player.GetComponent<Collider2D>());
+            Collider2D playerCollider = player.GetComponent<Collider2D>();
+            return detector.Value.IsTouching(playerCollider);
         }
     }
 }
