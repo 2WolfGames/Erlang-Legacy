@@ -11,9 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FirstIsland.unity
     guid: 9164dcf301ee4e443b0a8e464ebb578c
-  - enabled: 1
-    path: Assets/Scenes/lvl1.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/LoadingScene.unity
     guid: 527db62d792ef9343865f596b8cd50b0
@@ -65,4 +65,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Men Island/MenIsland_Zone9.unity
     guid: 8a9346758422a3e409c82058ab22090e
+  - enabled: 1
+    path: Assets/Scenes/Cinematographics/Cinematographic_Intro_P1.unity
+    guid: dab4a06374e297140913a200bb1b2298
+  - enabled: 1
+    path: Assets/Scenes/Cinematographics/Cinematographic_Intro_P2.unity
+    guid: 985487f86b6760044abd919d0ce25f05
   m_configObjects: {}
