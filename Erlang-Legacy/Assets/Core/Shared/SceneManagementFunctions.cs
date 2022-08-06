@@ -84,8 +84,16 @@ namespace Core.Shared
             {
                 return SceneID.MenIsland_Zone10;
             }
+            else if (currentScene == SceneID.Cinematographic_Intro_P1.ToString())
+            {
+                return SceneID.Cinematographic_Intro_P1;
+            }
+            else if (currentScene == SceneID.Cinematographic_Intro_P2.ToString())
+            {
+                return SceneID.Cinematographic_Intro_P2;
+            }
             else
-            { //lvl1
+            {
                 throw new System.Exception("Scene ID not found.");
             }
         }
@@ -97,7 +105,9 @@ namespace Core.Shared
         {
             string currentScene = SceneManager.GetActiveScene().name;
             if (currentScene == SceneID.StartMenu.ToString() ||
-            currentScene == SceneID.LoadingScene.ToString())
+            currentScene == SceneID.LoadingScene.ToString() ||
+            currentScene == SceneID.Cinematographic_Intro_P1.ToString() ||
+            currentScene == SceneID.Cinematographic_Intro_P2.ToString())
             {
                 return false;
             }
