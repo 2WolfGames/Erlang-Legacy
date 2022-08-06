@@ -39819,6 +39819,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9117715256540725157, guid: 144ba70820a80d7428eccc3270f4fca9,
         type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 92.0329
+      objectReference: {fileID: 0}
+    - target: {fileID: 9117715256540725157, guid: 144ba70820a80d7428eccc3270f4fca9,
+        type: 3}
       propertyPath: m_LocalPosition.y
       value: -19.85085
       objectReference: {fileID: 0}
@@ -39894,7 +39899,7 @@ PrefabInstance:
     - target: {fileID: 4815034752210865345, guid: 48e853ff129fd5046bb2e1738c428eb0,
         type: 3}
       propertyPath: scene
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4815034752210865345, guid: 48e853ff129fd5046bb2e1738c428eb0,
         type: 3}
@@ -39939,12 +39944,12 @@ PrefabInstance:
     - target: {fileID: 4815034753132920672, guid: 48e853ff129fd5046bb2e1738c428eb0,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.17
+      value: -44.2
       objectReference: {fileID: 0}
     - target: {fileID: 4815034753132920672, guid: 48e853ff129fd5046bb2e1738c428eb0,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.7
+      value: 104.3
       objectReference: {fileID: 0}
     - target: {fileID: 4815034753132920673, guid: 48e853ff129fd5046bb2e1738c428eb0,
         type: 3}
@@ -39964,7 +39969,12 @@ PrefabInstance:
     - target: {fileID: 4815034753132920687, guid: 48e853ff129fd5046bb2e1738c428eb0,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4815034753132920687, guid: 48e853ff129fd5046bb2e1738c428eb0,
+        type: 3}
+      propertyPath: m_TagString
+      value: E2
       objectReference: {fileID: 0}
     - target: {fileID: 4815034753760016232, guid: 48e853ff129fd5046bb2e1738c428eb0,
         type: 3}
@@ -83167,7 +83177,7 @@ PrefabInstance:
     - target: {fileID: 4815034752210865345, guid: 48e853ff129fd5046bb2e1738c428eb0,
         type: 3}
       propertyPath: scene
-      value: 16
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 4815034752210865345, guid: 48e853ff129fd5046bb2e1738c428eb0,
         type: 3}
