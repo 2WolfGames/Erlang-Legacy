@@ -14,6 +14,10 @@ namespace Core.UI
     {
         [SerializeField] SkeletonGraphic skeletonGraphic;
         [SerializeField] GameObject settingsMenu;
+        [SerializeField] GameObject selectGameMenu;
+        [SerializeField] GameObject selectGameMenuSelector;
+        [SerializeField] Transform optionCurrentGame;
+        [SerializeField] Transform optionNewGame;
         [SerializeField] Image worldImage;
         [SerializeField] Image cloudsImage;
 
@@ -24,6 +28,8 @@ namespace Core.UI
 
         private int option;
         private bool inSettingsPage = false;
+        private bool inSelectGameMenu = false;
+        private int optionSelectGameMenu = 0;
         private AudioSource audioSource;
 
         private void Awake()
@@ -37,6 +43,7 @@ namespace Core.UI
         {
             skeletonGraphic.AnimationState.SetAnimation(1, "init", false);
             skeletonGraphic.AnimationState.AddAnimation(1, "hoverInStart", false, 0);
+            MoveSelectGameSelector();
             option = 0;
         }
 
@@ -47,6 +54,7 @@ namespace Core.UI
             if (inSettingsPage)
                 return;
 
+            ManageSelectGameMenu();
             ManageOptions();
         }
 
@@ -69,6 +77,7 @@ namespace Core.UI
                     PlayNavigationSound();
                     OnStartGameHoverOut();
                     OnSettingsHoverIn();
+                    HideSelectGameMenu();
                     option = 1;
                 }
                 else if (Input.GetKeyDown(KeyCode.Space))
@@ -117,6 +126,44 @@ namespace Core.UI
             }
         }
 
+        private void ManageSelectGameMenu()
+        {
+            if (!inSelectGameMenu)
+                return;
+
+            if (optionSelectGameMenu == 0)
+            { //current game
+                if (Input.GetKeyDown(KeyCode.D))
+                {
+                    optionSelectGameMenu = 1;
+                    PlayNavigationSound();
+                    MoveSelectGameSelector();
+                }
+                else if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    Debug.Log("current");
+                    //PlaySelectSound();
+                    LoadCurrentGame();
+                }
+            }
+            else
+            { //op == 1 //new game 
+                if (Input.GetKeyDown(KeyCode.A))
+                {
+                    optionSelectGameMenu = 0;
+                    PlayNavigationSound();
+                    MoveSelectGameSelector();
+                }
+                else if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    Debug.Log("new");
+                    //PlaySelectSound();
+                    LoadNewGame();
+                }
+            }
+
+        }
+
         private void PlaySelectSound()
         {
             SoundManager soundManager = SoundManager.Instance;
@@ -142,9 +189,26 @@ namespace Core.UI
         {
             if (!SaveSystem.SaveGameExists())
             {
-                //Crear inicial file
-                SaveSystem.InitializeGame();
+                LoadNewGame();
             }
+            else
+            {
+                OpenSelectGameMenu();
+            }
+
+        }
+
+        private void LoadNewGame()
+        {
+            //Crear inicial file
+            SaveSystem.InitializeGame();
+            PlayerState playerState = SaveSystem.LoadPlayerState();
+            GameSessionController.Instance.LoadData = true;
+            StartCoroutine(Loader.LoadWithDelay((SceneID)playerState.scene, 0));
+        }
+
+        private void LoadCurrentGame()
+        {
             PlayerState playerState = SaveSystem.LoadPlayerState();
             GameSessionController.Instance.LoadData = true;
             StartCoroutine(Loader.LoadWithDelay((SceneID)playerState.scene, 0));
@@ -165,6 +229,21 @@ namespace Core.UI
         {
             settingsMenu.SetActive(false);
             inSettingsPage = false;
+        }
+
+        void OpenSelectGameMenu()
+        {
+            if (inSelectGameMenu)
+                return;
+
+            selectGameMenu.GetComponent<CanvasGroup>().alpha = 1;
+            inSelectGameMenu = true;
+        }
+
+        void HideSelectGameMenu()
+        {
+            selectGameMenu.GetComponent<CanvasGroup>().alpha = 0;
+            inSelectGameMenu = false;
         }
 
         //Animations interactions with menu 
@@ -197,6 +276,24 @@ namespace Core.UI
         public void OnQuitHoverOut()
         {
             skeletonGraphic.AnimationState.AddAnimation(1, "hoverOutQuit", false, 0);
+        }
+
+        private void MoveSelectGameSelector()
+        {
+            if (optionSelectGameMenu == 0)
+            {
+                selectGameMenuSelector.transform.position = new Vector3(
+                    optionCurrentGame.transform.position.x,
+                    selectGameMenuSelector.transform.position.y,
+                    selectGameMenuSelector.transform.position.z);
+            }
+            else
+            {
+                selectGameMenuSelector.transform.position = new Vector3(
+                    optionNewGame.transform.position.x,
+                    selectGameMenuSelector.transform.position.y,
+                    selectGameMenuSelector.transform.position.z);
+            }
         }
 
         #endregion

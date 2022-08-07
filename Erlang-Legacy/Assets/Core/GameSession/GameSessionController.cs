@@ -190,6 +190,7 @@ namespace Core.GameSession
             AbilitiesAcquired adquiredAbilities = abilityController.abilitiesAcquired;
             adquiredAbilities.DashAcquired = dashAcquired;
             adquiredAbilities.RayAcquired = rayAcquired;
+            Debug.Log("Dash: " + dashAcquired);
         }
 
         //pre: entranceTag is not EntranceID.None
