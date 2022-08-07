@@ -71,4 +71,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Cinematographics/Cinematographic_Intro_P2.unity
     guid: 985487f86b6760044abd919d0ce25f05
+  - enabled: 1
+    path: Assets/Scenes/Cinematographics/EndGameScene.unity
+    guid: 777a00c27b6d9fe4f9305037ee56e136
   m_configObjects: {}
