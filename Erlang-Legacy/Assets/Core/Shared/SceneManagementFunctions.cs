@@ -20,6 +20,9 @@ namespace Core.Shared
             {
                 return SceneID.LoadingScene;
             }
+            else if (currentScene == SceneID.EndGameScene.ToString()){
+                return SceneID.EndGameScene;
+            }
             else if (currentScene == SceneID.OmedIsland_Zone1.ToString())
             {
                 return SceneID.OmedIsland_Zone1;
@@ -106,6 +109,7 @@ namespace Core.Shared
             string currentScene = SceneManager.GetActiveScene().name;
             if (currentScene == SceneID.StartMenu.ToString() ||
             currentScene == SceneID.LoadingScene.ToString() ||
+            currentScene == SceneID.EndGameScene.ToString() ||
             currentScene == SceneID.Cinematographic_Intro_P1.ToString() ||
             currentScene == SceneID.Cinematographic_Intro_P2.ToString())
             {
