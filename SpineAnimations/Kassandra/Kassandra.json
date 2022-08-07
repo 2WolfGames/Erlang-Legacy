@@ -1,0 +1,44 @@
+{"skeleton":{"images":"images"},
+"bones":[{"name":"root"}],
+"slots":[
+	{"name":"TrenaDreta","bone":"root","attachment":"TrenaDreta"},
+	{"name":"TrenaEsquerra","bone":"root","attachment":"TrenaEsquerra"},
+	{"name":"MaEsquerra","bone":"root","attachment":"MaEsquerra"},
+	{"name":"BracEsquerra","bone":"root","attachment":"BracEsquerra"},
+	{"name":"PeuEsquerra","bone":"root","attachment":"PeuEsquerra"},
+	{"name":"CamaESquerra","bone":"root","attachment":"CamaESquerra"},
+	{"name":"Torc","bone":"root","attachment":"Torc"},
+	{"name":"PeuDret","bone":"root","attachment":"PeuDret"},
+	{"name":"CamaDreta","bone":"root","attachment":"CamaDreta"},
+	{"name":"BracDret","bone":"root","attachment":"BracDret"},
+	{"name":"MaDreta","bone":"root","attachment":"MaDreta"},
+	{"name":"Parpelles","bone":"root","attachment":"Parpelles"},
+	{"name":"Cap","bone":"root","attachment":"Cap"},
+	{"name":"CellaEsquerra","bone":"root","attachment":"CellaEsquerra"},
+	{"name":"CellaDreta","bone":"root","attachment":"CellaDreta"},
+	{"name":"FlequilloEsquerra","bone":"root","attachment":"FlequilloEsquerra"},
+	{"name":"FlequilloDret","bone":"root","attachment":"FlequilloDret"}
+],
+"skins":{
+	"default":{
+		"FlequilloDret":{"FlequilloDret":{"x":1125.48,"y":-249.96,"width":56,"height":52}},
+		"FlequilloEsquerra":{"FlequilloEsquerra":{"x":1070.98,"y":-250.46,"width":53,"height":53}},
+		"CellaDreta":{"CellaDreta":{"x":1110.27,"y":-274.98,"width":14,"height":3}},
+		"CellaEsquerra":{"CellaEsquerra":{"x":1069.00,"y":-274.50,"width":14,"height":3}},
+		"Cap":{"Cap":{"x":1105.73,"y":-274.96,"width":142,"height":112}},
+		"Parpelles":{"Parpelles":{"x":1091.24,"y":-265.96,"width":66,"height":22}},
+		"MaDreta":{"MaDreta":{"x":1166.77,"y":-461.49,"width":30,"height":85}},
+		"BracDret":{"BracDret":{"x":1154.50,"y":-387.10,"width":75,"height":108}},
+		"CamaDreta":{"CamaDreta":{"x":1119.00,"y":-509.83,"width":28,"height":114}},
+		"PeuDret":{"PeuDret":{"x":1105.70,"y":-583.95,"width":55,"height":120}},
+		"Torc":{"Torc":{"x":1101.00,"y":-414.00,"width":96,"height":130}},
+		"CamaESquerra":{"CamaESquerra":{"x":1082.00,"y":-498.83,"width":28,"height":114}},
+		"PeuEsquerra":{"PeuEsquerra":{"x":1068.50,"y":-583.95,"width":55,"height":120}},
+		"BracEsquerra":{"BracEsquerra":{"x":1051.75,"y":-386.64,"width":75,"height":107}},
+		"MaEsquerra":{"MaEsquerra":{"x":1015.77,"y":-452.50,"width":66,"height":70}},
+		"TrenaEsquerra":{"TrenaEsquerra":{"x":1191.18,"y":-367.66,"width":107,"height":376}},
+		"TrenaDreta":{"TrenaDreta":{"x":1014.98,"y":-372.15,"width":107,"height":376}}
+	}
+},
+"animations":{"animation":{}}
+}
