@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -40684,8 +40684,8 @@ MonoBehaviour:
   captainJava_Dialogue2_Data:
     npcName: Captain Java
     phrases:
-    - Your sister sents me.
-    - She said something about taking care of your dad's lab now that he is death.
+    - Your sister sent me to find you.
+    - She said something about taking care of your dad's lab now that he is dead.
     - Mr C. was a big asshole letting all those creatures in town.
     - 'I''ll wait for you in the ship. Don''t be late. '
     npcActions: 01000000010000000100000001000000
@@ -42270,7 +42270,7 @@ PrefabInstance:
     - target: {fileID: 9117715256540725157, guid: 144ba70820a80d7428eccc3270f4fca9,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 119.56032
+      value: 119.55099
       objectReference: {fileID: 0}
     - target: {fileID: 9117715256540725157, guid: 144ba70820a80d7428eccc3270f4fca9,
         type: 3}
@@ -71233,17 +71233,17 @@ PrefabInstance:
     - target: {fileID: 963182352250167341, guid: dbec3a056c2111f4689a8fa1426589bb,
         type: 3}
       propertyPath: npcData.phrases.Array.data[0]
-      value: 'That was you? '
+      value: Woow!
       objectReference: {fileID: 0}
     - target: {fileID: 963182352250167341, guid: dbec3a056c2111f4689a8fa1426589bb,
         type: 3}
       propertyPath: npcData.phrases.Array.data[1]
-      value: I thought that a rock fell from the mountain...
+      value: I thought a stone had fallen from the mountain...
       objectReference: {fileID: 0}
     - target: {fileID: 963182352250167341, guid: dbec3a056c2111f4689a8fa1426589bb,
         type: 3}
       propertyPath: npcData.phrases.Array.data[2]
-      value: 'You are lucky for that metal body you dad gave you. '
+      value: You're lucky to have that metal body.
       objectReference: {fileID: 0}
     - target: {fileID: 963182352250167341, guid: dbec3a056c2111f4689a8fa1426589bb,
         type: 3}

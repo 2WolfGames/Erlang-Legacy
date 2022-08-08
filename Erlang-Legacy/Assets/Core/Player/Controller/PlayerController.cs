@@ -126,7 +126,7 @@ namespace Core.Player.Controller
         // post: enable scripts & returns normal game constants
         private void OnUnblockUI()
         {
-            Debug.Log("freeze game play");
+            //Debug.Log("freeze game play");
             // reset global game constant to normal state if needed...
         }
 
@@ -135,7 +135,7 @@ namespace Core.Player.Controller
         // PROP: instead of freezing player we can make time slow 
         public void OnBlockUI()
         {
-            Debug.Log("unfreeze game play");
+            //Debug.Log("unfreeze game play");
         }
 
         public void Heal()

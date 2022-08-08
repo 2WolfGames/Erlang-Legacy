@@ -58810,7 +58810,7 @@ PrefabInstance:
     - target: {fileID: 5625281659813403158, guid: 3a92e288e57aab644a0656c959990934,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 152
+      value: 135.46
       objectReference: {fileID: 0}
     - target: {fileID: 5625281659813403158, guid: 3a92e288e57aab644a0656c959990934,
         type: 3}
@@ -59766,6 +59766,11 @@ PrefabInstance:
       propertyPath: conversationClips.Array.data[1]
       value: 
       objectReference: {fileID: 8300000, guid: 60795f46ceff1d34283b0349f0705a72, type: 3}
+    - target: {fileID: 8523642943090073849, guid: 73188a3deb179564aa6d9cbc6bcde66e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.29
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 73188a3deb179564aa6d9cbc6bcde66e, type: 3}
 --- !u!4 &827865970 stripped
@@ -61208,7 +61213,7 @@ PrefabInstance:
     - target: {fileID: 9117715256540725157, guid: 144ba70820a80d7428eccc3270f4fca9,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -12.732672
+      value: -12.73269
       objectReference: {fileID: 0}
     - target: {fileID: 9117715257027125277, guid: 144ba70820a80d7428eccc3270f4fca9,
         type: 3}
