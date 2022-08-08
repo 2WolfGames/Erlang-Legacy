@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 using Core.Player.Utility;
+using Core.Utility;
+using Core.Manager;
 
 namespace Core.Environment
 {
@@ -9,10 +11,11 @@ namespace Core.Environment
         [SerializeField] Sprite treasureClose;
         [SerializeField] Sprite treasureOpen;
         [SerializeField] GameObject onOpenParticleEffect;
+        [SerializeField] AudioClip openSound;
         SpriteRenderer spriteRenderer => GetComponent<SpriteRenderer>();
         public UnityEvent OnOpen;
-        bool playerIn = false;
-        bool treasureOpened = false;
+        private bool playerIn = false;
+        private bool treasureOpened = false;
 
         //pre: --
         //post: we assure that treasure is closed
@@ -54,6 +57,7 @@ namespace Core.Environment
         //post: OnOpen ic called and treasure remains opened
         private void OpenTreasure()
         {
+            SoundManager.Instance?.PlaySound(openSound, 1f, GetComponentInChildren<AudioSource>());
             treasureOpened = true;
             spriteRenderer.sprite = treasureOpen;
             //event
@@ -62,7 +66,8 @@ namespace Core.Environment
             {
                 Debug.LogWarning("OnOpen is null");
             }
-            Instantiate(onOpenParticleEffect, transform.position, transform.rotation);
+            var instance = Instantiate(onOpenParticleEffect, transform.position, transform.rotation);
+            instance.gameObject.Disposable(10f);
         }
     }
 }
