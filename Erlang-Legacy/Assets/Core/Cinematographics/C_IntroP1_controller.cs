@@ -56,7 +56,6 @@ namespace Core.Cinematographics
         //post: Game title fades out
         void HideTitle()
         {
-            Debug.Log("HideTitle");
             gameTitle.DOFade(0, 3f).SetDelay(5f).OnComplete(() =>
             {
                 AjaxIsKicked();
