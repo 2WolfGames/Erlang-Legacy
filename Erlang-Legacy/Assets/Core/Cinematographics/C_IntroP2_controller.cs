@@ -6,6 +6,7 @@ using Core.Shared;
 using Core.Player.Controller;
 using Core.Shared.Enum;
 using Core.NPC;
+using Core.Shared.SaveSystem;
 
 namespace Core.Cinematographics
 {
@@ -61,6 +62,8 @@ namespace Core.Cinematographics
         //      loads first playable scene.
         void StartGame()
         {
+            //Save game on first scene so user doesen't have to re watch every time this into
+            SaveSystem.SaveGameAfterFirstCinematographic();
             StartCoroutine(Loader.LoadWithDelay(SceneID.OmedIsland_Zone1, 0.1f));
         }
 

@@ -141,7 +141,6 @@ namespace Core.UI
                 }
                 else if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    Debug.Log("current");
                     //PlaySelectSound();
                     LoadCurrentGame();
                 }
@@ -156,7 +155,6 @@ namespace Core.UI
                 }
                 else if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    Debug.Log("new");
                     //PlaySelectSound();
                     LoadNewGame();
                 }
