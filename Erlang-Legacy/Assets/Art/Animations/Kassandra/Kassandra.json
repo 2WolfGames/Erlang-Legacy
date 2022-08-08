@@ -1,0 +1,401 @@
+{
+"skeleton": {
+	"hash": "sheAZiLOTPA",
+	"spine": "4.0.64",
+	"x": 182.99,
+	"y": 0.99,
+	"width": 284.2,
+	"height": 466.73,
+	"images": "./images/",
+	"audio": "C:/Unity/Erlang-Legacy/SpineAnimations/Kassandra"
+},
+"bones": [
+	{ "name": "root", "x": 320.12, "y": 174.46 },
+	{ "name": "torc", "parent": "root", "length": 122.82, "rotation": 89.55 },
+	{ "name": "cap", "parent": "torc", "length": 108.2, "rotation": 0.45, "x": 142.31, "y": 1.13 },
+	{ "name": "bracdret", "parent": "torc", "length": 93.1, "rotation": -161.87, "x": 129.96, "y": -39.91 },
+	{ "name": "madreta", "parent": "bracdret", "length": 68.24, "rotation": -18.49, "x": 95.25, "y": 0.34 },
+	{ "name": "bracesquerra", "parent": "torc", "length": 102.05, "rotation": 163.23, "x": 137.17, "y": 34.23 },
+	{ "name": "maesquerra", "parent": "bracesquerra", "length": 72.37, "rotation": -27.23, "x": 100.54, "y": 1.57 },
+	{ "name": "camadreta", "parent": "torc", "length": 85.78, "rotation": -178.89, "x": 8.97, "y": -20.4 },
+	{ "name": "peudret", "parent": "camadreta", "length": 87.75, "rotation": 0.62, "x": 88.67, "y": -2.96 },
+	{ "name": "camaesquerra", "parent": "torc", "length": 81.9, "rotation": -178.18, "x": 9.6, "y": 18.6 },
+	{ "name": "peuesquerra", "parent": "camaesquerra", "length": 86.84, "rotation": -3.94, "x": 87.73, "y": -1.11 },
+	{ "name": "parpelles", "parent": "cap", "length": 25.7, "rotation": 179.31, "x": 85.41, "y": 4.83 },
+	{ "name": "celladreta", "parent": "cap", "length": 13.42, "rotation": -93.95, "x": 56.18, "y": -5.48 },
+	{ "name": "cellaesquerra", "parent": "cap", "length": 13.39, "rotation": 91.97, "x": 55.72, "y": 22.68 },
+	{ "name": "flequillodret", "parent": "cap", "length": 70.83, "rotation": -134.74, "x": 105.42, "y": -3.79 },
+	{ "name": "flequilloesquerra", "parent": "cap", "length": 70.2, "rotation": 136.51, "x": 105.26, "y": 4.37 },
+	{ "name": "trenaesquerra", "parent": "cap", "length": 312.53, "rotation": -179.44, "x": 102.42, "y": 87.53 },
+	{ "name": "trenadreta", "parent": "cap", "length": 360.64, "rotation": -179.84, "x": 140.91, "y": -93.8 }
+],
+"slots": [
+	{ "name": "TrenaDreta", "bone": "trenaesquerra", "attachment": "TrenaDreta" },
+	{ "name": "TrenaEsquerra", "bone": "trenadreta", "attachment": "TrenaEsquerra" },
+	{ "name": "MaEsquerra", "bone": "maesquerra", "attachment": "MaEsquerra" },
+	{ "name": "BracEsquerra", "bone": "bracesquerra", "attachment": "BracEsquerra" },
+	{ "name": "PeuEsquerra", "bone": "peuesquerra", "attachment": "PeuEsquerra" },
+	{ "name": "CamaESquerra", "bone": "camaesquerra", "attachment": "CamaESquerra" },
+	{ "name": "Torc", "bone": "torc", "attachment": "Torc" },
+	{ "name": "PeuDret", "bone": "peudret", "attachment": "PeuDret" },
+	{ "name": "CamaDreta", "bone": "camadreta", "attachment": "CamaDreta" },
+	{ "name": "BracDret", "bone": "bracdret", "attachment": "BracDret" },
+	{ "name": "MaDreta", "bone": "madreta", "attachment": "MaDreta" },
+	{ "name": "Cap", "bone": "cap", "attachment": "Cap" },
+	{ "name": "Parpelles", "bone": "parpelles", "attachment": "Parpelles" },
+	{ "name": "CellaEsquerra", "bone": "cellaesquerra", "attachment": "CellaEsquerra" },
+	{ "name": "CellaDreta", "bone": "celladreta", "attachment": "CellaDreta" },
+	{ "name": "FlequilloEsquerra", "bone": "flequilloesquerra", "attachment": "FlequilloEsquerra" },
+	{ "name": "FlequilloDret", "bone": "flequillodret", "attachment": "FlequilloDret" }
+],
+"skins": [
+	{
+		"name": "default",
+		"attachments": {
+			"BracDret": {
+				"BracDret": { "x": 46.92, "y": 1.26, "rotation": 72.32, "width": 75, "height": 110 }
+			},
+			"BracEsquerra": {
+				"BracEsquerra": { "x": 53.26, "y": 2.67, "rotation": 107.22, "width": 76, "height": 108 }
+			},
+			"CamaDreta": {
+				"CamaDreta": { "x": 47.16, "y": -0.12, "rotation": 89.35, "width": 29, "height": 115 }
+			},
+			"CamaESquerra": {
+				"CamaESquerra": { "x": 36.2, "y": 1.55, "rotation": 88.64, "width": 29, "height": 115 }
+			},
+			"Cap": {
+				"Cap": { "x": 55.15, "y": -7.62, "rotation": -90, "width": 143, "height": 113 }
+			},
+			"CellaDreta": {
+				"CellaDreta": { "x": 6.73, "y": -0.59, "rotation": 3.95, "width": 15, "height": 4 }
+			},
+			"CellaEsquerra": {
+				"CellaEsquerra": { "x": 6.44, "y": -0.11, "rotation": 178.03, "width": 14, "height": 5 }
+			},
+			"FlequilloDret": {
+				"FlequilloDret": { "x": 34.53, "y": -1.35, "rotation": 44.74, "width": 57, "height": 53 }
+			},
+			"FlequilloEsquerra": {
+				"FlequilloEsquerra": { "x": 34.25, "y": 1.11, "rotation": 133.49, "width": 54, "height": 54 }
+			},
+			"MaDreta": {
+				"MaDreta": { "x": 28.08, "y": -1.12, "rotation": 90.82, "width": 31, "height": 85 }
+			},
+			"MaEsquerra": {
+				"MaEsquerra": { "x": 29.66, "y": -0.22, "rotation": 134.45, "width": 67, "height": 71 }
+			},
+			"Parpelles": {
+				"Parpelles": { "x": 21.29, "y": -1.79, "rotation": 90.69, "width": 67, "height": 23 }
+			},
+			"PeuDret": {
+				"PeuDret": { "x": 32.32, "y": -11.65, "rotation": 88.73, "width": 56, "height": 122 }
+			},
+			"PeuEsquerra": {
+				"PeuEsquerra": { "x": 34.06, "y": -10.55, "rotation": 92.57, "width": 57, "height": 121 }
+			},
+			"Torc": {
+				"Torc": { "x": 58.44, "y": -2.42, "rotation": -89.55, "width": 97, "height": 131 }
+			},
+			"TrenaDreta": {
+				"TrenaDreta": { "x": 144.49, "y": 3, "rotation": 89.44, "width": 108, "height": 378 }
+			},
+			"TrenaEsquerra": {
+				"TrenaEsquerra": { "x": 178.46, "y": -1.23, "rotation": 89.84, "width": 108, "height": 377 }
+			}
+		}
+	}
+],
+"animations": {
+	"hug": {
+		"bones": {
+			"bracesquerra": {
+				"rotate": [
+					{ "value": 8.39 }
+				],
+				"translate": [
+					{},
+					{ "time": 0.3, "x": -4.46, "y": -39.28 }
+				]
+			},
+			"maesquerra": {
+				"rotate": [
+					{ "value": 17.74 }
+				]
+			},
+			"torc": {
+				"rotate": [
+					{},
+					{ "time": 0.3, "value": 6.93 }
+				]
+			},
+			"camaesquerra": {
+				"rotate": [
+					{},
+					{ "time": 0.3, "value": -1.84 }
+				],
+				"translate": [
+					{},
+					{ "time": 0.3, "x": -0.23, "y": -2.07 }
+				]
+			},
+			"camadreta": {
+				"rotate": [
+					{},
+					{ "time": 0.3, "value": -6.21 }
+				],
+				"translate": [
+					{},
+					{ "time": 0.3, "x": -4.13, "y": 0.47 }
+				]
+			},
+			"parpelles": {
+				"translate": [
+					{},
+					{ "time": 0.3, "x": -12.39, "y": 1.51 }
+				]
+			},
+			"trenaesquerra": {
+				"rotate": [
+					{},
+					{ "time": 0.3, "value": -8.75 }
+				]
+			},
+			"trenadreta": {
+				"rotate": [
+					{},
+					{ "time": 0.3, "value": -9.58 }
+				]
+			},
+			"bracdret": {
+				"rotate": [
+					{},
+					{ "time": 0.3, "value": -92.02 }
+				],
+				"translate": [
+					{},
+					{ "time": 0.3, "x": 7.04, "y": 62.02 }
+				]
+			},
+			"peuesquerra": {
+				"rotate": [
+					{},
+					{ "time": 0.3, "value": -6.1 }
+				]
+			},
+			"flequillodret": {
+				"rotate": [
+					{},
+					{ "time": 0.3, "value": -0.27 }
+				]
+			},
+			"flequilloesquerra": {
+				"rotate": [
+					{},
+					{ "time": 0.3, "value": 5.52 }
+				]
+			}
+		}
+	},
+	"idle": {
+		"bones": {
+			"maesquerra": {
+				"rotate": [
+					{ "value": 12.86, "curve": "stepped" },
+					{ "time": 2.1667, "value": 12.86 },
+					{ "time": 2.3333, "value": -11.26 },
+					{ "time": 2.5, "value": 14.15 },
+					{ "time": 2.6667, "value": -16.46 },
+					{ "time": 2.8333, "value": 19.78 },
+					{ "time": 3, "value": 12.86 }
+				]
+			},
+			"bracesquerra": {
+				"rotate": [
+					{ "value": 9.77 },
+					{ "time": 1.6667, "value": 9.75 },
+					{ "time": 2, "value": 9.77 },
+					{ "time": 2.3333, "value": -23.23, "curve": "stepped" },
+					{ "time": 2.6667, "value": -23.23 },
+					{ "time": 3, "value": 9.77 }
+				]
+			},
+			"bracdret": {
+				"rotate": [
+					{ "value": -9.92 }
+				]
+			},
+			"torc": {
+				"translate": [
+					{ "y": -1.88 },
+					{ "time": 1 },
+					{ "time": 2, "y": -0.94 },
+					{ "time": 3 },
+					{ "time": 4, "y": -0.94 }
+				],
+				"scale": [
+					{},
+					{ "time": 1, "x": 1.01 },
+					{ "time": 2 },
+					{ "time": 3, "x": 1.01 },
+					{ "time": 4 }
+				]
+			},
+			"parpelles": {
+				"translate": [
+					{ "time": 2.1667 },
+					{ "time": 2.2667, "x": -13.55, "y": 2.26 },
+					{ "time": 2.3667, "x": 2.24, "y": 2.26 }
+				]
+			}
+		}
+	},
+	"run": {
+		"bones": {
+			"torc": {
+				"rotate": [
+					{ "value": 11.52 },
+					{ "time": 0.1667, "value": 16.81 },
+					{ "time": 0.4333, "value": 12.42 },
+					{ "time": 0.6, "value": 16.76 },
+					{ "time": 0.8333, "value": 11.52 }
+				],
+				"translate": [
+					{ "y": 4.16 },
+					{ "time": 0.4333, "y": -16.65 },
+					{ "time": 0.8333, "y": 4.16 }
+				]
+			},
+			"cap": {
+				"rotate": [
+					{ "value": -10.94 },
+					{ "time": 0.2, "value": -16.95 },
+					{ "time": 0.4, "value": -10.23 },
+					{ "time": 0.5667, "value": -15.13 },
+					{ "time": 0.8333, "value": -10.94 }
+				],
+				"translate": [
+					{ "x": 1.6, "y": -4.37 }
+				]
+			},
+			"trenaesquerra": {
+				"rotate": [
+					{ "value": 11.55 },
+					{ "time": 0.1667, "value": 1.37 },
+					{ "time": 0.3333, "value": 16.99 },
+					{ "time": 0.5, "value": 8.52 },
+					{ "time": 0.6667, "value": 18.68 },
+					{ "time": 0.8333, "value": 11.55 }
+				],
+				"translate": [
+					{ "x": 0.29, "y": -13.49 }
+				]
+			},
+			"trenadreta": {
+				"rotate": [
+					{ "value": 14.18 },
+					{ "time": 0.1667, "value": 22.35 },
+					{ "time": 0.3333, "value": 12.49 },
+					{ "time": 0.5, "value": 24.69 },
+					{ "time": 0.6667, "value": 10.84 },
+					{ "time": 0.8333, "value": 14.18 }
+				],
+				"translate": [
+					{ "x": 14.16, "y": 21.67 }
+				]
+			},
+			"camadreta": {
+				"rotate": [
+					{ "value": 17.39 },
+					{ "time": 0.1667, "value": -56.07 },
+					{ "time": 0.4333, "value": -50.33 },
+					{ "time": 0.6, "value": -39.79 },
+					{ "time": 0.8333, "value": 17.39 }
+				],
+				"translate": [
+					{ "x": 9.88, "y": -5.29 },
+					{ "time": 0.1667, "x": 8.08, "y": -4.98 },
+					{ "time": 0.4333, "x": 5.81, "y": -8.78 },
+					{ "time": 0.8333, "x": 9.88, "y": -5.29 }
+				]
+			},
+			"peudret": {
+				"rotate": [
+					{ "value": 67.24 },
+					{ "time": 0.1667, "value": 108.52 },
+					{ "time": 0.4333, "value": 40.47 },
+					{ "time": 0.6, "value": 2.13 },
+					{ "time": 0.8333, "value": 67.24 }
+				],
+				"translate": [
+					{ "x": 8.57, "y": 14.44 },
+					{ "time": 0.1667, "x": 5.45, "y": 16.55 },
+					{ "time": 0.4333, "x": 14.99, "y": 6.26 },
+					{ "time": 0.6, "x": 2.62, "y": 1.25 },
+					{ "time": 0.8333, "x": 8.57, "y": 14.44 }
+				]
+			},
+			"camaesquerra": {
+				"rotate": [
+					{ "value": -13.38 },
+					{ "time": 0.1667, "value": 15.96 },
+					{ "time": 0.4333, "value": 35.94 },
+					{ "time": 0.6, "value": 24.99 },
+					{ "time": 0.8333, "value": -13.38 }
+				],
+				"translate": [
+					{ "x": -0.83, "y": 1.74 },
+					{ "time": 0.4333, "x": -1.27, "y": -1.75 },
+					{ "time": 0.6, "x": 11.23, "y": 1.96 },
+					{ "time": 0.8333, "x": -0.83, "y": 1.74 }
+				]
+			},
+			"peuesquerra": {
+				"rotate": [
+					{ "value": 1.85 },
+					{ "time": 0.4333, "value": 59.83 },
+					{ "time": 0.6, "value": 23.51 },
+					{ "time": 0.8333, "value": 1.85 }
+				],
+				"translate": [
+					{},
+					{ "time": 0.4333, "x": -0.68, "y": 11.84 },
+					{ "time": 0.6, "x": 9.57, "y": 5.42 },
+					{ "time": 0.8333 }
+				]
+			},
+			"bracesquerra": {
+				"rotate": [
+					{ "value": -24.18 },
+					{ "time": 0.3333, "value": 10.79 },
+					{ "time": 0.8333, "value": -24.18 }
+				],
+				"translate": [
+					{ "x": -2.19, "y": -10.22 }
+				]
+			},
+			"maesquerra": {
+				"rotate": [
+					{ "value": -45.81 },
+					{ "time": 0.3333, "value": -10.95 },
+					{ "time": 0.8333, "value": -45.81 }
+				]
+			},
+			"bracdret": {
+				"rotate": [
+					{ "value": 32.86 },
+					{ "time": 0.3333, "value": -19.76 },
+					{ "time": 0.8333, "value": 32.86 }
+				]
+			},
+			"madreta": {
+				"rotate": [
+					{ "value": -58.89 },
+					{ "time": 0.3333, "value": -14.03 },
+					{ "time": 0.8333, "value": -58.89 }
+				]
+			}
+		}
+	}
+}
+}

@@ -4,6 +4,7 @@ using Core.Player.Utility;
 using Core.Shared;
 using UnityEngine;
 using Core.NPC.Util;
+using UnityEngine.Events;
 
 namespace Core.NPC
 {
@@ -12,6 +13,7 @@ namespace Core.NPC
         public NPCData npcData;
         [SerializeField] Transform talkPoint;
         [SerializeField] Animator npcAnimator;
+        public UnityEvent actionAtEndOfConversation;
         private bool playerIn = false;
         private bool inConversation = false;
 
@@ -54,7 +56,7 @@ namespace Core.NPC
         //      starts conversation with NPC
         //      disables player controll 
         //      return when it's conversation is over
-        private void TriggerDialogue()
+        public void TriggerDialogue()
         {
             inConversation = true;
 
@@ -74,6 +76,7 @@ namespace Core.NPC
                 {
                     player.Controllable = true;
                     inConversation = false;
+                    actionAtEndOfConversation?.Invoke();
                 });
             });
         }
