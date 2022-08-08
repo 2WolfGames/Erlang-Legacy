@@ -20,6 +20,7 @@ namespace Core.Cinematographics
         //post: we setup everythig for the cinematographic
         void Start()
         {
+            PlayerController.Instance.Controllable = false;
             PlayerController.Instance.Animator.SetTrigger("die");
             blackTransition.DOFade(0, 4f).SetDelay(3f).OnComplete(() =>
             {
@@ -38,7 +39,7 @@ namespace Core.Cinematographics
         //post: this method is called when first dialogue ends. 
         //      set ups second dialogue
         public void PositionEverythingForSecondDialogue()
-        {
+        {   
             PlayerController.Instance.Controllable = false;
             blackTransition.DOFade(1, 2f).OnComplete(() =>
             {
