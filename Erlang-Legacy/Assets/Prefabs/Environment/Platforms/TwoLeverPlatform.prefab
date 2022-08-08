@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 8180181447681122284}
   - component: {fileID: 8180181447681122283}
   - component: {fileID: 7128202444794939822}
+  - component: {fileID: 673181689900442155}
   m_Layer: 12
   m_Name: PlatformLeverA
   m_TagString: Untagged
@@ -282,6 +283,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &673181689900442155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8180181447681122281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af03f1a60496aa74b8c21c717a860d95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  repeat: 0
+  gameKey: 1
+  function: Activate Lever
+  waitTimeBeforeShowingKeys: 0
 --- !u!1 &8180181448126493939
 GameObject:
   m_ObjectHideFlags: 0
@@ -581,6 +598,7 @@ GameObject:
   - component: {fileID: 8180181448656811539}
   - component: {fileID: 8180181448656811538}
   - component: {fileID: 3790460529286657034}
+  - component: {fileID: 1338709428686038611}
   m_Layer: 12
   m_Name: PlatformLeverB
   m_TagString: Untagged
@@ -819,3 +837,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1338709428686038611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8180181448656811536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af03f1a60496aa74b8c21c717a860d95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  repeat: 0
+  gameKey: 1
+  function: Activate Lever
+  waitTimeBeforeShowingKeys: 0
