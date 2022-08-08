@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Core.Player.Controller;
 using DG.Tweening;
+using Core.Manager;
 
 namespace Core.Cinematographics
 {
@@ -13,7 +14,9 @@ namespace Core.Cinematographics
         [SerializeField] Animator kassandraAnimator;
         [SerializeField] Transform startAnimationPoint;
         [SerializeField] Image blackEndImage;
-        bool transitionStarted = false;
+        [SerializeField] AudioClip kassandraClip;
+        private bool transitionStarted = false;
+
 
         //pre: --
         //post: on player colision starts end demo cinematographic 
@@ -39,19 +42,29 @@ namespace Core.Cinematographics
 
             MovePlayer.Trigger(startAnimationPoint, 0f, Face.Left, 1f, () =>
             {
+                KassyNoticeAjaxIsPresent();
                 KassyRunsIntoAjaxArms();
             });
         }
 
+        private void KassyNoticeAjaxIsPresent()
+        {
+            AudioSource audioSource = kassandraBody.GetComponent<AudioSource>();
+            SoundManager soundManager = SoundManager.Instance;
+            soundManager.PlaySound(kassandraClip, 1f, audioSource);
+        }
+
         //pre: --
         //post: Unity Event for the end of Captain Java speach: loads new scene.
-        void KassyRunsIntoAjaxArms()
+        private void KassyRunsIntoAjaxArms()
         {
-            kassandraBody.transform.localScale= new Vector3(-1,1,1);
-            kassandraBody.transform.position = new Vector3(34.44f, 0,0);
-            kassandraBody.transform.DOLocalMoveX(39f,2f).SetDelay(2f).OnStart(() => {
+            kassandraBody.transform.localScale = new Vector3(-1, 1, 1);
+            kassandraBody.transform.position = new Vector3(34.44f, 0, 0);
+            kassandraBody.transform.DOLocalMoveX(39f, 2f).SetDelay(2f).OnStart(() =>
+            {
                 kassandraAnimator.SetTrigger("run");
-            }).OnComplete(() => {
+            }).OnComplete(() =>
+            {
                 kassandraAnimator.SetTrigger("hug");
                 EndGame();
             });
@@ -59,8 +72,10 @@ namespace Core.Cinematographics
 
         //`pre:--
         //post: Show game credits after fade screen away
-        void EndGame(){
-            blackEndImage.DOFade(1,5f).OnComplete(() => {
+        void EndGame()
+        {
+            blackEndImage.DOFade(1, 5f).OnComplete(() =>
+            {
                 StartCoroutine(Loader.LoadWithDelay(SceneID.EndGameScene, 1f));
             });
         }

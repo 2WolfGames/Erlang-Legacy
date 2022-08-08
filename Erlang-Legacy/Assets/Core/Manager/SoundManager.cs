@@ -38,6 +38,7 @@ namespace Core.Manager
                 return;
 
             AudioSource source = src ?? audioSource;
+            source.Stop();
 
             int randomIndex = Random.Range(0, clips.Length);
 
@@ -72,6 +73,7 @@ namespace Core.Manager
             El operador ?? no evalúa su operando derecho 
             si el operando izquierdo se evalúa como no NULL.*/
             AudioSource source = src ?? audioSource;
+            source.Stop();
             source.pitch = pitch;
             source.PlayOneShot(clip, volume);
         }

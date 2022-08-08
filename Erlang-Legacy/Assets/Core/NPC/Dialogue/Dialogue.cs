@@ -9,7 +9,6 @@ using Core.Shared;
 using System;
 using TMPro;
 using Core.Manager;
-using Core.UI;
 using Core.ScriptableEffect;
 
 namespace Core.NPC
@@ -119,6 +118,12 @@ namespace Core.NPC
             }
         }
 
+        private void StopSoundAfterCloseDialogue()
+        {
+            if (audioSource && audioSource.isPlaying)
+                audioSource.Stop();
+        }
+
         private void PlayConversationClip()
         {
             SoundManager soundManager = SoundManager.Instance;
@@ -203,6 +208,8 @@ namespace Core.NPC
 
             nameField.text = string.Empty;
             conversationField.text = string.Empty;
+
+            StopSoundAfterCloseDialogue();
         }
 
         //pre: --
