@@ -66,7 +66,6 @@ namespace Core.Cinematographics
         {
             pigAnimator.transform.DOLocalMoveX(81, 3f).SetDelay(3f).OnStart(() =>
             {
-                //HERE scream 
                 PlayerController.Instance.SetFacing(Face.Right);
                 //HERE starts battle pig music
                 pigAnimator.SetBool("Run", true);
