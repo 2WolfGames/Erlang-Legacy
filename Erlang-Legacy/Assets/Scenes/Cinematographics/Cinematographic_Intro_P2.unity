@@ -40684,8 +40684,8 @@ MonoBehaviour:
   captainJava_Dialogue2_Data:
     npcName: Captain Java
     phrases:
-    - Your sister sents me.
-    - She said something about taking care of your dad's lab now that he is death.
+    - Your sister sent me to find you.
+    - She said something about taking care of your dad's lab now that he is dead.
     - Mr C. was a big asshole letting all those creatures in town.
     - 'I''ll wait for you in the ship. Don''t be late. '
     npcActions: 01000000010000000100000001000000
