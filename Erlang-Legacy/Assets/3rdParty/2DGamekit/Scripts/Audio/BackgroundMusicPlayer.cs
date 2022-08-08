@@ -236,6 +236,7 @@ namespace Gamekit2D
 
         public void Mute(float fadeTime)
         {
+            Debug.Log("Mute");
             MuteJustAmbient(fadeTime);
             MuteJustMusic(fadeTime);
         }

@@ -316,6 +316,8 @@ MonoBehaviour:
   cloud2: {fileID: 1583013945}
   gameTitle: {fileID: 1863780161}
   pigAnimator: {fileID: 1636091016}
+  pigAttackBackgroundMusic: {fileID: 8300000, guid: c1f8eca4a80b8f54289cb229d0fc6f2c,
+    type: 3}
 --- !u!1 &432293498
 GameObject:
   m_ObjectHideFlags: 0
@@ -8766,7 +8768,7 @@ PrefabInstance:
     - target: {fileID: 9117715256540725157, guid: 144ba70820a80d7428eccc3270f4fca9,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 23.797707
+      value: 23.797739
       objectReference: {fileID: 0}
     - target: {fileID: 9117715257027125277, guid: 144ba70820a80d7428eccc3270f4fca9,
         type: 3}

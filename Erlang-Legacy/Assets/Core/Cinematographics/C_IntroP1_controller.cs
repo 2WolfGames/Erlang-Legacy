@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using Core.Shared;
 using Core.Player.Controller;
 using Core.Shared.Enum;
+using Gamekit2D;
 
 namespace Core.Cinematographics
 {
@@ -15,6 +16,7 @@ namespace Core.Cinematographics
         [SerializeField] Image cloud2;
         [SerializeField] Image gameTitle;
         [SerializeField] Animator pigAnimator;
+        [SerializeField] AudioClip pigAttackBackgroundMusic;
 
 
         //pre: --
@@ -54,6 +56,7 @@ namespace Core.Cinematographics
         //post: Game title fades out
         void HideTitle()
         {
+            Debug.Log("HideTitle");
             gameTitle.DOFade(0, 3f).SetDelay(5f).OnComplete(() =>
             {
                 AjaxIsKicked();
@@ -66,19 +69,23 @@ namespace Core.Cinematographics
         {
             pigAnimator.transform.DOLocalMoveX(81, 3f).SetDelay(3f).OnStart(() =>
             {
+                ChangeMusicAtmosphere();
                 PlayerController.Instance.SetFacing(Face.Right);
-                //HERE starts battle pig music
                 pigAnimator.SetBool("Run", true);
             }).OnComplete(() =>
             {
                 pigAnimator.SetBool("Run", false);
                 pigAnimator.transform.localScale = new Vector3(1, 1, 1);
                 pigAnimator.SetTrigger("Coz");
-                pigAnimator.transform.DOLocalMoveX(81, 1f).OnComplete(() =>
-                {
-                    AjaxFalls();
-                });
+                pigAnimator.transform.DOLocalMoveX(81, 1f).OnComplete(AjaxFalls);
             });
+        }
+
+        private void ChangeMusicAtmosphere()
+        {
+            BackgroundMusicPlayer backgroundMusicPlayer = BackgroundMusicPlayer.Instance;
+            backgroundMusicPlayer?.ChangeMusic(pigAttackBackgroundMusic);
+            backgroundMusicPlayer?.Play();
         }
 
         //pre: --
