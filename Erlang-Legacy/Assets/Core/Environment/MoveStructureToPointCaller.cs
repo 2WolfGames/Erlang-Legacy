@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Core.Manager;
 using Core.Player.Utility;
 using UnityEngine;
 
@@ -20,9 +21,9 @@ public class MoveStructureToPointCaller : MonoBehaviour
     [SerializeField] MoveStructureToPoint moveStructureToPointEngine;
     [SerializeField] Rigidbody2D structure;
     [SerializeField] Transform myPoint;
-    bool activated = false;
-    bool playerIn = false;
-
+    [SerializeField] AudioClip activateSound;
+    private bool activated = false;
+    private bool playerIn = false;
 
     //pre: --
     //post: seting defautl sprite to gameobject
@@ -78,8 +79,9 @@ public class MoveStructureToPointCaller : MonoBehaviour
     {
         if (!activated)
         {
+            SoundManager.Instance?.PlaySound(activateSound, 0.5f, GetComponentInChildren<AudioSource>());
             if (!IsStructureOnPoint())
-            {
+            {   
                 ChangeSprite();
                 moveStructureToPointEngine.Activate(myPoint);
                 activated = true;
