@@ -54,12 +54,12 @@ namespace Core.GameSession
             if (nonPlayableScene)
                 return;
 
-            if (loadData)
-            {
-                LoadSavedData();
-                PlacePlayer();
-                PowersPanelManager.Instance.ManagePowersVisibility();
-            }
+            // if (loadData)
+            // {
+            //     LoadSavedData();
+            //     PlacePlayer();
+            //     PowersPanelManager.Instance.ManagePowersVisibility();
+            // }
         }
 
         //pre: --
@@ -128,11 +128,11 @@ namespace Core.GameSession
 
         private Dictionary<Ability, bool> PlayerAbilitiesAdquiredSnapshot()
         {
-            AbilityController abilitiesController = PlayerController.Instance?.GetComponent<AbilityController>();
-            AbilitiesAcquired adquiredAbilities = abilitiesController?.abilitiesAcquired;
+            bool dashActivated = PlayerController.Instance.PlayerData.Abilities.Dash;
+            bool rayActivated = PlayerController.Instance.PlayerData.Abilities.Ray;
             Dictionary<Ability, bool> abilitiesState = new Dictionary<Ability, bool>{
-                {Ability.Dash, adquiredAbilities.Acquired(Ability.Dash)},
-                {Ability.Ray, adquiredAbilities.Acquired(Ability.Ray)},
+                {Ability.Dash, dashActivated},
+                {Ability.Ray, rayActivated},
             };
             return abilitiesState;
         }
@@ -162,6 +162,7 @@ namespace Core.GameSession
         //post: player stats are the ones saved in data
         private int LoadSavedData()
         {
+            Debug.Log("Loading data");
             PlayerState playerState = SaveSystem.LoadPlayerState();
 
             var playerHealth = PlayerController.Instance.PlayerData.Health;
@@ -176,20 +177,34 @@ namespace Core.GameSession
             return playerState.scene;
         }
 
+        // //pre: there is saved data && player.instance != null
+        // //post: player stats are the ones saved in data
+        // private int LoadSavedDataWhenPlayerDied()
+        // {
+        //     Debug.Log("Loading data when died");
+        //     PlayerState playerState = SaveSystem.LoadPlayerState();
+
+        //     var playerHealth = PlayerController.Instance.PlayerData.Health;
+        //     playerHealth.HP = playerState.max_health;
+        //     playerHealth.MaxHP = playerState.max_health;
+
+        //     LoadAbilitiesAdcquired(playerState);
+
+        //     currentSavePos = playerState.GetPosition();
+        //     loadData = false;
+
+        //     return playerState.scene;
+        // }
+
         private void LoadAbilitiesAdcquired(PlayerState playerState)
         {
             bool dashAcquired = false;
             bool rayAcquired = false;
-
             Dictionary<Ability, bool> mem_abilitiesAdquired = playerState.abilitiesAdquired;
-            AbilityController abilityController = PlayerController.Instance.GetComponent<AbilityController>();
-
             mem_abilitiesAdquired.TryGetValue(Ability.Dash, out dashAcquired);
             mem_abilitiesAdquired.TryGetValue(Ability.Ray, out rayAcquired);
-
-            AbilitiesAcquired adquiredAbilities = abilityController.abilitiesAcquired;
-            adquiredAbilities.DashAcquired = dashAcquired;
-            adquiredAbilities.RayAcquired = rayAcquired;
+            PlayerController.Instance.PlayerData.Abilities.Ray = rayAcquired;
+            PlayerController.Instance.PlayerData.Abilities.Dash = dashAcquired;
         }
 
         //pre: entranceTag is not EntranceID.None
