@@ -2,19 +2,20 @@
 using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
 using Core.Environment;
-using Core.IA.Bahavior.SharedVariable;
+using UnityEngine;
 
 namespace Core.AI.Task.FalseKnight
-{  
-    public class OpenDoors  : BehaviorDesigner.Runtime.Tasks.Action
+{
+    public class OpenDoors : BehaviorDesigner.Runtime.Tasks.Action
     {
-        public SharedGenericList<Door> doors;
+        public SharedGameObjectList doors;
         public SharedFloat speed = 1f;
 
         public override TaskStatus OnUpdate()
         {
-            foreach (Door door in doors.Value)
+            foreach (GameObject obj in doors.Value)
             {
+                Door door = obj.GetComponent<Door>();
                 door.Speed = speed.Value;
                 door.Open();
             }

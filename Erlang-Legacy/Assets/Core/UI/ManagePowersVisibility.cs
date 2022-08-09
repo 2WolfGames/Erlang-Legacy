@@ -9,6 +9,7 @@ namespace Core.UI
         [SerializeField] GameObject dashPower;
         [SerializeField] GameObject rayPower;
 
+
         //pre: --
         //post: hides Game Objects depending if player has the abilites or not
         public void ManageAdquiredPowersVisibility()

@@ -1,4 +1,5 @@
 using System.Collections;
+using DG.Tweening;
 using Core.Manager;
 using Core.Utility;
 using UnityEngine;
@@ -7,12 +8,12 @@ namespace Core.Environment
 {
     public class Door : MonoBehaviour, IOpenable, ICloseable
     {
-        [SerializeField] private GameObject objectDoor;
-        [SerializeField] private float speed = 1.0f;
-        [SerializeField] private Transform openPosition;
-        [SerializeField] private Transform closedPosition;
-        [SerializeField] private bool isOpen = false;
-        [SerializeField] private AudioClip doorMovingClip;
+        [SerializeField] GameObject objectDoor;
+        [SerializeField] float speed = 1.0f;
+        [SerializeField] Transform openPosition;
+        [SerializeField] Transform closedPosition;
+        [SerializeField] bool isOpen = false;
+        [SerializeField] AudioClip doorMovingClip;
 
         public float Speed { get => speed; set => speed = value; }
 
@@ -43,14 +44,16 @@ namespace Core.Environment
         {
             if (isOpen) return;
             isOpen = true;
-            StartCoroutine(Move(openPosition.position));
+            tranformDoor.DOMoveY(openPosition.position.y, 0.75f);
+            //StartCoroutine(Move(openPosition.position));
         }
 
         public void Close()
         {
             if (!isOpen) return;
             isOpen = false;
-            StartCoroutine(Move(closedPosition.position));
+            tranformDoor.DOMoveY(closedPosition.position.y, 0.75f);
+            //StartCoroutine(Move(closedPosition.position));
         }
 
         private IEnumerator Move(Vector3 target)

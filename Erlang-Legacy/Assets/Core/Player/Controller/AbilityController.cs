@@ -21,7 +21,7 @@ namespace Core.Player.Controller
         public DamageAreaData damageAreas;
         public ParticleSystem punchParticle;
         public ParticleSystem dashParticle;
-        public AbilitiesAcquired abilitiesAcquired;
+
         public bool Punching => punching;
         private enum Fist { L, R }
         private InteractOnTrigger2D dashTrigger => damageAreas.Dash;
@@ -88,24 +88,40 @@ namespace Core.Player.Controller
 
         public bool AdquiredAbility(Ability ability)
         {
-            if (abilitiesAcquired == null)
-            {
-                Debug.LogError("Please make sure to add abilities scriptable object manager");
-                return false;
-            }
-            return abilitiesAcquired.Acquired(ability);
+            if (ability == Ability.Dash)
+                return HasDash();
+            else if (ability == Ability.Ray)
+                return HasRay();
+
+            return false;
         }
 
-        public void AdquireAbility(Ability ability)
+        private bool HasDash()
         {
-            if (abilitiesAcquired == null)
-            {
-                Debug.LogError("Please make sure to add abilities scriptable object manager");
-            }
-            else
-            {
-                abilitiesAcquired.Acquire(ability);
-            }
+            return PlayerData.Abilities.Dash;
+        }
+
+        private bool HasRay()
+        {
+            return PlayerData.Abilities.Ray;
+        }
+
+        public void ActiveAbility(Ability ability)
+        {
+            if (ability == Ability.Dash)
+                ActiveDash();
+            else if (ability == Ability.Ray)
+                ActiveRay();
+        }
+
+        public void ActiveDash()
+        {
+            PlayerData.Abilities.Dash = true;
+        }
+
+        public void ActiveRay()
+        {
+            PlayerData.Abilities.Ray = true;
         }
 
         private bool CanPunch()
@@ -214,7 +230,7 @@ namespace Core.Player.Controller
 
         // called by ray player animation as event
         public void InvokeRayBallInstance()
-        {   
+        {
             Vector2 force = Vector2.right * FacingValue * projectileSpeed;
             VengefulProjectile instance = Instantiate(projectilePrefab, projectileOrigin.position, Quaternion.identity);
             instance.SetForce(force);

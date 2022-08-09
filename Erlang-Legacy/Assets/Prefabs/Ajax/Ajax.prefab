@@ -465,6 +465,7 @@ MonoBehaviour:
     dashTrailRender: {fileID: 7729203758757745403}
     health: {fileID: 11400000, guid: 38fc894eb3e78bf41a143ce13b99757c, type: 2}
     stats: {fileID: 11400000, guid: 93decfccab4b0ec4ea3f47954ba4b217, type: 2}
+    abilities: {fileID: 11400000, guid: 82610f626fac78549bc9820c99388842, type: 2}
   healEffectParticle: {fileID: 3589104469226228773}
   soundEffects:
     abilityAdquired:
@@ -566,7 +567,6 @@ MonoBehaviour:
     punch: {fileID: 1184085065}
   punchParticle: {fileID: 546977338950529148}
   dashParticle: {fileID: 1597337908403413970}
-  abilitiesAcquired: {fileID: 11400000, guid: 82610f626fac78549bc9820c99388842, type: 2}
 --- !u!114 &6302354587913962444
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -318,7 +318,7 @@ namespace Core.Player.Controller
         {
             if (!AdquiredAbility(ability))
             {
-                abilityController.AdquireAbility(ability);
+                abilityController.ActiveAbility(ability);
                 PowersPanelManager.Instance?.ManagePowersVisibility();
             }
         }
