@@ -59790,12 +59790,12 @@ PrefabInstance:
         type: 3}
       propertyPath: conversationClips.Array.data[0]
       value: 
-      objectReference: {fileID: 8300000, guid: c5e2735077e1fcb44bc949c68d491de6, type: 3}
+      objectReference: {fileID: 8300000, guid: 12fcf1d0f8141504e93ce47f6d81e062, type: 3}
     - target: {fileID: 8523642943039514711, guid: 73188a3deb179564aa6d9cbc6bcde66e,
         type: 3}
       propertyPath: conversationClips.Array.data[1]
       value: 
-      objectReference: {fileID: 8300000, guid: 60795f46ceff1d34283b0349f0705a72, type: 3}
+      objectReference: {fileID: 8300000, guid: da6b921e5d1768644bbb453ecc5fe046, type: 3}
     - target: {fileID: 8523642943090073849, guid: 73188a3deb179564aa6d9cbc6bcde66e,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -61243,7 +61243,7 @@ PrefabInstance:
     - target: {fileID: 9117715256540725157, guid: 144ba70820a80d7428eccc3270f4fca9,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -12.732732
+      value: -12.73269
       objectReference: {fileID: 0}
     - target: {fileID: 9117715257027125277, guid: 144ba70820a80d7428eccc3270f4fca9,
         type: 3}
