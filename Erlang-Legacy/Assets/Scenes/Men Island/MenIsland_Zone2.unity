@@ -424,7 +424,7 @@ MonoBehaviour:
   kassandraAnimator: {fileID: 4945247626981400319}
   startAnimationPoint: {fileID: 706152210}
   blackEndImage: {fileID: 55360186}
-  kassandraClip: {fileID: 8300000, guid: 88b4c1455b93da647be238d44b98186e, type: 3}
+  kassandraClip: {fileID: 8300000, guid: 76bf3438b1b738a4b934ce39aad65ded, type: 3}
 --- !u!61 &217071578
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -16412,6 +16412,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3779401471841932750}
     m_Modifications:
+    - target: {fileID: 544995286087852791, guid: 73188a3deb179564aa6d9cbc6bcde66e,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee,
+        type: 2}
+    - target: {fileID: 544995286087852791, guid: 73188a3deb179564aa6d9cbc6bcde66e,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 8523642942746165136, guid: 73188a3deb179564aa6d9cbc6bcde66e,
         type: 3}
       propertyPath: npcData.phrases.Array.size
@@ -16425,19 +16436,19 @@ PrefabInstance:
     - target: {fileID: 8523642942746165136, guid: 73188a3deb179564aa6d9cbc6bcde66e,
         type: 3}
       propertyPath: npcData.phrases.Array.data[0]
-      value: 'Ajax! Thanks god you are here! It''s me Cassy. '
+      value: Ajax! Thank God you're here! I'm Cassy.
       objectReference: {fileID: 0}
     - target: {fileID: 8523642942746165136, guid: 73188a3deb179564aa6d9cbc6bcde66e,
         type: 3}
       propertyPath: npcData.phrases.Array.data[1]
-      value: "I am in the control room... locked. \nThe specimens in dad's lab break
-        out and I had to press the emergency button..."
+      value: "I'm in the control room...locked.\nDad's lab specimens came out and
+        I had to hit the emergency button\u2026"
       objectReference: {fileID: 0}
     - target: {fileID: 8523642942746165136, guid: 73188a3deb179564aa6d9cbc6bcde66e,
         type: 3}
       propertyPath: npcData.phrases.Array.data[2]
       value: I didn't know that after 10 seconds the control room door would close
-        as the others.
+        like the others.
       objectReference: {fileID: 0}
     - target: {fileID: 8523642942746165136, guid: 73188a3deb179564aa6d9cbc6bcde66e,
         type: 3}
@@ -16447,8 +16458,10 @@ PrefabInstance:
     - target: {fileID: 8523642942746165136, guid: 73188a3deb179564aa6d9cbc6bcde66e,
         type: 3}
       propertyPath: npcData.phrases.Array.data[4]
-      value: "Don't worry about that I will figure the way out. \nPlease stay out
-        of the lab, it's dangerous. I will handle it.  "
+      value: 'Don''t worry about it, I''ll find a way out.
+
+        Please stay out
+        of the lab, it''s dangerous. I''ll handle it.'
       objectReference: {fileID: 0}
     - target: {fileID: 8523642942746165136, guid: 73188a3deb179564aa6d9cbc6bcde66e,
         type: 3}
@@ -16529,12 +16542,23 @@ PrefabInstance:
         type: 3}
       propertyPath: conversationClips.Array.data[0]
       value: 
-      objectReference: {fileID: 8300000, guid: 47ff70fd734dcc34791e62c50ac96401, type: 3}
+      objectReference: {fileID: 8300000, guid: da6b921e5d1768644bbb453ecc5fe046, type: 3}
     - target: {fileID: 8523642943039514711, guid: 73188a3deb179564aa6d9cbc6bcde66e,
         type: 3}
       propertyPath: conversationClips.Array.data[1]
       value: 
-      objectReference: {fileID: 8300000, guid: 0271e07a9b5751444935b83d2c447e7d, type: 3}
+      objectReference: {fileID: 8300000, guid: 12fcf1d0f8141504e93ce47f6d81e062, type: 3}
+    - target: {fileID: 8523642943944308484, guid: 73188a3deb179564aa6d9cbc6bcde66e,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee,
+        type: 2}
+    - target: {fileID: 8523642943944308484, guid: 73188a3deb179564aa6d9cbc6bcde66e,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 8869831939620881164, guid: 73188a3deb179564aa6d9cbc6bcde66e,
         type: 3}
       propertyPath: waitTimeBeforeShowingKeys
@@ -16829,12 +16853,12 @@ PrefabInstance:
     - target: {fileID: 9117715256540725157, guid: 144ba70820a80d7428eccc3270f4fca9,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 81.928215
+      value: 81.93038
       objectReference: {fileID: 0}
     - target: {fileID: 9117715256540725157, guid: 144ba70820a80d7428eccc3270f4fca9,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.6275456
+      value: 1.6274693
       objectReference: {fileID: 0}
     - target: {fileID: 9117715257027125277, guid: 144ba70820a80d7428eccc3270f4fca9,
         type: 3}

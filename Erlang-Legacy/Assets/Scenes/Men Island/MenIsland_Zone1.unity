@@ -63282,12 +63282,7 @@ PrefabInstance:
     - target: {fileID: 9117715256540725157, guid: 144ba70820a80d7428eccc3270f4fca9,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.3974864
-      objectReference: {fileID: 0}
-    - target: {fileID: 9117715256540725157, guid: 144ba70820a80d7428eccc3270f4fca9,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1.3974884
+      value: -1.3974435
       objectReference: {fileID: 0}
     - target: {fileID: 9117715257027125277, guid: 144ba70820a80d7428eccc3270f4fca9,
         type: 3}
@@ -91100,12 +91095,12 @@ PrefabInstance:
     - target: {fileID: 963182352250167341, guid: dbec3a056c2111f4689a8fa1426589bb,
         type: 3}
       propertyPath: npcData.phrases.Array.data[1]
-      value: Ajax, you sholud go to your home and check if Cassandra it's alright.
+      value: Ajax, you should go to your home and check if Cassandra it's alright.
       objectReference: {fileID: 0}
     - target: {fileID: 963182352250167341, guid: dbec3a056c2111f4689a8fa1426589bb,
         type: 3}
       propertyPath: npcData.phrases.Array.data[2]
-      value: I think something it's not going well...
+      value: I think something is wrong...
       objectReference: {fileID: 0}
     - target: {fileID: 963182352250167341, guid: dbec3a056c2111f4689a8fa1426589bb,
         type: 3}

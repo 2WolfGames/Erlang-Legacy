@@ -162,7 +162,6 @@ namespace Core.GameSession
         //post: player stats are the ones saved in data
         private int LoadSavedData()
         {
-            Debug.Log("Loading data");
             PlayerState playerState = SaveSystem.LoadPlayerState();
 
             var playerHealth = PlayerController.Instance.PlayerData.Health;
