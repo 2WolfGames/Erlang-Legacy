@@ -22,6 +22,8 @@ jobs:
         run: exit 1 
 
   buildWebGL:
+  
+    # Check out master branch
     needs: checkLicense
     name: Build for WebGL 🖥️
     runs-on: ubuntu-latest
