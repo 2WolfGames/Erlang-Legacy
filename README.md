@@ -1,4 +1,4 @@
-![presentation_Mesa de trabajo 1](https://github.com/2WolfGames/Erlang-Legacy/assets/61147274/84c8f68d-3839-4df8-a7b2-d94417816205)
+![Github_presentation](https://github.com/2WolfGames/Erlang-Legacy/assets/61147274/2b11d66e-1744-4b26-879e-7f71c2555c36)
 
 _This repository is a final Computer Engineering degree project from [UdG](https://www.udg.edu/ca/eps)_
 
